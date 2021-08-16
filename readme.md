@@ -17,7 +17,7 @@ Also create a function `getInfo` that takes a figure and returns a string in the
 next format:
 ```typescript
 const redRectangle = new Rectangle('red', 3, 5);
-getInfo(redSquare) === 'A red rectangle - 15';
+getInfo(redRectangle) === 'A red rectangle - 15';
 
 const greenCircle = new Circle('green', 1);
 getInfo(greenCircle) === 'A green circle - 3.14';
