@@ -15,26 +15,26 @@ describe('Class "Triangle"', () => {
       .toBeInstanceOf(Triangle);
   });
 
-  test('should have a method "getSquare"', () => {
+  test('should have a method "getArea"', () => {
     const triangle = new Triangle('green', 3, 4, 5);
 
-    expect(triangle.getSquare)
+    expect(triangle.getArea)
       .toBeInstanceOf(Function);
   });
 });
 
-describe('Method "getSquare" of class "Triangle"', () => {
+describe('Method "getArea" of class "Triangle"', () => {
   test('should return a number', () => {
     const triangle = new Triangle('green', 3, 4, 5);
 
-    expect(typeof triangle.getSquare())
+    expect(typeof triangle.getArea())
       .toBe('number');
   });
 
   test('should return a correct square of a triangle', () => {
     const triangle = new Triangle('green', 3, 4, 5);
 
-    expect(triangle.getSquare())
+    expect(triangle.getArea())
       .toBe(6);
   });
 });
@@ -52,26 +52,26 @@ describe('Class "Circle"', () => {
       .toBeInstanceOf(Circle);
   });
 
-  test('should have a method "getSquare"', () => {
+  test('should have a method "getArea"', () => {
     const circle = new Circle('red', 6);
 
-    expect(circle.getSquare)
+    expect(circle.getArea)
       .toBeInstanceOf(Function);
   });
 });
 
-describe('Method "getSquare" of class "Circle"', () => {
+describe('Method "getArea" of class "Circle"', () => {
   test('should return a number', () => {
     const circle = new Circle('red', 6);
 
-    expect(typeof circle.getSquare())
+    expect(typeof circle.getArea())
       .toBe('number');
   });
 
   test('should return a correct square of a circle', () => {
     const circle = new Circle('red', 6);
 
-    expect(circle.getSquare())
+    expect(circle.getArea())
       .toBe(113.04);
   });
 });
@@ -89,26 +89,26 @@ describe('Class "Rectangle"', () => {
       .toBeInstanceOf(Rectangle);
   });
 
-  test('should have a method "getSquare"', () => {
+  test('should have a method "getArea"', () => {
     const rectangle = new Rectangle('blue', 8, 10);
 
-    expect(rectangle.getSquare)
+    expect(rectangle.getArea)
       .toBeInstanceOf(Function);
   });
 });
 
-describe('Method "getSquare" of class "Rectangle"', () => {
+describe('Method "getArea" of class "Rectangle"', () => {
   test('should return a number', () => {
     const rectangle = new Rectangle('blue', 8, 10);
 
-    expect(typeof rectangle.getSquare())
+    expect(typeof rectangle.getArea())
       .toBe('number');
   });
 
   test('should return a correct square of a rectangle', () => {
     const rectangle = new Rectangle('blue', 8, 10);
 
-    expect(rectangle.getSquare())
+    expect(rectangle.getArea())
       .toBe(80);
   });
 });
