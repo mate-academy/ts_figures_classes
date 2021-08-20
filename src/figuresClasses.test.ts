@@ -15,6 +15,32 @@ describe('Class "Triangle"', () => {
       .toBeInstanceOf(Triangle);
   });
 
+  test('should have a public property "shape"', () => {
+    const triangle = new Triangle('green', 3, 4, 5);
+
+    expect(triangle)
+      .toHaveProperty('shape');
+  });
+
+  test('should have a public property "color"', () => {
+    const triangle = new Triangle('green', 3, 4, 5);
+
+    expect(triangle)
+      .toHaveProperty('color');
+  });
+
+  test('should check whether all sides are positive numbers', () => {
+    expect(() => {
+      new Triangle('green', 0, 2, 2);
+    }).toThrow(Error);
+  });
+
+  test('should check whether it is a triangle', () => {
+    expect(() => {
+      new Triangle('green', 5, 10, 15);
+    }).toThrow(Error);
+  });
+
   test('should have a method "getArea"', () => {
     const triangle = new Triangle('green', 3, 4, 5);
 
@@ -52,6 +78,26 @@ describe('Class "Circle"', () => {
       .toBeInstanceOf(Circle);
   });
 
+  test('should have a public property "shape"', () => {
+    const circle = new Circle('red', 6);
+
+    expect(circle)
+      .toHaveProperty('shape');
+  });
+
+  test('should have a public property "color"', () => {
+    const circle = new Circle('red', 6);
+
+    expect(circle)
+      .toHaveProperty('color');
+  });
+
+  test('should check whether radius is a positive number', () => {
+    expect(() => {
+      new Circle('red', -3);
+    }).toThrow(Error);
+  });
+
   test('should have a method "getArea"', () => {
     const circle = new Circle('red', 6);
 
@@ -87,6 +133,26 @@ describe('Class "Rectangle"', () => {
 
     expect(rectangle)
       .toBeInstanceOf(Rectangle);
+  });
+
+  test('should have a public property "shape"', () => {
+    const rectangle = new Rectangle('blue', 8, 10);
+
+    expect(rectangle)
+      .toHaveProperty('shape');
+  });
+
+  test('should have a public property "color"', () => {
+    const rectangle = new Rectangle('blue', 8, 10);
+
+    expect(rectangle)
+      .toHaveProperty('color');
+  });
+
+  test('should check whether radius is a positive number', () => {
+    expect(() => {
+      new Rectangle('blue', 5, -1);
+    }).toThrow(Error);
   });
 
   test('should have a method "getArea"', () => {
