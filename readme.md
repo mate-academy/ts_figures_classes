@@ -13,6 +13,16 @@ In addition to a `color` constructors should accept required data:
 - a `radius` for a circle;
 - a `width` and a `height` for a rectangle.
 
+The constructors should throw errors if:
+- `0` or a negative number is passed to a constructor;
+- if passed lengths don't form a triangle (for the `Triangle` constructor);
+
+Example:
+```typescript
+new Rectangle('blue', 2, 0) // throws an error
+new Triangle('red', 1, 2, 3) // throws an error: sides 1, 2 and 3 can't form a triangle
+```
+
 Also create a function `getInfo` that takes a figure and returns a string in the
 next format:
 ```typescript
