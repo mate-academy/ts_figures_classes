@@ -118,7 +118,7 @@ describe('Method "getArea" of class "Circle"', () => {
     const circle = new Circle('red', 6);
 
     expect(circle.getArea())
-      .toBe(113.04);
+      .toBe(113.1);
   });
 });
 
@@ -203,7 +203,7 @@ describe('Function "getInfo"', () => {
     const greenCircle = new Circle('green', 13.31);
 
     expect(getInfo(greenCircle))
-      .toBe('A green circle - 556.27');
+      .toBe('A green circle - 556.55');
   });
 
   test('should return correct information about a rectangle', () => {
