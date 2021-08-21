@@ -1,11 +1,17 @@
 type Color = 'red' | 'green' | 'blue';
 
+enum Shape {
+  triangle = 'triangle',
+  circle = 'circle',
+  rectangle = 'rectangle',
+}
+
 export interface Figure {
   color: Color,
 }
 
 export class Triangle implements Figure {
-  public shape = 'triangle';
+  public shape = Shape.triangle;
 
   constructor(
     public color: Color,
@@ -26,16 +32,17 @@ export class Triangle implements Figure {
 
   getArea(): number {
     const semiPerimeter = (this.a + this.b + this.c) / 2;
-
-    return Number((Math.sqrt(semiPerimeter
+    const area: string = Math.sqrt(semiPerimeter
       * (semiPerimeter - this.a)
       * (semiPerimeter - this.b)
-      * (semiPerimeter - this.c))).toFixed(2));
+      * (semiPerimeter - this.c)).toFixed(2);
+
+    return +area;
   }
 }
 
 export class Circle {
-  public shape = 'circle';
+  public shape = Shape.circle;
 
   constructor(
     public color: Color,
@@ -47,12 +54,15 @@ export class Circle {
   }
 
   getArea(): number {
-    return Number((Number(Math.PI.toFixed(2)) * this.radius ** 2).toFixed(2));
+    const area: string = (Number(Math.PI.toFixed(2)) * this.radius ** 2)
+      .toFixed(2);
+
+    return +area;
   }
 }
 
 export class Rectangle {
-  public shape = 'rectangle';
+  public shape = Shape.rectangle;
 
   constructor(
     public color: Color,
@@ -65,7 +75,9 @@ export class Rectangle {
   }
 
   getArea(): number {
-    return Number((this.width * this.height).toFixed(2));
+    const area: string = (this.width * this.height).toFixed(2);
+
+    return +area;
   }
 }
 
