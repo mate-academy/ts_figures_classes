@@ -5,9 +5,9 @@ enum Shape {
 }
 
 enum Color {
-  red = 'red',
-  green = 'green',
-  blue = 'blue',
+  red,
+  green,
+  blue,
 }
 
 export interface Figure {
@@ -17,7 +17,7 @@ export interface Figure {
 }
 
 export class Triangle implements Figure {
-  public shape :Shape;
+  public shape = Shape.triangle;
 
   constructor(
     public color: Color,
@@ -25,8 +25,6 @@ export class Triangle implements Figure {
     public b: number,
     public c: number,
   ) {
-    this.shape = Shape.triangle;
-
     if (this.a <= 0 || this.b <= 0 || this.c <= 0) {
       throw new Error('Values must be greater then 0');
     }
@@ -47,14 +45,12 @@ export class Triangle implements Figure {
 }
 
 export class Circle implements Figure {
-  public shape :Shape;
+  public shape = Shape.circle;
 
   constructor(
     public color: Color,
     public radius: number,
   ) {
-    this.shape = Shape.circle;
-
     if (this.radius <= 0) {
       throw new Error('Radius must be greater then 0');
     }
@@ -68,15 +64,13 @@ export class Circle implements Figure {
 }
 
 export class Rectangle implements Figure {
-  public shape :Shape;
+  public shape = Shape.rectangle;
 
   constructor(
     public color: Color,
     public width: number,
     public height: number,
   ) {
-    this.shape = Shape.rectangle;
-
     if (this.width <= 0 || this.height <= 0) {
       throw new Error('Width and height must be greater then 0');
     }
