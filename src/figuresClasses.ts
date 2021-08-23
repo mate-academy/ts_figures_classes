@@ -13,7 +13,7 @@ enum Color {
 export interface Figure {
   shape: Shape;
   color: Color;
-  getArea: () => number;
+  getArea(): number;
 }
 
 function checkSizes(...sizes: number[]): void {
