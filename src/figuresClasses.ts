@@ -46,7 +46,7 @@ export class Circle implements Figure {
   constructor(
     public color: Color,
     public radius: number,
-    public shape: Shape.circle,
+    public shape = Shape.circle,
   ) {
     if (this.radius <= 0) {
       throw new Error('Not valid value');
@@ -63,7 +63,7 @@ export class Rectangle implements Figure {
     public color: Color,
     public h: number,
     public w: number,
-    public shape: Shape.rectangle,
+    public shape = Shape.rectangle,
   ) {
     if (this.h <= 0 || this.w <= 0) {
       throw new Error('Not valid value');
