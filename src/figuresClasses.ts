@@ -25,7 +25,7 @@ export class Triangle implements Figure {
   }
 
   getArea(): number {
-    const halfPerim: number = (this.a + this.b + this.c) / 2;
+    const halfPerim = (this.a + this.b + this.c) / 2;
 
     return +(Math.sqrt(
       halfPerim
