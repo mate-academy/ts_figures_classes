@@ -8,7 +8,7 @@ export interface Figure {
 }
 
 export class Triangle implements Figure {
-  shape: Shape ='triangle';
+  shape: Shape = 'triangle';
 
   constructor(
     public color: Color,
