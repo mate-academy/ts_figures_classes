@@ -19,16 +19,13 @@ export interface Figure {
 }
 
 export class Triangle implements Figure {
-  shape: Shape;
-
   constructor(
     public color: Color,
     public a:number,
     public b: number,
     public c: number,
+    public shape = Shape.triangle,
   ) {
-    this.shape = Shape.triangle;
-
     if (this.a <= 0 || this.b <= 0 || this.c <= 0) {
       throw new Error('Not valid value');
     } else if (this.a + this.b <= this.c
@@ -39,21 +36,18 @@ export class Triangle implements Figure {
   }
 
   getArea(): number {
-    const p: number = (this.a + this.b + this.c) / 2;
+    const p = (this.a + this.b + this.c) / 2;
 
     return Math.sqrt(p * (p - this.a) * (p - this.b) * (p - this.c));
   }
 }
 
 export class Circle implements Figure {
-  shape: Shape;
-
   constructor(
     public color: Color,
     public radius: number,
+    public shape: Shape.circle,
   ) {
-    this.shape = Shape.circle;
-
     if (this.radius <= 0) {
       throw new Error('Not valid value');
     }
@@ -65,15 +59,12 @@ export class Circle implements Figure {
 }
 
 export class Rectangle implements Figure {
-  shape: Shape;
-
   constructor(
     public color: Color,
     public h: number,
     public w: number,
+    public shape: Shape.rectangle,
   ) {
-    this.shape = Shape.rectangle;
-
     if (this.h <= 0 || this.w <= 0) {
       throw new Error('Not valid value');
     }
