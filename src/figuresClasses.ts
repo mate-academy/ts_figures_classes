@@ -4,7 +4,11 @@ enum Shape {
   Rectangle = 'rectangle',
 }
 
-type Color = 'red' | 'green' | 'blue';
+enum Color {
+  Red = 'red',
+  Green = 'green',
+  Blue = 'blue',
+}
 
 export interface Figure {
   shape: Shape;
@@ -21,11 +25,13 @@ export class Triangle implements Figure {
     public b: number,
     public c: number,
   ) {
-    if (a <= 0 || b <= 0 || c <= 0) {
+    if (this.a <= 0 || this.b <= 0 || this.c <= 0) {
       throw new Error('side can\'t be equal or less 0');
     }
 
-    if (a + b <= c || a + c <= b || b + c <= a) {
+    if (this.a + this.b <= this.c
+      || this.a + this.c <= this.b
+      || this.b + this.c <= this.a) {
       throw new Error('sides 1, 2 and 3 can\'t form a triangle');
     }
   }
@@ -46,7 +52,7 @@ export class Circle {
     public color: Color,
     public radius: number,
   ) {
-    if (radius <= 0) {
+    if (this.radius <= 0) {
       throw new Error('side can\'t be equal or less 0');
     }
   }
@@ -64,7 +70,7 @@ export class Rectangle {
     public width: number,
     public height: number,
   ) {
-    if (width <= 0 || height <= 0) {
+    if (this.width <= 0 || this.height <= 0) {
       throw new Error('side can\'t be equal or less 0');
     }
   }
