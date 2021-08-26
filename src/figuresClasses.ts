@@ -4,8 +4,8 @@ export interface Figure {
   getArea(): number;
 }
 
-type Color = 'red'|'green'|'blue';
-type Shape = 'triangle'|'circle'|'rectangle';
+type Color = 'red' | 'green' | 'blue';
+type Shape = 'triangle' | 'circle' | 'rectangle';
 
 export class Triangle {
   public shape: Shape;
@@ -18,9 +18,9 @@ export class Triangle {
   ) {
     this.shape = 'triangle';
 
-    const first : boolean = this.a + this.b > this.c;
-    const second : boolean = this.a + this.c > this.b;
-    const third : boolean = this.b + this.c > this.a;
+    const first = this.a + this.b > this.c;
+    const second = this.a + this.c > this.b;
+    const third = this.b + this.c > this.a;
 
     if (!first || !second || !third) {
       throw Error('Error');
@@ -55,7 +55,7 @@ export class Circle {
   }
 
   getArea(): number {
-    const first: number = this.a ** 2;
+    const first = this.a ** 2;
     const result = 3.14 * first;
 
     return +result.toFixed(2);
@@ -83,8 +83,7 @@ export class Rectangle {
 }
 
 export function getInfo(figure: Figure): string {
-  const { shape } = figure;
-  const { color } = figure;
+  const { shape, color } = figure;
   const area = figure.getArea();
 
   return `A ${color} ${shape} - ${area}`;
