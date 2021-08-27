@@ -48,14 +48,12 @@ export class Circle implements Figure {
   }
 }
 
-export class Rectangle implements Figure {
-  shape: string = 'rectangle';
-
+export class Rectangle {
   constructor(
     public color: string,
     public a: number,
     public b: number,
-    // public shape: string = 'rectangle',
+    public shape: string = 'rectangle',
   ) {
     if (this.a <= 0 || this.b <= 0) {
       throw new Error('Only positive numbers, please');
