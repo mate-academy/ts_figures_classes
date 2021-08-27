@@ -25,9 +25,10 @@ export class Triangle implements Figure {
     public b: number,
     public c: number,
   ) {
-    if (this.a >= this.b + this.c || this.b >= this.a + this.c
-    || this.c >= this.a + this.b || this.a <= 0
-    || this.b <= 0 || this.c <= 0) {
+    if (this.a >= this.b + this.c
+      || this.b >= this.a + this.c
+      || this.c >= this.a + this.b
+      || this.a <= 0 || this.b <= 0 || this.c <= 0) {
       throw new Error('Please, enter valid data');
     }
     this.shape = Shape.Triangle;
@@ -36,9 +37,10 @@ export class Triangle implements Figure {
   getArea(): number {
     const halfOfPerimeter = (this.a + this.b + this.c) / 2;
 
-    return +Math.sqrt(halfOfPerimeter * (halfOfPerimeter - this.a)
-    * (halfOfPerimeter - this.b)
-    * (halfOfPerimeter - this.c)).toFixed(2);
+    return +Math.sqrt(halfOfPerimeter
+      * (halfOfPerimeter - this.a)
+      * (halfOfPerimeter - this.b)
+      * (halfOfPerimeter - this.c)).toFixed(2);
   }
 }
 
