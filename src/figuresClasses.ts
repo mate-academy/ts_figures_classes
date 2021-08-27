@@ -1,5 +1,14 @@
-type Shape = 'triangle' | 'circle' | 'rectangle';
-type Color = 'red' | 'green' | 'blue';
+enum Shape {
+  Triangle = 'triangle',
+  Circle = 'circle',
+  Rectangle = 'rectangle',
+}
+
+enum Color {
+  Red = 'red',
+  Green = 'green',
+  Blue = 'blue',
+}
 
 export interface Figure {
   shape: Shape;
@@ -8,7 +17,7 @@ export interface Figure {
 }
 
 export class Triangle implements Figure {
-  shape: Shape = 'triangle';
+  shape = Shape.Triangle;
 
   constructor(
     public color: Color,
@@ -17,7 +26,7 @@ export class Triangle implements Figure {
     public z: number,
   ) {
     if (this.x <= 0 || this.y <= 0 || this.z <= 0) {
-      throw new Error();
+      throw new Error('size less than 0');
     }
 
     if (
@@ -25,7 +34,7 @@ export class Triangle implements Figure {
       || (this.y >= this.x + this.z)
       || (this.z >= this.y + this.x)
     ) {
-      throw new Error();
+      throw new Error('such a triangle does not exist');
     }
   }
 
@@ -43,14 +52,14 @@ export class Triangle implements Figure {
 }
 
 export class Circle implements Figure {
-  shape: Shape = 'circle';
+  shape = Shape.Circle;
 
   constructor(
     public color: Color,
     public radius: number,
   ) {
     if (this.radius <= 0) {
-      throw new Error();
+      throw new Error('size less than 0');
     }
   }
 
@@ -60,7 +69,7 @@ export class Circle implements Figure {
 }
 
 export class Rectangle implements Figure {
-  shape: Shape = 'rectangle';
+  shape = Shape.Rectangle;
 
   constructor(
     public color: Color,
@@ -68,7 +77,7 @@ export class Rectangle implements Figure {
     public height: number,
   ) {
     if (this.width <= 0 || this.height <= 0) {
-      throw new Error();
+      throw new Error('size less than 0');
     }
   }
 
