@@ -13,7 +13,7 @@ enum Color {
 export interface Figure {
   shape: Shape;
   color: Color;
-  getArea(): number | never;
+  getArea(): number;
 }
 
 export class Triangle implements Figure {
@@ -33,7 +33,7 @@ export class Triangle implements Figure {
     this.shape = Shape.Triangle;
   }
 
-  getArea(): number | never {
+  getArea(): number {
     const halfOfPerimeter = (this.a + this.b + this.c) / 2;
 
     return +Math.sqrt(halfOfPerimeter * (halfOfPerimeter - this.a)
