@@ -25,10 +25,8 @@ export class Triangle implements Figure {
     public b: number,
     public c: number,
   ) {
-    if (this.a >= this.b + this.c
-      || this.b >= this.a + this.c
-      || this.c >= this.a + this.b
-      || this.a <= 0 || this.b <= 0 || this.c <= 0) {
+    if (a >= b + c || b >= a + c || c >= a + b
+      || a <= 0 || b <= 0 || c <= 0) {
       throw new Error('Please, enter valid data');
     }
     this.shape = Shape.Triangle;
@@ -51,7 +49,7 @@ export class Circle implements Figure {
     public color: Color,
     public radius: number,
   ) {
-    if (this.radius <= 0) {
+    if (radius <= 0) {
       throw new Error('Please, enter valid data');
     }
     this.shape = Shape.Circle;
