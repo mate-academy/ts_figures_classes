@@ -10,22 +10,13 @@ export interface Figure {
 export class Triangle implements Figure {
   shape: Shape;
 
-  a: number;
-
-  b: number;
-
-  c: number;
-
   constructor(
     public color: Color,
-    a: number,
-    b: number,
-    c: number,
+    public a: number,
+    public b: number,
+    public c: number,
   ) {
     this.shape = 'triangle';
-    this.a = a;
-    this.b = b;
-    this.c = c;
 
     if (this.a <= 0 || this.b <= 0 || this.c <= 0) {
       throw new Error('All sides should be positive integers');
@@ -44,21 +35,20 @@ export class Triangle implements Figure {
     const { b } = this;
     const { c } = this;
 
-    return Math.sqrt(p * (p - a) * (p - b) * (p - c));
+    const result = Math.sqrt(p * (p - a) * (p - b) * (p - c));
+
+    return (Math.round(result * 100) / 100);
   }
 }
 
 export class Circle implements Figure {
   shape: Shape;
 
-  radius: number;
-
   constructor(
     public color: Color,
-    r: number,
+    public radius: number,
   ) {
     this.shape = 'circle';
-    this.radius = r;
 
     if (this.radius <= 0) {
       throw new Error('The radius should be positive integer');
@@ -66,25 +56,19 @@ export class Circle implements Figure {
   }
 
   public getArea(): number {
-    return (this.radius * this.radius * 3.14);
+    return Math.round(this.radius * this.radius * 3.14 * 100) / 100;
   }
 }
 
 export class Rectangle implements Figure {
   shape: Shape;
 
-  height: number;
-
-  width: number;
-
   constructor(
     public color: Color,
-    a: number,
-    b: number,
+    public height: number,
+    public width: number,
   ) {
     this.shape = 'rectangle';
-    this.height = a;
-    this.width = b;
 
     if (this.height <= 0 || this.width <= 0) {
       throw new Error('Both sides should be positive integers');
@@ -99,6 +83,5 @@ export class Rectangle implements Figure {
 export function getInfo(figure: Figure): string {
   const object: Figure = figure;
 
-  return `A ${object.color} ${object.shape} - ${Math.round(object.getArea()
-    * 100) / 100}`;
+  return `A ${object.color} ${object.shape} - ${object.getArea()}`;
 }
