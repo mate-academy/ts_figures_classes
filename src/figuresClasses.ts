@@ -5,9 +5,9 @@ enum Shape {
 }
 
 enum Color {
-  red,
-  blue,
-  green,
+  Red = 'red',
+  Blue = 'blue',
+  Green = 'green',
 }
 
 export interface Figure {
@@ -17,7 +17,7 @@ export interface Figure {
 }
 
 export class Triangle implements Figure {
-  shape: Shape.Triangle;
+  shape = Shape.Triangle;
 
   constructor(
     public color: Color,
@@ -29,7 +29,6 @@ export class Triangle implements Figure {
       || a <= 0 || b <= 0 || c <= 0) {
       throw new Error('Please, enter valid data');
     }
-    this.shape = Shape.Triangle;
   }
 
   getArea(): number {
@@ -43,7 +42,7 @@ export class Triangle implements Figure {
 }
 
 export class Circle implements Figure {
-  shape: Shape;
+  shape = Shape.Circle;
 
   constructor(
     public color: Color,
@@ -52,7 +51,6 @@ export class Circle implements Figure {
     if (radius <= 0) {
       throw new Error('Please, enter valid data');
     }
-    this.shape = Shape.Circle;
   }
 
   getArea(): number {
@@ -61,7 +59,7 @@ export class Circle implements Figure {
 }
 
 export class Rectangle implements Figure {
-  shape: Shape;
+  shape = Shape.Rectangle;
 
   constructor(
     public color: Color,
@@ -71,7 +69,6 @@ export class Rectangle implements Figure {
     if (a <= 0 || b <= 0) {
       throw new Error('Please, enter valid data');
     }
-    this.shape = Shape.Rectangle;
   }
 
   getArea(): number {
