@@ -66,7 +66,7 @@ export class Rectangle {
   }
 }
 
-export function getInfo(figure: Figure): string | never {
+export function getInfo(figure: Figure): string {
   const s = figure.getArea();
 
   return `A ${figure.color} ${figure.shape} - ${s}`;
