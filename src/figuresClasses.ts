@@ -1,16 +1,28 @@
+enum Shape {
+  Triangle = 'triangle',
+  Circle = 'circle',
+  Rectangle = 'rectangle',
+}
+
+enum Color {
+  Red = 'red',
+  Green = 'green',
+  Blue = 'blue',
+}
+
 export interface Figure {
-  color: string;
-  shape: string;
+  color: Color;
+  shape: Shape;
   getArea(): number;
 }
 
 export class Triangle implements Figure {
   constructor(
-    public color: string,
+    public color: Color,
     public a: number,
     public b: number,
     public c: number,
-    public shape: string = 'triangle',
+    public shape: Shape = Shape.Triangle,
   ) {
     if (this.a <= 0 || this.b <= 0 || this.b <= 0) {
       throw new Error('Only positive numbers, please');
@@ -34,9 +46,9 @@ export class Triangle implements Figure {
 
 export class Circle implements Figure {
   constructor(
-    public color: string,
+    public color: Color,
     public radius: number,
-    public shape: string = 'circle',
+    public shape: Shape = Shape.Circle,
   ) {
     if (this.radius <= 0) {
       throw new Error('Only positive numbers, please');
@@ -50,10 +62,10 @@ export class Circle implements Figure {
 
 export class Rectangle {
   constructor(
-    public color: string,
+    public color: Color,
     public a: number,
     public b: number,
-    public shape: string = 'rectangle',
+    public shape: Shape = Shape.Rectangle,
   ) {
     if (this.a <= 0 || this.b <= 0) {
       throw new Error('Only positive numbers, please');
