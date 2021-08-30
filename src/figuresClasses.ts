@@ -78,10 +78,12 @@ export class Rectangle {
 }
 
 export function getInfo(figure: Figure): string {
+  // const result = `A ${figure.color} ${figure.shape} - `
+  // + `${(figure.getArea() % 1 === 0)
+  //   ? figure.getArea()
+  //   : figure.getArea().toFixed(2)}`;
   const result = `A ${figure.color} ${figure.shape} - `
-  + `${(figure.getArea() % 1 === 0)
-    ? figure.getArea()
-    : figure.getArea().toFixed(2)}`;
+  + `${+figure.getArea().toFixed(2)}`;
 
   return result;
 }
