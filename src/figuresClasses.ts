@@ -14,14 +14,14 @@ export class Triangle implements Figure {
     public c: number,
   ) {
     if (a <= 0 || b <= 0 || c <= 0) {
-      throw new Error('Side length has to be grater than 0');
+      throw new Error('Side length should be greater than 0');
     }
 
     const arrayOfTriangle: number[] = [a, b, c]
       .sort((x: number, y: number) => y - x);
 
     if (arrayOfTriangle[0] === arrayOfTriangle[1] + arrayOfTriangle[2]) {
-      throw new Error('These three sides cannot make a triangle');
+      throw new Error('A triangle can\'t be created from these 3 sides');
     }
   }
 
@@ -44,7 +44,7 @@ export class Circle implements Figure {
     public radius: number,
   ) {
     if (radius <= 0) {
-      throw new Error('Side length has to be grater than 0');
+      throw new Error('Radius length should be greater than 0');
     }
   }
 
