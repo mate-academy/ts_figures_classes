@@ -1,14 +1,26 @@
+enum Shape {
+  triangle = 'triangle',
+  circle = 'circle',
+  rectangle = 'rectangle',
+}
+
+enum Color {
+  red = 'red',
+  green = 'green',
+  blue = 'blue',
+}
+
 export interface Figure {
-  shape: string;
-  color: string;
+  shape: Shape;
+  color: Color;
   getArea(): number;
 }
 
 export class Triangle implements Figure {
-  public shape = 'triangle';
+  public shape = Shape.triangle;
 
   constructor(
-    public color: string,
+    public color: Color,
     public a: number,
     public b: number,
     public c: number,
@@ -32,15 +44,15 @@ export class Triangle implements Figure {
       * (p - this.b)
       * (p - this.c)) ** (1 / 2); // Heron's formula
 
-    return Number(area.toFixed(2));
+    return Number(area);
   }
 }
 
 export class Circle implements Figure {
-  public shape = 'circle';
+  public shape = Shape.circle;
 
   constructor(
-    public color: string,
+    public color: Color,
     public radius: number,
   ) {
     if (radius <= 0) {
@@ -51,15 +63,15 @@ export class Circle implements Figure {
   getArea(): number {
     const area: number = 3.14 * this.radius ** 2;
 
-    return Number(area.toFixed(2));
+    return Number(area);
   }
 }
 
 export class Rectangle implements Figure {
-  public shape = 'rectangle';
+  public shape = Shape.rectangle;
 
   constructor(
-    public color: string,
+    public color: Color,
     public width: number,
     public height: number,
   ) {
@@ -71,10 +83,10 @@ export class Rectangle implements Figure {
   getArea(): number {
     const area: number = this.width * this.height;
 
-    return Number(area.toFixed(2));
+    return Number(area);
   }
 }
 
 export function getInfo(figure: Figure): string {
-  return `A ${figure.color} ${figure.shape} - ${figure.getArea()}`;
+  return `A ${figure.color} ${figure.shape} - ${figure.getArea().toFixed(2)}`;
 }
