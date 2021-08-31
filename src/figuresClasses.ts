@@ -1,7 +1,18 @@
+enum ShapeTypes {
+  triangle,
+  circle,
+  rectangle,
+}
+
+enum ColorTypes {
+  red,
+  green,
+  blue,
+}
 
 export interface Figure {
-  shape: 'triangle' | 'circle' | 'rectangle';
-  color: 'red' | 'green' | 'blue';
+  shape: ShapeTypes;
+  color: ColorTypes;
   getArea(): number,
 }
 
@@ -26,8 +37,14 @@ export class Triangle {
   getArea(): number {
     const peremeter: number = (this.a + this.b + this.c) / 2;
 
-    // eslint-disable-next-line max-len
-    return Math.floor(Math.sqrt(peremeter * (peremeter - this.a) * (peremeter - this.b) * (peremeter - this.c)) * 100) / 100;
+    return (
+      Math.floor(
+        Math.sqrt(
+          peremeter
+          * (peremeter - this.a) * (peremeter - this.b) * (peremeter - this.c),
+        ) * 100,
+      ) / 100
+    );
   }
 }
 
@@ -67,7 +84,7 @@ export class Rectangle {
 }
 
 export function getInfo(figure: Figure): string {
-  const s = figure.getArea();
+  const infoAboutFigure = figure.getArea();
 
-  return `A ${figure.color} ${figure.shape} - ${s}`;
+  return `A ${figure.color} ${figure.shape} - ${infoAboutFigure}`;
 }
