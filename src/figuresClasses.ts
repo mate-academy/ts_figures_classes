@@ -1,13 +1,13 @@
 enum ShapeTypes {
-  triangle,
-  circle,
-  rectangle,
+  triangle = 'triangle',
+  circle = 'circle',
+  rectangle = 'rectangle',
 }
 
 enum ColorTypes {
-  red,
-  green,
-  blue,
+  red = 'red',
+  green = 'green',
+  blue = 'blue',
 }
 
 export interface Figure {
@@ -17,7 +17,7 @@ export interface Figure {
 }
 
 export class Triangle {
-  shape = 'triangle';
+  shape = ShapeTypes.triangle;
 
   constructor(
     public color: string,
@@ -49,7 +49,7 @@ export class Triangle {
 }
 
 export class Circle {
-  shape = 'circle';
+  shape = ShapeTypes.circle;
 
   constructor(
     public color: string,
@@ -66,7 +66,7 @@ export class Circle {
 }
 
 export class Rectangle {
-  shape = 'rectangle';
+  shape = ShapeTypes.rectangle;
 
   constructor(
     public color: string,
