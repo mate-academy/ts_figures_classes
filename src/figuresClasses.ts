@@ -7,11 +7,11 @@ export interface Figure {
   getArea(): number;
 }
 
-export class Triangle {
+export class Triangle implements Figure {
   shape: Shape = 'triangle';
 
   constructor(
-    public color: string,
+    public color: Color,
     public a: number,
     public b: number,
     public c: number,
@@ -29,11 +29,11 @@ export class Triangle {
   }
 }
 
-export class Circle {
+export class Circle implements Figure {
   shape: Shape = 'circle';
 
   constructor(
-    public color: string,
+    public color: Color,
     public radius: number,
   ) {
     if (radius <= 0) {
@@ -42,15 +42,15 @@ export class Circle {
   }
 
   getArea(): number {
-    return +(this.radius * this.radius * 3.14).toFixed(2);
+    return +((this.radius ** 2) * 3.14).toFixed(2);
   }
 }
 
-export class Rectangle {
+export class Rectangle implements Figure {
   shape: Shape = 'rectangle';
 
   constructor(
-    public color: string,
+    public color: Color,
     public width: number,
     public height: number,
   ) {
