@@ -22,13 +22,13 @@ export class Triangle implements Figure {
     public c: number,
     public shape = Shape.triangle,
   ) {
-    if (this.a <= 0 || this.b <= 0 || this.c <= 0) {
+    if (a <= 0 || b <= 0 || c <= 0) {
       throw new Error();
     }
 
-    if (this.a + this.b <= this.c
-      || this.a + this.c <= this.b
-      || this.b + this.c <= this.a) {
+    if (a + b <= c
+      || a + c <= b
+      || b + c <= a) {
       throw new Error();
     }
   }
@@ -46,7 +46,7 @@ export class Circle implements Figure {
     public radius: number,
     public shape = Shape.circle,
   ) {
-    if (this.radius <= 0) {
+    if (radius <= 0) {
       throw new Error();
     }
   }
@@ -63,7 +63,7 @@ export class Rectangle implements Figure {
     public height: number,
     public shape = Shape.rectangle,
   ) {
-    if (this.width <= 0 || this.height <= 0) {
+    if (width <= 0 || height <= 0) {
       throw new Error();
     }
   }
