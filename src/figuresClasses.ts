@@ -1,5 +1,10 @@
 type Color = 'red' | 'green' | 'blue';
-type Shape = 'triangle' | 'circle' | 'rectangle';
+
+enum Shape {
+  Triangle = 'triangle',
+  Circle = 'circle',
+  Rectangle = 'rectangle',
+}
 
 const round = (exp: number): number => Math.round(exp * 100) / 100;
 
@@ -10,7 +15,7 @@ export interface Figure {
 }
 
 export class Triangle implements Figure {
-  shape: Shape = 'triangle';
+  shape = Shape.Triangle;
 
   constructor(
     public color: Color,
@@ -41,7 +46,7 @@ ${this.b} and ${this.c} cant form triangle`);
 }
 
 export class Circle implements Figure {
-  shape: Shape = 'circle';
+  shape = Shape.Circle;
 
   constructor(
     public color: Color,
@@ -58,7 +63,7 @@ export class Circle implements Figure {
 }
 
 export class Rectangle implements Figure {
-  shape: Shape = 'rectangle';
+  shape = Shape.Rectangle;
 
   constructor(
     public color: Color,
