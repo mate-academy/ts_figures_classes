@@ -1,5 +1,10 @@
-type Shape = 'triangle' | 'circle' | 'rectangle';
 type Color = 'red' | 'green' | 'blue';
+
+enum Shape {
+  triangle = 'triangle',
+  circle = 'circle',
+  rectangle = 'rectangle',
+}
 
 export interface Figure {
   shape: Shape;
@@ -8,7 +13,7 @@ export interface Figure {
 }
 
 export class Triangle implements Figure {
-  shape: Shape = 'triangle';
+  shape: Shape = Shape.triangle;
 
   constructor(
     public color: Color,
@@ -17,12 +22,12 @@ export class Triangle implements Figure {
     public c: number,
   ) {
     if (
-      !(a + b > c)
-      || !(b + c > a)
-      || !(c + a > b)
+      (a + b <= c)
+      || (b + c <= a)
+      || (c + a <= b)
       || a <= 0 || b <= 0 || c <= 0
     ) {
-      throw new Error('Those length cannot form a triangle');
+      throw new Error('These lengths cannot form a triangle');
     }
   }
 
@@ -43,14 +48,14 @@ export class Triangle implements Figure {
 }
 
 export class Circle implements Figure {
-  shape: Shape = 'circle';
+  shape: Shape = Shape.circle;
 
   constructor(
     public color: Color,
     public radius: number,
   ) {
     if (radius <= 0) {
-      throw new Error('Radius must bigger than 0');
+      throw new Error('Radius must be bigger than 0');
     }
   }
 
@@ -64,7 +69,7 @@ export class Circle implements Figure {
 }
 
 export class Rectangle implements Figure {
-  shape: Shape = 'rectangle';
+  shape: Shape = Shape.rectangle;
 
   constructor(
     public color: Color,
