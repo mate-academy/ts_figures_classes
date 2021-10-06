@@ -13,9 +13,9 @@ export class Triangle implements Figure {
     public shape: Figure['shape'],
   ) {
     if (a <= 0 || b <= 0 || c <= 0
-      || (a + b) === c
-      || (a + c) === b
-      || (c + b) === a) {
+      || (a + b) >= c
+      || (a + c) >= b
+      || (c + b) >= a) {
       throw Error();
     }
     this.shape = 'triangle';
