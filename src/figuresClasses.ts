@@ -1,5 +1,14 @@
-type Color = 'red' | 'green' | 'blue';
-type Shape = 'triangle' | 'circle' | 'rectangle';
+enum Color {
+  Red = 'red',
+  Green = 'green',
+  Blue = 'blue',
+}
+
+enum Shape {
+  Triangle = 'triangle',
+  Circle = 'circle',
+  Rectangle = 'rectangle',
+}
 
 export interface Figure {
   shape: Shape;
@@ -8,7 +17,7 @@ export interface Figure {
 }
 
 export class Triangle implements Figure {
-  shape: Shape = 'triangle';
+  shape = Shape.Triangle;
 
   constructor(
     public color: Color,
@@ -17,7 +26,7 @@ export class Triangle implements Figure {
     public c: number,
   ) {
     if (a + b <= c || a + c <= b || c + b <= a) {
-      throw new Error();
+      throw new Error('Passed lengths don\'t form a triangle');
     }
   }
 
@@ -31,14 +40,14 @@ export class Triangle implements Figure {
 }
 
 export class Circle implements Figure {
-  shape: Shape = 'circle';
+  shape = Shape.Circle;
 
   constructor(
     public color: Color,
     public radius: number,
   ) {
     if (radius <= 0) {
-      throw new Error();
+      throw new Error('`0` or a negative number is passed');
     }
   }
 
@@ -48,7 +57,7 @@ export class Circle implements Figure {
 }
 
 export class Rectangle implements Figure {
-  shape: Shape = 'rectangle';
+  shape = Shape.Rectangle;
 
   constructor(
     public color: Color,
@@ -56,7 +65,7 @@ export class Rectangle implements Figure {
     public height: number,
   ) {
     if (width <= 0 || height <= 0) {
-      throw new Error();
+      throw new Error('`0` or a negative number is passed');
     }
   }
 
