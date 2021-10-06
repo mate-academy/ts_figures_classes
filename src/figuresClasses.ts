@@ -40,9 +40,9 @@ export class Triangle implements Figure {
 
   getArea(): number {
     const p = (this.a + this.b + this.c) / 2;
-    const s = Math.sqrt(p * (p - this.a) * (p - this.b) * (p - this.c));
+    const result = Math.sqrt(p * (p - this.a) * (p - this.b) * (p - this.c));
 
-    return Math.round(s * 100) / 100;
+    return Math.round(result * 100) / 100;
   }
 }
 export class Circle implements Figure {
