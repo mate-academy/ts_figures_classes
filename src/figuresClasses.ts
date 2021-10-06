@@ -1,5 +1,11 @@
+enum Shape {
+  Triangle = 'triangle',
+  Circle = 'circle',
+  Rectangle = 'rectangle'
+}
+
 export interface Figure {
-  shape: string;
+  shape: Shape;
   color: string;
   getArea(): number;
 }
@@ -22,7 +28,7 @@ export class Triangle implements Figure {
     }
   }
 
-  shape = 'triangle';
+  shape = Shape.Triangle;
 
   getArea(): number {
     const p = (this.a + this.b + this.c) / 2;
@@ -42,7 +48,7 @@ export class Circle implements Figure {
     }
   }
 
-  shape = 'circle';
+  shape = Shape.Circle;
 
   getArea(): number {
     const square = 3.14 * this.radius ** 2;
@@ -62,7 +68,7 @@ export class Rectangle implements Figure {
     }
   }
 
-  shape = 'rectangle';
+  shape = Shape.Rectangle;
 
   getArea(): number {
     return Math.round(this.width * this.height * 100) / 100;
