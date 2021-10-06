@@ -6,12 +6,12 @@ enum Shape {
 
 type Color = 'red'| 'green' | 'blue';
 
-const round = (number: number):number => +number.toFixed(2);
+const round = (number: number): number => +number.toFixed(2);
 
 export interface Figure {
   shape : Shape,
   color : Color,
-  getArea():number
+  getArea(): number
 }
 
 export class Triangle implements Figure {
@@ -36,7 +36,7 @@ export class Triangle implements Figure {
     }
   }
 
-  getArea():number {
+  getArea(): number {
     const halfPerimeter = (this.sideA + this.sideB + this.sideC) / 2;
 
     return round((halfPerimeter
@@ -58,7 +58,7 @@ export class Circle implements Figure {
     }
   }
 
-  getArea():number {
+  getArea(): number {
     return round(3.14 * this.radius ** 2);
   }
 }
@@ -69,14 +69,14 @@ export class Rectangle implements Figure {
   constructor(
     public color: Color,
     public sideA: number,
-    public sideB:number,
+    public sideB: number,
   ) {
     if (sideA <= 0 || sideB <= 0) {
       throw new Error();
     }
   }
 
-  getArea():number {
+  getArea(): number {
     return round(this.sideA * this.sideB);
   }
 }
