@@ -1,16 +1,29 @@
+enum Shape {
+  Triangle = 'triangle',
+  Circle = 'circle',
+  Rectangle = 'rectangle',
+}
+
+enum Color {
+  Red = 'red',
+  Green = 'green',
+  Blue = 'blue',
+}
+
 export interface Figure {
-  shape: 'triangle' | 'circle' | 'rectangle',
-  color: 'red' | 'green' | 'blue',
+  shape: Shape,
+  color: Color,
   getArea(): number;
 }
 
 export class Triangle implements Figure {
+  shape = Shape.Triangle;
+
   constructor(
     public color: Figure['color'],
     public a: number,
     public b: number,
     public c: number,
-    public shape: Figure['shape'],
   ) {
     if (a <= 0 || b <= 0 || c <= 0
       || (a + b) >= c
@@ -18,7 +31,6 @@ export class Triangle implements Figure {
       || (c + b) >= a) {
       throw Error();
     }
-    this.shape = 'triangle';
   }
 
   getArea(): number {
@@ -32,15 +44,15 @@ export class Triangle implements Figure {
 }
 
 export class Circle implements Figure {
+  shape = Shape.Circle;
+
   constructor(
     public color: Figure['color'],
     public r: number,
-    public shape: Figure['shape'],
   ) {
     if (r <= 0) {
       throw Error();
     }
-    this.shape = 'circle';
   }
 
   getArea(): number {
@@ -49,16 +61,16 @@ export class Circle implements Figure {
 }
 
 export class Rectangle implements Figure {
+  shape = Shape.Rectangle;
+
   constructor(
     public color: Figure['color'],
     public h: number,
     public l: number,
-    public shape: Figure['shape'],
   ) {
     if (h <= 0 || l <= 0) {
       throw Error();
     }
-    this.shape = 'rectangle';
   }
 
   getArea(): number {
