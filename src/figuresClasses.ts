@@ -13,8 +13,8 @@ export interface Figure {
   width?: number;
 }
 
-export class Triangle {
-  shape = 'triangle';
+export class Triangle implements Figure {
+  shape: Shape = 'triangle';
 
   constructor(
     public color: Color,
@@ -48,8 +48,8 @@ export class Triangle {
   }
 }
 
-export class Circle {
-  shape = 'circle';
+export class Circle implements Figure {
+  shape: Shape = 'circle';
 
   constructor(
     public color: Color,
@@ -69,8 +69,8 @@ export class Circle {
   }
 }
 
-export class Rectangle {
-  shape = 'rectangle';
+export class Rectangle implements Figure {
+  shape: Shape = 'rectangle';
 
   constructor(
     public color: Color,
