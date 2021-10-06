@@ -29,6 +29,6 @@ next format:
 const redRectangle = new Rectangle('red', 3, 5);
 getInfo(redRectangle) === 'A red rectangle - 15';
 
-const greenCircle = new Circle('green', 1);
+const greenCircle = new Circle('green', 1);ck
 getInfo(greenCircle) === 'A green circle - 3.14';
 ```
