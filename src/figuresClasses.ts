@@ -5,12 +5,6 @@ export interface Figure {
   shape: Shape;
   color: Color;
   getArea(): number;
-  a?: number;
-  b?: number;
-  c?: number;
-  radius?: number;
-  heigth?: number;
-  width?: number;
 }
 
 export class Triangle implements Figure {
