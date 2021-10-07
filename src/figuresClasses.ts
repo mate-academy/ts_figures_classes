@@ -4,18 +4,20 @@ enum Shapes {
   rectangle = 'rectangle',
 }
 
+type Color = 'red' | 'green' | 'blue';
+
 export interface Figure {
   shape: string;
-  color: string;
+  color: Color;
 
   getArea: () => number;
 }
 
 export class Triangle implements Figure {
-  public shape: string = Shapes.triangle;
+  shape: string = Shapes.triangle;
 
   constructor(
-    public color: string,
+    public color: Color,
     public a: number,
     public b: number,
     public c: number,
@@ -24,7 +26,7 @@ export class Triangle implements Figure {
       || b <= 0
       || c <= 0
       || (a + b <= c || a + c <= b || b + c <= a)) {
-      throw new Error();
+      throw new Error('Can\'t form a triangle');
     }
   }
 
@@ -37,14 +39,14 @@ export class Triangle implements Figure {
 }
 
 export class Circle implements Figure {
-  public shape: string = Shapes.circle;
+  shape: string = Shapes.circle;
 
   constructor(
-    public color: string,
+    public color: Color,
     public radius: number,
   ) {
     if (radius <= 0) {
-      throw new Error();
+      throw new Error('Radius can\'t be <= 0');
     }
   }
 
@@ -54,15 +56,15 @@ export class Circle implements Figure {
 }
 
 export class Rectangle implements Figure {
-  public shape: string = Shapes.rectangle;
+  shape: string = Shapes.rectangle;
 
   constructor(
-    public color: string,
+    public color: Color,
     public width: number,
     public height: number,
   ) {
     if (width <= 0 || height <= 0) {
-      throw new Error();
+      throw new Error('Sides can\'t be <= 0');
     }
   }
 
