@@ -4,17 +4,21 @@ enum Shape {
   rectangle = 'rectangle',
 }
 
+type Color = {
+  color: 'red' | 'green' | 'blue';
+};
+
 export interface Figure {
   shape: Shape,
-  color: 'red' | 'green' | 'blue',
+  color: Color,
   getArea(): number,
 }
 
 export class Triangle implements Figure {
-  public shape = Shape.triangle;
+  shape = Shape.triangle;
 
   constructor(
-    public color: Figure['color'],
+    public color: Color,
     public a: number,
     public b: number,
     public c: number,
@@ -39,10 +43,10 @@ export class Triangle implements Figure {
 }
 
 export class Circle implements Figure {
-  public shape = Shape.circle;
+  shape = Shape.circle;
 
   constructor(
-    public color: Figure['color'],
+    public color: Color,
     public radius: number,
   ) {
     if (this.radius <= 0) {
@@ -59,7 +63,7 @@ export class Circle implements Figure {
 }
 
 export class Rectangle implements Figure {
-  public shape = Shape.rectangle;
+  shape = Shape.rectangle;
 
   constructor(
     public color: Figure['color'],
