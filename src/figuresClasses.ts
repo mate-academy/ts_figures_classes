@@ -1,16 +1,26 @@
+type Colors = 'red' | 'green' | 'blue';
+
+type Shapes = 'triangle' | 'circle' | 'rectangle';
+
+export enum Shape {
+  Triangle = 'triangle',
+  Circle = 'circle',
+  Rectangle = 'rectangle',
+}
+
 export interface Figure {
-  shape: 'triangle' | 'circle' | 'rectangle',
-  color: 'red' | 'green' | 'blue';
+  shape: Shapes,
+  color: Colors,
   getArea(): number,
 }
 
 const round = (n: number): number => Math.round(n * 100) / 100;
 
 export class Triangle implements Figure {
-  public shape: Figure['shape'] = 'triangle';
+  public shape: Shapes = Shape.Triangle;
 
   constructor(
-    public color: Figure['color'],
+    public color: Colors,
     public a: number,
     public b: number,
     public c: number,
@@ -38,14 +48,14 @@ export class Triangle implements Figure {
 }
 
 export class Circle implements Figure {
-  public shape: Figure['shape'] = 'circle';
+  public shape: Shapes = Shape.Circle;
 
   constructor(
-    public color: Figure['color'],
+    public color: Colors,
     public radius: number,
   ) {
     if (this.radius < 0) {
-      throw new Error();
+      throw new Error('radius can\'t be negative');
     }
   }
 
@@ -55,15 +65,15 @@ export class Circle implements Figure {
 }
 
 export class Rectangle implements Figure {
-  public shape: Figure['shape'] = 'rectangle';
+  public shape: Shapes = Shape.Rectangle;
 
   constructor(
-    public color: Figure['color'],
+    public color: Colors,
     public a: number,
     public b: number,
   ) {
     if (this.a < 0 || this.b < 0) {
-      throw new Error();
+      throw new Error('sides can\'t be negative');
     }
   }
 
