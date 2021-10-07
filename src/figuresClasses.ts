@@ -12,7 +12,7 @@ export interface Figure {
 }
 
 export class Triangle implements Figure {
-  shape: string;
+  public shape: string = Shapes.triangle;
 
   constructor(
     public color: string,
@@ -26,8 +26,6 @@ export class Triangle implements Figure {
       || (a + b <= c || a + c <= b || b + c <= a)) {
       throw new Error();
     }
-
-    this.shape = Shapes.triangle;
   }
 
   getArea(): number {
@@ -39,7 +37,7 @@ export class Triangle implements Figure {
 }
 
 export class Circle implements Figure {
-  shape: string;
+  public shape: string = Shapes.circle;
 
   constructor(
     public color: string,
@@ -48,8 +46,6 @@ export class Circle implements Figure {
     if (radius <= 0) {
       throw new Error();
     }
-
-    this.shape = Shapes.circle;
   }
 
   getArea(): number {
@@ -58,7 +54,7 @@ export class Circle implements Figure {
 }
 
 export class Rectangle implements Figure {
-  shape: string;
+  public shape: string = Shapes.rectangle;
 
   constructor(
     public color: string,
@@ -68,8 +64,6 @@ export class Rectangle implements Figure {
     if (width <= 0 || height <= 0) {
       throw new Error();
     }
-
-    this.shape = Shapes.rectangle;
   }
 
   getArea(): number {
