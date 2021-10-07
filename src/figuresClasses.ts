@@ -1,20 +1,20 @@
 enum Shapes {
-  triangle = 'triangle',
-  circle = 'circle',
-  rectangle = 'rectangle',
+  Triangle = 'triangle',
+  Circle = 'circle',
+  Rectangle = 'rectangle',
 }
 
 type Color = 'red' | 'green' | 'blue';
 
 export interface Figure {
-  shape: string;
+  shape: Shapes;
   color: Color;
 
   getArea: () => number;
 }
 
 export class Triangle implements Figure {
-  shape: string = Shapes.triangle;
+  shape = Shapes.Triangle;
 
   constructor(
     public color: Color,
@@ -39,7 +39,7 @@ export class Triangle implements Figure {
 }
 
 export class Circle implements Figure {
-  shape: string = Shapes.circle;
+  shape = Shapes.Circle;
 
   constructor(
     public color: Color,
@@ -56,7 +56,7 @@ export class Circle implements Figure {
 }
 
 export class Rectangle implements Figure {
-  shape: string = Shapes.rectangle;
+  shape = Shapes.Rectangle;
 
   constructor(
     public color: Color,
