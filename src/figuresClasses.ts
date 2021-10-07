@@ -7,21 +7,21 @@ export enum Shape {
 export interface Figure {
   shape: Shape;
   color: string;
-  calculateArea(): number;
+  getArea(): number;
 }
 
 export class Triangle implements Figure {
   constructor(
     public color: string,
-    public side1: number,
-    public side2: number,
-    public side3: number,
+    public a: number,
+    public b: number,
+    public c: number,
   ) {
-    if (side1 <= 0 || side2 <= 0 || side3 <= 0) {
+    if (a <= 0 || b <= 0 || c <= 0) {
       throw new Error('sides a, b and c can\'t form a triangle');
     }
 
-    const sides = [side1, side2, side3].sort((a, b) => b - a);
+    const sides = [a, b, c].sort((side1, side2) => side2 - side1);
 
     if (sides[0] >= sides[1] + sides[2]) {
       throw new Error('It is not a triangle');
@@ -30,12 +30,12 @@ export class Triangle implements Figure {
 
   shape = Shape.Triangle;
 
-  calculateArea(): number {
-    const perimeter = (this.side1 + this.side2 + this.side3) / 2;
+  getArea(): number {
+    const perimeter = (this.a + this.b + this.c) / 2;
     const area = Math.sqrt(perimeter
-      * (perimeter - this.side1)
-      * (perimeter - this.side2)
-      * (perimeter - this.side3));
+      * (perimeter - this.a)
+      * (perimeter - this.b)
+      * (perimeter - this.c));
 
     return Math.round(area * 100) / 100;
   }
@@ -52,8 +52,8 @@ export class Circle implements Figure {
 
   shape = Shape.Circle;
 
-  calculateArea(): number {
-    const area = 3.14 * this.radius ** 2;
+  getArea(): number {
+    const area = Math.PI * this.radius ** 2;
 
     return Math.round(area * 100) / 100;
   }
@@ -71,11 +71,11 @@ export class Rectangle implements Figure {
 
   shape = Shape.Rectangle;
 
-  calculateArea(): number {
+  getArea(): number {
     return Math.round(this.width * this.height * 100) / 100;
   }
 }
 
 export function getInfo(figure: Figure): string {
-  return `A ${figure.color} ${figure.shape} - ${figure.calculateArea()}`;
+  return `A ${figure.color} ${figure.shape} - ${figure.getArea()}`;
 }
