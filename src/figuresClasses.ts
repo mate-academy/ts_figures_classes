@@ -1,17 +1,17 @@
-type Shapes = 'triangle'|'circle'|'rectangle';
-type Colors = 'red'|'green'|'blue';
+type Shape = 'triangle' | 'circle' | 'rectangle';
+type Color = 'red' | 'green' | 'blue';
 
 export interface Figure {
-  shape: Shapes;
-  color: Colors;
-  getArea: object;
+  shape: Shape;
+  color: Color;
+  getArea(): number;
 }
 
 export class Triangle implements Figure {
-  shape: Shapes = 'triangle';
+  shape: Shape = 'triangle';
 
   constructor(
-    public color: Colors,
+    public color: Color,
     public a: number,
     public b: number,
     public c: number,
@@ -22,7 +22,7 @@ export class Triangle implements Figure {
       || a + c <= b
       || a + b <= c
       || b + c <= a) {
-      throw new Error('Неправильн0!');
+      throw new Error();
     }
   }
 
@@ -35,14 +35,14 @@ export class Triangle implements Figure {
 }
 
 export class Circle implements Figure {
-  shape: Shapes = 'circle';
+  shape: Shape = 'circle';
 
   constructor(
-    public color: Colors,
+    public color: Color,
     public radius: number,
   ) {
     if (radius <= 0) {
-      throw new Error('хочу більше!');
+      throw new Error();
     }
   }
 
@@ -52,15 +52,15 @@ export class Circle implements Figure {
 }
 
 export class Rectangle implements Figure {
-  shape: Shapes = 'rectangle';
+  shape: Shape = 'rectangle';
 
   constructor(
-    public color: Colors,
+    public color: Color,
     public width: number,
     public height: number,
   ) {
     if (width <= 0 || height <= 0) {
-      throw new Error('ерор');
+      throw new Error();
     }
   }
 
