@@ -17,6 +17,11 @@ The constructors should throw errors if:
 - `0` or a negative number is passed to a constructor;
 - if passed lengths don't form a triangle (for the `Triangle` constructor);
 
+The constructors should throw new Error('your error message') if:
+
+any length is <= 0
+the longest side of a triangle is >= than a sum of two others
+
 Example:
 ```typescript
 new Rectangle('blue', 2, 0) // throws an error
