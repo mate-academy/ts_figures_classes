@@ -4,9 +4,7 @@ enum Shape {
   rectangle = 'rectangle',
 }
 
-type Color = {
-  color: 'red' | 'green' | 'blue';
-};
+type Color = 'red' | 'green' | 'blue';
 
 export interface Figure {
   shape: Shape,
@@ -66,7 +64,7 @@ export class Rectangle implements Figure {
   shape = Shape.rectangle;
 
   constructor(
-    public color: Figure['color'],
+    public color: Color,
     public width: number,
     public height: number,
   ) {
