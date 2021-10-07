@@ -1,4 +1,4 @@
-enum Shape {
+export enum Shape {
   Triangle = 'triangle',
   Circle = 'circle',
   Rectangle = 'rectangle'
@@ -7,7 +7,7 @@ enum Shape {
 export interface Figure {
   shape: Shape;
   color: string;
-  getArea(): number;
+  calculateArea(): number;
 }
 
 export class Triangle implements Figure {
@@ -30,14 +30,14 @@ export class Triangle implements Figure {
 
   shape = Shape.Triangle;
 
-  getArea(): number {
+  calculateArea(): number {
     const perimeter = (this.side1 + this.side2 + this.side3) / 2;
-    const square = Math.sqrt(perimeter
+    const area = Math.sqrt(perimeter
       * (perimeter - this.side1)
       * (perimeter - this.side2)
       * (perimeter - this.side3));
 
-    return Math.round(square * 100) / 100;
+    return Math.round(area * 100) / 100;
   }
 }
 export class Circle implements Figure {
@@ -52,10 +52,10 @@ export class Circle implements Figure {
 
   shape = Shape.Circle;
 
-  getArea(): number {
-    const square = 3.14 * this.radius ** 2;
+  calculateArea(): number {
+    const area = 3.14 * this.radius ** 2;
 
-    return Math.round(square * 100) / 100;
+    return Math.round(area * 100) / 100;
   }
 }
 export class Rectangle implements Figure {
@@ -71,11 +71,11 @@ export class Rectangle implements Figure {
 
   shape = Shape.Rectangle;
 
-  getArea(): number {
+  calculateArea(): number {
     return Math.round(this.width * this.height * 100) / 100;
   }
 }
 
 export function getInfo(figure: Figure): string {
-  return `A ${figure.color} ${figure.shape} - ${figure.getArea()}`;
+  return `A ${figure.color} ${figure.shape} - ${figure.calculateArea()}`;
 }

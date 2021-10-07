@@ -44,7 +44,7 @@ describe('Class "Triangle"', () => {
   test('should have a method "getArea"', () => {
     const triangle = new Triangle('green', 3, 4, 5);
 
-    expect(triangle.getArea)
+    expect(triangle.calculateArea)
       .toBeInstanceOf(Function);
   });
 });
@@ -53,14 +53,14 @@ describe('Method "getArea" of class "Triangle"', () => {
   test('should return a number', () => {
     const triangle = new Triangle('green', 3, 4, 5);
 
-    expect(typeof triangle.getArea())
+    expect(typeof triangle.calculateArea())
       .toBe('number');
   });
 
   test('should return a correct square of a triangle', () => {
     const triangle = new Triangle('green', 3, 4, 5);
 
-    expect(triangle.getArea())
+    expect(triangle.calculateArea())
       .toBe(6);
   });
 });
@@ -101,7 +101,7 @@ describe('Class "Circle"', () => {
   test('should have a method "getArea"', () => {
     const circle = new Circle('red', 6);
 
-    expect(circle.getArea)
+    expect(circle.calculateArea)
       .toBeInstanceOf(Function);
   });
 });
@@ -110,14 +110,14 @@ describe('Method "getArea" of class "Circle"', () => {
   test('should return a number', () => {
     const circle = new Circle('red', 6);
 
-    expect(typeof circle.getArea())
+    expect(typeof circle.calculateArea())
       .toBe('number');
   });
 
   test('should return a correct square of a circle', () => {
     const circle = new Circle('red', 6);
 
-    expect(circle.getArea())
+    expect(circle.calculateArea())
       .toBe(113.04);
   });
 });
@@ -158,7 +158,7 @@ describe('Class "Rectangle"', () => {
   test('should have a method "getArea"', () => {
     const rectangle = new Rectangle('blue', 8, 10);
 
-    expect(rectangle.getArea)
+    expect(rectangle.calculateArea)
       .toBeInstanceOf(Function);
   });
 });
@@ -167,14 +167,14 @@ describe('Method "getArea" of class "Rectangle"', () => {
   test('should return a number', () => {
     const rectangle = new Rectangle('blue', 8, 10);
 
-    expect(typeof rectangle.getArea())
+    expect(typeof rectangle.calculateArea())
       .toBe('number');
   });
 
   test('should return a correct square of a rectangle', () => {
     const rectangle = new Rectangle('blue', 8, 10);
 
-    expect(rectangle.getArea())
+    expect(rectangle.calculateArea())
       .toBe(80);
   });
 });
