@@ -4,9 +4,13 @@ export enum Shape {
   rectangle = 'rectangle',
 }
 
+type Color = {
+  color: 'red' | 'green' | 'blue',
+};
+
 export interface Figure {
   shape: Shape;
-  color: 'red' | 'green' | 'blue';
+  color: Color;
   getArea(): number;
 }
 
@@ -14,7 +18,7 @@ export class Triangle implements Figure {
   shape = Shape.triangle;
 
   constructor(
-    public color: 'red' | 'green' | 'blue',
+    public color: Color,
     public a: number,
     public b: number,
     public c: number,
@@ -26,7 +30,7 @@ export class Triangle implements Figure {
       || this.b + this.c <= this.a
       || this.a + this.c <= this.b
     ) {
-      throw new Error();
+      throw new Error('Sides should form a propper triangle!');
     }
   }
 
@@ -42,11 +46,11 @@ export class Circle implements Figure {
   shape = Shape.circle;
 
   constructor(
-    public color: 'red' | 'green' | 'blue',
+    public color: Color,
     public radius: number,
   ) {
     if (this.radius <= 0) {
-      throw new Error();
+      throw new Error('Radius should be more than zero!');
     }
   }
 
@@ -63,12 +67,12 @@ export class Rectangle implements Figure {
   shape = Shape.rectangle;
 
   constructor(
-    public color: 'red' | 'green' | 'blue',
+    public color: Color,
     public width: number,
     public height: number,
   ) {
     if (this.width <= 0 || this.height <= 0) {
-      throw new Error();
+      throw new Error('Sides should form a propper Rectangle!');
     }
   }
 
