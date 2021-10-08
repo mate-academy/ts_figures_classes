@@ -4,11 +4,16 @@ export interface Figure {
   shape: string;
   color: Color;
   getArea: () => number;
-  // getArea(): number;
+}
+
+enum Shape {
+  triangle = 'triangle',
+  circle = 'circle',
+  rectangle = 'rectangle',
 }
 
 export class Triangle implements Figure {
-  public shape: string = 'triangle';
+  public shape: string = Shape.triangle;
 
   constructor(
     public color: Color,
@@ -36,7 +41,7 @@ export class Triangle implements Figure {
 }
 
 export class Circle implements Figure {
-  public shape: string = 'circle';
+  public shape: string = Shape.circle;
 
   constructor(
     public color: Color,
@@ -55,7 +60,7 @@ export class Circle implements Figure {
 }
 
 export class Rectangle implements Figure {
-  public shape: string = 'rectangle';
+  public shape: string = Shape.rectangle;
 
   constructor(
     public color: Color,
