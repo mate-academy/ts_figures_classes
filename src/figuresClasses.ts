@@ -22,7 +22,7 @@ export class Triangle implements Figure {
     public c: number,
   ) {
     if (a <= 0 || b <= 0 || c <= 0) {
-      throw new Error();
+      throw new Error('one of the sides cannot be <= 0');
     }
 
     if (a + b <= c || b + c <= a || a + c <= b) {
@@ -46,7 +46,7 @@ export class Circle implements Figure {
     public radius: number,
   ) {
     if (radius <= 0) {
-      throw new Error();
+      throw new Error('circle radius cannot be <= 0');
     }
   }
 
@@ -64,7 +64,7 @@ export class Rectangle {
     public b: number,
   ) {
     if (a <= 0 || b <= 0) {
-      throw new Error();
+      throw new Error('Width/height cannot be <= 0');
     }
   }
 
