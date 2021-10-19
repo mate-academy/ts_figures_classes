@@ -23,7 +23,8 @@ export class Triangle implements Figure {
     const arr: number[] = [this.a, this.b, this.c];
     const max: number = Math.max(...arr);
     const rest: number[] = arr.filter((item: number) => item !== max);
-    const sum = rest.reduce((prev: number, first: number) => first + prev);
+    const sum: number
+     = rest.reduce((prev: number, first: number) => first + prev);
 
     if (max >= sum) {
       throw Error('There is no such triangle');
@@ -31,8 +32,9 @@ export class Triangle implements Figure {
   }
 
   getArea(): number {
-    const semiPerimeter = (this.a + this.b + this.c) / 2;
-    const area = Math.floor(100 * Math.sqrt(semiPerimeter * (semiPerimeter
+    const semiPerimeter: number = (this.a + this.b + this.c) / 2;
+    const area: number
+      = Math.floor(100 * Math.sqrt(semiPerimeter * (semiPerimeter
         - this.a) * (semiPerimeter - this.b) * (semiPerimeter - this.c))) / 100;
 
     return area;
@@ -54,7 +56,7 @@ export class Circle implements Figure {
   }
 
   getArea(): number {
-    const area = Math.floor(100 * Math.PI * this.radius ** 2) / 100;
+    const area: number = Math.floor(100 * Math.PI * this.radius ** 2) / 100;
 
     return area;
   }
