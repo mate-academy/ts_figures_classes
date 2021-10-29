@@ -1,5 +1,14 @@
-type KindFigure = 'triangle' | 'circle' | 'rectangle';
-type Color = 'red' | 'green' | 'blue';
+enum KindFigure {
+  triangle = 'triangle',
+  circle = 'circle',
+  rectangle = 'rectangle',
+}
+
+enum Color {
+  red = 'red',
+  green = 'green',
+  blue = 'blue',
+}
 
 export interface Figure {
   shape: KindFigure;
@@ -9,7 +18,7 @@ export interface Figure {
 }
 
 export class Triangle implements Figure {
-  shape: KindFigure = 'triangle';
+  shape: KindFigure = KindFigure.triangle;
 
   constructor(
     public color: Color,
@@ -24,17 +33,17 @@ export class Triangle implements Figure {
   }
 
   getArea(): number {
-    const semiPerimeter: number = (this.a + this.b + this.c) * 0.5;
+    const semiPerimeter: number = (this.a + this.b + this.c) / 2;
 
     return Math.floor(Math.sqrt(semiPerimeter
-     * (semiPerimeter - this.a)
-     * (semiPerimeter - this.b)
-     * (semiPerimeter - this.c)) * 100) / 100;
+      * (semiPerimeter - this.a)
+      * (semiPerimeter - this.b)
+      * (semiPerimeter - this.c)) * 100) / 100;
   }
 }
 
 export class Circle implements Figure {
-  shape: KindFigure = 'circle';
+  shape: KindFigure = KindFigure.circle;
 
   constructor(
     public color: Color,
@@ -51,7 +60,7 @@ export class Circle implements Figure {
 }
 
 export class Rectangle implements Figure {
-  shape: KindFigure = 'rectangle';
+  shape: KindFigure = KindFigure.rectangle;
 
   constructor(
     public color: Color,
