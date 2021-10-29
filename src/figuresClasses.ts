@@ -26,9 +26,8 @@ export class Triangle implements Figure {
     public b: number,
     public c: number,
   ) {
-    if (a === 0 || b === 0 || c === 0
-    || a >= b + c || b >= a + c || c >= a + b) {
-      throw new Error('Error');
+    if (a >= b + c || b >= a + c || c >= a + b) {
+      throw new Error('One side is too long or zero');
     }
   }
 
@@ -38,7 +37,8 @@ export class Triangle implements Figure {
     return Math.floor(Math.sqrt(semiPerimeter
       * (semiPerimeter - this.a)
       * (semiPerimeter - this.b)
-      * (semiPerimeter - this.c)) * 100) / 100;
+      * (semiPerimeter - this.c))
+      * 100) / 100;
   }
 }
 
@@ -50,7 +50,7 @@ export class Circle implements Figure {
     public radius: number,
   ) {
     if (radius <= 0) {
-      throw new Error('Error');
+      throw new Error('Radius must be more than 0');
     }
   }
 
@@ -68,7 +68,7 @@ export class Rectangle implements Figure {
     public height: number,
   ) {
     if (width <= 0 || height <= 0) {
-      throw new Error('Error');
+      throw new Error('Side cannot be zero');
     }
   }
 
