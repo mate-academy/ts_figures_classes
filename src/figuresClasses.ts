@@ -66,16 +66,16 @@ export class Rectangle implements Figure {
 
   constructor(
     public color: Color,
-    public a: number,
-    public b: number,
+    public width: number,
+    public height: number,
   ) {
-    if (!isValidLengths(a, b)) {
+    if (!isValidLengths(width, height)) {
       throw new Error('Both sides of rectangle must be > 0!');
     }
   }
 
   getArea(): number {
-    return Math.floor(this.a * this.b * 100) / 100;
+    return Math.floor(this.width * this.height * 100) / 100;
   }
 }
 
