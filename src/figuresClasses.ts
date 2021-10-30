@@ -7,6 +7,20 @@ export interface Figure {
   getArea(): number;
 }
 
+export function validate(...args: number[]): boolean {
+  const [a, b, c] = args;
+
+  if (args.length === 3) {
+    if (a < (b + c) && b < (a + c) && c < (a + b)) {
+      return false;
+    }
+
+    return true;
+  }
+
+  return args.some((side: number) => side <= 0);
+}
+
 export class Triangle implements Figure {
   shape: FigureShape = 'triangle';
 
@@ -16,22 +30,18 @@ export class Triangle implements Figure {
     public b: number,
     public c: number,
   ) {
-    if (a <= 0 || b <= 0 || c <= 0) {
-      throw new Error('Side must be larger then zero!');
-    }
-
-    if (a + b <= c || a + c <= b || b + c <= a) {
-      throw new Error('Side size isn`t valid');
+    if (validate(a, b, c)) {
+      throw new Error('Invalid data input!');
     }
   }
 
   getArea(): number {
-    const s: number = (this.a + this.b + this.c) / 2;
+    const semiPerimeter: number = (this.a + this.b + this.c) / 2;
 
     return +Math.sqrt(
-      s * (s - this.a)
-      * (s - this.b)
-      * (s - this.c),
+      semiPerimeter * (semiPerimeter - this.a)
+      * (semiPerimeter - this.b)
+      * (semiPerimeter - this.c),
     ).toFixed(2);
   }
 }
@@ -44,7 +54,7 @@ export class Rectangle implements Figure {
     public width: number,
     public height: number,
   ) {
-    if (width <= 0 || height <= 0) {
+    if (validate(width, height)) {
       throw new Error('Side must be larger then zero!');
     }
   }
@@ -61,7 +71,7 @@ export class Circle implements Figure {
     public color: FigureColor,
     public radius: number,
   ) {
-    if (radius <= 0) {
+    if (validate(radius)) {
       throw new Error('Radius must be larger then zero!');
     }
   }
