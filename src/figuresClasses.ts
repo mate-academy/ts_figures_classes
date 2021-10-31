@@ -3,7 +3,6 @@ enum Shape {
   Circle = 'circle',
   Rectangle = 'rectangle'
 }
-
 type Color = 'red' | 'green' | 'blue';
 
 export interface Figure {
