@@ -3,12 +3,12 @@ enum Shape {
   Circle = 'circle',
   Rectangle = 'rectangle'
 }
+
 type Color = 'red' | 'green' | 'blue';
 
 export interface Figure {
   shape: Shape;
   color: Color;
-
   getArea(): number;
 }
 
@@ -23,17 +23,17 @@ export class Triangle implements Figure {
   ) {
     if (a <= 0 || b <= 0 || c <= 0) {
       throw new Error('Side <= 0');
-    } else if (a + b <= c || a + c <= b || b + c <= a) {
-      throw new Error('Impossible to create triangle with these sides');
+    } else if (a + b <= c || a + c <= b || c + b <= a) {
+      throw new Error('Not triangle');
     }
   }
 
   getArea(): number {
-    const semiPerimeter: number = (this.a + this.b + this.c) / 2;
+    const perimeter: number = (this.a + this.b + this.c) / 2;
 
     return Math.floor(
-      Math.sqrt(semiPerimeter * (semiPerimeter - this.a)
-      * (semiPerimeter - this.b) * (semiPerimeter - this.c)) * 100,
+      Math.sqrt(perimeter * (perimeter - this.a)
+      * (perimeter - this.b) * (perimeter - this.c)) * 100,
     ) / 100;
   }
 }
@@ -55,7 +55,7 @@ export class Circle implements Figure {
   }
 }
 
-export class Rectangle {
+export class Rectangle implements Figure {
   public shape = Shape.Rectangle;
 
   constructor(
