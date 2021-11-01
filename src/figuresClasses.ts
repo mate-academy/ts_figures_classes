@@ -17,12 +17,13 @@ export interface Figure {
 }
 
 export class Triangle implements Figure {
+  shape = Shape.Triangle;
+
   constructor(
     public color: Color,
     public a: number,
     public b: number,
     public c: number,
-    public shape = Shape.Triangle,
   ) {
     if (a <= 0 || b <= 0 || c <= 0) {
       throw new Error('One of your sides is <= 0');
@@ -35,18 +36,22 @@ export class Triangle implements Figure {
 
   getArea(): number {
     // used Heron's formula
-    const s = (this.a + this.b + this.c) / 2;
-    const area = Math.sqrt(s * ((s - this.a) * (s - this.b) * (s - this.c)));
+    const semiPerimetr = (this.a + this.b + this.c) / 2;
+    const area = Math.sqrt(semiPerimetr
+      * (semiPerimetr - this.a)
+      * (semiPerimetr - this.b)
+      * (semiPerimetr - this.c));
 
     return Math.floor(area * 100) / 100;
   }
 }
 
 export class Circle {
+  shape = Shape.Circle;
+
   constructor(
     public color: Color,
     public radius: number,
-    public shape = Shape.Circle,
   ) {
     if (radius <= 0) {
       throw new Error('Radius cannot be less than 0');
@@ -59,11 +64,12 @@ export class Circle {
 }
 
 export class Rectangle {
+  shape = Shape.Rectangle;
+
   constructor(
     public color: Color,
     public width: number,
     public height: number,
-    public shape = Shape.Rectangle,
   ) {
     if (width <= 0 || height <= 0) {
       throw new Error('One of your sides is <= 0');
