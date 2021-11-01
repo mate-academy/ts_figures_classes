@@ -21,20 +21,25 @@ export class Triangle implements Figure {
       throw new Error('Error');
     }
 
-    const smalls = this.a + this.b + this.c - Math.max(this.a, this.b, this.c);
+    const longest = Math.max(+this.a, +this.b, +this.c);
+    const sumOfShortSides = this.a + this.b + this.c - longest;
 
-    if (Math.max(this.a, this.b, this.c) >= (smalls)) {
+    if (longest >= (sumOfShortSides)) {
       throw new Error('Error');
     }
   }
 
   getArea(): number {
     const longest = Math.max(+this.a, +this.b, +this.c);
-    const p = (this.a + this.b + this.c) / 2;
-    const sqrt = Math.sqrt(p * (p - this.a) * (p - this.b) * (p - this.c));
-    const h = (2 / longest) * sqrt;
+    const perimeter = (this.a + this.b + this.c) / 2;
+    const sqrt = Math.sqrt(
+      perimeter * (perimeter - this.a)
+      * (perimeter - this.b)
+      * (perimeter - this.c),
+    );
+    const height = (2 / longest) * sqrt;
 
-    return +(1 / 2 * longest * h * 100).toFixed() / 100;
+    return Number((1 / 2 * longest * height * 100).toFixed()) / 100;
   }
 }
 
@@ -50,7 +55,7 @@ export class Circle implements Figure {
   }
 
   getArea(): number {
-    return (Math.floor(Math.PI * this.radius * this.radius * 100)) / 100;
+    return (Math.floor(Math.PI * this.radius ** 2 * 100)) / 100;
   }
 }
 
