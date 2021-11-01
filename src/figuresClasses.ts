@@ -18,28 +18,28 @@ export class Triangle implements Figure {
     public shape: Shape = 'triangle',
   ) {
     if (this.a <= 0 || this.b <= 0 || this.c <= 0) {
-      throw new Error('Error');
+      throw new Error('Sides can not form a triangle');
     }
 
-    const longest = Math.max(+this.a, +this.b, +this.c);
+    const longest = Math.max(this.a, this.b, this.c);
     const sumOfShortSides = this.a + this.b + this.c - longest;
 
     if (longest >= (sumOfShortSides)) {
-      throw new Error('Error');
+      throw new Error('Sides can not form a triangle');
     }
   }
 
   getArea(): number {
-    const longest = Math.max(+this.a, +this.b, +this.c);
-    const perimeter = (this.a + this.b + this.c) / 2;
-    const sqrt = Math.sqrt(
-      perimeter * (perimeter - this.a)
-      * (perimeter - this.b)
-      * (perimeter - this.c),
-    );
-    const height = (2 / longest) * sqrt;
+    const longestSide = Math.max(this.a, this.b, this.c);
+    const semiPerimeter = (this.a + this.b + this.c) / 2;
+    const height = (2 / longestSide)
+      * Math.sqrt(
+        semiPerimeter * (semiPerimeter - this.a)
+        * (semiPerimeter - this.b)
+        * (semiPerimeter - this.c),
+      );
 
-    return Number((1 / 2 * longest * height * 100).toFixed()) / 100;
+    return Number((1 / 2 * longestSide * height * 100).toFixed()) / 100;
   }
 }
 
@@ -50,7 +50,7 @@ export class Circle implements Figure {
     public shape: Shape = 'circle',
   ) {
     if (this.radius <= 0) {
-      throw new Error('Error');
+      throw new Error('Error! Radius can not be 0');
     }
   }
 
@@ -67,15 +67,11 @@ export class Rectangle implements Figure {
     public shape: Shape = 'rectangle',
   ) {
     if (this.height <= 0 || this.width <= 0) {
-      throw new Error('Error');
+      throw new Error('Error! The side should be >= 0');
     }
   }
 
   getArea(): number {
-    if (this.width === 0 || this.height === 0) {
-      throw new Error('Error');
-    }
-
     return this.width * this.height;
   }
 }
