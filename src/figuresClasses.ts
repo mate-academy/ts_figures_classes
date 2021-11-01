@@ -1,3 +1,5 @@
+type Color = 'red' | 'green' | 'blue';
+
 export interface Figure {
   shape: string;
   color: string;
@@ -7,16 +9,14 @@ export interface Figure {
 }
 
 export class Triangle implements Figure {
-  public shape: string;
+  public shape = 'triangle';
 
   sizes: number[];
 
   constructor(
-    public color: string,
+    public color: Color,
     ...args: number[]
   ) {
-    this.shape = 'triangle';
-    this.color = color;
     this.sizes = args.sort((a, b) => a - b);
 
     const maxValue = this.sizes[2];
@@ -44,16 +44,14 @@ export class Triangle implements Figure {
 }
 
 export class Circle implements Figure {
-  public shape: string;
+  public shape = 'circle';
 
   sizes: number[];
 
   constructor(
-    public color: string,
+    public color: Color,
     ...args: number[]
   ) {
-    this.shape = 'circle';
-    this.color = color;
     this.sizes = args;
 
     if (!(this.sizes[0] > 0)) {
@@ -69,16 +67,14 @@ export class Circle implements Figure {
 }
 
 export class Rectangle implements Figure {
-  public shape: string;
+  public shape = 'rectangle';
 
   sizes: number[];
 
   constructor(
-    public color:string,
+    public color: Color,
     ...args: number[]
   ) {
-    this.shape = 'rectangle';
-    this.color = color;
     this.sizes = args;
 
     const isCorrectLengthOfSides = this.sizes.every((side) => side > 0);
