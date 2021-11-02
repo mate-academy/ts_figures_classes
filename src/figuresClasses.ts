@@ -17,20 +17,20 @@ export class Triangle implements Figure {
     public c: number,
   ) {
     if (this.a <= 0 || this.b <= 0 || this.c <= 0) {
-      throw new Error('your error message');
+      throw new Error('sides must be greater then zero');
     }
 
     if (this.a >= this.b + this.c
       || this.b >= this.a + this.c
       || this.c >= this.b + this.a) {
-      throw new Error('your error message');
+      throw new Error('sides with given length can&apos;t form a triangle');
     }
   }
 
   getArea(): number {
-    const perimeter = (this.a + this.b + this.c) / 2;
-    const areaOfTriangle = Math.sqrt(perimeter * (perimeter - this.a)
-      * (perimeter - this.b) * (perimeter - this.c));
+    const halfPerimeter = (this.a + this.b + this.c) / 2;
+    const areaOfTriangle = Math.sqrt(halfPerimeter * (halfPerimeter - this.a)
+      * (halfPerimeter - this.b) * (halfPerimeter - this.c));
 
     return Math.floor(100 * areaOfTriangle) / 100;
   }
@@ -44,7 +44,7 @@ export class Circle {
     public radius: number,
   ) {
     if (this.radius <= 0) {
-      throw new Error('your error message');
+      throw new Error('radius must be more then zero');
     }
   }
 
@@ -64,7 +64,7 @@ export class Rectangle {
     public height: number,
   ) {
     if (width <= 0 || height <= 0) {
-      throw new Error('your error message');
+      throw new Error('sides must have more then zero length');
     }
   }
 
