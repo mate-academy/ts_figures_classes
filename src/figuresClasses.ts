@@ -4,18 +4,26 @@ export interface Figure {
   getArea: () => number;
 }
 
+enum Shape {
+  Triangle = 'triangle',
+  Circle = 'circle',
+  Rectangle = 'rectangle',
+}
+
+type Color = 'red' | 'green' | 'blue';
+
 export class Triangle implements Figure {
-  shape: string = 'triangle';
+  shape = Shape.Triangle;
 
   constructor(
-    public color: string,
+    public color: Color,
     public a: number,
     public b: number,
     public c: number,
   ) {
     const sidesArray = [a, b, c];
     const longestSide = sidesArray.splice(
-      sidesArray.indexOf(Math.max.apply(null, sidesArray)), 1,
+      sidesArray.indexOf(Math.max(...sidesArray)), 1,
     );
     const sumOfOtherSides = sidesArray.reduce((prev, cur) => prev + cur);
 
@@ -36,10 +44,10 @@ export class Triangle implements Figure {
 }
 
 export class Circle implements Figure {
-  shape: string = 'circle';
+  shape = Shape.Circle;
 
   constructor(
-    public color: string,
+    public color: Color,
     public radius: number,
   ) {
     if (radius <= 0) {
@@ -53,10 +61,10 @@ export class Circle implements Figure {
 }
 
 export class Rectangle implements Figure {
-  shape: string = 'rectangle';
+  shape = Shape.Rectangle;
 
   constructor(
-    public color: string,
+    public color: Color,
     public width: number,
     public height: number,
   ) {
