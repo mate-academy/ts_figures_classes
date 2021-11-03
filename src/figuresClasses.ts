@@ -7,17 +7,15 @@ export interface Figure {
   getArea(): number;
 }
 
-export function validate(...args: number[]): boolean {
-  const [a, b, c] = args;
-
-  if (args.length === 3) {
-    if (a < (b + c) && b < (a + c) && c < (a + b)) {
-      return false;
-    }
-
-    return true;
+export function validateTriangle(a: number, b: number, c: number): boolean {
+  if (a < (b + c) && b < (a + c) && c < (a + b)) {
+    return false;
   }
 
+  return true;
+}
+
+export function validate(...args: number[]): boolean {
   return args.some((side: number) => side <= 0);
 }
 
@@ -30,7 +28,7 @@ export class Triangle implements Figure {
     public b: number,
     public c: number,
   ) {
-    if (validate(a, b, c)) {
+    if (validateTriangle(a, b, c)) {
       throw new Error('Invalid data input!');
     }
   }
