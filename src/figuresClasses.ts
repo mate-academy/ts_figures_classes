@@ -7,7 +7,7 @@ export interface Figure {
   getArea(): number;
 }
 
-export class Triangle {
+export class Triangle implements Figure {
   shape: Shape = 'triangle';
 
   constructor(
@@ -66,7 +66,7 @@ export class Circle implements Figure {
   }
 }
 
-export class Rectangle {
+export class Rectangle implements Figure {
   shape: Shape = 'rectangle';
 
   constructor(
