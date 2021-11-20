@@ -21,6 +21,7 @@ module.exports = {
     'no-unused-vars': 'off',
     '@typescript-eslint/no-unused-vars': ['error'],
     'no-shadow': 'off',
+    "no-useless-constructor": "off",
     '@typescript-eslint/no-shadow': ['error'],
     '@typescript-eslint/indent': ['error', 2],
     '@typescript-eslint/explicit-function-return-type': 'error',
