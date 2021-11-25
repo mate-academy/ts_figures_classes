@@ -1,4 +1,4 @@
-enum Shapes{
+enum Shapes {
   Triangle = 'triangle',
   Circle = 'circle',
   Rectangle = 'rectangle',
