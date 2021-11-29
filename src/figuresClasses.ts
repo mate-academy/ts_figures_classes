@@ -11,9 +11,9 @@ enum Color {
 }
 
 export interface Figure {
-  shape: Shape,
-  color: Color,
-  getArea: () => number
+  shape: Shape;
+  color: Color;
+  getArea: () => number;
 }
 
 export class Triangle implements Figure {
