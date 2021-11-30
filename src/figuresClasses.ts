@@ -15,10 +15,15 @@ export class Triangle implements Figure {
     public b:number,
     public c:number,
   ) {
+    if (a <= 0 || b <= 0 || c <= 0) {
+      throw new Error('Side length should be greater than 0');
+    }
+
     const arr = [a, b, c].sort((side1, side2) => side2 - side1);
 
-    if (a <= 0 || b <= 0 || c <= 0 || arr[0] >= arr[1] + arr[2]) {
-      throw new Error('Invalid data');
+    if (arr[0] >= arr[1] + arr[2]) {
+      throw new Error('Length of the longest side should be less than '
+        + 'sum of another two sides');
     }
   }
 
@@ -39,7 +44,7 @@ export class Circle implements Figure {
     public radius:number,
   ) {
     if (radius <= 0) {
-      throw new Error('Invalid data');
+      throw new Error('Radius should be greater than 0');
     }
   }
 
@@ -56,7 +61,7 @@ export class Rectangle implements Figure {
     public height:number,
   ) {
     if (width <= 0 || height <= 0) {
-      throw new Error('Invalid data');
+      throw new Error('Length of both sides should be greater than 0');
     }
   }
 
