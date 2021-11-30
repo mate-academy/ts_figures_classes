@@ -21,7 +21,7 @@ export class Triangle implements Figure {
     }
 
     if (a + b <= c || c + b <= a || c + a <= b) {
-      throw new Error('It is impossible. Such triangle doesnot exist');
+      throw new Error('It is impossible. Such triangle does not exist');
     }
   }
 
@@ -43,7 +43,7 @@ export class Circle implements Figure {
     public color: Color,
     public radius: number,
   ) {
-    if (radius < 0) {
+    if (radius <= 0) {
       throw new Error('Radius must be more than 0');
     }
   }
