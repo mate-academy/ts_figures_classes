@@ -1,7 +1,10 @@
+type Shape = 'triangle' | 'circle' | 'rectangle';
+type Color = 'red' | 'green' | 'blue';
+
 export interface Figure {
-  shape: string,
-  color: string,
-  getArea: () => (number)
+  shape: Shape,
+  color: Color,
+  getArea: () => number
 }
 
 export class Triangle {
