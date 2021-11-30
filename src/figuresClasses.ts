@@ -27,10 +27,12 @@ export class Triangle implements Figure {
     const p = (this.side1 + this.side2 + this.side3) / 2;
 
     return Math.round(
-      Math.sqrt(p
+      Math.sqrt(
+        p
       * (p - this.side1)
       * (p - this.side2)
-      * (p - this.side3))
+      * (p - this.side3),
+      )
       * 100,
     ) / 100;
   }
