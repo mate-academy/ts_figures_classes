@@ -26,7 +26,7 @@ export class Triangle implements Figure {
     public c: number,
   ) {
     if (a <= 0 || b <= 0 || c <= 0) {
-      throw new Error('It` not a triangle');
+      throw new Error('It`s not a triangle');
     }
 
     const theLongestSide = Math.max(a, b, c);
