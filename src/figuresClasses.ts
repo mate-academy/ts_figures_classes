@@ -31,11 +31,11 @@ export class Triangle implements Figure {
   }
 
   getArea():number {
-    const halfPerimeter = (this.a + this.b + this.c) / 2;
-    const area = Math.sqrt(halfPerimeter
-      * (halfPerimeter - this.a)
-      * (halfPerimeter - this.b)
-      * (halfPerimeter - this.c));
+    const halfSquare = (this.a + this.b + this.c) / 2;
+    const area = Math.sqrt(halfSquare
+      * (halfSquare - this.a)
+      * (halfSquare - this.b)
+      * (halfSquare - this.c));
 
     return Math.floor(100 * area) / 100;
   }
