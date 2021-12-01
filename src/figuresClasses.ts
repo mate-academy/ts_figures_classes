@@ -24,7 +24,8 @@ export class Triangle implements Figure {
     const longestSide = Math.max(this.a, this.b, this.c);
     const sumOfTwoSides = (this.a + this.b + this.c) - longestSide;
 
-    if (a <= 0
+    if (
+      a <= 0
       || b <= 0
       || c <= 0
       || longestSide >= sumOfTwoSides
