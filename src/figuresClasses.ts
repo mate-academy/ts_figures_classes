@@ -26,13 +26,11 @@ export class Triangle implements Figure {
     public c:number,
   ) {
     if (a <= 0 || b <= 0 || c <= 0) {
-      throw new Error('All sides must be greater than 0');
+      throw new Error('Error');
     }
 
     if (a >= (b + c) || b >= (a + c) || c >= (a + b)) {
-      throw new Error(
-        'The longest side must be greater than a sum of two others',
-      );
+      throw new Error('Error');
     }
   }
 
@@ -52,7 +50,7 @@ export class Circle implements Figure {
     public radius: number,
   ) {
     if (radius <= 0) {
-      throw new Error('Radius must be greater than 0');
+      throw new Error('Error');
     }
   }
 
@@ -70,7 +68,7 @@ export class Rectangle implements Figure {
     public height: number,
   ) {
     if (width <= 0 || height <= 0) {
-      throw new Error('Width and height must be greater than 0');
+      throw new Error('Error');
     }
   }
 
