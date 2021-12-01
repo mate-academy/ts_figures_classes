@@ -64,7 +64,7 @@ export class Circle implements Figure {
 }
 
 export class Rectangle implements Figure {
-  shape: Shape = 'rectangle';
+  shape: Shape = Shape.rectangle;
 
   constructor(
     public color: Color,
