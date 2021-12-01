@@ -7,7 +7,7 @@ export interface Figure {
 }
 
 export class Triangle {
-  shape: string = 'triangle';
+  shape = 'triangle';
 
   constructor(
     public color: ColorType,
@@ -34,7 +34,7 @@ export class Triangle {
 }
 
 export class Circle implements Figure {
-  shape: string = 'circle';
+  shape = 'circle';
 
   constructor(
     public color: ColorType,
@@ -51,7 +51,7 @@ export class Circle implements Figure {
 }
 
 export class Rectangle implements Figure {
-  shape: string = 'rectangle';
+  shape = 'rectangle';
 
   constructor(
     public color: ColorType,
