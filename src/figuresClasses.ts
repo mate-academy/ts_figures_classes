@@ -7,7 +7,7 @@ enum Shapes {
 type Color = 'red'|'green'|'blue';
 
 export interface Figure {
-  shape: string;
+  shape: Shapes;
   color: Color;
   getArea() : number;
 }
