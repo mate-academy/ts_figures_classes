@@ -1,23 +1,30 @@
+enum Shape {
+  Triangle = 'triangle',
+  Circle = 'circle',
+  Rectangle = 'rectangle',
+}
+
+enum Color {
+  Red = 'red',
+  Green = 'green',
+  Blue = 'blue',
+}
+
 export interface Figure {
-  shape: 'triangle' | 'circle' | 'rectangle',
-  color: 'red' | 'green' | 'blue',
-  getArea: () => number
+  shape: Shape.Triangle | Shape.Circle | Shape.Rectangle,
+  color: Color.Red | Color.Green | Color.Blue,
+  getArea(): number
 }
 
 export class Triangle implements Figure {
-  shape: 'triangle';
+  shape: Shape = Shape.Triangle;
 
   constructor(
-    public color: 'red' | 'green' | 'blue',
+    public color: Color,
     public a: number,
     public b: number,
     public c: number,
   ) {
-    this.shape = 'triangle';
-    this.a = a;
-    this.b = b;
-    this.c = c;
-
     if (a <= 0 || b <= 0 || c <= 0) {
       throw new Error('All sides must be a positive numbers');
     }
@@ -37,15 +44,12 @@ export class Triangle implements Figure {
 }
 
 export class Circle implements Figure {
-  shape: 'circle';
+  shape: Shape = Shape.Circle;
 
   constructor(
-    public color: 'red' | 'green' | 'blue',
+    public color: Color,
     public radius: number,
   ) {
-    this.shape = 'circle';
-    this.radius = radius;
-
     if (this.radius <= 0) {
       throw new Error('Radius of cicle mush be more than 0');
     }
@@ -57,17 +61,13 @@ export class Circle implements Figure {
 }
 
 export class Rectangle implements Figure {
-  shape: 'rectangle';
+  shape: Shape = Shape.Rectangle;
 
   constructor(
-    public color: 'red' | 'green' | 'blue',
+    public color: Color,
     public a: number,
     public b: number,
   ) {
-    this.shape = 'rectangle';
-    this.a = a;
-    this.b = b;
-
     if (a <= 0 || b <= 0) {
       throw new Error('Sides must be more than 0');
     }
@@ -79,7 +79,5 @@ export class Rectangle implements Figure {
 }
 
 export function getInfo(figure: Figure): string {
-  const area: number = figure.getArea();
-
-  return `A ${figure.color} ${figure.shape} - ${area}`;
+  return `A ${figure.color} ${figure.shape} - ${figure.getArea()}`;
 }
