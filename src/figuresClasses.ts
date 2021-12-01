@@ -17,7 +17,7 @@ export interface Figure {
 }
 
 export class Triangle implements Figure {
-  shape: Shape = 'triangle';
+  shape: Shape = Shape.triangle;
 
   constructor(
     public color: Color,
@@ -25,15 +25,7 @@ export class Triangle implements Figure {
     public b: number,
     public c: number,
   ) {
-    let biggestSide = this.a;
-
-    if (this.b > this.a && this.b > this.c) {
-      biggestSide = this.b;
-    }
-
-    if (this.c > this.a && this.c > this.b) {
-      biggestSide = this.c;
-    }
+    const biggestSide = Math.max(this.a, this.b, this.c);
 
     if (biggestSide >= this.a + this.b + this.c - biggestSide) {
       throw new Error('Sides can not form a triangle');
@@ -45,16 +37,15 @@ export class Triangle implements Figure {
   }
 
   getArea(): number {
-    const area = 1 / 4 * (Math.sqrt((this.a + this.b + this.c) * (0 - this.a
-      + this.b + this.c) * (this.a - this.b
-        + this.c) * (this.a + this.b - this.c)));
+    const hP = (this.a + this.b + this.c) / 2;
+    const area = Math.sqrt(hP * (hP - this.a) * (hP - this.b) * (hP - this.c));
 
     return Math.floor((area) * 100) / 100;
   }
 }
 
 export class Circle implements Figure {
-  shape: Shape = 'circle';
+  shape: Shape = Shape.circle;
 
   constructor(
     public color: Color,
