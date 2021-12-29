@@ -1,21 +1,33 @@
-type Fig = 'triangle' | 'circle' | 'rectangle';
-type Col = 'red' | 'green' | 'blue';
+// type Fig = 'triangle' | 'circle' | 'rectangle';
+// type Col = 'red' | 'green' | 'blue';
+
+enum Shapes {
+  triangle = 'triangle',
+  circle = 'circle',
+  rectangle = 'rectangle',
+}
+
+enum Color {
+  red,
+  green,
+  blue,
+}
 
 const down: (num: number) => number = num =>
   Math.floor(num * 100) / 100;
 
 export interface Figure {
-  shape: Fig;
-  color: Col;
+  shape: Shapes;
+  color: Color;
 
   getArea(): number;
 }
 
 export class Triangle implements Figure {
-  shape: Fig = 'triangle';
+  shape: Shapes = Shapes.triangle;
 
   constructor(
-    public color: Col,
+    public color: Color,
     public a: number,
     public b: number,
     public c: number,
@@ -27,16 +39,16 @@ export class Triangle implements Figure {
   }
 
   getArea(): number {
-    const p: number = (this.a + this.b + this.c) / 2;
+    const p = (this.a + this.b + this.c) / 2;
 
     return down(Math.sqrt(p * (p - this.a) * (p - this.b) * (p - this.c)));
   }
 }
 
 export class Circle implements Figure {
-  shape: Fig = 'circle';
+  shape: Shapes = Shapes.circle;
 
-  constructor(public color: Col, public radius: number) {
+  constructor(public color: Color, public radius: number) {
     if (this.radius <= 0) {
       throw new Error('not a valid circle');
     }
@@ -48,10 +60,10 @@ export class Circle implements Figure {
 }
 
 export class Rectangle {
-  shape: Fig = 'rectangle';
+  shape: Shapes = Shapes.rectangle;
 
   constructor(
-    public color: Col,
+    public color: Color,
     public width: number,
     public height: number,
   ) {
