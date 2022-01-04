@@ -13,6 +13,7 @@ enum Colors {
 export interface Figure {
   shape: Shapes;
   color: Colors;
+  getArea(): number;
 }
 
 export class Triangle implements Figure {
@@ -27,16 +28,15 @@ export class Triangle implements Figure {
     if (a <= 0
       || b <= 0
       || c <= 0
-      || (Math.max(a, b, c) >= a + b + c - Math.max(a, b, c))) {
+      || (Math.max(a, b, c) >= a + b + c - Math.max(a, b, c))
+    ) {
       throw new Error('Enter valid sides');
     }
   }
 
   getArea(): number {
-    const s: number = (this.a + this.b + this.c) / 2;
-    const area: number = Math.sqrt(
-      s * (s - this.a) * (s - this.b) * (s - this.c),
-    );
+    const s = (this.a + this.b + this.c) / 2;
+    const area = Math.sqrt(s * (s - this.a) * (s - this.b) * (s - this.c));
 
     return Math.floor(area * 100) / 100;
   }
@@ -77,6 +77,6 @@ export class Rectangle implements Figure {
   }
 }
 
-export function getInfo(figure): string {
+export function getInfo(figure: Figure): string {
   return `A ${figure.color} ${figure.shape} - ${figure.getArea()}`;
 }
