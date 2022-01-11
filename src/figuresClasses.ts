@@ -1,8 +1,8 @@
 /* eslint-disable no-useless-constructor */
 enum Shapes {
-  triangle = 'triangle',
-  circle = 'circle',
-  rectangle = 'rectangle',
+  Triangle = 'triangle',
+  Circle = 'circle',
+  Rectangle = 'rectangle',
 }
 enum Color {
   Red = 'red',
@@ -16,7 +16,7 @@ export interface Figure {
 }
 
 export class Triangle implements Figure {
-  shape = Shapes.triangle;
+  shape = Shapes.Triangle;
 
   constructor(
     public color: Color,
@@ -40,7 +40,7 @@ export class Triangle implements Figure {
 }
 
 export class Circle implements Figure {
-  shape = Shapes.circle;
+  shape = Shapes.Circle;
 
   constructor(
     public color: Color,
@@ -59,7 +59,7 @@ export class Circle implements Figure {
 }
 
 export class Rectangle implements Figure {
-  shape = Shapes.rectangle;
+  shape = Shapes.Rectangle;
 
   constructor(
     public color: Color,
