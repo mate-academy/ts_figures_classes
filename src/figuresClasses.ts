@@ -26,11 +26,11 @@ export class Triangle implements Figure {
     public c: number,
   ) {
     if (a <= 0 || b <= 0 || c <= 0) {
-      throw new Error('your error message');
+      throw new Error('Value should be positive');
     }
 
     if (a >= b + c || b >= a + c || c >= a + b) {
-      throw new Error('your error message');
+      throw new Error('Longest side should be less than a sum of two others');
     }
   }
 
@@ -52,7 +52,7 @@ export class Circle implements Figure {
     public radius: number,
   ) {
     if (radius <= 0) {
-      throw new Error('your error message');
+      throw new Error('Value should be positive');
     }
   }
 
@@ -72,7 +72,7 @@ export class Rectangle implements Figure {
     public height: number,
   ) {
     if (width <= 0 || height <= 0) {
-      throw new Error('your error message');
+      throw new Error('Value should be positive');
     }
   }
 
