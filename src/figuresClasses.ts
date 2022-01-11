@@ -70,7 +70,7 @@ export class Rectangle implements Figure {
   getArea(): number {
     const square: number = this.width * this.height;
 
-    return square;
+    return Math.floor(square * 100) / 100;
   }
 }
 
