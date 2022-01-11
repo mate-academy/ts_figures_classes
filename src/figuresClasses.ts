@@ -18,7 +18,7 @@ export class Triangle implements Figure {
   ) {
     if (a >= b + c || b >= a + c || c >= a + b
       || a === 0 || b === 0 || c === 0) {
-      throw new Error('your error message');
+      throw new Error('All sides should be a positive numbers');
     }
   }
 
@@ -40,7 +40,7 @@ export class Circle implements Figure {
     public radius: number,
   ) {
     if (radius <= 0) {
-      throw new Error('your error message');
+      throw new Error('Radius should be a positive number');
     }
   }
 
@@ -58,7 +58,7 @@ export class Rectangle implements Figure {
     public height: number,
   ) {
     if (width <= 0 || height <= 0) {
-      throw new Error('your error message');
+      throw new Error('Both sides should be a positive numbers');
     }
   }
 
