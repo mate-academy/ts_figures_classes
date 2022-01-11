@@ -57,7 +57,7 @@ export class Rectangle {
   shape: Shape = 'rectangle';
 
   constructor(
-    public color: string,
+    public color: Color,
     public width: number,
     public height: number,
   ) {
