@@ -1,6 +1,18 @@
+enum Shapes {
+  Triangle = 'triangle',
+  Circle = 'circle',
+  Rectangle = 'rectangle',
+}
+
+enum Colors {
+  Red = 'red',
+  Green = 'green',
+  Blue = 'blue'
+}
+
 export interface Figure {
-  color: string;
-  shape: string;
+  color: Colors;
+  shape: Shapes;
   getArea(): number;
 }
 
@@ -20,10 +32,10 @@ interface RectangleeSides {
 }
 
 export class Triangle implements Figure, TriangleSides {
-  public shape = 'triangle';
+  public shape = Shapes.Triangle;
 
   constructor(
-    public color: string,
+    public color: Colors,
     public a: number,
     public b: number,
     public c: number,
@@ -49,10 +61,10 @@ export class Triangle implements Figure, TriangleSides {
 }
 
 export class Circle implements Figure, CircleRadius {
-  public shape = 'circle';
+  public shape = Shapes.Circle;
 
   constructor(
-    public color: string,
+    public color: Colors,
     public radius: number,
   ) {
     if (radius < 0) {
@@ -61,15 +73,15 @@ export class Circle implements Figure, CircleRadius {
   }
 
   getArea(): number {
-    return Math.floor(Math.PI * this.radius * this.radius * 100) / 100;
+    return Math.floor(Math.PI * this.radius ** 2 * 100) / 100;
   }
 }
 
 export class Rectangle implements Figure, RectangleeSides {
-  public shape = 'rectangle';
+  public shape = Shapes.Rectangle;
 
   constructor(
-    public color: string,
+    public color: Colors,
     public width: number,
     public height: number,
   ) {
