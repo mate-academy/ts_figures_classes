@@ -50,13 +50,15 @@ export class Triangle implements Figure, TriangleSides {
   }
 
   getArea(): number {
-    const semiPerimeter = 1 / 2 * (this.a + this.b + this.c);
-    const areaTriangle = Math.floor(Math.sqrt(
-      semiPerimeter * (semiPerimeter - this.a) * (semiPerimeter - this.b)
-    * (semiPerimeter - this.c),
-    ) * 100) / 100;
+    const semiPerimeter = (this.a + this.b + this.c) / 2;
+    const areaTriangle = Math.sqrt(
+      semiPerimeter
+        * (semiPerimeter - this.a)
+        * (semiPerimeter - this.b)
+        * (semiPerimeter - this.c),
+    );
 
-    return areaTriangle;
+    return Math.floor(areaTriangle * 100) / 100;
   }
 }
 
