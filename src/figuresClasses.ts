@@ -1,13 +1,13 @@
 enum Shape {
-  Triangle,
-  Circle,
-  Rectangle
+  Triangle = 'triangle',
+  Circle = 'circle',
+  Rectangle = 'rectangle',
 }
 
 enum Color {
-  Red,
-  Green,
-  Blue
+  Red = 'red',
+  Green = 'green',
+  Blue = 'blue',
 }
 
 export interface Figure {
@@ -34,7 +34,7 @@ export class Triangle implements Figure {
     const sp = (this.a + this.b + this.c) / 2;
     const area = Math.sqrt(sp * (sp - this.a) * (sp - this.b) * (sp - this.c));
 
-    return area;
+    return Math.trunc(area * 100) / 100;
   }
 }
 
@@ -53,7 +53,7 @@ export class Circle implements Figure {
   getArea(): number {
     const area = Math.PI * (this.radius ** 2);
 
-    return area;
+    return Math.trunc(area * 100) / 100;
   }
 }
 
@@ -73,7 +73,7 @@ export class Rectangle implements Figure {
   getArea(): number {
     const area = this.width * this.height;
 
-    return area;
+    return Math.trunc(area * 100) / 100;
   }
 }
 
