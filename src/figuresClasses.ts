@@ -16,18 +16,21 @@ export interface Figure {
   getArea: () => number;
 }
 
-function rounded(area: number): number {
-  const partsOfNumber = String(area).split('.');
-
-  if (partsOfNumber.length > 1) {
-    partsOfNumber[1] = partsOfNumber[1].slice(0, 2);
-  }
-
-  return +partsOfNumber.join('.');
-}
-
 export class Triangle implements Figure {
   shape: Shape;
+
+  constructor(
+    public color: Color,
+    public a: number,
+    public b: number,
+    public c: number,
+  ) {
+    this.shape = Shape.Triangle;
+
+    if (!this.validSides()) {
+      throw new Error('Invalid sides');
+    }
+  }
 
   validSides(): boolean {
     if (this.a <= 0 || this.b <= 0 || this.c <= 0) {
@@ -46,25 +49,12 @@ export class Triangle implements Figure {
     return maxSide < sumSides;
   }
 
-  constructor(
-    public color: Color,
-    public a: number,
-    public b: number,
-    public c: number,
-  ) {
-    this.shape = Shape.Triangle;
-
-    if (!this.validSides()) {
-      throw new Error('Invalid sides');
-    }
-  }
-
   getArea(): number {
     const s = (this.a + this.b + this.c) / 2;
 
     const area = Math.sqrt(s * (s - this.a) * (s - this.b) * (s - this.c));
 
-    return rounded(area);
+    return Math.floor(area * 100) / 100;
   }
 }
 
@@ -83,7 +73,9 @@ export class Circle implements Figure {
   }
 
   getArea(): number {
-    return rounded(Math.PI * (this.radius ** 2));
+    const area = (Math.PI * (this.radius ** 2));
+
+    return Math.floor(area * 100) / 100;
   }
 }
 
@@ -103,7 +95,9 @@ export class Rectangle implements Figure {
   }
 
   getArea(): number {
-    return rounded(this.height * this.width);
+    const area = (this.height * this.width);
+
+    return Math.floor(area * 100) / 100;
   }
 }
 
