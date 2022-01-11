@@ -4,11 +4,7 @@ enum Shapes {
   Rectangle = 'rectangle',
 }
 
-enum Colors {
-  Red = 'red',
-  Green = 'green',
-  Blue = 'blue'
-}
+type Colors = 'red' | 'green' | 'blue';
 
 export interface Figure {
   color: Colors;
