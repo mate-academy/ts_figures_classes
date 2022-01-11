@@ -7,8 +7,8 @@ export interface Figure {
   getArea(): number;
 }
 
-export class Triangle {
-  shape: Shape;
+export class Triangle implements Figure {
+  shape: Shape = 'triangle';
 
   constructor(
     public color: Color,
@@ -16,8 +16,6 @@ export class Triangle {
     public b: number,
     public c: number,
   ) {
-    this.shape = 'triangle';
-
     if (a <= 0 || b <= 0 || c <= 0) {
       throw new Error('All sides should be positive numbers');
     }
@@ -38,36 +36,32 @@ export class Triangle {
 }
 
 export class Circle {
-  shape: Shape;
+  shape: Shape = 'circle';
 
   constructor(
     public color: Color,
     public radius: number,
   ) {
-    this.shape = 'circle';
-
     if (radius <= 0) {
       throw new Error('Radius should be a positive numbers');
     }
   }
 
   getArea(): number {
-    const square: number = Math.PI * this.radius * this.radius;
+    const square: number = Math.PI * this.radius ** 2;
 
     return Math.floor(square * 100) / 100;
   }
 }
 
 export class Rectangle {
-  shape: Shape;
+  shape: Shape = 'rectangle';
 
   constructor(
     public color: Color,
     public width: number,
     public height: number,
   ) {
-    this.shape = 'rectangle';
-
     if (width <= 0 || height <= 0) {
       throw new Error('Width and height should be a positive numbers');
     }
