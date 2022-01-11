@@ -26,23 +26,20 @@ export class Triangle implements Figure {
     public b: number,
     public c: number,
   ) {
-    if (
-      this.a <= 0
-  || this.b <= 0
-  || this.c <= 0
-  || this.a + this.b <= this.c
-  || this.b + this.c <= this.a
-  || this.a + this.c <= this.b
-    ) {
-      throw new Error('not a valid triangle');
+    if (this.a <= 0 || this.b <= 0 || this.c <= 0) {
+      throw new Error('Side cannot be negative');
+    }
+
+    if (a + b <= c || a + c <= b || b + c <= a) {
+      throw new Error(`Sides ${a}, ${b} and ${c} can't form a triangle`);
     }
   }
 
   getArea(): number {
     const p: number = (this.a + this.b + this.c) / 2;
-    const S = (Math.sqrt(p * (p - this.a) * (p - this.b) * (p - this.c)));
+    const area = (Math.sqrt(p * (p - this.a) * (p - this.b) * (p - this.c)));
 
-    return Math.floor(S * 100) / 100;
+    return Math.floor(area * 100) / 100;
   }
 }
 
@@ -56,9 +53,9 @@ export class Circle implements Figure {
   }
 
   getArea(): number {
-    const S: number = (Math.PI * this.radius * this.radius);
+    const area: number = (Math.PI * this.radius * this.radius);
 
-    return Math.floor(S * 100) / 100;
+    return Math.floor(area * 100) / 100;
   }
 }
 
@@ -76,9 +73,9 @@ export class Rectangle implements Figure {
   }
 
   getArea(): number {
-    const S: number = (this.height * this.width);
+    const area: number = (this.height * this.width);
 
-    return Math.floor(S * 100) / 100;
+    return Math.floor(area * 100) / 100;
   }
 }
 
