@@ -25,14 +25,15 @@ export class Triangle implements Figure {
     public b: number,
     public c: number,
   ) {
-    if (a <= 0 || b <= 0 || c <= 0 || a + b <= c || a + c <= b || b + c <= a) {
+    if (a <= 0 || b <= 0 || c <= 0
+      || a + b <= c || a + c <= b || b + c <= a) {
       throw new Error('Enter correct values of triangle sides');
     }
   }
 
   getArea(): number {
-    const sp = (this.a + this.b + this.c) / 2;
-    const area = Math.sqrt(sp * (sp - this.a) * (sp - this.b) * (sp - this.c));
+    const p = (this.a + this.b + this.c) / 2;
+    const area = Math.sqrt(p * (p - this.a) * (p - this.b) * (p - this.c));
 
     return Math.trunc(area * 100) / 100;
   }
