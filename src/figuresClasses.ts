@@ -10,8 +10,12 @@ export class Triangle implements Figure {
 
   semiPerim: number;
 
-  constructor(public color: 'red' | 'blue' | 'green',
-    public a: number, public b: number, public c: number) {
+  constructor(
+    public color: 'red' | 'blue' | 'green',
+    public a: number,
+    public b: number,
+    public c: number,
+  ) {
     if (a >= b + c || b >= a + c || c >= a + b
       || a === 0 || b === 0 || c === 0) {
       throw new Error('your error message');
@@ -31,7 +35,10 @@ export class Triangle implements Figure {
 export class Circle implements Figure {
   shape = 'circle';
 
-  constructor(public color: 'red' | 'blue' | 'green', public radius: number) {
+  constructor(
+    public color: 'red' | 'blue' | 'green',
+    public radius: number,
+  ) {
     if (radius <= 0) {
       throw new Error('your error message');
     }
@@ -45,8 +52,11 @@ export class Circle implements Figure {
 export class Rectangle implements Figure {
   shape = 'rectangle';
 
-  constructor(public color: 'red' | 'blue' | 'green',
-    public width: number, public height: number) {
+  constructor(
+    public color: 'red' | 'blue' | 'green',
+    public width: number,
+    public height: number,
+  ) {
     if (width <= 0 || height <= 0) {
       throw new Error('your error message');
     }
