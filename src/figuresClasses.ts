@@ -17,7 +17,7 @@ export interface Figure {
 }
 
 export class Triangle implements Figure {
-  shape: Shape;
+  shape = Shape.Triangle;
 
   constructor(
     public color: Color,
@@ -25,8 +25,6 @@ export class Triangle implements Figure {
     public b: number,
     public c: number,
   ) {
-    this.shape = Shape.Triangle;
-
     if (!this.validSides()) {
       throw new Error('Invalid sides');
     }
@@ -50,23 +48,22 @@ export class Triangle implements Figure {
   }
 
   getArea(): number {
-    const s = (this.a + this.b + this.c) / 2;
+    const semiPerimiter = (this.a + this.b + this.c) / 2;
 
-    const area = Math.sqrt(s * (s - this.a) * (s - this.b) * (s - this.c));
+    const area = Math.sqrt(semiPerimiter * (semiPerimiter - this.a)
+      * (semiPerimiter - this.b) * (semiPerimiter - this.c));
 
     return Math.floor(area * 100) / 100;
   }
 }
 
 export class Circle implements Figure {
-  shape: Shape;
+  shape = Shape.Circle;
 
   constructor(
     public color: Color,
     public radius: number,
   ) {
-    this.shape = Shape.Circle;
-
     if (this.radius <= 0) {
       throw new Error('Invalid radius');
     }
@@ -80,15 +77,13 @@ export class Circle implements Figure {
 }
 
 export class Rectangle implements Figure {
-  shape: Shape;
+  shape = Shape.Rectangle;
 
   constructor(
     public color: Color,
     public width: number,
     public height: number,
   ) {
-    this.shape = Shape.Rectangle;
-
     if (this.width <= 0 || this.height <= 0) {
       throw new Error('Invalid data');
     }
