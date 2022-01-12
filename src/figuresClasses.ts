@@ -1,28 +1,31 @@
+enum Shape {
+  Triangle = 'triangle',
+  Circle = 'circle',
+  Rectangle = 'rectangle',
+}
+
+enum Color {
+  Red = 'red',
+  Green = 'green',
+  Blue = 'blue',
+}
+
 export interface Figure {
-  shape: string;
-  color: string;
+  shape: Shape;
+  color: Color;
   getArea(): number;
 }
 
 export class Triangle implements Figure {
-  public shape = 'triangle';
+  shape = Shape.Triangle;
 
   constructor(
-    public color: string,
+    public color: Color,
     public a: number,
     public b: number,
     public c: number,
   ) {
-    const arrOfSides = [];
-    let longest = 0;
-
-    arrOfSides.push(this.a, this.b, this.c);
-
-    for (let i = 0; i < arrOfSides.length; i += 1) {
-      if (arrOfSides[i] > longest) {
-        longest = arrOfSides[i];
-      }
-    }
+    const longest = Math.max(this.a, this.b, this.c);
 
     if (a <= 0 || b <= 0 || c <= 0) {
       throw new Error('Sides of triangle must be non-negative');
@@ -48,10 +51,10 @@ export class Triangle implements Figure {
 }
 
 export class Circle implements Figure {
-  shape = 'circle';
+  shape = Shape.Circle;
 
   constructor(
-    public color: string,
+    public color: Color,
     public radius: number,
   ) {
     if (radius <= 0) {
@@ -65,10 +68,10 @@ export class Circle implements Figure {
 }
 
 export class Rectangle implements Figure {
-  shape = 'rectangle';
+  shape = Shape.Rectangle;
 
   constructor(
-    public color: string,
+    public color: Color,
     public width: number,
     public height: number,
   ) {
