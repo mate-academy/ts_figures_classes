@@ -14,7 +14,7 @@ export class Triangle implements Figure {
   ) {
     this.shape = 'triangle';
 
-    if (a + b <= c) {
+    if (a + b <= c || a + c <= b || b + c <= a) {
       throw new Error('your error message');
     }
 
