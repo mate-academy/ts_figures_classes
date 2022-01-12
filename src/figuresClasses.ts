@@ -1,15 +1,22 @@
-type Shape = 'triangle' | 'circle' | 'rectangle';
-type Color = 'red' | 'green' | 'blue';
-type GetArea = () => number;
+enum Shape {
+  Triangle = 'triangle',
+  Circle = 'circle',
+  Rectangle = 'rectangle',
+}
+enum Color {
+  red,
+  green,
+  blue,
+}
 
 export interface Figure {
   shape: Shape;
   color: Color;
-  getArea: GetArea;
+  getArea(): number;
 }
 
 export class Triangle implements Figure {
-  readonly shape: Shape = 'triangle';
+  readonly shape: Shape = Shape.Triangle;
 
   constructor(
     readonly color: Color,
@@ -17,45 +24,46 @@ export class Triangle implements Figure {
     private b: number,
     private c: number,
   ) {
-    if (!(this.a > 0) || !(this.b > 0) || !(this.c > 0)) {
-      throw new Error('Side of triangle should be greater than zero!');
-    }
+    const maxValue = Math.max(this.a, this.b, this.c);
 
-    if ((this.a + this.b) <= this.c
-      || (this.a + this.c) <= this.b
-      || (this.b + this.c) <= this.a
-    ) {
-      throw new Error('Entered data is invalid');
+    if (this.a <= 0
+      || this.b <= 0
+      || this.c <= 0
+      || maxValue >= (this.a + this.b + this.c) - maxValue) {
+      throw new Error('Entered data isn\'t valid');
     }
   }
 
   getArea(): number {
-    const p: number = (this.a + this.b + this.c) / 2;
+    const halfPerimeter: number = (this.a + this.b + this.c) / 2;
 
-    return Math.floor(Math.sqrt(p
-      * (p - this.a) * (p - this.b) * (p - this.c)) * 100) / 100;
+    return Math.floor(Math.sqrt(halfPerimeter
+      * (halfPerimeter - this.a)
+      * (halfPerimeter - this.b)
+      * (halfPerimeter - this.c))
+      * 100) / 100;
   }
 }
 
 export class Circle {
-  readonly shape: Shape = 'circle';
+  readonly shape: Shape = Shape.Circle;
 
   constructor(
     readonly color: Color,
-    private a: number,
+    private radius: number,
   ) {
-    if (!(this.a > 0)) {
+    if (!(this.radius > 0)) {
       throw new Error('Radius of circle should be greater than zero!');
     }
   }
 
   getArea(): number {
-    return Math.floor(Math.PI * (this.a ** 2) * 100) / 100;
+    return Math.floor(Math.PI * (this.radius ** 2) * 100) / 100;
   }
 }
 
 export class Rectangle {
-  readonly shape: Shape = 'rectangle';
+  readonly shape: Shape = Shape.Rectangle;
 
   constructor(
     readonly color: Color,
