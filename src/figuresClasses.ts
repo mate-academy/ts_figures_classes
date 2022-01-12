@@ -25,15 +25,23 @@ export class Triangle implements Figure {
     public b: number,
     public c: number,
   ) {
-    if (a <= 0 || b <= 0 || c <= 0
-      || a + b <= c || a + c <= b || b + c <= a) {
+    if (a <= 0
+      || b <= 0
+      || c <= 0
+      || a + b <= c
+      || a + c <= b
+      || b + c <= a
+    ) {
       throw new Error('Enter correct values of triangle sides');
     }
   }
 
   getArea(): number {
-    const p = (this.a + this.b + this.c) / 2;
-    const area = Math.sqrt(p * (p - this.a) * (p - this.b) * (p - this.c));
+    const semiPerimeter = (this.a + this.b + this.c) / 2;
+    const area = Math.sqrt(semiPerimeter
+      * (semiPerimeter - this.a)
+      * (semiPerimeter - this.b)
+      * (semiPerimeter - this.c));
 
     return Math.trunc(area * 100) / 100;
   }
