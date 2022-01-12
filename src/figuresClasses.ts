@@ -17,11 +17,6 @@ export class Triangle implements Figure {
     public b: number,
     public c: number,
   ) {
-    this.color = color;
-    this.a = a;
-    this.b = b;
-    this.c = c;
-
     if (a <= 0 || b <= 0 || c <= 0) {
       throw new Error('Side\'s length should be greater 0');
     }
@@ -36,10 +31,12 @@ export class Triangle implements Figure {
   }
 
   getArea(): number {
-    const s = (this.a + this.b + this.c) / 2;
+    const semiPerimeter = (this.a + this.b + this.c) / 2;
 
-    return Math.trunc(Math.sqrt(s
-      * (s - this.a) * (s - this.b) * (s - this.c)) * 100) / 100;
+    return Math.trunc(Math.sqrt(semiPerimeter
+      * (semiPerimeter - this.a)
+      * (semiPerimeter - this.b)
+      * (semiPerimeter - this.c)) * 100) / 100;
   }
 }
 
@@ -50,9 +47,6 @@ export class Circle implements Figure {
     public color: Color,
     public radius: number,
   ) {
-    this.color = color;
-    this.radius = radius;
-
     if (radius <= 0) {
       throw new Error('Radius should be greater 0');
     }
@@ -71,10 +65,6 @@ export class Rectangle implements Figure {
     public width: number,
     public height: number,
   ) {
-    this.color = color;
-    this.width = width;
-    this.height = height;
-
     if (width <= 0 || height <= 0) {
       throw new Error('Side\'s length should be greater 0');
     }
