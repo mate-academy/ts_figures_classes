@@ -25,10 +25,6 @@ export class Triangle implements Figure {
     public b: number,
     public c: number,
   ) {
-    this.a = a;
-    this.b = b;
-    this.c = c;
-
     if (this.a <= 0 || this.b <= 0 || this.c <= 0) {
       throw new Error('Enter valid sides');
     }
@@ -59,8 +55,6 @@ export class Circle implements Figure {
     public color: Color,
     public radius: number,
   ) {
-    this.radius = radius;
-
     if (this.radius < 0) {
       throw new Error('Radius should be > 0');
     }
@@ -81,9 +75,6 @@ export class Rectangle implements Figure {
     public width: number,
     public height: number,
   ) {
-    this.width = width;
-    this.height = height;
-
     if (this.height <= 0 || this.width <= 0) {
       throw new Error('Sides should be > 0');
     }
