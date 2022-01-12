@@ -26,26 +26,24 @@ export class Triangle implements Figure {
     public b: number,
     public c: number,
   ) {
-    if (this.a <= 0
-      || this.b <= 0
-      || this.c <= 0
-    ) {
+    if (this.a <= 0 || this.b <= 0 || this.c <= 0) {
       throw new Error('Try to put another side length');
     }
 
-    if (Math.max(this.a, this.b, this.c)
-      >= (this.a + this.b + this.c - Math.max(this.a, this.b, this.c))) {
+    const maxSideLength = Math.max(this.a, this.b, this.c);
+
+    if (maxSideLength >= (this.a + this.b + this.c - maxSideLength)) {
       throw new Error('One of your sides is bigger then sum of two other');
     }
   }
 
   getArea(): number {
-    const semiPerimetr = (this.a + this.b + this.c) / 2;
+    const semiPerimeter = (this.a + this.b + this.c) / 2;
 
-    const area = Math.sqrt(semiPerimetr
-      * (semiPerimetr - this.a)
-      * (semiPerimetr - this.b)
-      * (semiPerimetr - this.c));
+    const area = Math.sqrt(semiPerimeter
+      * (semiPerimeter - this.a)
+      * (semiPerimeter - this.b)
+      * (semiPerimeter - this.c));
 
     return Math.floor(area * 100) / 100;
   }
@@ -78,10 +76,7 @@ export class Rectangle implements Figure {
     public width: number,
     public height: number,
   ) {
-    if (
-      this.width <= 0
-      || this.height <= 0
-    ) {
+    if (this.width <= 0 || this.height <= 0) {
       throw new Error('Try to put another side length');
     }
   }
@@ -91,6 +86,6 @@ export class Rectangle implements Figure {
   }
 }
 
-export function getInfo(figure: Triangle | Circle | Rectangle): string {
+export function getInfo(figure: Figure): string {
   return `A ${figure.color} ${figure.shape} - ${figure.getArea()}`;
 }
