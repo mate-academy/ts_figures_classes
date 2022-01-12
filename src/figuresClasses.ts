@@ -11,7 +11,7 @@ export interface Figure {
 
 function isValidSides(sides: Sides): void {
   if (sides.some((side: number) => side <= 0)) {
-    throw new Error('Sides of a triangle is incorrect!');
+    throw new Error('Invalid input data');
   }
 
   if (sides.length === 3) {
@@ -21,7 +21,7 @@ function isValidSides(sides: Sides): void {
     test.splice(test.indexOf(max), 1);
 
     if (max >= test[0] + test[1]) {
-      throw new Error('Sides of a triangle is incorrect!');
+      throw new Error('Invalid input data');
     }
   }
 }
@@ -49,7 +49,7 @@ export class Triangle implements Figure {
   }
 
   getArea(): number {
-    let area: number = Math.sqrt(4 * (this.a * this.b) ** 2
+    let area = Math.sqrt(4 * (this.a * this.b) ** 2
     - (this.a ** 2 + this.b ** 2 - this.c ** 2) ** 2) / 4;
 
     area = Math.floor(area * 100) / 100;
