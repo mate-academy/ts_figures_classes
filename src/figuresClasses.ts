@@ -29,17 +29,23 @@ export class Triangle implements Figure {
     if (this.a <= 0
       || this.b <= 0
       || this.c <= 0
-      || Math.max(this.a, this.b, this.c)
-        >= (this.a + this.b + this.c - Math.max(this.a, this.b, this.c))
     ) {
-      throw new Error('Your parametrs are not so good');
+      throw new Error('Try to put another side length');
+    }
+
+    if (Math.max(this.a, this.b, this.c)
+      >= (this.a + this.b + this.c - Math.max(this.a, this.b, this.c))) {
+      throw new Error('One of your sides is bigger then sum of two other');
     }
   }
 
   getArea(): number {
-    const s = (this.a + this.b + this.c) / 2;
+    const semiPerimetr = (this.a + this.b + this.c) / 2;
 
-    const area = Math.sqrt(s * (s - this.a) * (s - this.b) * (s - this.c));
+    const area = Math.sqrt(semiPerimetr
+      * (semiPerimetr - this.a)
+      * (semiPerimetr - this.b)
+      * (semiPerimetr - this.c));
 
     return Math.floor(area * 100) / 100;
   }
@@ -53,7 +59,7 @@ export class Circle implements Figure {
     public radius: number,
   ) {
     if (this.radius <= 0) {
-      throw new Error('Your parametrs are not so good');
+      throw new Error('Try to put another radius length');
     }
   }
 
@@ -76,7 +82,7 @@ export class Rectangle implements Figure {
       this.width <= 0
       || this.height <= 0
     ) {
-      throw new Error('Your parametrs are not so good');
+      throw new Error('Try to put another side length');
     }
   }
 
