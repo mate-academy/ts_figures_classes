@@ -1,5 +1,14 @@
-type Shape = 'triangle' | 'circle' | 'rectangle';
-type Color = 'red' | 'green' | 'blue';
+enum Shape {
+  Triangle = 'triangle',
+  Circle = 'circle',
+  Rectangle = 'rectangle',
+}
+
+enum Color {
+  Red = 'red',
+  Green = 'green',
+  Blue = 'blue',
+}
 
 export interface Figure {
   shape: Shape;
@@ -8,7 +17,7 @@ export interface Figure {
 }
 
 export class Triangle implements Figure {
-  shape: Shape = 'triangle';
+  shape = Shape.Triangle;
 
   constructor(
     public color: Color,
@@ -26,17 +35,17 @@ export class Triangle implements Figure {
   }
 
   getArea(): number {
-    const semiPerimeter: number = (this.a + this.b + this.c) / 2;
-    const underTheRoot: number = semiPerimeter * (semiPerimeter - this.a)
+    const semiPerimeter = (this.a + this.b + this.c) / 2;
+    const underTheRoot = semiPerimeter * (semiPerimeter - this.a)
       * (semiPerimeter - this.b) * (semiPerimeter - this.c);
-    const square: number = Math.sqrt(underTheRoot);
+    const square = Math.sqrt(underTheRoot);
 
     return Math.floor(square * 100) / 100;
   }
 }
 
 export class Circle implements Figure {
-  shape: Shape = 'circle';
+  shape = Shape.Circle;
 
   constructor(
     public color: Color,
@@ -48,14 +57,14 @@ export class Circle implements Figure {
   }
 
   getArea(): number {
-    const square: number = Math.PI * this.radius ** 2;
+    const square = Math.PI * this.radius ** 2;
 
     return Math.floor(square * 100) / 100;
   }
 }
 
 export class Rectangle implements Figure {
-  shape: Shape = 'rectangle';
+  shape = Shape.Rectangle;
 
   constructor(
     public color: Color,
@@ -68,7 +77,7 @@ export class Rectangle implements Figure {
   }
 
   getArea(): number {
-    const square: number = this.width * this.height;
+    const square = this.width * this.height;
 
     return Math.floor(square * 100) / 100;
   }
