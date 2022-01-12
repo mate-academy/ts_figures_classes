@@ -36,8 +36,9 @@ export class Triangle implements Figure {
   }
 
   getArea(): number {
-    const p: number = (this.a + this.b + this.c) / 2;
-    const area = (Math.sqrt(p * (p - this.a) * (p - this.b) * (p - this.c)));
+    const perimeter: number = (this.a + this.b + this.c) / 2;
+    const area = (Math.sqrt(perimeter * (perimeter - this.a)
+    * (perimeter - this.b) * (perimeter - this.c)));
 
     return Math.floor(area * 100) / 100;
   }
