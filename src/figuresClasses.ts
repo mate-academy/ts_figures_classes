@@ -5,9 +5,9 @@ enum Color {
 }
 
 enum Shape {
-  triangle,
-  circle,
-  rectangle,
+  triangle = 'triangle',
+  circle = 'circle',
+  rectangle = 'rectangle',
 }
 
 const ifLengthZero = (...args:number[]):void => {
@@ -78,7 +78,7 @@ export class Rectangle implements Figure {
     public a: number,
     public b: number,
   ) {
-    ifLengthZero();
+    ifLengthZero(this.a, this.b);
   }
 
   getArea(): number {
