@@ -1,13 +1,13 @@
 enum Color {
   red,
   green,
-  blue
+  blue,
 }
 
 enum Shape {
   triangle,
   circle,
-  rectangle
+  rectangle,
 }
 
 const ifLengthZero = (...args:number[]):void => {
@@ -24,8 +24,9 @@ export interface Figure {
 }
 
 export class Triangle implements Figure {
+  shape = Shape.triangle;
+
   constructor(
-    public shape: Shape.triangle,
     public color: Color,
     public a:number,
     public b:number,
@@ -53,8 +54,9 @@ export class Triangle implements Figure {
 }
 
 export class Circle implements Figure {
+  shape = Shape.circle;
+
   constructor(
-    public shape: Shape.circle,
     public color: Color,
     public radius: number,
   ) {
@@ -69,8 +71,9 @@ export class Circle implements Figure {
 }
 
 export class Rectangle implements Figure {
+  shape = Shape.rectangle;
+
   constructor(
-    public shape: Shape.rectangle,
     public color: Color,
     public a: number,
     public b: number,
