@@ -59,7 +59,7 @@ export class Circle implements Figure {
   getArea(): number {
     const area = +(Math.PI * this.radius * this.radius);
 
-    return +(area.toString()).slice(0, (area.toString()).indexOf('.') + 3);
+    return Math.floor(100 * area) / 100;
   }
 }
 
