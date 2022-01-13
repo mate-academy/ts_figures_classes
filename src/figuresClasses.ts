@@ -1,17 +1,26 @@
+enum Shape {
+  Triangle = 'triangle',
+  Circle = 'circle',
+  Rectangle = 'rectangle',
+}
+
+enum Color {
+  Red = 'red',
+  Blue = 'blue',
+  Green = 'green',
+}
 
 export interface Figure {
-  shape: 'triangle' | 'circle' | 'rectangle',
-  color: 'red' | 'blue' | 'green',
+  shape: Shape,
+  color: Color,
   getArea(): number,
 }
 
 export class Triangle implements Figure {
-  shape = 'triangle';
-
-  semiPerim: number;
+  shape: Shape = Shape.Triangle;
 
   constructor(
-    public color: 'red' | 'blue' | 'green',
+    public color: Color,
     public a: number,
     public b: number,
     public c: number,
@@ -23,20 +32,20 @@ export class Triangle implements Figure {
   }
 
   getArea(): number {
-    this.semiPerim = (this.a + this.b + this.c) / 2;
+    const semiPerim: number = (this.a + this.b + this.c) / 2;
 
-    return Math.round(((this.semiPerim
-      * (this.semiPerim - this.a)
-      * (this.semiPerim - this.b)
-      * (this.semiPerim - this.c)) ** 0.5) * 100) / 100;
+    return Math.round(((semiPerim
+      * (semiPerim - this.a)
+      * (semiPerim - this.b)
+      * (semiPerim - this.c)) ** 0.5) * 100) / 100;
   }
 }
 
 export class Circle implements Figure {
-  shape = 'circle';
+  shape: Shape = Shape.Circle;
 
   constructor(
-    public color: 'red' | 'blue' | 'green',
+    public color: Color,
     public radius: number,
   ) {
     if (radius <= 0) {
@@ -50,10 +59,10 @@ export class Circle implements Figure {
 }
 
 export class Rectangle implements Figure {
-  shape = 'rectangle';
+  shape: Shape = Shape.Rectangle;
 
   constructor(
-    public color: 'red' | 'blue' | 'green',
+    public color: Color,
     public width: number,
     public height: number,
   ) {
