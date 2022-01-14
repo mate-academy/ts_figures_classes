@@ -13,27 +13,20 @@ export class Triangle implements Figure {
     public b: number,
     public c: number,
   ) {
-    this.color = color;
-
-    if (a <= 0
-      || b <= 0
-      || c <= 0
-      || a + b <= c
-      || b + c <= a
-      || c + a <= b
-    ) {
-      throw new Error('Wrong sides');
+    if (a <= 0 || b <= 0 || c <= 0
+      || a + b <= c || b + c <= a || a + c <= b) {
+      throw new Error('Can\'t create triangle, invalid side parameter');
     }
   }
 
   getArea(): number {
-    const half: number = (this.a + this.b + this.c) / 2;
+    const halfOfPerimeter: number = (this.a + this.b + this.c) / 2;
 
     return Math.floor(Math.sqrt(
-      half
-      * (half - this.a)
-      * (half - this.b)
-      * (half - this.c),
+      halfOfPerimeter
+      * (halfOfPerimeter - this.a)
+      * (halfOfPerimeter - this.b)
+      * (halfOfPerimeter - this.c),
     ) * 100) / 100;
   }
 }
@@ -45,10 +38,8 @@ export class Circle implements Figure {
     public color: string,
     public radius: number,
   ) {
-    this.color = color;
-
     if (this.radius <= 0) {
-      throw new Error('Wrong radius');
+      throw new Error('Incorrect input data. Review your input values');
     }
   }
 
@@ -65,10 +56,8 @@ export class Rectangle implements Figure {
     public width: number,
     public height: number,
   ) {
-    this.color = color;
-
     if (width <= 0 || height <= 0) {
-      throw new Error('Wrong width or height');
+      throw new Error('Incorrect input data. Review your input values');
     }
   }
 
