@@ -1,5 +1,13 @@
-type Color = 'red' | 'blue' | 'green';
-type Shape = 'triangle' | 'circle' | 'rectangle';
+enum Color {
+  Red = 'red',
+  Blue = 'blue',
+  Green = 'green',
+}
+enum Shape {
+  Triangle = 'triangle',
+  Circle = 'circle',
+  Rectangle = 'rectangle',
+}
 
 export interface Figure {
   shape: Shape,
@@ -8,7 +16,7 @@ export interface Figure {
 }
 
 export class Triangle implements Figure {
-  shape = 'triangle';
+  shape = Shape.Triangle;
 
   constructor(
     public color: Color,
@@ -37,7 +45,7 @@ export class Triangle implements Figure {
 }
 
 export class Circle implements Figure {
-  shape = 'circle';
+  shape = Shape.Circle;
 
   constructor(
     public color: Color,
@@ -54,7 +62,7 @@ export class Circle implements Figure {
 }
 
 export class Rectangle implements Figure {
-  shape = 'rectangle';
+  shape = Shape.Rectangle;
 
   constructor(
     public color: Color,
@@ -71,6 +79,6 @@ export class Rectangle implements Figure {
   }
 }
 
-export function getInfo(figure): string {
+export function getInfo(figure: Figure): string {
   return `A ${figure.color} ${figure.shape} - ${figure.getArea()}`;
 }
