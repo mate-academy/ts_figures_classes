@@ -49,7 +49,7 @@ export class Circle implements Figure {
   }
 }
 
-export class Rectangle {
+export class Rectangle implements Figure {
   shape = 'rectangle';
 
   constructor(
