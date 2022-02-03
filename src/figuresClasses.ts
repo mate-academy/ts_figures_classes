@@ -1,4 +1,9 @@
-type Shape = 'triangle' | 'circle' | 'rectangle';
+enum Shape {
+  triangle = 'triangle',
+  circle = 'circle',
+  rectangle = 'rectangle',
+}
+
 type Color = 'red' | 'green' | 'blue';
 
 export interface Figure {
@@ -17,11 +22,12 @@ export class Triangle implements Figure {
     const data = [a, b, c].sort((prev, next) => next - prev);
 
     if (a <= 0 || b <= 0 || c <= 0 || data[0] >= data[1] + data[2]) {
-      throw new Error('your error message');
+      throw new Error('Please check data, because data'
+        + 'is not correct or it is not triangle');
     }
   }
 
-  shape: Shape = 'triangle';
+  shape = Shape.triangle;
 
   getArea(): number {
     const p: number = (this.a + this.b + this.c) * 0.5;
@@ -38,11 +44,11 @@ export class Circle implements Figure {
     public radius : number,
   ) {
     if (radius <= 0) {
-      throw new Error('your error message');
+      throw new Error('ERROR - Please write correct radius');
     }
   }
 
-  shape: Shape = 'circle';
+  shape = Shape.circle;
 
   getArea(): number {
     const s = this.radius ** 2 * Math.PI;
@@ -58,11 +64,11 @@ export class Rectangle implements Figure {
     public height: number,
   ) {
     if (width <= 0 || height <= 0) {
-      throw new Error('your error message');
+      throw new Error('ERROR - Please write correct data');
     }
   }
 
-  shape: Shape = 'rectangle';
+  shape = Shape.rectangle;
 
   getArea(): number {
     return this.width * this.height;
