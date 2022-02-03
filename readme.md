@@ -6,7 +6,7 @@ has:
 - a `shape` (`triangle`, `circle` or `rectangle`);
 - a `color` (`red`, `green` or `blue`);
 - a method `getArea` that returns the area of the figure rounded down to 
-hundredths.
+hundredths.f
 
 In addition to a `color` constructors should accept required data:
 - sides `a`, `b` and `c` for a triangle;
