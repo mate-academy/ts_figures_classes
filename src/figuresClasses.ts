@@ -14,7 +14,7 @@ export interface Figure {
 
 export class Triangle implements Figure {
   constructor(
-    public color: 'red' | 'green' | 'blue',
+    public color: Color,
     public a: number,
     public b: number,
     public c: number,
