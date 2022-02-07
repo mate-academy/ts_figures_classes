@@ -19,7 +19,7 @@ export class Triangle implements Figure {
         || this.a + this.c <= this.b
         || this.b + this.c <= this.a
         || [this.a, this.b, this.c].some((side: number) => side <= 0)) {
-      throw new Error('Incorrect value!');
+      throw new Error(`This figure is not ${this.shape}`);
     }
   }
 
@@ -42,7 +42,7 @@ export class Circle implements Figure {
     this.shape = this.constructor.name.toLowerCase();
 
     if (this.radius <= 0) {
-      throw new Error('Incorrect value!');
+      throw new Error(`This figure is not ${this.shape}`);
     }
   }
 
@@ -62,7 +62,7 @@ export class Rectangle implements Figure {
     this.shape = this.constructor.name.toLowerCase();
 
     if ([this.width, this.hight].some((side: number) => side <= 0)) {
-      throw new Error('Incorrect value!');
+      throw new Error(`This figure is not ${this.shape}`);
     }
   }
 
