@@ -17,10 +17,10 @@ export class Triangle implements Figure {
   ) {
     this.shape = this.constructor.name.toLowerCase();
 
-    if (this.a + this.b <= this.c
-        || this.a + this.c <= this.b
-        || this.b + this.c <= this.a
-        || [this.a, this.b, this.c].some((side: number) => side <= 0)) {
+    if (a + b <= c
+        || a + c <= b
+        || b + c <= a
+        || [a, b, c].some((side: number) => side <= 0)) {
       throw new Error(
         `Entered values don't belong to figure type of ${this.shape}`,
       );
@@ -45,7 +45,7 @@ export class Circle implements Figure {
   ) {
     this.shape = this.constructor.name.toLowerCase();
 
-    if (this.radius <= 0) {
+    if (radius <= 0) {
       throw new Error(
         `Entered values don't belong to figure type of ${this.shape}`,
       );
@@ -67,7 +67,7 @@ export class Rectangle implements Figure {
   ) {
     this.shape = this.constructor.name.toLowerCase();
 
-    if ([this.width, this.hight].some((side: number) => side <= 0)) {
+    if ([width, hight].some((side: number) => side <= 0)) {
       throw new Error(
         `Entered values don't belong to figure type of ${this.shape}`,
       );
