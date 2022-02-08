@@ -32,7 +32,7 @@ export class Triangle implements Figure {
     const s = (this.a + this.b + this.c) / 2;
     const area = Math.sqrt(s * (s - this.a) * (s - this.b) * (s - this.c));
 
-    return Number(Math.floor(area * 100) / 100);
+    return Math.floor(area * 100) / 100;
   }
 }
 
