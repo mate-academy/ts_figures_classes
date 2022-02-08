@@ -1,34 +1,21 @@
-type Shape = 'triangle' | 'circle' | 'rectangle';
 type Color = 'red' | 'green' | 'blue';
 
 export interface Figure {
-  shape: Shape;
+  shape: string;
   color: Color;
   getArea(): number;
 }
 
 export class Triangle implements Figure {
-  shape: Shape;
-
-  color: Color;
-
-  a: number;
-
-  b: number;
-
-  c: number;
+  shape: string;
 
   constructor(
-    color: Color,
-    a: number,
-    b: number,
-    c: number,
+    public color: Color,
+    public a: number,
+    public b: number,
+    public c: number,
   ) {
     this.shape = 'triangle';
-    this.color = color;
-    this.a = a;
-    this.b = b;
-    this.c = c;
 
     if (
       a <= 0
@@ -50,16 +37,13 @@ export class Triangle implements Figure {
 }
 
 export class Circle {
-  shape: Shape;
+  shape: string;
 
-  color: Color;
-
-  radius: number;
-
-  constructor(color: Color, radius: number) {
+  constructor(
+    public color: Color,
+    public radius: number,
+  ) {
     this.shape = 'circle';
-    this.color = color;
-    this.radius = radius;
 
     if (radius <= 0) {
       throw new Error('Radius length should be more than 0');
@@ -76,23 +60,14 @@ export class Circle {
 }
 
 export class Rectangle {
-  shape: Shape;
-
-  color: Color;
-
-  a: number;
-
-  b: number;
+  shape: string;
 
   constructor(
-    color: Color,
-    a: number,
-    b: number,
+    public color: Color,
+    public a: number,
+    public b: number,
   ) {
     this.shape = 'rectangle';
-    this.color = color;
-    this.a = a;
-    this.b = b;
 
     if (a <= 0 || b <= 0) {
       throw new Error('Sides length should be more than 0');
