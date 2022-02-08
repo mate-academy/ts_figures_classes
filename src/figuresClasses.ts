@@ -10,15 +10,12 @@ export interface Figure {
 export class Triangle implements Figure {
   shape: Shape;
 
-  color: Color;
-
-  a: number;
-
-  b: number;
-
-  c: number;
-
-  constructor(color: Color, a: number, b: number, c: number) {
+  constructor(
+    public color: Color,
+    public a: number,
+    public b: number,
+    public c: number,
+  ) {
     if (Math.max(a, b, c) >= [a, b, c]
       .filter((side) => side !== Math.max(a, b, c))
       .reduce((z, y) => z + y)) {
@@ -48,11 +45,7 @@ export class Triangle implements Figure {
 export class Circle {
   shape: Shape;
 
-  color: Color;
-
-  radius: number;
-
-  constructor(color: Color, radius: number) {
+  constructor(public color: Color, public radius: number) {
     if (radius <= 0) {
       throw new Error('radius lower or equal to 0');
     }
@@ -69,13 +62,11 @@ export class Circle {
 export class Rectangle {
   shape: Shape;
 
-  color: Color;
-
-  width: number;
-
-  height: number;
-
-  constructor(color: Color, width: number, height: number) {
+  constructor(
+    public color: Color,
+    public width: number,
+    public height: number,
+  ) {
     if (width <= 0 || height <= 0) {
       throw new Error('some sides lower or equal to 0');
     }
