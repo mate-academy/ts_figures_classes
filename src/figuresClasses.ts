@@ -91,21 +91,5 @@ export class Rectangle {
 }
 
 export function getInfo(figure: Figure): string {
-  switch (figure.shape) {
-    case 'triangle': {
-      return `A ${figure.color} triangle - ${figure.getArea()}`;
-    }
-
-    case 'circle': {
-      return `A ${figure.color} circle - ${figure.getArea()}`;
-    }
-
-    case 'rectangle': {
-      return `A ${figure.color} rectangle - ${figure.getArea()}`;
-    }
-
-    default: {
-      return 'not a figure';
-    }
-  }
+  return `A ${figure.color} ${figure.shape} - ${figure.getArea()}`;
 }
