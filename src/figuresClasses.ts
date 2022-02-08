@@ -1,6 +1,8 @@
+type Color = 'red' | 'green' | 'blue';
+
 export interface Figure {
   shape: string;
-  color: string;
+  color: Color;
   getArea(): number;
 }
 
@@ -8,7 +10,7 @@ export class Triangle implements Figure {
   public shape: string;
 
   constructor(
-    public color: string,
+    public color: Color,
     public a: number,
     public b: number,
     public c: number,
@@ -19,7 +21,9 @@ export class Triangle implements Figure {
         || this.a + this.c <= this.b
         || this.b + this.c <= this.a
         || [this.a, this.b, this.c].some((side: number) => side <= 0)) {
-      throw new Error(`This figure is not ${this.shape}`);
+      throw new Error(
+        `Entered values don't belong to figure type of ${this.shape}`,
+      );
     }
   }
 
@@ -36,13 +40,15 @@ export class Circle implements Figure {
   public shape: string;
 
   constructor(
-    public color: string,
+    public color: Color,
     public radius: number,
   ) {
     this.shape = this.constructor.name.toLowerCase();
 
     if (this.radius <= 0) {
-      throw new Error(`This figure is not ${this.shape}`);
+      throw new Error(
+        `Entered values don't belong to figure type of ${this.shape}`,
+      );
     }
   }
 
@@ -55,14 +61,16 @@ export class Rectangle implements Figure {
   public shape: string;
 
   constructor(
-    public color: string,
+    public color: Color,
     public width: number,
     public hight: number,
   ) {
     this.shape = this.constructor.name.toLowerCase();
 
     if ([this.width, this.hight].some((side: number) => side <= 0)) {
-      throw new Error(`This figure is not ${this.shape}`);
+      throw new Error(
+        `Entered values don't belong to figure type of ${this.shape}`,
+      );
     }
   }
 
