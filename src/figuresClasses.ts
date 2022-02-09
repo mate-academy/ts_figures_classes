@@ -1,33 +1,22 @@
+type Color = 'red' | 'green' | 'blue';
+type Shape = 'triangle' | 'rectangle' | 'circle';
 
 export interface Figure {
-  color: 'red' | 'green' | 'blue';
-  shape: string;
-  radius?: number;
+  color: Color;
+  shape: Shape;
   getArea: () => number;
 }
 
 export class Triangle implements Figure {
-  color: 'red' | 'green' | 'blue';
-
-  shape: string;
-
-  a: number;
-
-  b: number;
-
-  c: number;
+  shape: Shape;
 
   constructor(
-    color: 'red' | 'green' | 'blue',
-    a: number,
-    b: number,
-    c: number,
+    public color: Color,
+    public a: number,
+    public b: number,
+    public c: number,
   ) {
-    this.color = color;
     this.shape = 'triangle';
-    this.a = a;
-    this.b = b;
-    this.c = c;
 
     if (this.a >= this.b + this.c
       || this.c >= this.a + this.b
@@ -36,7 +25,7 @@ export class Triangle implements Figure {
       throw new Error('please, put correct data');
     }
 
-    if (this.a === 0 || this.b === 0 || this.c === 0) {
+    if (this.a <= 0 || this.b <= 0 || this.c <= 0) {
       throw new Error('please, put correct data');
     }
   }
@@ -51,18 +40,12 @@ export class Triangle implements Figure {
 }
 
 export class Circle implements Figure {
-  color: 'red' | 'green' | 'blue';
-
-  shape: string;
-
-  radius: number;
+  shape: Shape;
 
   constructor(
-    color: 'red' | 'green' | 'blue',
-    radius: number,
+    public color: Color,
+    public radius: number,
   ) {
-    this.color = color;
-    this.radius = radius;
     this.shape = 'circle';
 
     if (radius <= 0) {
@@ -76,23 +59,14 @@ export class Circle implements Figure {
 }
 
 export class Rectangle implements Figure {
-  color: 'red' | 'green' | 'blue';
-
-  shape: string;
-
-  a: number;
-
-  b: number;
+  shape: Shape;
 
   constructor(
-    color: 'red' | 'green' | 'blue',
-    a: number,
-    b: number,
+    public color: Color,
+    public a: number,
+    public b: number,
   ) {
-    this.a = a;
-    this.b = b;
     this.shape = 'rectangle';
-    this.color = color;
 
     if (this.a < 0 || this.b < 0 || this.a - this.b === 0) {
       throw new Error('not valid sides values :)');
