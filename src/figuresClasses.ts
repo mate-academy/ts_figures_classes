@@ -28,7 +28,7 @@ export class Triangle implements Figure {
       || c >= a + b
       || b >= c + a
     ) {
-      throw new Error('error');
+      throw new Error('please, put correct data');
     }
     this.shape = 'triangle';
   }
@@ -51,7 +51,7 @@ export class Circle implements Figure {
     public radius: number,
   ) {
     if (radius <= 0) {
-      throw new Error('error');
+      throw new Error('please, put correct data');
     }
 
     this.shape = 'circle';
@@ -71,7 +71,7 @@ export class Rectangle implements Figure {
     public height: number,
   ) {
     if (width <= 0 || height <= 0) {
-      throw new Error('error');
+      throw new Error('please, put correct data');
     }
 
     this.shape = 'rectangle';
