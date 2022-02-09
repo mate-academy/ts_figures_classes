@@ -1,23 +1,25 @@
+// import { type } from "os";
+
+type Shape = 'triangle' | 'circle' | 'rectangle';
+type Color = 'blue' | 'green' | 'red';
+
 export interface Figure {
-  shape: string
-  color: string
-  getArea(): number | never
-  sides?: number[]
+  shape: Shape
+  color: Color
+  getArea(): number
   radius?: number
+  sides?: number[]
 }
 
-export class Triangle implements Figure {
-  shape: string;
-
-  color: string;
+export class Triangle {
+  shape: Shape;
 
   sides: number[];
 
   getArea: () => number | never;
 
-  constructor(color: string, ...sides: number[]) {
+  constructor(public color: Color, ...sides: number[]) {
     this.shape = 'triangle';
-    this.color = color;
     this.sides = sides;
 
     const [a, b, c] = sides;
@@ -30,7 +32,7 @@ export class Triangle implements Figure {
       throw new Error("sides 1, 2 and 3 can't form a triangle");
     }
 
-    this.getArea = (): number | never => {
+    this.getArea = (): number => {
       p /= 2;
 
       const result = ((p - a) * (p - b) * (p - c) * p) ** (1 / 2);
@@ -40,25 +42,22 @@ export class Triangle implements Figure {
   }
 }
 
-export class Circle implements Figure {
-  shape: string;
-
-  color: string;
+export class Circle {
+  shape: Shape;
 
   radius: number;
 
   getArea: () => number | never;
 
-  constructor(color: string, radius: number) {
+  constructor(public color: Color, radius: number) {
     this.shape = 'circle';
-    this.color = color;
     this.radius = radius;
 
     if (radius <= 0) {
       throw new Error('radius must be greater than 0');
     }
 
-    this.getArea = (): number | never => {
+    this.getArea = (): number => {
       const s = (Math.PI * radius * radius);
 
       return Math.floor(s * 100) / 100;
@@ -67,17 +66,14 @@ export class Circle implements Figure {
 }
 
 export class Rectangle {
-  shape: string;
-
-  color: string;
+  shape: Shape;
 
   sides: number[];
 
   getArea: () => number | never;
 
-  constructor(color: string, ...sides: number[]) {
+  constructor(public color: Color, ...sides: number[]) {
     this.shape = 'rectangle';
-    this.color = color;
     this.sides = sides;
 
     const errorValue = [sides[0], sides[1]]
@@ -87,7 +83,7 @@ export class Rectangle {
       throw new Error("sides can't form a rectangle");
     }
 
-    this.getArea = (): number | never => {
+    this.getArea = (): number => {
       const [width, height] = sides;
       const s = width * height;
 
