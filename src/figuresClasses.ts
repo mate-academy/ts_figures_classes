@@ -41,7 +41,7 @@ export class Circle implements Figure {
     public radius: number,
   ) {
     if (radius <= 0) {
-      throw new Error('Invalid side length');
+      throw new Error('Invalid radius length');
     }
   }
 
