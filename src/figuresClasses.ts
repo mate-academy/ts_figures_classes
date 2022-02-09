@@ -1,19 +1,23 @@
 export enum Shape {
-  triangle = 'triangle',
-  circle = 'circle',
-  rectamgle = 'rectangle'
+  Triangle = 'triangle',
+  Circle = 'circle',
+  Rectamgle = 'rectangle'
 }
 
 export enum Color {
-  red = 'red',
-  green = 'green',
-  blue = 'blue'
+  Red = 'red',
+  Green = 'green',
+  Blue = 'blue'
 }
 
 export interface Figure {
   shape: Shape;
   color: Color;
   getArea(): number;
+}
+
+function roundToTwoDigits(number: number): number {
+  return Math.floor(number * 100) / 100;
 }
 
 export class Triangle implements Figure {
@@ -25,23 +29,23 @@ export class Triangle implements Figure {
     public y: number,
     public c: number,
   ) {
-    this.shape = Shape.triangle;
+    this.shape = Shape.Triangle;
 
     if (x <= 0 || y <= 0 || c <= 0) {
-      throw new Error('Incorrect coords');
+      throw new Error('Incorrect data for Triangle');
     }
 
     if (x >= (y + c) || y >= (x + c) || c >= (y + x)) {
-      throw new Error('Incorrect coords');
+      throw new Error('Incorrect data for Triangle');
     }
   }
 
   getArea(): number {
     const s: number = (this.x + this.y + this.c) / 2;
 
-    return Math.floor(
-      Math.sqrt(s * (s - this.x) * (s - this.y) * (s - this.c)) * 100,
-    ) / 100;
+    return roundToTwoDigits(
+      Math.sqrt(s * (s - this.x) * (s - this.y) * (s - this.c)),
+    );
   }
 }
 
@@ -52,15 +56,15 @@ export class Circle {
     public color: Color,
     public radius: number,
   ) {
-    this.shape = Shape.circle;
+    this.shape = Shape.Circle;
 
     if (radius <= 0) {
-      throw new Error('Incorrect coords');
+      throw new Error('Incorrect radius for Circle');
     }
   }
 
   getArea(): number {
-    return Math.floor(Math.PI * (this.radius ** 2) * 100) / 100;
+    return roundToTwoDigits(Math.PI * (this.radius ** 2));
   }
 }
 
@@ -72,10 +76,10 @@ export class Rectangle {
     public width: number,
     public height: number,
   ) {
-    this.shape = Shape.rectamgle;
+    this.shape = Shape.Rectamgle;
 
     if (this.width <= 0 || this.height <= 0) {
-      throw new Error('Incorrect coords');
+      throw new Error('Incorrect data for Rectangle');
     }
   }
 
