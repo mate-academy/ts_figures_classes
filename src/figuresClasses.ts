@@ -3,8 +3,6 @@ export interface Figure {
   color: 'red' | 'green' | 'blue';
   shape: string;
   radius?: number;
-  width?: number;
-  height?: number;
   getArea: () => number;
 }
 
