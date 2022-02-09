@@ -4,10 +4,6 @@ export interface Figure {
   shape:Shape;
   color:Color;
   getArea(): number;
-  a?:number;
-  b?:number;
-  c?:number;
-  radius?:number;
 }
 
 export class Triangle implements Figure {
@@ -26,7 +22,7 @@ export class Triangle implements Figure {
     || (b >= a + c)
     || (c >= b + a)
     || (c <= 0 || a <= 0 || b <= 0)) {
-      throw new Error('Error');
+      throw new Error('Sides of triangle can not be equal or less then 0');
     }
   }
 
@@ -49,7 +45,7 @@ export class Circle implements Figure {
     this.shape = 'circle';
 
     if (this.radius <= 0) {
-      throw new Error('Error');
+      throw new Error('Radius can not be equal or less then 0');
     }
   }
 
@@ -69,7 +65,7 @@ export class Rectangle implements Figure {
     this.shape = 'rectangle';
 
     if (a <= 0 || b <= 0) {
-      throw new Error('Error');
+      throw new Error('Sides of rectangle can not be equal or less then 0');
     }
   }
 
