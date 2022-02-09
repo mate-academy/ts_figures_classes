@@ -1,6 +1,10 @@
 export type Shape = 'triangle' | 'circle' | 'rectangle';
 export type Color = 'red' | 'green' | 'blue';
 
+export function roundToHundredth(num: number): number {
+  return Math.floor(num * 100) / 100;
+}
+
 export interface Figure {
   shape: Shape;
   color: Color;
@@ -32,7 +36,7 @@ export class Triangle implements Figure {
     const s = (this.a + this.b + this.c) / 2;
     const area = Math.sqrt(s * (s - this.a) * (s - this.b) * (s - this.c));
 
-    return Math.floor(area * 100) / 100;
+    return roundToHundredth(area);
   }
 }
 
@@ -51,7 +55,7 @@ export class Circle implements Figure {
   }
 
   getArea(): number {
-    return Math.floor(Math.PI * this.radius ** 2 * 100) / 100;
+    return roundToHundredth(Math.PI * this.radius ** 2);
   }
 }
 
@@ -71,7 +75,7 @@ export class Rectangle implements Figure {
   }
 
   getArea(): number {
-    return Math.floor(this.width * this.height * 100) / 100;
+    return roundToHundredth(this.width * this.height);
   }
 }
 
