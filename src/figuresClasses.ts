@@ -1,31 +1,33 @@
 // import { type } from "os";
 
-type Shape = 'triangle' | 'circle' | 'rectangle';
+enum Shape {
+  Triangle = 'triangle',
+  Circle = 'circle',
+  Rectangle = 'rectangle'
+}
+
 type Color = 'blue' | 'green' | 'red';
 
 export interface Figure {
   shape: Shape
   color: Color
   getArea(): number
-  radius?: number
-  sides?: number[]
 }
 
-export class Triangle {
-  shape: Shape;
+export class Triangle implements Figure {
+  shape = Shape.Triangle;
 
   sides: number[];
 
-  getArea: () => number | never;
+  getArea: () => number;
 
   constructor(public color: Color, ...sides: number[]) {
-    this.shape = 'triangle';
     this.sides = sides;
 
     const [a, b, c] = sides;
     let p = a + b + c;
 
-    const errorValue = sides.some((elem: number) => elem <= 0
+    const errorValue = sides.some((elem) => elem <= 0
         || p - elem <= elem);
 
     if (errorValue) {
@@ -42,15 +44,14 @@ export class Triangle {
   }
 }
 
-export class Circle {
-  shape: Shape;
+export class Circle implements Figure {
+  shape = Shape.Circle;
 
   radius: number;
 
-  getArea: () => number | never;
+  getArea: () => number;
 
   constructor(public color: Color, radius: number) {
-    this.shape = 'circle';
     this.radius = radius;
 
     if (radius <= 0) {
@@ -65,15 +66,14 @@ export class Circle {
   }
 }
 
-export class Rectangle {
-  shape: Shape;
+export class Rectangle implements Figure {
+  shape = Shape.Rectangle;
 
   sides: number[];
 
-  getArea: () => number | never;
+  getArea: () => number;
 
   constructor(public color: Color, ...sides: number[]) {
-    this.shape = 'rectangle';
     this.sides = sides;
 
     const errorValue = [sides[0], sides[1]]
