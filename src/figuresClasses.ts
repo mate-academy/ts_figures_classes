@@ -1,5 +1,9 @@
 type Color = 'red' | 'green' | 'blue';
 
+function rounding(value: number): number {
+  return Math.floor(value * 100) / 100;
+}
+
 export interface Figure {
   shape: string;
   color: Color;
@@ -31,8 +35,7 @@ export class Triangle implements Figure {
   getArea(): number {
     const p = (this.a + this.b + this.c) / 2;
 
-    return Math.floor(Math.sqrt(p * (p - this.a)
-      * (p - this.b) * (p - this.c)) * 100) / 100;
+    return rounding(Math.sqrt(p * (p - this.a) * (p - this.b) * (p - this.c)));
   }
 }
 
@@ -51,11 +54,7 @@ export class Circle {
   }
 
   getArea(): number {
-    return Math.floor(Math.PI
-      * this.radius
-      * this.radius
-      * 100)
-      / 100;
+    return rounding(Math.PI * this.radius * this.radius);
   }
 }
 
@@ -75,7 +74,7 @@ export class Rectangle {
   }
 
   getArea(): number {
-    return Math.floor(this.a * this.b * 100) / 100;
+    return rounding(this.a * this.b);
   }
 }
 
