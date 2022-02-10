@@ -8,6 +8,10 @@ export interface Figure {
   getArea: () => number;
 }
 
+export const roundedDownToHundredths = (num: number): number => {
+  return +(Math.floor(num * 100) / 100);
+};
+
 export class Triangle implements Figure {
   constructor(
     public color: Color,
@@ -31,7 +35,7 @@ export class Triangle implements Figure {
     const p = (this.a + this.b + this.c) / 2;
     const s = Math.sqrt(p * (p - this.a) * (p - this.b) * (p - this.c));
 
-    return +(Math.floor(s * 100) / 100);
+    return roundedDownToHundredths(s);
   }
 }
 
@@ -50,7 +54,7 @@ export class Circle implements Figure {
   getArea(): number {
     const s = Math.PI * this.radius * this.radius;
 
-    return +(Math.floor(s * 100) / 100);
+    return roundedDownToHundredths(s);
   }
 }
 
@@ -70,7 +74,7 @@ export class Rectangle implements Figure {
   getArea(): number {
     const s = this.width * this.height;
 
-    return +(Math.ceil(s * 100) / 100);
+    return roundedDownToHundredths(s);
   }
 }
 
