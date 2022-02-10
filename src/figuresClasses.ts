@@ -24,7 +24,7 @@ export class Triangle implements Figure {
       || a + b <= c
       || a + c <= b
       || b + c <= a) {
-      throw new Error('Error!');
+      throw new Error('Resulting value should be even number');
     }
   }
 
@@ -46,7 +46,7 @@ export class Circle implements Figure {
     this.shape = 'circle';
 
     if (this.radius <= 0) {
-      throw new Error('Error!');
+      throw new Error('Resulting value should be even number');
     }
   }
 
@@ -66,7 +66,7 @@ export class Rectangle implements Figure {
     this.shape = 'rectangle';
 
     if (width <= 0 || height <= 0) {
-      throw new Error('Error!');
+      throw new Error('Resulting value should be even number');
     }
   }
 
