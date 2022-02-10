@@ -1,17 +1,18 @@
+type Color = 'red' | 'green' | 'blue';
+type Shape = 'triangle' | 'circle' | 'rectangle';
+
 export interface Figure {
-  shape: string,
-  color: string,
+  shape: Shape,
+  color: Color,
   getArea: () => number,
 }
-
-type Color = 'red' | 'green' | 'blue';
 
 function roundToHundreds(num: number): number {
   return Math.floor(num * 100) / 100;
 }
 
-export class Triangle {
-  shape = 'triangle';
+export class Triangle implements Figure {
+  shape: Shape;
 
   constructor(
     public color: Color,
@@ -33,6 +34,8 @@ export class Triangle {
         'the sum of two shortest sides should be bigger than the longest side',
       );
     }
+
+    this.shape = 'triangle';
   }
 
   getArea(): number {
@@ -44,8 +47,8 @@ export class Triangle {
   }
 }
 
-export class Circle {
-  shape = 'circle';
+export class Circle implements Figure {
+  shape: Shape;
 
   constructor(
     public color: Color,
@@ -54,6 +57,8 @@ export class Circle {
     if (radius <= 0) {
       throw new Error('radius should be positive');
     }
+
+    this.shape = 'circle';
   }
 
   getArea(): number {
@@ -61,8 +66,8 @@ export class Circle {
   }
 }
 
-export class Rectangle {
-  shape = 'rectangle';
+export class Rectangle implements Figure {
+  shape: Shape;
 
   constructor(
     public color: Color,
@@ -72,6 +77,8 @@ export class Rectangle {
     if (width <= 0 || height <= 0) {
       throw new Error('both sides should be positive');
     }
+
+    this.shape = 'rectangle';
   }
 
   getArea(): number {
