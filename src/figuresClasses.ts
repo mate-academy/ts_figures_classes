@@ -32,7 +32,7 @@ export class Triangle implements Figure {
       || a + c <= b
       || b + c <= a
     ) {
-      throw new Error('invalid sides');
+      throw new Error('Incorrect sides lengths');
     }
   }
 
@@ -66,21 +66,12 @@ export class Circle implements Figure {
 export class Rectangle implements Figure {
   shape: Shape;
 
-  color;
-
-  width;
-
-  height;
-
   constructor(
-    color: Color,
-    width: number,
-    height: number,
+    public color: Color,
+    public width: number,
+    public height: number,
   ) {
     this.shape = 'rectangle';
-    this.color = color;
-    this.width = width;
-    this.height = height;
 
     if (width <= 0 || height <= 0) {
       throw new Error('invalid sides');
