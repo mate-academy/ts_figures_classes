@@ -1,13 +1,19 @@
 type Color = 'red' | 'green' | 'blue';
 
+enum Shapes {
+  triangle = 'triangle',
+  circle = 'circle',
+  rectangle = 'rectangle',
+}
+
 export interface Figure {
-  shape: string;
+  shape: Shapes;
   color: Color;
   getArea(): number;
 }
 
 export class Triangle implements Figure {
-  public shape: string;
+  public shape: Shapes;
 
   constructor(
     public color: Color,
@@ -15,7 +21,7 @@ export class Triangle implements Figure {
     public b: number,
     public c: number,
   ) {
-    this.shape = this.constructor.name.toLowerCase();
+    this.shape = Shapes.triangle;
 
     if (a + b <= c
         || a + c <= b
@@ -37,13 +43,13 @@ export class Triangle implements Figure {
 }
 
 export class Circle implements Figure {
-  public shape: string;
+  public shape: Shapes;
 
   constructor(
     public color: Color,
     public radius: number,
   ) {
-    this.shape = this.constructor.name.toLowerCase();
+    this.shape = Shapes.circle;
 
     if (radius <= 0) {
       throw new Error(
@@ -58,14 +64,14 @@ export class Circle implements Figure {
 }
 
 export class Rectangle implements Figure {
-  public shape: string;
+  public shape: Shapes;
 
   constructor(
     public color: Color,
     public width: number,
     public hight: number,
   ) {
-    this.shape = this.constructor.name.toLowerCase();
+    this.shape = Shapes.rectangle;
 
     if ([width, hight].some((side: number) => side <= 0)) {
       throw new Error(
