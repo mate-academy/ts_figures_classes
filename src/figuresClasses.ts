@@ -32,7 +32,9 @@ export class Triangle implements Figure {
       || a + c <= b
       || b + c <= a
     ) {
-      throw new Error('Incorrect sides lengths');
+      throw new Error(
+        'Incorrect sides lengths (0 or one side bigger then sum of two else)',
+      );
     }
   }
 
