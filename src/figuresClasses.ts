@@ -2,6 +2,10 @@ type Shapes = 'triangle' | 'circle' | 'rectangle';
 
 type Colors = 'red' | 'green' | 'blue';
 
+function round(x): number {
+  return Math.floor(x * 100) / 100;
+}
+
 export interface Figure {
   shape: Shapes;
   color: Colors;
@@ -19,12 +23,12 @@ export class Triangle implements Figure {
   ) {
     this.shape = 'triangle';
 
-    if (a <= 0 || b <= 0 || c <= 0
-      || a + b <= c
-      || b + c <= a
-      || c + a <= b
-    ) {
-      throw new Error('sides not valid');
+    if (a <= 0 || b <= 0 || c <= 0) {
+      throw new Error('Sides should be positive');
+    }
+
+    if (a + b <= c || b + c <= a || c + a <= b) {
+      throw new Error('Can not build triangle');
     }
   }
 
@@ -34,7 +38,7 @@ export class Triangle implements Figure {
     const area = Math.sqrt(semiPerimetr * (semiPerimetr - this.a)
      * (semiPerimetr - this.b) * (semiPerimetr - this.c));
 
-    return Math.floor(area * 100) / 100;
+    return round(area);
   }
 }
 
@@ -55,7 +59,7 @@ export class Circle implements Figure {
   getArea(): number {
     const area = Math.PI * this.radius ** 2;
 
-    return Math.floor(area * 100) / 100;
+    return round(area);
   }
 }
 
@@ -70,14 +74,14 @@ export class Rectangle implements Figure {
     this.shape = 'rectangle';
 
     if (width <= 0 || height <= 0) {
-      throw new Error('width and height not valid');
+      throw new Error('width and height are not valid');
     }
   }
 
   getArea(): number {
     const area = this.width * this.height;
 
-    return Math.floor(area * 100) / 100;
+    return round(area);
   }
 }
 
