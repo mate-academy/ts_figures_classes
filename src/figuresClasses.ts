@@ -1,18 +1,17 @@
-export type Shape = 'triangle' | 'circle' | 'rectangle';
-export type Color = 'red' | 'green' | 'blue';
+type Color = 'red' | 'green' | 'blue';
 
-export function roundToHundredth(num: number): number {
-  return Math.floor(num * 100) / 100;
+function rounding(value: number): number {
+  return Math.floor(value * 100) / 100;
 }
 
 export interface Figure {
-  shape: Shape;
+  shape: string;
   color: Color;
-  getArea: () => number;
+  getArea(): number;
 }
 
 export class Triangle implements Figure {
-  shape: Shape;
+  shape: string;
 
   constructor(
     public color: Color,
@@ -20,62 +19,62 @@ export class Triangle implements Figure {
     public b: number,
     public c: number,
   ) {
-    const sides = [a, b, c].sort((x, y) => x - y);
+    this.shape = 'triangle';
 
-    if (a <= 0
+    if (
+      a <= 0
       || b <= 0
       || c <= 0
-      || sides[2] >= sides[0] + sides[1]) {
-      throw new Error('Invalid side length');
+      || a + b <= c
+      || a + c <= b
+      || b + c <= a) {
+      throw new Error('Sides length should be correct');
     }
-
-    this.shape = 'triangle';
   }
 
   getArea(): number {
-    const s = (this.a + this.b + this.c) / 2;
-    const area = Math.sqrt(s * (s - this.a) * (s - this.b) * (s - this.c));
+    const p = (this.a + this.b + this.c) / 2;
 
-    return roundToHundredth(area);
+    return rounding(Math.sqrt(p * (p - this.a) * (p - this.b) * (p - this.c)));
   }
 }
 
-export class Circle implements Figure {
-  shape: Shape;
+export class Circle {
+  shape: string;
 
   constructor(
     public color: Color,
     public radius: number,
   ) {
-    if (radius <= 0) {
-      throw new Error('Invalid radius');
-    }
-
     this.shape = 'circle';
+
+    if (radius <= 0) {
+      throw new Error('Radius length should be more than 0');
+    }
   }
 
   getArea(): number {
-    return roundToHundredth(Math.PI * this.radius ** 2);
+    return rounding(Math.PI * this.radius * this.radius);
   }
 }
 
-export class Rectangle implements Figure {
-  shape: Shape;
+export class Rectangle {
+  shape: string;
 
   constructor(
     public color: Color,
-    public width: number,
-    public height: number,
+    public a: number,
+    public b: number,
   ) {
-    if (width <= 0 || height <= 0) {
-      throw new Error('Invalid side length');
-    }
-
     this.shape = 'rectangle';
+
+    if (a <= 0 || b <= 0) {
+      throw new Error('Sides length should be more than 0');
+    }
   }
 
   getArea(): number {
-    return roundToHundredth(this.width * this.height);
+    return rounding(this.a * this.b);
   }
 }
 
