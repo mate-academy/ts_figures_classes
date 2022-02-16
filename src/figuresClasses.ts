@@ -1,14 +1,17 @@
+type Shape = 'triangle' | 'circle' | 'rectangle';
+type Color = 'red' | 'green' | 'blue';
+
 export interface Figure {
-  shape : string,
-  color : string,
+  shape: Shape,
+  color : Color,
   getArea() : number | Error,
 }
 
 export class Triangle implements Figure {
-  public shape: string;
+  public shape: Shape;
 
   constructor(
-    public color: string,
+    public color: Color,
     public a: number,
     public b: number,
     public c: number,
@@ -21,7 +24,7 @@ export class Triangle implements Figure {
 
     if ((a <= 0 || b <= 0 || c <= 0)
       || Math.max(a, b, c) >= a + b + c - Math.max(a, b, c)) {
-      throw new Error('Not valid data');
+      throw new Error('Please check all sides of triangle');
     }
   }
 
@@ -35,10 +38,10 @@ export class Triangle implements Figure {
 }
 
 export class Circle implements Figure {
-  public shape: string;
+  public shape: Shape;
 
   constructor(
-    public color: string,
+    public color: Color,
     public radius: number,
   ) {
     this.shape = 'circle';
@@ -46,7 +49,7 @@ export class Circle implements Figure {
     this.radius = radius;
 
     if (radius <= 0) {
-      throw new Error('Not valid data');
+      throw new Error('Please check radius of circle');
     }
   }
 
@@ -58,10 +61,10 @@ export class Circle implements Figure {
 }
 
 export class Rectangle implements Figure {
-  public shape: string;
+  public shape: Shape;
 
   constructor(
-    public color: string,
+    public color: Color,
     public width: number,
     public height: number,
   ) {
@@ -71,7 +74,7 @@ export class Rectangle implements Figure {
     this.height = height;
 
     if (height <= 0 || width <= 0) {
-      throw new Error('Not valid data');
+      throw new Error('Please check width and height of reactangle');
     }
   }
 
@@ -82,7 +85,7 @@ export class Rectangle implements Figure {
   }
 }
 
-export function getInfo(figure) : string {
+export function getInfo(figure: Figure) : string {
   const info = `A ${figure.color} ${figure.shape} - ${figure.getArea()}`;
 
   return info;
