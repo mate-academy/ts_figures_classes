@@ -16,11 +16,13 @@ export class Triangle implements Figure {
     public b: number,
     public c: number,
   ) {
-    if (this.a <= 0 || this.b <= 0 || this.c <= 0) {
-      throw new Error('incorrect data');
-    } else if (this.a >= this.b + this.c
+    if (this.a <= 0
+      || this.b <= 0
+      || this.c <= 0
+      || this.a >= this.b + this.c
       || this.b >= this.a + this.c
-      || this.c >= this.a + this.b) {
+      || this.c >= this.a + this.b
+    ) {
       throw new Error('incorrect data');
     }
   }
