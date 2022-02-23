@@ -7,6 +7,12 @@ export interface Figure {
   getArea(): number;
 }
 
+const toCheck = (a: number, b: number, c: number): boolean => {
+  const arr = [a, b, c].sort((x, y) => x - y);
+
+  return arr[2] < arr[1] + arr[0];
+};
+
 export class Triangle implements Figure {
   shape: Shape = 'triangle';
 
@@ -16,13 +22,7 @@ export class Triangle implements Figure {
     public b: number,
     public c: number,
   ) {
-    if (this.a <= 0
-      || this.b <= 0
-      || this.c <= 0
-      || this.a >= this.b + this.c
-      || this.b >= this.a + this.c
-      || this.c >= this.a + this.b
-    ) {
+    if (a <= 0 || b <= 0 || c <= 0 || !toCheck(a, b, c)) {
       throw new Error('incorrect data');
     }
   }
