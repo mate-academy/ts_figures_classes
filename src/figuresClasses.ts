@@ -53,7 +53,7 @@ export class Circle implements Figure {
   }
 
   getArea(): number {
-    return +(this.radius ** 2 * Math.PI).toFixed(2);
+    return +(this.radius ** 2 * Math.PI).toFixed(3).slice(0, -1);
   }
 }
 
