@@ -42,9 +42,8 @@ export class Triangle extends BaseFigure {
 
   getArea(): number {
     const s = (this.a + this.b + this.c) / 2;
-    const S = Math.sqrt(s * (s - this.a) * (s - this.b) * (s - this.c));
 
-    return Math.round(S * 100) / 100;
+    return Math.round(Math.sqrt(s * (s - this.a) * (s - this.b) * (s - this.c)) * 100) / 100;
   }
 }
 
