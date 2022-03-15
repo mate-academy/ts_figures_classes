@@ -1,18 +1,18 @@
-type Colors = 'red' | 'green' | 'blue';
-type Shapes = 'triangle' | 'circle' | 'rectangle';
+type Color = 'red' | 'green' | 'blue';
+type Shape = 'triangle' | 'circle' | 'rectangle';
 
 export interface Figure {
-  color: Colors,
-  shape: Shapes,
+  color: Color,
+  shape: Shape,
 
   getArea(): number,
 }
 
 export class Triangle implements Figure {
-  shape: Shapes = 'triangle';
+  shape: Shape = 'triangle';
 
   constructor(
-    public color: Colors,
+    public color: Color,
     public a: number,
     public b: number,
     public c: number,
@@ -27,17 +27,23 @@ export class Triangle implements Figure {
 
   getArea(): number {
     const { a, b, c } = this;
-    const s: number = (a + b + c) / 2;
+    const semiPerimeter: number = (a + b + c) / 2;
 
-    return +(Math.sqrt(s * (s - a) * (s - b) * (s - c))).toFixed(2);
+    return Number(
+      (Math.sqrt(semiPerimeter
+        * (semiPerimeter - a)
+        * (semiPerimeter - b)
+        * (semiPerimeter - c))
+      ).toFixed(2),
+    );
   }
 }
 
 export class Circle implements Figure {
-  shape: Shapes = 'circle';
+  shape: Shape = 'circle';
 
   constructor(
-    public color: Colors,
+    public color: Color,
     public radius: number,
   ) {
     if (radius <= 0) {
@@ -51,10 +57,10 @@ export class Circle implements Figure {
 }
 
 export class Rectangle implements Figure {
-  shape: Shapes = 'rectangle';
+  shape: Shape = 'rectangle';
 
   constructor(
-    public color: Colors,
+    public color: Color,
     public width: number,
     public height: number,
   ) {
