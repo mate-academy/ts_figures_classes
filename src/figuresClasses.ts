@@ -34,10 +34,12 @@ export class Triangle extends BasicFigure {
   }
 
   getArea(): number {
-    const s = (this.a + this.b + this.c) / 2;
-    const heron = Math.sqrt(s * (s - this.a) * (s - this.b) * (s - this.c));
+    const semi = (this.a + this.b + this.c) / 2;
+    const area = Math.sqrt(
+      semi * (semi - this.a) * (semi - this.b) * (semi - this.c),
+    );
 
-    return Math.round(heron * 100) / 100;
+    return Math.round(area * 100) / 100;
   }
 }
 
