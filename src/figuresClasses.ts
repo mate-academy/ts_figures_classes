@@ -79,6 +79,9 @@ export class Rectangle extends BasicFigure {
 }
 
 export function getInfo(figure: Figure): string {
-  // @ts-ignore
-  return `A ${figure.color} ${figure.shape} - ${figure.getArea()}`;
+  let output: string = `A ${figure.color} ${figure.shape} - `;
+
+  output += figure.getArea ? `${figure.getArea()}` : '';
+
+  return output;
 }
