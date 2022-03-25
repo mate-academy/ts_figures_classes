@@ -1,11 +1,11 @@
 # Figures
-We have 3 types of figures: triangles, circles and rectangles. 
+We have 3 types of figures: triangles, circles and rectangles.
 
-Write an interface `Figure` and 3 classes implementing it so that every figure 
+Write an interface `Figure` and 3 classes implementing it so that every figure
 has:
 - a `shape` (`triangle`, `circle` or `rectangle`);
 - a `color` (`red`, `green` or `blue`);
-- a method `getArea` that returns the area of the figure rounded down to 
+- a method `getArea` that returns the area of the figure rounded down to
 hundredths.
 
 In addition to a `color` constructors should accept required data:
