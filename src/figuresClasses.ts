@@ -3,9 +3,10 @@ export interface Figure {
   color: string;
   getArea(): number;
 }
+type Shape = 'triangle' | 'circle' | 'rectangle';
 
 export class Triangle implements Figure {
-  shape: string;
+  shape: Shape = 'triangle';
 
   color: string;
 
@@ -16,7 +17,6 @@ export class Triangle implements Figure {
   c: number;
 
   constructor(color: string, a: number, b: number, c: number) {
-    this.shape = 'triangle';
     this.color = color;
     this.a = a;
     this.b = b;
@@ -43,14 +43,13 @@ export class Triangle implements Figure {
 }
 
 export class Circle implements Figure {
-  shape: string;
+  shape:Shape = 'circle';
 
   color: string;
 
   radius: number;
 
   constructor(color: string, radius: number) {
-    this.shape = 'circle';
     this.color = color;
     this.radius = radius;
 
@@ -67,7 +66,7 @@ export class Circle implements Figure {
 }
 
 export class Rectangle implements Figure {
-  shape: string;
+  shape:Shape ='rectangle';
 
   color: string;
 
@@ -76,7 +75,6 @@ export class Rectangle implements Figure {
   height: number;
 
   constructor(color: string, width: number, height: number) {
-    this.shape = 'rectangle';
     this.color = color;
     this.width = width;
     this.height = height;
