@@ -31,11 +31,11 @@ export class Triangle implements Figure {
     this.c = c;
 
     if (a <= 0 || b <= 0 || c <= 0) {
-      throw new Error();
+      throw new Error('Values must be positive and more then 0');
     }
 
     if ((c >= a + b) || (b >= a + c) || (a >= b + c)) {
-      throw new Error();
+      throw new Error(`sides ${a}, ${b} and ${c} can't form a triangle`);
     }
   }
 
@@ -59,7 +59,7 @@ export class Circle implements Figure {
     this.radius = radius;
 
     if (radius <= 0) {
-      throw new Error();
+      throw new Error('Values must be positive and more then 0');
     }
   }
 
@@ -81,7 +81,7 @@ export class Rectangle implements Figure {
     this.height = height;
 
     if (width <= 0 || height <= 0) {
-      throw new Error();
+      throw new Error('Values must be positive and more then 0');
     }
   }
 
