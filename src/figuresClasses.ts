@@ -1,14 +1,17 @@
+type FigureColor = 'red' | 'green' | 'blue';
+type FigureShape = 'triangle' | 'circle' | 'rectangle';
+
 export interface Figure {
-  color: 'red' | 'green' | 'blue',
-  shape: string, // 'triangle' | 'circle' | 'rectangle'
+  color: FigureColor,
+  shape: FigureShape,
   getArea(): number;
 }
 
 export class Triangle implements Figure {
-  shape: string = 'triangle';
+  shape: FigureShape = 'triangle';
 
   constructor(
-    public color: 'red' | 'green' | 'blue',
+    public color: FigureColor,
     public a: number,
     public b: number,
     public c: number,
@@ -31,17 +34,15 @@ export class Triangle implements Figure {
       * (semiPerimeter - this.a) * (semiPerimeter - this.b)
       * (semiPerimeter - this.c));
 
-    const triangleArea: number = Math.round(areaWithoutRounding * 100) / 100;
-
-    return triangleArea;
+    return Math.round(areaWithoutRounding * 100) / 100;
   }
 }
 
 export class Circle {
-  shape: string = 'circle';
+  shape: FigureShape = 'circle';
 
   constructor(
-    public color: 'red' | 'green' | 'blue',
+    public color: FigureColor,
     public radius: number,
   ) {
     if (radius <= 0) {
@@ -50,18 +51,15 @@ export class Circle {
   }
 
   getArea(): number {
-    const circleArea: number
-      = (Math.round((Math.PI * this.radius * this.radius) * 100)) / 100;
-
-    return circleArea;
+    return Math.round((Math.PI * this.radius * this.radius) * 100) / 100;
   }
 }
 
 export class Rectangle {
-  shape: string = 'rectangle';
+  shape: FigureShape = 'rectangle';
 
   constructor(
-    public color: 'red' | 'green' | 'blue',
+    public color: FigureColor,
     public width: number,
     public height: number,
   ) {
@@ -71,10 +69,7 @@ export class Rectangle {
   }
 
   getArea(): number {
-    const rectangleArea: number
-      = Math.round(this.width * this.height * 100) / 100;
-
-    return rectangleArea;
+    return Math.round(this.width * this.height * 100) / 100;
   }
 }
 
