@@ -17,7 +17,7 @@ export class Triangle implements Figure {
     this.shape = 'triangle';
 
     if (this.a < 0 || this.b < 0 || this.c < 0) {
-      throw new Error('sides 1, 2 and 3 can not form a triangle');
+      throw new Error('Sides can not be less 0');
     }
 
     const longest = Math.max(this.a, this.b, this.c);
