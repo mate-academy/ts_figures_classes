@@ -16,16 +16,16 @@ enum Color{
 }
 
 export interface Figure {
-  getType(): Shape;
-  getColor(): Color;
+  shape: Shape;
+  color: Color;
   getArea(): number;
 }
 
 export class Triangle implements Figure {
-  private shape: Shape;
+  shape: Shape = Shape.Triangle;
 
   constructor(
-    private color: Color,
+    public color: Color,
     private a: number,
     private b: number,
     private c: number,
@@ -36,16 +36,6 @@ export class Triangle implements Figure {
     ) {
       throw new Error('sides 1, 2 and 3 can\'t form a triangle');
     }
-
-    this.shape = Shape.Triangle;
-  }
-
-  public getType(): Shape {
-    return this.shape;
-  }
-
-  public getColor(): Color {
-    return this.color;
   }
 
   public getArea(): number {
@@ -59,24 +49,15 @@ export class Triangle implements Figure {
 }
 
 export class Circle implements Figure {
-  private shape: Shape;
+  public shape: Shape = Shape.Circle;
 
   constructor(
-    private color: Color,
+    public color: Color,
     private radius: number,
   ) {
     if (radius <= 0) {
       throw new Error('can\'t form a circle with that size');
     }
-    this.shape = Shape.Circle;
-  }
-
-  public getType(): Shape {
-    return this.shape;
-  }
-
-  public getColor(): Color {
-    return this.color;
   }
 
   public getArea(): number {
@@ -88,25 +69,16 @@ export class Circle implements Figure {
 }
 
 export class Rectangle implements Figure {
-  private shape: Shape;
+  public shape: Shape = Shape.Rectangle;
 
   constructor(
-    private color: Color,
+    public color: Color,
     private width: number,
     private height: number,
   ) {
     if (width <= 0 || height <= 0) {
       throw new Error('can\'t form a rectancgle with that width and height');
     }
-    this.shape = Shape.Rectangle;
-  }
-
-  public getType(): Shape {
-    return this.shape;
-  }
-
-  public getColor(): Color {
-    return this.color;
   }
 
   public getArea(): number {
@@ -115,6 +87,6 @@ export class Rectangle implements Figure {
 }
 
 export function getInfo(figure: Figure): string {
-  return `A ${figure.getColor()} ${figure.getType()} `
+  return `A ${figure.color} ${figure.shape} `
   + `- ${figure.getArea()}`;
 }
