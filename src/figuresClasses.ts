@@ -1,26 +1,38 @@
+enum FigureShape {
+  Triangle = 'triangle',
+  Circle = 'circle',
+  Rectangle = 'rectangle',
+}
+
+enum FigureColor {
+  Red = 'red',
+  Green = 'green',
+  Blue = 'blue',
+}
+
 export interface Figure {
-  shape: 'triangle' | 'circle' | 'rectangle';
-  color: 'red' | 'green' | 'blue';
-  getArea: () => number;
+  shape: FigureShape;
+  color: FigureColor;
+  getArea(): number;
 }
 
 export class Triangle implements Figure {
-  private hypotenuse: number;
-
-  private cathetus: number[];
-
-  public shape: 'triangle' | 'circle' | 'rectangle' = 'triangle';
+  public shape = FigureShape.Triangle;
 
   public getArea(): number {
-    const s = (this.a + this.b + this.c) / 2;
+    const halfSquare = (this.a + this.b + this.c) / 2;
 
-    const A = (s * (s - this.a) * (s - this.b) * (s - this.c)) ** 0.5;
+    const square = (halfSquare
+      * (halfSquare - this.a)
+      * (halfSquare - this.b)
+      * (halfSquare - this.c))
+      ** 0.5;
 
-    return Math.floor(A * 100) / 100;
+    return Math.floor(square * 100) / 100;
   }
 
   constructor(
-    public color: 'red' | 'green' | 'blue',
+    public color: FigureColor,
     public a: number,
     public b: number,
     public c: number,
@@ -29,47 +41,44 @@ export class Triangle implements Figure {
       throw new Error('Invalid parameters!');
     }
 
-    this.hypotenuse = Math.max(a, b, c);
-    this.cathetus = [a, b, c].filter((x) => x !== this.hypotenuse);
-
-    if (this.hypotenuse === this.cathetus.reduce((x, y) => x + y)) {
-      throw new Error('');
+    if (a + b <= c || a + c <= b || b + c <= a) {
+      throw new Error('This is not triangle');
     }
   }
 }
 
 export class Circle implements Figure {
-  public shape: 'triangle' | 'circle' | 'rectangle' = 'circle';
+  public shape = FigureShape.Circle;
 
   public getArea(): number {
-    const A = Math.floor((Math.PI * (this.radius ** 2)) * 100) / 100;
+    const square = Math.floor((Math.PI * (this.radius ** 2)) * 100) / 100;
 
-    return A;
+    return square;
   }
 
   constructor(
-    public color: 'red' | 'green' | 'blue',
+    public color: FigureColor,
     public radius: number,
   ) {
     if (radius <= 0) {
-      throw new Error('Invalid parameters');
+      throw new Error('Invalid radius!');
     }
   }
 }
 
 export class Rectangle implements Figure {
-  public shape: 'triangle' | 'circle' | 'rectangle' = 'rectangle';
+  public shape = FigureShape.Rectangle;
 
   public getArea(): number {
     return Math.floor(this.width * this.height * 100) / 100;
   }
 
   constructor(
-    public color: 'red' | 'green' | 'blue',
+    public color: FigureColor,
     public width: number,
     public height: number,
   ) {
-    if ([width, height].some((argument: number) => argument <= 0)) {
+    if (width <= 0 || height <= 0) {
       throw new Error('Invalid parameters');
     }
   }
