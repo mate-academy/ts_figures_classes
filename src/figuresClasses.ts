@@ -38,10 +38,7 @@ export class Triangle {
   }
 
   getArea(): number {
-    const square: number = Math.sqrt(this.s * (this.s - this.a)
-    * (this.s - this.b) * (this.s - this.c));
-
-    return square;
+    return this.square;
   }
 }
 
@@ -62,10 +59,7 @@ export class Circle {
   }
 
   getArea(): number {
-    const square: number
-    = Math.floor(Math.PI * this.radius * this.radius * 100) / 100;
-
-    return square;
+    return this.square;
   }
 }
 
@@ -88,9 +82,7 @@ export class Rectangle {
   }
 
   getArea(): number {
-    const square: number = this.width * this.height;
-
-    return square;
+    return this.square;
   }
 }
 
