@@ -1,24 +1,24 @@
-export enum Shape {
+export enum Shapes {
   triangle = 'triangle',
   circle = 'circle',
   rectangle = 'rectangle'
 }
 
-export enum Color {
+export enum Colors {
   red = 'red',
   green = 'green',
   blue = 'blue'
 }
 
 export interface Figure {
-  shape: Shape;
-  color: Color;
+  shape: Shapes;
+  color: Colors;
   getArea(): number;
 }
 
 export class Triangle implements Figure {
   constructor(
-    public color: Color,
+    public color: Colors,
     public a: number,
     public b: number,
     public c: number,
@@ -38,7 +38,7 @@ export class Triangle implements Figure {
     }
   }
 
-  public shape = Shape.triangle;
+  public shape = Shapes.triangle;
 
   public getArea(): number {
     const semiPerimiter = (this.a + this.b + this.c) / 2;
@@ -53,7 +53,7 @@ export class Triangle implements Figure {
 
 export class Circle {
   constructor(
-    public color: Color,
+    public color: Colors,
     public radius: number,
   ) {
     if (radius <= 0) {
@@ -61,7 +61,7 @@ export class Circle {
     }
   }
 
-  public shape = Shape.circle;
+  public shape = Shapes.circle;
 
   getArea(): number {
     return Math.floor((Math.PI * this.radius ** 2) * 100) / 100;
@@ -70,7 +70,7 @@ export class Circle {
 
 export class Rectangle {
   constructor(
-    public color: Color,
+    public color: Colors,
     public width: number,
     public height: number,
   ) {
@@ -79,7 +79,7 @@ export class Rectangle {
     }
   }
 
-  public shape = Shape.rectangle;
+  public shape = Shapes.rectangle;
 
   getArea(): number {
     return Math.floor(this.width * this.height * 100) / 100;
