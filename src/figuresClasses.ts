@@ -21,15 +21,15 @@ export class Circle implements Figure {
 
   constructor(
     public color: Color,
-    public a: number,
+    public radius: number,
   ) {
-    if (a <= 0) {
+    if (radius <= 0) {
       throw new Error('value can`t be 0 and <');
     }
   }
 
   getArea(): number {
-    return Math.trunc((Math.PI * (this.a ** 2)) * 100) / 100;
+    return Math.floor((Math.PI * (this.radius ** 2)) * 100) / 100;
   }
 }
 
@@ -47,7 +47,7 @@ export class Triangle implements Figure {
     }
 
     if (a + b <= c || b + c <= a || c + a <= b) {
-      throw new Error('a + b can`t be c');
+      throw new Error('sum of cathets cant be less then hypotenuse');
     }
   }
 
@@ -68,16 +68,16 @@ export class Rectangle {
 
   constructor(
     public color: Color,
-    public a: number,
-    public b: number,
+    public width: number,
+    public height: number,
   ) {
-    if (a <= 0 || b <= 0) {
+    if (width <= 0 || height <= 0) {
       throw new Error('value can`t be 0 and <');
     }
   }
 
   getArea(): number {
-    return this.a * this.b;
+    return this.width * this.height;
   }
 }
 
