@@ -1,5 +1,15 @@
-type Color = 'red'| 'green' | 'blue';
-type Shape = 'triangle'| 'circle' | 'rectangle';
+enum Shape {
+  Triangle = 'triangle',
+  Circle = 'circle',
+  Rectangle = 'rectangle',
+
+}
+
+enum Color {
+  Red = 'red',
+  Green = 'green',
+  Blue = 'blue',
+}
 
 export interface Figure {
   shape: Shape;
@@ -8,58 +18,61 @@ export interface Figure {
 }
 
 export class Triangle implements Figure {
+  public shape = Shape.Triangle;
+
   constructor(
-    public shape: 'triangle',
     public color: Color,
     public a: number,
     public b: number,
     public c: number,
   ) {
     if (a <= 0 || b <= 0 || c <= 0) {
-      throw new Error('error');
+      throw new Error('Sides can not be less than 0');
     }
 
-    if (a + b >= c || a + c >= b || b + c >= a) {
-      throw new Error(`sides ${a}, ${b} and ${c} can't form a triangle`);
+    if (a + b <= c || a + c <= b || b + c <= a) {
+      throw new Error('Sum of the two sides can not'
+
+      + 'be less than the length of the third one');
     }
   }
 
   getArea(): number {
-    const p = (this.a + this.b + this.c) / 2;
+    const halfPerimeter: number = (this.a + this.b + this.c) / 2;
 
-    const square = Math.sqrt(p * (p - this.a) * (p - this.b) * (p - this.c));
-
-    return +square.toFixed(2);
+    return Math.round(
+      Math.sqrt(halfPerimeter
+        * (halfPerimeter - this.a)
+        * (halfPerimeter - this.b)
+        * (halfPerimeter - this.c)) * 100,
+    ) / 100;
   }
 }
 
 export class Circle implements Figure {
-  constructor(
-    public shape: 'circle',
-    public color: Color,
-    public radius: number,
-  ) {
+  public shape = Shape.Circle;
+
+  constructor(public color: Color, public radius: number) {
     if (radius <= 0) {
-      throw new Error('error');
+      throw new Error('Invalid radius');
     }
   }
 
   getArea(): number {
-    const square = Math.PI * this.radius * this.radius;
-
-    return +square.toFixed(2);
+    return Math.floor(100 * Math.PI * this.radius ** 2) / 100;
   }
 }
 
 export class Rectangle implements Figure {
+  public shape = Shape.Rectangle;
+
   constructor(
-    public shape: 'rectangle',
     public color: Color,
     public width: number,
     public height: number,
   ) {
-    if (width <= 0 || height <= 0) {
-      throw new Error('error');
+    if (this.width <= 0 || this.height <= 0) {
+      throw new Error('Invalid side size');
     }
   }
 
@@ -68,6 +81,6 @@ export class Rectangle implements Figure {
   }
 }
 
-export function getInfo(figure): string {
+export function getInfo(figure: Figure): string {
   return `A ${figure.color} ${figure.shape} - ${figure.getArea()}`;
 }
