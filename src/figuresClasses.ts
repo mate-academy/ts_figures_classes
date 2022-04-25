@@ -19,7 +19,7 @@ export class Triangle implements Figure {
       throw new Error('error');
     }
 
-    if (((a + b) >= c) || ((a + c) >= b) || ((b + c) >= a)) {
+    if (a + b >= c || a + c >= b || b + c >= a) {
       throw new Error(`sides ${a}, ${b} and ${c} can't form a triangle`);
     }
   }
@@ -27,7 +27,9 @@ export class Triangle implements Figure {
   getArea(): number {
     const p = (this.a + this.b + this.c) / 2;
 
-    return Math.sqrt(p * (p - this.a) * (p - this.b) * (p - this.c));
+    const square = Math.sqrt(p * (p - this.a) * (p - this.b) * (p - this.c));
+
+    return +square.toFixed(2);
   }
 }
 
@@ -43,7 +45,9 @@ export class Circle implements Figure {
   }
 
   getArea(): number {
-    return Math.PI * this.radius * this.radius;
+    const square = Math.PI * this.radius * this.radius;
+
+    return +square.toFixed(2);
   }
 }
 
