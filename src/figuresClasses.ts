@@ -1,19 +1,77 @@
+type Color = 'red' | 'green' | 'blue';
+type Shape = 'triangle' | 'circle' | 'rectangle';
+
 export interface Figure {
-
+  color: Color,
+  shape: Shape,
+  getArea(): number,
 }
 
-export class Triangle {
+export class Triangle implements Figure {
+  shape: Shape = 'triangle';
 
+  constructor(
+    public color: Color,
+    public a: number,
+    public b: number,
+    public c: number,
+  ) {
+    const sides = [a, b, c].sort((x, y) => y - x);
+
+    if ((sides[0] >= sides[1] + sides[2]) || a < 1 || b < 1 || c < 1) {
+      throw new Error('Every side must me more then 0');
+    }
+  }
+
+  getArea(): number {
+    const { a, b, c } = this;
+    const semiPerimeter: number = (a + b + c) / 2;
+
+    return Number(
+      (Math.sqrt(semiPerimeter
+      * (semiPerimeter - a)
+      * (semiPerimeter - b)
+      * (semiPerimeter - c))
+      ).toFixed(2),
+    );
+  }
 }
 
-export class Circle {
+export class Circle implements Figure {
+  shape: Shape = 'circle';
 
+  constructor(
+    public color: Color,
+    public radius: number,
+  ) {
+    if (radius <= 0) {
+      throw new Error('Radius must be more then 0');
+    }
+  }
+
+  getArea(): number {
+    return Math.floor(Math.PI * this.radius ** 2 * 100) / 100;
+  }
 }
 
-export class Rectangle {
+export class Rectangle implements Figure {
+  shape: Shape = 'rectangle';
 
+  constructor(
+    public color: Color,
+    public width: number,
+    public height: number,
+  ) {
+    if (width <= 0 || height <= 0) {
+      throw new Error('Width and heigth must be more then 0');
+    }
+  }
+
+  getArea(): number {
+    return this.width * this.height;
+  }
 }
 
-export function getInfo(figure) {
-
+export function getInfo(figure: Figure): string {
+  return `A ${figure.color} ${figure.shape} - ${figure.getArea()}`;
 }
