@@ -26,7 +26,7 @@ export class Triangle implements Figure {
     public c: number,
   ) {
     if (a <= 0 || b <= 0 || c <= 0) {
-      throw new Error('Error!');
+      throw new Error('Error! It are not a sides of triangle');
     }
 
     if (Math.max(a, b, c) >= (a + b + c - Math.max(a, b, c))) {
@@ -47,7 +47,7 @@ export class Circle implements Figure {
 
   constructor(public color: Color, public radius: number) {
     if (radius <= 0) {
-      throw new Error('Error!');
+      throw new Error('Error! Radius is not correct');
     }
   }
 
@@ -65,7 +65,7 @@ export class Rectangle implements Figure {
     public height: number,
   ) {
     if (width <= 0 || height <= 0) {
-      throw new Error('Error!');
+      throw new Error('Error! It is not sides of rectangle');
     }
   }
 
