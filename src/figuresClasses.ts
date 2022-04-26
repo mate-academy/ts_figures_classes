@@ -26,20 +26,20 @@ export class Triangle implements Figure {
     public c: number,
   ) {
     if (this.a <= 0 || this.b <= 0 || this.c <= 0) {
-      throw new Error('your error message');
+      throw new Error('any length is <= 0');
     }
 
     if (this.a + this.b <= this.c
       || this.a + this.c <= this.b
       || this.b + this.c <= this.a) {
-      throw new Error('your error message');
+      throw new Error('such parameters do not allow to create a triangle');
     }
   }
 
   getArea(): number {
-    const s = (this.a + this.b + this.c) / 2;
-    let square = Math.sqrt(s * (s - this.a)
-      * (s - this.b) * (s - this.c));
+    const semiPerimeter = (this.a + this.b + this.c) / 2;
+    let square = Math.sqrt(semiPerimeter * (semiPerimeter - this.a)
+      * (semiPerimeter - this.b) * (semiPerimeter - this.c));
 
     square = Math.floor(square * 100) / 100;
 
