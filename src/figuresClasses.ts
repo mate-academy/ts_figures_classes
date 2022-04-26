@@ -1,20 +1,32 @@
+enum Shape {
+  triangle = 'triangle',
+  circle = 'circle',
+  rectangle = 'rectangle',
+}
+
+enum Color {
+  red,
+  green,
+  blue,
+}
+
 export interface Figure {
-  shape: 'triangle' | 'circle' | 'rectangle';
-  color: 'red' | 'green' | 'blue';
+  shape: Shape;
+  color: Color;
 
   getArea(): number;
 }
 
 export class Triangle implements Figure {
-  public shape: 'triangle';
+  public shape: Shape.triangle;
 
   constructor(
-    public color: 'red' | 'green' | 'blue',
+    public color: Color,
     public a: number,
     public b: number,
     public c: number,
   ) {
-    this.shape = 'triangle';
+    this.shape = Shape.triangle;
 
     if (this.a < 0 || this.b < 0 || this.c < 0) {
       throw new Error('Sides can not be less 0');
@@ -32,15 +44,18 @@ export class Triangle implements Figure {
     const s = (this.a + this.b + this.c) / 2;
     const res = Math.sqrt(s * (s - this.a) * (s - this.b) * (s - this.c));
 
-    return +res.toFixed(2);
+    return Math.floor(res * 100) / 100;
   }
 }
 
 export class Circle implements Figure {
-  public shape: 'circle';
+  public shape: Shape.circle;
 
-  constructor(public color: 'red' | 'green' | 'blue', public radius: number) {
-    this.shape = 'circle';
+  constructor(
+    public color: Color,
+    public radius: number,
+  ) {
+    this.shape = Shape.circle;
 
     if (this.radius < 0) {
       throw new Error('Incorrect value of radius');
@@ -53,14 +68,14 @@ export class Circle implements Figure {
 }
 
 export class Rectangle implements Figure {
-  public shape: 'rectangle';
+  public shape: Shape.rectangle;
 
   constructor(
-    public color: 'red' | 'green' | 'blue',
+    public color: Color,
     public width: number,
     public heigth: number,
   ) {
-    this.shape = 'rectangle';
+    this.shape = Shape.rectangle;
 
     if (this.heigth < 0 || this.width < 0) {
       throw new Error('Incorrect values');
@@ -68,7 +83,7 @@ export class Rectangle implements Figure {
   }
 
   getArea(): number {
-    return +(this.heigth * this.width).toFixed(2);
+    return Math.floor(this.heigth * this.width * 100) / 100;
   }
 }
 
