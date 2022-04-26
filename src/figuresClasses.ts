@@ -26,12 +26,12 @@ export class Triangle implements Figure {
   }
 
   public getArea(): number {
-    const P = (this.a + this.b + this.c) / 2;
+    const Perimeter = (this.a + this.b + this.c) / 2;
 
-    const S = Math.sqrt(P * (P - this.a)
-      * (P - this.b) * (P - this.c));
+    const area = Math.sqrt(Perimeter * (Perimeter - this.a)
+      * (Perimeter - this.b) * (Perimeter - this.c));
 
-    return Math.floor(S * 100) / 100;
+    return Math.floor(area * 100) / 100;
   }
 }
 
@@ -48,9 +48,9 @@ export class Circle implements Figure {
   }
 
   public getArea(): number {
-    const S = (Math.PI * (this.radius ** 2));
+    const area = (Math.PI * (this.radius ** 2));
 
-    return (Math.floor(S * 100)) / 100;
+    return (Math.floor(area * 100)) / 100;
   }
 }
 
