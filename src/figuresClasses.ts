@@ -1,7 +1,7 @@
 enum Color {
   Red = 'red',
   Green = 'green',
-  Blue = 'Blue',
+  Blue = 'blue',
 }
 
 enum Shape {
@@ -29,7 +29,7 @@ export class Circle implements Figure {
   }
 
   getArea(): number {
-    return Math.floor((Math.PI * (this.radius ** 2)) * 100) / 100;
+    return Math.trunc((Math.PI * (this.radius ** 2)) * 100) / 100;
   }
 }
 
