@@ -25,16 +25,20 @@ export class Triangle implements Figure {
       throw new Error('Invalid data input');
     }
 
-    if (this.c >= this.a + this.b) {
+    if ((this.c >= this.a + this.b)
+      || (this.a >= this.c + this.b)
+      || (this.b >= this.a + this.c)
+    ) {
       throw new Error('sides 1, 2 and 3 can not form a triangle');
     }
   }
 
   getArea(): number {
-    const s = ((this.a + this.b + this.c) / 2);
+    const halfSum = ((this.a + this.b + this.c) / 2);
 
     return Math.floor(
-      Math.sqrt(s * (s - this.a) * (s - this.b) * (s - this.c)) * 100,
+      Math.sqrt(halfSum * (halfSum - this.a)
+        * (halfSum - this.b) * (halfSum - this.c)) * 100,
     ) / 100;
   }
 }
