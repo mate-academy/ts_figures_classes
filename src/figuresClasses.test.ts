@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 import { Triangle, Rectangle, Circle, getInfo } from './figuresClasses';
 
 describe('Class "Triangle"', () => {
