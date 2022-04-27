@@ -1,23 +1,35 @@
 
-type Shape = 'triangle' | 'circle' | 'rectangle';
-type Color = 'red' | 'green' | 'blue';
+// type Shape = 'triangle' | 'circle' | 'rectangle';
+// type Color = 'red' | 'green' | 'blue';
 
 function roundNumber(number: number, countDigits: number): number {
   return Math.trunc(number * (10 ** countDigits))
     / (10 ** countDigits);
 }
 
+enum Colors {
+  red,
+  green,
+  blue,
+}
+
+enum Shape {
+  Triangle = 'triangle',
+  Circle = 'circle',
+  Rectangle = 'rectangle',
+}
+
 export interface Figure {
   shape: Shape;
-  color: Color;
+  color: Colors;
   getArea(): number;
 }
 
 export class Triangle implements Figure {
-  shape: Shape = 'triangle';
+  shape: Shape = Shape.Triangle;
 
   constructor(
-    public color: Color,
+    public color: Colors,
     public a: number,
     public b: number,
     public c: number,
@@ -43,10 +55,10 @@ export class Triangle implements Figure {
 }
 
 export class Circle implements Figure {
-  shape: Shape = 'circle';
+  shape: Shape = Shape.Circle;
 
   constructor(
-    public color: Color,
+    public color: Colors,
     public radius: number,
   ) {
     if (radius <= 0) {
@@ -60,10 +72,10 @@ export class Circle implements Figure {
 }
 
 export class Rectangle implements Figure {
-  shape: Shape = 'rectangle';
+  shape: Shape = Shape.Rectangle;
 
   constructor(
-    public color: Color,
+    public color: Colors,
     public width: number,
     public height: number,
   ) {
