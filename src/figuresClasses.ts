@@ -26,11 +26,11 @@ export class Triangle implements Figure {
     public c: number,
   ) {
     if (a <= 0 || b <= 0 || c <= 0) {
-      throw new Error('error lengths');
+      throw new Error('One side is less than 0');
     }
 
     if (a + b <= c || b + c <= a || a + c <= b) {
-      throw new Error('error lengths');
+      throw new Error('The longest side is less than sum of the other two');
     }
   }
 
@@ -50,7 +50,7 @@ export class Circle implements Figure {
     public radius: number,
   ) {
     if (radius <= 0) {
-      throw new Error('error radius');
+      throw new Error('Radius is less than 0');
     }
   }
 
@@ -70,7 +70,7 @@ export class Rectangle implements Figure {
     public heigth: number,
   ) {
     if (width <= 0 || heigth <= 0) {
-      throw new Error('error width or height');
+      throw new Error('Width or heigth is less than 0');
     }
   }
 
