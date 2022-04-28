@@ -1,13 +1,13 @@
 enum Shape {
-  triangle = 'triangle',
-  circle = 'circle',
-  rectangle = 'rectangle',
+  Triangle = 'triangle',
+  Circle = 'circle',
+  Rectangle = 'rectangle',
 }
 
 enum Color {
-  red,
-  green,
-  blue,
+  Red = 'red',
+  Green = 'green',
+  Blue = 'blue',
 }
 
 export interface Figure {
@@ -18,7 +18,7 @@ export interface Figure {
 }
 
 export class Triangle implements Figure {
-  public shape: Shape.triangle;
+  public shape: Shape.Triangle;
 
   constructor(
     public color: Color,
@@ -26,7 +26,7 @@ export class Triangle implements Figure {
     public b: number,
     public c: number,
   ) {
-    this.shape = Shape.triangle;
+    this.shape = Shape.Triangle;
 
     if (this.a < 0 || this.b < 0 || this.c < 0) {
       throw new Error('Sides can not be less 0');
@@ -49,13 +49,13 @@ export class Triangle implements Figure {
 }
 
 export class Circle implements Figure {
-  public shape: Shape.circle;
+  public shape: Shape.Circle;
 
   constructor(
     public color: Color,
     public radius: number,
   ) {
-    this.shape = Shape.circle;
+    this.shape = Shape.Circle;
 
     if (this.radius < 0) {
       throw new Error('Incorrect value of radius');
@@ -68,14 +68,14 @@ export class Circle implements Figure {
 }
 
 export class Rectangle implements Figure {
-  public shape: Shape.rectangle;
+  public shape: Shape.Rectangle;
 
   constructor(
     public color: Color,
     public width: number,
     public heigth: number,
   ) {
-    this.shape = Shape.rectangle;
+    this.shape = Shape.Rectangle;
 
     if (this.heigth < 0 || this.width < 0) {
       throw new Error('Incorrect values');
