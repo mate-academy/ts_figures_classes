@@ -1,9 +1,6 @@
 export interface Figure {
   shape: string;
   color: 'red' | 'green' | 'blue';
-  a: number;
-  b?: number;
-  c?: number;
   getArea(): number
 }
 
