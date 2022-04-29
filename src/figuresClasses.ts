@@ -75,13 +75,5 @@ export class Rectangle implements Figure {
 }
 
 export function getInfo(figure: Figure): string {
-  if (figure.c) {
-    return `A ${figure.color} ${figure.shape} - ${figure.getArea()}`;
-  }
-
-  if (figure.b) {
-    return `A ${figure.color} ${figure.shape} - ${figure.getArea()}`;
-  }
-
   return `A ${figure.color} ${figure.shape} - ${figure.getArea()}`;
 }
