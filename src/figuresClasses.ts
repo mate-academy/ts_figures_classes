@@ -16,14 +16,14 @@ export class Triangle implements Figure {
     public b: number,
     public c: number,
   ) {
-    if (this.a <= 0 || this.b <= 0 || this.c <= 0) {
+    if (a <= 0 || b <= 0 || c <= 0) {
       throw new Error('There is missing dimention.');
     }
 
     if (
-      this.a >= (this.b + this.c)
-      || this.b >= (this.a + this.c)
-      || this.c >= (this.a + this.b)
+      a >= (b + c)
+      || b >= (a + c)
+      || c >= (a + b)
     ) {
       throw new Error('There is now triangle with such dimentions.');
     }
@@ -44,7 +44,7 @@ export class Circle implements Figure {
     public color: 'red' | 'green' | 'blue',
     public a: number,
   ) {
-    if (this.a <= 0) {
+    if (a <= 0) {
       throw new Error('There is missing dimention.');
     }
   }
@@ -64,7 +64,7 @@ export class Rectangle implements Figure {
     public a: number,
     public b: number,
   ) {
-    if (this.a <= 0 || this.b <= 0) {
+    if (a <= 0 || b <= 0) {
       throw new Error('There is missing dimention.');
     }
   }
