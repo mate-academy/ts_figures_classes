@@ -3,7 +3,7 @@ type Color = 'red' | 'green' | 'blue';
 
 export function throwError(...args: number[]): void {
   if (args.some((item: number) => item <= 0)) {
-    throw new Error('your error message');
+    throw new Error('Length is less or queal 0');
   }
 }
 
@@ -19,26 +19,27 @@ export class Triangle implements Figure {
 
   constructor(
     public color: Color,
-    public a: number,
-    public b: number,
-    public c: number,
+    public aSideOfTriangle: number,
+    public bSideOfTriangle: number,
+    public cSideOfTriangle: number,
   ) {
-    const arr: number[] = [a, b, c];
+    const arr: number[] = [aSideOfTriangle, bSideOfTriangle, cSideOfTriangle];
 
     arr.sort((x: number, y: number) => x - y);
 
     if (arr[2] >= (arr[0] + arr[1])) {
-      throw new Error('your error message');
+      throw new Error('side of a triangle is >= than a sum of two others');
     }
 
-    throwError(a, b, c);
+    throwError(aSideOfTriangle, bSideOfTriangle, cSideOfTriangle);
   }
 
   getArea(): number {
-    const s = (this.a + this.b + this.c) / 2;
+    const s = (this.aSideOfTriangle + this.bSideOfTriangle
+        + this.cSideOfTriangle) / 2;
 
-    return Math.floor(Math.sqrt(s * (s - this.a)
-      * (s - this.b) * (s - this.c)) * 100) / 100;
+    return Math.floor(Math.sqrt(s * (s - this.aSideOfTriangle)
+      * (s - this.bSideOfTriangle) * (s - this.cSideOfTriangle)) * 100) / 100;
   }
 }
 
