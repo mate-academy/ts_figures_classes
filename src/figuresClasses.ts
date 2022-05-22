@@ -2,6 +2,12 @@ export function rounder(longNumber: number): number {
   return Math.floor(longNumber * 100) / 100;
 }
 
+export function error(...params: number[]): void {
+  if (params.some((side) => side <= 0)) {
+    throw new Error('One of the sides less than 1');
+  }
+}
+
 export type Color = 'red' | 'green' | 'blue';
 
 export enum Shape {
@@ -25,9 +31,7 @@ export class Triangle {
     public b: number,
     public c: number,
   ) {
-    if ([a, b, c].some((number) => number <= 0)) {
-      throw new Error('One of the sides less than 1');
-    }
+    error(a, b, c);
 
     const arr:number[] = [a, b, c].sort((x, y) => x - y);
 
@@ -39,7 +43,8 @@ export class Triangle {
   getArea(): number {
     const p: number = (this.a + this.b + this.c) / 2;
 
-    return rounder(Math.sqrt(p * (p - this.a) * (p - this.b) * (p - this.c)));
+    return rounder(Math.sqrt(p * (p - this.a)
+ * (p - this.b) * (p - this.c)));
   }
 }
 
@@ -50,9 +55,7 @@ export class Circle implements Figure {
     public color: Color,
     public radius: number,
   ) {
-    if (radius <= 0) {
-      throw new Error('Radius less than 1');
-    }
+    error(radius);
   }
 
   getArea(): number {
@@ -68,9 +71,7 @@ export class Rectangle implements Figure {
     public width: number,
     public height: number,
   ) {
-    if (width <= 0 || height <= 0) {
-      throw new Error('One of the sides less than 1');
-    }
+    error(width, height);
   }
 
   getArea(): number {
