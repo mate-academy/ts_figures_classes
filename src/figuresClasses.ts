@@ -2,6 +2,12 @@ function roundHundreds(item: number): number {
   return Math.floor(item * 100) / 100;
 }
 
+function invalidData(...args: number[]): void {
+  if (args.some((el: number) => el <= 0)) {
+    throw new Error('invalid data');
+  }
+}
+
 type Shape = 'triangle' | 'circle' | 'rectangle';
 type Color = 'red' | 'green' | 'blue';
 
@@ -23,14 +29,12 @@ export class Triangle implements Figure {
   ) {
     this.a = a;
 
-    if (a <= 0 || b <= 0 || c <= 0) {
-      throw new Error('your error message');
-    }
+    invalidData(a, b, c);
 
     const max: number[] = [a, b, c].sort((x, y) => x - y);
 
     if (max[2] >= max[0] + max[1]) {
-      throw new Error('your error message');
+      throw new Error('invalid data');
     }
   }
 
@@ -49,9 +53,7 @@ export class Circle implements Figure {
     public color: Color,
     public radius: number,
   ) {
-    if (radius < 1) {
-      throw new Error('your error message');
-    }
+    invalidData(radius);
   }
 
   getArea(): number {
@@ -67,9 +69,7 @@ export class Rectangle implements Figure {
     public width: number,
     public height: number,
   ) {
-    if (width < 1 || height < 1) {
-      throw new Error('your error message');
-    }
+    invalidData(width, height);
   }
 
   getArea(): number {
