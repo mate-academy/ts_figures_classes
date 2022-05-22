@@ -1,15 +1,25 @@
+type Color = 'red' | 'green' | 'blue';
+
+enum Shape {
+  Triangle = 'triangle',
+  Circle = 'circle',
+  Rectangle = 'rectangle'
+}
+
 export interface Figure {
-  color: string,
-  shape?: string,
+  color: Color,
+  shape: Shape,
+  getArea(): number,
 }
 
 export class Triangle implements Figure {
+  public shape = Shape.Triangle;
+
   constructor(
-    public color: string,
+    public color: Color,
     public a: number,
     public b: number,
     public c: number,
-    public shape: string = 'triangle',
   ) {
     if (a < 0 || b < 0 || c < 0 || a + b <= c) {
       throw new Error('your error message');
@@ -25,10 +35,11 @@ export class Triangle implements Figure {
 }
 
 export class Circle {
+  public shape = Shape.Circle;
+
   constructor(
-    public color: string,
+    public color: Color,
     public radius: number,
-    public shape: string = 'circle',
   ) {
     if (radius < 0) {
       throw new Error('your error message');
@@ -43,11 +54,12 @@ export class Circle {
 }
 
 export class Rectangle {
+  public shape = Shape.Rectangle;
+
   constructor(
-    public color: string,
+    public color: Color,
     public width: number,
     public height: number,
-    public shape: string = 'rectangle',
   ) {
     if (width < 0 || height < 0) {
       throw new Error('your error message');
@@ -61,15 +73,6 @@ export class Rectangle {
   }
 }
 
-export function getInfo(figure): string {
-  switch (figure.shape) {
-    case 'circle':
-      return `A ${figure.color} ${figure.shape} - ${figure.getArea()}`;
-    case 'triangle':
-      return `A ${figure.color} ${figure.shape} - ${figure.getArea()}`;
-    case 'rectangle':
-      return `A ${figure.color} ${figure.shape} - ${figure.getArea()}`;
-    default:
-      return '';
-  }
+export function getInfo(figure: Figure): string {
+  return `A ${figure.color} ${figure.shape} - ${figure.getArea()}`;
 }
