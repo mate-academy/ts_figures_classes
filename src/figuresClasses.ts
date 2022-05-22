@@ -7,7 +7,7 @@ function round(num: number): number {
 
 function error(...arg: number[]): void {
   if (arg.some((el) => el <= 0)) {
-    throw new Error('Error');
+    throw new Error('Not enough side/radius value');
   }
 }
 
@@ -31,7 +31,7 @@ export class Triangle implements Figure {
     const arr: number[] = [a, b, c].sort((item1, item2) => item1 - item2);
 
     if (arr[2] >= arr[0] + arr[1]) {
-      throw new Error('Error');
+      throw new Error('This is not a triangle');
     }
   }
 
