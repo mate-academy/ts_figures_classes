@@ -1,15 +1,35 @@
-enum Shape {
+export enum Shape {
   Triangle = 'triangle',
   Circle = 'circle',
   Rectangle = 'rectangle'
 }
 
-type Color = 'red' | 'green' | 'blue';
+export type Color = 'red' | 'green' | 'blue';
 
 export interface Figure {
   shape: Shape,
   color: Color,
   getArea(): number
+}
+
+export function roundToHundredths(uglyNumber: number): number {
+  return Math.floor(uglyNumber * 100) / 100;
+}
+
+export function errorChecker(...sizes: number[]): void {
+  if (sizes.some((size) => size <= 0)) {
+    switch (sizes.length) {
+      case 3:
+        throw new Error('You entered wrong side sizes! '
+        + 'All sizes have to be greater than 0!');
+      case 2:
+        throw new Error('Enter both width and height sizes greater than 0!');
+      case 1:
+        throw new Error('Enter correct radius, greater than 0!');
+      default:
+        throw new Error('No, no! This is not so rigth!');
+    }
+  }
 }
 
 export class Triangle implements Figure {
@@ -24,7 +44,7 @@ export class Triangle implements Figure {
       * (semiperimeter - this.b)
       * (semiperimeter - this.c));
 
-    return Math.floor(area * 100) / 100;
+    return roundToHundredths(area);
   }
 
   constructor(
@@ -33,17 +53,13 @@ export class Triangle implements Figure {
     public b: number,
     public c: number,
   ) {
-    if (a <= 0 || b <= 0 || c <= 0) {
-      throw new Error('No, no! This is not rigth! '
-        + 'You entered wrong side sizes! '
-        + 'All sizes have to be greater than 0!');
-    }
+    errorChecker(a, b, c);
 
     if (((a + b) <= c) || ((a + c) <= b) || ((c + b) <= a)) {
-      throw new Error('Oh no! This is not so rigth! '
-        + 'I can not connect your sides togeter!'
+      throw new Error('Oh no! This is not rigth! '
+        + 'I can not form a triangle!'
         + 'The longest side of a triangle has to be '
-        + 'less than a sum of two others');
+        + 'less than a sum of two others!');
     }
   }
 }
@@ -54,17 +70,14 @@ export class Circle implements Figure {
   getArea(): number {
     const area = Math.PI * this.radius ** 2;
 
-    return Math.floor(area * 100) / 100;
+    return roundToHundredths(area);
   }
 
   constructor(
     public color: Color,
     public radius: number,
   ) {
-    if (radius <= 0) {
-      throw new Error('No, no, no! This is wrong size! '
-      + 'Enter correct radius, greater than 0!');
-    }
+    errorChecker(radius);
   }
 }
 
@@ -80,9 +93,7 @@ export class Rectangle implements Figure {
     public width: number,
     public heigth: number,
   ) {
-    if (width <= 0 || heigth <= 0) {
-      throw new Error('This is not so rigth! Enter both sizes greater than 0!');
-    }
+    errorChecker(width, heigth);
   }
 }
 
