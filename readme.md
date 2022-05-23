@@ -1,11 +1,11 @@
 # Figures
-We have 3 types of figures: triangles, circles and rectangles. 
+We have 3 types of figures: triangles, circles and rectangles.
 
-Write an interface `Figure` and 3 classes implementing it so that every figure 
+Write an interface `Figure` and 3 classes implementing it so that every figure
 has:
 - a `shape` (`triangle`, `circle` or `rectangle`);
 - a `color` (`red`, `green` or `blue`);
-- a method `getArea` that returns the area of the figure rounded down to 
+- a method `getArea` that returns the area of the figure rounded down to
 hundredths.
 
 In addition to a `color` constructors should accept required data:
@@ -36,3 +36,40 @@ getInfo(redRectangle) === 'A red rectangle - 15';
 const greenCircle = new Circle('green', 1);
 getInfo(greenCircle) === 'A green circle - 3.14';
 ```
+<!-- У нас есть 3 типа фигур: треугольники, круги и прямоугольники.
+
+Напишите интерфейс `Рисунок` и реализуйте его 3 класса, чтобы каждая фигура
+имеет:
+- «форма» («треугольник», «круг» или «прямоугольник»);
+- «цвет» («красный», «зеленый» или «синий»);
+- метод `getArea`, возвращающий площадь фигуры, округленную в меньшую сторону до
+сотые.
+
+В дополнение к `color` конструкторы должны принимать необходимые данные:
+- стороны `a`, `b` и `c` для треугольника;
+- `радиус` для окружности;
+- ширина и высота прямоугольника.
+
+Конструкторы должны выдавать новую ошибку ("ваше сообщение об ошибке"), если:
+- любая длина <= 0
+- самая длинная сторона треугольника >= суммы двух других
+
+Подсказки:
+- использовать `Math.PI` для вычисления квадрата круга
+- используйте [формулу Герона](https://en.wikipedia.org/wiki/Heron%27s_formula) для треугольников
+
+Пример:
+```машинопись
+new Rectangle('blue', 2, 0) // выдает ошибку
+new Triangle('red', 1, 2, 3) // выдает ошибку: стороны 1, 2 и 3 не могут образовать треугольник
+```
+
+Также создайте функцию `getInfo`, которая принимает число и возвращает строку в
+следующий формат:
+```машинопись
+const redRectangle = новый прямоугольник («красный», 3, 5);
+getInfo(redRectangle) === 'Красный прямоугольник - 15';
+
+const greenCircle = новый круг («зеленый», 1);
+getInfo(greenCircle) === 'Зеленый круг - 3.14';
+``` -->
