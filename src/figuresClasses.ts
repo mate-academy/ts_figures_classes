@@ -7,6 +7,10 @@ export interface Figure {
   getArea(): number;
 }
 
+function round(value: number): number {
+  return (Math.floor(value * 100) / 100);
+}
+
 export class Triangle implements Figure {
   shape: Shape = 'triangle';
 
@@ -28,10 +32,11 @@ export class Triangle implements Figure {
 
   getArea(): number {
     const semiPerimetr = 0.5 * (this.a + this.b + this.c);
+    const triangleArea = (semiPerimetr * (semiPerimetr - this.a)
+    * (semiPerimetr - this.b)
+* (semiPerimetr - this.c)) ** 0.5;
 
-    return Math.floor(((semiPerimetr * (semiPerimetr - this.a)
-        * (semiPerimetr - this.b)
-    * (semiPerimetr - this.c)) ** 0.5) * 100) / 100;
+    return round(triangleArea);
   }
 }
 
@@ -51,7 +56,9 @@ export class Circle implements Figure {
   }
 
   getArea():number {
-    return Math.floor(((Math.PI * this.radius * this.radius)) * 100) / 100;
+    const circleArea = Math.PI * this.radius * this.radius;
+
+    return round(circleArea);
   }
 }
 
