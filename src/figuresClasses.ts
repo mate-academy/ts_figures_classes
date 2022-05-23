@@ -1,4 +1,9 @@
-type Shape = 'triangle' | 'circle' | 'rectangle';
+enum Shape {
+  Triangle = 'triangle',
+  Circle = 'circle',
+  Rectangle = 'rectangle',
+}
+
 type Color = 'red' | 'green' | 'blue';
 
 export interface Figure {
@@ -20,7 +25,7 @@ function throwError(...sides: number[]): void {
 }
 
 export class Triangle implements Figure {
-  shape: Shape;
+  shape: Shape = Shape.Triangle;
 
   constructor(
     public color: Color,
@@ -28,8 +33,6 @@ export class Triangle implements Figure {
     public b: number,
     public c: number,
   ) {
-    this.shape = 'triangle';
-
     throwError(a, b, c);
 
     const sortedSides: number[] = [a, b, c]
@@ -52,14 +55,12 @@ export class Triangle implements Figure {
 }
 
 export class Circle implements Figure {
-  shape: Shape;
+  shape: Shape = Shape.Circle;
 
   constructor(
     public color: Color,
     public radius: number,
   ) {
-    this.shape = 'circle';
-
     throwError(radius);
   }
 
@@ -71,15 +72,13 @@ export class Circle implements Figure {
 }
 
 export class Rectangle implements Figure {
-  shape: Shape;
+  shape: Shape = Shape.Rectangle;
 
   constructor(
     public color: Color,
     public width: number,
     public height: number,
   ) {
-    this.shape = 'rectangle';
-
     throwError(width, height);
   }
 
