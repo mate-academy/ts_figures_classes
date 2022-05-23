@@ -4,9 +4,14 @@ enum Shape {
   Rectangle = 'rectangle',
 }
 type Color = 'red' | 'green' | 'blue';
-type Callback = (arg: number) => number;
+type Callbeck = (arg: number) => number;
 
-const callback: Callback = (n) => Math.floor(n * 100) / 100;
+const roundingToHundredth: Callbeck = (n) => Math.floor(n * 100) / 100;
+const checkSizeOfNumber = (...args: number[]): void => {
+  if (args.some((num) => (num <= 0))) {
+    throw new Error('Error, entered wrong parameters');
+  }
+};
 
 export interface Figure {
   shape: Shape,
@@ -23,13 +28,11 @@ export class Triangle implements Figure {
     public b: number,
     public c: number,
   ) {
-    if (this.a <= 0 || this.b <= 0 || this.c <= 0) {
-      throw new Error('Ooops');
-    }
+    checkSizeOfNumber(a, b, c);
 
     if ((a + b) <= c
     || (a + c) <= b || (c + b) <= a) {
-      throw new Error('Ooops');
+      throw new Error('Error, entered wrong parameters');
     }
   }
 
@@ -38,7 +41,7 @@ export class Triangle implements Figure {
 
     const area = Math.sqrt(s * ((s - this.a) * (s - this.b) * (s - this.c)));
 
-    return callback(area);
+    return roundingToHundredth(area);
   }
 }
 
@@ -49,13 +52,11 @@ export class Circle implements Figure {
     public color: Color,
     public radius: number,
   ) {
-    if (radius <= 0) {
-      throw new Error('Ooops');
-    }
+    checkSizeOfNumber(radius);
   }
 
   getArea(): number {
-    return callback(Math.PI * (this.radius ** 2));
+    return roundingToHundredth(Math.PI * (this.radius ** 2));
   }
 }
 
@@ -67,13 +68,11 @@ export class Rectangle implements Figure {
     public width: number,
     public height: number,
   ) {
-    if (width <= 0 || height <= 0) {
-      throw new Error('Ooops');
-    }
+    checkSizeOfNumber(width, height);
   }
 
   getArea(): number {
-    return callback(this.width * this.height);
+    return roundingToHundredth(this.width * this.height);
   }
 }
 
