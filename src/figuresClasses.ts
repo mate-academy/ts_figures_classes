@@ -15,18 +15,14 @@ export class Triangle implements Figure {
   shape: Shape = 'triangle';
 
   constructor(
-
     public color: Color,
-
     public a: number,
-
     public b: number,
-
     public c: number,
   ) {
     if (a === 0 || b === 0 || c === 0 || a >= b + c
       || b >= a + c || c >= a + b) {
-      throw new Error();
+      throw new Error('This is not a triangle');
     }
   }
 
@@ -44,14 +40,12 @@ export class Circle implements Figure {
   shape: Shape = 'circle';
 
   constructor(
-
     public color: Color,
-
     public radius: number,
 
   ) {
     if (radius <= 0) {
-      throw new Error();
+      throw new Error('This is not a circle');
     }
   }
 
@@ -75,7 +69,7 @@ export class Rectangle implements Figure {
 
   ) {
     if (a <= 0 || b <= 0) {
-      throw new Error();
+      throw new Error('This is not a rectangle');
     }
   }
 
