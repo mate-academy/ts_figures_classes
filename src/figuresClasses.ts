@@ -1,3 +1,7 @@
+function floorToHundrets(area: number):number {
+  return Math.floor(100 * area) / 100;
+}
+
 type Shape = 'triangle' | 'circle' | 'rectangle';
 type Color = 'red' | 'green' | 'blue';
 
@@ -32,7 +36,7 @@ export class Triangle implements Figure {
     const area: number = Math.sqrt(p
       * (p - this.a) * (p - this.b) * (p - this.c));
 
-    return Math.floor(100 * area) / 100;
+    return floorToHundrets(area);
   }
 }
 
@@ -51,7 +55,7 @@ export class Circle implements Figure {
   getArea(): number {
     const area: number = Math.PI * this.radius * this.radius;
 
-    return Math.floor(100 * area) / 100;
+    return floorToHundrets(area);
   }
 }
 
@@ -71,7 +75,7 @@ export class Rectangle implements Figure {
   getArea(): number {
     const area: number = this.height * this.width;
 
-    return Math.floor(100 * area) / 100;
+    return floorToHundrets(area);
   }
 }
 
