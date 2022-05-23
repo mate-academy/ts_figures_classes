@@ -16,7 +16,7 @@ function RoundDown(squere: number): number {
   return Math.floor(squere * 100) / 100;
 }
 
-function getError(): never {
+function getError(): void {
   throw new Error('invalid params');
 }
 
@@ -29,7 +29,7 @@ export class Triangle implements Figure {
     public b: number,
     public c: number,
   ) {
-    const getMax: number[] = [this.a, this.b, this.c]
+    const getMax: number[] = [a, b, c]
       .sort((sideA, sideB) => sideB - sideA);
 
     if (a <= 0 || b <= 0 || c <= 0) {
