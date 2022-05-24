@@ -14,20 +14,12 @@ export interface Figure {
 export class Triangle implements Figure {
   public shape: Shape = 'triangle';
 
-  public color;
-
-  public a;
-
-  public b;
-
-  public c;
-
-  constructor(color: Color, a: number, b: number, c: number) {
-    this.color = color;
-    this.a = a;
-    this.b = b;
-    this.c = c;
-
+  constructor(
+    public color: Color,
+    public a: number,
+    public b: number,
+    public c: number,
+  ) {
     if (a <= 0 || b <= 0 || c <= 0) {
       throw new Error('what are you doing, dude?');
     }
@@ -48,14 +40,10 @@ export class Triangle implements Figure {
 export class Circle implements Figure {
   public shape: Shape = 'circle';
 
-  public color;
-
-  public radius;
-
-  constructor(color: Color, radius: number) {
-    this.color = color;
-    this.radius = radius;
-
+  constructor(
+    public color: Color,
+    public radius: number,
+  ) {
     if (radius <= 0) {
       throw new Error('what are you doing, dude?');
     }
@@ -69,17 +57,11 @@ export class Circle implements Figure {
 export class Rectangle implements Figure {
   public shape: Shape = 'rectangle';
 
-  public width;
-
-  public color;
-
-  public height;
-
-  constructor(color: Color, width: number, height: number) {
-    this.width = width;
-    this.height = height;
-    this.color = color;
-
+  constructor(
+    public color: Color,
+    public width: number,
+    public height: number,
+  ) {
     if (width <= 0 || height <= 0) {
       throw new Error('what are you doing, dude?');
     }
