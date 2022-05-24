@@ -16,16 +16,20 @@ export interface Figure {
   getArea(): number;
 }
 
+function rounding(number: number): number {
+  return Math.floor(number * 100) / 100;
+}
+
 export class Triangle implements Figure {
   shape: Shape.Triangle;
 
   color: Color;
 
   getArea = (): number => {
-    const s = (this.a + this.b + this.c) / 2;
-    const area = Math.sqrt(s * (s - this.a) * (s - this.b) * (s - this.c));
+    const { a, b, c } = this;
+    const s = (a + b + c) / 2;
 
-    return Math.floor(area * 100) / 100;
+    return rounding(Math.sqrt(s * (s - a) * (s - b) * (s - c)));
   };
 
   constructor(
@@ -49,7 +53,7 @@ export class Circle implements Figure {
 
   color: Color;
 
-  getArea = (): number => Math.floor(Math.PI * (this.radius ** 2) * 100) / 100;
+  getArea = (): number => rounding(Math.PI * (this.radius ** 2));
 
   constructor(
     color: Color,
@@ -69,7 +73,7 @@ export class Rectangle implements Figure {
 
   color: Color;
 
-  getArea = (): number => Math.floor(this.height * this.width * 100) / 100;
+  getArea = (): number => rounding(this.height * this.width);
 
   constructor(color: Color, public width: number, public height: number) {
     this.shape = Shape.Rectangle;
