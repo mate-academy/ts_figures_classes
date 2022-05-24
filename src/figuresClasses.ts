@@ -12,7 +12,7 @@ export interface Figure {
   getArea(): number;
 }
 
-function RoundDown(squere: number): number {
+function roundDown(squere: number): number {
   return Math.floor(squere * 100) / 100;
 }
 
