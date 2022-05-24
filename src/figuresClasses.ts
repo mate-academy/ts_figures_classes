@@ -4,7 +4,11 @@ enum Shape {
   Rectangle = 'rectangle',
 }
 
-type Color = 'red' | 'green' | 'blue';
+enum Color {
+  Red = 'red',
+  Green = 'green',
+  Blue = 'blue',
+}
 
 export interface Figure {
   shape: Shape,
@@ -44,11 +48,11 @@ export class Triangle implements Figure {
   }
 
   getArea(): number {
-    const semiPerimeter = (this.a + this.b + this.c) / 2;
-
+    const { a, b, c } = this;
+    const semiPerimeter = (a + b + c) / 2;
     const area = Math.sqrt(semiPerimeter
-      * (semiPerimeter - this.a)
-      * (semiPerimeter - this.b) * (semiPerimeter - this.c));
+      * (semiPerimeter - a)
+      * (semiPerimeter - b) * (semiPerimeter - c));
 
     return roundDown(area);
   }
@@ -65,7 +69,8 @@ export class Circle implements Figure {
   }
 
   getArea(): number {
-    const area = Math.PI * (this.radius ** 2);
+    const { radius } = this;
+    const area = Math.PI * (radius ** 2);
 
     return roundDown(area);
   }
@@ -83,7 +88,9 @@ export class Rectangle implements Figure {
   }
 
   getArea():number {
-    return roundDown(this.width * this.height);
+    const { width, height } = this;
+
+    return roundDown(width * height);
   }
 }
 
