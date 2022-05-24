@@ -8,7 +8,7 @@ export interface Figure {
 }
 
 export class Triangle {
-  public shape: Shape = 'triangle';
+  shape: Shape = 'triangle';
 
   a: number;
 
@@ -52,8 +52,8 @@ export class Circle {
   constructor(public color: Color, radius: number) {
     this.radius = radius;
 
-    if (radius < 0) {
-      throw new Error('Circle cannot have a negative radius');
+    if (radius <= 0) {
+      throw new Error('Circle cannot have a radius of zero or negative');
     }
   }
 
@@ -79,6 +79,6 @@ export class Rectangle {
   getArea = (): number => this.width * this.height;
 }
 
-export function getInfo({ color, shape, getArea }: Figure): string {
-  return `A ${color} ${shape} - ${getArea()}`;
-}
+export const getInfo = ({ color, shape, getArea }: Figure): string =>
+  // eslint-disable-next-line implicit-arrow-linebreak
+  (`A ${color} ${shape} - ${getArea()}`);
