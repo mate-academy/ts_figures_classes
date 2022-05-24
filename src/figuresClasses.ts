@@ -19,58 +19,57 @@ export function roundTo2(area: number): number {
 export class Triangle implements Figure {
   shape = Shape.Triangle;
 
-  getArea(): number {
-    const semiperimeter: number = (this.a + this.b + this.c) / 2;
-
-    const area: number
-    = Math.sqrt(semiperimeter
-    * (semiperimeter - this.a)
-    * (semiperimeter - this.b)
-    * (semiperimeter - this.c));
-
-    return roundTo2(area);
-  }
-
   constructor(
     public color: Color,
     public a: number,
     public b: number,
     public c: number,
   ) {
-    if (a <= 0 || b <= 0 || c <= 0
-      || ((a + b) <= c) || ((a + c) <= b) || ((c + b) <= a)) {
-      throw new Error('Arguments are not valid');
+    if (a <= 0 || b <= 0 || c <= 0) {
+      throw new Error('Side is not valid');
     }
+
+    if ((a + b) <= c || (a + c) <= b || (c + b) <= a) {
+      throw new Error('Triangle doesn`t exist');
+    }
+  }
+
+  getArea(): number {
+    const { a, b, c } = this;
+
+    const semiperimeter: number = (a + b + c) / 2;
+
+    const area: number = Math.sqrt(semiperimeter
+    * (semiperimeter - a)
+    * (semiperimeter - b)
+    * (semiperimeter - c));
+
+    return roundTo2(area);
   }
 }
 
 export class Circle implements Figure {
   shape = Shape.Circle;
 
-  getArea(): number {
-    const area: number = Math.PI * this.radius * this.radius;
-
-    return roundTo2(area);
-  }
-
   constructor(
     public color: Color,
     public radius : number,
   ) {
     if (radius <= 0) {
-      throw new Error('Arguments are not valid');
+      throw new Error('Radius is not valid');
     }
+  }
+
+  getArea(): number {
+    const { radius } = this;
+    const area: number = Math.PI * radius ** 2;
+
+    return roundTo2(area);
   }
 }
 
 export class Rectangle implements Figure {
   shape = Shape.Rectangle;
-
-  getArea(): number {
-    const area: number = this.width * this.height;
-
-    return roundTo2(area);
-  }
 
   constructor(
     public color: Color,
@@ -78,8 +77,15 @@ export class Rectangle implements Figure {
     public height : number,
   ) {
     if (width <= 0 || height <= 0) {
-      throw new Error('Arguments are not valid');
+      throw new Error('Side is not valid');
     }
+  }
+
+  getArea(): number {
+    const { width, height } = this;
+    const area: number = width * height;
+
+    return roundTo2(area);
   }
 }
 
