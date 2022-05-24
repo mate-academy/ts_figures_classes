@@ -1,3 +1,4 @@
+
 function paramsOverZero(...args: number[]): void {
   const params = args;
 
@@ -16,7 +17,10 @@ function checkLongestSide(
   }
 }
 
-// type Shape = 'triangle' | 'circle' | 'rectangle';
+function round(n: number):number {
+  return Math.floor(n * 100) / 100;
+}
+
 type Color = 'red' | 'green' | 'blue';
 
 enum Shape {
@@ -46,13 +50,15 @@ export class Triangle implements Figure {
   }
 
   getArea(): number {
-    const semiP = (this.a + this.b + this.c) / 2;
+    const { a, b, c } = this;
+
+    const semiP = (a + b + c) / 2;
 
     const bigRes = Math.sqrt(
-      semiP * (semiP - this.a) * (semiP - this.b) * (semiP - this.c),
+      semiP * (semiP - a) * (semiP - b) * (semiP - c),
     );
 
-    return Math.floor(bigRes * 100) / 100;
+    return round(bigRes);
   }
 }
 
@@ -67,7 +73,9 @@ export class Circle implements Figure {
   }
 
   getArea(): number {
-    return Math.floor((Math.PI * (this.radius ** 2)) * 100) / 100;
+    const { radius } = this;
+
+    return round(Math.PI * (radius ** 2));
   }
 }
 
@@ -83,7 +91,9 @@ export class Rectangle implements Figure {
   }
 
   getArea(): number {
-    return this.width * this.height;
+    const { width, height } = this;
+
+    return width * height;
   }
 }
 
