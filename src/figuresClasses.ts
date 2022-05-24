@@ -1,6 +1,9 @@
+type Color = 'red'| 'green' | 'blue';
+type Shape = 'triangle'| 'circle' | 'rectangle';
+
 export interface Figure {
-  shape: string,
-  color: string,
+  shape: Shape,
+  color: Color,
   getArea(): number,
 }
 
@@ -9,22 +12,22 @@ function round(square: number): number {
 }
 
 export class Triangle implements Figure {
-  public shape: string = 'triangle';
+  public shape: Shape = 'triangle';
 
   constructor(
-    public color: string,
+    public color: Color,
     public a: number,
     public b: number,
     public c: number,
   ) {
     if (a <= 0 || b <= 0 || c <= 0) {
-      throw new Error('Resulting value should be even number');
+      throw new Error('The sides of the triangle must be natural numbers');
     }
 
     if (a >= b + c
       || b >= a + c
       || c >= a + b) {
-      throw new Error('Resulting value should be even number');
+      throw new Error('Specify the right sides of the triangle');
     }
   }
 
@@ -39,14 +42,14 @@ export class Triangle implements Figure {
 }
 
 export class Circle implements Figure {
-  public shape: string = 'circle';
+  public shape: Shape = 'circle';
 
   constructor(
-    public color: string,
+    public color: Color,
     public radius: number,
   ) {
     if (radius <= 0) {
-      throw new Error('Resulting value should be even number');
+      throw new Error('You are trying to draw the non-existent');
     }
   }
 
@@ -56,15 +59,15 @@ export class Circle implements Figure {
 }
 
 export class Rectangle implements Figure {
-  public shape: string = 'rectangle';
+  public shape: Shape = 'rectangle';
 
   constructor(
-    public color: string,
+    public color: Color,
     public width: number,
     public height: number,
   ) {
     if (width <= 0 || height <= 0) {
-      throw new Error('Resulting value should be even number');
+      throw new Error('You are trying to draw the non-existent');
     }
   }
 
