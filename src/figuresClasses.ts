@@ -12,7 +12,7 @@ export interface Figure {
   getArea(): number;
 }
 
-export function roundTo2(area: number): number {
+export function roundToHundredths(area: number): number {
   return Math.floor(area * 100) / 100;
 }
 
@@ -44,7 +44,7 @@ export class Triangle implements Figure {
     * (semiperimeter - b)
     * (semiperimeter - c));
 
-    return roundTo2(area);
+    return roundToHundredths(area);
   }
 }
 
@@ -64,7 +64,7 @@ export class Circle implements Figure {
     const { radius } = this;
     const area: number = Math.PI * radius ** 2;
 
-    return roundTo2(area);
+    return roundToHundredths(area);
   }
 }
 
@@ -85,7 +85,7 @@ export class Rectangle implements Figure {
     const { width, height } = this;
     const area: number = width * height;
 
-    return roundTo2(area);
+    return roundToHundredths(area);
   }
 }
 
