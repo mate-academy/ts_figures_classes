@@ -79,6 +79,6 @@ export class Rectangle {
   getArea = (): number => this.width * this.height;
 }
 
-export const getInfo = ({ color, shape, getArea }: Figure): string =>
-  // eslint-disable-next-line implicit-arrow-linebreak
-  (`A ${color} ${shape} - ${getArea()}`);
+export const getInfo = (
+  { color, shape, getArea }: Figure,
+): string => `A ${color} ${shape} - ${getArea()}`;
