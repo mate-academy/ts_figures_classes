@@ -7,6 +7,10 @@ export function error(...arg: number[]): void {
   }
 }
 
+export function round(number: number): number {
+  return Math.floor(number * 100) / 100;
+}
+
 export interface Figure {
   shape: Shape;
   color: Color;
@@ -35,8 +39,10 @@ export class Triangle implements Figure {
   getArea(): number {
     const p: number = (this.a + this.b + this.c) / 2;
 
-    return Math.floor((Math.sqrt(p * (p - this.a)
-      * (p - this.b) * (p - this.c))) * 100) / 100;
+    const square = Math.sqrt(p * (p - this.a)
+      * (p - this.b) * (p - this.c));
+
+    return round(square);
   }
 }
 
@@ -51,7 +57,9 @@ export class Circle implements Figure {
   }
 
   getArea(): number {
-    return Math.floor((Math.PI * this.radius * this.radius) * 100) / 100;
+    const square = (Math.PI * this.radius * this.radius);
+
+    return round(square);
   }
 }
 
