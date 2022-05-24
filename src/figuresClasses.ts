@@ -44,9 +44,9 @@ export class Triangle implements Figure {
 
   constructor(
     public color: Color,
-    protected a: number,
-    protected b: number,
-    protected c: number,
+    private a: number,
+    private b: number,
+    private c: number,
   ) {
     areDimensionsValid(a, b, c);
     isTriangleValid(a, b, c);
@@ -66,7 +66,7 @@ export class Circle implements Figure {
 
   constructor(
     public color: Color,
-    protected radius: number,
+    private radius: number,
   ) {
     areDimensionsValid(radius);
   }
@@ -81,8 +81,8 @@ export class Rectangle implements Figure {
 
   constructor(
     public color: Color,
-    protected width: number,
-    protected height: number,
+    private width: number,
+    private height: number,
   ) {
     areDimensionsValid(width, height);
   }
