@@ -6,31 +6,35 @@ enum Shape {
 
 type Color = 'red' | 'green' | 'blue';
 
-function rounding(n: number): number {
-  return Math.floor(n * 100) / 100;
-}
-
 export interface Figure {
   shape: Shape;
   color: Color;
   getArea(): number;
 }
 
+function areDimensionsValid(...dimensions: number[]): void {
+  if (dimensions.some((dimension: number) => dimension <= 0)) {
+    throw new Error('One or more dimensions are equal to or less than zero');
+  }
+}
+
+function rounding(number: number): number {
+  return Math.floor(number * 100) / 100;
+}
+
 export class Triangle implements Figure {
-  public shape = Shape.Triangle;
+  public shape: Shape = Shape.Triangle;
 
   constructor(
     public color: Color,
-    protected a: number,
-    protected b: number,
-    protected c: number,
+    private a: number,
+    private b: number,
+    private c: number,
   ) {
-    if ([a, b, c].some((side) => side <= 0)) {
-      throw new Error('Incorrect dimention passed');
-    }
+    areDimensionsValid(a, b, c);
 
     if (a >= b + c || b >= a + c || c >= a + b) {
-      throw new Error('Incorrect dimention passed');
+      throw new Error('One of the sides is longer than the sum of the others');
     }
   }
 
@@ -42,15 +46,13 @@ export class Triangle implements Figure {
 }
 
 export class Circle implements Figure {
-  public shape = Shape.Circle;
+  public shape: Shape = Shape.Circle;
 
   constructor(
     public color: Color,
-    protected radius: number,
+    private radius: number,
   ) {
-    if (radius <= 0) {
-      throw new Error('Incorrect radius passed');
-    }
+    areDimensionsValid(radius);
   }
 
   getArea(): number {
@@ -59,16 +61,14 @@ export class Circle implements Figure {
 }
 
 export class Rectangle implements Figure {
-  public shape = Shape.Rectangle;
+  public shape: Shape = Shape.Rectangle;
 
   constructor(
     public color: Color,
-    protected width: number,
-    protected height: number,
+    private width: number,
+    private height: number,
   ) {
-    if (width <= 0 || height <= 0) {
-      throw new Error('Incorrect dimention passed');
-    }
+    areDimensionsValid(width, height);
   }
 
   getArea(): number {
