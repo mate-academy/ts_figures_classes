@@ -20,7 +20,7 @@ export class Triangle implements Figure {
     const sides = [a, b, c].sort((x, y) => y - x);
 
     if ((sides[0] >= sides[1] + sides[2])
-        || a < 1 || b < 1 || c < 1) {
+        || a < 1 || a <= 1) {
       throw new Error('All sides must be greater than 0');
     }
   }
