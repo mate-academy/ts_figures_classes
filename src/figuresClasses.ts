@@ -12,7 +12,8 @@ export interface Figure {
   getArea(): number
 }
 
-export function roundToHundredths(uglyNumber: number): number {
+// eslint-disable-next-line @typescript-eslint/explicit-function-return-type
+export function roundToHundredths(uglyNumber: number) {
   return Math.floor(uglyNumber * 100) / 100;
 }
 
