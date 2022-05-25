@@ -21,7 +21,7 @@ export class Circle implements Figure {
 
   constructor(
     public color: Color,
-    public a: number,
+    protected a: number,
   ) {
     if (a <= 0) {
       throw new Error('Incorrect radius');
@@ -37,9 +37,9 @@ export class Rectangle extends Circle {
   public shape = Shapes.Rectangle;
 
   constructor(
-    color: Color,
-    a: number,
-    public b: number,
+    public color: Color,
+    protected a: number,
+    protected b: number,
   ) {
     super(color, a);
 
@@ -57,10 +57,10 @@ export class Triangle extends Rectangle {
   public shape = Shapes.Triangle;
 
   constructor(
-    color: Color,
-    a: number,
-    b: number,
-    public c: number,
+    public color: Color,
+    protected a: number,
+    protected b: number,
+    protected c: number,
   ) {
     super(color, a, b);
 
