@@ -1,3 +1,7 @@
+function roundToTwoPlaces(number: number): number {
+  return Math.floor(number * 100) / 100;
+}
+
 type Shape = 'triangle' | 'rectangle' | 'circle';
 type Color = 'red' | 'green' | 'blue';
 
@@ -36,11 +40,10 @@ export class Triangle {
   }
 
   getArea = ():number => {
-    const semiPerimeter = (this.a + this.b + this.c) / 2;
-    const s = semiPerimeter;
+    const s = (this.a + this.b + this.c) / 2;
+    const area = Math.sqrt(s * (s - this.a) * (s - this.b) * (s - this.c));
 
-    return +(Math.sqrt(s * (s - this.a) * (s - this.b) * (s - this.c)))
-      .toFixed(2);
+    return roundToTwoPlaces(area);
   };
 }
 
@@ -57,7 +60,7 @@ export class Circle {
     }
   }
 
-  getArea = (): number => Math.floor(Math.PI * this.radius ** 2 * 100) / 100;
+  getArea = (): number => roundToTwoPlaces(Math.PI * this.radius ** 2);
 }
 
 export class Rectangle {
@@ -76,7 +79,7 @@ export class Rectangle {
     }
   }
 
-  getArea = (): number => this.width * this.height;
+  getArea = (): number => roundToTwoPlaces(this.width * this.height);
 }
 
 export const getInfo = (
