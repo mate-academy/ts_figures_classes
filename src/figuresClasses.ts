@@ -1,105 +1,96 @@
+type Color = 'red' | 'green' | 'blue';
+
+enum Shape {
+  Triangle = 'triangle',
+  Circle = 'circle',
+  Rectangle = 'rectangle',
+}
+
 export interface Figure {
-  shape: string;
-  color: string;
-  getArea: () => number;
+  shape: Shape;
+  color: Color;
+  getArea(): number;
+}
+
+function round(n: number): number {
+  return Math.floor(n * 100) / 100;
 }
 
 export class Triangle implements Figure {
-  shape: string;
-
-  color: string;
-
-  a: number;
-
-  b: number;
-
-  c: number;
+  shape: Shape = Shape.Triangle;
 
   constructor(
-    color: string,
-    a: number,
-    b: number,
-    c: number,
+    public color: Color,
+    public a: number,
+    public b: number,
+    public c: number,
   ) {
-    this.shape = 'triangle';
-    this.color = color;
-    this.a = a;
-    this.b = b;
-    this.c = c;
-
     if (a <= 0 || b <= 0 || c <= 0) {
-      throw new Error('Resulting value shold be even number');
+      throw new Error('Sides shold be positive');
     }
 
     if (a >= b + c
-    || b >= a + c
-    || c >= a + b) {
-      throw new Error('Resulting value shold be even number');
+  || b >= a + c
+  || c >= a + b) {
+      throw new Error('Can not build a triangle');
     }
   }
 
-  getArea():number {
-    const p = (this.a + this.b + this.c) / 2;
+  getArea(): number {
+    const { a, b, c } = this;
 
-    return Math.floor(Math.sqrt(p * (p - this.a)
-      * (p - this.b) * (p - this.c)) * 100) / 100;
+    const s = (a + b + c) / 2;
+
+    const TriangleArea = Math.sqrt(s
+      * (s - a)
+      * (s - b)
+      * (s - c));
+
+    return round(TriangleArea);
   }
 }
 
 export class Circle implements Figure {
-  shape: string;
-
-  color: string;
-
-  radius: number;
+  shape: Shape = Shape.Circle;
 
   constructor(
-    color: string,
-    radius: number,
+    public color: Color,
+    public radius: number,
   ) {
-    this.shape = 'circle';
-    this.color = color;
-    this.radius = radius;
-
     if (this.radius <= 0) {
-      throw new Error('Resulting value shold be even number');
+      throw new Error('Can not build a circle');
     }
   }
 
   getArea():number {
-    return Math.floor((Math.PI * this.radius * this.radius) * 100) / 100;
+    const { radius } = this;
+
+    return round(Math.PI * radius * radius);
   }
 }
 
 export class Rectangle implements Figure {
-  shape: string;
-
-  color: string;
-
-  width: number;
-
-  heigh: number;
+  shape: Shape = Shape.Rectangle;
 
   constructor(
-    color: string,
-    width: number,
-    height: number,
+    public color: Color,
+    public width: number,
+    public heigh: number,
   ) {
-    this.shape = 'rectangle';
-    this.color = color;
-    this.width = width;
-    this.heigh = height;
-
     if (this.width <= 0 || this.heigh <= 0) {
-      throw new Error('Resulting value shold be even number');
+      throw new Error('Can not build a rectangle');
     }
   }
 
-  getArea():number {
-    return (this.width * this.heigh);
+  getArea(): number {
+    const { width, heigh } = this;
+
+    return round(width * heigh);
   }
 }
 
-export function getInfo(figure: Circle | Rectangle | Triangle): string {
-  return `A ${figure.color} ${figure.shape} - ${figure.getArea()}`;
+export function getInfo(figure: Figure): string {
+  const { color, shape, getArea } = figure;
+
+  return `A ${color} ${shape} - ${getArea.apply(figure)}`;
 }
