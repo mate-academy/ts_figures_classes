@@ -53,7 +53,7 @@ export class Rectangle extends Circle {
   }
 }
 
-export class Triangle extends Rectangle {
+export class Triangle implements Figure {
   public shape = Shapes.Triangle;
 
   constructor(
