@@ -64,6 +64,12 @@ export class Triangle extends Rectangle {
   ) {
     super(color, a, b);
 
+    const sides = [a, b];
+
+    if (sides.some((side: number) => side <= 0)) {
+      throw new Error('Dimensions are not valid for triangle');
+    }
+
     if (a + b <= c || b + c <= a || a + c <= b) {
       throw new Error('These sides don`t create a valid triangle');
     }
