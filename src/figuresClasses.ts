@@ -57,10 +57,10 @@ export class Triangle implements Figure {
   public shape = Shapes.Triangle;
 
   constructor(
-    color: Color,
-    a: number,
-    b: number,
-    public c: number,
+    public color: Color,
+    private a: number,
+    private b: number,
+    private c: number,
   ) {
     super(color, a, b);
 
