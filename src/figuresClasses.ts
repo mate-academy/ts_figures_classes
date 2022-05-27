@@ -33,9 +33,9 @@ export class Triangle implements Figure {
 
   constructor(
     color: Color,
-    public a: number,
-    public b: number,
-    public c: number,
+    private a: number,
+    private b: number,
+    private c: number,
   ) {
     this.shape = Shape.Triangle;
     this.color = color;
@@ -56,7 +56,7 @@ export class Circle implements Figure {
 
   constructor(
     color: Color,
-    public radius: number,
+    private radius: number,
   ) {
     this.shape = Shape.Circle;
     this.color = color;
@@ -74,7 +74,11 @@ export class Rectangle implements Figure {
 
   getArea = (): number => Math.floor(this.height * this.width * 100) / 100;
 
-  constructor(color: Color, public width: number, public height: number) {
+  constructor(
+    color: Color,
+    private width: number,
+    private height: number,
+  ) {
     this.shape = Shape.Rectangle;
     this.color = color;
 
