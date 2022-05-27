@@ -33,16 +33,14 @@ export class Circle implements Figure {
   }
 }
 
-export class Rectangle extends Circle {
+export class Rectangle implements Figure {
   public shape = Shapes.Rectangle;
 
   constructor(
-    color: Color,
-    a: number,
+    public color: Color,
+    public a: number,
     public b: number,
   ) {
-    super(color, a);
-
     if (a <= 0 || b <= 0) {
       throw new Error('This is not a rectangle');
     }
@@ -53,17 +51,15 @@ export class Rectangle extends Circle {
   }
 }
 
-export class Triangle extends Rectangle {
+export class Triangle implements Figure {
   public shape = Shapes.Triangle;
 
   constructor(
-    color: Color,
-    a: number,
-    b: number,
+    public color: Color,
+    public a: number,
+    public b: number,
     public c: number,
   ) {
-    super(color, a, b);
-
     const sides = [a, b];
 
     if (sides.some((side: number) => side <= 0)) {
