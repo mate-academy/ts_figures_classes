@@ -9,7 +9,7 @@ export interface Figure {
   shape: Shape;
   color: Color;
 
-  getArea: () => {};
+  getArea(): number;
 }
 
 export class Triangle implements Figure {
