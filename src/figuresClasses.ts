@@ -15,7 +15,7 @@ export interface Figure {
   getArea(): number;
 }
 
-function rounding(number: number) :number {
+function round(number: number) :number {
   return Math.floor(number * 100) / 100;
 }
 
@@ -24,12 +24,12 @@ export class Triangle implements Figure {
 
   color: Color;
 
-  getArea = (): number => {
+  getArea(): number {
     const { a, b, c } = this;
     const s = (a + b + c) / 2;
 
-    return rounding(Math.sqrt(s * (s - a) * (s - b) * (s - c)));
-  };
+    return round(Math.sqrt(s * (s - a) * (s - b) * (s - c)));
+  }
 
   constructor(
     color: Color,
@@ -52,7 +52,7 @@ export class Circle implements Figure {
 
   color: Color;
 
-  getArea = (): number => rounding(Math.PI * (this.radius ** 2));
+  getArea = (): number => round(Math.PI * (this.radius ** 2));
 
   constructor(
     color: Color,
@@ -72,7 +72,7 @@ export class Rectangle implements Figure {
 
   color: Color;
 
-  getArea = (): number => Math.floor(this.height * this.width * 100) / 100;
+  getArea = (): number => round(this.height * this.width);
 
   constructor(
     color: Color,
