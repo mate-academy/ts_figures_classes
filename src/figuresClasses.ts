@@ -52,7 +52,9 @@ export class Circle implements Figure {
 
   color: Color;
 
-  getArea = (): number => round(Math.PI * (this.radius ** 2));
+  getArea(): number {
+    return round(Math.PI * (this.radius ** 2));
+  }
 
   constructor(
     color: Color,
@@ -72,7 +74,9 @@ export class Rectangle implements Figure {
 
   color: Color;
 
-  getArea = (): number => round(this.height * this.width);
+  getArea(): number {
+    return round(this.height * this.width);
+  }
 
   constructor(
     color: Color,
