@@ -1,12 +1,17 @@
+type Color = 'red'| 'green'| 'blue';
+type Shape = 'triangle' | 'circle' | 'rectangle';
+
 export interface Figure {
-  shape: 'triangle' | 'circle' | 'rectangle',
-  color: 'red'| 'green'| 'blue',
+  shape: Shape,
+  color: Color,
   getArea: () => number
 }
 
 export class Triangle implements Figure {
+  public shape: Shape = 'triangle';
+
   constructor(
-    public color: 'red'| 'green'| 'blue',
+    public color: Color,
     public a: number,
     public b: number,
     public c: number,
@@ -19,8 +24,6 @@ export class Triangle implements Figure {
     }
   }
 
-  public shape: 'triangle' = 'triangle';
-
   getArea(): number {
     const s: number = (this.a + this.b + this.c) / 2;
     const area: number = Math.sqrt(
@@ -32,8 +35,10 @@ export class Triangle implements Figure {
 }
 
 export class Circle implements Figure {
+  public shape: Shape = 'circle';
+
   constructor(
-    public color: 'red'| 'green'| 'blue',
+    public color: Color,
     public radius: number,
   ) {
     if (radius <= 0) {
@@ -41,16 +46,16 @@ export class Circle implements Figure {
     }
   }
 
-  public shape: 'circle' = 'circle';
-
   getArea(): number {
     return +(Math.floor((Math.PI * (this.radius * this.radius)) * 100)) / 100;
   }
 }
 
 export class Rectangle implements Figure {
+  public shape: Shape = 'rectangle';
+
   constructor(
-    public color: 'red'| 'green'| 'blue',
+    public color: Color,
     public width: number,
     public height: number,
   ) {
@@ -58,8 +63,6 @@ export class Rectangle implements Figure {
       throw new Error(`Entered wrong ${this.shape} size`);
     }
   }
-
-  public shape: 'rectangle' = 'rectangle';
 
   getArea(): number {
     return +(this.height * this.width).toFixed(2);
