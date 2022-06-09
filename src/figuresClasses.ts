@@ -5,11 +5,11 @@ export interface Figure {
 
 export class Triangle implements Figure {
   constructor(
-    public color: 'red' | 'green' | 'blue',
+    public color: Figure ['color'],
     public a: number,
     public b: number,
     public c: number,
-    public shape: 'triangle' | 'circle' | 'rectangle',
+    public shape: Figure ['shape'],
     public allSides: number[],
   ) {
     this.allSides = [this.a, this.b, this.c].sort((x, y) => x - y);
@@ -35,9 +35,9 @@ export class Triangle implements Figure {
 
 export class Circle implements Figure {
   constructor(
-    public color: 'red' | 'green' | 'blue',
+    public color: Figure ['color'],
     public radius: number,
-    public shape: 'triangle' | 'circle' | 'rectangle',
+    public shape: Figure ['shape'],
   ) {
     if (this.radius <= 0) {
       throw new Error('too small radius');
@@ -54,10 +54,10 @@ export class Circle implements Figure {
 
 export class Rectangle implements Figure {
   constructor(
-    public color: 'red' | 'green' | 'blue',
+    public color: Figure ['color'],
     public width: number,
     public height: number,
-    public shape: 'triangle' | 'circle' | 'rectangle',
+    public shape: Figure ['shape'],
   ) {
     if (this.width <= 0 || this.height <= 0) {
       throw new Error('too small side');
