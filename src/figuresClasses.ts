@@ -1,13 +1,23 @@
-type Color = 'red' | 'green' | 'blue';
+enum Color {
+  Red = 'red',
+  Green = 'green',
+  Blue = 'blue',
+}
+
+enum Shape {
+  Triangle = 'triangle',
+  Circle = 'circle',
+  Rectangle = 'rectangle',
+}
 
 export interface Figure {
-  shape: 'triangle' | 'circle' | 'rectangle',
+  shape: Shape,
   color: Color,
   getArea(): number,
 }
 
 export class Triangle implements Figure {
-  public shape: 'triangle';
+  public shape: Shape.Triangle;
 
   public color: Color;
 
@@ -18,7 +28,7 @@ export class Triangle implements Figure {
   public c: number;
 
   constructor(color: Color, a: number, b: number, c: number) {
-    this.shape = 'triangle';
+    this.shape = Shape.Triangle;
 
     this.color = color;
     this.a = a;
@@ -47,14 +57,14 @@ export class Triangle implements Figure {
 }
 
 export class Circle implements Figure {
-  public shape: 'circle';
+  public shape: Shape.Circle;
 
   public color: Color;
 
   public radius: number;
 
   constructor(color: Color, radius: number) {
-    this.shape = 'circle';
+    this.shape = Shape.Circle;
     this.color = color;
     this.radius = radius;
 
@@ -69,7 +79,7 @@ export class Circle implements Figure {
 }
 
 export class Rectangle implements Figure {
-  public shape: 'rectangle';
+  public shape: Shape.Rectangle;
 
   public color: Color;
 
@@ -78,7 +88,7 @@ export class Rectangle implements Figure {
   public height: number;
 
   constructor(color: Color, width: number, height: number) {
-    this.shape = 'rectangle';
+    this.shape = Shape.Rectangle;
     this.color = color;
     this.width = width;
     this.height = height;
