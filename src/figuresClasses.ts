@@ -1,26 +1,30 @@
+type Color = 'red'| 'green' | 'blue';
+
+enum Shape {
+  Triangle = 'triangle',
+  Circle = 'circle',
+  Rectangle = 'rectangle',
+}
+
 export interface Figure {
-  shape: 'triangle'| 'circle' | 'rectangle',
-  color: 'red'| 'green' | 'blue'
+  shape: Shape,
+  color: Color,
 }
 
 export class Triangle implements Figure {
-  color: 'red' | 'green' | 'blue';
-
-  shape: 'triangle' = 'triangle';
+  shape: Shape = Shape.Triangle;
 
   constructor(
-    color: 'red' | 'green' | 'blue',
+    public color: Color,
     public a: number,
     public b: number,
     public c: number,
   ) {
-    this.color = color;
-
-    const sides: number[] = [a, b, c].sort((sideA, sideB) => sideB - sideA);
-
     if (a <= 0 || b <= 0 || c <= 0) {
       throw new Error('Not a triangle!');
     }
+
+    const sides: number[] = [a, b, c].sort((sideA, sideB) => sideB - sideA);
 
     if (sides[0] >= (sides[2] + sides[1])) {
       throw new Error('Not a triangle!');
@@ -28,59 +32,51 @@ export class Triangle implements Figure {
   }
 
   getArea(): number {
-    const p = 0.5 * (this.a + this.b + this.c);
-    const result = Math.sqrt(p * ((p - this.a) * (p - this.b) * (p - this.c)));
+    const { a, b, c } = this;
+    const p = 0.5 * (a + b + c);
+    const result = Math.sqrt(p * ((p - a) * (p - b) * (p - c)));
 
     return Math.floor(result * 100) / 100;
   }
 }
 
 export class Circle implements Figure {
-  color: 'red' | 'green' | 'blue';
-
-  shape: 'circle' = 'circle';
+  shape: Shape = Shape.Circle;
 
   constructor(
-    color: 'red' | 'green' | 'blue',
-
+    public color: Color,
     public radius: number,
   ) {
-    this.color = color;
-
     if (radius <= 0) {
       throw new Error('Not a Circle!');
     }
   }
 
   getArea(): number {
-    const result = Math.PI * (this.radius ** 2);
+    const { radius } = this;
+    const result = Math.PI * (radius ** 2);
 
     return Math.floor(result * 100) / 100;
   }
 }
 
 export class Rectangle implements Figure {
-  color: 'red' | 'green' | 'blue';
-
-  shape: 'rectangle' = 'rectangle';
-
-  width: number;
+  shape: Shape = Shape.Rectangle;
 
   constructor(
-    color: 'red' | 'green' | 'blue',
-    width: number,
+    public color: Color,
+    public width: number,
     public height: number,
   ) {
-    this.color = color;
-    this.width = width;
-
     if (width <= 0 || height <= 0) {
       throw new Error('Not a Rectangle!');
     }
   }
 
   getArea(): number {
-    return this.width * this.height;
+    const { width, height } = this;
+
+    return width * height;
   }
 }
 
