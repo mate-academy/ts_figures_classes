@@ -10,16 +10,12 @@ export interface Figure {
 export class Triangle implements Figure {
   shape: Shape = 'triangle';
 
-  color: Color;
-
   constructor(
-    color: Color,
+    public color: Color,
     public a: number,
     public b: number,
     public c: number,
   ) {
-    this.color = color;
-
     if (a <= 0 || b <= 0 || c <= 0) {
       throw new Error('Any side cannot be equal or less than 0');
     }
