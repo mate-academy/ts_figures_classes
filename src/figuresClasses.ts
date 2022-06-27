@@ -21,14 +21,15 @@ export class Triangle implements Figure {
     this.color = color;
 
     if (a <= 0 || b <= 0 || c <= 0) {
-      throw new Error('your error message');
+      throw new Error('Any side cannot be equal or less than 0');
     }
 
     const sorted: number[] = [a, b, c]
       .sort((first: number, second: number) => second - first);
 
     if (sorted[0] >= (sorted[1] + sorted[2])) {
-      throw new Error('your error message');
+      throw new Error('The biggest side cannot be bigger'
+      + ' than sum of other 2 sides');
     }
   }
 
@@ -44,13 +45,12 @@ export class Triangle implements Figure {
 export class Circle implements Figure {
   shape: Shape = 'circle';
 
-  color: Color;
-
-  constructor(color: Color, public radius: number) {
-    this.color = color;
-
+  constructor(
+    public color: Color,
+    public radius: number,
+  ) {
     if (radius <= 0) {
-      throw new Error('your error message');
+      throw new Error('Radius cannot be equal or less than 0');
     }
   }
 
@@ -64,17 +64,13 @@ export class Circle implements Figure {
 export class Rectangle implements Figure {
   shape: Shape = 'rectangle';
 
-  color: Color;
-
   constructor(
-    color: Color,
+    public color: Color,
     public width: number,
     public heigth: number,
   ) {
-    this.color = color;
-
     if (width <= 0 || heigth <= 0) {
-      throw new Error('your error message');
+      throw new Error('Neither width nor heigth can be equal or less than 0');
     }
   }
 
