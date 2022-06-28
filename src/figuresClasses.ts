@@ -5,7 +5,7 @@ export interface Figure {
   shape: Shape,
   color: Color,
 
-  getArea(a, b, c): number;
+  getArea(): number;
 }
 
 export class Triangle implements Figure {
@@ -17,9 +17,14 @@ export class Triangle implements Figure {
     private b: number,
     private c: number,
   ) {
-    if (a <= 0 || b <= 0 || c <= 0 || a + b <= c || a + c <= b || b + c <= a) {
-      throw new Error('your error message');
+    if (a <= 0 || b <= 0 || c <= 0) {
+      throw new Error('ALl the sides must be positive integers');
     }
+
+    if (a + b <= c || a + c <= b || b + c <= a) {
+      throw new Error('Sum of 2 sides must always be bigger then 3 one');
+    }
+
     this.shape = 'triangle';
     this.color = color;
   }
@@ -40,14 +45,14 @@ export class Circle implements Figure {
     private radius: number,
   ) {
     if (radius <= 0) {
-      throw new Error('your error message');
+      throw new Error('Radius must be positive integer');
     }
     this.radius = radius;
     this.shape = 'circle';
   }
 
   getArea(): number {
-    return +(Math.round((Math.PI * this.radius ** 2) * 100) / 100);
+    return +(Math.floor((Math.PI * this.radius ** 2) * 100) / 100);
   }
 }
 
@@ -60,7 +65,7 @@ export class Rectangle implements Figure {
     private height: number,
   ) {
     if (width <= 0 || height <= 0) {
-      throw new Error('your error message');
+      throw new Error('Both sides must be positive integers');
     }
     this.width = width;
     this.height = height;
@@ -72,6 +77,6 @@ export class Rectangle implements Figure {
   }
 }
 
-export function getInfo(figure): string {
+export function getInfo(figure: Circle | Rectangle | Triangle): string {
   return `A ${figure.color} ${figure.shape} - ${figure.getArea()}`;
 }
