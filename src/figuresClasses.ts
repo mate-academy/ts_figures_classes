@@ -41,7 +41,7 @@ export class Circle {
     public radius: number,
   ) {
     if (radius <= 0) {
-      throw new Error('value of the side of the triangle < 0');
+      throw new Error('incorrect value, radius < 0');
     }
   }
 
@@ -61,7 +61,7 @@ export class Rectangle {
     public b: number,
   ) {
     if (a <= 0 || b <= 0) {
-      throw new Error('value of the side of the triangle < 0');
+      throw new Error('incorrect value');
     }
   }
 
