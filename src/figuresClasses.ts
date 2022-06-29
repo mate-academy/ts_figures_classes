@@ -1,66 +1,61 @@
 type Color = 'red' | 'green' | 'blue';
-type Shape = 'triangle' | 'circle' | 'rectangle';
+
+enum Shape {
+  Triangle = 'triangle',
+  Circle = 'circle',
+  Rectangle = 'rectangle'
+}
 
 export interface Figure {
-  color:Color;
-  shape:Shape;
-  getArea():number;
+  color: Color;
+  shape: Shape;
+  getArea(): number;
 }
 
 export class Triangle implements Figure {
-  color: Color;
-
-  shape:Shape = 'triangle';
-
-  a: number;
-
-  b: number;
-
-  c: number;
+  shape = Shape.Triangle;
 
   constructor(
-    color: Color,
-    a: number,
-    b: number,
-    c: number,
+    public color: Color,
+    public a: number,
+    public b: number,
+    public c: number,
   ) {
     if (a <= 0 || b <= 0 || c <= 0) {
-      throw new Error();
+      throw new Error(`Sides of ${this.shape} should be great than 0`);
     }
 
     if (Math.max(...[a, b, c]) >= a + b + c - Math.max(...[a, b, c])) {
-      throw new Error('sides 1, 2 and 3 can\'t form a triangle');
+      throw new Error(`
+      For a ${this.shape}
+      , the sum of any two sides must be greater than the third.
+      Otherwise, the two sides will simply
+      "fall" on the third and the triangle will not work. FIX THIS!!!`);
     }
-    this.color = color;
-    this.a = a;
-    this.b = b;
-    this.c = c;
   }
 
   getArea(): number {
-    const s = (this.a + this.b + this.c) / 2;
-    const area = Math.sqrt(s * ((s - this.a) * (s - this.b) * (s - this.c)));
+    const halfPerimeter = (this.a + this.b + this.c) / 2;
+    const area = Math
+      .sqrt(halfPerimeter
+        * ((halfPerimeter - this.a)
+        * (halfPerimeter - this.b)
+        * (halfPerimeter - this.c)));
 
     return Math.floor(100 * area) / 100;
   }
 }
 
 export class Circle implements Figure {
-  color: Color;
-
-  shape:Shape = 'circle';
-
-  radius: number;
+  shape = Shape.Circle;
 
   constructor(
-    color: Color,
-    radius: number,
+    public color: Color,
+    public radius: number,
   ) {
     if (radius <= 0) {
-      throw new Error();
+      throw new Error(`Radius of ${this.shape} should be great than 0`);
     }
-    this.color = color;
-    this.radius = radius;
   }
 
   getArea(): number {
@@ -71,25 +66,16 @@ export class Circle implements Figure {
 }
 
 export class Rectangle implements Figure {
-  color: Color;
-
-  shape:Shape = 'rectangle';
-
-  width: number;
-
-  height: number;
+  shape = Shape.Rectangle;
 
   constructor(
-    color: Color,
-    width: number,
-    height: number,
+    public color: Color,
+    public width: number,
+    public height: number,
   ) {
     if (width <= 0 || height <= 0) {
-      throw new Error();
+      throw new Error(`Width / height of ${this.shape} should be great than 0`);
     }
-    this.color = color;
-    this.width = width;
-    this.height = height;
   }
 
   getArea(): number {
