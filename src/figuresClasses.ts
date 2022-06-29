@@ -17,19 +17,19 @@ export class Triangle implements Figure {
     public c: number,
   ) {
     if (this.a <= 0 || this.b <= 0 || this.c <= 0) {
-      throw new Error('Please enter correct side values');
+      throw new Error('Sides should be a positive number');
     }
 
     if (this.a >= this.b + this.c
       || this.b >= this.a + this.c
       || this.c >= this.a + this.b) {
-      throw new Error('The side value cant be more then sum of two others');
+      throw new Error('Those sides can not create a triangle');
     }
   }
 
   getArea(): number {
     const { a, b, c } = this;
-    const semiPerimeter = (this.a + this.b + this.c) / 2;
+    const semiPerimeter = (a + b + c) / 2;
     const area = Math.sqrt(semiPerimeter
      * (semiPerimeter - a)
      * (semiPerimeter - b)
@@ -47,7 +47,7 @@ export class Circle implements Figure {
     public radius: number,
   ) {
     if (this.radius <= 0) {
-      throw new Error('Radius value must be more then 0');
+      throw new Error('Radius should be a positive number');
     }
   }
 
@@ -67,7 +67,7 @@ export class Rectangle implements Figure {
     public height: number,
   ) {
     if (this.width <= 0 || this.height <= 0) {
-      throw new Error('Sides of rectangle  must be more then 0');
+      throw new Error('Sides should be a positive number');
     }
   }
 
