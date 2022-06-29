@@ -34,9 +34,12 @@ export class Triangle implements Figure {
   }
 
   getArea(): number {
-    const s = (this.a + this.b + this.c) / 2;
+    const semiPerimeter = (this.a + this.b + this.c) / 2;
 
-    const area = Math.sqrt(s * (s - this.a) * (s - this.b) * (s - this.c));
+    const area = Math.sqrt(semiPerimeter
+      * (semiPerimeter - this.a)
+      * (semiPerimeter - this.b)
+      * (semiPerimeter - this.c));
 
     return Math.floor(area * 100) / 100;
   }
@@ -68,7 +71,8 @@ export class Rectangle implements Figure {
     public height: number,
   ) {
     if (width <= 0 || height <= 0) {
-      throw new Error('Sides should be a positive integer');
+      // eslint-disable-next-line max-len
+      throw new Error('Sides should be a positive numbers, because all rectangles has positive height and width');
     }
   }
 
