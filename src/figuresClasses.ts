@@ -12,9 +12,9 @@ export class Triangle implements Figure {
 
   constructor(
     public color: Color,
-    public a:number,
-    public b:number,
-    public c:number,
+    public a: number,
+    public b: number,
+    public c: number,
   ) {
     if (a < 0 || b < 0 || c < 0) {
       throw new Error("can't be less than 0");
@@ -29,7 +29,7 @@ export class Triangle implements Figure {
     const s = (this.a + this.b + this.c) / 2;
     const area = Math.sqrt(s * (s - this.a) * (s - this.b) * (s - this.c));
 
-    return +area.toFixed(2);
+    return Number(area.toFixed(2));
   }
 }
 
@@ -68,6 +68,6 @@ export class Rectangle implements Figure {
   }
 }
 
-export function getInfo(figure: Figure):string {
+export function getInfo(figure: Figure): string {
   return `A ${figure.color} ${figure.shape} - ${figure.getArea()}`;
 }
