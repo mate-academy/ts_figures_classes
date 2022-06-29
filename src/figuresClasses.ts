@@ -1,4 +1,9 @@
-type Shape = 'triangle'| 'circle'| 'rectangle';
+enum Shape {
+  Triangle = 'triangle',
+  Circle = 'circle',
+  Rectangle = 'rectangle'
+}
+
 type Color = 'red'| 'green'| 'blue';
 
 function roundNumber(num: number): number {
@@ -12,42 +17,39 @@ export interface Figure {
 }
 
 export class Triangle implements Figure {
-  color: Color;
-
-  shape: Shape;
+  shape = Shape.Triangle;
 
   constructor(
-    color: Color,
+    public color: Color,
     public a: number,
     public b: number,
     public c: number,
   ) {
-    this.shape = 'triangle';
     this.color = color;
 
     if (a >= b + c || b >= a + c || c >= a + b) {
-      throw new Error('Please provide valid dimension of Triangle side');
+      throw new Error(`The longest side of triangle
+      should be greater or equal than a sum of two others.
+      Kindly provide valid length of triangle side`);
     }
   }
 
   getArea(): number {
-    const area = (this.a + this.b + this.c) / 2;
+    const semiperimeter = (this.a + this.b + this.c) / 2;
 
-    return roundNumber(Math.sqrt(area * (area - this.a) * (area - this.b)
-    * (area - this.c)));
+    return roundNumber(Math.sqrt(semiperimeter
+      * (semiperimeter - this.a) * (semiperimeter - this.b)
+    * (semiperimeter - this.c)));
   }
 }
 
 export class Circle {
-  color: Color;
-
-  shape: Shape;
+  shape = Shape.Circle;
 
   constructor(
-    color: Color,
+    public color: Color,
     public radius: number,
   ) {
-    this.shape = 'circle';
     this.color = color;
 
     if (radius <= 0) {
@@ -61,16 +63,13 @@ export class Circle {
 }
 
 export class Rectangle {
-  color: Color;
-
-  shape: Shape;
+  shape = Shape.Rectangle;
 
   constructor(
-    color: Color,
+    public color: Color,
     public width: number,
     public height: number,
   ) {
-    this.shape = 'rectangle';
     this.color = color;
 
     if (width <= 0 || height <= 0) {
