@@ -1,17 +1,17 @@
-type Figures = 'triangle' | 'circle' | 'rectangle';
-type Colors = 'red' | 'green' | 'blue';
+type Shape = 'triangle' | 'circle' | 'rectangle';
+type Color = 'red' | 'green' | 'blue';
 
 export interface Figure {
-  shape: Figures;
-  color: Colors;
+  shape: Shape;
+  color: Color;
   getArea(): number;
 }
 
 export class Triangle implements Figure {
-  public shape: Figures = 'triangle';
+  public shape: Shape = 'triangle';
 
   constructor(
-    public color: Colors,
+    public color: Color,
     public a: number,
     public b: number,
     public c: number,
@@ -46,10 +46,10 @@ export class Triangle implements Figure {
 }
 
 export class Circle implements Figure {
-  public shape: Figures = 'circle';
+  public shape: Shape = 'circle';
 
   constructor(
-    public color: Colors,
+    public color: Color,
     public radius: number,
   ) {
     if (radius <= 0) {
@@ -63,10 +63,10 @@ export class Circle implements Figure {
 }
 
 export class Rectangle implements Figure {
-  public shape: Figures = 'rectangle';
+  public shape: Shape = 'rectangle';
 
   constructor(
-    public color: Colors,
+    public color: Color,
     public width: number,
     public height: number,
   ) {
