@@ -1,4 +1,9 @@
-type Shape = 'triangle' | 'circle' | 'rectangle';
+enum Shape {
+  Triangle = 'triangle',
+  Circle = 'circle',
+  Rectangle = 'rectangle',
+}
+
 type Color = 'red' | 'green' | 'blue';
 
 export interface Figure {
@@ -8,7 +13,7 @@ export interface Figure {
 }
 
 export class Triangle implements Figure {
-  public shape: Shape = 'triangle';
+  public shape = Shape.Triangle;
 
   constructor(
     public color: Color,
@@ -24,12 +29,17 @@ export class Triangle implements Figure {
 
     const biggestValue = Number(sortedValues.slice(-1));
 
-    if (biggestValue >= sumOfSmallestValues
-      || !a
-      || !b
-      || !c
-    ) {
-      throw new Error('The entered data of the sides is incorrect');
+    if (biggestValue >= sumOfSmallestValues) {
+      throw new Error(
+        'One side of the triangle is greater than the sum of the other two',
+      );
+    }
+
+    if (!a || !b || !c) {
+      throw new Error(
+        'Cannot create a triangle '
+        + 'if one of the sides is less than or equal to zero',
+      );
     }
   }
 
@@ -46,14 +56,14 @@ export class Triangle implements Figure {
 }
 
 export class Circle implements Figure {
-  public shape: Shape = 'circle';
+  public shape = Shape.Circle;
 
   constructor(
     public color: Color,
     public radius: number,
   ) {
     if (radius <= 0) {
-      throw new Error('The entered radius is incorrect');
+      throw new Error('The entered radius is less than or equal to zero');
     }
   }
 
@@ -63,7 +73,7 @@ export class Circle implements Figure {
 }
 
 export class Rectangle implements Figure {
-  public shape: Shape = 'rectangle';
+  public shape = Shape.Rectangle;
 
   constructor(
     public color: Color,
@@ -71,7 +81,9 @@ export class Rectangle implements Figure {
     public height: number,
   ) {
     if (width <= 0 || height <= 0) {
-      throw new Error('The entered height or/and width is incorrect');
+      throw new Error(
+        'The entered height or width is less than or equal to zero',
+      );
     }
   }
 
