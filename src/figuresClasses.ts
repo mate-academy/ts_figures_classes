@@ -1,7 +1,15 @@
 
-type Shape = 'triangle' | 'circle' | 'rectangle';
+enum Shape {
+  Triangle = 'triangle',
+  Circle = 'circle',
+  Rectangle = 'rectangle',
+}
 
-type Color = 'red' | 'green' | 'blue';
+enum Color {
+  Blue = 'blue',
+  Green = 'green',
+  Red = 'red',
+}
 
 export interface Figure {
   shape: Shape,
@@ -10,7 +18,7 @@ export interface Figure {
 }
 
 export class Triangle implements Figure {
-  shape: Shape = 'triangle';
+  shape: Shape = Shape.Triangle;
 
   constructor(
     public color: Color,
@@ -19,44 +27,45 @@ export class Triangle implements Figure {
     public c: number,
   ) {
     if (a === 0 || b === 0 || c === 0) {
-      throw new Error('One of the sides is Zero(0)');
+      throw new Error('One of the sides of the triangle is equal to 0');
     }
 
     if (a + b <= c || c + b <= a || a + c <= b) {
-      throw new Error('Use proper values to calculate area');
+      throw new Error(`One side of the triangle can't
+      be equal or bigger than sum of two others`);
     }
   }
 
   getArea(): number {
-    const p: number = 0.5 * (this.a + this.b + this.c);
-    const S: number = Math.sqrt(p * ((p - this.a)
-      * (p - this.b) * (p - this.c)));
+    const halfPerimeter: number = 0.5 * (this.a + this.b + this.c);
+    const areaSize: number = Math.sqrt(halfPerimeter * ((halfPerimeter - this.a)
+      * (halfPerimeter - this.b) * (halfPerimeter - this.c)));
 
-    return Math.round(S * 100) / 100;
+    return Math.round(areaSize * 100) / 100;
   }
 }
 
 export class Circle implements Figure {
-  shape: Shape = 'circle';
+  shape: Shape = Shape.Circle;
 
   constructor(
     public color: Color,
     public radius: number,
   ) {
     if (this.radius <= 0) {
-      throw new Error('Use proper values to calculate area');
+      throw new Error('Radius of the cicle can`t be 0 or less than 0');
     }
   }
 
   getArea(): number {
-    const S: number = Math.PI * this.radius ** 2;
+    const areaSize: number = Math.PI * this.radius ** 2;
 
-    return Math.floor(S * 100) / 100;
+    return Math.floor(areaSize * 100) / 100;
   }
 }
 
 export class Rectangle implements Figure {
-  shape: Shape = 'rectangle';
+  shape: Shape = Shape.Rectangle;
 
   constructor(
     public color: Color,
@@ -64,14 +73,14 @@ export class Rectangle implements Figure {
     public b: number,
   ) {
     if (this.a <= 0 || this.b <= 0) {
-      throw new Error('Use proper values to calculate area');
+      throw new Error('Side of rectangle can`t be equal or less than 0');
     }
   }
 
   getArea(): number {
-    const S: number = this.a * this.b;
+    const areaSize: number = this.a * this.b;
 
-    return S;
+    return areaSize;
   }
 }
 
