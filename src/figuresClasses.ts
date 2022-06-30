@@ -1,4 +1,4 @@
-enum TypeOfShape{
+enum ShapeType{
   Triangle = 'triangle',
   Circle = 'circle',
   Rectangle = 'rectangle'
@@ -7,13 +7,13 @@ enum TypeOfShape{
 type Color = 'red' | 'green' | 'blue';
 
 export interface Figure {
-  shape:TypeOfShape;
+  shape: ShapeType;
   color: Color;
   getArea(): number;
 }
 
 export class Triangle implements Figure {
-  public shape = TypeOfShape.Triangle;
+  public shape = ShapeType.Triangle;
 
   constructor(
     public color: Color,
@@ -28,7 +28,8 @@ export class Triangle implements Figure {
     if (this.a + this.b <= this.c
       || this.a + this.c <= this.b
       || this.c + this.b <= this.a) {
-      throw new Error('Those sides can not create a triangle');
+      // eslint-disable-next-line max-len
+      throw new Error('Those sides can not create a triangle: sum of two sides should be bigger than the third one');
     }
   }
 
@@ -42,7 +43,7 @@ export class Triangle implements Figure {
 }
 
 export class Circle implements Figure {
-  public shape = TypeOfShape.Circle;
+  public shape = ShapeType.Circle;
 
   constructor(
     public color: Color,
@@ -59,7 +60,7 @@ export class Circle implements Figure {
 }
 
 export class Rectangle implements Figure {
-  public shape = TypeOfShape.Rectangle;
+  public shape = ShapeType.Rectangle;
 
   constructor(
     public color: Color,
