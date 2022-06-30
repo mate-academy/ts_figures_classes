@@ -1,14 +1,22 @@
+type Color = 'red' | 'blue' | 'green';
+
 export interface Figure {
   shape: string,
-  color: string,
+  color: Color,
   getArea(): number,
 }
 
+enum Shape {
+  Triangle = 'triangle',
+  Circle = 'circle',
+  Rectangle = 'rectangle',
+}
+
 export class Triangle implements Figure {
-  public shape: string = 'triangle';
+  public shape: string = Shape.Triangle;
 
   constructor(
-    public color: string,
+    public color: Color,
     public a: number,
     public b: number,
     public c: number,
@@ -23,9 +31,14 @@ export class Triangle implements Figure {
   }
 
   getArea(): number {
-    const p: number = (this.a + this.b + this.c) / 2;
+    const halfPerimetr: number = (this.a + this.b + this.c) / 2;
     const area = Math.floor(
-      Math.sqrt(p * ((p - this.a) * (p - this.b) * (p - this.c))) * 100,
+      Math.sqrt(
+        halfPerimetr
+        * ((halfPerimetr - this.a)
+        * (halfPerimetr - this.b)
+        * (halfPerimetr - this.c)),
+      ) * 100,
     ) / 100;
 
     return area;
@@ -33,10 +46,10 @@ export class Triangle implements Figure {
 }
 
 export class Circle implements Figure {
-  public shape: string = 'circle';
+  public shape: string = Shape.Circle;
 
   constructor(
-    public color: string,
+    public color: Color,
     public radius: number,
   ) {
     if (radius <= 0) {
@@ -52,10 +65,10 @@ export class Circle implements Figure {
 }
 
 export class Rectangle implements Figure {
-  public shape: string = 'rectangle';
+  public shape: string = Shape.Rectangle;
 
   constructor(
-    public color: string,
+    public color: Color,
     public width: number,
     public height: number,
   ) {
