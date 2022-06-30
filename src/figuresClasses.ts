@@ -22,7 +22,9 @@ export class Triangle implements Figure {
 
     if (Math.max(sideA, sideB, sideC)
       >= sideA + sideB + sideC - Math.max(sideA, sideB, sideC)) {
-      throw new Error('');
+      throw new Error(
+        'Biggest side don`t most be bigger or equal than sum other sides',
+      );
     }
   }
 
