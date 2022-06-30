@@ -1,5 +1,10 @@
-type Shape = 'triangle' | 'circle' | 'rectangle';
 type Color = 'red' | 'green' | 'blue';
+
+enum Shape {
+  Triangle = 'triangle',
+  Circle = 'circle',
+  Rectangle = 'rectangle',
+}
 
 export interface Figure {
   shape: Shape;
@@ -8,7 +13,7 @@ export interface Figure {
 }
 
 export class Triangle implements Figure {
-  shape: Shape = 'triangle';
+  shape: Shape = Shape.Triangle;
 
   constructor(
     public color: Color,
@@ -17,14 +22,15 @@ export class Triangle implements Figure {
     public c: number,
   ) {
     if (this.a <= 0 || this.b <= 0 || this.c <= 0) {
-      throw new Error('all sides can be positive numbers');
+      throw new Error('all sides of a triangle must be positive numbers');
     }
 
     if (this.a + this.b <= this.c
       || this.b + this.c <= this.a
       || this.a + this.c <= this.b
     ) {
-      throw new Error('all sides can be positive numbers');
+      throw new Error('the longest side must be less'
+        + 'than a sum of two others sides');
     }
   }
 
@@ -43,14 +49,14 @@ export class Triangle implements Figure {
 }
 
 export class Circle implements Figure {
-  shape: Shape = 'circle';
+  shape: Shape = Shape.Circle;
 
   constructor(
     public color: Color,
     public radius: number,
   ) {
     if (this.radius <= 0) {
-      throw new Error('radius can be a positive number');
+      throw new Error('radius must be a positive number');
     }
   }
 
@@ -60,7 +66,7 @@ export class Circle implements Figure {
 }
 
 export class Rectangle implements Figure {
-  shape: Shape = 'rectangle';
+  shape: Shape = Shape.Rectangle;
 
   constructor(
     public color: Color,
@@ -68,7 +74,7 @@ export class Rectangle implements Figure {
     public b: number,
   ) {
     if (this.a <= 0 || this.b <= 0) {
-      throw new Error('all sides of rectangle can be positive');
+      throw new Error('all sides of a rectangle must be positive numbers');
     }
   }
 
