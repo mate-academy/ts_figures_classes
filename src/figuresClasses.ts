@@ -1,5 +1,9 @@
-type Shape = 'triangle'| 'circle' | 'rectangle';
-type Color = 'red'| 'green' | 'blue';
+enum Shape {
+  Triangle = 'triangle',
+  Circle = 'circle',
+  Rectangle = 'rectangle'
+}
+type Color = 'red' | ' green' | ' blue';
 
 export interface Figure {
   shape: Shape,
@@ -8,7 +12,7 @@ export interface Figure {
 }
 
 export class Triangle implements Figure {
-  shape: Shape = 'triangle';
+  shape = Shape.Triangle;
 
   constructor(
     public color: Color,
@@ -21,29 +25,29 @@ export class Triangle implements Figure {
       || c <= 0
       || Math.max(a, b, c) >= (a + b + c) - Math.max(a, b, c)
     ) {
-      throw new Error('it is not a triangle');
+      throw new Error('The side of the triangle cannot be less than 0');
     }
   }
 
   getArea(): number {
     const semiPerimeter: number = (this.a + this.b + this.c) / 2;
 
-    return +(Math.sqrt(semiPerimeter
+    return Number((Math.sqrt(semiPerimeter
       * (semiPerimeter - this.a)
       * (semiPerimeter - this.b)
-      * (semiPerimeter - this.c))).toFixed(2);
+      * (semiPerimeter - this.c))).toFixed(2));
   }
 }
 
 export class Circle implements Figure {
-  shape: Shape = 'circle';
+  shape = Shape.Circle;
 
   constructor(
     public color: Color,
     public radius: number,
   ) {
     if (radius <= 0) {
-      throw new Error('it is not a circle');
+      throw new Error('The radius of the circle cannot be less than 0');
     }
   }
 
@@ -53,7 +57,7 @@ export class Circle implements Figure {
 }
 
 export class Rectangle implements Figure {
-  shape: Shape = 'rectangle';
+  shape = Shape.Rectangle;
 
   constructor(
     public color: Color,
@@ -62,7 +66,7 @@ export class Rectangle implements Figure {
 
   ) {
     if (a <= 0 || b <= 0) {
-      throw new Error('it is not a rectangle');
+      throw new Error('The side of the rectangle cannot be less than 0');
     }
   }
 
@@ -71,6 +75,6 @@ export class Rectangle implements Figure {
   }
 }
 
-export function getInfo(figure): string {
+export function getInfo(figure: Figure): string {
   return `A ${figure.color} ${figure.shape} - ${figure.getArea()}`;
 }
