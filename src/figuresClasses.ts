@@ -21,11 +21,11 @@ export class Triangle implements Figure {
     public c: number,
   ) {
     if (a <= 0 || b <= 0 || c <= 0) {
-      throw new Error('One of the sides is incorrect');
+      throw new Error('Sides must be equal and less than 0!');
     }
 
     if (a >= b + c || b >= a + c || c >= b + a) {
-      throw new Error('sides 1, 2 and 3 can\'t form a triangle');
+      throw new Error('One of the sides can\'t be bigger than two others!');
     }
   }
 
@@ -48,7 +48,7 @@ export class Circle implements Figure {
     public radius: number,
   ) {
     if (radius <= 0) {
-      throw new Error('Radius is incorrect');
+      throw new Error('Radius must be less than 0!');
     }
   }
 
@@ -66,7 +66,7 @@ export class Rectangle implements Figure {
     public height: number,
   ) {
     if (width <= 0 || height <= 0) {
-      throw new Error('One of the si des is incorrect');
+      throw new Error('Sides must be equal and less than 0!');
     }
   }
 
