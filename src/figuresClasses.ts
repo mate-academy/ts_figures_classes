@@ -26,11 +26,18 @@ export class Triangle implements Figure {
       a <= 0
       || b <= 0
       || c <= 0
-      || a >= b + c
+    ) {
+      throw new Error('Triangle must have positive sides.');
+    }
+
+    if (
+      a >= b + c
       || b >= a + c
       || c >= a + b
     ) {
-      throw new Error('Invalid input');
+      throw new Error(
+        'Each side of triangle must be less than sum of two others.',
+      );
     }
 
     const halfPerimeter = (this.a + this.b + this.c) / 2;
@@ -59,7 +66,7 @@ export class Circle implements Figure {
     public radius: number,
   ) {
     if (radius <= 0) {
-      throw new Error('Invalid input');
+      throw new Error('Circle must have positive radius.');
     }
 
     this.area = Math.floor((Math.PI * (this.radius ** 2) * 100)) / 100;
@@ -81,7 +88,7 @@ export class Rectangle implements Figure {
     public height: number,
   ) {
     if (width <= 0 || height <= 0) {
-      throw new Error('Invalid input');
+      throw new Error('Rectangle must have positive width and height.');
     }
 
     this.area = Math.floor((this.width * this.height * 100)) / 100;
