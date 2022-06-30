@@ -17,11 +17,11 @@ export class Triangle implements Figure {
     public c:number,
   ) {
     if (a < 0 || b < 0 || c < 0) {
-      throw new Error('your error message');
+      throw new Error('Can`t create triangle');
     }
 
     if (a >= b + c || b >= a + c || c >= a + b) {
-      throw new Error('your error message');
+      throw new Error('Can`t create triangle');
     }
   }
 
@@ -41,7 +41,7 @@ export class Circle implements Figure {
     public radius: number,
   ) {
     if (radius <= 0) {
-      throw new Error('your error message');
+      throw new Error('Can`t create circle');
     }
   }
 
@@ -59,7 +59,7 @@ export class Rectangle implements Figure {
     public height : number,
   ) {
     if (width <= 0 || height <= 0) {
-      throw new Error('your error message');
+      throw new Error('Can`t create rectangle');
     }
   }
 
