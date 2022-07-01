@@ -1,18 +1,19 @@
 type Colors = 'red' | 'green' | 'blue';
 
-enum Shapes {
-  triangle,
-  circle,
-  rectangle,
+enum Shape {
+  triangle = 'triangle',
+  circle = 'circle',
+  rectangle = 'rectangle',
 }
 
 export interface Figure {
-  shape?: Shapes;
+  shape: Shape;
   color: Colors;
+  getArea(): number;
 }
 
 export class Triangle implements Figure {
-  public shape: Shapes = Shapes.triangle;
+  public shape: Shape = Shape.triangle;
 
   constructor(
     public color: Colors,
@@ -21,27 +22,27 @@ export class Triangle implements Figure {
     public c: number,
   ) {
     if (a <= 0 || b <= 0 || c <= 0 || a >= b + c || b >= a + c || c >= a + b) {
-      throw new Error('Invalid data');
+      throw new Error('The side must be a positive number');
     }
   }
 
   getArea(): number {
-    const s: number = (this.a + this.b + this.c) / 2;
+    const halfOfPerimetre: number = (this.a + this.b + this.c) / 2;
 
-    return Math.floor(Math.sqrt(s
-       * (s - this.a) * (s - this.b) * (s - this.c)) * 100) / 100;
+    return Math.floor(Math.sqrt(halfOfPerimetre * (halfOfPerimetre - this.a)
+     * (halfOfPerimetre - this.b) * (halfOfPerimetre - this.c)) * 100) / 100;
   }
 }
 
 export class Circle implements Figure {
-  public shape: Shapes = Shapes.circle;
+  public shape: Shape = Shape.circle;
 
   constructor(
     public color: Colors,
     public radius: number,
   ) {
     if (radius <= 0) {
-      throw new Error('Invalid data');
+      throw new Error('Radius must be a positive number');
     }
   }
 
@@ -51,7 +52,7 @@ export class Circle implements Figure {
 }
 
 export class Rectangle implements Figure {
-  public shape: Shapes = Shapes.rectangle;
+  public shape: Shape = Shape.rectangle;
 
   constructor(
     public color: Colors,
@@ -59,7 +60,7 @@ export class Rectangle implements Figure {
     public height: number,
   ) {
     if (width <= 0 || height <= 0) {
-      throw new Error('Invalid data');
+      throw new Error('The side must be a positive number');
     }
   }
 
@@ -69,23 +70,5 @@ export class Rectangle implements Figure {
 }
 
 export function getInfo(figure: Figure): string | undefined {
-  if (figure instanceof Rectangle) {
-    const area: number = figure.getArea();
-
-    return `A ${figure.color} rectangle - ${area}`;
-  }
-
-  if (figure instanceof Circle) {
-    const area: number = figure.getArea();
-
-    return `A ${figure.color} circle - ${area}`;
-  }
-
-  if (figure instanceof Triangle) {
-    const area: number = figure.getArea();
-
-    return `A ${figure.color} triangle - ${area}`;
-  }
-
-  return undefined;
+  return `A ${figure.color} ${figure.shape} - ${figure.getArea()}`;
 }
