@@ -1,5 +1,10 @@
-type Shape = 'triangle' | 'circle' | 'rectangle';
 type Color = 'red' | 'green' | 'blue';
+
+export enum Shape {
+  TRIANGLE = 'triangle',
+  CIRCLE = 'circle',
+  RECTANGLE = 'rectangle',
+}
 
 export interface Figure {
   shape: Shape;
@@ -7,14 +12,8 @@ export interface Figure {
   getArea(): number;
 }
 
-export enum ShapeName {
-  TRIANGLE = 'triangle',
-  CIRCLE = 'circle',
-  RECTANGLE = 'rectangle',
-}
-
 export class Triangle implements Figure {
-  shape: Shape = ShapeName.TRIANGLE;
+  shape: Shape = Shape.TRIANGLE;
 
   constructor(
     public color: Color,
@@ -23,7 +22,7 @@ export class Triangle implements Figure {
     public c: number,
   ) {
     if (a < 0 || b < 0 || c < 0) {
-      throw new Error("can't be less than 0");
+      throw new Error("Any side can't be less than 0");
     }
 
     if (a >= b + c || b >= a + c || c >= a + b) {
@@ -40,14 +39,14 @@ export class Triangle implements Figure {
 }
 
 export class Circle implements Figure {
-  shape: Shape = ShapeName.CIRCLE;
+  shape: Shape = Shape.CIRCLE;
 
   constructor(
     public color: Color,
     public r: number,
   ) {
     if (r <= 0) {
-      throw new Error("can't be less than 0");
+      throw new Error("Radius can't be less than 0");
     }
   }
 
@@ -57,7 +56,7 @@ export class Circle implements Figure {
 }
 
 export class Rectangle implements Figure {
-  shape: Shape = ShapeName.RECTANGLE;
+  shape: Shape = Shape.RECTANGLE;
 
   constructor(
     public color: Color,
@@ -65,7 +64,7 @@ export class Rectangle implements Figure {
     public b: number,
   ) {
     if (a < 0 || b < 0) {
-      throw new Error("can't be less than 0");
+      throw new Error("Any side can't be less than 0");
     }
   }
 
