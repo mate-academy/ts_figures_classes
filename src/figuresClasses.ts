@@ -1,4 +1,9 @@
-type Shape = 'triangle' | 'circle' | 'rectangle';
+enum Shape {
+  triangle = 'triangle',
+  circle = 'circle',
+  rectangle = 'rectangle',
+}
+
 type Color = 'red' | 'green' | 'blue';
 
 export interface Figure {
@@ -8,33 +13,36 @@ export interface Figure {
 }
 
 export class Triangle implements Figure {
-  shape: Shape = 'triangle';
+  shape = Shape.triangle;
 
   constructor(
     public color: Color,
-    private a: number,
-    private b: number,
-    private c: number,
+    public a: number,
+    public b: number,
+    public c: number,
   ) {
     if (a <= 0 || b <= 0 || c <= 0) {
-      throw new Error('Can not be less than 0!');
+      throw new Error('Sides can`t be equal to or less than 0');
     }
 
     if (a >= b + c || b >= a + c || c >= a + b) {
-      throw new Error('Side can not be bigger than sum of two others!');
+      throw new Error('One of the sides can`t be bigger than two others');
     }
   }
 
   getArea(): number {
-    const p = (this.a + this.b + this.c) / 2;
+    const semiPerimeter = (this.a + this.b + this.c) / 2;
+    const area = Math.sqrt(semiPerimeter
+      * (semiPerimeter - this.a)
+      * (semiPerimeter - this.b)
+      * (semiPerimeter - this.c));
 
-    return +(Math
-      .sqrt(p * (p - this.a) * (p - this.b) * (p - this.c)).toFixed(2));
+    return Math.floor(area * 100) / 100;
   }
 }
 
 export class Circle implements Figure {
-  shape: Shape = 'circle';
+  shape = Shape.circle;
 
   constructor(
     public color: Color,
@@ -46,12 +54,12 @@ export class Circle implements Figure {
   }
 
   getArea(): number {
-    return +(Math.floor((Math.PI * this.radius ** 2) * 100) / 100);
+    return Number(Math.floor((Math.PI * this.radius ** 2) * 100) / 100);
   }
 }
 
 export class Rectangle implements Figure {
-  shape: Shape = 'rectangle';
+  shape = Shape.rectangle;
 
   constructor(
     public color: Color,
