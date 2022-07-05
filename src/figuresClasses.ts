@@ -7,8 +7,6 @@ export interface Figure {
   getArea(): number,
 }
 
-export const error = new Error('Incorrect side value');
-
 export function checkTriangleSides(
   a: number,
   b: number,
@@ -36,7 +34,7 @@ export class Triangle implements Figure {
     public c: number,
   ) {
     if (!checkTriangleSides(a, b, c)) {
-      throw error;
+      throw new Error('Incorrect triangle side');
     }
   }
 
@@ -59,7 +57,7 @@ export class Circle implements Figure {
     public radius: number,
   ) {
     if (radius <= 0) {
-      throw error;
+      throw new Error('Incorrect circle radius');
     }
   }
 
@@ -79,7 +77,7 @@ export class Rectangle implements Figure {
     public height: number,
   ) {
     if (width <= 0 || height <= 0) {
-      throw error;
+      throw new Error('Incorrect rectangle side');
     }
   }
 
