@@ -1,4 +1,8 @@
-type Color = 'red' | 'green' | 'blue';
+enum Color {
+  Red = 'red',
+  Green = 'green',
+  Blue = 'blue',
+}
 
 enum Shape {
   Triangle = 'triangle',
@@ -21,13 +25,19 @@ export class Triangle implements Figure {
     public b: number,
     public c: number,
   ) {
-    if (this.a <= 0 || this.b <= 0 || this.c <= 0) {
+    const sides = [this.a, this.b, this.c];
+
+    sides.sort((side1, side2) => side1 - side2);
+
+    const largeSide = sides[2];
+    const mediumSide = sides[1];
+    const smallSide = sides[0];
+
+    if (smallSide <= 0) {
       throw new Error('Every side must have length more than zero!');
     }
 
-    if (this.a >= this.b + this.c
-        || this.b >= this.a + this.c
-        || this.c >= this.a + this.b) {
+    if (largeSide >= smallSide + mediumSide) {
       throw new Error('The longest side of a triangle'
       + ' must be less than a sum of two others!');
     }
