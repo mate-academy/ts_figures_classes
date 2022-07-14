@@ -1,5 +1,13 @@
+enum Shape {
+  triangle = 'triangle',
+  circle = 'circle',
+  rectangle = 'rectangle',
+}
+
+type Color = 'red' | 'green' | 'blue';
+
 export interface Figure {
-  shape:string,
+  shape:Shape,
   color:string,
   getArea():number,
 }
@@ -11,12 +19,12 @@ export class Triangle implements Figure {
 
   c:number;
 
-  shape:string;
+  shape:Shape;
 
-  color:string;
+  color:Color;
 
   constructor(
-    color:string,
+    color:Color,
     a:number,
     b:number,
     c:number,
@@ -29,15 +37,16 @@ export class Triangle implements Figure {
       throw new Error('Invalid triangle sides');
     }
 
-    this.shape = 'triangle';
+    this.shape = Shape.triangle;
     this.color = color;
+
     this.a = a;
     this.b = b;
     this.c = c;
   }
 
   getArea():number {
-    const p:number = (this.a + this.b + this.c) / 2;
+    const p = (this.a + this.b + this.c) / 2;
 
     return +Math
       .sqrt(p * (p - this.a) * (p - this.b) * (p - this.c)).toFixed(2);
@@ -47,16 +56,16 @@ export class Triangle implements Figure {
 export class Circle {
   radius:number;
 
-  shape:string;
+  shape:Shape;
 
-  color:string;
+  color:Color;
 
-  constructor(color:string, radius:number) {
+  constructor(color:Color, radius:number) {
     if (radius <= 0) {
       throw new Error('Zero value argument');
     }
 
-    this.shape = 'circle';
+    this.shape = Shape.circle;
     this.color = color;
     this.radius = radius;
   }
@@ -73,12 +82,12 @@ export class Rectangle {
 
   height:number;
 
-  shape:string;
+  shape:Shape;
 
-  color:string;
+  color:Color;
 
   constructor(
-    color:string,
+    color:Color,
     width:number,
     height:number,
   ) {
@@ -86,7 +95,7 @@ export class Rectangle {
       throw new Error('Zero value argument');
     }
 
-    this.shape = 'rectangle';
+    this.shape = Shape.rectangle;
     this.color = color;
     this.width = width;
     this.height = height;
