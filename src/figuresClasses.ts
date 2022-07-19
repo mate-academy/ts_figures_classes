@@ -15,6 +15,12 @@ export interface Figure {
   getArea(): number;
 }
 
+function squareRound(square: number): number {
+  const result: number = Math.floor(square * 100) / 100;
+
+  return result;
+}
+
 export class Triangle implements Figure {
   shape = Shape.triangle;
 
@@ -25,21 +31,24 @@ export class Triangle implements Figure {
     public c: number,
   ) {
     if (this.a <= 0 || this.b <= 0 || this.c <= 0) {
-      throw new Error('Incorrect value');
+      throw new Error('Side(s) of triangle not correct'
+      + ' (side length must be > 0)');
     }
 
     const max: number = Math.max(this.a, this.b, this.c);
 
     if (max >= (this.a + this.b + this.c - max)) {
-      throw new Error('Sides of triangle not correct');
+      throw new Error('Triangle cannot be built (the longest side of a '
+        + 'triangle must be < than a sum of two others)');
     }
   }
 
   getArea(): number {
-    const p: number = (this.a + this.b + this.c) / 2;
-    const s: number = Math.sqrt(p * (p - this.a) * (p - this.b) * (p - this.c));
+    const semiPerimeter: number = (this.a + this.b + this.c) / 2;
+    const square: number = Math.sqrt(semiPerimeter * (semiPerimeter - this.a)
+      * (semiPerimeter - this.b) * (semiPerimeter - this.c));
 
-    return +s.toFixed(2);
+    return squareRound(square);
   }
 }
 
@@ -51,12 +60,14 @@ export class Circle implements Figure {
     public radius: number,
   ) {
     if (this.radius <= 0) {
-      throw new Error('Incorrect value');
+      throw new Error('Radius length must be > 0');
     }
   }
 
   getArea(): number {
-    return Math.floor(Math.PI * this.radius ** 2 * 100) / 100;
+    const square = Math.PI * this.radius ** 2;
+
+    return squareRound(square);
   }
 }
 
@@ -69,14 +80,15 @@ export class Rectangle implements Figure {
     public height: number,
   ) {
     if (this.width <= 0 || this.height <= 0) {
-      throw new Error('Incorrect value');
+      throw new Error('Side(s) of rectangle not correct'
+      + ' (side length must be > 0)');
     }
   }
 
   getArea(): number {
-    const s: number = this.width * this.height;
+    const square: number = this.width * this.height;
 
-    return +s.toFixed(2);
+    return squareRound(square);
   }
 }
 
