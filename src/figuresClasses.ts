@@ -10,7 +10,7 @@ export class Triangle implements Figure {
     public a: number,
     public b: number,
     public c: number,
-    public shape: 'triangle' | 'circle' | 'rectangle' = 'triangle',
+    public shape: Figure['shape'] = 'triangle',
   ) {
     if (a <= 0 || b <= 0 || c <= 0 || a >= b + c || b >= a + c || c >= a + b) {
       throw new Error('Invalid sides');
@@ -18,10 +18,10 @@ export class Triangle implements Figure {
   }
 
   getArea(): number {
-    const s = (this.a + this.b + this.c) / 2;
+    const semiperimeter = (this.a + this.b + this.c) / 2;
 
-    return Math.round(Math.sqrt(s * (s - this.a)
-      * (s - this.b) * (s - this.c)) * 100) / 100;
+    return Math.round(Math.sqrt(semiperimeter * (semiperimeter - this.a)
+      * (semiperimeter - this.b) * (semiperimeter - this.c)) * 100) / 100;
   }
 }
 
@@ -29,7 +29,7 @@ export class Circle implements Figure {
   constructor(
     public color: 'red' | 'green' | 'blue',
     public radius: number,
-    public shape: 'triangle' | 'circle' | 'rectangle' = 'circle',
+    public shape: Figure['shape'] = 'circle',
   ) {
     if (radius <= 0) {
       throw new Error('Invalid sides');
@@ -46,7 +46,7 @@ export class Rectangle implements Figure {
     public color: 'red' | 'green' | 'blue',
     public width: number,
     public height: number,
-    public shape: 'triangle' | 'circle' | 'rectangle' = 'rectangle',
+    public shape: Figure['shape'] = 'rectangle',
   ) {
     if (width <= 0 || height <= 0) {
       throw new Error('Invalid sides');
