@@ -30,10 +30,10 @@ export class Triangle implements Figure {
 
   getArea(): number {
     const semiP: number = (this.a + this.b + this.c) / 2;
-    const S: number = Math.sqrt(semiP * (semiP - this.a)
+    const square: number = Math.sqrt(semiP * (semiP - this.a)
     * (semiP - this.b) * (semiP - this.c));
 
-    return Number(S.toFixed(2));
+    return Number(square.toFixed(2));
   }
 }
 
@@ -50,9 +50,9 @@ export class Circle {
   }
 
   getArea(): number {
-    const S: number = Math.PI * this.radius ** 2;
+    const square: number = Math.PI * this.radius ** 2;
 
-    return Math.floor(S * 100) / 100;
+    return Math.floor(square * 100) / 100;
   }
 }
 
@@ -70,9 +70,9 @@ export class Rectangle {
   }
 
   getArea(): number {
-    const S: number = this.a * this.b;
+    const square: number = this.a * this.b;
 
-    return Number(S.toFixed(2));
+    return Number(square.toFixed(2));
   }
 }
 
