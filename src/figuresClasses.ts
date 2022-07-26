@@ -26,7 +26,7 @@ export class Triangle implements Figure {
 
     if (arrOfSides[2] >= arrOfSides[0] + arrOfSides[1]
       || a < 0 || b < 0 || c < 0) {
-      throw new Error('Error');
+      throw new Error('Wrong Data Input');
     }
   }
 
@@ -46,12 +46,12 @@ export class Circle implements Figure {
     public r: number,
   ) {
     if (r < 0) {
-      throw new Error('ERROR');
+      throw new Error('Wrong Data Input');
     }
   }
 
   getArea(): number {
-    const area = Math.PI * this.r * this.r * 100;
+    const area = Math.PI * this.r ** 2 * 100;
 
     return Math.trunc(area) / 100;
   }
@@ -66,7 +66,7 @@ export class Rectangle implements Figure {
     public height: number,
   ) {
     if (width < 0 || height < 0) {
-      throw new Error('ERROR');
+      throw new Error('Wrong Data Input');
     }
   }
 
