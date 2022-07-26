@@ -8,48 +8,39 @@ export interface Figure {
 }
 
 export class Triangle implements Figure {
-  public shape: Shape;
+  shape: Shape = 'triangle';
 
-  private sides: number[];
-
-  constructor(public color:Color, ...sides:number[]) {
-    this.shape = 'triangle';
-    this.color = color;
-
-    if (sides[0] + sides[1] <= sides[2]
-      || sides[0] + sides[2] <= sides[1]
-      || sides[2] + sides[3] <= sides[0]
-      || sides[0] === 0
-      || sides[1] === 0
-      || sides[2] === 0) {
+  constructor(
+    public color:Color,
+    public a:number,
+    public b:number,
+    public c:number,
+  ) {
+    if (a + b <= c
+      || b + c <= a
+      || a + c <= b
+      || b <= 0
+      || a <= 0
+      || c <= 0) {
       throw new Error('Invalid sides');
     }
-
-    this.sides = sides;
   }
 
   getArea(): number {
-    const s: number = (this.sides[0] + this.sides[1] + this.sides[2]) / 2;
+    const semiPerimeter: number = (this.a + this.b + this.c) / 2;
 
-    return Math.floor(Math.sqrt(s * (s - this.sides[0])
-    * (s - this.sides[1]) * (s - this.sides[2])) * 100) / 100;
+    return Math.floor(Math.sqrt(semiPerimeter * (semiPerimeter - this.a)
+    * (semiPerimeter - this.b) * (semiPerimeter - this.c)) * 100) / 100;
   }
 }
 
 export class Circle implements Figure {
-  public shape: Shape;
+  shape: Shape = 'circle';
 
-  private radius: number;
-
-  constructor(public color:Color, radius:number) {
-    this.shape = 'circle';
-    this.color = color;
-
+  constructor(public color:Color, public radius:number) {
     if (radius <= 0) {
       throw new Error('Invalid radius');
     }
-
-    this.radius = radius;
   }
 
   getArea(): number {
@@ -58,23 +49,16 @@ export class Circle implements Figure {
 }
 
 export class Rectangle implements Figure {
-  public shape: Shape;
+  shape: Shape = 'rectangle';
 
-  private sides: number[];
-
-  constructor(public color:Color, ...sides:number[]) {
-    this.shape = 'rectangle';
-    this.color = color;
-
-    if (sides[0] <= 0 || sides[1] <= 0) {
+  constructor(public color:Color, public a:number, public b:number) {
+    if (a <= 0 || b <= 0) {
       throw new Error('Invalid sides');
     }
-
-    this.sides = sides;
   }
 
   getArea(): number {
-    return +(this.sides[0] * this.sides[1]).toFixed(2);
+    return Math.floor(this.a * this.b * 100) / 100;
   }
 }
 
