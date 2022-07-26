@@ -24,7 +24,7 @@ export class Triangle implements Figure {
       || a + c <= b
       || c + b <= a
     ) {
-      throw new Error('your error message');
+      throw new Error('The parameters for building the figure are not correct');
     }
   }
 
@@ -46,7 +46,7 @@ export class Circle implements Figure {
     public shape: ShapeType = 'circle',
   ) {
     if (radius <= 0) {
-      throw new Error('your error message');
+      throw new Error('The parameters for building the figure are not correct');
     }
   }
 
@@ -63,7 +63,7 @@ export class Rectangle implements Figure {
     public shape: ShapeType = 'rectangle',
   ) {
     if (width <= 0 || height <= 0) {
-      throw new Error('your error message');
+      throw new Error('The parameters for building the figure are not correct');
     }
   }
 
