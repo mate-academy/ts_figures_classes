@@ -53,7 +53,7 @@ export class Circle implements Figure {
 
   constructor(color: FigureColor, radius: number) {
     if (radius <= 0) {
-      throw new Error('incorrect triangle side sizes');
+      throw new Error('incorrect circle radius');
     }
     this.color = color;
     this.radius = radius;
@@ -75,7 +75,7 @@ export class Rectangle implements Figure {
 
   constructor(color: FigureColor, a: number, b: number) {
     if (a <= 0 || b <= 0) {
-      throw new Error('incorrect triangle side sizes');
+      throw new Error('incorrect rectangle sides sizes');
     }
     this.color = color;
     this.a = a;
