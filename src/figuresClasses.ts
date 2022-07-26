@@ -53,6 +53,8 @@ export class Circle implements Figure {
     const areaOfCircle: number = +Math.PI * (this.radius ** 2);
 
     return Math.floor(areaOfCircle * 100) / 100;
+
+    // return +(Math.PI * (this.radius ** 2)).toFixed(2);
   }
 }
 
