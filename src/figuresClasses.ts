@@ -24,10 +24,10 @@ export class Triangle implements Figure {
   }
 
   getArea(): number {
-    const p = (this.a + this.b + this.c) / 2;
+    const perimeter = (this.a + this.b + this.c) / 2;
 
-    return Math.trunc((p * (p - this.a)
-    * (p - this.b) * (p - this.c)) ** 0.5 * 100) / 100;
+    return Math.trunc((perimeter * (perimeter - this.a)
+    * (perimeter - this.b) * (perimeter - this.c)) ** 0.5 * 100) / 100;
   }
 }
 
@@ -39,7 +39,7 @@ export class Circle implements Figure {
     public radius:number,
   ) {
     if (radius <= 0) {
-      throw new Error('num must be > 0');
+      throw new Error('number must be > 0');
     }
   }
 
@@ -57,7 +57,7 @@ export class Rectangle implements Figure {
     public height:number,
   ) {
     if (width <= 0 || height <= 0) {
-      throw new Error('num must be > 0');
+      throw new Error('number must be > 0');
     }
   }
 
@@ -66,6 +66,6 @@ export class Rectangle implements Figure {
   }
 }
 
-export function getInfo(figure):string {
+export function getInfo(figure:Figure):string {
   return `A ${figure.color} ${figure.shape} - ${figure.getArea()}`;
 }
