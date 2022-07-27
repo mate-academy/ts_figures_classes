@@ -3,7 +3,7 @@ type Color = 'red' | 'green' | 'blue';
 
 export interface Figure {
   color: Color;
-  shape: string;
+  shape: Shape;
   getArea: () => number;
 }
 
@@ -14,7 +14,7 @@ const semiPerimeter = (a: number, b: number, c: number): number => {
 export class Triangle {
   shape: Shape = 'triangle';
 
-  public color: string;
+  public color: Color;
 
   public a: number;
 
@@ -49,7 +49,7 @@ export class Triangle {
 export class Circle {
   shape: Shape = 'circle';
 
-  public color: string;
+  public color: Color;
 
   public radius: number;
 
@@ -70,7 +70,7 @@ export class Circle {
 export class Rectangle {
   shape: Shape = 'rectangle';
 
-  public color: string;
+  public color: Color;
 
   public width: number;
 
