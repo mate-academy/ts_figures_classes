@@ -15,8 +15,12 @@ export class Triangle {
     public b: number,
     public c: number,
   ) {
-    if (a <= 0 || b <= 0 || c <= 0 || a >= b + c || b >= a + c || c >= a + b) {
-      throw new Error('Invalid sides');
+    if (a <= 0 || b <= 0 || c <= 0) {
+      throw new Error('The sides of the triangle must be greater than zero');
+    }
+
+    if (a >= b + c || b >= a + c || c >= a + b) {
+      throw new Error('The sum of two sides must be less than the third side');
     }
   }
 
@@ -36,7 +40,7 @@ export class Circle {
     public radius: number,
   ) {
     if (radius <= 0) {
-      throw new Error('Invalid sides');
+      throw new Error('Invalid radius. The radius must be greater than zero');
     }
   }
 
@@ -54,7 +58,7 @@ export class Rectangle {
     public b: number,
   ) {
     if (a <= 0 || b <= 0) {
-      throw new Error('Invalid sides');
+      throw new Error('Invalid sides. The sides must be greater than zero');
     }
   }
 
