@@ -7,27 +7,15 @@ export interface Figure {
   getArea: () => number;
 }
 
-const semiPerimeter = (a: number, b: number, c: number): number => {
-  return (a + b + c) / 2;
-};
-
 export class Triangle {
   shape: Shape = 'triangle';
 
-  public color: Color;
-
-  public a: number;
-
-  public b: number;
-
-  public c: number;
-
-  constructor(color: string, a: number, b: number, c: number) {
-    this.color = color;
-    this.a = a;
-    this.b = b;
-    this.c = c;
-
+  constructor(
+    public color: Color,
+    public a: number,
+    public b: number,
+    public c: number,
+  ) {
     if (this.a <= 0
       || this.b <= 0
       || this.c <= 0
@@ -39,6 +27,10 @@ export class Triangle {
   }
 
   getArea(): number {
+    const semiPerimeter = (a: number, b: number, c: number): number => {
+      return (a + b + c) / 2;
+    };
+
     const p = semiPerimeter(this.a, this.b, this.c);
 
     // eslint-disable-next-line max-len
@@ -49,14 +41,7 @@ export class Triangle {
 export class Circle {
   shape: Shape = 'circle';
 
-  public color: Color;
-
-  public radius: number;
-
-  constructor(color: string, radius: number) {
-    this.color = color;
-    this.radius = radius;
-
+  constructor(public color: Color, public radius: number) {
     if (this.radius <= 0) {
       throw new Error('The side length was entered incorrectly');
     }
@@ -70,17 +55,11 @@ export class Circle {
 export class Rectangle {
   shape: Shape = 'rectangle';
 
-  public color: Color;
-
-  public width: number;
-
-  public height: number;
-
-  constructor(color: string, width: number, height: number) {
-    this.color = color;
-    this.width = width;
-    this.height = height;
-
+  constructor(
+    public color: Color,
+    public width: number,
+    public height: number,
+  ) {
     if (this.width <= 0 || this.height <= 0) {
       throw new Error('The side length was entered incorrectly');
     }
