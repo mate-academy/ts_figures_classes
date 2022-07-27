@@ -23,8 +23,6 @@ export class Triangle implements Figure {
     if (a + b <= c || a + c <= b || c + b <= a) {
       throw new Error('Incorrect side length');
     }
-
-    this.color = color;
   }
 
   getArea(): number {
@@ -74,8 +72,5 @@ export class Rectangle implements Figure {
 }
 
 export function getInfo(figure: Figure): string {
-  // eslint-disable-next-line no-console
-  console.log(`A ${figure.color} ${figure.shape} - ${figure.getArea()}`);
-
   return `A ${figure.color} ${figure.shape} - ${figure.getArea()}`;
 }
