@@ -38,14 +38,14 @@ export class Triangle implements Figure {
 export class Circle implements Figure {
   public shape: Shape = 'circle';
 
-  constructor(public color: Color, public r: number) {
-    if (r < 0) {
+  constructor(public color: Color, public radius: number) {
+    if (radius < 0) {
       throw new Error('invalid value of radius');
     }
   }
 
   getArea(): number {
-    return Math.floor(Math.PI * (this.r ** 2) * 100) / 100;
+    return Math.floor(Math.PI * (this.radius ** 2) * 100) / 100;
   }
 }
 
@@ -54,16 +54,16 @@ export class Rectangle {
 
   constructor(
     public color: Color,
-    public w: number,
-    public h: number,
+    public width: number,
+    public height: number,
   ) {
-    if (w < 0 || h < 0) {
+    if (width < 0 || height < 0) {
       throw new Error('invalid value of width or height');
     }
   }
 
   getArea(): number {
-    return this.w * this.h;
+    return this.width * this.height;
   }
 }
 
