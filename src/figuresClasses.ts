@@ -1,17 +1,28 @@
+enum Shape {
+  Triangle = 'triangle',
+  Circle = 'circle',
+  Rectangle = 'rectangle',
+}
+
 export interface Figure {
-  shape: 'triangle' | 'circle' | 'rectangle';
+  shape: Shape;
   color: 'red'| 'green' | 'blue';
   getArea: () => number;
 }
 
+type Color = 'red'| 'green' | 'blue';
+
 export class Triangle implements Figure {
+  public shape: Shape;
+
   constructor(
-    public color: 'red'| 'green' | 'blue',
+    public color: Color,
     public a: number,
     public b: number,
     public c: number,
-    public shape: Figure['shape'] = 'triangle',
   ) {
+    this.shape = Shape.Triangle;
+
     const sortedSides: number[] = [a, b, c]
       .sort((first, second) => second - first);
 
@@ -30,11 +41,14 @@ export class Triangle implements Figure {
 }
 
 export class Circle implements Figure {
+  public shape: Shape;
+
   constructor(
-    public color: 'red'| 'green' | 'blue',
+    public color: Color,
     public radius: number,
-    public shape: Figure['shape'] = 'circle',
   ) {
+    this.shape = Shape.Circle;
+
     if (radius <= 0) {
       throw new Error('Invalid sides');
     }
@@ -46,12 +60,15 @@ export class Circle implements Figure {
 }
 
 export class Rectangle implements Figure {
+  public shape: Shape;
+
   constructor(
-    public color: 'red'| 'green' | 'blue',
+    public color: Color,
     public a: number,
     public b: number,
-    public shape: Figure['shape'] = 'rectangle',
   ) {
+    this.shape = Shape.Rectangle;
+
     if (a <= 0 || b <= 0) {
       throw new Error('Invalid sides');
     }
@@ -62,6 +79,6 @@ export class Rectangle implements Figure {
   }
 }
 
-export function getInfo(figure): string {
+export function getInfo(figure: Figure): string {
   return `A ${figure.color} ${figure.shape} - ${figure.getArea()}`;
 }
