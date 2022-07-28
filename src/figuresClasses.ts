@@ -18,10 +18,8 @@ export interface Figure {
 export class Triangle implements Figure {
   shape = FigureShape.triangle;
 
-  color: FigureColor;
-
   constructor(
-    color: FigureColor,
+    public color: FigureColor,
     public a: number,
     public b: number,
     public c: number,
@@ -33,8 +31,6 @@ export class Triangle implements Figure {
     ) {
       throw new Error('incorrect triangle side sizes');
     }
-
-    this.color = color;
   }
 
   getArea(): number {
@@ -51,16 +47,13 @@ export class Triangle implements Figure {
 export class Circle implements Figure {
   shape = FigureShape.circle;
 
-  color: FigureColor;
-
   constructor(
-    color: FigureColor,
+    public color: FigureColor,
     public radius: number,
   ) {
     if (radius <= 0) {
       throw new Error('incorrect circle radius');
     }
-    this.color = color;
   }
 
   getArea(): number {
@@ -71,17 +64,14 @@ export class Circle implements Figure {
 export class Rectangle implements Figure {
   shape = FigureShape.rectangle;
 
-  color: FigureColor;
-
   constructor(
-    color: FigureColor,
+    public color: FigureColor,
     public a: number,
     public b: number,
   ) {
     if (a <= 0 || b <= 0) {
       throw new Error('incorrect rectangle sides sizes');
     }
-    this.color = color;
   }
 
   getArea(): number {
