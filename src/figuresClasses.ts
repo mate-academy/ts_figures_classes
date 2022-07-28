@@ -1,5 +1,13 @@
-export type FigureColor = 'red' | 'green' | 'blue';
-export type FigureShape = 'triangle' | 'circle' | 'rectangle';
+export enum FigureColor {
+  red = 'red',
+  green ='green',
+  blue = 'blue'
+}
+export enum FigureShape {
+  triangle = 'triangle',
+  circle = 'circle',
+  rectangle = 'rectangle'
+}
 
 export interface Figure {
   shape: FigureShape;
@@ -8,17 +16,16 @@ export interface Figure {
 }
 
 export class Triangle implements Figure {
-  shape: FigureShape = 'triangle';
+  shape = FigureShape.triangle;
 
   color: FigureColor;
 
-  a: number;
-
-  b: number;
-
-  c: number;
-
-  constructor(col: FigureColor, a: number, b: number, c: number) {
+  constructor(
+    color: FigureColor,
+    public a: number,
+    public b: number,
+    public c: number,
+  ) {
     if (a <= 0 || b <= 0 || c <= 0
       || a + b <= c
       || b + c <= a
@@ -27,10 +34,7 @@ export class Triangle implements Figure {
       throw new Error('incorrect triangle side sizes');
     }
 
-    this.color = col;
-    this.a = a;
-    this.b = b;
-    this.c = c;
+    this.color = color;
   }
 
   getArea(): number {
@@ -45,18 +49,18 @@ export class Triangle implements Figure {
 }
 
 export class Circle implements Figure {
-  shape: FigureShape = 'circle';
+  shape = FigureShape.circle;
 
   color: FigureColor;
 
-  radius: number;
-
-  constructor(color: FigureColor, radius: number) {
+  constructor(
+    color: FigureColor,
+    public radius: number,
+  ) {
     if (radius <= 0) {
       throw new Error('incorrect circle radius');
     }
     this.color = color;
-    this.radius = radius;
   }
 
   getArea(): number {
@@ -65,21 +69,19 @@ export class Circle implements Figure {
 }
 
 export class Rectangle implements Figure {
-  shape: FigureShape = 'rectangle';
+  shape = FigureShape.rectangle;
 
   color: FigureColor;
 
-  a: number;
-
-  b: number;
-
-  constructor(color: FigureColor, a: number, b: number) {
+  constructor(
+    color: FigureColor,
+    public a: number,
+    public b: number,
+  ) {
     if (a <= 0 || b <= 0) {
       throw new Error('incorrect rectangle sides sizes');
     }
     this.color = color;
-    this.a = a;
-    this.b = b;
   }
 
   getArea(): number {
