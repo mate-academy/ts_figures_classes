@@ -28,7 +28,7 @@ export class Triangle implements Figure {
 
     if ((sortedSides[0] >= sortedSides[1] + sortedSides[2])
     || sortedSides.some((side) => side === 0)) {
-      throw new Error('Invalid sides');
+      throw new Error(`${this.shape} cannot be created with your parameters`);
     }
   }
 
@@ -50,7 +50,7 @@ export class Circle implements Figure {
     this.shape = Shape.Circle;
 
     if (radius <= 0) {
-      throw new Error('Invalid sides');
+      throw new Error(`${this.shape} cannot be created with your parameters`);
     }
   }
 
@@ -70,7 +70,7 @@ export class Rectangle implements Figure {
     this.shape = Shape.Rectangle;
 
     if (a <= 0 || b <= 0) {
-      throw new Error('Invalid sides');
+      throw new Error(`${this.shape} cannot be created with your parameters`);
     }
   }
 
