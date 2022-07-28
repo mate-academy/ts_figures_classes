@@ -9,7 +9,9 @@ export interface Figure {
 }
 
 export class Triangle implements Figure {
-  readonly shape = 'triangle';
+  shape: Shape = 'triangle';
+
+  private perimeter: number;
 
   constructor(
     public color: Color,
@@ -18,21 +20,22 @@ export class Triangle implements Figure {
     public c: number,
 
   ) {
+    this.perimeter = a + b + c;
+
     if (a <= 0 || b <= 0 || c <= 0) {
-      throw new Error('not correct sides');
+      throw new Error('sides should be greater then 0');
     }
 
     const biggestSide = Math.max(a, b, c);
-    const perimeter = a + b + c;
 
-    if (biggestSide >= (perimeter - biggestSide)) {
-      throw new Error('not a triangle');
+    if (biggestSide >= (this.perimeter - biggestSide)) {
+      throw new Error('imposible make triangle with such sides');
     }
   }
 
   getArea(): number {
     const { a, b, c } = this;
-    const semi = (a + b + c) / 2;
+    const semi = (this.perimeter) / 2;
     const area = Math.sqrt(semi * (semi - a) * (semi - b) * (semi - c));
 
     return Math.floor(area * 100) / 100;
@@ -47,7 +50,7 @@ export class Circle implements Figure {
     public radius : number,
   ) {
     if (radius <= 0) {
-      throw new Error('not correct radius');
+      throw new Error('radius should be greater then 0');
     }
   }
 
@@ -69,7 +72,7 @@ export class Rectangle implements Figure {
     public height : number,
   ) {
     if (width <= 0 || height <= 0) {
-      throw new Error('not correct sides');
+      throw new Error('sides should be greater then 0');
     }
   }
 
