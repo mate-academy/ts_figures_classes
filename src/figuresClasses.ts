@@ -33,8 +33,11 @@ export class Triangle {
 
     const p = semiPerimeter(this.a, this.b, this.c);
 
-    // eslint-disable-next-line max-len
-    return Math.round(100 * Math.sqrt(p * ((p - this.a) * (p - this.b) * (p - this.c)))) / 100;
+    return Math.round(100
+      * Math.sqrt(p
+      * ((p - this.a)
+      * (p - this.b)
+      * (p - this.c)))) / 100;
   }
 }
 
