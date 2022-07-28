@@ -5,11 +5,19 @@ export interface Figure {
   getArea(): number;
 }
 
+enum Shapes {
+  triangle = 'triangle',
+  circle = 'circle',
+  rectangle = 'rectangle',
+}
+
+type Colors = 'red' | 'green' | 'blue';
+
 export class Triangle implements Figure {
-  shape: 'triangle' = 'triangle';
+  shape: Shapes = Shapes.triangle;
 
   constructor(
-    public color: 'red' | 'green' | 'blue',
+    public color: Colors,
     public a: number,
     public b: number,
     public c: number,
@@ -36,10 +44,10 @@ export class Triangle implements Figure {
 }
 
 export class Circle implements Figure {
-  shape: 'circle' = 'circle';
+  shape: Shapes = Shapes.circle;
 
   constructor(
-    public color: 'red' | 'green' | 'blue',
+    public color: Colors,
     public radius: number,
   ) {
     if (this.radius <= 0) {
@@ -54,10 +62,10 @@ export class Circle implements Figure {
 }
 
 export class Rectangle implements Figure {
-  shape: 'rectangle' = 'rectangle';
+  shape: Shapes = Shapes.rectangle;
 
   constructor(
-    public color: 'red' | 'green' | 'blue',
+    public color: Colors,
     public width: number,
     public height: number,
   ) {
