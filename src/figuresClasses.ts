@@ -1,16 +1,22 @@
-type ShapeType = 'triangle' | 'circle' | 'rectangle';
+enum ShapeType {
+  Triangle = 'triangle',
+  Circle = 'circle',
+  Rectangle = 'rectangle'
+}
+
+type Color = 'red' | 'green' | 'blue';
 
 export interface Figure {
   shape: ShapeType;
-  color: 'red' | 'green' | 'blue';
+  color: Color;
   getArea: () => number;
 }
 
-export class Triangle {
-  shape = 'triangle';
+export class Triangle implements Figure {
+  shape = ShapeType.Triangle;
 
   constructor(
-    public color: ShapeType,
+    public color: Color,
     public a: number,
     public b: number,
     public c: number,
@@ -32,11 +38,11 @@ export class Triangle {
   }
 }
 
-export class Circle {
-  shape = 'circle';
+export class Circle implements Figure {
+  shape = ShapeType.Circle;
 
   constructor(
-    public color: ShapeType,
+    public color: Color,
     public radius: number,
   ) {
     if (radius <= 0) {
@@ -49,11 +55,11 @@ export class Circle {
   }
 }
 
-export class Rectangle {
-  shape = 'rectangle';
+export class Rectangle implements Figure {
+  shape = ShapeType.Rectangle;
 
   constructor(
-    public color: ShapeType,
+    public color: Color,
     public a: number,
     public b: number,
   ) {
