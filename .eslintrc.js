@@ -27,5 +27,6 @@ module.exports = {
     '@typescript-eslint/no-explicit-any': 'error',
     'max-classes-per-file': 'off',
     'no-new': 'off',
+    'no-useless-constructor': 'off'
   },
 };
