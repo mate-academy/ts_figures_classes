@@ -1,11 +1,29 @@
+type Color = 'red' | 'green' | 'blue';
+
+enum Shape {
+  triangle = 'triangle',
+  circle = 'circle',
+  rectangle = 'rectangle'
+}
+
 export interface Figure {
-  shape: 'triangle' | 'circle' | 'rectangle',
-  color: 'red' | 'green' | 'blue',
+  shape: Shape,
+  color: Color,
   getArea(): number;
 }
 
+function findError(a: number, b: number, c: number): string {
+  if (a <= 0 || b <= 0 || c <= 0 || a + b <= c || a + c <= b || b + c <= a) {
+    throw new Error('Error message');
+  }
+}
+
+function roundNumber(total: number): number {
+  return Math.floor(+total * 100) / 100;
+}
+
 export class Triangle implements Figure {
-  shape: Figure['shape'] = 'triangle';
+  shape = Shape.triangle;
 
   constructor(
     public color: string,
@@ -13,9 +31,7 @@ export class Triangle implements Figure {
     public b: number,
     public c: number,
   ) {
-    if (a <= 0 || b <= 0 || c <= 0 || a + b <= c || a + c <= b || b + c <= a) {
-      throw new Error('your error message');
-    }
+    findError(a, b, c);
   }
 
   getArea(): number {
@@ -23,12 +39,12 @@ export class Triangle implements Figure {
     const area = Math.sqrt(perimetr
       * (perimetr - this.a) * (perimetr - this.b) * (perimetr - this.c));
 
-    return Math.floor(area * 100) / 100;
+    return roundNumber(area);
   }
 }
 
 export class Circle implements Figure {
-  shape: Figure['shape'] = 'circle';
+  shape = Shape.circle;
 
   constructor(
     public color: string,
@@ -40,14 +56,14 @@ export class Circle implements Figure {
   }
 
   getArea(): number {
-    const area = (Math.floor(Math.PI * (this.radius ** 2) * 100) / 100);
+    const area = Math.PI * (this.radius ** 2);
 
-    return area;
+    return roundNumber(area);
   }
 }
 
 export class Rectangle implements Figure {
-  shape: Figure['shape'] = 'rectangle';
+  shape = Shape.rectangle;
 
   constructor(
     public color: string,
