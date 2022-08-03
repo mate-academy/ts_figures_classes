@@ -26,7 +26,9 @@ export class Triangle implements Figure {
       .reduce((sum, side) => sum + side);
 
     if (a <= 0 || b <= 0 || c <= 0 || maxSide >= sumOfLowSides) {
-      throw new Error('error');
+      throw new Error(
+        'Incorrect data: impossible to build a triangle with this values',
+      );
     }
   }
 
@@ -48,7 +50,7 @@ export class Circle implements Figure {
     public radius: number,
   ) {
     if (radius <= 0) {
-      throw new Error('error');
+      throw new Error('Incorrect data: the radius must be greater then 0');
     }
   }
 
@@ -66,7 +68,9 @@ export class Rectangle implements Figure {
     public height: number,
   ) {
     if (width <= 0 || height <= 0) {
-      throw new Error('error');
+      throw new Error(
+        'Incorrect data: width and height must be greater then 0',
+      );
     }
   }
 
