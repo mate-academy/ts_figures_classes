@@ -29,11 +29,6 @@ export class Triangle implements Figure {
     if (this.a <= 0 || this.b <= 0 || this.c <= 0) {
       throw new Error('error message');
     }
-
-    this.color = color;
-    this.a = a;
-    this.b = b;
-    this.c = c;
   }
 
   getArea(): number {
@@ -56,9 +51,6 @@ export class Circle {
     if (this.radius <= 0) {
       throw new Error('error message');
     }
-
-    this.color = color;
-    this.radius = radius;
   }
 
   getArea(): number {
@@ -81,10 +73,6 @@ export class Rectangle {
     if (this.width <= 0 || this.height <= 0) {
       throw new Error('error message');
     }
-
-    this.color = color;
-    this.width = width;
-    this.height = height;
   }
 
   getArea(): number {
