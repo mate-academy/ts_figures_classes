@@ -11,6 +11,21 @@ function round(num: number): number {
   return Math.floor(num * 100) / 100;
 }
 
+const check = (shape: Shape, ...params: number[]): boolean => {
+  if (shape === 'triangle') {
+    const maxSide = Math.max(params[0], params[1], params[2]);
+    const sumOfLowSides = [params[0], params[1], params[2]]
+      .filter((side) => side !== maxSide)
+      .reduce((sum, side) => sum + side);
+
+    if (maxSide >= sumOfLowSides) {
+      return false;
+    }
+  }
+
+  return params.every((param) => param > 0);
+};
+
 export class Triangle implements Figure {
   shape: Shape = 'triangle';
 
@@ -20,12 +35,7 @@ export class Triangle implements Figure {
     public b: number,
     public c: number,
   ) {
-    const maxSide = Math.max(a, b, c);
-    const sumOfLowSides = [a, b, c]
-      .filter((side) => side !== maxSide)
-      .reduce((sum, side) => sum + side);
-
-    if (a <= 0 || b <= 0 || c <= 0 || maxSide >= sumOfLowSides) {
+    if (!check(this.shape, a, b, c)) {
       throw new Error(
         'Incorrect data: impossible to build a triangle with this values',
       );
@@ -49,7 +59,7 @@ export class Circle implements Figure {
     public color: Color,
     public radius: number,
   ) {
-    if (radius <= 0) {
+    if (!check(this.shape, radius)) {
       throw new Error('Incorrect data: the radius must be greater then 0');
     }
   }
@@ -67,7 +77,7 @@ export class Rectangle implements Figure {
     public width: number,
     public height: number,
   ) {
-    if (width <= 0 || height <= 0) {
+    if (!check(this.shape, width, height)) {
       throw new Error(
         'Incorrect data: width and height must be greater then 0',
       );
