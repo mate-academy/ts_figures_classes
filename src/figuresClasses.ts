@@ -1,25 +1,34 @@
+type Color = 'red' | 'green' | 'blue';
+
 export interface Figure {
   shape: string,
-  color: string,
+  color: Color,
   getArea(): number,
+}
+
+function rounding(area: number): number {
+  return Math.floor(area * 100) / 100;
 }
 
 export class Triangle implements Figure {
   public shape = 'triangle';
 
   constructor(
-    public color: string,
+    public color: Color,
     public a: number,
     public b: number,
     public c: number,
   ) {
     if (a <= 0
       || b <= 0
-      || c <= 0
-      || a >= (b + c)
+      || c <= 0) {
+      throw new Error('Error: The side length is <= 0');
+    }
+
+    if (a >= (b + c)
       || b >= (a + c)
       || c >= (a + b)) {
-      throw new Error('Error: check the data');
+      throw new Error('Error: The longest side is <= than a sum of two others');
     }
   }
 
@@ -30,7 +39,7 @@ export class Triangle implements Figure {
       * (semiPerimeter - this.b)
       * (semiPerimeter - this.c));
 
-    return Math.floor(area * 100) / 100;
+    return rounding(area);
   }
 }
 
@@ -38,18 +47,18 @@ export class Circle implements Figure {
   public shape = 'circle';
 
   constructor(
-    public color: string,
+    public color: Color,
     public radius: number,
   ) {
     if (radius <= 0) {
-      throw new Error('Error: check the data');
+      throw new Error('Error: The radius length is <= 0');
     }
   }
 
   getArea(): number {
     const area = Math.PI * this.radius ** 2;
 
-    return (Math.floor(area * 100)) / 100;
+    return rounding(area);
   }
 }
 
@@ -57,17 +66,19 @@ export class Rectangle implements Figure {
   public shape = 'rectangle';
 
   constructor(
-    public color: string,
+    public color: Color,
     public a: number,
     public b: number,
   ) {
     if (a <= 0 || b <= 0) {
-      throw new Error('Error: check the data');
+      throw new Error('Error: The side length is <= 0');
     }
   }
 
   getArea(): number {
-    return this.a * this.b;
+    const area = this.a * this.b;
+
+    return rounding(area);
   }
 }
 
