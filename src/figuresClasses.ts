@@ -7,6 +7,9 @@ export interface Figure {
   getArea: () => number;
 }
 
+function roundArea(a: number): number {
+  return Math.floor(a * 100) / 100;
+}
 export class Triangle implements Figure {
   public shape: Shape = 'triangle';
 
@@ -15,17 +18,20 @@ export class Triangle implements Figure {
     public a: number,
     public b: number,
     public c: number,
-    public p: number = (a + b + c) / 2,
   ) {
     if (this.a <= 0 || this.b <= 0 || this.c <= 0
      || this.c >= (this.a + this.b)) {
-      throw new Error('your error message');
+      throw new Error('triangle sides not correct');
     }
   }
 
   getArea(): number {
-    return Math.sqrt(this.p * ((this.p - this.a)
-      * (this.p - this.b) * (this.p - this.c)));
+    const p = (this.a + this.b + this.c) / 2;
+
+    const area = Math.sqrt(p * ((p - this.a)
+      * (p - this.b) * (p - this.c)));
+
+    return roundArea(area);
   }
 }
 
@@ -37,12 +43,14 @@ export class Circle implements Figure {
     public radius: number,
   ) {
     if (this.radius <= 0) {
-      throw new Error('your error message');
+      throw new Error('circle radius not correct');
     }
   }
 
   getArea(): number {
-    return Math.floor(Math.PI * this.radius * this.radius * 100) / 100;
+    const area = Math.PI * this.radius * this.radius;
+
+    return roundArea(area);
   }
 }
 
@@ -55,17 +63,17 @@ export class Rectangle implements Figure {
     public height: number,
   ) {
     if (this.width <= 0 || this.height <= 0) {
-      throw new Error('your error message');
+      throw new Error('rectangle sides not correct');
     }
   }
 
   getArea(): number {
-    return this.width * this.height;
+    const area = this.width * this.height;
+
+    return roundArea(area);
   }
 }
 
 export function getInfo(figure: Triangle | Circle | Rectangle): string {
-  const square: number = Math.round((figure.getArea()) * 100) / 100;
-
-  return `A ${figure.color} ${figure.shape} - ${square}`;
+  return `A ${figure.color} ${figure.shape} - ${figure.getArea()}`;
 }
