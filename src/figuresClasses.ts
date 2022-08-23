@@ -1,17 +1,14 @@
 
-type Shape = 'triangle' | 'circle' | 'rectangle';
-type Color = 'red' | 'green' | 'blue';
-
 export interface Figure {
-  shape: Shape;
-  color: Color;
+  shape: 'triangle' | 'circle' | 'rectangle';
+  color: 'red' | 'green' | 'blue';
   getArea(): number;
 }
 
 export class Triangle implements Figure {
-  shape: Shape;
+  shape;
 
-  color: Color;
+  color;
 
   a: number;
 
@@ -19,7 +16,7 @@ export class Triangle implements Figure {
 
   c: number;
 
-  constructor(color: Color, a: number, b: number, c: number) {
+  constructor(color, a: number, b: number, c: number) {
     if (a <= 0 || b <= 0 || c <= 0) {
       throw new Error('some side less then 0');
     }
@@ -46,13 +43,13 @@ export class Triangle implements Figure {
 }
 
 export class Circle implements Figure {
-  shape: Shape;
+  shape;
 
-  color: Color;
+  color;
 
   radius: number;
 
-  constructor(color: Color, radius: number) {
+  constructor(color, radius: number) {
     if (radius <= 0) {
       throw new Error(`${radius} less then 0`);
     }
@@ -68,15 +65,15 @@ export class Circle implements Figure {
 }
 
 export class Rectangle implements Figure {
-  shape: Shape;
+  shape;
 
-  color: Color;
+  color;
 
   width: number;
 
   height: number;
 
-  constructor(color: Color, width: number, height: number) {
+  constructor(color, width: number, height: number) {
     if (width <= 0 || height <= 0) {
       throw new Error('side is incorrect');
     }
