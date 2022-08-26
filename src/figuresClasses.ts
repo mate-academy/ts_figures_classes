@@ -1,5 +1,9 @@
 type Color = 'red' | 'green' | 'blue';
-type Shapes = 'triangle' | 'circle' | 'rectangle';
+enum Shapes {
+  Triangle = 'triangle',
+  Circle = 'circle',
+  Rectangle = 'rectangle',
+}
 
 export interface Figure {
   shape: Shapes;
@@ -22,7 +26,7 @@ function errorParameter(...args: number[]): boolean {
 }
 
 export class Triangle implements Figure {
-  shape: Shapes = 'triangle';
+  shape: Shapes = Shapes.Triangle;
 
   constructor(
     public color: Color,
@@ -49,7 +53,7 @@ export class Triangle implements Figure {
 }
 
 export class Circle implements Figure {
-  shape: Shapes = 'circle';
+  shape: Shapes = Shapes.Circle;
 
   constructor(
     public color: Color,
@@ -66,7 +70,7 @@ export class Circle implements Figure {
 }
 
 export class Rectangle implements Figure {
-  shape: Shapes = 'rectangle';
+  shape: Shapes = Shapes.Rectangle;
 
   constructor(
     public color: Color,
