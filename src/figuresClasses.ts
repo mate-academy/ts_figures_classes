@@ -8,8 +8,9 @@ type Colors = 'red' | 'green' | 'blue';
 export interface Figure {
   shape: Shapes;
   color: Colors;
+  getArea(): number;
 }
-class BaseFigure {
+abstract class BaseFigure implements Figure {
   protected isOk: boolean = true;
 
   constructor(
@@ -27,6 +28,8 @@ class BaseFigure {
       throw new Error('Every figure length must be > 0!');
     }
   }
+
+  abstract getArea(): number;
 }
 
 export class Triangle extends BaseFigure {
