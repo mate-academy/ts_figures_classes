@@ -1,4 +1,9 @@
-type Shapes = 'triangle' | 'circle' | 'rectangle';
+enum Shapes {
+  Triangle = 'triangle',
+  Circle = 'circle',
+  Rectangle = 'rectangle',
+}
+
 type Colors = 'red' | 'green' | 'blue';
 export interface Figure {
   shape: Shapes;
@@ -31,7 +36,7 @@ export class Triangle extends BaseFigure {
     public b: number,
     public c: number,
   ) {
-    super('triangle', color);
+    super(Shapes.Triangle, color);
     this.checkLengths(a, b, c);
     this.checkPossible();
   }
@@ -62,7 +67,7 @@ export class Circle extends BaseFigure {
     public color: Colors,
     public radius: number,
   ) {
-    super('circle', color);
+    super(Shapes.Circle, color);
     this.checkLengths(radius);
   }
 
@@ -76,15 +81,11 @@ export class Rectangle extends BaseFigure {
     public width: number,
     public height: number,
   ) {
-    super('rectangle', color);
+    super(Shapes.Rectangle, color);
     this.checkLengths(width, height);
   }
 
   public getArea(): number {
     return this.width * this.height;
   }
-}
-
-export function getInfo(figure: BaseFigure): BaseFigure {
-  return figure;
 }
