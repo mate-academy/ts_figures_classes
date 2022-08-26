@@ -5,11 +5,13 @@ enum Shapes {
 }
 
 type Colors = 'red' | 'green' | 'blue';
+
 export interface Figure {
   shape: Shapes;
   color: Colors;
   getArea(): number;
 }
+
 abstract class BaseFigure implements Figure {
   protected isOk: boolean = true;
 
@@ -65,6 +67,7 @@ export class Triangle extends BaseFigure {
     );
   }
 }
+
 export class Circle extends BaseFigure {
   constructor(
     public color: Colors,
@@ -78,6 +81,7 @@ export class Circle extends BaseFigure {
     return Math.trunc(this.radius ** 2 * Math.PI * 100) / 100;
   }
 }
+
 export class Rectangle extends BaseFigure {
   constructor(
     public color: Colors,
@@ -91,4 +95,8 @@ export class Rectangle extends BaseFigure {
   public getArea(): number {
     return this.width * this.height;
   }
+}
+
+export function getInfo(figure: BaseFigure): string {
+  return `A ${figure.color} ${figure.shape} - ${figure.getArea()}`;
 }
