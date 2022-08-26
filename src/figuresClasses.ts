@@ -25,8 +25,6 @@ class BaseFigure {
 }
 
 export class Triangle extends BaseFigure {
-  readonly shape: Shapes = 'triangle';
-
   constructor(
     public color: Colors,
     public a: number,
@@ -71,4 +69,11 @@ export class Circle extends BaseFigure {
   public getArea(): number {
     return Math.trunc(this.radius ** 2 * Math.PI * 100) / 100;
   }
+}
+export class Rectangle extends BaseFigure {
+
+}
+
+export function getInfo(figure: BaseFigure): BaseFigure {
+  return figure;
 }
