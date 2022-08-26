@@ -59,3 +59,16 @@ export class Triangle extends BaseFigure {
     );
   }
 }
+export class Circle extends BaseFigure {
+  constructor(
+    public color: Colors,
+    public radius: number,
+  ) {
+    super('circle', color);
+    this.checkLengths(radius);
+  }
+
+  public getArea(): number {
+    return Math.trunc(this.radius ** 2 * Math.PI * 100) / 100;
+  }
+}
