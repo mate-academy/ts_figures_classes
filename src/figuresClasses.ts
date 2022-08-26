@@ -71,7 +71,18 @@ export class Circle extends BaseFigure {
   }
 }
 export class Rectangle extends BaseFigure {
+  constructor(
+    public color: Colors,
+    public width: number,
+    public height: number,
+  ) {
+    super('rectangle', color);
+    this.checkLengths(width, height);
+  }
 
+  public getArea(): number {
+    return this.width * this.height;
+  }
 }
 
 export function getInfo(figure: BaseFigure): BaseFigure {
