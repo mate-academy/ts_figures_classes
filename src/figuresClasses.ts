@@ -23,12 +23,16 @@ abstract class BaseFigure implements Figure {
     this.color = color;
   }
 
-  public checkLengths(...values: number[]): void {
+  protected checkLengths(...values: number[]): void {
     this.isOk = values.every((value) => value > 0);
 
     if (!this.isOk) {
       throw new Error('Every figure length must be > 0!');
     }
+  }
+
+  static roundArea(area: number): number {
+    return Math.trunc(area * 100) / 100;
   }
 
   abstract getArea(): number;
@@ -59,12 +63,14 @@ export class Triangle extends BaseFigure {
   public getArea(): number {
     const semiPerimeter: number = (this.a + this.b + this.c) / 2;
 
-    return Math.sqrt(
+    const area = Math.sqrt(
       semiPerimeter
       * (semiPerimeter - this.a)
       * (semiPerimeter - this.b)
       * (semiPerimeter - this.c),
     );
+
+    return BaseFigure.roundArea(area);
   }
 }
 
@@ -78,7 +84,9 @@ export class Circle extends BaseFigure {
   }
 
   public getArea(): number {
-    return Math.trunc(this.radius ** 2 * Math.PI * 100) / 100;
+    const area: number = this.radius ** 2 * Math.PI;
+
+    return BaseFigure.roundArea(area);
   }
 }
 
@@ -93,7 +101,9 @@ export class Rectangle extends BaseFigure {
   }
 
   public getArea(): number {
-    return this.width * this.height;
+    const area: number = this.width * this.height;
+
+    return BaseFigure.roundArea(area);
   }
 }
 
