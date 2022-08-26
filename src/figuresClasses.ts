@@ -12,9 +12,13 @@ function isBadTriangle(
   side2: number,
   side3: number,
 ): boolean {
-  return (side1 + side2) <= side3
-    || (side1 + side3) <= side2
-    || (side2 + side3) <= side1;
+  const largest: number = Math.max(side1, side2, side3);
+
+  return (side1 + side2 + side3) - largest <= largest;
+}
+
+function errorParameter(...args: number[]): boolean {
+  return args.some((arg : number) => arg <= 0);
 }
 
 export class Triangle implements Figure {
@@ -26,7 +30,7 @@ export class Triangle implements Figure {
     public b: number,
     public c: number,
   ) {
-    if (a <= 0 || b <= 0 || c <= 0) {
+    if (errorParameter(a, b, c)) {
       throw new Error('Sides must be greater than zero');
     }
 
@@ -51,7 +55,7 @@ export class Circle implements Figure {
     public color: Color,
     public radius: number,
   ) {
-    if (radius <= 0) {
+    if (errorParameter(radius)) {
       throw new Error('Radius must be greater than zero');
     }
   }
@@ -69,7 +73,7 @@ export class Rectangle implements Figure {
     public width: number,
     public high: number,
   ) {
-    if (width <= 0 || high <= 0) {
+    if (errorParameter(high, width)) {
       throw new Error('Width and high must be greater than zero');
     }
   }
