@@ -19,21 +19,23 @@ export class Triangle implements Figure {
     if (this.a <= 0
       || this.b <= 0
       || this.c <= 0) {
-      throw new Error('Invalid value');
+      throw new Error('Side length cannot be less than or equal to zero');
     }
 
-    const biggestSide = Math.max(a, b, c);
+    const longestSide = Math.max(a, b, c);
 
-    if (biggestSide >= (a + b + c - biggestSide)) {
-      throw new Error('Invalid value');
+    if (longestSide >= (a + b + c - longestSide)) {
+      throw new Error('The longest side of a triangle cannot be '
+        + 'greater than or equal to the sum of two others');
     }
   }
 
   getArea(): number {
-    const p = (this.a + this.b + this.c) / 2;
-    const s = Math.sqrt(p * (p - this.a) * (p - this.b) * (p - this.c));
+    const perimeter = (this.a + this.b + this.c) / 2;
+    const square = Math.sqrt(perimeter * (perimeter - this.a) * (
+      perimeter - this.b) * (perimeter - this.c));
 
-    return Math.round(s * 100) / 100;
+    return Math.round(square * 100) / 100;
   }
 }
 
@@ -45,7 +47,7 @@ export class Circle implements Figure {
     public radius: number,
   ) {
     if (radius < 0) {
-      throw new Error('Invalid value');
+      throw new Error('Radius cannot be less than zero');
     }
   }
 
@@ -63,7 +65,7 @@ export class Rectangle implements Figure {
     public height: number,
   ) {
     if (width <= 0 || height <= 0) {
-      throw new Error('Invalid value');
+      throw new Error('Side length cannot be less than or equal to zero');
     }
   }
 
