@@ -41,7 +41,7 @@ export class Triangle implements Figure {
   }
 }
 
-export class Circle {
+export class Circle implements Figure {
   public shape: Shape = Shape.Circle;
 
   constructor(
@@ -58,7 +58,7 @@ export class Circle {
   }
 }
 
-export class Rectangle {
+export class Rectangle implements Figure {
   public shape: Shape = Shape.Rectangle;
 
   constructor(
