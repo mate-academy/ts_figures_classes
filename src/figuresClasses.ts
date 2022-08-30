@@ -1,13 +1,23 @@
-type Shape = 'triangle' | 'circle' | 'rectangle';
-type Color = 'red' | 'blue' | 'green';
+enum Shape {
+  Triangle = 'triangle',
+  Circle = 'circle',
+  Rectangle = 'rectangle',
+}
+
+type Color = 'red' | 'green ' | 'blue';
+
 export interface Figure {
   shape: Shape;
   color: Color;
   getArea(): number;
 }
 
+const checkSides = (...args: number[]): boolean => args.some(
+  (side : number) => side <= 0,
+);
+
 export class Triangle implements Figure {
-  shape: Shape = 'triangle';
+  shape: Shape = Shape.Triangle;
 
   constructor(
     public color: Color,
@@ -15,9 +25,7 @@ export class Triangle implements Figure {
     public b: number,
     public c: number,
   ) {
-    if (this.a <= 0
-      || this.b <= 0
-      || this.c <= 0) {
+    if (checkSides(a, b, c)) {
       throw new Error('Invalid value');
     }
 
@@ -29,16 +37,17 @@ export class Triangle implements Figure {
   }
 
   getArea(): number {
-    const s: number = (this.a + this.b + this.c) / 2;
+    const halfPerimeter: number = (this.a + this.b + this.c) / 2;
 
     return +Math.sqrt(
-      s * (s - this.a) * (s - this.b) * (s - this.c),
+      halfPerimeter * (halfPerimeter - this.a)
+       * (halfPerimeter - this.b) * (halfPerimeter - this.c),
     ).toFixed(2);
   }
 }
 
 export class Circle implements Figure {
-  shape: Shape = 'circle';
+  shape: Shape = Shape.Circle;
 
   constructor(
     public color: Color,
@@ -55,7 +64,7 @@ export class Circle implements Figure {
 }
 
 export class Rectangle implements Figure {
-  shape: Shape = 'rectangle';
+  shape: Shape = Shape.Rectangle;
 
   constructor(
     public color: Color,
@@ -68,7 +77,7 @@ export class Rectangle implements Figure {
   }
 
   getArea(): number {
-    return +(this.width * this.height).toFixed(2);
+    return this.width * this.height;
   }
 }
 
