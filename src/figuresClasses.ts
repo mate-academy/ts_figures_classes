@@ -1,4 +1,8 @@
-type Shape = 'triangle' | 'circle' | 'rectangle';
+enum Shape {
+  Triangle = 'triangle',
+  Circle = 'circle',
+  Rectangle = 'rectangle',
+}
 type Color = 'red' | 'blue' | 'green';
 
 export interface Figure {
@@ -7,8 +11,12 @@ export interface Figure {
   getArea(): number;
 }
 
+function invalidValue(...args: number[]): boolean {
+  return args.some((param : number) => param <= 0);
+}
+
 export class Triangle implements Figure {
-  shape: Shape = 'triangle';
+  shape: Shape = Shape.Triangle;
 
   constructor(
     public color: Color,
@@ -16,13 +24,13 @@ export class Triangle implements Figure {
     public b: number,
     public c: number,
   ) {
-    if (this.a <= 0 || this.b <= 0 || this.c <= 0) {
+    if (invalidValue(this.a, this.b, this.c)) {
       throw new Error('Invalid value');
     }
 
-    if (this.a + this.b <= this.c
-      || this.b + this.c <= this.a
-      || this.c + this.a <= this.b) {
+    const largest: number = Math.max(this.a, this.b, this.c);
+
+    if ((this.a + this.b + this.c - largest) <= largest) {
       throw new Error('Sides 1, 2 and 3 can not form a triangle');
     }
   }
@@ -36,13 +44,13 @@ export class Triangle implements Figure {
 }
 
 export class Circle implements Figure {
-  shape: Shape = 'circle';
+  shape: Shape = Shape.Circle;
 
   constructor(
     public color: Color,
     public radius: number,
   ) {
-    if (this.radius <= 0) {
+    if (invalidValue(this.radius)) {
       throw new Error('Invalid value');
     }
   }
@@ -53,14 +61,14 @@ export class Circle implements Figure {
 }
 
 export class Rectangle implements Figure {
-  shape: Shape = 'rectangle';
+  shape: Shape = Shape.Rectangle;
 
   constructor(
     public color: Color,
     public width: number,
     public height: number,
   ) {
-    if (this.width <= 0 || this.height <= 0) {
+    if (invalidValue(this.width, this.height)) {
       throw new Error('Invalid value');
     }
   }
