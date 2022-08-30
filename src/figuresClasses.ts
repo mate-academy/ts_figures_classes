@@ -23,9 +23,9 @@ export class Triangle implements Figure {
       throw new Error('Invalid value.');
     }
 
-    if (this.a + this.b <= this.c
-      || this.a + this.c <= this.b
-      || this.b + this.c <= this.a) {
+    const largestSide: number = Math.max(this.a, this.b, this.c);
+
+    if ((this.a + this.b + this.c - largestSide) <= largestSide) {
       throw new Error('Invalid sizes length.');
     }
   }
@@ -46,13 +46,13 @@ export class Circle implements Figure {
     public color: Color,
     public radius: number,
   ) {
-    if (this.radius < 0) {
+    if (this.radius <= 0) {
       throw new Error('Invalid radius length.');
     }
   }
 
   getArea(): number {
-    return +Math.floor(Math.PI * this.radius ** 2 * 100) / 100;
+    return Math.floor(Math.PI * this.radius ** 2 * 100) / 100;
   }
 }
 
