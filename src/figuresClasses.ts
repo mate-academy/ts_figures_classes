@@ -75,10 +75,10 @@ export class Rectangle implements Figure {
   }
 
   getArea(): number {
-    return Math.floor((this.width * this.height) * 100) / 100;
+    return this.width * this.height;
   }
 }
 
-export function getInfo(figure): string {
+export function getInfo(figure: Figure): string {
   return `A ${figure.color} ${figure.shape} - ${figure.getArea()}`;
 }
