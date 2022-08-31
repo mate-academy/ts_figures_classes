@@ -12,7 +12,7 @@ enum Color {
 
 export interface Figure {
   shape: Shapes,
-  color: 'red' | 'green' | 'blue',
+  color: Color,
   getArea(): number,
 }
 
