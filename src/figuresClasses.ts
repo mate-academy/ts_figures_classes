@@ -16,6 +16,14 @@ export interface Figure {
   getArea(): number;
 }
 
+function haveIvalidValue(...args: number[]): boolean {
+  return args.some((value) => value <= 0);
+}
+
+function rounder(num: number): number {
+  return Math.floor(100 * num) / 100;
+}
+
 export class Triangle implements Figure {
   public shape: Shape = Shape.Triangle;
 
@@ -26,18 +34,23 @@ export class Triangle implements Figure {
     public c: number,
   ) {
     const maxSide: number = Math.max(a, b, c);
+    const invalidSidesRatio: boolean = maxSide >= a + b + c - maxSide;
 
-    if (maxSide >= a + b + c - maxSide) {
+    if (haveIvalidValue(a, b, c) || invalidSidesRatio) {
       throw new Error(`sides ${a}, ${b} and ${c} can't form a triangle`);
     }
   }
 
   getArea(): number {
-    const s: number = (this.a + this.b + this.c) / 2;
-    const area: number = Math
-      .sqrt(s * (s - this.a) * (s - this.b) * (s - this.c));
+    const semiPerimeter: number = (this.a + this.b + this.c) / 2;
+    const area: number = Math.sqrt(
+      semiPerimeter
+      * (semiPerimeter - this.a)
+      * (semiPerimeter - this.b)
+      * (semiPerimeter - this.c),
+    );
 
-    return Math.floor(100 * area) / 100;
+    return rounder(area);
   }
 }
 
@@ -48,13 +61,13 @@ export class Circle implements Figure {
     public color: Color,
     public radius: number,
   ) {
-    if (radius <= 0) {
+    if (haveIvalidValue(radius)) {
       throw new Error('radius should be greater than 0');
     }
   }
 
   getArea(): number {
-    return Math.floor(100 * Math.PI * this.radius ** 2) / 100;
+    return rounder(Math.PI * this.radius ** 2);
   }
 }
 
@@ -66,13 +79,13 @@ export class Rectangle implements Figure {
     public width: number,
     public height: number,
   ) {
-    if (width <= 0 || height <= 0) {
+    if (haveIvalidValue(width, height)) {
       throw new Error('width and height should be greater than 0');
     }
   }
 
   getArea(): number {
-    return Math.floor(100 * this.width * this.height) / 100;
+    return rounder(this.width * this.height);
   }
 }
 
