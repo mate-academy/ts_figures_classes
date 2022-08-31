@@ -1,9 +1,9 @@
 
 type Color = 'red' | 'green' | 'blue';
 enum Shapes {
-  triangle = 'triangle',
-  circle = 'circle',
-  rectangle = 'rectangle',
+  Triangle = 'triangle',
+  Circle = 'circle',
+  Rectangle = 'rectangle',
 }
 
 export interface Figure {
@@ -23,7 +23,7 @@ function chackArg(arg: number):void {
 }
 
 export class Triangle implements Figure {
-  public shape = Shapes.triangle;
+  public shape = Shapes.Triangle;
 
   constructor(
     public color: Color,
@@ -51,7 +51,7 @@ export class Triangle implements Figure {
 }
 
 export class Circle implements Figure {
-  public shape = Shapes.circle;
+  public shape = Shapes.Circle;
 
   constructor(
     public color: Color,
@@ -66,7 +66,7 @@ export class Circle implements Figure {
 }
 
 export class Rectangle implements Figure {
-  public shape = Shapes.rectangle;
+  public shape = Shapes.Rectangle;
 
   constructor(
     public color: Color,
