@@ -1,4 +1,8 @@
-type Shape = 'triangle' | 'circle' | 'rectangle';
+enum Shape {
+  Triangle = 'triangle',
+  Circle = 'circle',
+  Rectangle = 'rectangle'
+}
 type Color = 'red' | 'green' | 'blue';
 
 export interface Figure {
@@ -8,8 +12,16 @@ export interface Figure {
   getArea(): number;
 }
 
+export function checkLength(...args: number[]): boolean {
+  return args.some((value) => value <= 0);
+}
+
+export function rounder(area: number): number {
+  return Math.floor(area * 100) / 100;
+}
+
 export class Triangle implements Figure {
-  shape: Shape = 'triangle';
+  shape: Shape = Shape.Triangle;
 
   constructor(
     public color: Color,
@@ -17,10 +29,8 @@ export class Triangle implements Figure {
     public b: number,
     public c: number,
   ) {
-    if (this.a <= 0
-      || this.b <= 0
-      || this.c <= 0) {
-      throw new Error('Invalid value.');
+    if (checkLength(this.a, this.b, this.c)) {
+      throw new Error('Invalid sides length.');
     }
 
     const largestSide: number = Math.max(this.a, this.b, this.c);
@@ -31,46 +41,49 @@ export class Triangle implements Figure {
   }
 
   getArea(): number {
-    const p: number = (this.a + this.b + this.c) / 2;
+    const semiPerimeter: number = (this.a + this.b + this.c) / 2;
 
-    return +Math.sqrt(
-      p * (p - this.a) * (p - this.b) * (p - this.c),
-    ).toFixed(2);
+    return rounder(Math.sqrt(
+      semiPerimeter
+       * (semiPerimeter - this.a)
+       * (semiPerimeter - this.b)
+       * (semiPerimeter - this.c),
+    ));
   }
 }
 
 export class Circle implements Figure {
-  shape: Shape = 'circle';
+  shape: Shape = Shape.Circle;
 
   constructor(
     public color: Color,
     public radius: number,
   ) {
-    if (this.radius <= 0) {
+    if (checkLength(this.radius)) {
       throw new Error('Invalid radius length.');
     }
   }
 
   getArea(): number {
-    return Math.floor(Math.PI * this.radius ** 2 * 100) / 100;
+    return rounder(Math.PI * this.radius ** 2);
   }
 }
 
 export class Rectangle implements Figure {
-  shape: Shape = 'rectangle';
+  shape: Shape = Shape.Rectangle;
 
   constructor(
     public color: Color,
     public width: number,
     public heigth: number,
   ) {
-    if (this.width <= 0 || this.heigth <= 0) {
+    if (checkLength(this.heigth, this.width)) {
       throw new Error('Rectangle sides must be greater than 0.');
     }
   }
 
   getArea():number {
-    return +Math.floor(this.heigth * this.width).toFixed(2);
+    return rounder(this.heigth * this.width);
   }
 }
 
