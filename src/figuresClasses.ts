@@ -42,7 +42,7 @@ export class Triangle implements Figure {
     const area = Math.sqrt(halfPerimeter * (halfPerimeter - this.sideA)
       * (halfPerimeter - this.sideB) * (halfPerimeter - this.sideC));
 
-    return Math.floor(area);
+    return Math.floor(area * 100) / 100;
   }
 }
 
