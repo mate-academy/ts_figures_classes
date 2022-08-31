@@ -13,8 +13,6 @@ export interface Figure {
 }
 
 abstract class BaseFigure implements Figure {
-  protected isOk: boolean = true;
-
   constructor(
     readonly shape: Shapes,
     public color: Colors,
@@ -23,10 +21,10 @@ abstract class BaseFigure implements Figure {
     this.color = color;
   }
 
-  protected checkLengths(...values: number[]): void {
-    this.isOk = values.every((value) => value > 0);
+  static checkLengths(...values: number[]): void {
+    const correctValues = values.every((value) => value > 0);
 
-    if (!this.isOk) {
+    if (!correctValues) {
       throw new Error('Every figure length must be > 0!');
     }
   }
@@ -46,16 +44,16 @@ export class Triangle extends BaseFigure {
     public c: number,
   ) {
     super(Shapes.Triangle, color);
-    this.checkLengths(a, b, c);
+    BaseFigure.checkLengths(a, b, c);
     this.checkPossible();
   }
 
   private checkPossible(): void {
     const longest: number = Math.max(this.a, this.b, this.c);
 
-    this.isOk = this.a + this.b + this.c - longest > longest;
+    const isPosiible = this.a + this.b + this.c - longest > longest;
 
-    if (!this.isOk) {
+    if (!isPosiible) {
       throw new Error('Impossible triangle!');
     }
   }
@@ -80,7 +78,7 @@ export class Circle extends BaseFigure {
     public radius: number,
   ) {
     super(Shapes.Circle, color);
-    this.checkLengths(radius);
+    BaseFigure.checkLengths(radius);
   }
 
   public getArea(): number {
@@ -97,7 +95,7 @@ export class Rectangle extends BaseFigure {
     public height: number,
   ) {
     super(Shapes.Rectangle, color);
-    this.checkLengths(width, height);
+    BaseFigure.checkLengths(width, height);
   }
 
   public getArea(): number {
