@@ -12,6 +12,12 @@ export interface Figure {
   getArea(): number,
 }
 
+function errorChecker(...args: number[]): void {
+  if (args.some((argument) => argument <= 0)) {
+    throw new Error('One of elements less or equals zero');
+  }
+}
+
 export class Triangle implements Figure {
   public shape = Shape.Triangle;
 
@@ -21,9 +27,7 @@ export class Triangle implements Figure {
     public b: number,
     public c: number,
   ) {
-    if (a <= 0 || b <= 0 || c <= 0) {
-      throw new Error('One of sides less or equals zero');
-    }
+    errorChecker(a, b, c);
 
     if (a + b <= c || a + c <= b || b + c <= a) {
       throw new Error('The sum of sides less than the third side');
@@ -51,9 +55,7 @@ export class Circle implements Figure {
     public color: Color,
     public radius: number,
   ) {
-    if (radius <= 0) {
-      throw new Error('Radius less or equals zero');
-    }
+    errorChecker(radius);
   }
 
   getArea(): number {
@@ -69,9 +71,7 @@ export class Rectangle implements Figure {
     public width: number,
     public height: number,
   ) {
-    if (width <= 0 || height <= 0) {
-      throw new Error('Side less or equals zero');
-    }
+    errorChecker(width, height);
   }
 
   getArea(): number {
