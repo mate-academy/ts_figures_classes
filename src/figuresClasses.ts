@@ -34,6 +34,10 @@ abstract class GeometricShapes implements Figure {
     return height * width;
   }
 
+  static checkValidSide(...sides: number[]): boolean {
+    return sides.some((side) => side < 1);
+  }
+
   constructor(
     public shape: Shapes,
     public color: Colors,
@@ -52,7 +56,7 @@ export class Triangle extends GeometricShapes {
   ) {
     super(Shapes.Triangle, color);
 
-    if (a < 1 || b < 1 || c < 1) {
+    if (GeometricShapes.checkValidSide(a, b, c)) {
       throw new Error('Side size must be greater than 0');
     }
 
@@ -75,7 +79,7 @@ export class Circle extends GeometricShapes {
   ) {
     super(Shapes.Circle, color);
 
-    if (radius < 0) {
+    if (GeometricShapes.checkValidSide(radius)) {
       throw new Error('Radius must be greater than 0');
     }
   }
@@ -95,7 +99,7 @@ export class Rectangle extends GeometricShapes {
   ) {
     super(Shapes.Rectangle, color);
 
-    if (width < 0 || height < 0) {
+    if (GeometricShapes.checkValidSide(width, height)) {
       throw new Error('Width or height must be greater than 0');
     }
   }
