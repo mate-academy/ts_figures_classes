@@ -69,7 +69,7 @@ export class Rectangle implements Figure {
     public rectangleWidth: number,
     public rectangleHeight: number,
   ) {
-    if (this.rectangleWidth <= 0 || this.rectangleHeight <= 0) {
+    if ([rectangleHeight, rectangleWidth].some((parameter) => parameter <= 0)) {
       throw new Error('Width and hight must be >= 0');
     }
   }
