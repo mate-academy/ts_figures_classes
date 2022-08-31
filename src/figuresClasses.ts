@@ -34,7 +34,7 @@ export class Triangle implements Figure {
   }
 }
 
-export class Circle {
+export class Circle implements Figure {
   shape: Shape = 'circle';
 
   constructor(
@@ -51,7 +51,7 @@ export class Circle {
   }
 }
 
-export class Rectangle {
+export class Rectangle implements Figure {
   shape: Shape = 'rectangle';
 
   constructor(
