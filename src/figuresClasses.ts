@@ -16,11 +16,12 @@ export class Triangle implements Figure {
     public b: number,
     public c: number,
   ) {
-    if (
-      (a + b <= c || a + c <= b || b + c <= a)
-      || (a <= 0 || b <= 0 || c <= 0)
-    ) {
-      throw new Error('Wrong figure parameters');
+    if (a <= 0 || b <= 0 || c <= 0) {
+      throw new Error('a, b and c must be > 0');
+    }
+
+    if (a + b <= c || a + c <= b || b + c <= a) {
+      throw new Error('The longest side must be >= than a sum of two others');
     }
   }
 
@@ -41,7 +42,7 @@ export class Circle implements Figure {
     public radius: number,
   ) {
     if (radius <= 0) {
-      throw new Error('Wrong figure parameters');
+      throw new Error('Radius must be > 0');
     }
   }
 
@@ -61,7 +62,7 @@ export class Rectangle implements Figure {
     public height: number,
   ) {
     if (width <= 0 || height <= 0) {
-      throw new Error('Wrong figure parameters');
+      throw new Error('Width and height must be > 0');
     }
   }
 
