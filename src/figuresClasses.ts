@@ -52,7 +52,7 @@ export class Circle implements Figure {
     public circleRadius: number,
   ) {
     if (this.circleRadius <= 0) {
-      throw new Error('Invalid radius value');
+      throw new Error('Value should be greater than 0');
     }
   }
 
