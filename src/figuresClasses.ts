@@ -21,13 +21,13 @@ export class Triangle implements Figure {
     public c: number,
   ) {
     if (this.a <= 0 || this.b <= 0 || this.c <= 0) {
-      throw new Error('Some side is not correct');
+      throw new Error('Side can not be 0 or less');
     }
 
     if (this.a >= (this.b + this.c)
     || this.b >= (this.c + this.a)
     || this.c >= (this.a + this.b)) {
-      throw new Error('Some side is not correct');
+      throw new Error('Sides 1, 2 and 3 can not form a triangle');
     }
   }
 
@@ -51,7 +51,7 @@ export class Circle implements Figure {
     public radius: number,
   ) {
     if (this.radius <= 0) {
-      throw new Error('Wrong size');
+      throw new Error('Radius can not be 0 or less');
     }
   }
 
