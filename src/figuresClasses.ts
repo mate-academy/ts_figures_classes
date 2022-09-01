@@ -13,6 +13,16 @@ export interface Figure {
   getArea():number;
 }
 
+function isSideCorrect(...args:number[]):boolean {
+  return args.some((arg:number) => {
+    return arg <= 0;
+  });
+}
+
+function rounder(value:number | string):number {
+  return Math.floor(+value * 100) / 100;
+}
+
 export class Triangle implements Figure {
   shape = Shape.Triangle;
 
@@ -22,12 +32,6 @@ export class Triangle implements Figure {
     public b:number,
     public c:number,
   ) {
-    const isSideCorrect = (...args:number[]):boolean => {
-      return args.some((arg:number) => {
-        return arg <= 0;
-      });
-    };
-
     if (isSideCorrect()) {
       throw new Error('Incorrect side length parameter');
     }
@@ -40,9 +44,9 @@ export class Triangle implements Figure {
   getArea():number {
     const getHalf: number = (this.a + this.b + this.c) / 2;
 
-    return Number(Math.sqrt(
+    return rounder(Math.sqrt(
       getHalf * (getHalf - this.a) * (getHalf - this.b) * (getHalf - this.c),
-    ).toFixed(2));
+    ));
   }
 }
 
@@ -53,13 +57,13 @@ export class Circle implements Figure {
     public color: Color,
     public radius: number,
   ) {
-    if (radius <= 0) {
+    if (isSideCorrect(radius)) {
       throw new Error('Incorrect radius. Radius must be greater then zero');
     }
   }
 
   getArea(): number {
-    return Math.floor(Math.PI * (this.radius ** 2) * 100) / 100;
+    return rounder(Math.PI * (this.radius ** 2));
   }
 }
 
@@ -71,7 +75,7 @@ export class Rectangle implements Figure {
     public width: number,
     public height: number,
   ) {
-    if (height <= 0 || width <= 0) {
+    if (isSideCorrect(height, width)) {
       throw new Error('width and height must be greater then zero');
     }
   }
