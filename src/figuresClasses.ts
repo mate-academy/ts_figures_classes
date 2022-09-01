@@ -1,4 +1,8 @@
-type Color = 'red' | 'green' | 'blue';
+enum Color {
+  Red = 'red',
+  Green = 'green',
+  Blue = 'blue',
+}
 type Shape = 'triangle' | 'circle' | 'rectangle';
 
 export interface Figure {
