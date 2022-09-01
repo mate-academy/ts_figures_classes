@@ -16,6 +16,10 @@ export interface Figure {
   getArea(): number;
 }
 
+function sizeChecker(...sides: number[]): Boolean {
+  return sides.some((side: number) => side <= 0);
+}
+
 export class Triangle implements Figure {
   public shape = Shape.Triangle;
 
@@ -25,8 +29,8 @@ export class Triangle implements Figure {
     public sideB: number,
     public sideC: number,
   ) {
-    if ([sideA, sideB, sideC].some((side) => side === 0)) {
-      throw new Error('Side is less than 0');
+    if (sizeChecker(sideA, sideB, sideC)) {
+      throw new Error('All sides must be > 0');
     }
 
     if (sideA >= sideB + sideC
@@ -69,7 +73,7 @@ export class Rectangle implements Figure {
     public rectangleWidth: number,
     public rectangleHeight: number,
   ) {
-    if ([rectangleHeight, rectangleWidth].some((parameter) => parameter <= 0)) {
+    if (sizeChecker(rectangleHeight, rectangleWidth)) {
       throw new Error('Width and hight must be >= 0');
     }
   }
