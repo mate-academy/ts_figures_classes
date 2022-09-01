@@ -1,3 +1,7 @@
+export function zeroChecker(...args: number[]): boolean {
+  return args.every((number) => number >= 0);
+}
+
 export enum FigureShapes {
   Triangle = 'triangle',
   Circle = 'circle',
@@ -19,7 +23,7 @@ export class Triangle implements Figure {
     public b: number,
     public c: number,
   ) {
-    if (a <= 0 || b <= 0 || c <= 0) {
+    if (!zeroChecker(a, b, c)) {
       throw new Error('Triangle sides should be greater than 0');
     }
 
@@ -44,7 +48,7 @@ export class Circle implements Figure {
     public color: string,
     public radius: number,
   ) {
-    if (radius < 0) {
+    if (!zeroChecker(radius)) {
       throw new Error('Come on, radius should be greater than 0');
     }
   }
@@ -62,7 +66,7 @@ export class Rectangle implements Figure {
     public width: number,
     public height: number,
   ) {
-    if (width < 0 || height < 0) {
+    if (!zeroChecker(width, height)) {
       throw new Error('Rectangle side should be greater than 0');
     }
   }
