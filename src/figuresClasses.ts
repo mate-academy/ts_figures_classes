@@ -25,7 +25,7 @@ export class Triangle implements Figure {
     public b: number,
     public c: number,
   ) {
-    if ([a, b, c].some((side) => side === 0)) {
+    if ([a, b, c].some((side) => side <= 0)) {
       throw new Error('ERROR: invalid sides length (some length is <= than 0)');
     }
 
