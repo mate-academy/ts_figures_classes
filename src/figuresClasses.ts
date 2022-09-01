@@ -42,10 +42,11 @@ export class Triangle implements Figure {
   }
 
   getArea():number {
-    const getHalf: number = (this.a + this.b + this.c) / 2;
+    const semiPerimetr: number = (this.a + this.b + this.c) / 2;
 
     return rounder(Math.sqrt(
-      getHalf * (getHalf - this.a) * (getHalf - this.b) * (getHalf - this.c),
+      semiPerimetr * (semiPerimetr - this.a)
+      * (semiPerimetr - this.b) * (semiPerimetr - this.c),
     ));
   }
 }
