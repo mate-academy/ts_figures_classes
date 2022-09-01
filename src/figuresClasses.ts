@@ -7,8 +7,8 @@ enum Shape {
 }
 
 export interface Figure {
-  shape: Shape;
-  color: Color;
+  shape:Shape;
+  color:Color;
 
   getArea():number;
 }
@@ -22,7 +22,13 @@ export class Triangle implements Figure {
     public b:number,
     public c:number,
   ) {
-    if (a <= 0 || b <= 0 || c <= 0) {
+    const isSideCorrect = (...args:number[]):boolean => {
+      return args.some((arg:number) => {
+        return arg <= 0;
+      });
+    };
+
+    if (isSideCorrect()) {
       throw new Error('Incorrect side length parameter');
     }
 
