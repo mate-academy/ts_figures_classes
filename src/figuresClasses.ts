@@ -26,19 +26,21 @@ export class Triangle implements Figure {
     public c: number,
   ) {
     const longestSide = Math.max(this.a, this.b, this.c);
+    const hasInvalidSide = this.a <= 0 || this.b <= 0 || this.c <= 0;
+    const isImpossible = longestSide >= this.a + this.b + this.c - longestSide;
 
-    if (this.a <= 0 || this.b <= 0 || this.c <= 0
-      || longestSide >= this.a + this.b + this.c - longestSide) {
+    if (hasInvalidSide || isImpossible) {
       throw new Error('Can`t make triangle');
     }
   }
 
   getArea(): number {
-    const s = (this.a + this.b + this.c) / 2;
+    const { a, b, c } = this;
 
-    return Math.floor(Math.sqrt(
-      s * (s - this.a) * (s - this.b) * (s - this.c),
-    ) * 100) / 100;
+    const s = (a + b + c) / 2;
+    const area = Math.sqrt(s * (s - a) * (s - b) * (s - c));
+
+    return Math.floor(area * 100) / 100;
   }
 }
 
@@ -55,7 +57,9 @@ export class Circle implements Figure {
   }
 
   getArea(): number {
-    return Math.floor((Math.PI * this.radius ** 2) * 100) / 100;
+    const area = Math.PI * this.radius ** 2;
+
+    return Math.floor(area * 100) / 100;
   }
 }
 
