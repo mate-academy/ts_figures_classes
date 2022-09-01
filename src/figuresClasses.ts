@@ -20,7 +20,7 @@ export class Triangle implements Figure {
         || this.a >= this.b + this.c
         || this.b >= this.c + this.a
         || this.c >= this.b + this.a) {
-      throw new Error('Invalid input data');
+      throw new Error('Side must be the correct length');
     }
   }
 
@@ -43,7 +43,7 @@ export class Circle implements Figure {
     public radius: number,
   ) {
     if (this.radius <= 0) {
-      throw new Error('Invalid input data');
+      throw new Error('Radius must be the correct length');
     }
   }
 
@@ -63,7 +63,7 @@ export class Rectangle implements Figure {
     public height: number,
   ) {
     if (this.width <= 0 || this.height <= 0) {
-      throw new Error('Invalid input data');
+      throw new Error('Width and height must be the correct length');
     }
   }
 
