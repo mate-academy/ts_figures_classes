@@ -1,4 +1,14 @@
 
+function roundedArea(area:number):number {
+  return Math.floor(area * 100) / 100;
+}
+
+function checkArg(arg: number):void {
+  if (arg <= 0) {
+    throw new Error('One of side or radius <= 0');
+  }
+}
+
 type Color = 'red' | 'green' | 'blue';
 enum Shapes {
   Triangle = 'triangle',
@@ -12,26 +22,17 @@ export interface Figure {
   getArea(): number;
 }
 
-function roundedArea(area:number):number {
-  return Math.floor(area * 100) / 100;
-}
-
-function chackArg(arg: number):void {
-  if (arg <= 0) {
-    throw new Error('One of side or radius <= 0');
-  }
-}
-
 export class Triangle implements Figure {
   public shape = Shapes.Triangle;
 
   constructor(
+    // public shape:Shapes,
     public color: Color,
     public sideA: number,
     public sideB: number,
     public sideC: number,
   ) {
-    [sideA, sideB, sideC].some((side):void => chackArg(side));
+    [sideA, sideB, sideC].some((side):void => checkArg(side));
 
     if (sideA + sideB <= sideC
       || sideB + sideC <= sideA
@@ -57,7 +58,7 @@ export class Circle implements Figure {
     public color: Color,
     public radius: number,
   ) {
-    chackArg(radius);
+    checkArg(radius);
   }
 
   public getArea():number {
@@ -73,7 +74,7 @@ export class Rectangle implements Figure {
     public width: number,
     public height: number,
   ) {
-    [width, height].forEach((side):void => chackArg(side));
+    [width, height].forEach((side):void => checkArg(side));
   }
 
   public getArea():number {
@@ -81,6 +82,6 @@ export class Rectangle implements Figure {
   }
 }
 
-export function getInfo(figure:Rectangle|Circle|Triangle):string {
+export function getInfo(figure: Figure):string {
   return `A ${figure.color} ${figure.shape} - ${figure.getArea()}`;
 }
