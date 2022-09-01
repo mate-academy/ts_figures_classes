@@ -1,27 +1,21 @@
+type Colors = 'red' | 'blue' | 'green';
+type Shape = 'circle' | 'triangle' | 'rectangle';
+
 export interface Figure {
-  shape: string;
-  color: string;
+  shape: Shape;
+  color: Colors;
   getArea(): number;
 }
 
 export class Triangle implements Figure {
-  shape: string;
+  shape: Shape = 'triangle';
 
-  color: string;
-
-  a: number;
-
-  b: number;
-
-  c: number;
-
-  constructor(color: string, a: number, b: number, c: number) {
-    this.shape = 'triangle';
-    this.color = color;
-    this.a = a;
-    this.b = b;
-    this.c = c;
-
+  constructor(
+    public color: Colors,
+    public a: number,
+    public b: number,
+    public c: number,
+  ) {
     const maxSide: number = Math.max(a, b, c);
 
     if (maxSide >= a + b + c - maxSide) {
@@ -39,17 +33,13 @@ export class Triangle implements Figure {
 }
 
 export class Circle implements Figure {
-  shape: string;
+  shape: Shape = 'circle';
 
-  color: string;
+  constructor(
+    public color: Colors,
+    public radius: number,
 
-  radius: number;
-
-  constructor(color: string, radius: number) {
-    this.shape = 'circle';
-    this.color = color;
-    this.radius = radius;
-
+  ) {
     if (this.radius <= 0) {
       throw new Error('Radius should be positive');
     }
@@ -61,20 +51,13 @@ export class Circle implements Figure {
 }
 
 export class Rectangle implements Figure {
-  shape: string;
+  shape: Shape = 'rectangle';
 
-  color: string;
-
-  a: number;
-
-  b: number;
-
-  constructor(color: string, a: number, b: number) {
-    this.shape = 'rectangle';
-    this.color = color;
-    this.a = a;
-    this.b = b;
-
+  constructor(
+    public color: Colors,
+    public a: number,
+    public b: number,
+  ) {
     if (this.a <= 0 || this.b <= 0) {
       throw new Error('Sides should be positive');
     }
