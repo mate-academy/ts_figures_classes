@@ -2,6 +2,10 @@ export function zeroChecker(...args: number[]): boolean {
   return args.every((number) => number >= 0);
 }
 
+export function rounder(number: number): number {
+  return Math.floor(number * 100) / 100;
+}
+
 export enum FigureShapes {
   Triangle = 'triangle',
   Circle = 'circle',
@@ -33,11 +37,12 @@ export class Triangle implements Figure {
   }
 
   getArea(): number {
-    const s = (this.a + this.b + this.c) / 2;
+    const semiPerimetr = (this.a + this.b + this.c) / 2;
 
-    const area = Math.sqrt(s * ((s - this.a) * (s - this.b) * (s - this.c)));
+    const area = Math.sqrt(semiPerimetr * ((semiPerimetr - this.a)
+    * (semiPerimetr - this.b) * (semiPerimetr - this.c)));
 
-    return Math.floor(area * 100) / 100;
+    return rounder(area);
   }
 }
 
@@ -54,7 +59,7 @@ export class Circle implements Figure {
   }
 
   getArea(): number {
-    return Math.floor((Math.PI * this.radius * this.radius) * 100) / 100;
+    return rounder(Math.PI * this.radius * this.radius);
   }
 }
 
@@ -72,7 +77,7 @@ export class Rectangle implements Figure {
   }
 
   getArea(): number {
-    return this.width * this.height;
+    return rounder(this.width * this.height);
   }
 }
 
