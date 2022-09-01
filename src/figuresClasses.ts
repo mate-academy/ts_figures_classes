@@ -1,7 +1,16 @@
 // import { type } from "os";
 
-type Color = 'red' | 'green' | 'blue';
-type Shape = 'triangle' | 'circle' | 'rectangle';
+enum Color {
+  Red = 'red',
+  Green = 'green',
+  Blue = 'blue',
+}
+
+enum Shape {
+  Triangle = 'triangle',
+  Circle = 'circle',
+  Rectangle = 'rectangle',
+}
 
 export interface Figure {
   shape: Shape;
@@ -9,8 +18,16 @@ export interface Figure {
   getArea(): number;
 }
 
+function errors(...args: number[]): boolean {
+  return args.some((arg: number) => arg <= 0);
+}
+
+function rounder(num: number): number {
+  return Math.floor(num * 100) / 100;
+}
+
 export class Triangle implements Figure {
-  public shape: Shape = 'triangle';
+  public shape = Shape.Triangle;
 
   constructor(
     public color: Color,
@@ -18,7 +35,7 @@ export class Triangle implements Figure {
     public b: number,
     public c: number,
   ) {
-    if (a <= 0 || b <= 0 || c <= 0) {
+    if (errors(a, b, c)) {
       throw new Error('side cannot be less than or equal to 0');
     }
 
@@ -28,21 +45,26 @@ export class Triangle implements Figure {
   }
 
   getArea(): number {
-    const s: number = (this.a + this.b + this.c) / 2;
-    const area = Math.sqrt(s * (s - this.a) * (s - this.b) * (s - this.c));
+    const semiPerimetr: number = (this.a + this.b + this.c) / 2;
+    const area = Math.sqrt(
+      semiPerimetr
+      * (semiPerimetr - this.a)
+      * (semiPerimetr - this.b)
+      * (semiPerimetr - this.c),
+    );
 
-    return Math.floor(area * 100) / 100;
+    return rounder(area);
   }
 }
 
 export class Circle {
-  public shape: Shape = 'circle';
+  public shape = Shape.Circle;
 
   constructor(
     public color: Color,
     public radius: number,
   ) {
-    if (radius <= 0) {
+    if (errors(radius)) {
       throw new Error('radius cannot be less than or equal to 0');
     }
   }
@@ -50,19 +72,19 @@ export class Circle {
   getArea(): number {
     const area = Math.PI * (this.radius ** 2);
 
-    return Math.floor(area * 100) / 100;
+    return rounder(area);
   }
 }
 
 export class Rectangle {
-  public shape: Shape = 'rectangle';
+  public shape = Shape.Rectangle;
 
   constructor(
     public color: Color,
     public width : number,
     public height : number,
   ) {
-    if (width <= 0 || height <= 0) {
+    if (errors(width, height)) {
       throw new Error('side cannot be less than or equal to 0');
     }
   }
@@ -70,7 +92,7 @@ export class Rectangle {
   getArea(): number {
     const area = this.width * this.height;
 
-    return Math.floor(area * 100) / 100;
+    return rounder(area);
   }
 }
 
