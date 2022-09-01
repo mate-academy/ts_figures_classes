@@ -16,26 +16,26 @@ export class Triangle implements Figure {
 
   constructor(
     public color: Color,
-    public a: number,
-    public b: number,
-    public c: number,
+    public side1: number,
+    public side2: number,
+    public side3: number,
   ) {
-    if (this.a <= 0 || this.b <= 0 || this.c <= 0) {
+    if (this.side1 <= 0 || this.side2 <= 0 || this.side3 <= 0) {
       throw new Error('Side can not be 0 or less');
     }
 
-    if (this.a >= (this.b + this.c)
-    || this.b >= (this.c + this.a)
-    || this.c >= (this.a + this.b)) {
+    if (this.side1 >= (this.side2 + this.side3)
+    || this.side2 >= (this.side3 + this.side1)
+    || this.side3 >= (this.side1 + this.side2)) {
       throw new Error('Sides 1, 2 and 3 can not form a triangle');
     }
   }
 
   getArea(): number {
-    const halfPer = (this.a + this.b + this.c) / 2;
+    const halfPer = (this.side1 + this.side2 + this.side3) / 2;
 
-    const perimetr = halfPer * (halfPer - this.a)
-    * (halfPer - this.b) * (halfPer - this.c);
+    const perimetr = halfPer * (halfPer - this.side1)
+    * (halfPer - this.side2) * (halfPer - this.side3);
 
     const resultPer: number = Math.sqrt(perimetr);
 
