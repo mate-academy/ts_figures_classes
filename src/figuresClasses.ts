@@ -1,14 +1,31 @@
-type Shape = 'triangle' | 'circle' | 'rectangle';
-type Color = 'red' | 'green' | 'blue';
+enum Shape {
+  Triangle = 'triangle',
+  Circle = 'circle',
+  Rectangle = 'rectangle',
+}
+
+enum Color {
+  Red = 'red',
+  Green = 'green',
+  Blue = 'blue',
+}
+
+function roundArea(area: number): number {
+  return Math.floor(100 * area) / 100;
+}
+
+function isPositiveNumber(...numbers: number[]): boolean {
+  return numbers.some((num: number) => num <= 0);
+}
 
 export interface Figure {
-  color: string;
+  color: Color;
   shape: string;
   getArea(): number;
 }
 
 export class Triangle implements Figure {
-  shape: Shape = 'triangle';
+  public shape: Shape = Shape.Triangle;
 
   constructor(
     public color: Color,
@@ -16,7 +33,7 @@ export class Triangle implements Figure {
     public b: number,
     public c: number,
   ) {
-    if (a <= 0 || b <= 0 || c <= 0) {
+    if (isPositiveNumber(a, b, c)) {
       throw new Error('Sides are not valid (side <= 0)');
     }
 
@@ -49,45 +66,49 @@ export class Triangle implements Figure {
     const semiPerimeter = (this.a + this.b + this.c) / 2;
     const area = Math.sqrt(semiPerimeter
     * (semiPerimeter - this.a)
-  * (semiPerimeter - this.b)
-  * (semiPerimeter - this.c));
+    * (semiPerimeter - this.b)
+    * (semiPerimeter - this.c));
 
-    return +area.toFixed(2);
+    return roundArea(area);
   }
 }
 
 export class Circle implements Figure {
-  shape: Shape = 'circle';
+  public shape: Shape = Shape.Circle;
 
   constructor(
     public color: Color,
     public radius: number,
   ) {
-    if (radius <= 0) {
+    if (isPositiveNumber(radius)) {
       throw new Error('Radius is not valid!');
     }
   }
 
   getArea(): number {
-    return Math.floor(100 * (Math.PI * this.radius ** 2)) / 100;
+    const area = Math.PI * this.radius ** 2;
+
+    return roundArea(area);
   }
 }
 
 export class Rectangle implements Figure {
-  shape: Shape = 'rectangle';
+  public shape: Shape = Shape.Rectangle;
 
   constructor(
     public color: Color,
     public width: number,
     public height: number,
   ) {
-    if (this.width <= 0 || this.height <= 0) {
+    if (isPositiveNumber(width, height)) {
       throw new Error('Sides are not positive!');
     }
   }
 
   getArea(): number {
-    return this.height * this.width;
+    const area = this.height * this.width;
+
+    return roundArea(area);
   }
 }
 
