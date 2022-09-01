@@ -16,6 +16,14 @@ export interface Figure {
   getArea(): number;
 }
 
+function checkZero(...args: number[]): boolean {
+  return args.some((item) => item <= 0);
+}
+
+function roundArea(area: number): number {
+  return Math.trunc(area * 100) / 100;
+}
+
 export class Triangle implements Figure {
   shape: Shape = Shape.Triangle;
 
@@ -25,7 +33,7 @@ export class Triangle implements Figure {
     public b: number,
     public c: number,
   ) {
-    if ([a, b, c].some((side) => side <= 0)) {
+    if (checkZero(a, b, c)) {
       throw new Error('ERROR: invalid sides length (some length is <= than 0)');
     }
 
@@ -48,7 +56,7 @@ export class Triangle implements Figure {
         * (semiPerimeter - this.c),
     );
 
-    return Math.round(area * 100) / 100;
+    return roundArea(area);
   }
 }
 
@@ -65,7 +73,9 @@ export class Circle implements Figure {
   }
 
   getArea(): number {
-    return Math.floor(Math.PI * this.radius ** 2 * 100) / 100;
+    const area: number = Math.PI * this.radius ** 2;
+
+    return roundArea(area);
   }
 }
 
@@ -77,8 +87,7 @@ export class Rectangle {
     public width: number,
     public height: number,
   ) {
-    const rectangleCheck: boolean = [width, height]
-      .some((parameter) => parameter <= 0);
+    const rectangleCheck: boolean = checkZero(width, height);
 
     if (rectangleCheck) {
       throw new Error('ERROR: width and hight must be >= than 0');
@@ -86,7 +95,7 @@ export class Rectangle {
   }
 
   getArea(): number {
-    return this.width * this.height;
+    return Math.round(this.width * this.height);
   }
 }
 
