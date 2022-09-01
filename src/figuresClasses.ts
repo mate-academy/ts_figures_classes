@@ -16,7 +16,7 @@ export interface Figure {
   getArea(): number;
 }
 
-function haveIvalidValue(...args: number[]): boolean {
+function haveInvalidValue(...args: number[]): boolean {
   return args.some((value) => value <= 0);
 }
 
@@ -36,7 +36,7 @@ export class Triangle implements Figure {
     const maxSide: number = Math.max(a, b, c);
     const invalidSidesRatio: boolean = maxSide >= a + b + c - maxSide;
 
-    if (haveIvalidValue(a, b, c) || invalidSidesRatio) {
+    if (haveInvalidValue(a, b, c) || invalidSidesRatio) {
       throw new Error(`sides ${a}, ${b} and ${c} can't form a triangle`);
     }
   }
@@ -61,7 +61,7 @@ export class Circle implements Figure {
     public color: Color,
     public radius: number,
   ) {
-    if (haveIvalidValue(radius)) {
+    if (haveInvalidValue(radius)) {
       throw new Error('radius should be greater than 0');
     }
   }
@@ -79,7 +79,7 @@ export class Rectangle implements Figure {
     public width: number,
     public height: number,
   ) {
-    if (haveIvalidValue(width, height)) {
+    if (haveInvalidValue(width, height)) {
       throw new Error('width and height should be greater than 0');
     }
   }
