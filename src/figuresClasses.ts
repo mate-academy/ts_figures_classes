@@ -1,26 +1,34 @@
+enum Shape {
+  Triangle = 'triangle',
+  Circle = 'circle',
+  Rectangle = 'rectangle',
+}
+
+type Color = 'red' | 'green' | 'blue';
+
 export interface Figure {
-  shape: 'triangle' | 'circle' | 'rectangle',
-  color: 'red' | 'green' | 'blue',
+  shape: Shape,
+  color: Color,
   getArea(): number,
 }
 
 export class Triangle implements Figure {
+  public shape = Shape.Triangle;
+
   constructor(
-    public color: 'red' | 'green' | 'blue',
+    public color: Color,
     public a: number,
     public b: number,
     public c: number,
-    public shape: Figure['shape'] = 'triangle',
   ) {
     const sides = [a, b, c];
     const longestSide = Math.max(a, b, c);
     const smallerSides = sides.filter((side: number) => side !== longestSide);
 
-    if (a <= 0
-      || b <= 0
-      || c <= 0
-      || longestSide >= (smallerSides[0] + smallerSides[1])) {
-      throw new Error('Error!');
+    if (a <= 0 || b <= 0 || c <= 0) {
+      throw new Error('Error! All sides should be greater than 0');
+    } else if (longestSide >= (smallerSides[0] + smallerSides[1])) {
+      throw new Error('The longest side should be < than a sum of two others');
     }
   }
 
@@ -33,13 +41,14 @@ export class Triangle implements Figure {
 }
 
 export class Circle implements Figure {
+  public shape = Shape.Circle;
+
   constructor(
-    public color: 'red' | 'green' | 'blue',
+    public color: Color,
     public radius: number,
-    public shape: Figure['shape'] = 'circle',
   ) {
     if (radius <= 0) {
-      throw new Error('Error!');
+      throw new Error('Error! Radius should be greater than 0');
     }
   }
 
@@ -49,14 +58,15 @@ export class Circle implements Figure {
 }
 
 export class Rectangle implements Figure {
+  public shape = Shape.Rectangle;
+
   constructor(
-    public color: 'red' | 'green' | 'blue',
+    public color: Color,
     public width: number,
     public height: number,
-    public shape: Figure['shape'] = 'rectangle',
   ) {
     if (width <= 0 || height <= 0) {
-      throw new Error('Error!');
+      throw new Error('Error! Width and height should be greater than 0');
     }
   }
 
