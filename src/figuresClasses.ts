@@ -1,15 +1,23 @@
-type Shape = 'triangle' | 'circle' | 'rectangle';
+enum Shape {
+  Triangle = 'triangle',
+  Circle = 'circle',
+  Rectangle = 'rectangle',
+}
+
 type Color = 'red' | 'green' | 'blue';
 
 export interface Figure {
   shape: Shape,
   color: Color,
-
   getArea(): number;
 }
 
+function checkAFigure(...args: number[]): boolean {
+  return args.some((arg) => arg <= 0);
+}
+
 export class Triangle implements Figure {
-  shape: Shape = 'triangle';
+  shape: Shape = Shape.Triangle;
 
   constructor(
     public color: Color,
@@ -17,9 +25,7 @@ export class Triangle implements Figure {
     public b: number,
     public c: number,
   ) {
-    if (this.a <= 0
-     || this.b <= 0
-     || this.c <= 0) {
+    if (checkAFigure(a, b, c)) {
       throw new Error('incorrect figure parameters');
     }
 
@@ -42,13 +48,13 @@ export class Triangle implements Figure {
 }
 
 export class Circle implements Figure {
-  shape: Shape = 'circle';
+  shape: Shape = Shape.Circle;
 
   constructor(
     public color: Color,
     public radius: number,
   ) {
-    if (radius < 0) {
+    if (checkAFigure(radius)) {
       throw new Error('There is no circle');
     }
   }
@@ -59,15 +65,14 @@ export class Circle implements Figure {
 }
 
 export class Rectangle implements Figure {
-  shape: Shape = 'rectangle';
+  shape: Shape = Shape.Rectangle;
 
   constructor(
     public color: Color,
     public width: number,
     public height: number,
   ) {
-    if (width <= 0
-    || height <= 0) {
+    if (checkAFigure(width, height)) {
       throw new Error('This is line, not rectangle');
     }
   }
