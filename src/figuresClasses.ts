@@ -1,5 +1,10 @@
-type Shape = 'triangle' | 'circle' | 'rectangle';
 type Color = 'red' | 'green' | 'blue';
+
+enum Shape {
+  Triangle = 'triangle',
+  Circle = 'circle',
+  Rectangle = 'rectangle',
+}
 
 export interface Figure {
   shape: Shape;
@@ -8,8 +13,14 @@ export interface Figure {
   getArea(): number;
 }
 
+function errorChecking(...args: number[]): void {
+  if (args.some((argument) => argument <= 0)) {
+    throw new Error('Values must be greater than zero');
+  }
+}
+
 export class Triangle implements Figure {
-  shape: Shape = 'triangle';
+  shape = Shape.Triangle;
 
   constructor(
     public color: Color,
@@ -17,9 +28,7 @@ export class Triangle implements Figure {
     public b: number,
     public c: number,
   ) {
-    if (a <= 0 || b <= 0 || c <= 0) {
-      throw new Error('Side must be greater than zero');
-    }
+    errorChecking(a, b, c);
 
     if ((a + b <= c) || (a + c <= b) || (b + c <= a)) {
       throw new Error('The hypotenuse is shorter than the sum of the legs');
@@ -41,15 +50,13 @@ export class Triangle implements Figure {
 }
 
 export class Circle implements Figure {
-  shape: Shape = 'circle';
+  shape = Shape.Circle;
 
   constructor(
     public color: Color,
     public radius: number,
   ) {
-    if (radius <= 0) {
-      throw new Error('Radius should be greater then zero');
-    }
+    errorChecking(radius);
   }
 
   getArea(): number {
@@ -58,16 +65,14 @@ export class Circle implements Figure {
 }
 
 export class Rectangle {
-  shape: Shape = 'rectangle';
+  shape = Shape.Rectangle;
 
   constructor(
     public color: Color,
     public width: number,
     public height: number,
   ) {
-    if (height <= 0 || width <= 0) {
-      throw new Error('Sides must be greater than zero');
-    }
+    errorChecking(width, height);
   }
 
   getArea():number {
