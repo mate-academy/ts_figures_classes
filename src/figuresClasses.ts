@@ -31,7 +31,7 @@ export class Triangle implements Figure {
       || this.b >= this.a + this.c
       || this.c >= this.a + this.b
     ) {
-      throw new Error('Error! Invalid result');
+      throw new Error('Error! sides a, b and c can\'t form a triangle');
     }
   }
 
@@ -53,7 +53,7 @@ export class Circle {
     public radius: number,
   ) {
     if (this.radius <= 0) {
-      throw new Error('Error! Invalid result');
+      throw new Error('Error! Invalid radius');
     }
   }
 
@@ -71,7 +71,7 @@ export class Rectangle {
     public height: number,
   ) {
     if (this.width <= 0 || this.height <= 0) {
-      throw new Error('Error! Invalid result');
+      throw new Error('Error! Invalid side length');
     }
   }
 
