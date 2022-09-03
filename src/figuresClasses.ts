@@ -1,4 +1,4 @@
-function MathFloor(value: number): number {
+function Rounding(value: number): number {
   return Math.floor(value * 100) / 100;
 }
 
@@ -32,7 +32,9 @@ export class Triangle implements Figure {
     if (this.SideA + this.SideB <= this.SideC
       || this.SideB + this.SideC <= this.SideB
       || this.SideC + this.SideB <= this.SideA) {
-      throw new Error('Longest side can`t be less than sum of two other sides');
+      throw new Error(
+        'Longest side can`t be longer than sum of two other sides',
+      );
     }
   }
 
@@ -45,7 +47,7 @@ export class Triangle implements Figure {
       * (semiPerimeter - this.SideC),
     );
 
-    return MathFloor(area);
+    return Rounding(area);
   }
 }
 
@@ -64,7 +66,7 @@ export class Circle implements Figure {
   getArea(): number {
     const area: number = Math.PI * (this.radius ** 2);
 
-    return MathFloor(area);
+    return Rounding(area);
   }
 }
 
@@ -77,14 +79,14 @@ export class Rectangle implements Figure {
     public height: number,
   ) {
     if (this.width <= 0 || this.height <= 0) {
-      throw new Error('Side length can`t be 0');
+      throw new Error('Side length should be positive');
     }
   }
 
   getArea(): number {
     const area: number = this.width * this.height;
 
-    return MathFloor(area);
+    return Rounding(area);
   }
 }
 
