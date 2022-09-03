@@ -17,6 +17,10 @@ function checkLength(...args: number[]): void {
   }
 }
 
+function rounder(area: number): number {
+  return Number(area.toFixed(2));
+}
+
 export class Triangle implements Figure {
   public shape: Shape = Shape.Triangle;
 
@@ -42,7 +46,7 @@ export class Triangle implements Figure {
         * (semiperimeter - this.b)
         * (semiperimeter - this.c));
 
-    return Number(area.toFixed(2));
+    return rounder(area);
   }
 }
 
@@ -77,7 +81,7 @@ export class Rectangle implements Figure {
   getArea(): number {
     const area: number = this.width * this.height;
 
-    return Number(area.toFixed(2));
+    return rounder(area);
   }
 }
 
