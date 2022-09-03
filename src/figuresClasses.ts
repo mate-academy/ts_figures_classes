@@ -1,14 +1,34 @@
-type Shapes = 'triangle' | 'circle' | 'rectangle';
+/* eslint-disable max-len */
 type Colors = 'red' | 'green' | 'blue';
 
+enum Shape {
+  Triangle = 'triangle',
+  Circle = 'circle',
+  Rectangle = 'rectangle',
+}
+
 export interface Figure {
-  shape: Shapes;
+  shape: Shape;
   color: Colors;
   getArea(): number;
 }
 
+function errorChecking(...args: number[]): void {
+  if (args.some((argument) => argument <= 0)) {
+    throw new Error('Values must be greater than zero');
+  }
+}
+
+function rounder(num: number): number {
+  if (typeof num === 'number') {
+    return Number(num.toFixed(2));
+  }
+
+  return 0;
+}
+
 export class Triangle implements Figure {
-  shape: Shapes = 'triangle';
+  shape = Shape.Triangle;
 
   constructor(
     public color: Colors,
@@ -26,16 +46,15 @@ export class Triangle implements Figure {
   }
 
   getArea(): number {
-    const p: number = (this.a + this.b + this.c) / 2;
-    const square: number
-      = Math.sqrt(p * (p - this.a) * (p - this.b) * (p - this.c));
+    const semiPeriment: number = (this.a + this.b + this.c) / 2;
+    const square: number = Math.sqrt(semiPeriment * (semiPeriment - this.a) * (semiPeriment - this.b) * (semiPeriment - this.c));
 
-    return Number(square.toFixed(2));
+    return rounder(square);
   }
 }
 
 export class Circle {
-  shape: Shapes = 'circle';
+  shape = Shape.Circle;
 
   constructor(
     public color: Colors,
@@ -54,22 +73,20 @@ export class Circle {
 }
 
 export class Rectangle {
-  shape: Shapes = 'rectangle';
+  shape = Shape.Rectangle;
 
   constructor(
     public color: Colors,
     public a: number,
     public b: number,
   ) {
-    if (a <= 0 || b <= 0) {
-      throw new Error('Rectangle sides should be a positive numbers');
-    }
+    errorChecking(a, b);
   }
 
   getArea(): number {
     const square: number = this.a * this.b;
 
-    return Number(square.toFixed(2));
+    return rounder(square);
   }
 }
 
