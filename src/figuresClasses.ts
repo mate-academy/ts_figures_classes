@@ -1,13 +1,13 @@
 enum Color {
-  red = 'red',
-  green = 'green',
-  blue = 'blue',
+  Red = 'red',
+  Green = 'green',
+  Blue = 'blue',
 }
 
 enum Shape {
-  triangle = 'triangle',
-  circle = 'circle',
-  rectangle = 'rectangle',
+  Triangle = 'triangle',
+  Circle = 'circle',
+  Rectangle = 'rectangle',
 }
 
 export interface Figure {
@@ -16,16 +16,16 @@ export interface Figure {
   getArea(): number;
 }
 
-function isValidLength(...args: number[]): boolean {
+function isInValidLength(...args: number[]): boolean {
   return args.some((a: number) => a <= 0);
 }
 
-function round(param: number): number {
+function floor(param: number): number {
   return Math.floor(100 * param) / 100;
 }
 
 export class Triangle implements Figure {
-  public shape: Shape = Shape.triangle;
+  public shape: Shape = Shape.Triangle;
 
   constructor(
     public color: Color,
@@ -34,46 +34,46 @@ export class Triangle implements Figure {
     public c: number,
   ) {
     const maxLength: number = Math.max(a, b, c);
-    const validLength: boolean = maxLength >= a + b + c - maxLength;
+    const invalidSidesRatio: boolean = maxLength >= a + b + c - maxLength;
 
-    if (isValidLength(a, b, c)
-     || validLength) {
+    if (isInValidLength(a, b, c)
+     || invalidSidesRatio) {
       throw new Error('ERROR');
     }
   }
 
   getArea(): number {
-    const Perimeter: number = (this.a + this.b + this.c) / 2;
+    const perimeter: number = (this.a + this.b + this.c) / 2;
     const area: number = Math.sqrt(
-      Perimeter
-      * (Perimeter - this.a)
-      * (Perimeter - this.b)
-      * (Perimeter - this.c),
+      perimeter
+      * (perimeter - this.a)
+      * (perimeter - this.b)
+      * (perimeter - this.c),
     );
 
-    return round(area);
+    return floor(area);
   }
 }
 
 export class Circle implements Figure {
-  public shape: Shape = Shape.circle;
+  public shape: Shape = Shape.Circle;
 
   constructor(
     public color: Color,
     public radius: number,
   ) {
-    if (radius <= 0) {
+    if (isInValidLength(this.radius)) {
       throw new Error('ERROR');
     }
   }
 
   getArea(): number {
-    return round(Math.PI * this.radius ** 2);
+    return floor(Math.PI * this.radius ** 2);
   }
 }
 
 export class Rectangle implements Figure {
-  public shape: Shape = Shape.rectangle;
+  public shape: Shape = Shape.Rectangle;
 
   constructor(
     public color: Color,
@@ -86,7 +86,7 @@ export class Rectangle implements Figure {
   }
 
   getArea(): number {
-    return round(this.width * this.height);
+    return floor(this.width * this.height);
   }
 }
 
