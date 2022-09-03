@@ -1,14 +1,24 @@
-type Shape = 'triangle' | 'circle' | 'rectangle';
+enum Shape {
+  Triangle = 'triangle',
+  Circle = 'circle',
+  Rectangle = 'rectangle',
+}
 type Color = 'red' | 'green' | 'blue';
 
 export interface Figure {
-  shape: string,
-  color: string,
+  shape: Shape,
+  color: Color,
   getArea(): number,
 }
 
+function checkLength(...args: number[]): void {
+  if (args.some((argument) => argument <= 0)) {
+    throw new Error('Every figure length must be > 0!');
+  }
+}
+
 export class Triangle implements Figure {
-  public shape: Shape = 'triangle';
+  public shape: Shape = Shape.Triangle;
 
   constructor(
     public color: Color,
@@ -16,10 +26,11 @@ export class Triangle implements Figure {
     public b: number,
     public c: number,
   ) {
-    if (this.a <= 0 || this.b <= 0 || this.c <= 0
-        || this.a >= this.b + this.c
-        || this.b >= this.c + this.a
-        || this.c >= this.b + this.a) {
+    checkLength(a, b, c);
+
+    if (a >= b + c
+        || b >= c + a
+        || c >= b + a) {
       throw new Error('Side must be the correct length');
     }
   }
@@ -36,15 +47,13 @@ export class Triangle implements Figure {
 }
 
 export class Circle implements Figure {
-  public shape: Shape = 'circle';
+  public shape: Shape = Shape.Circle;
 
   constructor(
     public color: Color,
     public radius: number,
   ) {
-    if (this.radius <= 0) {
-      throw new Error('Radius must be the correct length');
-    }
+    checkLength(radius);
   }
 
   getArea(): number {
@@ -55,16 +64,14 @@ export class Circle implements Figure {
 }
 
 export class Rectangle implements Figure {
-  public shape: Shape = 'rectangle';
+  public shape: Shape = Shape.Rectangle;
 
   constructor(
     public color: Color,
     public width: number,
     public height: number,
   ) {
-    if (this.width <= 0 || this.height <= 0) {
-      throw new Error('Width and height must be the correct length');
-    }
+    checkLength(width, height);
   }
 
   getArea(): number {
