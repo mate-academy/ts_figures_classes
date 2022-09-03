@@ -26,11 +26,10 @@ export class Triangle implements Figure {
     public b: number,
     public c: number,
   ) {
-    if (
-      this.a >= this.b + this.c
-      || this.b >= this.a + this.c
-      || this.c >= this.a + this.b
-    ) {
+    const maxLength: number = Math.max(a, b, c);
+    const isValidLength: boolean = maxLength >= a + b + c - maxLength;
+
+    if (isValidLength) {
       throw new Error('Error! sides a, b and c can\'t form a triangle');
     }
   }
@@ -38,8 +37,12 @@ export class Triangle implements Figure {
   getArea(): number {
     const perimeter = (this.a + this.b + this.c) / 2;
 
-    const sqrtValue = Math.sqrt(perimeter * (perimeter - this.a)
-    * (perimeter - this.b) * (perimeter - this.c));
+    const sqrtValue = Math.sqrt(
+      perimeter
+      * (perimeter - this.a)
+      * (perimeter - this.b)
+      * (perimeter - this.c),
+    );
 
     return Number(sqrtValue.toFixed(2));
   }
