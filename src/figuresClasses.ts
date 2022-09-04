@@ -1,5 +1,14 @@
-type Shape ='triangle' | 'circle' | 'rectangle';
-type Color = 'red' | 'green' | 'blue';
+enum Color {
+  Red = 'red',
+  Green = 'green',
+  Blue = 'blue',
+}
+
+enum Shape {
+  Triangle = 'triangle',
+  Circle = 'circle',
+  Rectangle = 'rectangle',
+}
 
 export interface Figure {
   shape: Shape;
@@ -12,41 +21,43 @@ function validates(...args: number[]): boolean {
 }
 
 export class Triangle {
-  shape: Shape = 'triangle';
+  shape = Shape.Triangle;
 
   constructor(
     public color: Color,
-    public a: number,
-    public b: number,
-    public c: number,
+    public side1: number,
+    public side2: number,
+    public side3: number,
   ) {
-    if (validates(this.a, this.b, this.c)) {
+    if (validates(side1, side2, side3)) {
       throw new Error('Invalid value');
     }
 
-    if ((a + b) <= c || (a + c) <= b || (b + c) <= a) {
+    if ((side1 + side2) <= side3
+    || (side1 + side3) <= side2
+    || (side2 + side3) <= side1) {
       throw new Error('It is not a triangle');
     }
   }
 
   getArea(): number {
-    const semiPerimeter: number = (this.a + this.b + this.c) / 2;
+    const semiPerimeter: number = (this.side1 + this.side2 + this.side3) / 2;
 
     return Math.floor(Math.sqrt(semiPerimeter
-      * (semiPerimeter - this.a)
-      * (semiPerimeter - this.b)
-      * (semiPerimeter - this.c)) * 100) / 100;
+      * (semiPerimeter - this.side1)
+      * (semiPerimeter - this.side2)
+      * (semiPerimeter - this.side3)) * 100) / 100;
   }
 }
 
 export class Circle {
-  shape: Shape = 'circle';
+  shape = Shape.Circle;
 
   constructor(
     public color: Color,
     public radius: number,
   ) {
-    if (validates(this.radius)) {
+    if (validates(radius)) {
       throw new Error('Invalid value');
     }
   }
@@ -57,14 +68,14 @@ export class Circle {
 }
 
 export class Rectangle {
-  shape: Shape = 'rectangle';
+  shape = Shape.Rectangle;
 
   constructor(
     public color: Color,
     public width: number,
     public height: number,
   ) {
-    if (validates(this.width, this.height)) {
+    if (validates(width, height)) {
       throw new Error('Invalid value');
     }
   }
