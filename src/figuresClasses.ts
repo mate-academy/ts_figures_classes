@@ -12,33 +12,21 @@ export interface Figure {
 
 type Color = 'red' | 'green' | 'blue';
 
-abstract class BaseFigure implements Figure {
-  constructor(
-    readonly shape: Shape,
-    public color: Color,
-  ) {
-    this.shape = shape;
-    this.color = color;
-  }
-
-  abstract getArea():number;
-}
-
 function checkValue(...args: number[]): void {
   if (args.some((side) => side <= 0)) {
     throw new Error('ERROR, value should be > 0');
   }
 }
 
-export class Triangle extends BaseFigure {
+export class Triangle {
+  public shape = Shape.Triangle;
+
   constructor(
     public color: Color,
     public a = 0,
     public b = 0,
     public c = 0,
   ) {
-    super(Shape.Triangle, color);
-    this.color = color;
     checkValue(a, b, c);
 
     if (a + b <= c || a + c <= b || b + c <= a) {
@@ -60,29 +48,29 @@ export class Triangle extends BaseFigure {
   }
 }
 
-export class Circle extends BaseFigure {
+export class Circle {
+  public shape = Shape.Circle;
+
   constructor(
     public color: Color,
     public radius: number,
   ) {
-    super(Shape.Circle, color);
     checkValue(this.radius);
   }
 
   getArea():number {
-    const area = Math.floor((Math.PI * this.radius ** 2) * 100) / 100;
-
-    return area;
+    return Math.floor((Math.PI * this.radius ** 2) * 100) / 100;
   }
 }
 
-export class Rectangle extends BaseFigure {
+export class Rectangle {
+  public shape = Shape.Rectangle;
+
   constructor(
     public color: Color,
     public witdh: number,
     public hight: number,
   ) {
-    super(Shape.Rectangle, color);
     checkValue(this.witdh, this.hight);
   }
 
