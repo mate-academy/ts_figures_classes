@@ -10,6 +10,10 @@ export interface Figure {
   getArea(): number;
 }
 
+function formatNumber(num: number): number {
+  return Math.floor(num * 100) / 100;
+}
+
 type Color = 'red' | 'green' | 'blue';
 
 function checkValue(...args: number[]): void {
@@ -44,7 +48,7 @@ export class Triangle {
       * (semiPerimetr - this.c),
     );
 
-    return Math.floor(area * 100) / 100;
+    return formatNumber(area);
   }
 }
 
@@ -59,7 +63,7 @@ export class Circle {
   }
 
   getArea():number {
-    return Math.floor((Math.PI * this.radius ** 2) * 100) / 100;
+    return formatNumber(Math.PI * this.radius ** 2);
   }
 }
 
