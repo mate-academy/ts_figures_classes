@@ -22,21 +22,13 @@ export class Triangle implements Figure {
       throw new Error('the entered value must be greater than 0');
     }
 
-    if (this.a >= this.b + this.c) {
+    if (
+      this.a >= this.b + this.c
+      || this.c >= this.b + this.a
+      || this.b >= this.a + this.c
+    ) {
       throw new Error(
-        'side "a" must be less than the sum of the other two sides',
-      );
-    }
-
-    if (this.c >= this.b + this.a) {
-      throw new Error(
-        'side "c" must be less than the sum of the other two sides',
-      );
-    }
-
-    if (this.b >= this.a + this.c) {
-      throw new Error(
-        'side "b" must be less than the sum of the other two sides',
+        'The sum of sides less than the third side',
       );
     }
   }
