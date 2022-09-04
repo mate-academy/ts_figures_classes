@@ -7,6 +7,20 @@ export interface Figure {
   getArea(): number;
 }
 
+function checkError(...args: number[]): void {
+  if (args.some((item: number) => item <= 0)) {
+    throw new Error('Side length should be a positive number');
+  }
+}
+
+function checkSides(a: number, b: number, c: number): void {
+  if (a >= b + c || b >= a + c || c >= b + a) {
+    throw new Error(
+      'The longest side of a triangle is >= than a sum of two others',
+    );
+  }
+}
+
 export class Triangle implements Figure {
   shape: Shape = 'triangle';
 
@@ -16,17 +30,8 @@ export class Triangle implements Figure {
     public b: number,
     public c: number,
   ) {
-    if (this.a <= 0 || this.b <= 0 || this.c <= 0) {
-      throw new Error('Side length should be a positive number');
-    }
-
-    if (this.a >= this.b + this.c
-      || this.b >= this.a + this.c
-      || this.c >= this.b + this.a) {
-      throw new Error(
-        'The longest side of a triangle is >= than a sum of two others',
-      );
-    }
+    checkError(a, b, c);
+    checkSides(a, b, c);
   }
 
   getArea(): number {
@@ -47,9 +52,7 @@ export class Circle implements Figure {
     public color: Color,
     public radius: number,
   ) {
-    if (this.radius <= 0) {
-      throw new Error('Value must be a positive number');
-    }
+    checkError(radius);
   }
 
   getArea(): number {
@@ -67,9 +70,7 @@ export class Rectangle implements Figure {
     public width: number,
     public heigth: number,
   ) {
-    if (this.width <= 0 || this.heigth <= 0) {
-      throw new Error('Side length should be a positive number');
-    }
+    checkError(width, heigth);
   }
 
   getArea(): number {
