@@ -17,6 +17,10 @@ export interface Figure {
   getArea: () => number,
 }
 
+function roundDownHundredths(area: number): number {
+  return Math.floor(area * 100) / 100;
+}
+
 export class Triangle implements Figure {
   public shape = Shape.Triangle;
 
@@ -26,16 +30,15 @@ export class Triangle implements Figure {
     public b: number,
     public c: number,
   ) {
-    const longest = [a, b, c];
-    const max: number = Math.max(...longest);
+    const sorted = [a, b, c].sort((first: number, second: number) => {
+      return second - first;
+    });
 
-    longest.splice(longest.indexOf(max), 1);
-
-    if ((a <= 0 || b <= 0 || c <= 0) || max >= (longest[0] + longest[1])) {
+    if ((a <= 0 || b <= 0 || c <= 0)) {
       throw new Error('Length less than zero');
     }
 
-    if (max >= (longest[0] + longest[1])) {
+    if (sorted[0] >= (sorted[1] + sorted[2])) {
       throw new Error('The longest side of a triangle'
       + 'is >= than a sum of two others');
     }
@@ -45,7 +48,7 @@ export class Triangle implements Figure {
     const s = (this.a + this.b + this.c) / 2;
     const area = Math.sqrt(s * ((s - this.a) * (s - this.b) * (s - this.c)));
 
-    return Math.floor(area * 100) / 100;
+    return roundDownHundredths(area);
   }
 }
 
@@ -62,7 +65,9 @@ export class Circle implements Figure {
   }
 
   public getArea(): number {
-    return (Math.floor((Math.PI * this.radius * this.radius) * 100)) / 100;
+    const area = Math.PI * this.radius * this.radius;
+
+    return roundDownHundredths(area);
   }
 }
 
@@ -80,7 +85,9 @@ export class Rectangle {
   }
 
   public getArea():number {
-    return +(this.length * this.width).toFixed(2);
+    const area = this.length * this.width;
+
+    return roundDownHundredths(area);
   }
 }
 
