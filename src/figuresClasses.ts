@@ -20,7 +20,9 @@ export class Triangle implements Figure {
     || [this.a, this.b, this.c].sort((prev, cur) => prev - cur)[2]
     >= [this.a, this.b, this.c].sort((prev, cur) => prev - cur)[0]
     + [this.a, this.b, this.c].sort((prev, cur) => prev - cur)[1]) {
-      throw new Error('your error message');
+      throw new Error(`It’s even hard for me to imagine
+      what kind of triangle this should be.
+      I'm not a quantum computer, can I have a normal triangle?`);
     }
   }
 
@@ -37,7 +39,9 @@ export class Circle implements Figure {
 
   constructor(public color: ColorOfFigure, public r: number) {
     if (this.r <= 0) {
-      throw new Error('your error message');
+      throw new Error(`The circle with radius - 0, seriously?
+        Or, perhaps, you wrote a negative value for the radius,
+        which, in general, does not change the essence of the matter.`);
     }
   }
 
@@ -55,7 +59,9 @@ export class Rectangle implements Figure {
     public b: number,
   ) {
     if (this.a <= 0 || this.b <= 0) {
-      throw new Error('your error message');
+      throw new Error(`The rectangle with length of side - 0, seriously?
+      Or, perhaps, you wrote a negative value for the length of the side,
+      which, in general, does not change the essence of the matter.`);
     }
   }
 
