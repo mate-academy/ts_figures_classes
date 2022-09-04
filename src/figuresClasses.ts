@@ -6,6 +6,12 @@ export enum Shapes {
 
 type Color = 'red' | 'green' | 'blue';
 
+function checkValue(...args: number[]): void {
+  if (args.some((el) => el <= 0)) {
+    throw new Error('Error value is inappropriate');
+  }
+}
+
 export interface Figure {
   shape: Shapes;
   color: Color;
@@ -17,16 +23,11 @@ export class Triangle implements Figure {
 
   constructor(
     public color: Color,
-
     public a: number,
-
     public b: number,
-
     public c: number,
   ) {
-    if (this.a <= 0 || this.b <= 0 || this.c <= 0) {
-      throw new Error('Error invalid input');
-    }
+    checkValue(a, b, c);
 
     if (a >= b + c || b >= a + c || c >= b + a) {
       throw new Error('Error invalid input');
@@ -37,7 +38,7 @@ export class Triangle implements Figure {
     const p = (this.a + this.b + this.c) / 2;
     const square = Math.sqrt(p * (p - this.a) * (p - this.b) * (p - this.c));
 
-    return Math.round(square * 100) / 100;
+    return Math.floor(square * 100) / 100;
   }
 }
 
@@ -46,12 +47,9 @@ export class Circle implements Figure {
 
   constructor(
     public color: Color,
-
     public radius: number,
   ) {
-    if (radius <= 0) {
-      throw new Error('Error radius <= 0');
-    }
+    checkValue(radius);
   }
 
   getArea(): number {
@@ -64,14 +62,10 @@ export class Rectangle implements Figure {
 
   constructor(
     public color: Color,
-
     public width: number,
-
     public height: number,
   ) {
-    if (this.width <= 0 || this.height <= 0) {
-      throw new Error('Error invalid input');
-    }
+    checkValue(width, height);
   }
 
   getArea(): number {
