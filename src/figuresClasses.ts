@@ -16,6 +16,16 @@ export interface Figure {
   getArea(): number;
 }
 
+function validProp(...args: number[]): void {
+  if (args.some((num) => num <= 0)) {
+    throw new Error('Length of properties should be a positive number');
+  }
+}
+
+function roundResult(num: number): number {
+  return Math.floor(num * 100) / 100;
+}
+
 export class Triangle implements Figure {
   shape = Shape.Triangle;
 
@@ -25,13 +35,9 @@ export class Triangle implements Figure {
     public b: number,
     public c: number,
   ) {
+    validProp(a, b, c);
+
     if (
-      a <= 0
-      || b <= 0
-      || c <= 0
-    ) {
-      throw new Error('Every side should be a positive number');
-    } else if (
       a >= (b + c)
       || b >= (a + c)
       || c >= (a + b)
@@ -41,13 +47,18 @@ export class Triangle implements Figure {
   }
 
   getArea(): number {
-    const s = (this.a + this.b + this.c) / 2;
+    const halfPerimeter = (this.a + this.b + this.c) / 2;
 
-    const areaOfTriangle = s * (s - this.a) * (s - this.b) * (s - this.c);
+    const areaOfTriangle = halfPerimeter
+    * (halfPerimeter - this.a)
+    * (halfPerimeter - this.b)
+    * (halfPerimeter - this.c);
 
-    const result = Math.sqrt(areaOfTriangle);
+    let result = Math.sqrt(areaOfTriangle);
 
-    return Math.floor(result * 100) / 100;
+    result = roundResult(result);
+
+    return result;
   }
 }
 
@@ -58,15 +69,15 @@ export class Circle implements Figure {
     public color: Color,
     public radius: number,
   ) {
-    if (radius <= 0) {
-      throw new Error('Radius should be positive number');
-    }
+    validProp(radius);
   }
 
   getArea(): number {
-    const squareOfCircle = Math.PI * (this.radius ** 2);
+    let squareOfCircle = Math.PI * (this.radius ** 2);
 
-    return Math.floor(squareOfCircle * 100) / 100;
+    squareOfCircle = roundResult(squareOfCircle);
+
+    return squareOfCircle;
   }
 }
 
@@ -78,9 +89,7 @@ export class Rectangle implements Figure {
     public width: number,
     public height: number,
   ) {
-    if (width <= 0 || height <= 0) {
-      throw new Error('Every side should be a positive number');
-    }
+    validProp(width, height);
   }
 
   getArea(): number {
