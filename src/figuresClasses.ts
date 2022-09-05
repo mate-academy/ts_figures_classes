@@ -1,12 +1,24 @@
+enum Shape {
+  Triangle = 'triangle',
+  Circle = 'circle',
+  Rectangle = 'rectangle',
+}
+
+type Color = 'red' | 'green' | 'blue';
+
 export interface Figure {
-  shape: 'triangle' | 'circle' | 'rectangle';
-  color: 'red' | 'green' | 'blue';
+  shape: Shape
+  color: Color;
 
   getArea(): number;
 }
 
+function isWrongFigure(...args: number[]): boolean {
+  return args.some((side) => side <= 0);
+}
+
 export class Triangle {
-  shape = 'triangle';
+  shape = Shape.Triangle;
 
   constructor(
     public color: string,
@@ -14,10 +26,7 @@ export class Triangle {
     public sideB: number,
     public sideC: number,
   ) {
-    if (sideA <= 0
-      || sideB <= 0
-      || sideC <= 0
-    ) {
+    if (isWrongFigure(sideA, sideB, sideC)) {
       throw new Error('side must be greater than zero');
     }
 
@@ -32,22 +41,25 @@ export class Triangle {
   }
 
   getArea(): number {
-    const p = (this.sideA + this.sideB + this.sideC) / 2;
+    const semiPerimetr = (this.sideA + this.sideB + this.sideC) / 2;
 
     return Math.floor(Math.sqrt(
-      p * (p - this.sideA) * (p - this.sideB) * (p - this.sideC),
+      semiPerimetr
+      * (semiPerimetr - this.sideA)
+      * (semiPerimetr - this.sideB)
+      * (semiPerimetr - this.sideC),
     ) * 100) / 100;
   }
 }
 
 export class Circle {
-  shape = 'circle';
+  shape = Shape.Circle;
 
   constructor(
     public color: string,
     public radius: number,
   ) {
-    if (radius <= 0) {
+    if (isWrongFigure(radius)) {
       throw new Error('the radius must be greater than zero');
     }
   }
@@ -58,14 +70,14 @@ export class Circle {
 }
 
 export class Rectangle {
-  shape = 'rectangle';
+  shape = Shape.Rectangle;
 
   constructor(
     public color: string,
     public width: number,
     public height: number,
   ) {
-    if (width <= 0 || height <= 0) {
+    if (isWrongFigure(height, width)) {
       throw new Error('side must be greater than zero');
     }
   }
