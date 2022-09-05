@@ -37,8 +37,8 @@ export class Triangle implements Figure {
   getArea(): number {
     const { a, b, c } = this;
 
-    const s = (a + b + c) / 2;
-    const area = Math.sqrt(s * (s - a) * (s - b) * (s - c));
+    const semiP = (a + b + c) / 2;
+    const area = Math.sqrt(semiP * (semiP - a) * (semiP - b) * (semiP - c));
 
     return Math.floor(area * 100) / 100;
   }
@@ -71,7 +71,7 @@ export class Rectangle implements Figure {
     public width: number,
     public height: number,
   ) {
-    if (this.width <= 0 || this.height <= 0) {
+    if (width <= 0 || height <= 0) {
       throw new Error('Too small sides');
     }
   }
