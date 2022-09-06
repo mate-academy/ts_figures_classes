@@ -17,6 +17,10 @@ export interface Figure {
   getArea(): number;
 }
 
+function correctvalue(...args: number[]): boolean {
+  return args.some((param : number) => param <= 0);
+}
+
 export class Triangle implements Figure {
   public shape = Shapes.Triangle;
 
@@ -29,7 +33,7 @@ export class Triangle implements Figure {
     const maxLength: number = Math.max(a, b, c);
     const isValidLength: boolean = maxLength >= a + b + c - maxLength;
 
-    if (isValidLength) {
+    if (correctvalue(this.a, this.b, this.c) || isValidLength) {
       throw new Error('Error! sides a, b and c can\'t form a triangle');
     }
   }
@@ -55,7 +59,7 @@ export class Circle {
     public color: Colors,
     public radius: number,
   ) {
-    if (this.radius <= 0) {
+    if (correctvalue(this.radius)) {
       throw new Error('Error! Invalid radius');
     }
   }
@@ -73,7 +77,7 @@ export class Rectangle {
     public width: number,
     public height: number,
   ) {
-    if (this.width <= 0 || this.height <= 0) {
+    if (correctvalue(this.width, this.height)) {
       throw new Error('Error! Invalid side length');
     }
   }
