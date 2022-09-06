@@ -23,18 +23,24 @@ export class Triangle implements Figure {
   ) {
     const sides = [a, b, c];
     const longestSide = Math.max(a, b, c);
-    const smallerSides = sides.filter((side: number) => side !== longestSide);
+    const hasTooShortSide = sides.some((side) => side <= 0);
+    const hasTooLongSide = longestSide >= a + b + c - longestSide;
 
-    if (a <= 0 || b <= 0 || c <= 0) {
+    if (hasTooShortSide) {
       throw new Error('Error! All sides should be greater than 0');
-    } else if (longestSide >= (smallerSides[0] + smallerSides[1])) {
+    }
+
+    if (hasTooLongSide) {
       throw new Error('The longest side should be < than a sum of two others');
     }
   }
 
   getArea(): number {
-    const p = (this.a + this.b + this.c) / 2;
-    const square = Math.sqrt(p * (p - this.a) * (p - this.b) * (p - this.c));
+    const semiPerimeter = (this.a + this.b + this.c) / 2;
+    const square = Math.sqrt(semiPerimeter
+      * (semiPerimeter - this.a)
+      * (semiPerimeter - this.b)
+      * (semiPerimeter - this.c));
 
     return Math.floor(square * 100) / 100;
   }
