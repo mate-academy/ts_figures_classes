@@ -10,6 +10,12 @@ enum Shape {
   Rectangle = 'rectangle',
 }
 
+function belowZero(property:number): void {
+  if (property <= 0) {
+    throw new Error('Error: radius must be greater than 0!!!');
+  }
+}
+
 export class Triangle implements Figure {
   shape: Shape = Shape.Triangle;
 
@@ -19,9 +25,16 @@ export class Triangle implements Figure {
     public b:number,
     public c:number,
   ) {
-    if (a >= b + c || b >= a + c || c >= a + b || a <= 0 || b <= 0 || c <= 0) {
+    if (a >= b + c
+      || b >= a + c
+      || c >= a + b
+    ) {
       throw new Error('Error: can not create triangle with such data!!!');
     }
+
+    belowZero(a);
+    belowZero(b);
+    belowZero(c);
   }
 
   getArea(): number {
@@ -39,9 +52,7 @@ export class Circle implements Figure {
     public color: 'red' | 'green' | 'blue',
     public radius: number,
   ) {
-    if (radius <= 0) {
-      throw new Error('Error: radius must be greater than 0!!!');
-    }
+    belowZero(radius);
   }
 
   getArea(): number {
@@ -57,9 +68,8 @@ export class Rectangle implements Figure {
     public width:number,
     public height:number,
   ) {
-    if (width <= 0 || height <= 0) {
-      throw new Error('Error: width && height must be greater then 0!!!');
-    }
+    belowZero(width);
+    belowZero(height);
   }
 
   getArea(): number {
