@@ -1,7 +1,12 @@
 // import { type } from "os";
 
-type Shape = 'triangle' | 'circle' | 'rectangle';
 type Color = 'red' | 'green' | 'blue';
+
+enum Shape {
+  Triangle ='triangle',
+  Circle = 'circle',
+  Rectangle = 'rectangle',
+}
 
 export interface Figure {
   shape: Shape;
@@ -24,13 +29,18 @@ interface RectangleSides {
   height: number,
 }
 
+function getRoundedSquare(area: number): number {
+  return Math.floor(area * 100) / 100;
+}
+
 export class Triangle implements Figure, TriangleSides {
+  public shape = Shape.Triangle;
+
   constructor(
     public color: Color,
     public a: number,
     public b: number,
     public c: number,
-    public shape: Shape = 'triangle',
   ) {
     if (this.a <= 0 || this.b <= 0 || this.c <= 0) {
       throw new Error('Enter valid data');
@@ -47,18 +57,19 @@ export class Triangle implements Figure, TriangleSides {
 
   getArea(): number {
     const s: number = (this.a + this.b + this.c) / 2;
-    const square: number
+    const area: number
       = Math.sqrt(s * (s - this.a) * (s - this.b) * (s - this.c));
 
-    return Math.floor(square * 100) / 100;
+    return getRoundedSquare(area);
   }
 }
 
 export class Circle implements Figure, CircleRadius {
+  public shape = Shape.Circle;
+
   constructor(
     public color: Color,
     public radius: number,
-    public shape: Shape = 'circle',
   ) {
     if (this.radius <= 0) {
       throw new Error('Enter valid data');
@@ -66,16 +77,19 @@ export class Circle implements Figure, CircleRadius {
   }
 
   getArea(): number {
-    return Math.floor((Math.PI * this.radius ** 2) * 100) / 100;
+    const area = Math.PI * this.radius ** 2;
+
+    return getRoundedSquare(area);
   }
 }
 
 export class Rectangle implements Figure, RectangleSides {
+  public shape = Shape.Rectangle;
+
   constructor(
     public color: Color,
     public width: number,
     public height: number,
-    public shape: Shape = 'rectangle',
   ) {
     if (this.width <= 0 || this.height <= 0) {
       throw new Error('Enter valid data');
@@ -83,7 +97,9 @@ export class Rectangle implements Figure, RectangleSides {
   }
 
   getArea(): number {
-    return Math.floor((this.width * this.height) * 100) / 100;
+    const area = this.width * this.height;
+
+    return getRoundedSquare(area);
   }
 }
 
