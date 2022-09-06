@@ -1,5 +1,19 @@
-type Shape = 'triangle' | 'circle' | 'rectangle';
-type Color = 'red' | 'greeb' | 'blue';
+
+enum Shape {
+  triangle = 'triangle',
+  circle = 'circle',
+  rectangle = 'rectangle'
+}
+
+enum Color {
+  red = 'red',
+  green = 'green',
+  blue = 'blue'
+}
+
+function roundNumber(number: number): number {
+  return Math.floor(number * 100) / 100;
+}
 
 export interface Figure {
   shape: Shape,
@@ -8,7 +22,7 @@ export interface Figure {
 }
 
 export class Triangle implements Figure {
-  shape: Shape = 'triangle';
+  shape: Shape.triangle = Shape.triangle;
 
   constructor(
     public color: Color,
@@ -34,12 +48,12 @@ export class Triangle implements Figure {
       p * (p - this.a) * (p - this.b) * (p - this.c),
     );
 
-    return Math.floor(squareOfTriangle * 100) / 100;
+    return roundNumber(squareOfTriangle);
   }
 }
 
 export class Circle implements Figure {
-  shape: Shape = 'circle';
+  shape: Shape.circle = Shape.circle;
 
   constructor(
     public color: Color,
@@ -51,12 +65,14 @@ export class Circle implements Figure {
   }
 
   getArea(): number {
-    return Math.floor((Math.PI * this.radius ** 2) * 100) / 100;
+    const squareOfCircle = Math.PI * this.radius ** 2;
+
+    return roundNumber(squareOfCircle);
   }
 }
 
 export class Rectangle implements Figure {
-  shape: Shape = 'rectangle';
+  shape: Shape.rectangle = Shape.rectangle;
 
   constructor(
     public color: Color,
