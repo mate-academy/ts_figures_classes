@@ -7,7 +7,11 @@ export interface Figure {
   getArea(): number;
 }
 
-function notTriangle(side1: number, side2: number, side3: number) :boolean {
+function notTriangle(
+  side1: number,
+  side2: number,
+  side3: number,
+) :boolean {
   const longest: number = Math.max(side1, side2, side3);
 
   return (side1 + side2 + side3) - longest <= longest;
@@ -25,11 +29,11 @@ export class Triangle implements Figure {
     this.shape = 'triangle';
 
     if (this.a <= 0 || this.b <= 0 || this.c <= 0) {
-      throw new Error('your error message');
+      throw new Error('Side should be > 0');
     }
 
     if (notTriangle(a, b, c)) {
-      throw new Error('your error message');
+      throw new Error('The longest side is >= than a sum of two others');
     }
   }
 
@@ -49,7 +53,7 @@ export class Circle implements Figure {
     this.shape = 'circle';
 
     if (this.radius <= 0) {
-      throw new Error('your error message');
+      throw new Error('Radius should be > 0');
     }
   }
 
@@ -69,7 +73,7 @@ export class Rectangle implements Figure {
     this.shape = 'rectangle';
 
     if (this.width <= 0 || this.height <= 0) {
-      throw new Error('your error message');
+      throw new Error('Side should be > 0');
     }
   }
 
