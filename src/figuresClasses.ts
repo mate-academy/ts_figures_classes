@@ -1,4 +1,4 @@
-function Rounding(value: number): number {
+function getRoundedValue(value: number): number {
   return Math.floor(value * 100) / 100;
 }
 
@@ -26,7 +26,7 @@ export class Triangle implements Figure {
     public SideC: number,
   ) {
     if (this.SideA <= 0 || this.SideB <= 0 || this.SideC <= 0) {
-      throw new Error('Side length can`t be 0');
+      throw new Error('Side length should be positive');
     }
 
     if (this.SideA + this.SideB <= this.SideC
@@ -47,7 +47,7 @@ export class Triangle implements Figure {
       * (semiPerimeter - this.SideC),
     );
 
-    return Rounding(area);
+    return getRoundedValue(area);
   }
 }
 
@@ -59,14 +59,14 @@ export class Circle implements Figure {
     public radius: number,
   ) {
     if (this.radius <= 0) {
-      throw new Error('Radius of circle can`t be 0');
+      throw new Error('Radius of circle should be positive');
     }
   }
 
   getArea(): number {
     const area: number = Math.PI * (this.radius ** 2);
 
-    return Rounding(area);
+    return getRoundedValue(area);
   }
 }
 
@@ -86,7 +86,7 @@ export class Rectangle implements Figure {
   getArea(): number {
     const area: number = this.width * this.height;
 
-    return Rounding(area);
+    return getRoundedValue(area);
   }
 }
 
