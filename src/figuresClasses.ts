@@ -1,4 +1,3 @@
-
 type Color = 'red' | 'green' | 'blue';
 
 enum Shape {
@@ -15,6 +14,12 @@ export interface Figure {
   getArea(): number
 }
 
+function lessThanZeroError(...args: number[]): void {
+  if (args.some((el) => el <= 0)) {
+    throw new Error('Each element must be greater than zero');
+  }
+}
+
 export class Triangle implements Figure {
   public shape = Shape.Triangle;
 
@@ -24,9 +29,9 @@ export class Triangle implements Figure {
     public b: number,
     public c: number,
   ) {
-    if (a <= 0 || b <= 0 || c <= 0) {
-      throw new Error('Enter all sides greater than zero');
-    } else if (a + b <= c || b + c <= a || c + a <= b) {
+    lessThanZeroError(a, b, c);
+
+    if (a + b <= c || b + c <= a || c + a <= b) {
       throw new Error('The longest side is greater'
       + 'than or equal to the sum of the other two');
     }
@@ -52,9 +57,7 @@ export class Circle implements Figure {
     public color: Color,
     public radius: number,
   ) {
-    if (radius <= 0) {
-      throw new Error('Enter radius greater than zero');
-    }
+    lessThanZeroError(radius);
   }
 
   getArea(): number {
@@ -70,9 +73,7 @@ export class Rectangle implements Figure {
     public width: number,
     public height: number,
   ) {
-    if (width <= 0 || height <= 0) {
-      throw new Error('Enter height and width greater than zero');
-    }
+    lessThanZeroError(width, height);
   }
 
   getArea(): number {
