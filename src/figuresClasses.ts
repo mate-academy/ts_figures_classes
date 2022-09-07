@@ -18,7 +18,7 @@ export class Rectangle implements Figure {
     if (
       this.height < 0 || this.width < 0
     ) {
-      throw new Error('Insert correct data');
+      throw new Error('Width or/and length less than zero');
     }
   }
 
@@ -37,7 +37,7 @@ export class Circle implements Figure {
     if (
       this.radius < 0
     ) {
-      throw new Error('Insert correct data');
+      throw new Error('Radius cannot be less than zero');
     }
   }
 
@@ -55,13 +55,16 @@ export class Triangle implements Figure {
     public b: number,
     public c: number,
   ) {
+    if (this.a < 0 || this.b < 0 || this.c < 0) {
+      throw new Error('Some side is less than or equal to zero');
+    }
+
     if (
-      this.a < 0 || this.b < 0 || this.c < 0
-      || this.a + this.b <= this.c
+      this.a + this.b <= this.c
       || this.b + this.c <= this.a
       || this.a + this.c <= this.b
     ) {
-      throw new Error('Insert correct data');
+      throw new Error('The longest side is >= than a sum of two others or');
     }
   }
 
