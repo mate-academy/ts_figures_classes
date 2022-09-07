@@ -15,8 +15,11 @@ export interface Figure {
 
 export class Triangle implements Figure {
   shape: string;
+
   sideA: number;
+
   sideB: number;
+
   sideC: number;
 
   constructor(
@@ -75,7 +78,9 @@ export class Circle implements Figure {
 
 export class Rectangle implements Figure {
   shape: string;
+
   sideA: number;
+
   sideB: number;
 
   constructor(
