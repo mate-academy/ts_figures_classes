@@ -1,4 +1,4 @@
-type Color = 'red' | 'green' | 'Bundle';
+type Color = 'red' | 'green' | 'blue';
 
 enum Shape {
   Triangle = 'triangle',
@@ -77,6 +77,6 @@ export class Rectangle implements Figure {
   }
 }
 
-export function getInfo(figure): string {
+export function getInfo(figure: Figure): string {
   return `A ${figure.color} ${figure.shape} - ${figure.getArea()}`;
 }
