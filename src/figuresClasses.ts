@@ -1,5 +1,9 @@
-type Shape ='triangle' | 'circle' | 'rectangle';
+type Shape = 'triangle' | 'circle' | 'rectangle';
 type Color = 'red' | 'green' | 'blue';
+
+function isLessThanZero(arg: number): boolean {
+  return arg <= 0;
+}
 
 export interface Figure {
   shape: Shape,
@@ -16,7 +20,7 @@ export class Triangle implements Figure {
     public b: number,
     public c: number,
   ) {
-    if (a <= 0 || b <= 0 || c <= 0) {
+    if ([a, b, c].some(isLessThanZero)) {
       throw new Error('Invalid side length');
     }
 
@@ -41,7 +45,7 @@ export class Circle implements Figure {
     public color: Color,
     public radius: number,
   ) {
-    if (this.radius <= 0) {
+    if ([this.radius].some(isLessThanZero)) {
       throw new Error('Invalid radius');
     }
   }
@@ -59,7 +63,7 @@ export class Rectangle implements Figure {
     public width: number,
     public height: number,
   ) {
-    if (this.width <= 0 || this.height <= 0) {
+    if ([this.width, this.height].some(isLessThanZero)) {
       throw new Error('Invalid side length');
     }
   }
