@@ -10,9 +10,28 @@ enum Shape {
   Rectangle = 'rectangle',
 }
 
-function belowZero(property:number): void {
-  if (property <= 0) {
+function circleDataChecker(radius:number): void {
+  if (radius <= 0) {
     throw new Error('Error: radius must be greater than 0!!!');
+  }
+}
+
+function triangleDataChecker(a: number, b: number, c: number): void {
+  if (a >= b + c
+    || b >= a + c
+    || c >= a + b
+  ) {
+    throw new Error('Error: can not create triangle with such data!!!');
+  }
+
+  if (a <= 0 || b <= 0 || c <= 0) {
+    throw new Error('Error: Can not create triangle with side length of 0!!!');
+  }
+}
+
+function rectangleDataChecker(width:number, height: number): void {
+  if (width <= 0 || height <= 0) {
+    throw new Error('Error: Can not create rectangle with side length of 0!!!');
   }
 }
 
@@ -25,16 +44,7 @@ export class Triangle implements Figure {
     public b:number,
     public c:number,
   ) {
-    if (a >= b + c
-      || b >= a + c
-      || c >= a + b
-    ) {
-      throw new Error('Error: can not create triangle with such data!!!');
-    }
-
-    belowZero(a);
-    belowZero(b);
-    belowZero(c);
+    triangleDataChecker(a, b, c);
   }
 
   getArea(): number {
@@ -52,7 +62,7 @@ export class Circle implements Figure {
     public color: 'red' | 'green' | 'blue',
     public radius: number,
   ) {
-    belowZero(radius);
+    circleDataChecker(radius);
   }
 
   getArea(): number {
@@ -68,8 +78,7 @@ export class Rectangle implements Figure {
     public width:number,
     public height:number,
   ) {
-    belowZero(width);
-    belowZero(height);
+    rectangleDataChecker(width, height);
   }
 
   getArea(): number {
