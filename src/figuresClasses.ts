@@ -15,19 +15,11 @@ export function approx(number: number):number {
 export class Triangle implements Figure {
   shape: Shapes = 'triangle';
 
-  color: Colors;
-
-  a: number;
-
-  b: number;
-
-  c: number;
-
   constructor(
-    color:Colors,
-    a: number,
-    b: number,
-    c: number,
+    public color:Colors,
+    public a: number,
+    public b: number,
+    public c: number,
   ) {
     if (arguments.length < 4) {
       throw new Error('Wrong argument amount');
@@ -41,14 +33,6 @@ export class Triangle implements Figure {
       throw new Error(`the longest side of a triangle 
       is >= than a sum of two others`);
     }
-
-    this.color = color;
-
-    this.a = a;
-
-    this.b = b;
-
-    this.c = c;
   }
 
   getArea():number {
@@ -69,11 +53,7 @@ export class Triangle implements Figure {
 export class Circle {
   shape:Shapes = 'circle';
 
-  radius: number;
-
-  color: Colors;
-
-  constructor(color: Colors, radius: number) {
+  constructor(public color: Colors, public radius: number) {
     if (arguments.length < 2) {
       throw new Error('wrong argument length');
     }
@@ -81,9 +61,6 @@ export class Circle {
     if (radius <= 0) {
       throw new Error('radius should be bigger than 0');
     }
-
-    this.color = color;
-    this.radius = radius;
   }
 
   getArea():number {
@@ -98,13 +75,7 @@ export class Circle {
 export class Rectangle {
   shape: Shapes = 'rectangle';
 
-  a: number;
-
-  b: number;
-
-  color: Colors;
-
-  constructor(color: Colors, a: number, b: number) {
+  constructor(public color: Colors, public a: number, public b: number) {
     if (arguments.length < 3) {
       throw new Error('Wrong argument amount');
     }
@@ -112,10 +83,6 @@ export class Rectangle {
     if (a <= 0 || b <= 0) {
       throw new Error('Each side should be bigger than 0');
     }
-
-    this.color = color;
-    this.a = a;
-    this.b = b;
   }
 
   getArea(): number {
