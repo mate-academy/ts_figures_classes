@@ -1,5 +1,9 @@
-type Shape = 'triangle' | 'circle' | 'rectangle';
 type Color = 'red' | 'green' | 'blue';
+enum Shape {
+  Triangle = 'triangle',
+  Circle = 'circle',
+  Rectangle = 'rectangle'
+}
 
 export interface Figure {
   shape: Shape;
@@ -7,17 +11,19 @@ export interface Figure {
   getArea: () => number;
 }
 
+function findInvalidValue(...args: number[]): boolean {
+  return args.some((value) => value <= 0);
+}
+
 export class Rectangle implements Figure {
-  public shape: Shape = 'rectangle';
+  public shape: Shape = Shape.Rectangle;
 
   constructor(
     public color: Color,
     public height: number,
     public width: number,
   ) {
-    if (
-      this.height < 0 || this.width < 0
-    ) {
+    if (findInvalidValue(height, width)) {
       throw new Error('Width or/and length less than zero');
     }
   }
@@ -28,15 +34,13 @@ export class Rectangle implements Figure {
 }
 
 export class Circle implements Figure {
-  public shape: Shape = 'circle';
+  public shape: Shape = Shape.Circle;
 
   constructor(
     public color: Color,
     public radius: number,
   ) {
-    if (
-      this.radius < 0
-    ) {
+    if (findInvalidValue(radius)) {
       throw new Error('Radius cannot be less than zero');
     }
   }
@@ -47,7 +51,7 @@ export class Circle implements Figure {
 }
 
 export class Triangle implements Figure {
-  public shape: Shape = 'triangle';
+  public shape: Shape = Shape.Triangle;
 
   constructor(
     public color: Color,
@@ -55,14 +59,14 @@ export class Triangle implements Figure {
     public b: number,
     public c: number,
   ) {
-    if (this.a < 0 || this.b < 0 || this.c < 0) {
+    if (findInvalidValue(a, b, c)) {
       throw new Error('Some side is less than or equal to zero');
     }
 
     if (
-      this.a + this.b <= this.c
-      || this.b + this.c <= this.a
-      || this.a + this.c <= this.b
+      a + b <= c
+      || b + c <= a
+      || a + c <= b
     ) {
       throw new Error('The longest side is >= than a sum of two others or');
     }
