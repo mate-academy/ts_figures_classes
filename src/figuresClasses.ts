@@ -36,12 +36,14 @@ export class Triangle implements Figure {
   }
 
   getArea():number {
-    const s = (this.a + this.b + this.c) / 2;
+    const { a, b, c } = this;
+
+    const s = (a + b + c) / 2;
 
     return approx(Math.sqrt(
-      s * (s - this.a)
-      * (s - this.b)
-      * (s - this.c),
+      s * (s - a)
+      * (s - b)
+      * (s - c),
     ));
   }
 

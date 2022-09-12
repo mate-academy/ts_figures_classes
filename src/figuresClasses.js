@@ -23,10 +23,11 @@ var Triangle = /** @class */ (function () {
         }
     }
     Triangle.prototype.getArea = function () {
-        var s = (this.a + this.b + this.c) / 2;
-        return approx(Math.sqrt(s * (s - this.a)
-            * (s - this.b)
-            * (s - this.c)));
+        var _a = this, a = _a.a, b = _a.b, c = _a.c;
+        var s = (a + b + c) / 2;
+        return approx(Math.sqrt(s * (s - a)
+            * (s - b)
+            * (s - c)));
     };
     Triangle.prototype.message = function () {
         return "A ".concat(this.color, " ").concat(this.shape, " - ").concat(this.getArea());
