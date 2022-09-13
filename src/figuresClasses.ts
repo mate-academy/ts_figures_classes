@@ -12,6 +12,10 @@ export interface Figure {
   getArea() : number;
 }
 
+function validValue(...args: number[]): boolean {
+  return args.some((num) => num <= 0);
+}
+
 export class Triangle implements Figure {
   public shape = Shape.Triangle;
 
@@ -21,9 +25,7 @@ export class Triangle implements Figure {
     public b: number,
     public c: number,
   ) {
-    if (this.a <= 0
-      || this.b <= 0
-      || this.c <= 0) {
+    if (validValue(a, b, c)) {
       throw new Error('Some side was not indicated');
     }
 
@@ -47,7 +49,7 @@ export class Circle implements Figure {
     public color: Color,
     public radius: number,
   ) {
-    if (this.radius <= 0) {
+    if (validValue(radius)) {
       throw new Error('Some side was not indicated');
     }
   }
@@ -65,8 +67,8 @@ export class Rectangle implements Figure {
     public width: number,
     public height: number,
   ) {
-    if (this.width <= 0
-      || this.height <= 0) {
+    if (validValue(width)
+      || validValue(height)) {
       throw new Error('Radius was not indicated');
     }
   }
