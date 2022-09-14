@@ -32,16 +32,16 @@ export class Triangle implements Figure {
   ) {
     checkLength(a, b, c);
 
-    if (a >= b + c
-      || b >= c + a
-      || c >= b + a) {
+    const longestSide = Math.max(a, b, c);
+
+    if (longestSide >= a + b + c - longestSide) {
       throw new Error('Side must be the correct length');
     }
   }
 
   getArea(): number {
-    const semiperimeter: number = (this.a + this.b + this.c) / 2;
-    const area: number = Math.sqrt(semiperimeter
+    const semiperimeter = (this.a + this.b + this.c) / 2;
+    const area = Math.sqrt(semiperimeter
       * (semiperimeter - this.a)
       * (semiperimeter - this.b)
       * (semiperimeter - this.c));
