@@ -1,6 +1,38 @@
 type ShapeOfFigure = 'triangle' | 'circle' | 'rectangle';
 type ColorOfFigure = 'red' | 'green' | 'blue';
 
+function roundDownToHundredths(value: number): number {
+  return Math.floor(value * 100) / 100;
+}
+
+function sideSmallerZeroError(side: number, shape: ShapeOfFigure): void {
+  if (side <= 0) {
+    switch (shape) {
+      case 'circle':
+        throw new Error(`It’s even hard for me to imagine
+        what kind of triangle this should be.
+        I'm not a quantum computer, can I have a normal triangle?`);
+
+      case 'rectangle':
+        throw new Error(`It’s even hard for me to imagine
+        what kind of triangle this should be.
+        I'm not a quantum computer, can I have a normal triangle?`);
+
+      default:
+    }
+  }
+}
+
+function longestSideOfTriangleBiggerError(sides: number[]): void {
+  if (sides.sort((prev, cur) => prev - cur)[2]
+    >= sides.sort((prev, cur) => prev - cur)[0]
+    + sides.sort((prev, cur) => prev - cur)[1]) {
+    throw new Error(`It’s even hard for me to imagine
+    what kind of triangle this should be.
+    I'm not a quantum computer, can I have a normal triangle?`);
+  }
+}
+
 export interface Figure {
   shape: ShapeOfFigure;
   color: ColorOfFigure;
@@ -16,21 +48,16 @@ export class Triangle implements Figure {
     public b: number,
     public c: number,
   ) {
-    if (Math.min(this.a, this.b, this.c) <= 0
-    || [this.a, this.b, this.c].sort((prev, cur) => prev - cur)[2]
-    >= [this.a, this.b, this.c].sort((prev, cur) => prev - cur)[0]
-    + [this.a, this.b, this.c].sort((prev, cur) => prev - cur)[1]) {
-      throw new Error(`It’s even hard for me to imagine
-      what kind of triangle this should be.
-      I'm not a quantum computer, can I have a normal triangle?`);
-    }
+    sideSmallerZeroError(Math.min(this.a, this.b, this.c), this.shape);
+    longestSideOfTriangleBiggerError([this.a, this.b, this.c]);
   }
 
   getArea(): number {
     const p = 0.5 * (this.a + this.b + this.c);
 
-    return Math.floor(Math.sqrt(p * (p - this.a)
-    * (p - this.b) * (p - this.c)) * 100) / 100;
+    return roundDownToHundredths(
+      Math.sqrt(p * (p - this.a) * (p - this.b) * (p - this.c)),
+    );
   }
 }
 
@@ -38,15 +65,11 @@ export class Circle implements Figure {
   shape: ShapeOfFigure = 'circle';
 
   constructor(public color: ColorOfFigure, public r: number) {
-    if (this.r <= 0) {
-      throw new Error(`The circle with radius - 0, seriously?
-        Or, perhaps, you wrote a negative value for the radius,
-        which, in general, does not change the essence of the matter.`);
-    }
+    sideSmallerZeroError(this.r, this.shape);
   }
 
   getArea(): number {
-    return Math.floor(Math.PI * (this.r ** 2) * 100) / 100;
+    return roundDownToHundredths(Math.PI * (this.r ** 2));
   }
 }
 
@@ -58,15 +81,11 @@ export class Rectangle implements Figure {
     public a: number,
     public b: number,
   ) {
-    if (this.a <= 0 || this.b <= 0) {
-      throw new Error(`The rectangle with length of side - 0, seriously?
-      Or, perhaps, you wrote a negative value for the length of the side,
-      which, in general, does not change the essence of the matter.`);
-    }
+    sideSmallerZeroError(Math.min(this.a, this.b), this.shape);
   }
 
   getArea(): number {
-    return Math.floor(this.a * this.b * 100) / 100;
+    return roundDownToHundredths(this.a * this.b);
   }
 }
 
