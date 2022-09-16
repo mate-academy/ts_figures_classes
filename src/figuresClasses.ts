@@ -64,7 +64,10 @@ export class Triangle implements Figure {
 export class Circle implements Figure {
   shape: ShapeOfFigure = 'circle';
 
-  constructor(public color: ColorOfFigure, public r: number) {
+  constructor(
+    public color: ColorOfFigure,
+    public r: number,
+  ) {
     sideSmallerZeroError(this.r, this.shape);
   }
 
