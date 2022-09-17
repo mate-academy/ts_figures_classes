@@ -17,13 +17,14 @@ export class Triangle implements Figure {
     public c: number,
   ) {
     const sides = [this.a, this.b, this.c];
-    const sortedSide = sides.sort((x, y) => y - x);
 
-    if (sides.some((x) => x < 0)) {
+    sides.sort((x, y) => y - x);
+
+    if (sides.some((x) => x <= 0)) {
       throw new Error('Side of the triangle must be > 0');
     }
 
-    if (sortedSide[0] >= sortedSide[1] + sortedSide[2]) {
+    if (sides[0] >= sides[1] + sides[2]) {
       throw new Error('A side cannot be greater than the sum of the other two');
     }
   }
@@ -51,7 +52,7 @@ export class Circle implements Figure {
   }
 
   getArea(): number {
-    const areaCircle = Math.PI * (this.radius * this.radius);
+    const areaCircle = Math.PI * (this.radius ** 2);
 
     return Math.floor(areaCircle * 100) / 100;
   }
@@ -66,7 +67,7 @@ export class Rectangle implements Figure {
     public width: number,
   ) {
     if (this.height <= 0 || this.width <= 0) {
-      throw new Error('Height or width must be > 0');
+      throw new Error('Height and width must be > 0');
     }
   }
 
