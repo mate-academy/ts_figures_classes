@@ -9,24 +9,24 @@ function sideSmallerZeroError(side: number, shape: ShapeOfFigure): void {
   if (side <= 0) {
     switch (shape) {
       case 'circle':
-        throw new Error(`It’s even hard for me to imagine
-        what kind of triangle this should be.
-        I'm not a quantum computer, can I have a normal triangle?`);
+        throw new Error(`The circle with radius - 0, seriously?
+        Or, perhaps, you wrote a negative value for the radius,
+        which, in general, does not change the essence of the matter.`);
 
       case 'rectangle':
-        throw new Error(`It’s even hard for me to imagine
-        what kind of triangle this should be.
-        I'm not a quantum computer, can I have a normal triangle?`);
+        throw new Error(`The rectangle with length of side - 0, seriously?
+        Or, perhaps, you wrote a negative value for the length of the side,
+        which, in general, does not change the essence of the matter.`);
 
-      default:
+      default: // Do nothing
     }
   }
 }
 
 function longestSideOfTriangleBiggerError(sides: number[]): void {
-  if (sides.sort((prev, cur) => prev - cur)[2]
-    >= sides.sort((prev, cur) => prev - cur)[0]
-    + sides.sort((prev, cur) => prev - cur)[1]) {
+  const sidesSorted: number[] = sides.sort((prev, cur) => prev - cur);
+
+  if (sidesSorted[2] >= sidesSorted[0] + sidesSorted[1]) {
     throw new Error(`It’s even hard for me to imagine
     what kind of triangle this should be.
     I'm not a quantum computer, can I have a normal triangle?`);
