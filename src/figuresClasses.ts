@@ -5,22 +5,16 @@ export interface Figure {
 }
 
 function isTriangle(a: number, b: number, c: number): boolean {
-  if (a > b && a > c) {
-    if (a >= b + c) {
-      return false;
-    }
+  if (a > b && a > c && a >= b + c) {
+    return false;
   }
 
-  if (b > a && b > c) {
-    if (b >= a + c) {
-      return false;
-    }
+  if (b > a && b > c && b >= a + c) {
+    return false;
   }
 
-  if (c > a && c > b) {
-    if (c >= a + b) {
-      return false;
-    }
+  if (c > a && c > b && c >= a + b) {
+    return false;
   }
 
   return true;
