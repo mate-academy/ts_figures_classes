@@ -16,9 +16,12 @@ export class Triangle implements Figure {
     public b: number,
     public c: number,
   ) {
-    if ((a >= (b + c)) || (b >= (a + c)) || (c >= (a + b))
-    || (a <= 0 || b <= 0 || c <= 0)) {
+    if (a >= (b + c) || (b >= (a + c)) || (c >= (a + b))) {
       throw new Error('error: sides 1, 2 and 3 cannot form a triangle');
+    }
+
+    if (a <= 0 || b <= 0 || c <= 0) {
+      throw new Error('error: sides 1, 2 and 3 cannot have a negative value');
     }
   }
 
@@ -28,7 +31,7 @@ export class Triangle implements Figure {
    * (perimetr - this.c);
     const result = Math.sqrt(square);
 
-    return +result.toFixed(2);
+    return Number(result.toFixed(2));
   }
 }
 
@@ -45,7 +48,7 @@ export class Circle {
   }
 
   getArea():number {
-    const result = (Math.PI * this.radius * this.radius);
+    const result = Math.PI * this.radius * this.radius;
 
     return Math.floor(result * 100) / 100;
   }
@@ -65,7 +68,7 @@ export class Rectangle {
   }
 
   getArea():number {
-    return +(this.width * this.height).toFixed(2);
+    return Number((this.width * this.height).toFixed(2));
   }
 }
 
