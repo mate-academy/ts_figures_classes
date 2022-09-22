@@ -9,7 +9,7 @@ export interface Figure {
   getArea(): number,
 }
 
-export function roundedArea(num): number {
+export function roundedArea(num: number): number {
   return Math.floor(num * 100) / 100;
 }
 
