@@ -23,17 +23,10 @@ export class Triangle implements Figure {
     public c: number,
   ) {
     const maxSide = Math.max(a, b, c);
-    let sum = 0;
 
-    if (a === maxSide) {
-      sum = b + c;
-    } else if (b === maxSide) {
-      sum = a + c;
-    } else if (c === maxSide) {
-      sum = a + b;
-    }
+    const hasPositiveSides = [a, b, c].every((side) => side > 0);
 
-    if (a <= 0 || b <= 0 || c <= 0 || maxSide >= sum) {
+    if (!hasPositiveSides || a + b + c - maxSide <= maxSide) {
       throw new Error('Triangle with a side(s) <= 0 doesnt exist.');
     }
   }
@@ -62,7 +55,7 @@ export class Circle implements Figure {
   }
 
   getArea(): number {
-    const area = Math.PI * this.radius * this.radius;
+    const area = Math.PI * this.radius ** 2;
 
     return roundedArea(area);
   }
