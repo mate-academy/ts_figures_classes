@@ -5,15 +5,11 @@ export interface Figure {
 }
 
 function isTriangle(a: number, b: number, c: number): boolean {
-  if (a > b && a > c && a >= b + c) {
-    return false;
-  }
+  let sides: number[] = [a, b, c];
 
-  if (b > a && b > c && b >= a + c) {
-    return false;
-  }
+  sides = sides.sort((x:number, y: number) => x - y);
 
-  if (c > a && c > b && c >= a + b) {
+  if (sides[2] >= sides[1] + sides[0]) {
     return false;
   }
 
