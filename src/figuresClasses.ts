@@ -18,8 +18,8 @@ export interface Figure {
   getArea(): number;
 }
 
-function valid(...args:number[]): boolean {
-  return [...args].some((el) => el <= 0);
+function getHasTooSmallSide(...sides:number[]): boolean {
+  return [...sides].some((side) => side <= 0);
 }
 
 export class Triangle implements Figure {
@@ -31,15 +31,14 @@ export class Triangle implements Figure {
     public sideB: number,
     public sideC: number,
   ) {
-    if (valid(sideA, sideB, sideC)) {
+    if (getHasTooSmallSide(sideA, sideB, sideC)) {
       throw new Error('Passed value must be more than 0');
     }
 
-    if (
-      sideA + sideB <= sideC
-        || sideB + sideC <= sideA
-        || sideC + sideA <= sideB
-    ) {
+    const longestSide = Math.max(sideA, sideB, sideC);
+    const perimetr = sideA + sideB + sideC;
+
+    if (perimetr - longestSide <= longestSide) {
       throw new Error('Side X is longer than sum of Y and Z');
     }
   }
@@ -61,7 +60,7 @@ export class Circle implements Figure {
     public color: Color,
     public radius: number,
   ) {
-    if (valid(radius)) {
+    if (getHasTooSmallSide(radius)) {
       throw new Error('Passed value must be more than 0');
     }
   }
@@ -79,7 +78,7 @@ export class Rectangle implements Figure {
     public width: number,
     public height: number,
   ) {
-    if (valid(width, height)) {
+    if (getHasTooSmallSide(width, height)) {
       throw new Error('Width and height must be more than 0');
     }
   }
