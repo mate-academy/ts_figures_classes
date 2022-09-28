@@ -16,16 +16,22 @@ export class Triangle implements Figure {
     public b: number,
     public c: number,
   ) {
-    if (a <= 0 || b <= 0 || c <= 0) {
+    const sides = [a, b, c];
+    const hasNonPositiveSide = sides.some((side) => side <= 0);
+    const longest = Math.max(...sides);
+    const hasTooLongSide = sides
+      .reduce((perimetr, side) => perimetr + side) - longest <= longest;
+
+    if (hasNonPositiveSide) {
       throw new Error('The side of the triangle can`t be less than 0.');
     }
 
-    if ((a + b <= c) || (a + c <= b) || (b + c <= a)) {
+    if (hasTooLongSide) {
       throw new Error('Wrong sides. Not a triangle.');
     }
   }
 
-  getArea() : number {
+  getArea(): number {
     const p = (this.a + this.b + this.c) / 2;
 
     return Number(Math.sqrt(p * (p - this.a) * (p - this.b) * (p - this.c))
