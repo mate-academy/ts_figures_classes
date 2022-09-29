@@ -1,4 +1,5 @@
 type Color = 'red' | 'green' | 'blue';
+type Shape = 'triangle' | 'circle' | 'rectangle';
 
 function catchError(...arg: number[]): void {
   const parameters = [...arg];
@@ -21,13 +22,13 @@ function roundArea(area: number): number {
 }
 
 export interface Figure {
-  shape: string;
+  shape: Shape;
   color: Color;
   getArea(): number;
 }
 
 export class Triangle implements Figure {
-  shape = 'triangle';
+  shape: Shape = 'triangle';
 
   constructor(
     public color: Color,
@@ -47,7 +48,7 @@ export class Triangle implements Figure {
 }
 
 export class Circle implements Figure {
-  shape = 'circle';
+  shape: Shape = 'circle';
 
   constructor(
     public color: Color,
@@ -64,7 +65,7 @@ export class Circle implements Figure {
 }
 
 export class Rectangle implements Figure {
-  shape = 'rectangle';
+  shape: Shape = 'rectangle';
 
   constructor(
     public color: Color,
