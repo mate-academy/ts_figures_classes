@@ -1,13 +1,12 @@
 type Color = 'red' | 'green' | 'blue';
 type Shape = 'triangle' | 'circle' | 'rectangle';
 
-function catchError(...arg: number[]): void {
-  const parameters = [...arg];
-  let error = parameters.some((parameter) => parameter <= 0);
+function catchError(...args: number[]): void {
+  let error = args.some((parameter) => parameter <= 0);
 
-  if (parameters.length === 3) {
-    const max = Math.max(...parameters);
-    const sum = parameters.reduce((a, b) => a + b, 0);
+  if (args.length === 3) {
+    const max = Math.max(...args);
+    const sum = args.reduce((a, b) => a + b, 0);
 
     error = (max >= sum - max);
   }
