@@ -1,18 +1,16 @@
 
-// eslint-disable-next-line @typescript-eslint/naming-convention
-type color = 'red' | 'green' | 'blue';
-// eslint-disable-next-line @typescript-eslint/naming-convention
-type shape = 'triangle'| 'circle' |'rectangle';
+type Color = 'red' | 'green' | 'blue';
+type Shape = 'triangle'| 'circle' |'rectangle';
 
 export interface Figure {
-  shape: shape;
-  color: color;
+  shape: Shape;
+  color: Color;
   getArea():number
 
 }
 
 export class Triangle implements Figure {
-  color: color;
+  color: Color;
 
   a:number;
 
@@ -20,9 +18,9 @@ export class Triangle implements Figure {
 
   c:number;
 
-  shape:shape = 'triangle';
+  shape:Shape = 'triangle';
 
-  constructor(color:color, a:number, b:number, c:number) {
+  constructor(color:Color, a:number, b:number, c:number) {
     this.color = color;
     this.a = a;
     this.b = b;
@@ -54,13 +52,13 @@ export class Triangle implements Figure {
 }
 
 export class Circle implements Figure {
-  color:color;
+  color:Color;
 
   radius:number;
 
-  shape:shape = 'circle';
+  shape:Shape = 'circle';
 
-  constructor(color:color, radius:number) {
+  constructor(color:Color, radius:number) {
     this.color = color;
     this.radius = radius;
 
@@ -79,15 +77,15 @@ export class Circle implements Figure {
 }
 
 export class Rectangle implements Figure {
-  color: color;
+  color: Color;
 
   width:number;
 
   height:number;
 
-  shape:shape = 'rectangle';
+  shape:Shape = 'rectangle';
 
-  constructor(color:color, width:number, height:number) {
+  constructor(color:Color, width:number, height:number) {
     this.color = color;
     this.width = width;
     this.height = height;
@@ -107,8 +105,7 @@ export class Rectangle implements Figure {
 }
 
 export function getInfo(figure:Figure):string {
-  const { color } = figure;
-  const { shape } = figure;
+  const { color, shape } = figure;
   const Area = figure.getArea();
 
   return `A ${color} ${shape} - ${Area}`;
