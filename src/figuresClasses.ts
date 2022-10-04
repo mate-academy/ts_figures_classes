@@ -1,4 +1,9 @@
-type Shape = 'triangle' | 'circle' | 'rectangle';
+enum Shape {
+  triangle = 'triangle',
+  circle = 'circle',
+  rectangle = 'rectangle'
+}
+
 type Color = 'red' | 'green' | 'blue';
 
 export interface Figure {
@@ -9,7 +14,7 @@ export interface Figure {
 }
 
 export class Triangle implements Figure {
-  shape: Shape = 'triangle';
+  shape: Shape = Shape.triangle;
 
   constructor(
     public color: Color,
@@ -33,8 +38,7 @@ export class Triangle implements Figure {
     const maxSide = Math.max(this.sideA, this.sideB, this.sideC);
     const twoOtherSides = this.sideA + this.sideB + this.sideC - maxSide;
     const sideLengthCheck = this.sideA <= 0
-      || this.sideB <= 0
-      || this.sideC <= 0;
+      || this.sideB <= 0 || this.sideC <= 0;
 
     if (maxSide >= twoOtherSides || sideLengthCheck) {
       throw new Error('sides can\'t form a triangle');
@@ -43,7 +47,7 @@ export class Triangle implements Figure {
 }
 
 export class Circle implements Figure {
-  shape: Shape = 'circle';
+  shape: Shape = Shape.circle;
 
   constructor(
     public color: Color,
@@ -64,7 +68,7 @@ export class Circle implements Figure {
 }
 
 export class Rectangle implements Figure {
-  shape: Shape = 'rectangle';
+  shape: Shape = Shape.rectangle;
 
   constructor(
     public color: Color,
