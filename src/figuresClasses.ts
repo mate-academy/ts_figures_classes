@@ -32,8 +32,11 @@ export class Triangle implements Figure {
   checkProperties(): void {
     const maxSide = Math.max(this.sideA, this.sideB, this.sideC);
     const twoOtherSides = this.sideA + this.sideB + this.sideC - maxSide;
+    const sideLengthCheck = this.sideA <= 0
+      || this.sideB <= 0
+      || this.sideC <= 0;
 
-    if (maxSide >= twoOtherSides) {
+    if (maxSide >= twoOtherSides || sideLengthCheck) {
       throw new Error('sides can\'t form a triangle');
     }
   }
@@ -54,7 +57,7 @@ export class Circle implements Figure {
   }
 
   checkProperties(): void {
-    if (this.radius < 0) {
+    if (this.radius <= 0) {
       throw new Error('this circle doesn\'t exist');
     }
   }
@@ -83,20 +86,5 @@ export class Rectangle implements Figure {
 }
 
 export function getInfo(figure: Figure): string {
-  switch (figure.shape) {
-    case 'circle': {
-      return `A ${figure.color} ${figure.shape} - ${figure.getArea()}`;
-    }
-
-    case 'rectangle': {
-      return `A ${figure.color} ${figure.shape} - ${figure.getArea()}`;
-    }
-
-    case 'triangle': {
-      return `A ${figure.color} ${figure.shape} - ${figure.getArea()}`;
-    }
-
-    default:
-      throw new Error('Unknown figure');
-  }
+  return `A ${figure.color} ${figure.shape} - ${figure.getArea()}`;
 }
