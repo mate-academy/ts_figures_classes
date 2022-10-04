@@ -12,9 +12,9 @@ export class Triangle implements Figure {
 
   constructor(
     public color: Color,
-    public sideA: number,
-    public sideB: number,
-    public sideC: number,
+    private sideA: number,
+    private sideB: number,
+    private sideC: number,
   ) {
     if (sideA <= 0 || sideA <= 0 || sideC <= 0) {
       throw new Error('Incorrect values for triangle sides');
@@ -43,7 +43,7 @@ export class Circle implements Figure {
 
   constructor(
     public color: Color,
-    public radius: number,
+    private radius: number,
   ) {
     if (radius <= 0) {
       throw new Error('Incorrect values for circle radius');
@@ -60,8 +60,8 @@ export class Rectangle implements Figure {
 
   constructor(
     public color: Color,
-    public width: number,
-    public height: number,
+    private width: number,
+    private height: number,
   ) {
     if (width <= 0 || height <= 0) {
       throw new Error('Incorrect values for rectangle sides');
