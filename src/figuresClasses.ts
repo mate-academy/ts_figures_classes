@@ -4,7 +4,7 @@ enum Shape {
   Rectangle = 'rectangle',
 }
 
-// enum Color {
+// export enum Color {
 //   red = 'red',
 //   green = 'green',
 //   blue = 'green',
@@ -31,7 +31,7 @@ export class Triangle implements Figure {
     const perimeter: number = a + b + c;
 
     if (sides.some((side: number) => side <= 0)) {
-      throw new Error('Some of the sides are equal to or less than 0');
+      throw new Error('The sides values must be greater than 0');
     }
 
     if (sides.some((side: number) => side >= perimeter - side)) {
@@ -59,7 +59,7 @@ export class Circle implements Figure {
     public radius: number,
   ) {
     if (radius <= 0) {
-      throw new Error('Radius is equal to or less than 0');
+      throw new Error('Radius must be greater than 0');
     }
   }
 
@@ -73,16 +73,16 @@ export class Rectangle {
 
   constructor(
     public color: Color,
-    public a: number,
-    public b: number,
+    public width: number,
+    public height: number,
   ) {
-    if (a <= 0 || b <= 0) {
-      throw new Error('Some of the sides are equal to or less than 0');
+    if (width <= 0 || height <= 0) {
+      throw new Error('Height and width must be greater than 0');
     }
   }
 
   getArea(): number {
-    return Math.round((this.a * this.b) * 100) / 100;
+    return Math.round((this.width * this.height) * 100) / 100;
   }
 }
 
