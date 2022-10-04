@@ -31,7 +31,7 @@ export class Triangle implements Figure {
     const B = semiPer - this.sideB;
     const C = semiPer - this.sideC;
 
-    return Number(Math.sqrt(semiPer * A * B * C).toFixed(2));
+    return Math.trunc(Math.sqrt(semiPer * A * B * C) * 100) / 100;
   }
 
   checkProperties(): void {
@@ -57,7 +57,7 @@ export class Circle implements Figure {
   }
 
   getArea(): number {
-    return Number((Math.PI * this.radius * this.radius).toFixed(2));
+    return Math.trunc(Math.PI * this.radius * this.radius * 100) / 100;
   }
 
   checkProperties(): void {
@@ -79,7 +79,7 @@ export class Rectangle implements Figure {
   }
 
   getArea(): number {
-    return Number((this.width * this.height).toFixed(2));
+    return Math.trunc(this.width * this.height * 100) / 100;
   }
 
   checkProperties(): void {
