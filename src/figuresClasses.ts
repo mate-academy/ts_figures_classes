@@ -24,9 +24,9 @@ export class Triangle implements Figure {
 
   constructor(
     public color: Color,
-    public a: number,
-    public b: number,
-    public c: number,
+    private a: number,
+    private b: number,
+    private c: number,
   ) {
     if (checkingZeros(a, b, c)) {
       throw new Error('Error: sides can be only > 0');
@@ -38,8 +38,8 @@ export class Triangle implements Figure {
   }
 
   getArea(): number {
-    const semiPerimeter = (this.a + this.b + this.c) / 2;
-    const perimeter = Math.sqrt(semiPerimeter
+    const semiPerimeter: number = (this.a + this.b + this.c) / 2;
+    const perimeter: number = Math.sqrt(semiPerimeter
       * (semiPerimeter - this.a)
       * (semiPerimeter - this.b)
       * (semiPerimeter - this.c));
@@ -53,7 +53,7 @@ export class Circle implements Figure {
 
   constructor(
     public color: Color,
-    public radius: number,
+    private radius: number,
   ) {
     if (checkingZeros(radius)) {
       throw new Error('Error: sides can be only > 0');
@@ -61,7 +61,7 @@ export class Circle implements Figure {
   }
 
   getArea(): number {
-    const area = Math.PI * this.radius * this.radius;
+    const area: number = Math.PI * this.radius * this.radius;
 
     return Math.floor(area * 100) / 100;
   }
@@ -72,8 +72,8 @@ export class Rectangle implements Figure {
 
   constructor(
     public color: Color,
-    public a: number,
-    public b: number,
+    private a: number,
+    private b: number,
   ) {
     if (checkingZeros(a, b)) {
       throw new Error('Error: sides can be only > 0');
@@ -81,12 +81,12 @@ export class Rectangle implements Figure {
   }
 
   getArea(): number {
-    const area = this.a * this.b;
+    const area: number = this.a * this.b;
 
     return Math.floor(area * 100) / 100;
   }
 }
 
-export function getInfo(figure): string {
+export function getInfo(figure: Figure): string {
   return `A ${figure.color} ${figure.shape} - ${figure.getArea()}`;
 }
