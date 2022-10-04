@@ -32,15 +32,15 @@ export class Triangle implements Figure {
     const { a, b, c } = this;
 
     const p = (a + b + c) / 2;
-    const s = Math.sqrt(p * (p - a) * (p - b) * (p - c));
+    const area = Math.sqrt(p * (p - a) * (p - b) * (p - c));
 
-    return roundArea(s);
+    return roundArea(area);
   }
 }
 
 export class Circle {
   constructor(
-    public color: 'red' | 'green' | 'blue',
+    public color: Color,
     public radius: number,
     public shape: Shape = 'circle',
   ) {
@@ -50,28 +50,28 @@ export class Circle {
   }
 
   getArea(): number {
-    const s = Math.PI * (this.radius ** 2);
+    const area = Math.PI * (this.radius ** 2);
 
-    return roundArea(s);
+    return roundArea(area);
   }
 }
 
 export class Rectangle {
   constructor(
-    public color: 'red' | 'green' | 'blue',
-    public a: number,
-    public b: number,
+    public color: Color,
+    public length: number,
+    public width: number,
     public shape: Shape = 'rectangle',
   ) {
-    if (a < 0 || b < 0) {
+    if (length < 0 || width < 0) {
       throw Error('Input data is not valid');
     }
   }
 
   getArea(): number {
-    const s = this.a * this.b;
+    const area = this.length * this.width;
 
-    return roundArea(s);
+    return roundArea(area);
   }
 }
 
