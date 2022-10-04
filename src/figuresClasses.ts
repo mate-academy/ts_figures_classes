@@ -42,9 +42,9 @@ export class Triangle implements Figure {
 
   checkTriangle(): void {
     const sides = [this.sizeA, this.sizeB, this.sizeC];
-    const aver = sides.reduce((a: number, b: number) => a + b, 0);
+    const sumOfSides = sides.reduce((a: number, b: number) => a + b, 0);
 
-    if (aver - Math.max(...sides) <= Math.max(...sides)
+    if (sumOfSides - Math.max(...sides) <= Math.max(...sides)
       || sides.find((a: number) => (a <= 0))) {
       throw new Error('Invalid shape settings');
     }
