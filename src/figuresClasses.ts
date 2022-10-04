@@ -20,7 +20,7 @@ export class Triangle implements Figure {
       throw new Error('Incorrect values for triangle sides');
     }
 
-    const maxSide: number = Math.max(sideA, Math.max(sideB, sideC));
+    const maxSide: number = Math.max(sideA, sideB, sideC);
 
     if (maxSide >= (sideA + sideB + sideC - maxSide)) {
       throw new Error('It is not a triangle');
