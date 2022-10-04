@@ -92,8 +92,11 @@ export function getInfo(figure: Figure): string {
       return `A ${figure.color} ${figure.shape} - ${figure.getArea()}`;
     }
 
-    default: {
+    case 'triangle': {
       return `A ${figure.color} ${figure.shape} - ${figure.getArea()}`;
     }
+
+    default:
+      throw new Error('Unknown figure');
   }
 }
