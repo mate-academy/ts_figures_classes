@@ -1,5 +1,9 @@
 type Color = 'red' | 'green' | 'blue';
-type Shape = 'triangle' | 'circle' | 'rectangle';
+enum Shape {
+  Triangle = 'triangle',
+  Circle = 'circle',
+  Rectangle = 'rectangle',
+}
 
 export interface Figure {
   shape: Shape,
@@ -12,7 +16,7 @@ function round(num: number): number {
 }
 
 export class Triangle implements Figure {
-  shape: Shape = 'triangle';
+  shape: Shape = Shape.Triangle;
 
   constructor(
     public color: Color,
@@ -23,8 +27,12 @@ export class Triangle implements Figure {
     const sides = [a, b, c];
     const perimeter = a + b + c;
 
-    if (sides.some((side) => side <= 0 || side >= perimeter - side)) {
-      throw new Error();
+    if (sides.some((side) => side <= 0)) {
+      throw new Error('The input value of some sides <= 0');
+    }
+
+    if (sides.some((side) => side >= perimeter - side)) {
+      throw new Error('The input sides can\'t form a triangle');
     }
   }
 
@@ -36,14 +44,14 @@ export class Triangle implements Figure {
 }
 
 export class Circle implements Figure {
-  shape: Shape = 'circle';
+  shape: Shape = Shape.Circle;
 
   constructor(
     public color: Color,
     private radius: number,
   ) {
     if (radius <= 0) {
-      throw new Error();
+      throw new Error('The input value of radius <= 0');
     }
   }
 
@@ -53,7 +61,7 @@ export class Circle implements Figure {
 }
 
 export class Rectangle implements Figure {
-  shape: Shape = 'rectangle';
+  shape: Shape = Shape.Rectangle;
 
   constructor(
     public color: Color,
@@ -61,7 +69,7 @@ export class Rectangle implements Figure {
     private height: number,
   ) {
     if ([width, height].some((side) => side <= 0)) {
-      throw new Error();
+      throw new Error('The input value of some sides <= 0');
     }
   }
 
