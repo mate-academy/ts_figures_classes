@@ -18,11 +18,11 @@ export class Triangle implements Figure {
     public c: number,
   ) {
     if (a <= 0 || b <= 0 || c <= 0) {
-      throw Error('nope');
+      throw Error('All sides should be > 0');
     }
 
     if (a + b <= c || a + c <= b || c + b <= a) {
-      throw Error('nope');
+      throw Error('The longes side should be < then the sum of two others!');
     }
   }
 
@@ -46,7 +46,7 @@ export class Circle implements Figure {
     public a: number,
   ) {
     if (a <= 0) {
-      throw Error('nope');
+      throw Error('Radius should be > 0');
     }
   }
 
@@ -66,7 +66,7 @@ export class Rectangle {
     public b: number,
   ) {
     if (a <= 0 || b <= 0) {
-      throw Error('nope');
+      throw Error('All sides should be > 0');
     }
   }
 
