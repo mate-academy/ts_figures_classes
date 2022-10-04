@@ -13,9 +13,9 @@ export class Triangle implements Figure {
 
   constructor(
     public color: Color,
-    public sideA: number,
-    public sideB: number,
-    public sideC: number,
+    private sideA: number,
+    private sideB: number,
+    private sideC: number,
   ) {
     this.checkProperties();
   }
@@ -34,7 +34,7 @@ export class Triangle implements Figure {
     const twoOtherSides = this.sideA + this.sideB + this.sideC - maxSide;
 
     if (maxSide >= twoOtherSides) {
-      throw new Error('sides 1, 2 and 3 can\'t form a triangle');
+      throw new Error('sides can\'t form a triangle');
     }
   }
 }
@@ -44,7 +44,7 @@ export class Circle implements Figure {
 
   constructor(
     public color: Color,
-    public radius: number,
+    private radius: number,
   ) {
     this.checkProperties();
   }
@@ -65,8 +65,8 @@ export class Rectangle implements Figure {
 
   constructor(
     public color: Color,
-    public width: number,
-    public height: number,
+    private width: number,
+    private height: number,
   ) {
     this.checkProperties();
   }
