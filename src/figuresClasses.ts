@@ -13,20 +13,20 @@ export class Triangle implements Figure {
 
   constructor(
     public color: Color,
-    public a: number,
-    public b: number,
-    public c: number,
+    public sideA: number,
+    public sideB: number,
+    public sideC: number,
   ) {
     this.checkInitialData();
   }
 
   checkInitialData(): void {
-    if (this.a <= 0 || this.b <= 0 || this.c <= 0) {
+    if (this.sideA <= 0 || this.sideB <= 0 || this.sideC <= 0) {
       throw new Error('All sides should be > than zero!');
     }
 
-    const sides: number[] = [this.a, this.b, this.c]
-      .sort((n: number, m: number) => m - n);
+    const sides: number[] = [this.sideA, this.sideB, this.sideC]
+      .sort((side1: number, side2: number) => side2 - side1);
 
     if (sides[0] >= sides[1] + sides[2]) {
       throw new Error(
@@ -36,10 +36,11 @@ export class Triangle implements Figure {
   }
 
   getArea(): number {
-    const s = (this.a + this.b + this.c) / 2;
+    const semiperimeter = (this.sideA + this.sideB + this.sideC) / 2;
 
     return Math.round(Math.sqrt(
-      s * (s - this.a) * (s - this.b) * (s - this.c),
+      semiperimeter * (semiperimeter - this.sideA)
+        * (semiperimeter - this.sideB) * (semiperimeter - this.sideC),
     ) * 100) / 100;
   }
 }
@@ -83,7 +84,7 @@ export class Rectangle implements Figure {
   }
 
   getArea(): number {
-    return this.width * this.height;
+    return Math.round((this.width * this.height) * 100) / 100;
   }
 }
 
