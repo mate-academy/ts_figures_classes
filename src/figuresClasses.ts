@@ -2,21 +2,20 @@ type Shape = 'triangle' | 'circle' | 'rectangle';
 
 type Color = 'red' | 'green' | 'blue';
 export interface Figure {
+  shape: Shape;
   color: Color;
-  shape?: Shape;
   getArea(): number;
 }
 
 export class Triangle implements Figure {
+  shape: Shape = 'triangle';
+
   constructor(
     public color: Color,
     public sideA: number,
     public sideB: number,
     public sideC: number,
-    public shape?: Shape,
   ) {
-    this.shape = 'triangle';
-
     if (sideA <= 0 || sideA <= 0 || sideC <= 0) {
       throw new Error('Incorrect values for triangle sides');
     }
@@ -29,8 +28,8 @@ export class Triangle implements Figure {
   }
 
   getArea(): number {
-    const sunSides: number = this.sideA + this.sideB + this.sideC;
-    const semiPerimeter: number = sunSides / 2;
+    const totalSidesLength: number = this.sideA + this.sideB + this.sideC;
+    const semiPerimeter: number = totalSidesLength / 2;
 
     return Math.floor(Math.sqrt(semiPerimeter
       * (semiPerimeter - this.sideA)
@@ -40,13 +39,12 @@ export class Triangle implements Figure {
 }
 
 export class Circle implements Figure {
+  shape: Shape = 'circle';
+
   constructor(
     public color: Color,
     public radius: number,
-    public shape?: Shape,
   ) {
-    this.shape = 'circle';
-
     if (radius <= 0) {
       throw new Error('Incorrect values for circle radius');
     }
@@ -58,21 +56,20 @@ export class Circle implements Figure {
 }
 
 export class Rectangle implements Figure {
+  shape: Shape = 'rectangle';
+
   constructor(
     public color: Color,
     public width: number,
     public height: number,
-    public shape?: Shape,
   ) {
-    this.shape = 'rectangle';
-
     if (width <= 0 || height <= 0) {
       throw new Error('Incorrect values for rectangle sides');
     }
   }
 
   getArea(): number {
-    return this.width * this.height;
+    return Math.floor(this.width * this.height * 100) / 100;
   }
 }
 
