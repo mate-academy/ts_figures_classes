@@ -13,9 +13,9 @@ export class Triangle implements Figure {
 
   constructor(
     public color: Color,
-    public sideA: number,
-    public sideB: number,
-    public sideC: number,
+    private sideA: number,
+    private sideB: number,
+    private sideC: number,
   ) {
     this.checkInitialData();
   }
@@ -50,7 +50,7 @@ export class Circle implements Figure {
 
   constructor(
     public color: Color,
-    public radius: number,
+    private radius: number,
   ) {
     this.checkInitialData();
   }
@@ -71,8 +71,8 @@ export class Rectangle implements Figure {
 
   constructor(
     public color: Color,
-    public width: number,
-    public height: number,
+    private width: number,
+    private height: number,
   ) {
     this.checkInitialData();
   }
