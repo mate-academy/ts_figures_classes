@@ -36,9 +36,6 @@ export class Triangle implements Figure {
     }
 
     this.shape = Shape.Triangle;
-    this.a = a;
-    this.b = b;
-    this.c = c;
   }
 
   getArea(): number {
@@ -61,8 +58,6 @@ export class Circle implements Figure {
     }
 
     this.shape = Shape.Circle;
-    this.color = color;
-    this.radius = radius;
   }
 
   getArea(): number {
@@ -84,13 +79,10 @@ export class Rectangle implements Figure {
     }
 
     this.shape = Shape.Rectangle;
-    this.a = a;
-    this.b = b;
-    this.color = color;
   }
 
   getArea(): number {
-    return +(this.a * this.b).toFixed(2);
+    return +Math.floor(this.a * this.b).toFixed(2);
   }
 }
 
