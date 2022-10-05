@@ -82,7 +82,7 @@ export class Rectangle implements Figure {
   }
 
   getArea(): number {
-    return +Math.floor(this.a * this.b).toFixed(2);
+    return +Math.floor(this.a * this.b * 100) / 100;
   }
 }
 
