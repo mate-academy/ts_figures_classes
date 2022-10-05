@@ -2,9 +2,6 @@ type Shape = 'triangle' | 'circle' | 'rectangle';
 export interface Figure {
   shape: Shape;
   color: string;
-  a: number;
-  b?: number;
-  c?: number;
   getArea() : number;
 }
 
@@ -13,9 +10,9 @@ export class Triangle implements Figure {
 
   constructor(
     public color: string,
-    public a: number,
-    public b: number,
-    public c: number,
+    private a: number,
+    private b: number,
+    private c: number,
   ) {
     if (a <= 0 || b <= 0 || c <= 0) {
       throw Error('All sides should be > 0');
@@ -43,7 +40,7 @@ export class Circle implements Figure {
 
   constructor(
     public color: string,
-    public a: number,
+    private a: number,
   ) {
     if (a <= 0) {
       throw Error('Radius should be > 0');
@@ -62,8 +59,8 @@ export class Rectangle {
 
   constructor(
     public color: string,
-    public a: number,
-    public b: number,
+    private a: number,
+    private b: number,
   ) {
     if (a <= 0 || b <= 0) {
       throw Error('All sides should be > 0');
