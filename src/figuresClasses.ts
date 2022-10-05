@@ -18,7 +18,6 @@ export class Triangle implements Figure {
 
   constructor(public color: Colors, a: number, b: number, c: number) {
     this.shape = 'triangle';
-    this.color = color;
     this.a = a;
     this.b = b;
     this.c = c;
@@ -46,7 +45,7 @@ export class Triangle implements Figure {
     const biggestSide = Math.max(...sides);
     let sum = 0;
 
-    sides.forEach((side) => {
+    sides.forEach((side: number) => {
       if (side !== biggestSide) {
         sum += side;
       }
@@ -63,7 +62,6 @@ export class Circle implements Figure {
 
   constructor(public color: Colors, public radius: number) {
     this.shape = 'circle';
-    this.radius = radius;
 
     if (this.radius < 0) {
       throw new Error('Radius is negative');
