@@ -17,7 +17,7 @@ export interface Figure {
   getArea(): number;
 }
 
-const isNegative = (...arg): void => {
+const isNegative = (...arg: number[]): void => {
   if ([...arg].some((side:number): boolean => side <= 0)) {
     throw new Error('Length should be > 0');
   }
