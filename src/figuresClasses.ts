@@ -33,9 +33,12 @@ export class Triangle implements Figure {
     public c: number,
   ) {
     isNegative(a, b, c);
+    this.isTriangle();
+  }
 
-    const sides: number[] = [a, b, c].sort((first: number, second: number) => (
-      second - first));
+  private isTriangle(): void {
+    const sides: number[] = [this.a, this.b, this.c]
+      .sort((first, second) => second - first);
 
     if (sides[0] >= sides[1] + sides[2]) {
       throw new Error('Can not create a Triangle');
