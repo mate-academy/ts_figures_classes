@@ -13,34 +13,38 @@ export interface Figure {
   getArea():number,
 }
 
-export class Triangle {
+export class Triangle implements Figure {
   shape: Shape = Shape.Triangle;
 
   constructor(
     public color: Color,
-    private a:number,
-    private b:number,
-    private c:number,
+    private a: number,
+    private b: number,
+    private c: number,
   ) {
-    if (this.a + this.b <= this.c
+    if (
+      this.a + this.b <= this.c
       || this.b + this.c <= this.a
-      || this.c + this.a <= this.b) {
+      || this.c + this.a <= this.b
+    ) {
       throw new Error('This is not a triangle');
     }
   }
 
-  getArea():number {
+  getArea(): number {
     const semiPerimeter = (this.a + this.b + this.c) / 2;
-    const square = Math.sqrt(semiPerimeter
+    const square = Math.sqrt(
+      semiPerimeter
       * (semiPerimeter - this.a)
       * (semiPerimeter - this.b)
-      * (semiPerimeter - this.c));
+      * (semiPerimeter - this.c),
+    );
 
     return +square.toFixed(2);
   }
 }
 
-export class Circle {
+export class Circle implements Figure {
   shape: Shape = Shape.Circle;
 
   constructor(public color: Color, private radius: number) {
@@ -49,14 +53,14 @@ export class Circle {
     }
   }
 
-  getArea():number {
+  getArea(): number {
     const square = Math.PI * this.radius ** 2;
 
     return Math.floor(square * 100) / 100;
   }
 }
 
-export class Rectangle {
+export class Rectangle implements Figure {
   shape: Shape = Shape.Rectangle;
 
   constructor(
@@ -69,7 +73,7 @@ export class Rectangle {
     }
   }
 
-  getArea():number {
+  getArea(): number {
     const square = this.width * this.height;
 
     return +square.toFixed(2);
