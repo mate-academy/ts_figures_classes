@@ -1,5 +1,9 @@
 type Color = 'red' | 'green' | 'blue';
-type Shape = 'triangle' | 'circle' | 'rectangle';
+enum Shape {
+  Triangle= 'triangle',
+  Circle = 'circle',
+  Rectangle = 'rectangle',
+}
 
 export interface Figure {
   shape: Shape;
@@ -12,13 +16,16 @@ function roundArea(area: number): number {
 }
 
 export class Triangle implements Figure {
+  public shape: Shape;
+
   constructor(
     public color: Color,
     public a: number,
     public b: number,
     public c: number,
-    public shape: Shape = 'triangle',
   ) {
+    this.shape = Shape.Triangle;
+
     if (a + b <= c || b + c <= a || c + a <= b) {
       throw Error('Triangle does not exist');
     }
@@ -39,11 +46,14 @@ export class Triangle implements Figure {
 }
 
 export class Circle {
+  public shape: Shape;
+
   constructor(
     public color: Color,
     public radius: number,
-    public shape: Shape = 'circle',
   ) {
+    this.shape = Shape.Circle;
+
     if (radius < 0) {
       throw Error('Input data is not valid');
     }
@@ -57,12 +67,15 @@ export class Circle {
 }
 
 export class Rectangle {
+  shape: Shape;
+
   constructor(
     public color: Color,
     public length: number,
     public width: number,
-    public shape: Shape = 'rectangle',
   ) {
+    this.shape = Shape.Rectangle;
+
     if (length < 0 || width < 0) {
       throw Error('Input data is not valid');
     }
