@@ -25,8 +25,9 @@ export class Triangle implements Figure {
     }
 
     const sides = [this.a, this.b, this.c];
+    const maxSide = Math.max(...sides);
 
-    if (Math.max(...sides) >= (this.a + this.b + this.c) - Math.max(...sides)) {
+    if (maxSide >= (this.a + this.b + this.c) - maxSide) {
       throw new Error('sides cannot form a triangle');
     }
   }
