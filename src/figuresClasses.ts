@@ -15,11 +15,7 @@ export class Triangle implements Figure {
   shape: Shape = 'triangle';
 
   static canWeMake(a: number, b: number, c: number): boolean {
-    if (c >= a + b || b >= a + c || a >= b + c) {
-      return false;
-    }
-
-    return true;
+    return c < a + b && b < a + c && a < b + c;
   }
 
   constructor(
