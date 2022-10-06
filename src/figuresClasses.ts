@@ -21,8 +21,12 @@ export class Triangle implements Figure {
     this.shape = 'triangle';
     this.area = this.getArea();
 
-    if (this.checkSide() || this.checkLongestSide()) {
-      throw new Error('your error message');
+    if (this.checkSide()) {
+      throw new Error('One of your side is less then 0');
+    }
+
+    if (this.checkLongestSide()) {
+      throw new Error('One of your side is longest than a sum of two others');
     }
   }
 
@@ -72,7 +76,7 @@ export class Circle implements Figure {
     this.area = this.getArea();
 
     if (this.radius < 0) {
-      throw new Error('your error message');
+      throw new Error('Your radius is less then 0');
     }
   }
 
@@ -97,7 +101,7 @@ export class Rectangle implements Figure {
     this.area = this.getArea();
 
     if (this.width < 0 || this.height < 0) {
-      throw new Error('your error message');
+      throw new Error('Width or heigth less then 0');
     }
   }
 
