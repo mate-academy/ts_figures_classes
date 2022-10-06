@@ -1,13 +1,13 @@
 enum FigureShape {
-  triangle = 'triangle',
-  circle = 'circle',
-  rectangle = 'rectangle',
+  Triangle = 'triangle',
+  Circle = 'circle',
+  Rectangle = 'rectangle',
 }
 
 enum FigureColor {
-  red = 'red',
-  green = 'green',
-  blue = 'blue',
+  Red = 'red',
+  Green = 'green',
+  Blue = 'blue',
 }
 
 export interface Figure {
@@ -24,7 +24,7 @@ const isNegative = (...arg: number[]): void => {
 };
 
 export class Triangle implements Figure {
-  shape = FigureShape.triangle;
+  shape = FigureShape.Triangle;
 
   constructor(
     public color: FigureColor,
@@ -41,7 +41,7 @@ export class Triangle implements Figure {
       .sort((first, second) => second - first);
 
     if (sides[0] >= sides[1] + sides[2]) {
-      throw new Error('Can not create a Triangle');
+      throw new Error('Can not create a Triangle with those sides');
     }
   }
 
@@ -57,7 +57,7 @@ export class Triangle implements Figure {
 }
 
 export class Circle implements Figure {
-  shape = FigureShape.circle;
+  shape = FigureShape.Circle;
 
   constructor(
     public color: FigureColor,
@@ -72,7 +72,7 @@ export class Circle implements Figure {
 }
 
 export class Rectangle implements Figure {
-  shape = FigureShape.rectangle;
+  shape = FigureShape.Rectangle;
 
   constructor(
     public color: FigureColor,
