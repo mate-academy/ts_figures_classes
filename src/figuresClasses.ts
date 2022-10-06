@@ -52,16 +52,12 @@ export class Triangle implements Figure {
 }
 
 export class Circle implements Figure {
-  color:Color;
-
-  radius:number;
-
   shape:Shape = 'circle';
 
-  constructor(color:Color, radius:number) {
-    this.color = color;
-    this.radius = radius;
-
+  constructor(
+    public color:Color,
+    public radius:number,
+  ) {
     this.checkCircle();
   }
 
@@ -77,19 +73,13 @@ export class Circle implements Figure {
 }
 
 export class Rectangle implements Figure {
-  color: Color;
-
-  width:number;
-
-  height:number;
-
   shape:Shape = 'rectangle';
 
-  constructor(color:Color, width:number, height:number) {
-    this.color = color;
-    this.width = width;
-    this.height = height;
-
+  constructor(
+    public color:Color,
+    public width:number,
+    public height:number,
+  ) {
     this.checkRectangle();
   }
 
