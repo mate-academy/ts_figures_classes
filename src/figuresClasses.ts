@@ -15,6 +15,16 @@ function roundArea(area: number): number {
   return (Math.trunc(area * 100) / 100);
 }
 
+function helper(sizes: number[]): void {
+  sizes.every((size: number) => {
+    if (size <= 0) {
+      throw Error('Input data is not valid');
+    }
+
+    return size;
+  });
+}
+
 export class Triangle implements Figure {
   public shape: Shape;
 
@@ -30,9 +40,7 @@ export class Triangle implements Figure {
       throw Error('Triangle does not exist');
     }
 
-    if (a < 0 || b < 0 || c < 0) {
-      throw Error('Input data is not valid');
-    }
+    helper([a, b, c]);
   }
 
   getArea(): number {
@@ -54,9 +62,7 @@ export class Circle {
   ) {
     this.shape = Shape.Circle;
 
-    if (radius < 0) {
-      throw Error('Input data is not valid');
-    }
+    helper([radius]);
   }
 
   getArea(): number {
@@ -76,9 +82,7 @@ export class Rectangle {
   ) {
     this.shape = Shape.Rectangle;
 
-    if (length < 0 || width < 0) {
-      throw Error('Input data is not valid');
-    }
+    helper([length, width]);
   }
 
   getArea(): number {
