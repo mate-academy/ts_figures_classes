@@ -1,5 +1,10 @@
-type Shapes = 'triangle' | 'circle' | 'rectangle';
 type Colors = 'red' | 'green' | 'blue';
+
+enum Shapes {
+  Triangle = 'triangle',
+  Circle = 'circle',
+  Rectangle = 'rectangle',
+}
 
 export interface Figure {
   shape: Shapes;
@@ -17,7 +22,7 @@ export class Triangle implements Figure {
   c: number;
 
   constructor(public color: Colors, a: number, b: number, c: number) {
-    this.shape = 'triangle';
+    this.shape = Shapes.Triangle;
     this.a = a;
     this.b = b;
     this.c = c;
@@ -33,11 +38,11 @@ export class Triangle implements Figure {
       * (semiPerim - this.a) * (semiPerim - this.b) * (semiPerim - this.c),
     );
 
-    return +area.toFixed(2);
+    return Math.floor(area * 100) / 100;
   }
 
   isTriangle(): void {
-    if ((this.a === 0 || this.b === 0 || this.c === 0)) {
+    if (this.a <= 0 || this.b <= 0 || this.c <= 0) {
       throw new Error('Some side is equal to zero');
     }
 
@@ -61,7 +66,7 @@ export class Circle implements Figure {
   shape: Shapes;
 
   constructor(public color: Colors, public radius: number) {
-    this.shape = 'circle';
+    this.shape = Shapes.Circle;
 
     if (this.radius < 0) {
       throw new Error('Radius is negative');
@@ -81,7 +86,7 @@ export class Rectangle implements Figure {
   height: number;
 
   constructor(public color: Colors, width: number, height: number) {
-    this.shape = 'rectangle';
+    this.shape = Shapes.Rectangle;
     this.width = width;
     this.height = height;
 
