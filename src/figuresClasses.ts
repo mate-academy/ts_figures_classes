@@ -1,16 +1,21 @@
 type Color = 'red' | 'green' | 'blue';
-type Shape = 'triangle' | 'circle' | 'rectangle';
+
+enum Shape {
+  Triangle = 'triangle',
+  Circle = 'circle',
+  Rectangle = 'rectangle'
+}
 
 export interface Figure {
   color: Color;
   shape: Shape;
-  area: number;
+  getArea: () => number;
 }
 
-export class Triangle implements Figure {
-  shape: Shape;
+const roundDown = (area: number): number => Math.floor(area * 100) / 100;
 
-  area: number;
+export class Triangle implements Figure {
+  shape = Shape.Triangle;
 
   constructor(
     public color: Color,
@@ -18,9 +23,6 @@ export class Triangle implements Figure {
     public b: number,
     public c: number,
   ) {
-    this.shape = 'triangle';
-    this.area = this.getArea();
-
     if (this.checkSide()) {
       throw new Error('One of your side is less then 0');
     }
@@ -31,17 +33,18 @@ export class Triangle implements Figure {
   }
 
   getArea():number {
-    const semiPerimeter = (this.a + this.b + this.c) / 2;
+    const { a, b, c } = this;
 
-    const semiPerimeterA = semiPerimeter - this.a;
-    const semiPerimeterB = semiPerimeter - this.b;
-    const semiPerimeterC = semiPerimeter - this.c;
+    const semiPerimeter = (a + b + c) / 2;
 
     const area = Math.sqrt(
-      semiPerimeter * semiPerimeterA * semiPerimeterB * semiPerimeterC,
+      semiPerimeter
+      * (semiPerimeter - a)
+      * (semiPerimeter - b)
+      * (semiPerimeter - c),
     );
 
-    return Math.floor(area * 100) / 100;
+    return roundDown(area);
   }
 
   checkSide(): boolean {
@@ -64,42 +67,32 @@ export class Triangle implements Figure {
 }
 
 export class Circle implements Figure {
-  shape: Shape;
-
-  area: number;
+  shape = Shape.Circle;
 
   constructor(
     public color: Color,
     public radius: number,
   ) {
-    this.shape = 'circle';
-    this.area = this.getArea();
-
     if (this.radius < 0) {
       throw new Error('Your radius is less then 0');
     }
   }
 
   getArea():number {
-    const area = Math.PI * (this.radius * this.radius);
+    const area = Math.PI * (this.radius ** 2);
 
-    return Math.floor(area * 100) / 100;
+    return roundDown(area);
   }
 }
 
 export class Rectangle implements Figure {
-  shape: Shape;
-
-  area: number;
+  shape = Shape.Rectangle;
 
   constructor(
     public color: Color,
     public width: number,
     public height: number,
   ) {
-    this.shape = 'rectangle';
-    this.area = this.getArea();
-
     if (this.width < 0 || this.height < 0) {
       throw new Error('Width or heigth less then 0');
     }
@@ -108,10 +101,10 @@ export class Rectangle implements Figure {
   getArea():number {
     const area = this.width * this.height;
 
-    return Math.floor(area * 100) / 100;
+    return roundDown(area);
   }
 }
 
 export function getInfo(figure: Figure): string {
-  return `A ${figure.color} ${figure.shape} - ${figure.area}`;
+  return `A ${figure.color} ${figure.shape} - ${figure.getArea()}`;
 }
