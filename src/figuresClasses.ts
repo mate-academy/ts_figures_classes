@@ -8,27 +8,14 @@ export interface Figure {
 }
 
 export class Triangle implements Figure {
-  color: Color;
-
-  shape: Shape;
-
-  sideA: number;
-
-  sideB: number;
-
-  sideC: number;
+  shape: Shape = 'triangle';
 
   constructor(
-    color: Color,
-    sideA: number,
-    sideB: number,
-    sideC: number,
+    public color: Color,
+    public sideA: number,
+    public sideB: number,
+    public sideC: number,
   ) {
-    this.shape = 'triangle';
-    this.color = color;
-    this.sideA = sideA;
-    this.sideB = sideB;
-    this.sideC = sideC;
     this.checkIfValid();
   }
 
@@ -53,24 +40,17 @@ export class Triangle implements Figure {
       = Math.sqrt(semiPerimetr * (semiPerimetr - this.sideA)
       * (semiPerimetr - this.sideB) * (semiPerimetr - this.sideC));
 
-    return Math.round(area * 100) / 100;
+    return Math.floor(area * 100) / 100;
   }
 }
 
 export class Circle implements Figure {
-  color: Color;
-
-  shape: Shape;
-
-  radius: number;
+  shape: Shape = 'circle';
 
   constructor(
-    color: Color,
-    radius: number,
+    public color: Color,
+    public radius: number,
   ) {
-    this.shape = 'circle';
-    this.color = color;
-    this.radius = radius;
     this.checkIfValid();
   }
 
@@ -90,20 +70,11 @@ export class Circle implements Figure {
 export class Rectangle implements Figure {
   shape: Shape = 'rectangle';
 
-  color: Color;
-
-  width: number;
-
-  length: number;
-
   constructor(
-    color:Color,
-    width: number,
-    length: number,
+    public color:Color,
+    public width: number,
+    public length: number,
   ) {
-    this.color = color;
-    this.width = width;
-    this.length = length;
     this.checkIfValid();
   }
 
@@ -116,10 +87,10 @@ export class Rectangle implements Figure {
   getArea(): number {
     const area = this.length * this.width;
 
-    return Math.round(area * 100) / 100;
+    return Math.floor(area * 100) / 100;
   }
 }
 
-export function getInfo(figure): string {
+export function getInfo(figure: Figure): string {
   return `A ${figure.color} ${figure.shape} - ${figure.getArea()}`;
 }
