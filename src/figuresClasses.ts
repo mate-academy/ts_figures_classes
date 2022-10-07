@@ -6,6 +6,14 @@ enum Shape {
 
 type Color = 'red' | 'green' | 'blue';
 
+function roundedDown(area: number): number {
+  return Math.floor(area * 100) / 100;
+}
+
+function checkFigure(...nums: number[]): boolean {
+  return nums.some((num: number) => num <= 0);
+}
+
 export interface Figure {
   color: Color;
   shape: Shape;
@@ -17,29 +25,30 @@ export class Triangle implements Figure {
 
   constructor(
     public color: Color,
-    private aSide: number,
-    private bSide: number,
-    private cSide: number,
+    public a: number,
+    public b: number,
+    public c: number,
   ) {
-    if (aSide <= 0 || bSide <= 0 || cSide <= 0) {
+    if (checkFigure(a, b, c)) {
       throw new Error('Incorrect triangles sides');
     }
 
-    const maxValue = Math.max(aSide, bSide, cSide);
+    const maxValue = Math.max(a, b, c);
 
-    if (maxValue >= (aSide + bSide + cSide - maxValue)) {
+    if (maxValue >= (a + b + c - maxValue)) {
       throw new Error('It is not a triangle');
     }
   }
 
   getArea(): number {
-    const sideLength = (this.aSide + this.bSide + this.cSide) / 2;
-    const area = Math.sqrt(sideLength
-      * (sideLength - this.aSide)
-      * (sideLength - this.bSide)
-      * (sideLength - this.cSide));
+    const { a, b, c } = this;
+    const sideSemiLength = (a + b + c) / 2;
+    const area = Math.sqrt(sideSemiLength
+      * (sideSemiLength - a)
+      * (sideSemiLength - b)
+      * (sideSemiLength - c));
 
-    return Math.round(area * 100) / 100;
+    return roundedDown(area);
   }
 }
 
@@ -50,13 +59,15 @@ export class Circle implements Figure {
     public color: Color,
     public radius: number,
   ) {
-    if (radius <= 0) {
+    if (checkFigure(radius)) {
       throw new Error('Incorrect circles radius');
     }
   }
 
   getArea(): number {
-    return Math.floor((Math.PI * this.radius ** 2) * 100) / 100;
+    const area = Math.PI * this.radius ** 2;
+
+    return roundedDown(area);
   }
 }
 
@@ -68,13 +79,15 @@ export class Rectangle {
     public width: number,
     public height: number,
   ) {
-    if (width <= 0 || height <= 0) {
+    if (checkFigure(width, height)) {
       throw new Error('Incorrect values sides');
     }
   }
 
   getArea(): number {
-    return Math.round(this.width * this.height * 100) / 100;
+    const { width, height } = this;
+
+    return roundedDown(width * height);
   }
 }
 
