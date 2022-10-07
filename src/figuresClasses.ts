@@ -84,7 +84,7 @@ export class Rectangle {
     validate(this.width, this.height);
   }
 
-  getArea = ():number => {
+  getArea = (): number => {
     const { height, width } = this;
 
     const area = height * width;
