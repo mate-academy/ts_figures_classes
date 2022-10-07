@@ -26,10 +26,10 @@ export class Triangle implements Figure {
   shape = Shape.Triangle;
 
   constructor(
-    public color: Color,
-    public a: number,
-    public b: number,
-    public c: number,
+    readonly color: Color,
+    readonly a: number,
+    readonly b: number,
+    readonly c: number,
   ) {
     isValid(a, b, c);
 
@@ -56,8 +56,8 @@ export class Circle implements Figure {
   shape = Shape.Circle;
 
   constructor(
-    public color: Color,
-    public radius: number,
+    readonly color: Color,
+    readonly radius: number,
   ) {
     isValid(radius);
   }
@@ -71,9 +71,9 @@ export class Rectangle implements Figure {
   shape = Shape.Rectangle;
 
   constructor(
-    public color: Color,
-    public width: number,
-    public height: number,
+    readonly color: Color,
+    readonly width: number,
+    readonly height: number,
   ) {
     isValid(width, height);
   }
