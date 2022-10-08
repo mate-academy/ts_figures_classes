@@ -41,6 +41,10 @@ export class Circle {
     public radius: number,
     public shape: Shape = Shape.Circle,
   ) {
+    this.checkIfValid();
+  }
+
+  checkIfValid(): void {
     if (this.radius <= 0) {
       throw new Error('Error. Radius must be > 0');
     }
@@ -58,8 +62,12 @@ export class Rectangle {
     public height: number,
     public shape: Shape = Shape.Rectangle,
   ) {
+    this.getPositive();
+  }
+
+  getPositive(): void {
     if (this.width <= 0 || this.height <= 0) {
-      throw new Error('Error. Sides must be > 0');
+      throw new Error('Error. Radius must be > 0');
     }
   }
 
