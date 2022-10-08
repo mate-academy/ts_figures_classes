@@ -8,23 +8,23 @@ export class Triangle implements Figure {
 
   constructor(
     public color: 'red' | 'green' | 'blue',
-    public a: number,
-    public b: number,
-    public c: number,
+    public sideA: number,
+    public sideB: number,
+    public sideC: number,
   ) {
-    if (this.a <= 0 || this.b <= 0 || this.c <= 0
-      || (this.a - this.b - this.c) >= 0
-      || (this.b - this.a - this.c) >= 0
-      || (this.c - this.b - this.a) >= 0) {
+    if (this.sideA <= 0 || this.sideB <= 0 || this.sideC <= 0
+      || (this.sideA - this.sideB - this.sideC) >= 0
+      || (this.sideB - this.sideA - this.sideC) >= 0
+      || (this.sideC - this.sideB - this.sideA) >= 0) {
       throw new Error('Incorrect figure dimensions');
     }
   }
 
   getArea(): number {
-    const p: number = (this.a + this.b + this.c) / 2;
+    const p: number = (this.sideA + this.sideB + this.sideC) / 2;
 
     return Math.floor(Math.sqrt(p
-      * (p - this.a) * (p - this.b) * (p - this.c)) * 100) / 100;
+      * (p - this.sideA) * (p - this.sideB) * (p - this.sideC)) * 100) / 100;
   }
 }
 
@@ -33,15 +33,15 @@ export class Circle implements Figure {
 
   constructor(
     public color: 'red' | 'green' | 'blue',
-    public a: number,
+    public radius: number,
   ) {
-    if (this.a <= 0) {
+    if (this.radius <= 0) {
       throw new Error('Incorrect figure dimensions');
     }
   }
 
   getArea(): number {
-    return Math.floor(Math.PI * this.a * this.a * 100) / 100;
+    return Math.floor(Math.PI * this.radius * this.radius * 100) / 100;
   }
 }
 
@@ -50,16 +50,16 @@ export class Rectangle implements Figure {
 
   constructor(
     public color: 'red' | 'green' | 'blue',
-    public a: number,
-    public b: number,
+    public width: number,
+    public hieght: number,
   ) {
-    if (this.a <= 0 || this.b <= 0) {
+    if (this.width <= 0 || this.hieght <= 0) {
       throw new Error('Incorrect figure dimensions');
     }
   }
 
   getArea(): number {
-    return Math.floor(this.a * this.b * 100) / 100;
+    return Math.floor(this.width * this.hieght * 100) / 100;
   }
 }
 
