@@ -1,44 +1,41 @@
 // import { moveEmitHelpers } from 'typescript';
+type Color = 'red' | 'green' | 'blue';
 
+enum Shape {
+  Triangle = 'triangle',
+  Circle = 'circle',
+  Rectangle = 'rectangle',
+}
 export interface Figure {
-  color: 'red' | 'green' | 'blue';
-  shape: 'triangle' | 'circle' | 'rectangle';
-
+  color: Color;
+  shape: Shape;
   getArea: () => number;
 }
 
+const roundResult = (num: number): number => {
+  return Math.floor(num * 100) / 100;
+};
+
+const checkParameters = (...parameters: number[]): void => {
+  if (parameters.some((num) => num <= 0)) {
+    throw new Error('Enter number bigger than 0!');
+  }
+};
+
 export class Triangle {
-  shape: string = 'triangle';
-
-  semiperimeter: number;
-
-  area: number;
+  shape = Shape.Triangle;
 
   constructor(
     public color: Figure,
-    public a: number,
-    public b: number,
-    public c: number,
+    private a: number,
+    private b: number,
+    private c: number,
   ) {
-    this.color = color;
-    this.a = a;
-    this.b = b;
-    this.c = c;
+    checkParameters(a, b, c);
 
-    this.semiperimeter = (this.a + this.b + this.c) / 2;
-
-    this.area = Math.sqrt(
-      this.semiperimeter
-          * (this.semiperimeter - this.a)
-          * (this.semiperimeter - this.b)
-          * (this.semiperimeter - this.c),
-    );
-
-    if (this.a <= 0 || this.b <= 0 || this.c <= 0) {
-      throw new Error('Every side must be bigger than 0!');
-    }
-
-    if (!this.area) {
+    if (this.a >= this.b + this.c
+      || this.b >= this.a + this.c
+      || this.c >= this.a + this.b) {
       throw new Error(
         `Sides ${this.a}, ${this.b} and ${this.c} can't form a triangle`,
       );
@@ -46,54 +43,51 @@ export class Triangle {
   }
 
   getArea(): number {
-    return Math.floor(this.area * 100) / 100;
+    const semiperimeter = (this.a + this.b + this.c) / 2;
+
+    const area = Math.sqrt(
+      semiperimeter
+        * (semiperimeter - this.a)
+        * (semiperimeter - this.b)
+        * (semiperimeter - this.c),
+    );
+
+    return roundResult(area);
   }
 }
 
 export class Circle {
-  shape: string = 'circle';
-
-  area: number;
+  shape = Shape.Circle;
 
   constructor(
     public color: Figure,
-    public radius: number,
+    private radius: number,
   ) {
-    this.color = color;
-    this.radius = radius;
-    this.area = Math.PI * this.radius ** 2;
-
-    if (this.radius <= 0) {
-      throw new Error('The radius must be bigger than 0!');
-    }
+    checkParameters(radius);
   }
 
   getArea(): number {
-    return Math.floor(this.area * 100) / 100;
+    const area = Math.PI * this.radius ** 2;
+
+    return roundResult(area);
   }
 }
 
 export class Rectangle {
-  shape: string = 'rectangle';
-
-  area: number;
+  shape = Shape.Rectangle;
 
   constructor(
     public color: Figure,
-    public width: number,
-    public height: number,
+    private width: number,
+    private height: number,
   ) {
-    this.width = width;
-    this.height = height;
-    this.area = this.width * this.height;
-
-    if (this.width <= 0 || this.height <= 0) {
-      throw new Error('Every side must be bigger than 0!');
-    }
+    checkParameters(width, height);
   }
 
   getArea(): number {
-    return Math.floor(this.area * 100) / 100;
+    const area = this.width * this.height;
+
+    return roundResult(area);
   }
 }
 
