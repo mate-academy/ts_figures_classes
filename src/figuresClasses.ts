@@ -13,20 +13,14 @@ export interface Figure {
 }
 
 export class Triangle implements Figure {
-  shape: Shapes;
+  shape = Shapes.Triangle;
 
-  a: number;
-
-  b: number;
-
-  c: number;
-
-  constructor(public color: Colors, a: number, b: number, c: number) {
-    this.shape = Shapes.Triangle;
-    this.a = a;
-    this.b = b;
-    this.c = c;
-
+  constructor(
+    public color: Colors,
+    public a: number,
+    public b: number,
+    public c: number,
+  ) {
     this.isTriangle();
   }
 
@@ -63,11 +57,9 @@ export class Triangle implements Figure {
 }
 
 export class Circle implements Figure {
-  shape: Shapes;
+  shape = Shapes.Circle;
 
   constructor(public color: Colors, public radius: number) {
-    this.shape = Shapes.Circle;
-
     if (this.radius < 0) {
       throw new Error('Radius is negative');
     }
@@ -79,16 +71,14 @@ export class Circle implements Figure {
 }
 
 export class Rectangle implements Figure {
-  shape: Shapes;
+  shape = Shapes.Rectangle;
 
-  width: number;
-
-  height: number;
-
-  constructor(public color: Colors, width: number, height: number) {
+  constructor(
+    public color: Colors,
+    public width: number,
+    public height: number,
+  ) {
     this.shape = Shapes.Rectangle;
-    this.width = width;
-    this.height = height;
 
     if (width < 0 || height < 0) {
       throw new Error('Some side is negative');
