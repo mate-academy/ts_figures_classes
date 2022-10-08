@@ -24,12 +24,12 @@ export class Triangle implements Figure {
   }
 
   getArea(): number {
-    const perimetr: number = (this.a + this.b + this.c) / 2;
+    const semiperimetr: number = (this.a + this.b + this.c) / 2;
 
-    const area: number = Math.sqrt(perimetr
-      * (perimetr - this.a)
-      * (perimetr - this.b)
-      * (perimetr - this.c));
+    const area: number = Math.sqrt(semiperimetr
+      * (semiperimetr - this.a)
+      * (semiperimetr - this.b)
+      * (semiperimetr - this.c));
 
     return Math.floor(area * 100) / 100;
   }
@@ -40,15 +40,15 @@ export class Circle implements Figure {
 
   constructor(
     public color: string,
-    private a: number,
+    private radius: number,
   ) {
-    if (a <= 0) {
+    if (radius <= 0) {
       throw Error('Radius should be > 0');
     }
   }
 
   getArea(): number {
-    const area: number = Math.PI * this.a * this.a;
+    const area: number = Math.PI * this.radius * this.radius;
 
     return Math.floor(area * 100) / 100;
   }
@@ -59,16 +59,16 @@ export class Rectangle {
 
   constructor(
     public color: string,
-    private a: number,
-    private b: number,
+    private width: number,
+    private height: number,
   ) {
-    if (a <= 0 || b <= 0) {
+    if (width <= 0 || height <= 0) {
       throw Error('All sides should be > 0');
     }
   }
 
   getArea(): number {
-    return this.a * this.b;
+    return this.width * this.height;
   }
 }
 
