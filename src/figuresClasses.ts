@@ -1,9 +1,9 @@
 type Color = 'red' | 'green' | 'blue';
 
 enum Shape {
-  triangle = 'triangle',
-  circle = 'circle',
-  rectangle = 'rectangle',
+  Triangle = 'triangle',
+  Circle = 'circle',
+  Rectangle = 'rectangle',
 }
 
 export interface Figure {
@@ -13,7 +13,7 @@ export interface Figure {
 }
 
 export class Triangle implements Figure {
-  shape: Shape = Shape.triangle;
+  shape: Shape = Shape.Triangle;
 
   constructor(
     public color: Color,
@@ -26,7 +26,7 @@ export class Triangle implements Figure {
 
   correctValuesOfFigure(): void {
     if (this.a <= 0 || this.b <= 0 || this.c <= 0) {
-      throw new Error('Incorrect values');
+      throw new Error('Resulting value should be even number');
     }
 
     let sides: number[] = [this.a, this.b, this.c];
@@ -52,7 +52,7 @@ export class Triangle implements Figure {
 }
 
 export class Circle implements Figure {
-  shape: Shape = Shape.circle;
+  shape: Shape = Shape.Circle;
 
   constructor(
     public color: Color,
@@ -63,7 +63,7 @@ export class Circle implements Figure {
 
   correctValuesOfFigure(): void {
     if (this.radius <= 0) {
-      throw new Error('Incorrect values');
+      throw new Error('Resulting value should be even number');
     }
   }
 
@@ -73,7 +73,7 @@ export class Circle implements Figure {
 }
 
 export class Rectangle implements Figure {
-  shape: Shape = Shape.rectangle;
+  shape: Shape = Shape.Rectangle;
 
   constructor(
     public color: Color,
@@ -85,7 +85,7 @@ export class Rectangle implements Figure {
 
   correctValuesOfFigure(): void {
     if (this.width <= 0 || this.height <= 0) {
-      throw new Error('Incorrect values');
+      throw new Error('Resulting value should be even number');
     }
   }
 
