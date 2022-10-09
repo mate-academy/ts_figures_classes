@@ -10,22 +10,14 @@ export interface Figure {
 }
 
 export class Triangle implements Figure {
-  color: Color;
-
-  a:number;
-
-  b:number;
-
-  c:number;
-
   shape:Shape = 'triangle';
 
-  constructor(color:Color, a:number, b:number, c:number) {
-    this.color = color;
-    this.a = a;
-    this.b = b;
-    this.c = c;
-
+  constructor(
+    public color:Color,
+    public a:number,
+    public b:number,
+    public c:number,
+  ) {
     this.checkTriangle();
   }
 
