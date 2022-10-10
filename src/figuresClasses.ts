@@ -12,10 +12,13 @@ export class Triangle implements Figure {
     public sideB: number,
     public sideC: number,
   ) {
+    const longestSide = Math.max(sideA, sideB, sideC);
+    const sumShorterSide = [sideA, sideB, sideC]
+      .filter((side) => side !== longestSide)
+      .reduce((prev, current) => prev + current, 0);
+
     if (this.sideA <= 0 || this.sideB <= 0 || this.sideC <= 0
-      || (this.sideA - this.sideB - this.sideC) >= 0
-      || (this.sideB - this.sideA - this.sideC) >= 0
-      || (this.sideC - this.sideB - this.sideA) >= 0) {
+      || longestSide >= sumShorterSide) {
       throw new Error('Incorrect figure dimensions');
     }
   }
