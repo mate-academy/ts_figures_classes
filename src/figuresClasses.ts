@@ -9,11 +9,11 @@ export interface Figure {
 }
 
 export class Triangle implements Figure {
-  public sideA: number;
+  private sideA: number;
 
-  public sideB: number;
+  private sideB: number;
 
-  public sideC: number;
+  private sideC: number;
 
   public shape: Shape = 'triangle';
 
@@ -53,7 +53,7 @@ export class Triangle implements Figure {
 export class Circle implements Figure {
   public shape: Shape = 'circle';
 
-  public radius: number;
+  private radius: number;
 
   constructor(
     public color: Color,
@@ -76,9 +76,9 @@ export class Circle implements Figure {
 export class Rectangle implements Figure {
   public shape: Shape = 'rectangle';
 
-  public sideA: number;
+  private sideA: number;
 
-  public sideB: number;
+  private sideB: number;
 
   constructor(
     public color: Color,
