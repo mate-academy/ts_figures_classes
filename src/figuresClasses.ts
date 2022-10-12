@@ -7,19 +7,11 @@ export interface Figure {
 export class Triangle implements Figure {
   shape = 'triangle';
 
-  color: string;
-
-  a: number;
-
-  b: number;
-
-  c: number;
-
   constructor(
-    color: string,
-    a: number,
-    b: number,
-    c: number,
+    public color: string,
+    public a: number,
+    public b: number,
+    public c: number,
   ) {
     this.color = color;
 
@@ -39,9 +31,7 @@ export class Triangle implements Figure {
   getArea():number {
     const s = (this.a + this.b + this.c) / 2;
 
-    const s2 = (s * (s - this.a) * (s - this.b) * (s - this.c));
-
-    const area = (Math.sqrt(s2));
+    const area = (Math.sqrt((s * (s - this.a) * (s - this.b) * (s - this.c))));
 
     return Math.trunc(area * 100) / 100;
   }
@@ -50,13 +40,9 @@ export class Triangle implements Figure {
 export class Circle implements Figure {
   shape = 'circle';
 
-  color: string;
-
-  radius: number;
-
   constructor(
-    color: string,
-    radius: number,
+    public color: string,
+    public radius: number,
   ) {
     this.color = color;
 
@@ -77,16 +63,10 @@ export class Circle implements Figure {
 export class Rectangle implements Figure {
   shape = 'rectangle';
 
-  color: string;
-
-  width: number;
-
-  height: number;
-
   constructor(
-    color: string,
-    width: number,
-    height: number,
+    public color: string,
+    public width: number,
+    public height: number,
   ) {
     this.color = color;
 
