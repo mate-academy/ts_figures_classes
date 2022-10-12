@@ -27,7 +27,7 @@ export class Triangle implements Figure {
       throw new Error(`sides {${a}, ${b} and ${c} can't form a triangle}`);
     }
 
-    if (!a || !b || !c) {
+    if (a <= 0 || b <= 0 || c <= 0) {
       throw new Error('sides cannot be zero');
     }
 
@@ -37,13 +37,13 @@ export class Triangle implements Figure {
   }
 
   getArea(): number {
-    const halfP: number = (this.sideA + this.sideB + this.sideC) / 2;
+    const halfPerimeter: number = (this.sideA + this.sideB + this.sideC) / 2;
 
     const area = Math.sqrt(
-      halfP
-      * (halfP - this.sideA)
-      * (halfP - this.sideB)
-      * (halfP - this.sideC),
+      halfPerimeter
+      * (halfPerimeter - this.sideA)
+      * (halfPerimeter - this.sideB)
+      * (halfPerimeter - this.sideC),
     );
 
     return Math.round(area * 100) / 100;
