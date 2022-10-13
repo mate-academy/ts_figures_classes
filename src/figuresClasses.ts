@@ -6,6 +6,16 @@ export interface Figure {
   color: Color;
 }
 
+function isTriangle(a: number, b: number, c: number): boolean {
+  return (a + b <= c) || (c + b <= a) || (a + c <= b);
+}
+
+function isAnyNumberLessThanZero(...numbers: number[]): boolean {
+  return numbers
+    .map((number) => number <= 0)
+    .includes(true);
+}
+
 export class Triangle implements Figure {
   shape: Shape = 'triangle';
 
@@ -23,11 +33,11 @@ export class Triangle implements Figure {
     b: number,
     c: number,
   ) {
-    if (a <= 0 || b <= 0 || c <= 0) {
+    if (isAnyNumberLessThanZero(a, b, c)) {
       throw new Error('All sides must be greater than 0');
     }
 
-    if ((a + b <= c) || (c + b <= a) || (a + c <= b)) {
+    if ((isTriangle(a, b, c))) {
       throw new Error('Sum of any two sides must be greater than the third');
     }
 
@@ -57,7 +67,7 @@ export class Circle implements Figure {
     color: Color,
     radius: number,
   ) {
-    if (radius <= 0) {
+    if (isAnyNumberLessThanZero(radius)) {
       throw new Error('Radius must be greater than 0');
     }
 
@@ -84,7 +94,7 @@ export class Rectangle implements Figure {
     a: number,
     b: number,
   ) {
-    if (a <= 0 || b <= 0) {
+    if (isAnyNumberLessThanZero(a, b)) {
       throw new Error('All sides must be greater than 0');
     }
 
