@@ -5,7 +5,7 @@ export interface Figure {
   a?: number,
   b?: number,
   c?: number,
-  r?: number,
+  radius?: number,
   shape: string,
 }
 
@@ -18,8 +18,16 @@ export class Triangle implements Figure {
     public b: number,
     public c: number,
   ) {
-    if ((a <= 0 || b <= 0 || c <= 0)
-    || (a >= b + c || b >= a + c || c >= b + a)
+    const sideA: number = a;
+    const sideB: number = b;
+    const sideC: number = c;
+
+    if (sideA <= 0
+      || sideB <= 0
+      || sideC <= 0
+      || sideA >= sideB + sideC
+      || sideB >= sideA + sideC
+      || sideC >= sideB + sideA
     ) {
       throw new Error('Error');
     }
@@ -27,10 +35,13 @@ export class Triangle implements Figure {
   }
 
   getArea(): number {
-    const s: number = (this.a + this.b + this.c) / 2;
+    const semiperimeter: number = (this.a + this.b + this.c) / 2;
 
-    return Math.floor(Math.sqrt(s * (s - this.a) * (s - this.b) * (s - this.c))
-    * 100) / 100;
+    return Math.floor(Math.sqrt(semiperimeter
+      * (semiperimeter - this.a)
+      * (semiperimeter - this.b)
+      * (semiperimeter - this.c)) * 100)
+      / 100;
   }
 }
 
@@ -39,9 +50,9 @@ export class Circle implements Figure {
 
   constructor(
     public color: Color,
-    public r: number = 1,
+    public radius: number = 1,
   ) {
-    if (r <= 0) {
+    if (radius <= 0) {
       throw new Error('Error');
     }
     this.shape = 'circle';
@@ -50,7 +61,7 @@ export class Circle implements Figure {
   getArea(): number {
     const pi: number = Math.PI;
 
-    return Math.floor((pi * this.r ** 2) * 100) / 100;
+    return Math.floor((pi * this.radius ** 2) * 100) / 100;
   }
 }
 
