@@ -18,17 +18,13 @@ export class Triangle implements Figure {
     public b: number,
     public c: number,
   ) {
-    const sideA: number = a;
-    const sideB: number = b;
-    const sideC: number = c;
+    const sides = [a, b, c];
+    const perimeter = a + b + c;
+    const longestSide = Math.max(...sides);
+    const hasTooSmallSide = sides.some((side) => side <= 0);
+    const hasTooLongSide = longestSide >= perimeter - longestSide;
 
-    if (sideA <= 0
-      || sideB <= 0
-      || sideC <= 0
-      || sideA >= sideB + sideC
-      || sideB >= sideA + sideC
-      || sideC >= sideB + sideA
-    ) {
+    if (hasTooSmallSide || hasTooLongSide) {
       throw new Error('Error');
     }
     this.shape = 'triangle';
