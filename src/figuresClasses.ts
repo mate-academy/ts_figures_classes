@@ -24,11 +24,11 @@ export class Triangle implements Figure {
     const longestSide = Math.max(a, b, c);
 
     if (longestSide >= ((a + b + c) - longestSide)) {
-      throw new Error();
+      throw new Error('Invalid triangle sides!');
     }
 
     if (a <= 0 || b <= 0 || c <= 0) {
-      throw new Error();
+      throw new Error('Triangle\'s side cannot be 0 or negativ number!');
     }
   }
 
@@ -48,7 +48,7 @@ export class Circle implements Figure {
     public radius: number,
   ) {
     if (radius <= 0) {
-      throw new Error();
+      throw new Error('Circle\'s radius cannot be 0 or negative number!');
     }
   }
 
@@ -66,7 +66,9 @@ export class Rectangle implements Figure {
     public height: number,
   ) {
     if (width <= 0 || height <= 0) {
-      throw new Error();
+      throw new Error(
+        'Rectangle\'s width or height cannot be 0 or negative number!',
+      );
     }
   }
 
