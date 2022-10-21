@@ -1,7 +1,7 @@
 enum OfFiruers {
-  triangle = 'triangle',
-  circle = 'circle',
-  rectangle = 'rectangle'
+  Triangle = 'triangle',
+  Circle = 'circle',
+  Rectangle = 'rectangle'
 }
 
 type Color = 'red' | 'green' | 'blue';
@@ -13,7 +13,7 @@ export interface Figure {
 }
 
 export class Triangle implements Figure {
-  shape: OfFiruers = OfFiruers.triangle;
+  shape: OfFiruers = OfFiruers.Triangle;
 
   constructor(
     public color: Color,
@@ -43,14 +43,14 @@ export class Triangle implements Figure {
 }
 
 export class Circle implements Figure {
-  shape: OfFiruers = OfFiruers.circle;
+  shape: OfFiruers = OfFiruers.Circle;
 
   constructor(
     public color: Color,
     private radius: number,
   ) {
     if (this.radius <= 0) {
-      throw new Error('Radious is valid');
+      throw new Error('Radious is invalid');
     }
   }
 
@@ -60,7 +60,7 @@ export class Circle implements Figure {
 }
 
 export class Rectangle implements Figure {
-  shape: OfFiruers = OfFiruers.rectangle;
+  shape: OfFiruers = OfFiruers.Rectangle;
 
   constructor(
     public color: Color,
@@ -68,7 +68,7 @@ export class Rectangle implements Figure {
     private b: number,
   ) {
     if ([a, b].some((side) => side <= 0)) {
-      throw new Error('One of side is valid');
+      throw new Error('One of side is invalid');
     }
   }
 
