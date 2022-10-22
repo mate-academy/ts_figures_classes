@@ -1,23 +1,26 @@
+type Color = 'red' | 'blue' | 'green';
+
+enum Shape {
+  triangle = 'triangle',
+  rectangle = 'rectangle',
+  circle = 'circle',
+}
+
 export interface Figure {
-  shape: 'triangle' | 'rectangle' | 'circle',
-  color: 'red' | 'green' | 'blue',
+  shape: Shape,
+  color: Color,
   getArea(): number,
 }
 
 export class Triangle implements Figure {
   constructor(
-    public color: 'red' | 'green' | 'blue',
+    public color: Color,
     public a: number,
     public b: number,
     public c: number,
-    public shape: 'triangle' | 'rectangle' | 'circle'
-    = 'triangle',
+    public shape: Shape = Shape.triangle,
   ) {
-    if (!a || !b || !c || a <= 0 || b <= 0 || c <= 0) {
-      throw new Error('Please, enter valid data');
-    }
-
-    if (c >= a + b) {
+    if (!a || !b || !c || a <= 0 || b <= 0 || c <= 0 || c >= a + b) {
       throw new Error('Please, enter valid data');
     }
   }
@@ -32,10 +35,9 @@ export class Triangle implements Figure {
 
 export class Circle implements Figure {
   constructor(
-    public color: 'red' | 'green' | 'blue',
+    public color: Color,
     public radius: number,
-    public shape: 'triangle' | 'rectangle' | 'circle'
-    = 'circle',
+    public shape: Shape = Shape.circle,
   ) {
     if (!radius || radius <= 0) {
       throw new Error('Please, enter valid data');
@@ -51,11 +53,10 @@ export class Circle implements Figure {
 
 export class Rectangle implements Figure {
   constructor(
-    public color: 'red' | 'green' | 'blue',
+    public color: Color,
     public width: number,
     public height: number,
-    public shape: 'triangle' | 'rectangle' | 'circle'
-    = 'rectangle',
+    public shape: Shape = Shape.rectangle,
   ) {
     if (!width || !height || width <= 0 || height <= 0) {
       throw new Error('Please, enter valid data');
