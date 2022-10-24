@@ -21,7 +21,7 @@ export class Triangle implements Figure {
     public b: number,
     public c: number,
   ) {
-    if (a === 0 || b === 0 || c === 0) {
+    if (a <= 0 || b <= 0 || c <= 0) {
       throw new Error('Tringle Sides Length must be greater then ZERO');
     }
 
