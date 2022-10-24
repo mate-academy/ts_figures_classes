@@ -11,10 +11,10 @@ export class Triangle implements Figure {
   shape: Shape = 'triangle';
 
   constructor(
+    private a: number,
+    private b: number,
+    private c: number,
     public color: Color,
-    public a: number,
-    public b: number,
-    public c: number,
   ) {
     this.findErrors();
   }
@@ -52,7 +52,7 @@ export class Circle {
 
   constructor(
     public color: Color,
-    public radius: number,
+    private radius: number,
   ) {
     this.findErrors();
   }
@@ -73,8 +73,8 @@ export class Rectangle {
 
   constructor(
     public color: Color,
-    public wigth: number,
-    public height: number,
+    private wigth: number,
+    private height: number,
   ) {
     this.findErrors();
   }
