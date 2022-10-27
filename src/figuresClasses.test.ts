@@ -1,4 +1,3 @@
-// eslint-disable-next-line import/named
 import { Triangle, Rectangle, Circle, getInfo } from './figuresClasses';
 
 describe('Class "Triangle"', () => {

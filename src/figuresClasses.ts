@@ -1,110 +1,95 @@
+type Shape = 'triangle' | 'circle' | 'rectangle';
 type Color = 'red' | 'green' | 'blue';
 
 export interface Figure {
-  shape : 'triangle' | 'circle' | 'rectangle';
+  shape : Shape
   color : Color;
   getArea() : number;
 }
 
 let square : number;
 
+function getRounding(): number {
+  return Math.trunc(square * 100) / 100;
+}
+
 export class Triangle implements Figure {
-  shape : 'triangle';
+  shape : Shape;
 
-  color : 'red' | 'green' | 'blue';
-
-  a: number;
-
-  b: number;
-
-  c: number;
-
-  constructor(color : 'red' | 'green' | 'blue',
-    a : number, b : number, c : number) {
+  constructor(
+    public color : Color,
+    private b : number,
+    private a : number,
+    private c : number,
+  ) {
     this.shape = 'triangle';
-    this.color = color;
-    this.a = a;
-    this.b = b;
-    this.c = c;
 
-    if (this.a <= 0) {
-      throw new Error('your error message');
-    }
-
-    if (this.b <= 0) {
-      throw new Error('your error message');
-    }
-
-    if (this.c <= 0) {
-      throw new Error('your error message');
+    if (this.a <= 0 || this.b <= 0 || this.c <= 0) {
+      throw new Error(
+        `Throws an error: sides ${a}, ${b} and ${c} cannot form a triangle`,
+      );
     }
 
     if (this.a + this.b <= this.c
       || this.b + this.c <= this.a
       || this.a + this.c <= this.b) {
-      throw new Error('your error message');
+      throw new Error(
+        `Throws an error: sides ${a}, ${b} and ${c} cannot form a triangle`,
+      );
     }
   }
 
-  getArea() : number {
-    square = Math.sqrt(((this.a + this.b + this.c) / 2)
-    * (((this.a + this.b + this.c) / 2) - this.a)
-    * (((this.a + this.b + this.c) / 2) - this.b)
-    * (((this.a + this.b + this.c) / 2) - this.c));
+  getArea(): number {
+    const perimetr : number = ((this.a + this.b + this.c) / 2);
 
-    return Math.round(square * 100) / 100;
+    square = Math.sqrt(perimetr
+    * (perimetr - this.a)
+    * (perimetr - this.b)
+    * (perimetr - this.c));
+
+    return getRounding();
   }
 }
 
 export class Circle implements Figure {
-  shape: 'circle';
+  shape: Shape;
 
-  color : 'red' | 'green' | 'blue';
-
-  radius : number;
-
-  constructor(color : 'red' | 'green' | 'blue', radius : number) {
+  constructor(public color : Color, private radius : number) {
     this.shape = 'circle';
-    this.color = color;
-    this.radius = radius;
 
     if (radius <= 0) {
-      throw new Error('your error message');
+      throw new Error(`Throws an error: radius ${radius} cannot form circle`);
     }
   }
 
-  getArea() : number {
+  getArea(): number {
     square = Math.PI * this.radius ** 2;
 
-    return Math.trunc(square * 100) / 100;
+    return getRounding();
   }
 }
 
 export class Rectangle implements Figure {
-  shape : 'rectangle';
+  shape : Shape;
 
-  color : 'red' | 'green' | 'blue';
-
-  width : number;
-
-  height : number;
-
-  constructor(color : 'red' | 'green' | 'blue',
-    width : number, height : number) {
+  constructor(
+    public color : Color,
+    private width : number,
+    private height : number,
+  ) {
     this.shape = 'rectangle';
-    this.color = color;
-    this.width = width;
-    this.height = height;
 
     if (width <= 0 || height <= 0) {
-      throw new Error('your error message');
+      throw new Error(
+        `Throws an error: sides ${width} and ${height} cannot form a rectangle`,
+      );
     }
   }
 
-  getArea() : number {
+  getArea(): number {
     square = this.height * this.width;
 
-    return Math.round(square * 100) / 100;
+    return getRounding();
   }
 }
 
