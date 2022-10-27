@@ -1,9 +1,9 @@
 type Color = 'red' | 'green' | 'blue';
 
 enum Shape {
-  triangle = 'triangle',
-  circle = 'circle',
-  rectangle = 'rectangle',
+  Triangle = 'triangle',
+  Circle = 'circle',
+  Rectangle = 'rectangle',
 }
 
 export interface Figure {
@@ -17,7 +17,7 @@ export class Triangle implements Figure {
     public a: number,
     public b: number,
     public c: number,
-    public shape: Shape = Shape.triangle,
+    public shape: Shape = Shape.Triangle,
   ) {
     if (this.a + this.b <= this.c
       || this.a + this.c <= this.b
@@ -38,7 +38,7 @@ export class Circle implements Figure {
   constructor(
     public color: Color,
     public r: number,
-    public shape: Shape = Shape.circle,
+    public shape: Shape = Shape.Circle,
   ) {
     if (this.r <= 0) {
       throw new Error('radius must be > 0');
@@ -57,7 +57,7 @@ export class Rectangle implements Figure {
     public color: Color,
     public a: number,
     public b: number,
-    public shape: Shape = Shape.rectangle,
+    public shape: Shape = Shape.Rectangle,
   ) {
     if (this.a <= 0 || this.b <= 0) {
       throw new Error('Sides must be > 0');
