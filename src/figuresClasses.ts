@@ -7,9 +7,7 @@ export interface Figure {
   getArea() : number;
 }
 
-let square : number;
-
-function getRounding(): number {
+function getRounding(square : number): number {
   return Math.trunc(square * 100) / 100;
 }
 
@@ -42,12 +40,10 @@ export class Triangle implements Figure {
   getArea(): number {
     const perimetr : number = ((this.a + this.b + this.c) / 2);
 
-    square = Math.sqrt(perimetr
-    * (perimetr - this.a)
-    * (perimetr - this.b)
-    * (perimetr - this.c));
-
-    return getRounding();
+    return getRounding(Math.sqrt(perimetr
+      * (perimetr - this.a)
+      * (perimetr - this.b)
+      * (perimetr - this.c)));
   }
 }
 
@@ -63,9 +59,7 @@ export class Circle implements Figure {
   }
 
   getArea(): number {
-    square = Math.PI * this.radius ** 2;
-
-    return getRounding();
+    return getRounding(Math.PI * this.radius ** 2);
   }
 }
 
@@ -87,9 +81,7 @@ export class Rectangle implements Figure {
   }
 
   getArea(): number {
-    square = this.height * this.width;
-
-    return getRounding();
+    return getRounding(this.height * this.width);
   }
 }
 
