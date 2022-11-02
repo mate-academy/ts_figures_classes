@@ -15,13 +15,11 @@ export class Triangle implements Figure {
   shape: Shape = Shape.triangle;
 
   constructor(
-    public color: 'red'|'green'|'blue',
+    public color: Color,
     public a: number,
     public c: number,
     public b: number,
   ) {
-    this.color = color;
-
     const longestSide = Math.max(a, b, c);
     const otherSides = a + b + c - longestSide;
     const notZero = a > 0 && b > 0 && c > 0;
@@ -36,10 +34,10 @@ export class Triangle implements Figure {
   }
 
   getArea(): number {
-    const s: number = (this.a + this.b + this.c) / 2;
+    const sum : number = (this.a + this.b + this.c) / 2;
 
     const area
-      = Math.sqrt(s * (s - this.a) * (s - this.b) * (s - this.c));
+      = Math.sqrt(sum * (sum - this.a) * (sum - this.b) * (sum - this.c));
 
     return Math.floor(area * 100) / 100;
   }
@@ -49,14 +47,10 @@ export class Circle implements Figure {
   shape: Shape = Shape.circle;
 
   constructor(
-    public color: 'red' | 'green' | 'blue',
+    public color: Color,
     public radius: number,
   ) {
-    this.color = color;
-
-    if (radius > 0) {
-      this.radius = radius;
-    } else {
+    if (radius < 0) {
       throw new Error('errr');
     }
   }
@@ -72,12 +66,10 @@ export class Rectangle implements Figure {
   shape: Shape = Shape.rectangle;
 
   constructor(
-    public color: 'red' | 'green' | 'blue',
+    public color: Color,
     public height: number,
     public width: number,
   ) {
-    this.color = color;
-
     if (height <= 0 || width <= 0) {
       throw new Error('your error');
     }
