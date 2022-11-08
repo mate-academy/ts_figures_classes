@@ -1,7 +1,8 @@
 // eslint-disable-next-line
+import { roundArea } from "./helperFunctions";
 
 export interface Figure {
-  shape :string;
+  shape: string;
   color: string;
   a?: number;
   b?: number;
@@ -45,13 +46,13 @@ export class Triangle implements Figure {
   }
 
   getArea(): number {
-    const perimeter = (this.a + this.b + this.c) / 2;
+    const { a, b, c } = this;
+    const perimeter = (a + b + c) / 2;
     const area = Math.sqrt(
-      perimeter
-      * (perimeter - this.a) * (perimeter - this.b) * (perimeter - this.c),
+      perimeter * (perimeter - a) * (perimeter - b) * (perimeter - c),
     );
 
-    return Math.floor(area * 100) / 100;
+    return roundArea(area);
   }
 }
 
@@ -74,7 +75,7 @@ export class Circle implements Figure {
   getArea(): number {
     const area = Math.PI * this.radius * this.radius;
 
-    return Math.floor(area * 100) / 100;
+    return roundArea(area);
   }
 }
 
@@ -100,7 +101,7 @@ export class Rectangle implements Figure {
   getArea(): number {
     const area = this.width * this.height;
 
-    return Math.floor(area * 100) / 100;
+    return roundArea(area);
   }
 }
 
