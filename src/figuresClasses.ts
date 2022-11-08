@@ -17,7 +17,7 @@ export class Triangle implements Figure {
 
   c: number;
 
-  shape: string;
+  public shape: string;
 
   constructor(color: string, a: number, b: number, c: number) {
     this.color = color;
@@ -26,7 +26,7 @@ export class Triangle implements Figure {
     this.c = c;
     this.shape = this.constructor.name.toLowerCase();
 
-    if (this.a <= 0 || this.b <= 0 || this.c <= 0) {
+    if (a <= 0 || b <= 0 || c <= 0) {
       throw new Error('Negative sides!');
     }
 
