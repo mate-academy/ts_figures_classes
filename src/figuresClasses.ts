@@ -17,7 +17,7 @@ export class Triangle implements Figure {
 
   c: number;
 
-  public shape: string;
+  shape: string;
 
   constructor(color: string, a: number, b: number, c: number) {
     this.color = color;
