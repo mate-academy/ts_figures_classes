@@ -1,5 +1,9 @@
 type Color = 'red' | 'green' | 'blue';
 
+function roundDownToHundredths(length: number): number {
+  return Math.floor(length * 100) / 100;
+}
+
 enum Shapes {
   Triangle = 'triangle',
   Circle = 'circle',
@@ -21,13 +25,13 @@ export class Triangle implements Figure {
     public c: number,
   ) {
     if (this.a <= 0 || this.b <= 0 || this.c <= 0) {
-      throw new Error('your error message');
+      throw new Error('enter positive values for lenghts');
     }
 
     const max = Math.max(this.a, this.b, this.c);
 
     if (max >= this.a + this.b + this.c - max) {
-      throw new Error('your error message');
+      throw new Error('the longest side can not be more than sum of 2 else');
     }
   }
 
@@ -36,7 +40,7 @@ export class Triangle implements Figure {
     const squareTriangle = Math.sqrt(p * (p - this.a)
 * (p - this.b) * (p - this.c));
 
-    return Math.floor(squareTriangle * 100) / 100;
+    return roundDownToHundredths(squareTriangle);
   }
 }
 
@@ -48,14 +52,14 @@ export class Circle implements Figure {
     public radius: number,
   ) {
     if (this.radius <= 0) {
-      throw new Error('your error message');
+      throw new Error('enter positive values for lenghts');
     }
   }
 
   getArea():number {
-    const squareCircle = Math.PI * this.radius * this.radius;
+    const squareCircle = Math.PI * this.radius ** 2;
 
-    return Math.floor(squareCircle * 100) / 100;
+    return roundDownToHundredths(squareCircle);
   }
 }
 
@@ -68,14 +72,14 @@ export class Rectangle implements Figure {
     public height: number,
   ) {
     if (this.width <= 0 || this.height <= 0) {
-      throw new Error('your error message');
+      throw new Error('enter positive values for lenghts');
     }
   }
 
   getArea():number {
     const squareRectangle = this.width * this.height;
 
-    return Math.floor(squareRectangle * 100) / 100;
+    return roundDownToHundredths(squareRectangle);
   }
 }
 
