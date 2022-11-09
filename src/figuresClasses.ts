@@ -8,6 +8,10 @@ export interface Figure {
   getArea(): number;
 }
 
+function rounding(number: number): number {
+  return Math.floor(number * 100) / 100;
+}
+
 export class Triangle implements Figure {
   color: string;
 
@@ -39,8 +43,8 @@ export class Triangle implements Figure {
     const { a, b, c } = this;
     const size = (a + b + c) / 2;
 
-    return Math.floor((Math.sqrt(size
-      * (size - a) * (size - b) * (size - c))) * 100) / 100;
+    return rounding(Math.sqrt(size
+      * (size - a) * (size - b) * (size - c)));
   }
 }
 
@@ -62,9 +66,7 @@ export class Circle implements Figure {
   }
 
   getArea(): number {
-    const area = Math.PI * this.radius * this.radius;
-
-    return Math.floor(area * 100) / 100;
+    return rounding(Math.PI * this.radius * this.radius);
   }
 }
 
