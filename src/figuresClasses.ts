@@ -1,6 +1,10 @@
 type Color = 'red'|'green'|'blue';
 type Shape = 'triangle'|'circle'|'rectangle';
 
+function roundedSquare(square: number): number {
+  return Math.floor(square * 100) / 100;
+}
+
 export interface Figure {
   shape: Shape;
   color: Color;
@@ -26,11 +30,12 @@ export class Triangle implements Figure {
   }
 
   getArea(): number {
-    const sp: number = (this.a + this.b + this.c) / 2;
+    const semiPerimeter: number = (this.a + this.b + this.c) / 2;
     const triangleSquare: number
-     = ((sp * (sp - this.a) * (sp - this.b) * (sp - this.c)) ** 0.5);
+     = ((semiPerimeter * (semiPerimeter - this.a)
+      * (semiPerimeter - this.b) * (semiPerimeter - this.c)) ** 0.5);
 
-    return Math.floor(triangleSquare * 100) / 100;
+    return roundedSquare(triangleSquare);
   }
 }
 
@@ -49,7 +54,7 @@ export class Circle implements Figure {
   getArea(): number {
     const circleSquare: number = Math.PI * (this.radius ** 2);
 
-    return Math.floor(circleSquare * 100) / 100;
+    return roundedSquare(circleSquare);
   }
 }
 
@@ -69,7 +74,7 @@ export class Rectangle implements Figure {
   getArea(): number {
     const rectangleSquare: number = this.width * this.height;
 
-    return Math.floor(rectangleSquare * 100) / 100;
+    return roundedSquare(rectangleSquare);
   }
 }
 
