@@ -1,9 +1,14 @@
-type FigShape = 'triangle' | 'circle' | 'rectangle';
-type FigColor = 'red' | 'green' | 'blue';
+enum Shape {
+  Triangle = 'triangle',
+  Circle = 'circle',
+  Rectangle = 'rectangle',
+}
+
+type Color = 'red' | 'green' | 'blue';
 
 export interface Figure {
-  shape: FigShape;
-  color: FigColor;
+  shape: Shape;
+  color: Color;
   getArea(): number;
 }
 
@@ -12,10 +17,10 @@ function roundNum(num: number): number {
 }
 
 export class Triangle implements Figure {
-  shape: FigShape = 'triangle';
+  shape: Shape = Shape.Triangle;
 
   constructor(
-    public color: FigColor,
+    public color: Color,
     public a: number,
     public b: number,
     public c: number,
@@ -25,8 +30,9 @@ export class Triangle implements Figure {
     }
 
     if (a >= b + c || b >= c + a || c >= a + b) {
-      throw new Error('One side of triangle can\'t '
-        + 'be greater than sum of other two');
+      throw new Error(
+        'One side of triangle can\'t be greater than sum of other two',
+      );
     }
   }
 
@@ -40,10 +46,10 @@ export class Triangle implements Figure {
 }
 
 export class Circle implements Figure {
-  shape: FigShape = 'circle';
+  shape: Shape = Shape.Circle;
 
   constructor(
-    public color: FigColor,
+    public color: Color,
     public radius: number,
   ) {
     if (radius <= 0) {
@@ -59,10 +65,10 @@ export class Circle implements Figure {
 }
 
 export class Rectangle implements Figure {
-  shape: FigShape = 'rectangle';
+  shape: Shape = Shape.Rectangle;
 
   constructor(
-    public color: FigColor,
+    public color: Color,
     public width: number,
     public height: number,
   ) {
