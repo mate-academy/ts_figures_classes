@@ -16,7 +16,7 @@ export function roundNumber(number : number) :number {
   return Math.floor(number * 100) / 100;
 }
 
-export class Triangle {
+export class Triangle implements Figure {
   shape: Shape = Shape.Triangle;
 
   constructor(
@@ -42,7 +42,7 @@ export class Triangle {
   }
 }
 
-export class Circle {
+export class Circle implements Figure {
   shape: Shape = Shape.Circle;
 
   constructor(
@@ -61,7 +61,7 @@ export class Circle {
   }
 }
 
-export class Rectangle {
+export class Rectangle implements Figure {
   shape: Shape = Shape.Rectangle;
 
   constructor(
