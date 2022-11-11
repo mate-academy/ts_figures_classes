@@ -13,20 +13,11 @@ export class Triangle implements Figure {
     public b: number,
     public c: number,
   ) {
-    if (this.a <= 0 || this.b <= 0 || this.c <= 0) {
+    if (a <= 0 || b <= 0 || c <= 0) {
       throw new Error('Parameters can not be less than 0');
     }
 
-    const sides: number[] = [this.a, this.b, this.c];
-
-    const longestSide: number = Math.max(...sides);
-
-    const othersSides: number[]
-     = sides.filter((num: number) => num !== longestSide);
-
-    const sumOfSides: number = othersSides[0] + othersSides[1];
-
-    if (longestSide >= sumOfSides) {
+    if (a >= (b + c) || b >= (a + c) || c >= (a + b)) {
       throw new Error('These parameters can not form the triangle');
     }
   }
@@ -47,7 +38,7 @@ export class Circle implements Figure {
     public color: 'red' | 'green' | 'blue',
     public radius: number,
   ) {
-    if (this.radius <= 0) {
+    if (radius <= 0) {
       throw new Error('Parameters can not be less than 0');
     }
   }
@@ -67,7 +58,7 @@ export class Rectangle implements Figure {
     public width: number,
     public height: number,
   ) {
-    if (this.width <= 0 || this.height <= 0) {
+    if (width <= 0 || height <= 0) {
       throw new Error('Parameters can not be less than 0');
     }
   }
