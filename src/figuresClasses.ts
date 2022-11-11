@@ -6,18 +6,14 @@ enum Shape {
 
 type Color = 'red' | 'green' | 'blue';
 
-export interface FigureColor {
-  color: Color;
-}
-
 export interface Figure {
   color: Color;
   shape: Shape;
   getArea(): number;
 }
 
-export function roundNumber(num: number): number {
-  return Math.floor(num * 100) / 100;
+export function roundNumber(digit: number): number {
+  return Math.floor(digit * 100) / 100;
 }
 
 export class Triangle implements Figure {
