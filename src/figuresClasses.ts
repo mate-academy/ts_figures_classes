@@ -4,9 +4,6 @@ type Color = 'red' | 'green' | 'blue';
 export type Figure = {
   shape: Shape;
   color: Color;
-  side1: number;
-  side2?: number;
-  side3?: number;
 
   getArea(): number;
 };
@@ -55,15 +52,15 @@ export class Circle implements Figure {
 
   constructor(
     public color: Color,
-    public side1: number,
+    public radius: number,
   ) {
-    if (side1 <= 0) {
-      throw new Error('side must be geater than zero!');
+    if (radius <= 0) {
+      throw new Error('radius must be geater than zero!');
     }
   }
 
   getArea(): number {
-    const area = Math.PI * this.side1 ** 2;
+    const area = Math.PI * this.radius ** 2;
 
     return roundArea(area);
   }
