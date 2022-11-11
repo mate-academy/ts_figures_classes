@@ -7,20 +7,18 @@ export interface Figure {
   getArea: Function;
 }
 
+function squareFloor(square: number): number {
+  return Math.floor(square * 100) / 100;
+}
+
 export class Triangle implements Figure {
   shape: Shape;
 
-  a: number;
-
-  b: number;
-
-  c: number;
-
   constructor(
     public color: Color,
-    a: number,
-    b: number,
-    c: number,
+    public a: number,
+    public b: number,
+    public c: number,
   ) {
     this.shape = 'triangle';
 
@@ -31,10 +29,6 @@ export class Triangle implements Figure {
     if (a >= b + c || b >= a + c || c >= a + b) {
       throw new Error('Such triangle does not exist');
     }
-
-    this.a = a;
-    this.b = b;
-    this.c = c;
   }
 
   getArea(): number {
@@ -45,64 +39,55 @@ export class Triangle implements Figure {
       * (halfPerimeter - this.b)
       * (halfPerimeter - this.c));
 
-    return Math.floor(square * 100) / 100;
+    return squareFloor(square);
   }
 }
 
 export class Circle implements Figure {
   shape: Shape;
 
-  a: number;
-
   constructor(
     public color: Color,
-    a: number,
+    public radius: number,
   ) {
     this.shape = 'circle';
 
-    if (a <= 0) {
+    if (this.radius <= 0) {
       throw new Error('Radius is less or equal 0');
     }
-
-    this.a = a;
   }
 
   getArea(): number {
-    const square = Math.PI * this.a ** 2;
+    const square = Math.PI * this.radius ** 2;
 
-    return Math.floor(square * 100) / 100;
+    return squareFloor(square);
   }
 }
 
 export class Rectangle implements Figure {
   shape: Shape;
 
-  a: number;
-
-  b: number;
-
   constructor(
     public color: Color,
-    a: number,
-    b: number,
+    public width: number,
+    public height: number,
   ) {
     this.shape = 'rectangle';
 
-    if (a <= 0 || b <= 0) {
+    if (width <= 0 || height <= 0) {
       throw new Error('Side is less or equal 0');
     }
-
-    this.a = a;
-    this.b = b;
   }
 
   getArea(): number {
-    const square = this.a * this.b;
+    const square = this.width * this.height;
 
-    return Math.floor(square * 100) / 100;
+    return squareFloor(square);
   }
 }
 
 export function getInfo(figure: Figure): string {
-  return `A ${figure.color} ${figure.shape} - ${figure.getArea()}`;
+  const { color, shape } = figure;
+
+  return `A ${color} ${shape} - ${figure.getArea()}`;
 }
