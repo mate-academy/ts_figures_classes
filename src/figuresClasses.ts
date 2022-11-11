@@ -1,5 +1,14 @@
-type Color = 'red' | 'blue' | 'green';
-type Shape = 'circle' | 'rectangle' | 'triangle';
+enum Color {
+  Red = 'red',
+  Blue = 'blue',
+  Green = 'green'
+}
+
+enum Shape {
+  Circle = 'circle',
+  Rectangle = 'rectangle',
+  Triangle = 'triangle'
+}
 
 export interface Figure {
   shape: Shape;
@@ -12,7 +21,7 @@ export function roundNum(num : number) :number {
 }
 
 export class Circle implements Figure {
-  shape: Shape = 'circle';
+  shape: Shape = Shape.Circle;
 
   constructor(
     public color: Color,
@@ -31,7 +40,7 @@ export class Circle implements Figure {
 }
 
 export class Rectangle implements Figure {
-  shape: Shape = 'rectangle';
+  shape: Shape = Shape.Rectangle;
 
   constructor(
     public color: Color,
@@ -51,7 +60,7 @@ export class Rectangle implements Figure {
 }
 
 export class Triangle implements Figure {
-  shape: Shape = 'triangle';
+  shape: Shape = Shape.Triangle;
 
   constructor(
     public color: Color,
@@ -69,9 +78,10 @@ export class Triangle implements Figure {
   }
 
   getArea(): number {
-    const semiPerimetr = (this.a + this.b + this.c) / 2;
-    const area = Math.sqrt(semiPerimetr * (semiPerimetr - this.a)
-    * (semiPerimetr - this.b) * (semiPerimetr - this.c));
+    const { a, b, c } = this;
+    const semiPerimetr = (a + b + c) / 2;
+    const area = Math.sqrt(semiPerimetr * (semiPerimetr - a)
+    * (semiPerimetr - b) * (semiPerimetr - c));
 
     return roundNum(area);
   }
