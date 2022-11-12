@@ -19,26 +19,20 @@ export class Triangle implements Figure {
     if (a + b <= c
       || a + c <= b
       || b + c <= a) {
-      throw Error('this is not triangle');
+      throw Error('sides 1, 2 and 3 can\'t form a triangle');
     }
 
     if (a <= 0 || b <= 0 || c <= 0) {
-      throw Error('this is not triangle');
+      throw Error('This is not triangle');
     }
   }
 
   getArea(): number {
-    if (this.a + this.b > this.c
-      && this.a + this.c > this.b
-      && this.b + this.c > this.a) {
-      const halfPerimetr = (this.a + this.b + this.c) / 2;
-      const area = Math.floor(Math.sqrt(halfPerimetr * (halfPerimetr - this.a)
+    const halfPerimetr = (this.a + this.b + this.c) / 2;
+    const area = Math.floor(Math.sqrt(halfPerimetr * (halfPerimetr - this.a)
       * (halfPerimetr - this.b) * (halfPerimetr - this.c)) * 100) / 100;
 
-      return area;
-    }
-
-    throw new Error();
+    return area;
   }
 }
 
@@ -50,7 +44,7 @@ export class Circle implements Figure {
     private radius: number,
   ) {
     if (radius <= 0) {
-      throw Error('this is not triangle');
+      throw Error('This is not circle');
     }
   }
 
@@ -70,7 +64,7 @@ export class Rectangle {
     private height: number,
   ) {
     if (this.width <= 0 || this.height <= 0) {
-      throw Error('this is not triangle');
+      throw Error('Sides 1, 2 and 3 can\'t form a rectangle');
     }
   }
 
