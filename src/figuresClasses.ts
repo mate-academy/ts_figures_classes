@@ -38,8 +38,8 @@ export class Triangle implements Figure {
 
   getArea(): number {
     const { side1, side2, side3 } = this;
-    const s = (side1 + side2 + side3) / 2;
-    const area = Math.sqrt(s * (s - side1) * (s - side2) * (s - side3));
+    const s: number = (side1 + side2 + side3) / 2;
+    const area: number = Math.sqrt(s * (s - side1) * (s - side2) * (s - side3));
 
     return roundArea(area);
   }
@@ -47,8 +47,6 @@ export class Triangle implements Figure {
 
 export class Circle implements Figure {
   shape: Shape = 'circle';
-
-  area = 0;
 
   constructor(
     public color: Color,
@@ -60,7 +58,7 @@ export class Circle implements Figure {
   }
 
   getArea(): number {
-    const area = Math.PI * this.radius ** 2;
+    const area: number = Math.PI * this.radius ** 2;
 
     return roundArea(area);
   }
@@ -81,9 +79,9 @@ export class Rectangle implements Figure {
 
   getArea():number {
     const { side1, side2 } = this;
-    const area = side1 * side2;
+    const area: number = side1 * side2;
 
-    return Math.floor(area * 100) / 100;
+    return roundArea(area);
   }
 }
 
