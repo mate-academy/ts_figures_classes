@@ -62,7 +62,7 @@ export class Circle implements Figure {
     public radius: number,
   ) {
     if (radius <= 0) {
-      throw new Error('incorrect length of the radius of the figure');
+      throw new Error('Radius cannot be less or equal zero');
     }
   }
 
@@ -80,7 +80,7 @@ export class Rectangle implements Figure {
     public height: number,
   ) {
     if (width <= 0 || height <= 0) {
-      throw new Error('incorrect length of the side of the figure');
+      throw new Error('Side cannot be less or equal zero');
     }
   }
 
