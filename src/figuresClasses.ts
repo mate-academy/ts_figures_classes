@@ -36,9 +36,9 @@ export class Triangle {
   }
 
   getArea(): number {
-    const semiPerimeter = (this.a + this.b + this.c) / 2;
-    const area = Math.sqrt((semiPerimeter - this.a) * (semiPerimeter - this.b)
-      * (semiPerimeter - this.c) * semiPerimeter);
+    const halfOfPerimetr = (this.a + this.b + this.c) / 2;
+    const area = Math.sqrt((halfOfPerimetr - this.a) * (halfOfPerimetr - this.b)
+      * (halfOfPerimetr - this.c) * halfOfPerimetr);
 
     return roundValue(area);
   }
