@@ -28,7 +28,7 @@ export class Triangle implements Figure {
     if (this.a + this.b <= this.c
       || this.a + this.c <= this.b
       || this.b + this.c <= this.a) {
-      throw new Error('These sides cannot form a triangle');
+      throw new Error('These sides lengthes cannot form a triangle');
     }
   }
 
@@ -49,7 +49,7 @@ export class Circle implements Figure {
     public radius: number,
   ) {
     if (radius <= 0) {
-      throw new Error('The radius should be positive integer');
+      throw new Error('The radius should be positive');
     }
   }
 
@@ -69,12 +69,12 @@ export class Rectangle implements Figure {
     public b: number,
   ) {
     if (a <= 0 || b <= 0) {
-      throw new Error('The length of every side must be positive integer');
+      throw new Error('The length of every side must be positive');
     }
   }
 
   getArea(): number {
-    return this.a * this.b;
+    return Math.floor(this.a * this.b * 100) / 100;
   }
 }
 
