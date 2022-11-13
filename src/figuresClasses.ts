@@ -13,11 +13,19 @@ export class Triangle implements Figure {
     public b: number,
     public c: number,
   ) {
-    if (a <= 0 || b <= 0 || c <= 0) {
+    if (
+      a <= 0
+      || b <= 0
+      || c <= 0
+    ) {
       throw new Error('Parameters can not be less than 0');
     }
 
-    if (a >= (b + c) || b >= (a + c) || c >= (a + b)) {
+    if (
+      a >= (b + c)
+      || b >= (a + c)
+      || c >= (a + b)
+    ) {
       throw new Error('These parameters can not form the triangle');
     }
   }
