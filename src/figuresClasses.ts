@@ -1,29 +1,29 @@
-type ShapeType = 'triangle' | 'circle' | 'rectangle';
 type Color = 'red' | 'green' | 'blue';
 
+enum ShapeType {
+  Triangle = 'triangle',
+  Circle = 'circle',
+  Rectangle = 'rectangle',
+}
 export interface Figure {
   shape: ShapeType;
   color: Color;
   getArea(): number;
 }
 
+function roundArea(area: number): number {
+  return Math.floor(area * 100) / 100;
+}
+
 export class Triangle implements Figure {
-  shape: ShapeType = 'triangle';
+  shape: ShapeType = ShapeType.Triangle;
 
-  color: Color;
-
-  a: number;
-
-  b: number;
-
-  c: number;
-
-  constructor(color: Color, a: number, b: number, c: number) {
-    this.color = color;
-    this.a = a;
-    this.b = b;
-    this.c = c;
-
+  constructor(
+    public color: Color,
+    public a: number,
+    public b: number,
+    public c: number,
+  ) {
     if (a + b <= c || a + c <= b || b + c <= a) {
       throw new Error('Wrong, sides of triangle can not form a triangle');
     }
@@ -34,64 +34,54 @@ export class Triangle implements Figure {
   }
 
   getArea(): number {
-    // S=√p(p-a)(p-b)(p-c)
-    // p=(a+b+c)/2
-    const p = (this.a + this.b + this.c) / 2;
-    const area = Math.sqrt(p * (p - this.a) * (p - this.b) * (p - this.c));
+    const { a, b, c } = this;
+    const p = (a + b + c) / 2;
+    const area = Math.sqrt(p * (p - a) * (p - b) * (p - c));
 
-    return Math.floor(area * 100) / 100;
+    return roundArea(area);
   }
 }
 
 export class Circle implements Figure {
-  shape: ShapeType = 'circle';
+  shape: ShapeType = ShapeType.Circle;
 
-  color: Color;
-
-  radius: number;
-
-  constructor(color: Color, radius: number) {
-    this.color = color;
-    this.radius = radius;
-
+  constructor(
+    public color: Color,
+    public radius: number,
+  ) {
     if (radius <= 0) {
       throw new Error('Wrong radius');
     }
   }
 
   getArea(): number {
-    // S = πr2
     const area = Math.PI * this.radius ** 2;
 
-    return Math.floor(area * 100) / 100;
+    return roundArea(area);
   }
 }
 
 export class Rectangle implements Figure {
-  shape: ShapeType = 'rectangle';
+  shape: ShapeType = ShapeType.Rectangle;
 
-  color: Color;
-
-  width: number;
-
-  height: number;
-
-  constructor(color: Color, width: number, height: number) {
-    this.color = color;
-    this.width = width;
-    this.height = height;
-
+  constructor(
+    public color: Color,
+    public width: number,
+    public height: number,
+  ) {
     if (width <= 0 || height <= 0) {
       throw new Error('Wrong width or height');
     }
   }
 
   getArea(): number {
-    // S = a*b
-    return this.width * this.height;
+    const { width, height } = this;
+    const area = width * height;
+
+    return area;
   }
 }
 
-export function getInfo(figure: Figure): string {
+export function getInfo(figure: ShapeType): string {
   return `A ${figure.color} ${figure.shape} - ${figure.getArea()}`;
 }
