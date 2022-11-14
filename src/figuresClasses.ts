@@ -1,5 +1,9 @@
 type Color = 'red' | 'green' | 'blue';
-type Shape = 'triangle' | 'circle' | 'rectangle';
+enum Shape {
+  triangle = 'triangle',
+  circle = 'circle',
+  rectangle = 'rectangle',
+}
 
 export interface Figure {
   shape: Shape;
@@ -8,7 +12,7 @@ export interface Figure {
 }
 
 export class Triangle implements Figure {
-  shape: Shape = 'triangle';
+  shape = Shape.triangle;
 
   constructor(
     public color: Color,
@@ -16,24 +20,28 @@ export class Triangle implements Figure {
     public b: number,
     public c: number,
   ) {
-    if (
-      a <= 0 || b <= 0 || c <= 0 || a >= (b + c) || b >= (a + c) || c >= (b + a)
-    ) {
-      throw new Error('One of side length less than or equal to zero'
-        + 'or the longest side of a triangle is >= than a sum of two others');
+    if (a <= 0 || b <= 0 || c <= 0) {
+      throw new Error('One of side length less than or equal to zero');
+    }
+
+    if (a >= (b + c) || b >= (a + c) || c >= (b + a)) {
+      throw new Error('The longest side of a triangle'
+      + ' is >= than a sum of two others');
     }
   }
 
   getArea(): number {
-    const p: number = (this.a + this.b + this.c) / 2;
-    const S: number = Math.sqrt(p * (p - this.a) * (p - this.b) * (p - this.c));
+    const { a, b, c } = this;
+    const semiPerimeter: number = (a + b + c) / 2;
+    const area: number = Math.sqrt(semiPerimeter * (semiPerimeter - a)
+      * (semiPerimeter - b) * (semiPerimeter - c));
 
-    return Math.floor(S * 100) / 100;
+    return Math.floor(area * 100) / 100;
   }
 }
 
 export class Circle implements Figure {
-  shape: Shape = 'circle';
+  shape = Shape.circle;
 
   constructor(
     public color: Color,
@@ -45,14 +53,14 @@ export class Circle implements Figure {
   }
 
   getArea(): number {
-    const S: number = Math.PI * (this.radius ** 2);
+    const area: number = Math.PI * (this.radius ** 2);
 
-    return Math.floor(S * 100) / 100;
+    return Math.floor(area * 100) / 100;
   }
 }
 
 export class Rectangle implements Figure {
-  shape: Shape = 'rectangle';
+  shape = Shape.rectangle;
 
   constructor(
     public color: Color,
@@ -69,6 +77,6 @@ export class Rectangle implements Figure {
   }
 }
 
-export function getInfo(figure): string {
+export function getInfo(figure: Figure): string {
   return `A ${figure.color} ${figure.shape} - ${figure.getArea()}`;
 }
