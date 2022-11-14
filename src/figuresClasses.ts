@@ -1,10 +1,15 @@
-type Shape = 'triangle' | 'circle' | 'rectangle';
 type Color = 'red' | 'green' | 'blue';
+
+enum Shape {
+  Triangle = 'triangle',
+  Circle = 'circle',
+  Rectangle = 'rectangle',
+}
 
 export interface Figure {
   shape: Shape;
   color: Color;
-  getArea: Function;
+  getArea(): number;
 }
 
 function squareFloor(square: number): number {
@@ -12,7 +17,7 @@ function squareFloor(square: number): number {
 }
 
 export class Triangle implements Figure {
-  shape: Shape;
+  shape = Shape.Triangle;
 
   constructor(
     public color: Color,
@@ -20,8 +25,6 @@ export class Triangle implements Figure {
     public b: number,
     public c: number,
   ) {
-    this.shape = 'triangle';
-
     if (a <= 0 || b <= 0 || c <= 0) {
       throw new Error('Side is less or equal 0');
     }
@@ -44,14 +47,12 @@ export class Triangle implements Figure {
 }
 
 export class Circle implements Figure {
-  shape: Shape;
+  shape = Shape.Circle;
 
   constructor(
     public color: Color,
     public radius: number,
   ) {
-    this.shape = 'circle';
-
     if (this.radius <= 0) {
       throw new Error('Radius is less or equal 0');
     }
@@ -65,15 +66,13 @@ export class Circle implements Figure {
 }
 
 export class Rectangle implements Figure {
-  shape: Shape;
+  shape = Shape.Rectangle;
 
   constructor(
     public color: Color,
     public width: number,
     public height: number,
   ) {
-    this.shape = 'rectangle';
-
     if (width <= 0 || height <= 0) {
       throw new Error('Side is less or equal 0');
     }
