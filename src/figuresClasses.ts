@@ -36,8 +36,9 @@ export class Triangle implements Figure {
 
   getArea(): number {
     const semiPerimeter = (this.a + this.b + this.c) / 2;
-    const area = Math.sqrt((semiPerimeter - this.a) * (semiPerimeter - this.b)
-      * (semiPerimeter - this.c) * semiPerimeter);
+    const { a, b, c } = this;
+    const area = Math.sqrt((semiPerimeter - a) * (semiPerimeter - b)
+      * (semiPerimeter - c) * semiPerimeter);
 
     return roundedNum(area);
   }
@@ -46,7 +47,10 @@ export class Triangle implements Figure {
 export class Circle implements Figure {
   shape: Shape = Shape.Circle;
 
-  constructor(public color: Color, public radius: number) {
+  constructor(
+    public color: Color,
+    public radius: number,
+  ) {
     if (radius <= 0) {
       throw new Error('Can not build the circle!');
     }
