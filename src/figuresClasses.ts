@@ -1,5 +1,10 @@
-type Shape = 'triangle' | 'circle' | 'rectangle';
 type Color = 'red' | 'green' | 'blue';
+
+enum Shape {
+  Triangle = 'triangle',
+  Circle = 'circle',
+  Rectangle = 'rectangle',
+}
 
 export interface Figure {
   shape : Shape;
@@ -12,7 +17,7 @@ function getRoundedDigit(digit: number): number {
 }
 
 export class Triangle implements Figure {
-  public shape: Shape = 'triangle';
+  shape: Shape = Shape.Triangle;
 
   constructor(
     public color: Color,
@@ -21,7 +26,7 @@ export class Triangle implements Figure {
     public c: number,
   ) {
     if (a <= 0 || b <= 0 || c <= 0) {
-      throw new Error('We dont have one or maybe more sides!');
+      throw new Error('Achtnung, some passed values are lower than 0!');
     }
 
     if (a >= b + c || b >= a + c || c >= a + b) {
@@ -40,7 +45,7 @@ export class Triangle implements Figure {
 }
 
 export class Circle implements Figure {
-  public shape: Shape = 'circle';
+  shape: Shape = Shape.Circle;
 
   constructor(public color: Color, public radius: number) {
     if (radius <= 0) {
@@ -56,7 +61,7 @@ export class Circle implements Figure {
 }
 
 export class Rectangle implements Figure {
-  public shape: Shape = 'rectangle';
+  shape: Shape = Shape.Rectangle;
 
   constructor(
     public color: Color,
