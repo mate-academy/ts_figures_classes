@@ -1,5 +1,18 @@
-type Shape = 'triangle' | 'circle' | 'rectangle';
-type Color = 'red' | 'green' | 'blue';
+enum Shape {
+  Triangle = 'triangle',
+  Circle = 'circle',
+  Rectangle = 'rectangle',
+}
+
+enum Color {
+  Red = 'red',
+  Green = 'green',
+  Blue = 'blue',
+}
+
+function squareToHundreds(num: number): number {
+  return Math.floor(num * 100) / 100;
+}
 
 export interface Figure {
   shape: Shape,
@@ -8,7 +21,7 @@ export interface Figure {
 }
 
 export class Triangle implements Figure {
-  public shape: Shape;
+  public shape: Shape = Shape.Triangle;
 
   constructor(
     public color: Color,
@@ -16,8 +29,6 @@ export class Triangle implements Figure {
     public b: number,
     public c: number,
   ) {
-    this.shape = 'triangle';
-
     if (this.a < 0 || this.b < 0 || this.c < 0) {
       throw new Error('Invalid side');
     }
@@ -32,19 +43,17 @@ export class Triangle implements Figure {
     const area = Math.sqrt(half * (half - this.a)
       * (half - this.b) * (half - this.c));
 
-    return Math.floor(area * 100) / 100;
+    return squareToHundreds(area);
   }
 }
 
 export class Circle implements Figure {
-  public shape: Shape;
+  public shape: Shape = Shape.Circle;
 
   constructor(
     public color: Color,
     public radius: number,
   ) {
-    this.shape = 'circle';
-
     if (radius < 0) {
       throw new Error('This is not circle');
     }
@@ -53,20 +62,18 @@ export class Circle implements Figure {
   getArea(): number {
     const area = Math.PI * (this.radius ** 2);
 
-    return Math.floor(area * 100) / 100;
+    return squareToHundreds(area);
   }
 }
 
 export class Rectangle implements Figure {
-  public shape: Shape;
+  public shape: Shape = Shape.Rectangle;
 
   constructor(
     public color: Color,
     public width: number,
     public height: number,
   ) {
-    this.shape = 'rectangle';
-
     if (this.width < 0 || this.height < 0) {
       throw new Error('This is not rectagle');
     }
@@ -75,7 +82,7 @@ export class Rectangle implements Figure {
   getArea(): number {
     const area = this.width * this.height;
 
-    return Math.floor(area * 100) / 100;
+    return squareToHundreds(area);
   }
 }
 
