@@ -1,4 +1,9 @@
-type Shape = 'triangle' | 'circle' | 'rectangle';
+enum Shape {
+  Triangle = 'triangle',
+  Circle = 'circle',
+  Rectangle = 'rectangle'
+}
+
 type Color = 'red' | 'green' | 'blue';
 
 export interface Figure {
@@ -8,7 +13,7 @@ export interface Figure {
 }
 
 export class Triangle implements Figure {
-  public shape: Shape = 'triangle';
+  public shape: Shape = Shape.Triangle;
 
   constructor(
     public color: Color,
@@ -16,9 +21,9 @@ export class Triangle implements Figure {
     private b:number,
     private c:number,
   ) {
-    if (a + b <= c
-      || a + c <= b
-      || b + c <= a) {
+    const isNotTriangle = a + b <= c || a + c <= b || b + c <= a;
+
+    if (isNotTriangle) {
       throw Error('sides 1, 2 and 3 can\'t form a triangle');
     }
 
@@ -37,7 +42,7 @@ export class Triangle implements Figure {
 }
 
 export class Circle implements Figure {
-  public shape: Shape = 'circle';
+  public shape: Shape = Shape.Circle;
 
   constructor(
     public color: Color,
@@ -56,7 +61,7 @@ export class Circle implements Figure {
 }
 
 export class Rectangle {
-  public shape: Shape = 'rectangle';
+  public shape: Shape = Shape.Rectangle;
 
   constructor(
     public color: Color,
