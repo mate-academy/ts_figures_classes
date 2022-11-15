@@ -25,9 +25,12 @@ export class Triangle implements Figure {
     public side2: number,
     public side3: number,
   ) {
-    if (side1 + side2 <= side3
-      || side2 + side3 <= side1
-      || side3 + side1 <= side2) {
+    const isTriangle: boolean
+    = side1 + side2 <= side3
+    || side2 + side3 <= side1
+    || side3 + side1 <= side2;
+
+    if (isTriangle) {
       throw new Error(
         'The longest side must be smaller than sum of two others!',
       );
