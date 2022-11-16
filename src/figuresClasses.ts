@@ -5,13 +5,29 @@ export interface Figure {
   getArea(): number;
 }
 
+function round(expression: number): number {
+  return Math.floor(expression * 100) / 100;
+}
+
+enum ShapeFigure {
+  triangle = 'triangle',
+  circle = 'circle',
+  rectangle = 'rectangle'
+}
+
+enum ColorFigure {
+  red = 'red',
+  green = 'green',
+  blue = 'blue'
+}
+
 export class Triangle implements Figure {
   constructor(
-    public color: string,
+    public color: string = ColorFigure.green,
     public a: number,
     public b: number,
     public c: number,
-    public shape: string = 'triangle',
+    public shape: string = ShapeFigure.triangle,
   ) {
     this.a = a;
     this.b = b;
@@ -29,18 +45,18 @@ export class Triangle implements Figure {
   }
 
   getArea(): number {
-    return +(1 / 4 * Math.sqrt((this.b + this.c - this.a)
+    return round(1 / 4 * Math.sqrt((this.b + this.c - this.a)
        * (this.a + this.b + this.c)
        * (this.a - this.b + this.c)
-       * (this.a + this.b - this.c))).toFixed(2);
+       * (this.a + this.b - this.c)));
   }
 }
 
 export class Circle implements Figure {
   constructor(
-    public color: string,
+    public color: string = ColorFigure.red,
     public radius: number,
-    public shape: string = 'circle',
+    public shape: string = ShapeFigure.circle,
   ) {
     this.radius = radius;
 
@@ -50,16 +66,16 @@ export class Circle implements Figure {
   }
 
   getArea(): number {
-    return Math.floor((Math.PI * this.radius * this.radius) * 100) / 100;
+    return round((Math.PI * this.radius ** 2));
   }
 }
 
 export class Rectangle implements Figure {
   constructor(
-    public color: string,
+    public color: string = ColorFigure.blue,
     public width: number,
     public height: number,
-    public shape: string = 'rectangle',
+    public shape: string = ShapeFigure.rectangle,
   ) {
     this.width = width;
     this.height = height;
@@ -70,7 +86,7 @@ export class Rectangle implements Figure {
   }
 
   getArea(): number {
-    return +(this.width * this.height).toFixed(2);
+    return round(this.width * this.height);
   }
 }
 
