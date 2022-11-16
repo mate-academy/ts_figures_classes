@@ -1,6 +1,6 @@
 export interface Figure {
-  shape: string;
   color: string;
+  shape: string;
 
   getArea(): number;
 }
@@ -10,24 +10,25 @@ function round(expression: number): number {
 }
 
 enum ShapeFigure {
-  triangle = 'triangle',
-  circle = 'circle',
-  rectangle = 'rectangle'
+  Triangle = 'triangle',
+  Circle = 'circle',
+  Rectangle = 'rectangle'
 }
 
 enum ColorFigure {
-  red = 'red',
-  green = 'green',
-  blue = 'blue'
+  Red = 'red',
+  Green = 'green',
+  Blue = 'blue'
 }
 
 export class Triangle implements Figure {
+  shape = ShapeFigure.Triangle;
+
   constructor(
-    public color: string = ColorFigure.green,
+    public color: ColorFigure,
     public a: number,
     public b: number,
     public c: number,
-    public shape: string = ShapeFigure.triangle,
   ) {
     this.a = a;
     this.b = b;
@@ -53,10 +54,12 @@ export class Triangle implements Figure {
 }
 
 export class Circle implements Figure {
+  shape = ShapeFigure.Circle;
+
   constructor(
-    public color: string = ColorFigure.red,
+    public color: ColorFigure,
     public radius: number,
-    public shape: string = ShapeFigure.circle,
+
   ) {
     this.radius = radius;
 
@@ -71,11 +74,12 @@ export class Circle implements Figure {
 }
 
 export class Rectangle implements Figure {
+  shape = ShapeFigure.Rectangle;
+
   constructor(
-    public color: string = ColorFigure.blue,
+    public color: ColorFigure,
     public width: number,
     public height: number,
-    public shape: string = ShapeFigure.rectangle,
   ) {
     this.width = width;
     this.height = height;
