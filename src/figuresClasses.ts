@@ -23,7 +23,7 @@ export class Triangle implements Figure {
     const max: number = Math.max(a, b, c);
 
     if (max >= a + b + c - max) {
-      throw new Error(`Sides ${a}, ${b} and ${b} can't form a triangle.`);
+      throw new Error(`Sides ${a}, ${b} and ${c} can't form a triangle.`);
     }
   }
 
