@@ -1,4 +1,9 @@
-export type Shape = 'triangle' | 'circle' | 'rectangle';
+enum Shape {
+  Triangle = 'triangle',
+  Circle = 'circle',
+  Rectangle = 'rectangle',
+}
+
 export type Color = 'red' | 'green' | 'blue';
 
 export interface Figure {
@@ -8,60 +13,49 @@ export interface Figure {
   getArea(): number;
 }
 
-export function roundArea(digit: number): number {
-  return Math.floor(digit * 100) / 100;
+export function roundArea(area: number): number {
+  return Math.floor(area * 100) / 100;
 }
 
 export class Triangle implements Figure {
-  shape: Shape;
+  shape: Shape = Shape.Triangle;
 
-  color: Color;
+  constructor(
+    public color: Color,
+    public a: number,
+    public b: number,
+    public c: number,
+  ) {
+    const isTriangle: boolean = a + b <= c || a + c <= b || b + c <= a;
+    const isSide = a <= 0 || b <= 0 || c <= 0;
 
-  a: number;
+    if (isTriangle) {
+      throw new Error('Incorrect side values!');
+    }
 
-  b: number;
-
-  c: number;
-
-  constructor(color: Color, a: number, b: number, c: number) {
-    this.shape = 'triangle';
-    this.color = color;
-    this.a = a;
-    this.b = b;
-    this.c = c;
-
-    if (a <= 0
-      || b <= 0
-      || c <= 0
-      || a >= (b + c)
-      || b >= (a + c)
-      || c >= (a + b)) {
-      throw new Error('Resulting value should not be 0');
+    if (isSide) {
+      throw new Error('Side must be greater than 0!');
     }
   }
 
   getArea(): number {
-    const s = (this.a + this.b + this.c) / 2;
-    const area = Math.sqrt(s * (s - this.a) * (s - this.b) * (s - this.c));
+    const { a, b, c } = this;
+    const s = (a + b + c) / 2;
+    const area = Math.sqrt(s * (s - a) * (s - b) * (s - c));
 
     return roundArea(area);
   }
 }
 
-export class Circle {
-  shape: Shape;
+export class Circle implements Figure {
+  shape: Shape = Shape.Circle;
 
-  color: Color;
-
-  radius: number;
-
-  constructor(color: Color, radius: number) {
-    this.shape = 'circle';
-    this.color = color;
-    this.radius = radius;
-
-    if (this.radius <= 0) {
-      throw new Error('Resulting value should not be 0');
+  constructor(
+    public color: Color,
+    public radius: number,
+  ) {
+    if (radius <= 0) {
+      throw new Error('Radius should not be 0');
     }
   }
 
@@ -72,28 +66,22 @@ export class Circle {
   }
 }
 
-export class Rectangle {
-  shape: Shape;
+export class Rectangle implements Figure {
+  shape: Shape = Shape.Rectangle;
 
-  color: Color;
-
-  height: number;
-
-  width: number;
-
-  constructor(color: Color, height: number, width: number) {
-    this.shape = 'rectangle';
-    this.color = color;
-    this.height = height;
-    this.width = width;
-
-    if (this.width <= 0 || this.height <= 0) {
-      throw new Error('Resulting value should not be 0');
+  constructor(
+    public color: Color,
+    public height: number,
+    public width: number,
+  ) {
+    if (width <= 0 || height <= 0) {
+      throw new Error('Side should not be 0');
     }
   }
 
   getArea(): number {
-    const area = this.height * this.width;
+    const { height, width } = this;
+    const area = height * width;
 
     return roundArea(area);
   }
