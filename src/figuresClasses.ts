@@ -12,8 +12,11 @@ export interface Figure {
 }
 
 function getAreaOfTheFigures(
-  figure: Shape, a: number, b: number = 0, c: number = 0,
-):number {
+  figure: Shape,
+  a: number,
+  b: number = 0,
+  c: number = 0,
+): number {
   let area: number;
 
   switch (figure) {
