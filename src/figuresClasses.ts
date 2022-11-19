@@ -1,26 +1,30 @@
-type Shape = 'triangle' | 'circle' | 'rectangle';
+enum Shape {
+  Triangle = 'triangle',
+  Circle = 'circle',
+  Rectangle = 'rectangle',
+}
+
 type Color = 'red' | 'green' | 'blue';
 
+function roundToTwoDigits(number: number): number {
+  return Math.round(number * 100) / 100;
+}
+
 export interface Figure {
-  shape : Shape,
-  color : Color,
-  getArea() :number,
+  shape: Shape,
+  color: Color,
+  getArea(): number,
 }
 
 export class Triangle implements Figure {
-  public shape:Shape = 'triangle';
+  public shape: Shape = Shape.Triangle;
 
   constructor(
-    public color:Color,
+    public color: Color,
     public a: number,
     public b: number,
     public c: number,
   ) {
-    this.color = color;
-    this.a = a;
-    this.b = b;
-    this.c = c;
-
     if (this.a <= 0 || this.b <= 0 || this.c <= 0) {
       throw new Error('any triangle`s side should be larger than zero');
     }
@@ -39,21 +43,18 @@ export class Triangle implements Figure {
      * (halfPerimeter - this.b)
      * (halfPerimeter - this.c));
 
-    return Math.round(square * 100) / 100;
+    return roundToTwoDigits(square);
   }
 }
 
 export class Circle implements Figure {
-  public shape:Shape = 'circle';
+  public shape: Shape = Shape.Circle;
 
   constructor(
-    public color:Color,
+    public color: Color,
     public radius: number,
   ) {
-    this.color = color;
-    this.radius = radius;
-
-    if (this.radius <= 0) {
+    if (radius <= 0) {
       throw new Error('radius should be larger than zero');
     }
   }
@@ -66,17 +67,13 @@ export class Circle implements Figure {
 }
 
 export class Rectangle implements Figure {
-  public shape:Shape = 'rectangle';
+  public shape: Shape = Shape.Rectangle;
 
   constructor(
-    public color:Color,
+    public color: Color,
     public width: number,
     public height: number,
   ) {
-    this.color = color;
-    this.width = width;
-    this.height = height;
-
     if (this.width <= 0 || this.height <= 0) {
       throw new Error('Both rectangle sides should be largest than zero');
     }
@@ -85,10 +82,10 @@ export class Rectangle implements Figure {
   getArea(): number {
     const rectangleS = this.width * this.height;
 
-    return Math.round(rectangleS * 100) / 100;
+    return roundToTwoDigits(rectangleS);
   }
 }
 
-export function getInfo(figure: Figure):string {
+export function getInfo(figure: Figure): string {
   return `A ${figure.color} ${figure.shape} - ${figure.getArea()}`;
 }
