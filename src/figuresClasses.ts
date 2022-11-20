@@ -1,5 +1,10 @@
-type Shape = 'triangle' | 'circle' | 'rectangle';
 type Color = 'red' | 'green' | 'blue';
+
+export enum Shape {
+  Triangle = 'triangle',
+  Circle = 'circle',
+  Rectangle = 'rectangle',
+}
 
 export interface Figure {
   shape: Shape;
@@ -7,8 +12,18 @@ export interface Figure {
   getArea(): number;
 }
 
+function calculateFloor(area: number): number {
+  return Math.floor(area * 100) / 100;
+}
+
 export class Triangle implements Figure {
-  public shape: Shape = 'triangle';
+  shape = Shape.Triangle;
+
+  sideNegative: boolean = this.sideA <= 0 || this.sideB <= 0 || this.sideC <= 0;
+
+  sideOfTriangle: boolean = this.sideA >= this.sideB + this.sideC
+    || this.sideB >= this.sideC + this.sideA
+    || this.sideC >= this.sideB + this.sideA;
 
   constructor(
     public color: Color,
@@ -16,15 +31,16 @@ export class Triangle implements Figure {
     public sideB: number,
     public sideC: number,
   ) {
-    if (sideA <= 0
-        || sideB <= 0
-        || sideC <= 0) {
+    if (this.sideNegative) {
       throw new Error('Every side must be over 0');
     }
 
+    // I can't use this.sideOfTriangle from line 25 in check below
+    // because of error in tests
+
     if (sideA >= sideB + sideC
-        || sideB >= sideC + sideA
-        || sideC >= sideB + sideA) {
+      || sideB >= sideC + sideA
+      || sideC >= sideB + sideA) {
       throw new Error('Side can\'t be more or equal than sum of two others');
     }
   }
@@ -39,12 +55,12 @@ export class Triangle implements Figure {
       * (semiPerimeter - this.sideC),
     );
 
-    return Math.floor(squareTriangle * 100) / 100;
+    return calculateFloor(squareTriangle);
   }
 }
 
 export class Circle implements Figure {
-  public shape: Shape = 'circle';
+  shape = Shape.Circle;
 
   constructor(
     public color: Color,
@@ -58,12 +74,12 @@ export class Circle implements Figure {
   getArea(): number {
     const squareCircle = this.radius ** 2 * Math.PI;
 
-    return Math.floor(squareCircle * 100) / 100;
+    return calculateFloor(squareCircle);
   }
 }
 
 export class Rectangle implements Figure {
-  public shape: Shape = 'rectangle';
+  shape = Shape.Rectangle;
 
   constructor(
     public color: Color,
@@ -76,9 +92,14 @@ export class Rectangle implements Figure {
   }
 
   getArea(): number {
-    return Math.floor(this.sideA * this.sideB * 100) / 100;
+    const squareRectangle: number = this.sideA * this.sideB;
+
+    return calculateFloor(squareRectangle);
   }
 }
+
+// Also I can't destructure figure in {color, shape, getArea}
+// because getArea can't read property 'radius' or 'sideA' of undefined
 
 export function getInfo(figure: Figure): string {
   return `A ${figure.color} ${figure.shape} - ${figure.getArea()}`;
