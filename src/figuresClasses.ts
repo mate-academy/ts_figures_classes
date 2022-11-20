@@ -19,28 +19,25 @@ function calculateFloor(area: number): number {
 export class Triangle implements Figure {
   shape = Shape.Triangle;
 
-  sideNegative: boolean = this.sideA <= 0 || this.sideB <= 0 || this.sideC <= 0;
-
-  sideOfTriangle: boolean = this.sideA >= this.sideB + this.sideC
-    || this.sideB >= this.sideC + this.sideA
-    || this.sideC >= this.sideB + this.sideA;
-
   constructor(
     public color: Color,
     public sideA: number,
     public sideB: number,
     public sideC: number,
   ) {
-    if (this.sideNegative) {
+    const sideNegative: boolean = this.sideA <= 0
+      || this.sideB <= 0
+      || this.sideC <= 0;
+
+    if (sideNegative) {
       throw new Error('Every side must be over 0');
     }
 
-    // I can't use this.sideOfTriangle from line 25 in check below
-    // because of error in tests
+    const sideNotOfTriangle: boolean = this.sideA >= this.sideB + this.sideC
+    || this.sideB >= this.sideC + this.sideA
+    || this.sideC >= this.sideB + this.sideA;
 
-    if (sideA >= sideB + sideC
-      || sideB >= sideC + sideA
-      || sideC >= sideB + sideA) {
+    if (sideNotOfTriangle) {
       throw new Error('Side can\'t be more or equal than sum of two others');
     }
   }
@@ -98,8 +95,9 @@ export class Rectangle implements Figure {
   }
 }
 
-// Also I can't destructure figure in {color, shape, getArea}
-// because getArea can't read property 'radius' or 'sideA' of undefined
+// I can't destructure figure in {color, shape, getArea}
+// because getArea() can't read property 'radius' or 'sideA' of undefined
+// in function
 
 export function getInfo(figure: Figure): string {
   return `A ${figure.color} ${figure.shape} - ${figure.getArea()}`;
