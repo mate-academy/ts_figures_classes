@@ -11,11 +11,25 @@ function rounding(expr: number): number {
   return Math.floor(expr * 100) / 100;
 }
 
-function validation(check: boolean, message: string): Error | void {
-  if (check) {
+function validation(check: number[], shape: Shape): Error | void {
+  if (check.some((item) => item <= 0)) {
     throw new Error(
-      message,
+      `A ${(shape === 'circle') ? 'radius' : 'side'} `
+      + `of a ${shape} cannot be equal to 0 or be negative.`,
     );
+  }
+
+  if (shape === 'triangle') {
+    const [a, b, c] = check;
+    const maxSide: number = Math.max(a, b, c);
+    const checkLongestSide: boolean = maxSide >= (a + b + c) - maxSide;
+
+    if (checkLongestSide) {
+      throw new Error(
+        'the longest side of the triangle must be greater than '
+        + 'the sum of the other two',
+      );
+    }
   }
 }
 
@@ -28,16 +42,7 @@ export class Triangle implements Figure {
     public b: number,
     public c: number,
   ) {
-    const checkNegative:boolean = a <= 0 || b <= 0 || c <= 0;
-    const maxSide: number = Math.max(a, b, c);
-    const checkLongestSide: boolean = maxSide >= (a + b + c) - maxSide;
-    const messageNegative: string = 'A side of a triangle cannot be equal '
-    + 'to 0 or be negative.';
-    const messageLongest: string = 'the longest side of the triangle must '
-    + 'be greater than the sum of the other two';
-
-    validation(checkNegative, messageNegative);
-    validation(checkLongestSide, messageLongest);
+    validation([a, b, c], this.shape);
   }
 
   getArea(): number {
@@ -58,10 +63,7 @@ export class Circle implements Figure {
     public color: Color,
     public radius: number,
   ) {
-    const checkNegative: boolean = radius <= 0;
-    const message = 'The radius of the circle must not be zero or negative';
-
-    validation(checkNegative, message);
+    validation([radius], this.shape);
   }
 
   getArea(): number {
@@ -77,11 +79,7 @@ export class Rectangle implements Figure {
     public width: number,
     public height: number,
   ) {
-    const checkNegative:boolean = width <= 0 || height <= 0;
-    const message = 'A side of a rectangle cannot be equal'
-    + 'to 0 or be negative.';
-
-    validation(checkNegative, message);
+    validation([width, height], this.shape);
   }
 
   getArea(): number {
