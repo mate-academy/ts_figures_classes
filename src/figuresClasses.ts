@@ -8,39 +8,28 @@ export interface Figure {
 }
 
 export class Triangle implements Figure {
-  color: Color;
-
-  a: number;
-
-  b: number;
-
-  c: number;
-
   shape: Shape;
 
   constructor(
-    _color: Color,
-    _a: number,
-    _b: number,
-    _c: number,
+    public color: Color,
+    private a: number,
+    private b: number,
+    private c: number,
   ) {
-    if (_a < 0 || _b < 0 || _c < 0) {
-      throw new Error('Side of a triangle can not be negative');
+    if (!this.isTriangle(a, b, c)) {
+      throw new Error('Given sides do not form a triangle');
     }
-
-    if (_a >= _b + _c
-        || _b >= _a + _c
-        || _c >= _b + _a) {
-      throw new Error('the longest side of a triangle must be greater'
-        + 'than a sum of two others');
-    }
-
-    this.a = _a;
-    this.b = _b;
-    this.c = _c;
-    this.color = _color;
     this.shape = 'triangle';
   }
+
+  private isTriangle = (
+    sideA: number,
+    sideB: number,
+    sideC: number,
+  ): boolean => sideA > 0 && sideB > 0 && sideC > 0
+    && sideA < (sideB + sideC)
+    && sideB < (sideA + sideC)
+    && sideC < (sideB + sideA);
 
   getArea(): number {
     const semiperimeter = (this.a + this.b + this.c) / 2;
@@ -53,18 +42,15 @@ export class Triangle implements Figure {
 }
 
 export class Circle implements Figure {
-  color: Color;
-
-  radius: number;
-
   shape: Shape;
 
-  constructor(_color: Color, _radius: number) {
-    if (_radius < 0) {
+  constructor(
+    public color: Color,
+    private radius: number,
+  ) {
+    if (radius < 0) {
       throw new Error('Radius of a circle can not be negative');
     }
-    this.color = _color;
-    this.radius = _radius;
     this.shape = 'circle';
   }
 
@@ -74,30 +60,20 @@ export class Circle implements Figure {
 }
 
 export class Rectangle implements Figure {
-  color: Color;
-
-  width: number;
-
-  height: number;
-
   shape: Shape;
 
   constructor(
-    _color: Color,
-    _width: number,
-    _height: number,
+    public color: Color,
+    private width: number,
+    private height: number,
   ) {
-    if (_width < 0) {
+    if (width < 0) {
       throw new Error('Width of a rectangle can not be negative');
     }
 
-    if (_height < 0) {
+    if (height < 0) {
       throw new Error('Height of a rectangle can not be negative');
     }
-
-    this.color = _color;
-    this.width = _width;
-    this.height = _height;
     this.shape = 'rectangle';
   }
 
