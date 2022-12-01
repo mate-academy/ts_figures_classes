@@ -2,17 +2,20 @@ function convertNumber(number: number): number {
   return Math.trunc(number * 100) / 100;
 }
 
+type Shape = 'triangle' | 'circle' | 'rectangle';
+type Color = 'red' | 'green' | 'blue';
+
 export interface Figure {
-  shape: 'triangle' | 'circle' | 'rectangle',
-  color: 'red' | 'green' | 'blue',
+  shape: Shape;
+  color: Color;
   getArea(): number
 }
 
 export class Triangle {
-  public shape: Figure['shape'] = 'triangle';
+  public shape: Shape = 'triangle';
 
   constructor(
-    public color: Figure,
+    public color: Color,
     public sideA: number,
     public sideB: number,
     public sideC: number,
@@ -42,10 +45,10 @@ export class Triangle {
 }
 
 export class Circle {
-  public shape: Figure['shape'] = 'circle';
+  public shape: Shape = 'circle';
 
   constructor(
-    public color: Figure,
+    public color: Color,
     public radius: number,
   ) {
     if (radius <= 0) {
@@ -61,10 +64,10 @@ export class Circle {
 }
 
 export class Rectangle {
-  public shape: Figure['shape'] = 'rectangle';
+  public shape: Shape = 'rectangle';
 
   constructor(
-    public color: Figure,
+    public color: Color,
     public width: number,
     public height: number,
   ) {

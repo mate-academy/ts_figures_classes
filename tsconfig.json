@@ -1,4 +1,4 @@
-https://github.com/kolya-movchan/ts_figures_classes.git{
+{
   "extends": "@mate-academy/students-ts-config",
   "include": [
     "src"
