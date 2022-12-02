@@ -32,7 +32,7 @@ export class Triangle implements Figure {
     }
 
     const maxSide = arr.sort((x, y) => x - y).pop();
-    const restSidesSum = arr.reduce((x, y) => x + y);
+    const restSidesSum = arr.reduce((x, y) => x + y, 0);
 
     if (maxSide && maxSide >= restSidesSum) {
       throw new Error('your error message');
@@ -40,11 +40,12 @@ export class Triangle implements Figure {
   }
 
   getArea(): number {
-    const sPer = (this.a + this.b + this.c) / 2;
+    const semiperimeter = (this.a + this.b + this.c) / 2;
 
-    return Math.floor(Math.sqrt(
-      sPer * (sPer - this.a) * (sPer - this.b) * (sPer - this.c),
-    ) * 100) / 100;
+    return Math.floor(Math.sqrt(semiperimeter
+      * (semiperimeter - this.a)
+      * (semiperimeter - this.b)
+      * (semiperimeter - this.c)) * 100) / 100;
   }
 }
 
