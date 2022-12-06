@@ -1,17 +1,26 @@
 /* eslint-disable no-useless-constructor */
+
+export enum ShapeFigure {
+  triangle = 'triangle',
+  circle = 'circle',
+  rectangle = 'rectangle'
+}
+
+export type ColorFigure = 'red' | 'green' | 'blue';
+
 export interface Figure {
-  shape: string;
-  color: string;
+  shape: ShapeFigure;
+  color: ColorFigure;
 
   getArea():number;
 
 }
 
 export class Triangle {
-  shape: string = 'triangle';
+  shape: ShapeFigure = ShapeFigure.triangle;
 
   constructor(
-    public color: string,
+    public color: ColorFigure,
     public a: number,
     public b: number,
     public c: number,
@@ -38,10 +47,10 @@ export class Triangle {
 }
 
 export class Circle implements Figure {
-  shape: string = 'circle';
+  shape: ShapeFigure = ShapeFigure.circle;
 
   constructor(
-    public color: string,
+    public color: ColorFigure,
     public radius: number,
   ) {
     if (this.radius <= 0) {
@@ -55,10 +64,10 @@ export class Circle implements Figure {
 }
 
 export class Rectangle implements Figure {
-  shape: string = 'rectangle';
+  shape: ShapeFigure = ShapeFigure.rectangle;
 
   constructor(
-    public color: string,
+    public color: ColorFigure,
     public width: number,
     public height: number,
   ) {
