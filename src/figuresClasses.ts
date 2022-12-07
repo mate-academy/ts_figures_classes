@@ -11,7 +11,7 @@ export class Triangle implements Figure {
     public c: number,
   ) {
     if (a <= 0 || b <= 0 || c <= 0 || c >= a + b) {
-      throw new Error('your error message');
+      throw new Error('Error! This is not triangle');
     }
   }
 
@@ -32,7 +32,7 @@ export class Circle implements Figure {
     public radius: number,
   ) {
     if (radius <= 0) {
-      throw new Error('your error message');
+      throw new Error('Error! This is not a circle');
     }
   }
 
@@ -52,7 +52,7 @@ export class Rectangle implements Figure {
     public b: number,
   ) {
     if (a <= 0 || b <= 0) {
-      throw new Error('your error message');
+      throw new Error('Error! This is not rectangle');
     }
   }
 
