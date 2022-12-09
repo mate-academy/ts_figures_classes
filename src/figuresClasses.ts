@@ -17,6 +17,10 @@ export class Triangle implements Figure {
     if (arguments.length <= 0) {
       throw new Error('argument(s) missing');
     }
+
+    if ((a + b + c) - 2 * Math.max(a, b, c) <= 0) {
+      throw new Error('sides 1, 2 and 3 can\'t form a triangle');
+    }
   }
 }
 
