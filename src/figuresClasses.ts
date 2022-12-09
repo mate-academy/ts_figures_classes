@@ -1,6 +1,18 @@
+export enum Color {
+  red,
+  green,
+  blue,
+}
+
+export enum Shape {
+  triangle,
+  rectangle,
+  circle,
+}
+
 export interface Figure {
-  color: 'red' | 'green' | 'blue';
-  shape: 'triangle' | 'rectangle' | 'circle';
+  color: Color;
+  shape: Shape;
   getArea(): number;
   a?: number;
   b?: number;
@@ -16,11 +28,11 @@ function getRound(num: number): number {
 
 export class Triangle implements Figure {
   constructor(
-    public color: 'red' | 'green' | 'blue',
+    public color: Color,
     public a: number,
     public b: number,
     public c: number,
-    public shape: 'triangle',
+    public shape: Shape,
   ) {
     const isAnySidesZero
       = this.a <= 0
@@ -50,9 +62,9 @@ export class Triangle implements Figure {
 
 export class Circle {
   constructor(
-    public color: 'red' | 'green' | 'blue',
+    public color: Color,
     public radius: number,
-    public shape: 'circle',
+    public shape: Shape,
   ) {
     const isAnySidesZero = radius <= 0;
 
@@ -68,10 +80,10 @@ export class Circle {
 
 export class Rectangle implements Figure {
   constructor(
-    public color: 'red' | 'green' | 'blue',
+    public color: Color,
     public width: number,
     public height: number,
-    public shape: 'rectangle',
+    public shape: Shape,
   ) {
     const isAnySidesZero = this.width <= 0 || this.height <= 0;
 
