@@ -1,23 +1,21 @@
 
-// eslint-disable-next-line @typescript-eslint/naming-convention
-type color = 'red' | 'green' | 'blue';
-// eslint-disable-next-line @typescript-eslint/naming-convention
-type shape = 'triangle' | 'circle' | 'rectangle';
+type Color = 'red' | 'green' | 'blue';
+type Shape = 'triangle' | 'circle' | 'rectangle';
 
 function floorCorrectly(number: number): number {
   return Math.floor((number + Number.EPSILON) * 100) / 100;
 }
 export interface Figure {
-  shape: shape
-  color: color
+  shape: Shape
+  color: Color
   getArea(): number
 }
 
 export class Triangle implements Figure {
-  shape: shape = 'triangle';
+  shape: Shape = 'triangle';
 
   constructor(
-    public color: color,
+    public color: Color,
     public a: number,
     public b: number,
     public c: number,
@@ -41,10 +39,10 @@ export class Triangle implements Figure {
 }
 
 export class Circle implements Figure {
-  shape: shape = 'circle';
+  shape: Shape = 'circle';
 
   constructor(
-    public color: color,
+    public color: Color,
     public radius: number,
 
   ) {
@@ -63,10 +61,10 @@ export class Circle implements Figure {
 }
 
 export class Rectangle implements Figure {
-  shape: shape = 'rectangle';
+  shape: Shape = 'rectangle';
 
   constructor(
-    public color: color,
+    public color: Color,
     public width: number,
     public height: number,
 
@@ -85,7 +83,6 @@ export class Rectangle implements Figure {
   }
 }
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 export function getInfo(figure: Figure): string {
   return `A ${figure.color} ${figure.shape} - ${figure.getArea()}`;
 }
