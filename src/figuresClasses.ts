@@ -4,6 +4,9 @@ type color = 'red' | 'green' | 'blue';
 // eslint-disable-next-line @typescript-eslint/naming-convention
 type shape = 'triangle' | 'circle' | 'rectangle';
 
+function floorCorrectly(number: number): number {
+  return Math.floor((number + Number.EPSILON) * 100) / 100;
+}
 export interface Figure {
   shape: shape
   color: color
@@ -32,7 +35,8 @@ export class Triangle implements Figure {
   getArea(): number {
     const s = (this.a + this.b + this.c) / 2;
 
-    return Math.sqrt(s * (s - this.a) * (s - this.b) * (s - this.c));
+    return floorCorrectly(Math
+      .sqrt(s * (s - this.a) * (s - this.b) * (s - this.c)));
   }
 }
 
@@ -47,10 +51,14 @@ export class Circle implements Figure {
     if (arguments.length <= 0) {
       throw new Error('argument(s) missing');
     }
+
+    if (this.radius <= 0) {
+      throw new Error('Radius is not positive');
+    }
   }
 
   getArea(): number {
-    return Math.PI * (2 ** this.radius);
+    return floorCorrectly(Math.PI * (this.radius * this.radius));
   }
 }
 
@@ -66,14 +74,18 @@ export class Rectangle implements Figure {
     if (arguments.length <= 0) {
       throw new Error('argument(s) missing');
     }
+
+    if (this.width <= 0 || this.height <= 0) {
+      throw new Error('Height or Width is not positive');
+    }
   }
 
   getArea(): number {
-    return this.width * this.height;
+    return floorCorrectly(this.width * this.height);
   }
 }
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 export function getInfo(figure: Figure): string {
-  return `${figure}`;
+  return `A ${figure.color} ${figure.shape} - ${figure.getArea()}`;
 }
