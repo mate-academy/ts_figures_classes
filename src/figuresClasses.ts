@@ -10,8 +10,11 @@ export class Triangle implements Figure {
     public b: number,
     public c: number,
   ) {
-    if (a <= 0 || b <= 0 || c <= 0 || c >= a + b) {
-      throw new Error('Error! This is not triangle');
+    if (a <= 0 || b <= 0 || c <= 0) {
+      throw new Error('Error! Numbers cannot be negative or = 0');
+    } else if (c >= a + b) {
+      // eslint-disable-next-line max-len
+      throw new Error('Error! The third side cannot be greater than or equal to the sum of the other 2 sides');
     }
   }
 
@@ -32,7 +35,7 @@ export class Circle implements Figure {
     public radius: number,
   ) {
     if (radius <= 0) {
-      throw new Error('Error! This is not a circle');
+      throw new Error('Error! Radius cannot be a negative number or = 0');
     }
   }
 
@@ -52,7 +55,7 @@ export class Rectangle implements Figure {
     public b: number,
   ) {
     if (a <= 0 || b <= 0) {
-      throw new Error('Error! This is not rectangle');
+      throw new Error('Error! Numbers cannot be negative or = 0');
     }
   }
 
