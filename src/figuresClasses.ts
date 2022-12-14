@@ -63,7 +63,7 @@ export class Rectangle implements Figure {
     public height: number,
   ) {
     if (this.width <= 0 || this.height <= 0) {
-      throw new Error('Use correct radius');
+      throw new Error('Use correct width or height');
     }
   }
 
