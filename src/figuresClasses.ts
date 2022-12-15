@@ -18,26 +18,35 @@ export class Triangle implements Figure {
   ) {
     this.shape = 'triangle';
 
-    if (a <= 0
-      || b <= 0
-      || c <= 0
-      || a + b <= c
-      || a + c <= b
-      || b + c <= a
-    ) {
-      throw new Error(
-        'Check the size of sides, they must be positive'
-        + 'or sides don\'t satisfy the triagle condition',
-      );
+    if (!this.isValidTriangle()) {
+      throw new Error('Wrong triangle sides size');
     }
   }
 
-  getArea(): number {
-    const s:number = (this.a + this.b + this.c) / 2;
-    const square: number
-      = Math.sqrt(s * (s - this.a) * (s - this.b) * (s - this.c));
+  isValidTriangle(): boolean {
+    if (
+      this.a <= 0
+      || this.b <= 0
+      || this.c <= 0
+      || this.a + this.b <= this.c
+      || this.a + this.c <= this.b
+      || this.b + this.c <= this.a
+    ) {
+      return false;
+    }
 
-    return Number(square.toFixed(2));
+    return true;
+  }
+
+  getArea(): number {
+    const halfPerimeter = (this.a + this.b + this.c) / 2;
+
+    const area = Math.sqrt(
+      halfPerimeter * (halfPerimeter - this.a)
+      * (halfPerimeter - this.b) * (halfPerimeter - this.c),
+    );
+
+    return Number(area.toFixed(2));
   }
 }
 
@@ -46,19 +55,19 @@ export class Circle implements Figure {
 
   constructor(
     public color: Color,
-    public radius:number,
+    public radius: number,
   ) {
     this.shape = 'circle';
 
     if ((radius <= 0)) {
-      throw new Error('Check the size of the radius, it must be positive');
+      throw new Error('Wrong circle radius size');
     }
   }
 
   getArea(): number {
-    const square: number = Math.PI * this.radius * this.radius;
+    const area = Math.PI * this.radius * this.radius;
 
-    return Math.floor(square * 100) / 100;
+    return Math.floor(area * 100) / 100;
   }
 }
 
@@ -67,23 +76,31 @@ export class Rectangle implements Figure {
 
   constructor(
     public color: Color,
-    public width:number,
-    public height:number,
+    public width: number,
+    public height: number,
   ) {
     this.shape = 'rectangle';
 
-    if ((width <= 0 || height <= 0)) {
-      throw new Error('Check the size of the sides, they must be positive');
+    if (!this.isValidRectangle()) {
+      throw new Error('Size of the sides must be positive');
     }
   }
 
-  getArea(): number {
-    const square:number = this.width * this.height;
+  isValidRectangle(): boolean {
+    if (this.width <= 0 || this.height <= 0) {
+      return false;
+    }
 
-    return Number(square.toFixed(2));
+    return true;
+  }
+
+  getArea(): number {
+    const area = this.width * this.height;
+
+    return Number(area.toFixed(2));
   }
 }
 
-export function getInfo(figure:Figure):string {
+export function getInfo(figure: Figure): string {
   return `A ${figure.color} ${figure.shape} - ${figure.getArea()}`;
 }
