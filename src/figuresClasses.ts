@@ -8,12 +8,13 @@ export interface Figure {
 }
 
 export class Triangle implements Figure {
+  shape: Shape = 'triangle';
+
   constructor(
     public color: Color,
     public a: number,
     public b: number,
     public c: number,
-    public shape: Shape = 'triangle',
   ) {
     const half: number = (this.a + this.b + this.c) / 2;
 
@@ -36,10 +37,11 @@ export class Triangle implements Figure {
 }
 
 export class Circle implements Figure {
+  shape: Shape = 'circle';
+
   constructor(
     public color: Color,
     public radius: number,
-    public shape: Shape = 'circle',
   ) {
     if (this.radius < 0) {
       throw Error('Only positive numbers');
@@ -52,11 +54,12 @@ export class Circle implements Figure {
 }
 
 export class Rectangle implements Figure {
+  shape: Shape = 'rectangle';
+
   constructor(
     public color: Color,
     public a: number,
     public b: number,
-    public shape: Shape = 'rectangle',
   ) {
     if (this.a < 0 || this.b < 0) {
       throw Error('Only positive numbers');
