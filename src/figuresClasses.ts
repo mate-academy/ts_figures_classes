@@ -17,25 +17,34 @@ export class Triangle implements Figure {
     public c: number,
   ) {
     this.shape = 'triangle';
-    this.isValidParameters();
+    this.validParameters();
   }
 
-  isValidParameters(): void {
-    if (
-      this.a <= 0
-      || this.b <= 0
-      || this.c <= 0
-    ) {
-      throw new Error('side(s) can\'t be less then 0');
+  validParameters(): void {
+    const theSmallestNumber = Math.min(
+      this.a,
+      this.b,
+      this.c,
+    );
+
+    if (theSmallestNumber <= 0) {
+      throw new Error('side(s) should be greater then 0');
     }
 
-    if (
-      this.a + this.b <= this.c
-      || this.a + this.c <= this.b
-      || this.b + this.c <= this.a
-    ) {
+    if (!this.isValidTriangle()) {
       throw new Error('the side of the triangle is not valid');
     }
+  }
+
+  isValidTriangle(): boolean {
+    const sortedSides: number[] = [this.a, this.b, this.c]
+      .sort((side1, side2) => side1 - side2);
+
+    if ((sortedSides[2] >= (sortedSides[0] + sortedSides[1]))) {
+      return false;
+    }
+
+    return true;
   }
 
   getArea(): number {
@@ -61,7 +70,7 @@ export class Circle implements Figure {
 
   isValidParameters(): void {
     if (this.radius <= 0) {
-      throw new Error('radius can\'n be less then 0');
+      throw new Error('radius should be greater then 0');
     }
   }
 
@@ -86,11 +95,11 @@ export class Rectangle implements Figure {
 
   isValidParameters(): void {
     if (this.width <= 0) {
-      throw new Error('width can\'n be less then 0');
+      throw new Error('width should be greater then 0');
     }
 
     if (this.height <= 0) {
-      throw new Error('height can\'n be less then 0');
+      throw new Error('height should be greater then 0');
     }
   }
 
