@@ -16,19 +16,21 @@ export class Triangle implements Figure {
     public b: number,
     public c: number,
   ) {
-    if (a <= 0
-      || b <= 0
-      || c <= 0
-      || a + b <= c
-      || b + c <= a
-      || a + c <= b
-    ) {
+    const isValidTriangle
+    = a <= 0
+    || b <= 0
+    || c <= 0
+    || a + b <= c
+    || b + c <= a
+    || a + c <= b;
+
+    if (isValidTriangle) {
       throw new Error('The entered sides can\'t form a triangle');
     }
   }
 
   getArea(): number {
-    const semiPer: number = 0.5 * (this.a + this.b + this.c);
+    const semiPer = 0.5 * (this.a + this.b + this.c);
 
     return Math.floor(
       Math.sqrt(semiPer * (semiPer - this.a)
@@ -64,7 +66,9 @@ export class Rectangle implements Figure {
     public wigth: number,
     public height: number,
   ) {
-    if (wigth <= 0 || height <= 0) {
+    const isValidRectangle = wigth <= 0 || height <= 0;
+
+    if (isValidRectangle) {
       throw new Error('The entered sides can\t form a rectangle');
     }
   }
