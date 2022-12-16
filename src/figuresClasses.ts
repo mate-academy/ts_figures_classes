@@ -18,14 +18,14 @@ export class Triangle implements Figure {
     public b: number,
     public c: number,
   ) {
-    const hasInvalidSide: boolean = !((a && b && c) > 0);
-    const isNotTriangle: boolean = a >= b + c || b >= a + c || c >= a + b;
+    const allSidesValid: boolean = (a && b && c) > 0;
+    const isTriangle: boolean = a < b + c && b < a + c && c < a + b;
 
-    if (hasInvalidSide) {
+    if (!allSidesValid) {
       throw new Error('All sides must be positive numbers');
     }
 
-    if (isNotTriangle) {
+    if (!isTriangle) {
       throw new Error(`Sides ${a}, ${b} and ${c} can't form a triangle`);
     }
 
