@@ -17,14 +17,14 @@ export class Triangle implements Figure {
     public c: number,
   ) {
     const isValidTriangle
-    = a <= 0
-    || b <= 0
-    || c <= 0
-    || a + b <= c
-    || b + c <= a
-    || a + c <= b;
+    = a > 0
+    && b > 0
+    && c > 0
+    && a + b > c
+    && b + c > a
+    && a + c > b;
 
-    if (isValidTriangle) {
+    if (!isValidTriangle) {
       throw new Error('The entered sides can\'t form a triangle');
     }
   }
@@ -66,9 +66,9 @@ export class Rectangle implements Figure {
     public wigth: number,
     public height: number,
   ) {
-    const isValidRectangle = wigth <= 0 || height <= 0;
+    const isValidRectangle = wigth > 0 && height > 0;
 
-    if (isValidRectangle) {
+    if (!isValidRectangle) {
       throw new Error('The entered sides can\t form a rectangle');
     }
   }
