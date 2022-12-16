@@ -18,24 +18,20 @@ export class Triangle implements Figure {
   ) {
     this.shape = 'triangle';
 
-    if (!this.isValidTriangle()) {
+    if (this.isValidTriangle()) {
       throw new Error('Wrong triangle sides size');
     }
   }
 
   isValidTriangle(): boolean {
-    if (
+    return (
       this.a <= 0
       || this.b <= 0
       || this.c <= 0
       || this.a + this.b <= this.c
       || this.a + this.c <= this.b
       || this.b + this.c <= this.a
-    ) {
-      return false;
-    }
-
-    return true;
+    );
   }
 
   getArea(): number {
@@ -59,7 +55,7 @@ export class Circle implements Figure {
   ) {
     this.shape = 'circle';
 
-    if ((radius <= 0)) {
+    if (radius <= 0) {
       throw new Error('Wrong circle radius size');
     }
   }
@@ -81,17 +77,13 @@ export class Rectangle implements Figure {
   ) {
     this.shape = 'rectangle';
 
-    if (!this.isValidRectangle()) {
+    if (this.isValidRectangle()) {
       throw new Error('Size of the sides must be positive');
     }
   }
 
   isValidRectangle(): boolean {
-    if (this.width <= 0 || this.height <= 0) {
-      return false;
-    }
-
-    return true;
+    return (this.width <= 0 || this.height <= 0);
   }
 
   getArea(): number {
