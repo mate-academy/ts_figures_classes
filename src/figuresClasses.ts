@@ -16,22 +16,29 @@ export class Triangle implements Figure {
     public b: number,
     public c: number,
   ) {
-    if (
-      this.a === 0
-        || this.b === 0
-        || this.c === 0
-        || this.a + this.b <= this.c
-        || this.b + this.c <= this.a
-        || this.c + this.a <= this.b) {
-      throw new Error(`sides ${a}, ${b} and ${c} can't form a triangle`);
+    if (this.isValidTriangle()) {
+      throw new Error(`Sides ${a}, ${b} and ${c} can't form a triangle`);
     }
   }
 
+  isValidTriangle: () => boolean = () => {
+    return this.a === 0
+    || this.b === 0
+    || this.c === 0
+    || this.a + this.b <= this.c
+    || this.b + this.c <= this.a
+    || this.c + this.a <= this.b;
+  };
+
   getArea(): number {
-    const s = 0.5 * (this.a + this.b + this.c);
+    const halfPerimeter = 0.5 * (this.a + this.b + this.c);
 
     return Math.floor(
-      100 * Math.sqrt(s * (s - this.a) * (s - this.b) * (s - this.c)),
+      100
+        * Math.sqrt(halfPerimeter
+        * (halfPerimeter - this.a)
+        * (halfPerimeter - this.b)
+        * (halfPerimeter - this.c)),
     ) / 100;
   }
 }
@@ -43,10 +50,14 @@ export class Circle implements Figure {
     public color: Color,
     public radius: number,
   ) {
-    if (radius < 1) {
-      throw new Error(`radius ${radius} can't form the circle`);
+    if (this.isValidCircle()) {
+      throw new Error(`Radius ${radius} can't form the circle`);
     }
   }
+
+  isValidCircle: () => boolean = () => {
+    return this.radius < 1;
+  };
 
   getArea(): number {
     const area = Math.PI * this.radius ** 2;
@@ -63,8 +74,8 @@ export class Rectangle implements Figure {
     public a: number,
     public b: number,
   ) {
-    if (this.a < 1 || this.b < 1) {
-      throw new Error(`sides ${this.a} and ${this.b} can't form the rectangle`);
+    if (this.isValidRectangle()) {
+      throw new Error(`Sides ${this.a} and ${this.b} can't form the rectangle`);
     }
   }
 
@@ -73,6 +84,10 @@ export class Rectangle implements Figure {
 
     return Math.floor(100 * area) / 100;
   }
+
+  isValidRectangle: () => boolean = () => {
+    return this.a < 1 || this.b < 1;
+  };
 }
 
 export function getInfo(figure: Figure): string {
