@@ -16,15 +16,22 @@ export class Triangle implements Figure {
     public b: number,
     public c: number,
   ) {
-    if (a <= 0
+    if (!this.isValidTriangle) {
+      throw new Error('Use correct side');
+    }
+  }
+
+  isValidTriangle():boolean {
+    const { a, b, c } = this;
+
+    return (
+      a <= 0
       || b <= 0
       || c <= 0
       || a + b <= c
       || b + c <= a
       || a + c <= b
-    ) {
-      throw new Error('Use correct side');
-    }
+    );
   }
 
   getArea(): number {
@@ -62,9 +69,13 @@ export class Rectangle implements Figure {
     public width: number,
     public height: number,
   ) {
-    if (this.width <= 0 || this.height <= 0) {
+    if (!this.isValidRectangle) {
       throw new Error('Use correct width or height');
     }
+  }
+
+  isValidRectangle():boolean {
+    return (this.width <= 0 || this.height <= 0);
   }
 
   getArea(): number {
