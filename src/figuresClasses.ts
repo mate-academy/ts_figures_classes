@@ -22,8 +22,12 @@ export class Triangle implements Figure {
     public b: number,
     public c: number,
   ) {
-    const theSmallest: number = Math.min(a, b, c);
-    const sortedSides: number[] = [a, b, c]
+    this.validateFigure();
+  }
+
+  validateFigure(): void {
+    const theSmallest: number = Math.min(this.a, this.b, this.c);
+    const sortedSides: number[] = [this.a, this.b, this.c]
       .sort((side1, side2) => side1 - side2);
 
     if (theSmallest <= 0) {
@@ -55,7 +59,11 @@ export class Circle implements Figure {
     public color: Color,
     public radius: number,
   ) {
-    if (radius <= 0) {
+    this.validateFigure();
+  }
+
+  validateFigure(): void {
+    if (this.radius <= 0) {
       throw new Error('radius can\'t be 0');
     }
   }
@@ -73,7 +81,11 @@ export class Rectangle implements Figure {
     public width: number,
     public height: number,
   ) {
-    const theSmallest: number = Math.min(width, height);
+    this.validateFigure();
+  }
+
+  validateFigure(): void {
+    const theSmallest: number = Math.min(this.width, this.height);
 
     if (theSmallest <= 0) {
       throw new Error('invalid length of some side');
