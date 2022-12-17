@@ -1,5 +1,14 @@
-export type Shape = 'circle' | 'triangle' | 'rectangle';
-export type Color = 'red' | 'green' | 'blue';
+export enum Shape {
+  Circle = 'circle',
+  Triangle = 'triangle',
+  Rectangle = 'rectangle',
+}
+
+export enum Color {
+  Red = 'red',
+  Green = 'green',
+  Blue = 'blue',
+}
 
 export interface Figure {
   shape: Shape;
@@ -8,7 +17,7 @@ export interface Figure {
 }
 
 export class Triangle implements Figure {
-  shape: Shape = 'triangle';
+  shape = Shape.Triangle;
 
   getArea: () => number;
 
@@ -39,7 +48,7 @@ export class Triangle implements Figure {
 }
 
 export class Circle implements Figure {
-  shape: Shape = 'circle';
+  shape = Shape.Circle;
 
   getArea = (): number => Math.floor(Math.PI * this.radius ** 2 * 100) / 100;
 
@@ -54,7 +63,7 @@ export class Circle implements Figure {
 }
 
 export class Rectangle implements Figure {
-  shape: Shape = 'rectangle';
+  shape = Shape.Rectangle;
 
   getArea = (): number => Math.floor(this.width * this.height * 100) / 100;
 
