@@ -26,7 +26,9 @@ export class Triangle implements Figure {
     public c: number,
   ) {
     if (this.checkTriangle()) {
-      throw new Error('Invalid parametrs');
+      throw new Error(
+        `sides ${this.a}, ${this.b}, ${this.c} can't form a triangle`,
+      );
     }
   }
 
@@ -49,7 +51,7 @@ export class Circle implements Figure {
     public radius: number,
   ) {
     if (this.radius <= 0) {
-      throw new Error('Invalid parametrs');
+      throw new Error('Radius <= 0');
     }
   }
 
@@ -69,7 +71,7 @@ export class Rectangle implements Figure {
     public height: number,
   ) {
     if (this.width <= 0 || this.height <= 0) {
-      throw new Error('Invalid parametrs');
+      throw new Error('Width and Height should be > 0');
     }
   }
 
