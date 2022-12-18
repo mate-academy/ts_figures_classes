@@ -42,7 +42,9 @@ export class Triangle implements Figure {
     this.shape = 'triangle';
 
     if (this.isInvalidShape()) {
-      throw new Error('Invalid triangle');
+      throw new Error(
+        'It`s not possible to create a triangle with these parameters',
+      );
     }
   }
 }
@@ -61,7 +63,9 @@ export class Circle implements Figure {
     this.shape = 'circle';
 
     if (radius <= 0) {
-      throw new Error('Invalid circle');
+      throw new Error(
+        'It`s not possible to create a circle with these parameters',
+      );
     }
   }
 }
@@ -81,7 +85,9 @@ export class Rectangle implements Figure {
     this.shape = 'rectangle';
 
     if (width <= 0 || height <= 0) {
-      throw new Error('Invalid rectangle');
+      throw new Error(
+        'It`s not possible to create a rectangle with these parameters',
+      );
     }
   }
 }
