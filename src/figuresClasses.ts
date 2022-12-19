@@ -1,6 +1,10 @@
 type Colors = 'red' | 'green' | 'blue';
-type Shapes = 'triangle' | 'circle' | 'rectangle';
 
+enum Shapes {
+  triangle = 'triangle',
+  circle = 'circle',
+  rectangle = 'rectangle',
+}
 export interface Figure {
   color: Colors;
   shape: Shapes;
@@ -13,24 +17,24 @@ export class Triangle implements Figure {
   getArea(): number {
     const semiPerimeter = (this.sideA + this.sideB + this.sideC) / 2;
 
-    return +Math.sqrt(Math.abs(semiPerimeter
+    return +Math.sqrt(semiPerimeter
       * (semiPerimeter - this.sideA)
       * (semiPerimeter - this.sideB)
-      * (semiPerimeter - this.sideC))).toFixed(2);
+      * (semiPerimeter - this.sideC)).toFixed(2);
   }
 
-  isInvalidShape(): boolean {
-    const arr = [this.sideA, this.sideB, this.sideC];
+  private hasInvalidShape(): boolean {
+    const sides = [this.sideA, this.sideB, this.sideC];
 
-    const maxSide = arr.sort((a, b) => a - b).pop();
-    const twoSideSum = arr.reduce((sum, current) => sum + current);
-    const isInvalidValue = arr.some((side) => side <= 0);
+    const maxSide = sides.sort((a, b) => a - b).pop();
+    const twoSideSum = sides.reduce((sum, current) => sum + current);
+    const hasInvalidValue = sides.some((side) => side <= 0);
 
     if (!maxSide) {
       return false;
     }
 
-    return (maxSide >= twoSideSum) || isInvalidValue;
+    return (maxSide >= twoSideSum) || hasInvalidValue;
   }
 
   constructor(
@@ -39,9 +43,9 @@ export class Triangle implements Figure {
     public sideB: number,
     public sideC: number,
   ) {
-    this.shape = 'triangle';
+    this.shape = Shapes.triangle;
 
-    if (this.isInvalidShape()) {
+    if (this.hasInvalidShape()) {
       throw new Error(
         'It`s not possible to create a triangle with these parameters',
       );
@@ -60,7 +64,7 @@ export class Circle implements Figure {
     public color: Colors,
     public radius: number,
   ) {
-    this.shape = 'circle';
+    this.shape = Shapes.circle;
 
     if (radius <= 0) {
       throw new Error(
@@ -74,7 +78,7 @@ export class Rectangle implements Figure {
   shape: Shapes;
 
   getArea(): number {
-    return +(this.width * this.height).toFixed(2);
+    return Number((this.width * this.height).toFixed(2));
   }
 
   constructor(
@@ -82,7 +86,7 @@ export class Rectangle implements Figure {
     public width: number,
     public height: number,
   ) {
-    this.shape = 'rectangle';
+    this.shape = Shapes.rectangle;
 
     if (width <= 0 || height <= 0) {
       throw new Error(
