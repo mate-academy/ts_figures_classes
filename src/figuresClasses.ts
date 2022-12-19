@@ -1,9 +1,9 @@
 type Colors = 'red' | 'green' | 'blue';
 
 enum Shapes {
-  triangle = 'triangle',
-  circle = 'circle',
-  rectangle = 'rectangle',
+  Triangle = 'triangle',
+  Circle = 'circle',
+  Rectangle = 'rectangle',
 }
 export interface Figure {
   color: Colors;
@@ -43,16 +43,17 @@ export class Triangle implements Figure {
     public sideB: number,
     public sideC: number,
   ) {
-    this.shape = Shapes.triangle;
+    this.shape = Shapes.Triangle;
 
     if (this.hasInvalidShape()) {
       throw new Error(
-        'It`s not possible to create a triangle with these parameters',
+        `Its not possible to create a triangle with \
+        ${this.sideA} ${this.sideB} ${this.sideC} parameters`,
       );
     }
   }
 }
-
+// ${this.sideA} ${this.sideB} ${this.sideC}
 export class Circle implements Figure {
   shape: Shapes;
 
@@ -64,11 +65,11 @@ export class Circle implements Figure {
     public color: Colors,
     public radius: number,
   ) {
-    this.shape = Shapes.circle;
+    this.shape = Shapes.Circle;
 
     if (radius <= 0) {
       throw new Error(
-        'It`s not possible to create a circle with these parameters',
+        `It's not possible to create a circle with ${this.radius} parameter`,
       );
     }
   }
@@ -86,11 +87,12 @@ export class Rectangle implements Figure {
     public width: number,
     public height: number,
   ) {
-    this.shape = Shapes.rectangle;
+    this.shape = Shapes.Rectangle;
 
     if (width <= 0 || height <= 0) {
       throw new Error(
-        'It`s not possible to create a rectangle with these parameters',
+        `It's not possible to create a rectangle with \
+        ${this.width} ${this.height} parameters`,
       );
     }
   }
