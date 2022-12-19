@@ -16,18 +16,22 @@ export class Triangle implements Figure {
     public b: number,
     public c: number,
   ) {
-    if (this.isValidTriangle()) {
+    if (!this.isValidTriangle()) {
       throw new Error(`Sides ${a}, ${b} and ${c} can't form a triangle`);
     }
   }
 
-  isValidTriangle: () => boolean = () => {
-    return this.a === 0
-    || this.b === 0
-    || this.c === 0
-    || this.a + this.b <= this.c
-    || this.b + this.c <= this.a
-    || this.c + this.a <= this.b;
+  private isValidTriangle: () => boolean = () => {
+    const conditions = [
+      this.a !== 0,
+      this.b !== 0,
+      this.c !== 0,
+      this.a + this.b > this.c,
+      this.b + this.c > this.a,
+      this.c + this.a > this.b,
+    ];
+
+    return conditions.every(Boolean);
   };
 
   getArea(): number {
@@ -50,13 +54,13 @@ export class Circle implements Figure {
     public color: Color,
     public radius: number,
   ) {
-    if (this.isValidCircle()) {
+    if (!this.isValidCircle()) {
       throw new Error(`Radius ${radius} can't form the circle`);
     }
   }
 
-  isValidCircle: () => boolean = () => {
-    return this.radius < 1;
+  private isValidCircle: () => boolean = () => {
+    return this.radius > 0;
   };
 
   getArea(): number {
@@ -74,7 +78,7 @@ export class Rectangle implements Figure {
     public a: number,
     public b: number,
   ) {
-    if (this.isValidRectangle()) {
+    if (!this.isValidRectangle()) {
       throw new Error(`Sides ${this.a} and ${this.b} can't form the rectangle`);
     }
   }
@@ -85,8 +89,8 @@ export class Rectangle implements Figure {
     return Math.floor(100 * area) / 100;
   }
 
-  isValidRectangle: () => boolean = () => {
-    return this.a < 1 || this.b < 1;
+  private isValidRectangle: () => boolean = () => {
+    return this.a > 0 && this.b > 0;
   };
 }
 
