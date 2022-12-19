@@ -84,7 +84,7 @@ export class Rectangle implements Figure {
   ) {
     if (this.isValidRectangle()) {
       throw new Error(
-        'Wrong rectangle sides',
+        'Wrong rectangle sides - width and height must be greater than 0',
       );
     }
   }
