@@ -19,7 +19,7 @@ export class Triangle implements Figure {
     this.shape = 'triangle';
 
     if (this.isNotTriangle()) {
-      throw new Error('sides 1, 2 and 3 can not form a triangle');
+      throw new Error('Impossible to form a triangle with sides of such size.');
     }
   }
 
@@ -57,7 +57,7 @@ export class Circle implements Figure {
     this.shape = 'circle';
 
     if (this.isNotCircle()) {
-      throw new Error('radius can not form a circle');
+      throw new Error('The radius must be greater than 0 to form a circle.');
     }
   }
 
@@ -83,7 +83,7 @@ export class Rectangle implements Figure {
     this.shape = 'rectangle';
 
     if (this.isNotRectangle()) {
-      throw new Error('width and height can not form a rectangle');
+      throw new Error('Length and width must be > 0 to form a rectangle');
     }
   }
 
