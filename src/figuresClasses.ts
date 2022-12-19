@@ -65,10 +65,10 @@ export class Circle implements Figure {
     public radius: number,
   ) {
     this.shape = 'circle';
-    this.isValidParameters();
+    this.validParameters();
   }
 
-  isValidParameters(): void {
+  validParameters(): void {
     if (this.radius <= 0) {
       throw new Error('radius should be greater then 0');
     }
@@ -90,10 +90,10 @@ export class Rectangle implements Figure {
     public height: number,
   ) {
     this.shape = 'rectangle';
-    this.isValidParameters();
+    this.validParameters();
   }
 
-  isValidParameters(): void {
+  validParameters(): void {
     if (this.width <= 0) {
       throw new Error('width should be greater then 0');
     }
