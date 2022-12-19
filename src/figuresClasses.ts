@@ -23,7 +23,7 @@ export class Triangle implements Figure {
     }
 
     if (this.a >= half || this.b >= half || this.c >= half) {
-      throw Error('can\'t be a triangle');
+      throw Error('Use correct side');
     }
   }
 
