@@ -25,8 +25,6 @@ export class Triangle implements Figure {
     public b: number,
     public c: number,
   ) {
-    this.shape = Shape.triangle;
-
     if (this.a <= 0
       || this.b <= 0
       || this.c <= 0
@@ -38,12 +36,12 @@ export class Triangle implements Figure {
   }
 
   getArea(): number {
-    const s = (this.a + this.b + this.c) / 2;
+    const s: number = (this.a + this.b + this.c) / 2;
     let area: number = Math.sqrt(s * (s - this.a)
       * (s - this.b)
       * (s - this.c));
 
-    area = Math.round(area * 100) / 100;
+    area = Math.floor(area * 100) / 100;
 
     return area;
   }
@@ -56,8 +54,6 @@ export class Circle implements Figure {
     public color: Color,
     public radius: number,
   ) {
-    this.shape = Shape.circle;
-
     if (this.radius <= 0) {
       throw new Error('sides 1, 2 and 3 can\'t form a triangle');
     }
@@ -79,8 +75,6 @@ export class Rectangle implements Figure {
     public a: number,
     public b: number,
   ) {
-    this.shape = Shape.rectangle;
-
     if (this.a <= 0
       || this.b <= 0) {
       throw new Error('Wrong radius parameters');
