@@ -16,13 +16,16 @@ export class Triangle implements Figure {
     public b: number,
     public c: number,
   ) {
+    const conditions = [
+      a > 0
+      && b > 0
+      && c > 0
+      && a + b > c
+      && b + c > a
+      && a + c > b,
+    ];
     const isValidTriangle
-    = a > 0
-    && b > 0
-    && c > 0
-    && a + b > c
-    && b + c > a
-    && a + c > b;
+    = conditions.every(Boolean);
 
     if (!isValidTriangle) {
       throw new Error('The entered sides can\'t form a triangle');
