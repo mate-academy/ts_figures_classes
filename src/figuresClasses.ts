@@ -1,14 +1,19 @@
-type Shape = 'triangle' | 'circle' | 'rectangle';
 type Color = 'red' | 'green' | 'blue';
 
+enum Shape {
+  Triangle = 'triangle',
+  Circle = 'circle',
+  Rectangle = 'rectangle'
+}
+
 export interface Figure {
-  shape: Shape
-  color: Color
+  shape: Shape;
+  color: Color;
   getArea(): number;
 }
 
 export class Triangle implements Figure {
-  shape: Shape = 'triangle';
+  shape: Shape = Shape.Triangle;
 
   constructor(
     public color: Color,
@@ -16,15 +21,18 @@ export class Triangle implements Figure {
     public b: number,
     public c: number,
   ) {
-    if (
+    const cases = [
       a <= 0
       || b <= 0
       || c <= 0
       || a + b <= c
       || b + c <= a
-      || a + c <= b
-    ) {
-      throw new Error('invalid numbers');
+      || a + c <= b,
+    ];
+    const validTriangle = cases.some(Boolean);
+
+    if (validTriangle) {
+      throw new Error('invalid sides of triangle');
     }
   }
 
@@ -43,14 +51,14 @@ export class Triangle implements Figure {
 }
 
 export class Circle implements Figure {
-  shape: Shape = 'circle';
+  shape: Shape = Shape.Circle;
 
   constructor(
     public color: Color,
     public radius: number,
   ) {
     if (radius <= 0) {
-      throw new Error('invalid number');
+      throw new Error('invalid circle radius');
     }
   }
 
@@ -62,7 +70,7 @@ export class Circle implements Figure {
 }
 
 export class Rectangle implements Figure {
-  shape: Shape = 'rectangle';
+  shape: Shape = Shape.Rectangle;
 
   constructor(
     public color: Color,
@@ -70,14 +78,12 @@ export class Rectangle implements Figure {
     public height: number,
   ) {
     if (wigth <= 0 || height <= 0) {
-      throw new Error('invalid numbers');
+      throw new Error('invalid sides of rectangle');
     }
   }
 
   getArea(): number {
-    const areaRectangle = this.wigth * this.height;
-
-    return areaRectangle;
+    return this.wigth * this.height;
   }
 }
 
