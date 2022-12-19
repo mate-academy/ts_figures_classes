@@ -24,7 +24,7 @@ export class Triangle implements Figure {
   ) {
     this.shape = Shape.Triangle;
 
-    if (this.isValidTriangle()) {
+    if (!this.isValidTriangle()) {
       throw new Error('You cannot make a triangle with such sides');
     }
   }
@@ -39,7 +39,7 @@ export class Triangle implements Figure {
       this.c + this.a <= this.b,
     ];
 
-    return conditions.some((condition) => condition);
+    return !conditions.some(Boolean);
   }
 
   getArea(): number {
