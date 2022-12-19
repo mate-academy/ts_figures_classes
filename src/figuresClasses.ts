@@ -30,9 +30,7 @@ export class Triangle implements Figure {
     }
 
     if (a >= b + c || b >= a + c || c >= a + b) {
-      throw new Error('Sides '
-      + `${this.a}, ${this.b} and ${this.c} `
-      + 'cannot form a triangle');
+      throw new Error(`Sides ${a}, ${b} and ${c} cannot form a triangle`);
     }
   }
 
