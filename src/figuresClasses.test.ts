@@ -112,7 +112,7 @@ describe('Method "getArea" of class "Circle"', () => {
       .toBe('number');
   });
 
-  test('should return a correct square of a circle', () => {
+  test('should return a correct square of a  ', () => {
     const circle = new Circle('red', 6);
 
     expect(circle.getArea())
