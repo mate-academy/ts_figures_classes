@@ -15,8 +15,6 @@ export class Triangle implements Figure {
     public b: number,
     public c: number,
   ) {
-    this.shape = 'triangle';
-
     if (a <= 0 || b <= 0 || c <= 0) {
       throw new Error(`sides ${a}, ${b} and ${c} can't form a triangle`);
     }
@@ -27,16 +25,15 @@ export class Triangle implements Figure {
 
     const longestSide = sides.pop();
 
-    if (longestSide >= sides[0] + sides[1]) {
+    if (longestSide! >= sides[0] + sides[1]) {
       throw new Error(`sides ${a}, ${b} and ${c} can't form a triangle`);
     }
   }
 
-  shape: Shape;
+  shape: Shape = 'triangle';
 
   getArea(): number {
     const { a, b, c } = this;
-
     const s = (a + b + c) / 2;
     const triangleArea = Math.sqrt(s * (s - a) * (s - b) * (s - c));
 
@@ -49,14 +46,12 @@ export class Circle implements Figure {
     public color: Color,
     public radius: number,
   ) {
-    this.shape = 'circle';
-
     if (radius <= 0) {
-      throw new Error('radius can\'t form a circle');
+      throw new Error(`radius ${radius} can't form a circle`);
     }
   }
 
-  shape: Shape;
+  shape: Shape = 'circle';
 
   getArea(): number {
     return Math.floor((Math.PI * this.radius ** 2) * 100) / 100;
@@ -69,14 +64,12 @@ export class Rectangle implements Figure {
     public width: number,
     public height: number,
   ) {
-    this.shape = 'rectangle';
-
     if (width <= 0 || height <= 0) {
-      throw new Error(`sides ${width}, ${height} can't form a rectangle`);
+      throw new Error(`sides ${width} and ${height} can't form a rectangle`);
     }
   }
 
-  shape: Shape;
+  shape: Shape = 'rectangle';
 
   getArea(): number {
     return Math.floor(this.width * this.height * 100) / 100;
