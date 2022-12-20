@@ -8,7 +8,7 @@ export interface Figure {
 }
 
 export class Triangle implements Figure {
-  shape: Shape;
+  shape: Shape = 'triangle';
 
   constructor(
     public color: Color,
@@ -16,8 +16,6 @@ export class Triangle implements Figure {
     public b: number,
     public c: number,
   ) {
-    this.shape = 'triangle';
-
     if (!this.checkTriangle()) {
       throw new Error('There are no correct triangle sizes');
     }
@@ -50,14 +48,12 @@ export class Triangle implements Figure {
 }
 
 export class Circle implements Figure {
-  shape: Shape;
+  shape: Shape = 'circle';
 
   constructor(
     public color: Color,
     public radius: number,
   ) {
-    this.shape = 'circle';
-
     if (this.radius <= 0) {
       throw new Error('Not correct value of radius');
     }
@@ -69,15 +65,13 @@ export class Circle implements Figure {
 }
 
 export class Rectangle implements Figure {
-  shape: Shape;
+  shape: Shape = 'rectangle';
 
   constructor(
     public color: Color,
     public width: number,
     public hight: number,
   ) {
-    this.shape = 'rectangle';
-
     if (this.width <= 0 || this.hight <= 0) {
       throw new Error('Not correct value of side');
     }
