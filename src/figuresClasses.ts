@@ -20,7 +20,7 @@ export class Triangle implements Figure {
     const isNotTriangle = longestSide >= (a + b + c - longestSide);
 
     if (a <= 0 || b <= 0 || c <= 0 || isNotTriangle) {
-      throw new Error('Invalid sides values');
+      throw new Error('Sides values must be positive');
     }
   }
 
@@ -40,7 +40,7 @@ export class Circle implements Figure {
     public radius: number,
   ) {
     if (radius <= 0) {
-      throw new Error('Invalid radius');
+      throw new Error('Radius must be positive');
     }
   }
 
@@ -58,7 +58,7 @@ export class Rectangle implements Figure {
     public height: number,
   ) {
     if (width <= 0 || height <= 0) {
-      throw new Error('Invalid sides values');
+      throw new Error('Width and height must be positive');
     }
   }
 
