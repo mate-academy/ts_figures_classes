@@ -21,7 +21,8 @@ export class Triangle implements Figure {
     || this.b >= this.a + this.c
     || this.c >= this.a + this.b
     ) {
-      throw new Error('Wrong input data');
+      throw new Error('Unable to form triangle with sides'
+      + `${this.a}, ${this.b} and ${this.b}`);
     }
   }
 
@@ -42,7 +43,8 @@ export class Circle implements Figure {
     public radius: number,
   ) {
     if (this.radius <= 0) {
-      throw new Error('Wrong input data');
+      throw new Error(`Unable to form circle with following radius -
+      ${this.radius}`);
     }
   }
 
@@ -63,7 +65,8 @@ export class Rectangle implements Figure {
   ) {
     if (this.width <= 0
       || this.height <= 0) {
-      throw new Error('Wrong input data');
+      throw new Error('Unable to form rectangle with width'
+      + `${this.width}, and height ${this.height}`);
     }
   }
 
