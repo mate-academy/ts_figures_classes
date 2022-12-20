@@ -24,7 +24,7 @@ export class Triangle implements Figure {
       || this.a + this.b <= this.c
       || this.a + this.c <= this.b
       || this.b + this.c <= this.a) {
-      throw new Error('These sides can not form a triangle');
+      throw new Error('It is impossible to form a triangle with these sides');
     }
   }
 
@@ -46,7 +46,7 @@ export class Circle implements Figure {
     this.shape = 'circle';
 
     if (radius <= 0) {
-      throw new Error('It is not possible to form a circle with such a radius');
+      throw new Error('Radius must be > 0 to form a circle');
     }
   }
 
@@ -67,7 +67,7 @@ export class Rectangle implements Figure {
 
     if (this.width <= 0
       || this.height <= 0) {
-      throw new Error('These sides can not form a rectangle');
+      throw new Error('Width and height must be > 0 to form a rectangle');
     }
   }
 
