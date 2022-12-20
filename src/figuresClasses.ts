@@ -8,7 +8,7 @@ export interface Figure {
 }
 
 export class Triangle implements Figure {
-  shape: Shape;
+  shape: Shape = 'triangle';
 
   constructor(
     public color: Color,
@@ -16,17 +16,25 @@ export class Triangle implements Figure {
     public b: number,
     public c: number,
   ) {
-    this.shape = 'triangle';
+    // this.shape = 'triangle';
+    const checkSides = [a, b, c].sort((sideA, sideB) => (sideA - sideB));
 
-    if (
-      this.a <= 0
-      || this.b <= 0
-      || this.c <= 0
-      || this.a + this.b <= this.c
-      || this.b + this.c <= this.a
-      || this.c + this.a <= this.b) {
-      throw new Error('Wrong triangle sides size');
+    if (checkSides.some((side) => (side <= 0))) {
+      throw new Error('Wrong triangle sides size, them < 0');
     }
+
+    if (checkSides[2] >= checkSides[1] + checkSides[0]) {
+      throw new Error('longest side cannot be >= sum of 2 others');
+    }
+    // if (
+    //   this.a <= 0
+    //   || this.b <= 0
+    //   || this.c <= 0
+    //   || this.a + this.b <= this.c
+    //   || this.b + this.c <= this.a
+    //   || this.c + this.a <= this.b) {
+    //   throw new Error('Wrong triangle sides size');
+    // }
   }
 
   getArea(): number {
@@ -42,13 +50,13 @@ export class Triangle implements Figure {
 }
 
 export class Circle implements Figure {
-  shape: Shape;
+  shape: Shape = 'circle';
 
   constructor(
     public color: Color,
     public radius: number,
   ) {
-    this.shape = 'circle';
+    // this.shape = 'circle';
 
     if (this.radius <= 0) {
       throw new Error('Wrong circle radius size');
@@ -63,15 +71,13 @@ export class Circle implements Figure {
 }
 
 export class Rectangle implements Figure {
-  shape: Shape;
+  shape: Shape = 'rectangle';
 
   constructor(
     public color: Color,
     public sideA: number,
     public sideB: number,
   ) {
-    this.shape = 'rectangle';
-
     if (this.sideA <= 0 || this.sideB <= 0) {
       throw new Error('Wrong rectangle sides size');
     }
