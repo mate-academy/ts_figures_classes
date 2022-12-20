@@ -8,17 +8,19 @@ export interface Figure {
 }
 
 export class Triangle implements Figure {
-  shape: Shape;
+  shape: Shape = 'triangle';
 
-  isValidTriangle(): boolean {
-    return (
-      this.a <= 0
-      || this.b <= 0
-      || this.c <= 0
-      || this.a + this.b <= this.c
-      || this.a + this.c <= this.b
-      || this.b + this.c <= this.a
-    );
+  private isValidTriangle(): boolean {
+    const triangleConditions = [
+      this.a <= 0,
+      this.b <= 0,
+      this.c <= 0,
+      this.a + this.b <= this.c,
+      this.a + this.c <= this.b,
+      this.b + this.c <= this.a,
+    ];
+
+    return !triangleConditions.some(Boolean);
   }
 
   constructor(
@@ -27,9 +29,7 @@ export class Triangle implements Figure {
     public b: number,
     public c: number,
   ) {
-    this.shape = 'triangle';
-
-    if (this.isValidTriangle()) {
+    if (!(this.isValidTriangle())) {
       throw new Error('sides 1, 2 and 3 can not form a triangle');
     }
   }
@@ -37,26 +37,23 @@ export class Triangle implements Figure {
   getArea(): number {
     const halfPerim: number = (this.a + this.b + this.c) / 2;
 
-    const area: number = Math.sqrt(
+    return Number((Math.sqrt(
       halfPerim
       * (halfPerim - this.a)
       * (halfPerim - this.b)
       * (halfPerim - this.c),
-    );
-
-    return Number(area.toFixed(2));
+    ).toFixed(2)
+    ));
   }
 }
 
 export class Circle implements Figure {
-  shape: Shape;
+  shape: Shape = 'circle';
 
   constructor(
     public color: Color,
     public radius: number,
   ) {
-    this.shape = 'circle';
-
     if (radius <= 0) {
       throw new Error('Impossible to create circle with this radius');
     }
@@ -70,10 +67,10 @@ export class Circle implements Figure {
 }
 
 export class Rectangle implements Figure {
-  shape: Shape;
+  shape: Shape = 'rectangle';
 
-  isValideRectangle(): boolean {
-    return (this.width <= 0 || this.height <= 0);
+  private isValideRectangle(): boolean {
+    return (this.width >= 0 && this.height >= 0);
   }
 
   getArea(): number {
@@ -87,9 +84,7 @@ export class Rectangle implements Figure {
     public width: number,
     public height: number,
   ) {
-    this.shape = 'rectangle';
-
-    if (this.isValideRectangle()) {
+    if (!(this.isValideRectangle())) {
       throw new Error('Can not use negative value for size');
     }
   }
