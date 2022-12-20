@@ -30,7 +30,7 @@ export class Triangle implements Figure {
     }
   }
 
-  isImpossibleTriangel(): boolean {
+  private isImpossibleTriangel(): boolean {
     const { a, b, c } = this;
     const checks = [
       a <= 0,
@@ -63,9 +63,13 @@ export class Circle implements Figure {
     public color: Color,
     public radius: number,
   ) {
-    if (radius <= 0) {
+    if (this.isImpossibleCircle()) {
       throw new Error('Impossible Circle');
     }
+  }
+
+  private isImpossibleCircle(): boolean {
+    return this.radius <= 0;
   }
 
   getArea(): number {
@@ -88,7 +92,7 @@ export class Rectangle implements Figure {
     }
   }
 
-  isImpossibleRectangle(): boolean {
+  private isImpossibleRectangle(): boolean {
     return this.width <= 0 || this.height <= 0;
   }
 
