@@ -35,7 +35,7 @@ export class Circle implements Figure {
 
   constructor(color: string, radius: number) {
     if (radius <= 0) {
-      throw new Error('Invalid radius');
+      throw new Error('Invalid radius, enter data > 0');
     }
 
     this.color = color;
@@ -58,7 +58,7 @@ export class Rectangle implements Figure {
 
   constructor(color: string, width: number, height: number) {
     if (width <= 0 || height <= 0) {
-      throw new Error('Invalid rectangle dimensions');
+      throw new Error('Invalid rectangle dimensions, enter data > 0');
     }
 
     this.color = color;
