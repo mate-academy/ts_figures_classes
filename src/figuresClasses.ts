@@ -21,7 +21,7 @@ export class Triangle implements Figure {
     public b: number,
     public c: number,
   ) {
-    const cases = [
+    const invalidConditions = [
       a <= 0
       || b <= 0
       || c <= 0
@@ -29,9 +29,9 @@ export class Triangle implements Figure {
       || b + c <= a
       || a + c <= b,
     ];
-    const validTriangle = cases.some(Boolean);
+    const isIvalidTriangle = invalidConditions.some(Boolean);
 
-    if (validTriangle) {
+    if (isIvalidTriangle) {
       throw new Error('invalid sides of triangle');
     }
   }
@@ -63,9 +63,7 @@ export class Circle implements Figure {
   }
 
   getArea(): number {
-    const areaCircle = Math.floor(Math.PI * (this.radius ** 2) * 100) / 100;
-
-    return areaCircle;
+    return Math.floor(Math.PI * (this.radius ** 2) * 100) / 100;
   }
 }
 
