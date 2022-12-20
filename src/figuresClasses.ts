@@ -1,6 +1,8 @@
 type Shape = 'triangle' | 'circle' | 'rectangle';
 type Color = 'red' | 'green' | 'blue';
 
+const roundDown = (num: number): number => Math.floor(num * 100) / 100;
+
 export interface Figure {
   shape: Shape;
   color: Color;
@@ -29,7 +31,7 @@ export class Triangle implements Figure {
     const p = 0.5 * (this.a + this.b + this.c);
     const area = Math.sqrt(p * (p - this.a) * (p - this.b) * (p - this.c));
 
-    return Math.floor(area * 100) / 100;
+    return roundDown(area);
   }
 }
 
@@ -48,7 +50,7 @@ export class Circle implements Figure {
   getArea(): number {
     const area = Math.PI * (this.radius ** 2);
 
-    return Math.floor(area * 100) / 100;
+    return roundDown(area);
   }
 }
 
@@ -68,7 +70,7 @@ export class Rectangle implements Figure {
   getArea(): number {
     const area = this.width * this.height;
 
-    return Math.floor(area * 100) / 100;
+    return roundDown(area);
   }
 }
 
