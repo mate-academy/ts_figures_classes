@@ -17,7 +17,7 @@ export interface Figure {
 }
 
 export class Triangle implements Figure {
-  shape: Shape;
+  shape: Shape = Shape.Triangle;
 
   constructor(
     public color: Color,
@@ -25,28 +25,31 @@ export class Triangle implements Figure {
     public b: number,
     public c: number,
   ) {
-    this.shape = Shape.Triangle;
-
-    const isImpossibleTriangel = (
-      a <= 0
-      || b <= 0
-      || c <= 0
-      || a >= b + c
-      || b >= a + c
-      || c >= a + b
-    );
-
-    if (isImpossibleTriangel) {
+    if (this.isImpossibleTriangel()) {
       throw new Error('Impossible Triangel');
     }
   }
 
+  isImpossibleTriangel(): boolean {
+    const { a, b, c } = this;
+    const checks = [
+      a <= 0,
+      b <= 0,
+      c <= 0,
+      a >= b + c,
+      b >= a + c,
+      c >= a + b,
+    ];
+
+    return checks.some(Boolean);
+  }
+
   getArea(): number {
-    const SemiPerimeter = (this.a + this.b + this.c) / 2;
+    const { a, b, c } = this;
+    const SemiPer = (a + b + c) / 2;
 
     const area = Math.sqrt(
-      SemiPerimeter * (SemiPerimeter - this.a)
-      * (SemiPerimeter - this.b) * (SemiPerimeter - this.c),
+      SemiPer * (SemiPer - a) * (SemiPer - b) * (SemiPer - c),
     );
 
     return Math.round(area * 100) / 100;
@@ -54,17 +57,13 @@ export class Triangle implements Figure {
 }
 
 export class Circle implements Figure {
-  shape: Shape;
+  shape: Shape = Shape.Circle;
 
   constructor(
     public color: Color,
     public radius: number,
   ) {
-    this.shape = Shape.Circle;
-
-    const isImpossibleCircle = radius <= 0;
-
-    if (isImpossibleCircle) {
+    if (radius <= 0) {
       throw new Error('Impossible Circle');
     }
   }
@@ -77,20 +76,20 @@ export class Circle implements Figure {
 }
 
 export class Rectangle implements Figure {
-  shape: Shape;
+  shape: Shape = Shape.Rectangle;
 
   constructor(
     public color: Color,
     public width : number,
     public height : number,
   ) {
-    this.shape = Shape.Rectangle;
-
-    const isImpossibleRectangle = this.width <= 0 || this.height <= 0;
-
-    if (isImpossibleRectangle) {
+    if (this.isImpossibleRectangle()) {
       throw new Error('Impossible Rectangle');
     }
+  }
+
+  isImpossibleRectangle(): boolean {
+    return this.width <= 0 || this.height <= 0;
   }
 
   getArea(): number {
