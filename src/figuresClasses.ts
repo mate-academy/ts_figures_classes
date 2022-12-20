@@ -25,17 +25,20 @@ export class Triangle implements Figure {
     public b: number,
     public c: number,
   ) {
-    const condition = [this.a, this.b, this.c];
+    const conditions = [this.a <= 0, this.b <= 0, this.c <= 0,
+      this.a >= this.b + this.c,
+      this.b >= this.a + this.c,
+      this.c >= this.a + this.b,
+    ];
 
-    if (condition.some((element, _, arr) => element <= 0
-    || element >= arr.reduce((x, y) => x + y) - element)) {
+    if (conditions.some((el) => el === true)) {
       throw new Error('Wrong triangle parameters');
     }
   }
 
   getArea(): number {
-    const s: number = (this.a + this.b + this.c) / 2;
-    const area: number = Math.sqrt(s * (s - this.a)
+    const s = (this.a + this.b + this.c) / 2;
+    const area = Math.sqrt(s * (s - this.a)
       * (s - this.b)
       * (s - this.c));
 
