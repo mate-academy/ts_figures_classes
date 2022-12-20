@@ -1,13 +1,13 @@
 enum Shape {
-  triangle = 'triangle',
-  circle = 'circle',
-  rectangle = 'rectangle',
+  Triangle = 'triangle',
+  Circle = 'circle',
+  Rectangle = 'rectangle',
 }
 
 enum Color {
-  red = 'red',
-  green = 'green',
-  blue = 'blue',
+  Red = 'red',
+  Green = 'green',
+  Blue = 'blue',
 }
 
 export interface Figure {
@@ -17,7 +17,7 @@ export interface Figure {
 }
 
 export class Triangle implements Figure {
-  shape = Shape.triangle;
+  shape = Shape.Triangle;
 
   constructor(
     public color: Color,
@@ -25,50 +25,44 @@ export class Triangle implements Figure {
     public b: number,
     public c: number,
   ) {
-    if (this.a <= 0
-      || this.b <= 0
-      || this.c <= 0
-      || this.a >= this.b + this.c
-      || this.b >= this.a + this.c
-      || this.c >= this.a + this.b) {
+    const condition = [this.a, this.b, this.c];
+
+    if (condition.some((element, _, arr) => element <= 0
+    || element >= arr.reduce((x, y) => x + y) - element)) {
       throw new Error('Wrong triangle parameters');
     }
   }
 
   getArea(): number {
     const s: number = (this.a + this.b + this.c) / 2;
-    let area: number = Math.sqrt(s * (s - this.a)
+    const area: number = Math.sqrt(s * (s - this.a)
       * (s - this.b)
       * (s - this.c));
 
-    area = Math.floor(area * 100) / 100;
-
-    return area;
+    return Math.floor(area * 100) / 100;
   }
 }
 
 export class Circle implements Figure {
-  shape = Shape.circle;
+  shape = Shape.Circle;
 
   constructor(
     public color: Color,
     public radius: number,
   ) {
     if (this.radius <= 0) {
-      throw new Error('sides 1, 2 and 3 can\'t form a triangle');
+      throw new Error('Wrong radius');
     }
   }
 
   getArea(): number {
-    const area: number = Math.floor((Math.PI
+    return Math.floor((Math.PI
       * this.radius * this.radius) * 100) / 100;
-
-    return area;
   }
 }
 
 export class Rectangle implements Figure {
-  shape = Shape.rectangle;
+  shape = Shape.Rectangle;
 
   constructor(
     public color: Color,
@@ -82,9 +76,7 @@ export class Rectangle implements Figure {
   }
 
   getArea(): number {
-    const area: number = this.a * this.b;
-
-    return area;
+    return this.a * this.b;
   }
 }
 
