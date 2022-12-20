@@ -26,14 +26,18 @@ export class Triangle implements Figure {
       || this.a + this.b <= this.c
       || this.a + this.c <= this.b
       || this.b + this.c <= this.a) {
-      throw new Error('you can not create triangle with this sides');
+      throw new Error(
+        'you can not create triangle if side less or equal sum of other two',
+      );
     }
   }
 
   getArea(): number {
     const semiperimeter = 1 / 2 * (this.a + this.b + this.c);
-    // eslint-disable-next-line max-len
-    const triangleArea = Math.sqrt(semiperimeter * (semiperimeter - this.a) * (semiperimeter - this.b) * (semiperimeter - this.c));
+    const triangleArea = (Math.sqrt(
+      semiperimeter * (semiperimeter - this.a) * (
+        semiperimeter - this.b) * (semiperimeter - this.c),
+    ));
 
     return Number(triangleArea.toFixed(2));
   }
@@ -49,7 +53,9 @@ export class Circle implements Figure {
     this.shape = 'circle';
 
     if (radius <= 0) {
-      throw new Error('You can not create circle with this radius');
+      throw new Error(
+        'You can not create circle with radius that less or equal 0',
+      );
     }
   }
 
@@ -70,7 +76,9 @@ export class Rectangle implements Figure {
 
     if (this.width <= 0
       || this.height <= 0) {
-      throw new Error('you can not create rectangle with this sides');
+      throw new Error(
+        'you can not create rectangle with sides that are less or equal 0',
+      );
     }
   }
 
