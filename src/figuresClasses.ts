@@ -24,7 +24,7 @@ export class Triangle implements Figure {
       || this.a + this.b <= this.c
       || this.b + this.c <= this.a
       || this.c + this.a <= this.b) {
-      throw new Error('Wrong length of side');
+      throw new Error('Value can\'t be less than 1');
     }
   }
 
@@ -47,7 +47,7 @@ export class Circle implements Figure {
     this.shape = 'circle';
 
     if (this.radius <= 0) {
-      throw new Error('Wrong radius');
+      throw new Error('Value can\'t be less than 1');
     }
   }
 
@@ -69,7 +69,7 @@ export class Rectangle implements Figure {
     this.shape = 'rectangle';
 
     if (this.width <= 0 || this.height <= 0) {
-      throw new Error('Wrong length of side');
+      throw new Error('Value can\'t be less than 1');
     }
   }
 
