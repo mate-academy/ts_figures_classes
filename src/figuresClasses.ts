@@ -8,7 +8,7 @@ export interface Figure {
 }
 
 export class Triangle implements Figure {
-  shape: Shape;
+  shape: Shape = 'triangle';
 
   constructor(
     public color: Color,
@@ -16,22 +16,23 @@ export class Triangle implements Figure {
     public b: number,
     public c: number,
   ) {
-    this.shape = 'triangle';
-
-    if (this.isValidTriangle()) {
+    if (this.isInvalidTriangle()) {
       throw new Error('Impossible to make a triangle with such sides');
     }
   }
 
-  isValidTriangle(): boolean {
-    return (
-      this.a <= 0
-      || this.b <= 0
-      || this.c <= 0
-      || this.a + this.b <= this.c
-      || this.a + this.c <= this.b
-      || this.b + this.c <= this.a
-    );
+  private isInvalidTriangle(): boolean {
+    const { a, b, c } = this;
+    const inspect = [
+      a <= 0,
+      b <= 0,
+      c <= 0,
+      a + b <= c,
+      a + c <= b,
+      b + c <= a,
+    ];
+
+    return inspect.some(Boolean);
   }
 
   getArea(): number {
@@ -48,14 +49,12 @@ export class Triangle implements Figure {
 }
 
 export class Circle implements Figure {
-  shape: Shape;
+  shape: Shape = 'circle';
 
   constructor(
     public color: Color,
     public radius: number,
   ) {
-    this.shape = 'circle';
-
     if (radius <= 0) {
       throw new Error('Impossible to make a circle with such radius');
     }
@@ -69,21 +68,19 @@ export class Circle implements Figure {
 }
 
 export class Rectangle implements Figure {
-  shape: Shape;
+  shape: Shape = 'rectangle';
 
   constructor(
     public color: Color,
     public width: number,
     public height: number,
   ) {
-    this.shape = 'rectangle';
-
-    if (this.isValidRectangle()) {
+    if (this.isInvalidRectangle()) {
       throw new Error('Impossible to make a rectangle with such parameters');
     }
   }
 
-  isValidRectangle(): boolean {
+  private isInvalidRectangle(): boolean {
     return (this.width <= 0 || this.height <= 0);
   }
 
