@@ -11,15 +11,18 @@ export interface Figure {
 export class Triangle implements Figure {
   public shape: Shape = 'triangle';
 
-  isInvalidTriangle(): boolean {
+  private isInvalidTriangle(): boolean {
     const { a, b, c } = this;
+    const checks = [
+      a === 0,
+      b === 0,
+      c === 0,
+      a + b <= c,
+      b + c <= a,
+      c + a <= b,
+    ];
 
-    return a === 0
-      || b === 0
-      || c === 0
-      || a + b <= c
-      || b + c <= a
-      || c + a <= b;
+    return checks.some(Boolean);
   }
 
   constructor(
@@ -70,7 +73,7 @@ export class Circle implements Figure {
 export class Rectangle implements Figure {
   public shape: Shape = 'rectangle';
 
-  isInvalidRectangle(): boolean {
+  private isInvalidRectangle(): boolean {
     return this.width <= 0 || this.height <= 0;
   }
 
