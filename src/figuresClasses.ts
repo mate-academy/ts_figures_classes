@@ -16,7 +16,7 @@ export class Triangle implements Figure {
     public b: number,
     public c: number,
   ) {
-    const conditions = [
+    const invalidConditions = [
       this.a <= 0,
       this.b <= 0,
       this.c <= 0,
@@ -24,7 +24,7 @@ export class Triangle implements Figure {
       this.b + this.c <= this.a,
     ];
 
-    if (conditions.some((condition) => (condition))) {
+    if (invalidConditions.some(Boolean)) {
       throw new Error('Wrong triangle sides size');
     }
   }
@@ -48,8 +48,6 @@ export class Circle implements Figure {
     public color: Color,
     public radius: number,
   ) {
-    // this.shape = 'circle';
-
     if (this.radius <= 0) {
       throw new Error('Wrong circle radius size');
     }
