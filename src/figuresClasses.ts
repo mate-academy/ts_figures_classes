@@ -12,12 +12,14 @@ export class Triangle implements Figure {
   public shape: Shape = 'triangle';
 
   isInvalidTriangle(): boolean {
-    return this.a === 0
-      || this.b === 0
-      || this.c === 0
-      || this.a + this.b <= this.c
-      || this.b + this.c <= this.a
-      || this.c + this.a <= this.b;
+    const { a, b, c } = this;
+
+    return a === 0
+      || b === 0
+      || c === 0
+      || a + b <= c
+      || b + c <= a
+      || c + a <= b;
   }
 
   constructor(
@@ -35,12 +37,13 @@ export class Triangle implements Figure {
 
   getArea(): number {
     const semiPerimeter: number = (this.a + this.b + this.c) / 2;
+    const { a, b, c } = this;
 
     return Math.floor(Math.sqrt(
       semiPerimeter
-      * (semiPerimeter - this.a)
-      * (semiPerimeter - this.b)
-      * (semiPerimeter - this.c),
+      * (semiPerimeter - a)
+      * (semiPerimeter - b)
+      * (semiPerimeter - c),
     ) * 100) / 100;
   }
 }
