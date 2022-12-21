@@ -28,9 +28,10 @@ export class Triangle implements Figure {
   }
 
   getArea(): number {
-    const halfPerim = (this.a + this.b + this.c) / 2;
-    const area = Math.sqrt(halfPerim * (halfPerim - this.a)
-      * (halfPerim - this.b) * (halfPerim - this.c));
+		{a, b , c} = this;
+    const halfPerim = (a + b + c) / 2;
+    const area = Math.sqrt(halfPerim * (halfPerim - a)
+      * (halfPerim - b) * (halfPerim - c));
 
     return Number(area.toFixed(2));
   }
