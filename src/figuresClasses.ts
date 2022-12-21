@@ -25,7 +25,7 @@ export class Triangle implements Figure {
     ];
 
     if (conditions.some((condition) => (condition))) {
-      throw new Error('Wrong triangle sides size, them < 0');
+      throw new Error('Wrong triangle sides size');
     }
   }
 
