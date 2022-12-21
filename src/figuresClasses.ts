@@ -16,25 +16,17 @@ export class Triangle implements Figure {
     public b: number,
     public c: number,
   ) {
-    // this.shape = 'triangle';
-    const checkSides = [a, b, c].sort((sideA, sideB) => (sideA - sideB));
+    const conditions = [
+      this.a <= 0,
+      this.b <= 0,
+      this.c <= 0,
+      this.a + this.b <= this.c,
+      this.b + this.c <= this.a,
+    ];
 
-    if (checkSides.some((side) => (side <= 0))) {
+    if (conditions.some((condition) => (condition))) {
       throw new Error('Wrong triangle sides size, them < 0');
     }
-
-    if (checkSides[2] >= checkSides[1] + checkSides[0]) {
-      throw new Error('longest side cannot be >= sum of 2 others');
-    }
-    // if (
-    //   this.a <= 0
-    //   || this.b <= 0
-    //   || this.c <= 0
-    //   || this.a + this.b <= this.c
-    //   || this.b + this.c <= this.a
-    //   || this.c + this.a <= this.b) {
-    //   throw new Error('Wrong triangle sides size');
-    // }
   }
 
   getArea(): number {
