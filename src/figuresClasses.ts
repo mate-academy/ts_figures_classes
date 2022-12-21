@@ -15,16 +15,17 @@ export class Triangle implements Figure {
     public b: number,
     public c: number,
   ) {
-    const sides = [a, b, c];
-
-    sides.sort((l, k) => l - k);
-
-    const longestSide = sides.pop();
-
-    if (longestSide! >= sides[0] + sides[1]
-       || a <= 0 || b <= 0 || c <= 0) {
+    if (!this.isValid()) {
       throw new Error(`sides ${a}, ${b} and ${c} can't form a triangle`);
     }
+  }
+
+  private isValid(): boolean {
+    const { a, b, c } = this;
+
+    return !((a <= 0 || b <= 0 || c <= 0)
+    || (a + b <= c
+    || a + c <= b || b + c <= a));
   }
 
   shape: Shape = 'triangle';
