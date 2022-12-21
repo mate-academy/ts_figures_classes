@@ -18,11 +18,11 @@ export class Triangle implements Figure {
     private c: number,
   ) {
     if (a <= 0 || b <= 0 || c <= 0) {
-      throw new Error('This is not a Triangle');
+      throw new Error('Side length is less or equal to zero');
     }
 
     if (a + b <= c || b + c <= a || c + a <= b) {
-      throw new Error('This is not a Triangle');
+      throw new Error('Sum of two sides are less then the longest one');
     }
   }
 
@@ -42,7 +42,7 @@ export class Circle implements Figure {
     private radius: number,
   ) {
     if (radius <= 0) {
-      throw new Error('This is not a Circle');
+      throw new Error('Radius length is less or equal to zero');
     }
   }
 
@@ -60,7 +60,7 @@ export class Rectangle implements Figure {
     private height: number,
   ) {
     if (width <= 0 || height <= 0) {
-      throw new Error('This is not a Rectangle');
+      throw new Error('Width`s or height`s length is less or equal to zero');
     }
   }
 
