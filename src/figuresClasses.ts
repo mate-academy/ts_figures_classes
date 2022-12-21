@@ -16,15 +16,18 @@ export class Triangle implements Figure {
     public b: number,
     public c: number,
   ) {
-    if (
+    const invalidConditions = [
       a <= 0
       || b <= 0
       || c <= 0
       || a + b <= c
       || b + c <= a
-      || a + c <= b
-    ) {
-      throw new Error('Incorrect numbers!');
+      || a + c <= b,
+    ];
+    const isIvalidTriangle = invalidConditions.some(Boolean);
+
+    if (isIvalidTriangle) {
+      throw new Error('Incorrect triangle!');
     }
   }
 
