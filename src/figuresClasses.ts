@@ -23,7 +23,7 @@ export class Triangle implements Figure {
       || (c + a) <= b
       || (c + b) <= a
     ) {
-      throw new Error('Wrong sides!');
+      throw new Error('it\'s impossible to create a triangle with these sides');
     }
   }
 
@@ -44,7 +44,7 @@ export class Circle implements Figure {
     public radius: number,
   ) {
     if (radius <= 0) {
-      throw new Error('Wrong sides!');
+      throw new Error('Radius must be > 0!');
     }
   }
 
@@ -62,7 +62,7 @@ export class Rectangle implements Figure {
     public height: number,
   ) {
     if (width <= 0 || height <= 0) {
-      throw new Error('Wrong sides!');
+      throw new Error('Width and height must be > 0!');
     }
   }
 
