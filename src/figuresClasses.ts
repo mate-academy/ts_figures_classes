@@ -25,12 +25,12 @@ export class Triangle implements Figure {
     public b: number,
     public c: number,
   ) {
-    if (this.isImpossibleTriangel()) {
-      throw new Error('Impossible Triangel');
+    if (this.isInvalidTriangel()) {
+      throw new Error('You can\'t build triangle with these sides sizes');
     }
   }
 
-  private isImpossibleTriangel(): boolean {
+  private isInvalidTriangel(): boolean {
     const { a, b, c } = this;
     const checks = [
       a <= 0,
@@ -63,12 +63,12 @@ export class Circle implements Figure {
     public color: Color,
     public radius: number,
   ) {
-    if (this.isImpossibleCircle()) {
-      throw new Error('Impossible Circle');
+    if (this.isInvalidCircle()) {
+      throw new Error('Radius of circle must be > 0');
     }
   }
 
-  private isImpossibleCircle(): boolean {
+  private isInvalidCircle(): boolean {
     return this.radius <= 0;
   }
 
@@ -87,12 +87,12 @@ export class Rectangle implements Figure {
     public width : number,
     public height : number,
   ) {
-    if (this.isImpossibleRectangle()) {
-      throw new Error('Impossible Rectangle');
+    if (this.isInvalidRectangle()) {
+      throw new Error('You can\'t build rectangle with these sides sizes');
     }
   }
 
-  private isImpossibleRectangle(): boolean {
+  private isInvalidRectangle(): boolean {
     return this.width <= 0 || this.height <= 0;
   }
 
