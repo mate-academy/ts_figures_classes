@@ -31,7 +31,7 @@ export class Triangle implements Figure {
       this.c >= this.a + this.b,
     ];
 
-    if (conditions.some((el) => el === true)) {
+    if (conditions.some(Boolean)) {
       throw new Error('Wrong triangle parameters');
     }
   }
