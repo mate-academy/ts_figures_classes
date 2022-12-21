@@ -1,5 +1,14 @@
-type Shape = 'triangle' | 'circle' | 'rectangle';
-type Color = 'red' | 'green' | 'blue';
+enum Color {
+  red,
+  green,
+  blue,
+}
+
+enum Shape {
+  triangle,
+  circle,
+  rectangle,
+}
 
 export interface Figure {
   shape: Shape;
@@ -8,7 +17,7 @@ export interface Figure {
 }
 
 export class Triangle implements Figure {
-  shape: Shape = 'triangle';
+  shape: Shape = Shape.triangle;
 
   constructor(
     public color: Color,
@@ -17,7 +26,7 @@ export class Triangle implements Figure {
     public c: number,
   ) {
     if (a <= 0 || b <= 0 || c <= 0 || a + b <= c || a + c <= b || c + b <= a) {
-      throw new Error('your error message');
+      throw new Error('One or more sides less than 0');
     }
   }
 
@@ -30,14 +39,14 @@ export class Triangle implements Figure {
 }
 
 export class Circle implements Figure {
-  shape: Shape = 'circle';
+  shape: Shape = Shape.circle;
 
   constructor(
     public color: Color,
     public radius: number,
   ) {
     if (radius <= 0) {
-      throw new Error('your error message');
+      throw new Error('radius less than or equal to 0');
     }
   }
 
@@ -49,7 +58,7 @@ export class Circle implements Figure {
 }
 
 export class Rectangle implements Figure {
-  shape: Shape = 'rectangle';
+  shape: Shape = Shape.rectangle;
 
   constructor(
     public color: Color,
@@ -57,7 +66,7 @@ export class Rectangle implements Figure {
     public height: number,
   ) {
     if (width <= 0 || height <= 0) {
-      throw new Error('your error message');
+      throw new Error('width or height less than or equal to 0');
     }
   }
 
