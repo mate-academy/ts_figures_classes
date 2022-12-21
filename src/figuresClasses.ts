@@ -16,22 +16,16 @@ export class Triangle implements Figure {
     public b: number,
     public c: number,
   ) {
-    if (!this.checkTriangle()) {
+    const falseConditions = [
+      Math.max(a, b, c) >= a + b + c - Math.max(a, b, c),
+      this.a <= 0,
+      this.b <= 0,
+      this.c <= 0,
+    ];
+
+    if (falseConditions.some(Boolean)) {
       throw new Error('There are no correct triangle sizes');
     }
-  }
-
-  checkTriangle(): boolean {
-    const maxSize = Math.max(this.a, this.b, this.c);
-
-    if ((maxSize < this.a + this.b + this.c - maxSize)
-      && this.a > 0
-      && this.b > 0
-      && this.c > 0) {
-      return true;
-    }
-
-    return false;
   }
 
   getArea(): number {
