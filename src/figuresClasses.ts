@@ -14,9 +14,9 @@ export class Triangle implements Figure {
   private isInvalidTriangle(): boolean {
     const { a, b, c } = this;
     const checks = [
-      a === 0,
-      b === 0,
-      c === 0,
+      a <= 0,
+      b <= 0,
+      c <= 0,
       a + b <= c,
       b + c <= a,
       c + a <= b,
