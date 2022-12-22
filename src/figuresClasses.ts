@@ -3,8 +3,8 @@ export type Color = 'red'|'green'|'blue';
 
 export interface Figure {
   shape: string;
-  color:string;
-  getArea():number;
+  color: string;
+  getArea(): number;
 }
 
 export class Triangle implements Figure {
@@ -16,7 +16,7 @@ export class Triangle implements Figure {
 
   b: number;
 
-  c:number;
+  c: number;
 
   constructor(color: Color, a:number, b:number, c:number) {
     this.color = color;
@@ -48,7 +48,7 @@ export class Circle implements Figure {
 
   color: Color = 'green';
 
-  radius:number;
+  radius: number;
 
   constructor(color: Color, radius:number) {
     this.color = color;
@@ -70,9 +70,9 @@ export class Rectangle {
 
   color: Color = 'blue';
 
-  width:number;
+  width: number;
 
-  height:number;
+  height: number;
 
   constructor(color: Color, width:number, height:number) {
     this.color = color;
