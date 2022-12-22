@@ -23,7 +23,9 @@ export class Triangle implements Figure {
       || this.b + this.c <= this.a
       || this.a + this.c <= this.b
     ) {
-      throw new Error('This triangle cannot exist');
+      throw new Error('One of the values ​​of the triangle cannot be'
+       + 'less than zero or the sum of its two sides'
+       + 'cannot be greater than or equal to the third');
     }
   }
 
@@ -44,7 +46,8 @@ export class Circle implements Figure {
     public radius: number,
   ) {
     if (radius <= 0) {
-      throw new Error('This circle cannot exist');
+      throw new Error('One of the values ​​of the circle cannot be'
+       + 'less than zero');
     }
   }
 
@@ -64,7 +67,8 @@ export class Rectangle implements Figure {
     public height: number,
   ) {
     if (width <= 0 || height <= 0) {
-      throw new Error('This rectangle cannot exist');
+      throw new Error('One of the values ​​of the rectangle'
+      + 'cannot be less than zero');
     }
   }
 
