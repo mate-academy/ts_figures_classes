@@ -9,7 +9,7 @@ export interface Figure {
 }
 
 export class Triangle implements Figure {
-  shape: Shape;
+  shape: Shape = 'triangle';
 
   constructor(
     public color: Color,
@@ -17,8 +17,6 @@ export class Triangle implements Figure {
     public b: number,
     public c: number,
   ) {
-    this.shape = 'triangle';
-
     if (this.isTriangle() === false) {
       throw new Error(`Sides ${this.a}, ${this.b}
         and ${this.c} can't form a triangle`);
@@ -28,11 +26,11 @@ export class Triangle implements Figure {
   isTriangle(): boolean {
     return (
       this.a + this.b > this.c
-        && this.a + this.c > this.b
-        && this.b + this.c > this.a
-        && this.a !== 0
-        && this.b !== 0
-        && this.c !== 0
+      && this.a + this.c > this.b
+      && this.b + this.c > this.a
+      && this.a !== 0
+      && this.b !== 0
+      && this.c !== 0
     );
   }
 
@@ -49,16 +47,14 @@ export class Triangle implements Figure {
 }
 
 export class Circle implements Figure {
-  shape: Shape;
+  shape: Shape = 'circle';
 
   constructor(
     public color: Color,
     public radius: number,
   ) {
-    this.shape = 'circle';
-
     if (radius <= 0) {
-      throw new Error('Is not a circle');
+      throw new Error('Uncorrect circle radius size');
     }
   }
 
@@ -70,17 +66,15 @@ export class Circle implements Figure {
 }
 
 export class Rectangle implements Figure {
-  shape: Shape;
+  shape: Shape = 'rectangle';
 
   constructor(
     public color: Color,
     public width: number,
     public height: number,
   ) {
-    this.shape = 'rectangle';
-
     if (this.isRectangle() === true) {
-      throw new Error('Uncorrect sizes for sides');
+      throw new Error('Uncorrect rectangle sides size');
     }
   }
 
