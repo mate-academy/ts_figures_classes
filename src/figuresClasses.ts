@@ -18,7 +18,8 @@ export class Triangle implements Figure {
 
   ) {
     if (this.notCorrect()) {
-      throw new Error('Side length is not correct');
+      throw new Error('Side length should be > 0'
+      + 'and bigger than sum of other two sides');
     }
   }
 
