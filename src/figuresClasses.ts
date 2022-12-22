@@ -7,7 +7,7 @@ export interface Figure {
   getArea(): number,
 }
 
-export class Triangle {
+export class Triangle implements Figure {
   shape: Shape = 'triangle';
 
   color: Color;
@@ -24,14 +24,21 @@ export class Triangle {
     this.b = b;
     this.c = c;
 
-    if (a <= 0
+    if (
+      a <= 0
       || b <= 0
       || c <= 0
-      || a + b <= c
+    ) {
+      throw new Error('All sides of a triangle mush be positive numbers');
+    }
+
+    if (
+      a + b <= c
       || b + c <= a
       || a + c <= b
     ) {
-      throw new Error('side of triangle is wrong');
+      throw new Error('The longest side of a triangle must be smaller'
+      + 'than a sum of two others');
     }
   }
 
@@ -43,7 +50,7 @@ export class Triangle {
   }
 }
 
-export class Circle {
+export class Circle implements Figure {
   shape: Shape = 'circle';
 
   color: Color;
@@ -55,7 +62,7 @@ export class Circle {
     this.radius = radius;
 
     if (this.radius <= 0) {
-      throw new Error('your radius is incorrect');
+      throw new Error('Radius of a circle mush be a positive number');
     }
   }
 
@@ -66,7 +73,7 @@ export class Circle {
   }
 }
 
-export class Rectangle {
+export class Rectangle implements Figure {
   shape: Shape = 'rectangle';
 
   color: Color;
@@ -81,7 +88,7 @@ export class Rectangle {
     this.height = height;
 
     if (width <= 0 || height <= 0) {
-      throw new Error('your width or height is incorrect');
+      throw new Error('Both sides of a rectangle mush be positive numbers');
     }
   }
 
