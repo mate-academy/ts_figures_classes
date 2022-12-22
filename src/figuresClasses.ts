@@ -34,8 +34,10 @@ export class Triangle implements Figure {
   getArea(): number {
     const { a, b, c } = this;
     const halfPerimetr = (a + b + c) / 2;
-    const square = Math.sqrt(halfPerimetr
-      * (halfPerimetr - a) * (halfPerimetr - b) * (halfPerimetr - c));
+    const square = Math.sqrt(
+      halfPerimetr * (halfPerimetr - a) * (halfPerimetr - b)
+      * (halfPerimetr - c),
+    );
 
     return Math.round(square * 100) / 100;
   }
@@ -50,7 +52,7 @@ export class Circle implements Figure {
 
   ) {
     if (this.radius <= 0) {
-      throw new Error('Radius length is not correct');
+      throw new Error('Radius should be > 0');
     }
   }
 
@@ -69,7 +71,7 @@ export class Rectangle implements Figure {
 
   ) {
     if (width <= 0 || height <= 0) {
-      throw new Error('Enter correct length');
+      throw new Error('Width and height should be > 0');
     }
   }
 
