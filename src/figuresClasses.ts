@@ -19,7 +19,7 @@ export class Triangle implements Figure {
     public color: Color,
     private a: number,
     private b: number,
-    private c: number
+    private c: number,
   ) {
     if (a <= 0 || b <= 0 || c <= 0) {
       throw new Error('Invalid arguments');
@@ -33,6 +33,7 @@ export class Triangle implements Figure {
   getArea(): number {
     const { a, b, c } = this;
     const p = 0.5 * (a + b + c);
+
     return Math.round(Math.sqrt(p * (p - a) * (p - b) * (p - c)) * 100) / 100;
   }
 }
@@ -45,8 +46,10 @@ export class Circle implements Figure {
       throw new Error('Invalid arguments');
     }
   }
+
   getArea(): number {
     const { r } = this;
+
     return Math.round(Math.floor(Math.PI * (r * r) * 100)) / 100;
   }
 }
@@ -57,7 +60,7 @@ export class Rectangle implements Figure {
   constructor(
     public color: Color,
     private width: number,
-    private height: number
+    private height: number,
   ) {
     if (width <= 0 || height <= 0) {
       throw new Error('Height or width is negative');
@@ -66,6 +69,7 @@ export class Rectangle implements Figure {
 
   getArea(): number {
     const { width, height } = this;
+    
     return Math.round(width * height * 100) / 100;
   }
 }
