@@ -1,4 +1,9 @@
-type Shape = 'triangle' | 'circle' | 'rectangle';
+enum Shape {
+  Triangle = 'triangle',
+  Circle = 'circle',
+  Rectangle = 'rectangle',
+}
+
 type Color = 'red' | 'green' | 'blue';
 
 export interface Figure {
@@ -8,15 +13,19 @@ export interface Figure {
 }
 
 export class Triangle implements Figure {
-  public shape: Shape = 'triangle';
+  public shape = Shape.Triangle;
 
-  checkTriangle(): boolean {
-    return this.a <= 0
-      || this.b <= 0
-      || this.c <= 0
-      || this.a >= this.b + this.c
-      || this.b >= this.a + this.c
-      || this.c >= this.a + this.b;
+  private checkTriangle(): boolean {
+    const conditions = [
+      this.a <= 0,
+      this.b <= 0,
+      this.c <= 0,
+      this.a >= this.b + this.c,
+      this.b >= this.a + this.c,
+      this.c >= this.a + this.b,
+    ];
+
+    return !conditions.some(Boolean);
   }
 
   constructor(
@@ -25,7 +34,7 @@ export class Triangle implements Figure {
     public b: number,
     public c: number,
   ) {
-    if (this.checkTriangle()) {
+    if (!this.checkTriangle()) {
       throw new Error(
         `sides ${this.a}, ${this.b}, ${this.c} can't form a triangle`,
       );
@@ -44,7 +53,7 @@ export class Triangle implements Figure {
 }
 
 export class Circle implements Figure {
-  public shape: Shape = 'circle';
+  public shape = Shape.Circle;
 
   constructor(
     public color: Color,
@@ -56,14 +65,14 @@ export class Circle implements Figure {
   }
 
   getArea(): number {
-    const area = Math.floor(Math.PI * this.radius * this.radius * 100) / 100;
+    const area = Math.floor(Math.PI * this.radius ** 2 * 100) / 100;
 
     return area;
   }
 }
 
 export class Rectangle implements Figure {
-  public shape: Shape = 'rectangle';
+  public shape = Shape.Rectangle;
 
   constructor(
     public color: Color,
