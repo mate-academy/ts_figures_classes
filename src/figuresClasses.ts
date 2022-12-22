@@ -22,7 +22,7 @@ export class Triangle implements Figure {
     public c: number,
   ) {
     if (!this.isTriangleValid()) {
-      throw new Error('Triangle is not Valid');
+      throw new Error('Imposible to form a triangle with sides of such sizes!');
     }
   }
 
@@ -50,7 +50,7 @@ export class Circle implements Figure {
     public radius: number,
   ) {
     if (!this.isCircleValid()) {
-      throw new Error('Circle is not Valid');
+      throw new Error('Circle radius must be a positive number!');
     }
   }
 
@@ -72,7 +72,7 @@ export class Rectangle implements Figure {
     public height: number,
   ) {
     if (!this.isRectangleValid()) {
-      throw new Error('Rectangle is not Valid');
+      throw new Error('Rectangle sides must be a positive numbers!');
     }
   }
 
