@@ -17,21 +17,18 @@ export class Triangle implements Figure {
     public c: number,
 
   ) {
-    if (!this.isCorrect()) {
+    if (this.notCorrect()) {
       throw new Error('Side length is not correct');
     }
   }
 
-  isCorrect(): boolean {
+  notCorrect(): boolean {
     const { a, b, c } = this;
 
-    if ((a <= 0 || b <= 0 || c <= 0)
-      || (a + b <= c
-        || a + c <= b || b + c <= a)) {
-      return false;
-    }
-
-    return true;
+    return (
+      (a <= 0 || b <= 0 || c <= 0)
+      || (a + b <= c || a + c <= b || b + c <= a)
+    );
   }
 
   getArea(): number {
