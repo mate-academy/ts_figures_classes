@@ -1,4 +1,8 @@
-type Shape = 'triangle' | 'circle' | 'rectangle';
+enum Shape {
+  Triangle = 'triangle',
+  Circle = 'circle',
+  Rectangle = 'rectangle'
+}
 type Color = 'red' | 'green' | 'rectangle';
 
 export interface Figure {
@@ -8,28 +12,20 @@ export interface Figure {
 }
 
 export class Triangle implements Figure {
-  shape: Shape = 'triangle';
+  shape: Shape = Shape.Triangle;
 
-  color: Color;
-
-  a: number;
-
-  b: number;
-
-  c: number;
-
-  constructor(color: Color, a: number, b: number, c: number) {
-    this.color = color;
-    this.a = a;
-    this.b = b;
-    this.c = c;
-
+  constructor(
+    public color: Color,
+    public a: number,
+    public b: number,
+    public c: number,
+  ) {
     if (
       a <= 0
       || b <= 0
       || c <= 0
     ) {
-      throw new Error('All sides of a triangle mush be positive numbers');
+      throw new Error('All sides of a triangle must be positive numbers');
     }
 
     if (
@@ -37,8 +33,9 @@ export class Triangle implements Figure {
       || b + c <= a
       || a + c <= b
     ) {
-      throw new Error('The longest side of a triangle must be smaller'
-      + 'than a sum of two others');
+      throw new Error(
+        'The longest side of a triangle must be smaller than sum of two others',
+      );
     }
   }
 
@@ -51,18 +48,11 @@ export class Triangle implements Figure {
 }
 
 export class Circle implements Figure {
-  shape: Shape = 'circle';
+  shape: Shape = Shape.Circle;
 
-  color: Color;
-
-  radius: number;
-
-  constructor(color: Color, radius: number) {
-    this.color = color;
-    this.radius = radius;
-
+  constructor(public color: Color, public radius: number) {
     if (this.radius <= 0) {
-      throw new Error('Radius of a circle mush be a positive number');
+      throw new Error('Radius of a circle must be a positive number');
     }
   }
 
@@ -74,19 +64,13 @@ export class Circle implements Figure {
 }
 
 export class Rectangle implements Figure {
-  shape: Shape = 'rectangle';
+  shape: Shape = Shape.Rectangle;
 
-  color: Color;
-
-  width: number;
-
-  height: number;
-
-  constructor(color: Color, width: number, height: number) {
-    this.color = color;
-    this.width = width;
-    this.height = height;
-
+  constructor(
+    public color: Color,
+    public width: number,
+    public height: number,
+  ) {
     if (width <= 0 || height <= 0) {
       throw new Error('Both sides of a rectangle mush be positive numbers');
     }
