@@ -19,7 +19,7 @@ export class Triangle implements Figure {
   ) {
     if (this.isTriangle() === false) {
       throw new Error(`Sides ${this.a}, ${this.b}
-        and ${this.c} can't form a triangle`);
+        and ${this.c} can't form a triangle. Values should be greater than 0.`);
     }
   }
 
@@ -54,7 +54,7 @@ export class Circle implements Figure {
     public radius: number,
   ) {
     if (radius <= 0) {
-      throw new Error('Uncorrect circle radius size');
+      throw new Error('Radius should be greater than 0.');
     }
   }
 
@@ -74,7 +74,7 @@ export class Rectangle implements Figure {
     public height: number,
   ) {
     if (this.isRectangle() === true) {
-      throw new Error('Uncorrect rectangle sides size');
+      throw new Error('Values should be greater than 0.');
     }
   }
 
