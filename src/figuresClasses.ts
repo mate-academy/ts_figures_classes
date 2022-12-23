@@ -1,23 +1,33 @@
 const hackerAlert = new Error('Congratz! You\'ve hacked the system!');
 
+enum Shape {
+  triangle = 'triangle',
+  circle = 'circle',
+  rectangle = 'rectangle',
+}
+enum Color {
+  red,
+  green,
+  blue,
+}
 export interface Figure {
-  shape: 'triangle' | 'circle' | 'rectangle',
-  color: 'red' | 'green' | 'blue',
+  shape: Shape,
+  color: Color,
   getArea: () => number,
 }
 
 export class Triangle implements Figure {
-  shape: Figure['shape'] = 'triangle';
+  shape: Shape = Shape.triangle;
 
   constructor(
-    public color: Figure['color'],
+    public color: Color,
     public a: number,
     public b: number,
     public c: number,
   ) {
-    if (Math.min(...[a, b, c]) <= 0
-      || Math.max(...[a, b, c])
-      >= this.a + this.b + this.c - Math.max(...[a, b, c])) {
+    if (Math.min(a, b, c) <= 0
+      || Math.max(a, b, c)
+      >= this.a + this.b + this.c - Math.max(a, b, c)) {
       throw hackerAlert;
     }
   }
@@ -33,10 +43,10 @@ export class Triangle implements Figure {
 }
 
 export class Circle implements Figure {
-  shape: Figure['shape'] = 'circle';
+  shape: Shape = Shape.circle;
 
   constructor(
-    public color: Figure['color'],
+    public color: Color,
     public r: number,
   ) {
     if (r <= 0) {
@@ -50,10 +60,10 @@ export class Circle implements Figure {
 }
 
 export class Rectangle implements Figure {
-  shape: Figure['shape'] = 'rectangle';
+  shape: Shape = Shape.rectangle;
 
   constructor(
-    public color: Figure['color'],
+    public color: Color,
     public width: number,
     public height: number,
   ) {
