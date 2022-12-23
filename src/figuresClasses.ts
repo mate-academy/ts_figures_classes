@@ -24,7 +24,7 @@ export class Circle implements Figure {
   }
 }
 
-export class Rectangle extends Circle {
+export class Rectangle implements Figure {
   public shape: Shape = 'rectangle';
 
   constructor(
@@ -32,8 +32,6 @@ export class Rectangle extends Circle {
     public width: number,
     public height: number,
   ) {
-    super(color, width);
-
     if (height <= 0) {
       throw new Error('Side cant\'t be less than 0');
     }
@@ -44,7 +42,7 @@ export class Rectangle extends Circle {
   }
 }
 
-export class Triangle extends Rectangle {
+export class Triangle implements Figure {
   public shape: Shape = 'triangle';
 
   constructor(
@@ -53,8 +51,6 @@ export class Triangle extends Rectangle {
     public b: number,
     public c: number,
   ) {
-    super(color, a, b);
-
     if (c <= 0) {
       throw new Error('Side cant\'t be less than 0');
     }
