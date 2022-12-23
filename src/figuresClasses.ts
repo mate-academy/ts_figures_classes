@@ -1,5 +1,14 @@
-type Shape = 'triangle' | 'circle' | 'rectangle';
-type Color = 'red' | 'green' | 'blue';
+enum Shape {
+  Triangle = 'triangle',
+  Circle = 'circle',
+  Rectangle = 'rectangle'
+}
+
+enum Color {
+  Red = 'red',
+  Green = 'green',
+  Blue = 'blue'
+}
 
 export interface Figure {
   shape: Shape;
@@ -8,7 +17,7 @@ export interface Figure {
 }
 
 export class Triangle implements Figure {
-  shape: Shape = 'triangle';
+  shape = Shape.Triangle;
 
   constructor(
     public color: Color,
@@ -26,27 +35,25 @@ export class Triangle implements Figure {
   }
 
   isNotTriangle(): boolean {
-    const sides = [this.side1, this.side2, this.side3]
+    const [cat1, cat2, hyp] = [this.side1, this.side2, this.side3]
       .sort((a, b) => a - b);
-    const [cat1, cat2, hip] = sides;
 
-    return cat1 + cat2 <= hip;
+    return cat1 + cat2 <= hyp;
   }
 
   getArea(): number {
-    const sides = [this.side1, this.side2, this.side3].sort();
-    const [cat1, cat2, hip] = sides;
+    const [a, b, c] = [this.side1, this.side2, this.side3];
     // Semiperimeter "sP":
-    const sP = (cat1 + cat2 + hip) / 2;
+    const sP = (a + b + c) / 2;
     const triangleArea = Math.floor(Math.sqrt(sP
-      * (sP - cat1) * (sP - cat2) * (sP - hip)) * 100) / 100;
+      * (sP - a) * (sP - b) * (sP - c)) * 100) / 100;
 
     return Number(triangleArea);
   }
 }
 
 export class Circle implements Figure {
-  shape: Shape = 'circle';
+  shape = Shape.Circle;
 
   constructor(
     public color: Color,
@@ -63,7 +70,7 @@ export class Circle implements Figure {
 }
 
 export class Rectangle implements Figure {
-  shape: Shape = 'rectangle';
+  shape = Shape.Rectangle;
 
   constructor(
     public color: Color,
