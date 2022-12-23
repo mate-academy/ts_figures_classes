@@ -1,3 +1,7 @@
+function parameterError(...parameters: number[]): boolean {
+  return parameters.some((el: number) => el <= 0);
+}
+
 type Shape = 'triangle' | 'circle' | 'rectangle';
 type Color = 'red' | 'green' | 'blue';
 
@@ -16,7 +20,7 @@ export class Triangle implements Figure {
     public b: number,
     public c: number,
   ) {
-    if (this.a <= 0 || this.b <= 0 || this.c <= 0
+    if (parameterError(this.a, this.b, this.c)
       || this.a >= (this.b + this.c)
       || this.b >= (this.a + this.c)
       || this.c >= (this.b + this.a)) {
@@ -39,7 +43,7 @@ export class Circle implements Figure {
     public color: Color,
     public radius: number,
   ) {
-    if (this.radius <= 0) {
+    if (parameterError(this.radius)) {
       throw new Error('check the radius of the circle!');
     }
   }
@@ -59,7 +63,7 @@ export class Rectangle implements Figure {
     public width: number,
     public height: number,
   ) {
-    if (this.width <= 0 || this.height <= 0) {
+    if (parameterError(this.width, this.height)) {
       throw new Error('check the side of the rectangle');
     }
   }
