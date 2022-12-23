@@ -22,7 +22,7 @@ export class Triangle implements Figure {
       || c <= 0
       || Math.max(a, b, c) >= (a + b + c - Math.max(a, b, c))
     ) {
-      throw new Error('Error');
+      throw new Error('Posible any argument length is <= 0');
     }
   }
 
@@ -43,7 +43,7 @@ export class Circle implements Figure {
     public radius: number,
   ) {
     if (radius <= 0) {
-      throw new Error('Error');
+      throw new Error('Radius length is <= 0');
     }
   }
 
@@ -65,7 +65,7 @@ export class Rectangle implements Figure {
     public height: number,
   ) {
     if (width <= 0 || height <= 0) {
-      throw new Error('Error');
+      throw new Error('Posible width or height length is <= 0');
     }
   }
 }
