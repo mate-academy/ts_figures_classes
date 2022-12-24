@@ -10,20 +10,26 @@ export interface Figure {
 export class Triangle implements Figure {
   shape: Shape = 'triangle';
 
+  private isValidTriangle(): Boolean {
+    const { a, b, c } = this;
+
+    const falseConditions = [
+      Math.max(a, b, c) >= a + b + c - Math.max(a, b, c),
+      a <= 0,
+      b <= 0,
+      c <= 0,
+    ];
+
+    return falseConditions.some(Boolean);
+  }
+
   constructor(
     public color: Color,
     public a: number,
     public b: number,
     public c: number,
   ) {
-    const falseConditions = [
-      Math.max(a, b, c) >= a + b + c - Math.max(a, b, c),
-      this.a <= 0,
-      this.b <= 0,
-      this.c <= 0,
-    ];
-
-    if (falseConditions.some(Boolean)) {
+    if (this.isValidTriangle()) {
       throw new Error('There are no correct triangle sizes');
     }
   }
