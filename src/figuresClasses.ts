@@ -23,17 +23,14 @@ export class Triangle implements Figure {
     public side3: number,
   ) {
     if (side1 <= 0 || side2 <= 0 || side2 <= 0) {
-      throw new Error('your error message');
+      throw new Error('side of triangle cannot be 0');
     }
 
-    const sides: number[] = [this.side1, this.side2, this.side3];
+    const sidesArr: number[] = [this.side1, this.side2, this.side3]
+      .sort((a, b) => a - b);
 
-    const max: number = Math.max(...sides);
-
-    const sum = sides.filter((a) => a !== max).reduce((a, b) => a + b);
-
-    if (sum <= max) {
-      throw new Error('your error message');
+    if (sidesArr[0] + sidesArr[1] <= sidesArr[2]) {
+      throw new Error('sides 1, 2 and 3 cannot form a triangle');
     }
   }
 
@@ -56,7 +53,7 @@ export class Circle implements Figure {
     public radius: number,
   ) {
     if (radius <= 0) {
-      throw new Error('your error message');
+      throw new Error('radius of circle cannot be 0');
     }
   }
 
@@ -72,7 +69,7 @@ export class Rectangle implements Figure {
     public side2: number,
   ) {
     if (side1 <= 0 || side2 <= 0) {
-      throw new Error('your error message');
+      throw new Error('side of rectangle cannot be 0');
     }
   }
 
