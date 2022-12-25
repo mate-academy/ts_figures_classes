@@ -34,7 +34,7 @@ export class Triangle implements Figure {
     }
   }
 
-  getArea: GetArea = () => {
+  getArea(): number {
     const sper = (this.side1 + this.side2 + this.side3) / 2;
 
     return Math.floor(
@@ -42,7 +42,7 @@ export class Triangle implements Figure {
         sper * (sper - this.side1) * (sper - this.side2) * (sper - this.side3),
       ) * 100,
     ) / 100;
-  };
+  }
 }
 
 export class Circle implements Figure {
