@@ -1,4 +1,9 @@
-type Shape = 'triangle' | 'circle' | 'rectangle';
+enum Shape {
+  triangle = 'triangle',
+  circle = 'circle',
+  rectangle = 'rectangle',
+}
+
 type Color = 'red' | 'green' | 'blue';
 
 export interface Figure {
@@ -9,7 +14,7 @@ export interface Figure {
 }
 
 export class Triangle implements Figure {
-  shape: Shape = 'triangle';
+  shape: Shape = Shape.triangle;
 
   constructor(
     public color: Color,
@@ -17,7 +22,8 @@ export class Triangle implements Figure {
     public b: number,
     public c: number,
   ) {
-    if (a <= 0
+    if (
+      a <= 0
       || b <= 0
       || c <= 0
       || Math.max(a, b, c) >= (a + b + c - Math.max(a, b, c))
@@ -27,16 +33,16 @@ export class Triangle implements Figure {
   }
 
   getArea(): number {
-    const s: number = (this.a + this.b + this.c) / 2;
+    const square: number = (this.a + this.b + this.c) / 2;
 
     return +(Math.sqrt(
-      s * (s - this.a) * (s - this.b) * (s - this.c),
+      square * (square - this.a) * (square - this.b) * (square - this.c),
     )).toFixed(2);
   }
 }
 
 export class Circle implements Figure {
-  shape: Shape = 'circle';
+  shape: Shape = Shape.circle;
 
   constructor(
     public color: Color,
@@ -53,7 +59,7 @@ export class Circle implements Figure {
 }
 
 export class Rectangle implements Figure {
-  shape: Shape = 'rectangle';
+  shape: Shape = Shape.rectangle;
 
   getArea(): number {
     return this.width * this.height;
