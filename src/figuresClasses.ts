@@ -1,23 +1,24 @@
-type Colors = 'red' | 'green' | 'blue';
-type Shapes = 'triangle' | 'circle' | 'rectangle';
+type Color = 'red' | 'green' | 'blue';
+type Shape = 'triangle' | 'circle' | 'rectangle';
 
 function roundNumber(number: number): number {
   return Math.floor(number * 100) / 100;
 }
 
 export interface Figure {
-  shape: Shapes;
-  color: Colors;
+  shape: Shape;
+  color: Color;
   getArea(): number;
 }
 
 export class Triangle implements Figure {
+  shape: Shape = 'triangle';
+
   constructor(
-    public color: Colors,
+    public color: Color,
     public a: number,
     public b: number,
     public c: number,
-    public shape: Shapes = 'triangle',
   ) {
     if (a <= 0 || b <= 0 || c <= 0) {
       throw new Error('Triangle cannot have side size equal or below zero.');
@@ -41,11 +42,12 @@ export class Triangle implements Figure {
   }
 }
 
-export class Circle {
+export class Circle implements Figure {
+  public shape: Shape = 'circle';
+
   constructor(
-    public color: Colors,
+    public color: Color,
     public radius: number,
-    public shape: Shapes = 'circle',
   ) {
     if (radius <= 0) {
       throw new Error('Radius must be a positive number.');
@@ -59,12 +61,13 @@ export class Circle {
   }
 }
 
-export class Rectangle {
+export class Rectangle implements Figure {
+  public shape: Shape = 'rectangle';
+
   constructor(
-    public color: Colors,
+    public color: Color,
     public a: number,
     public b: number,
-    public shape: Shapes = 'rectangle',
   ) {
     if (a <= 0 || b <= 0) {
       throw new Error("Rectangle sides' sizes must be positive.");
