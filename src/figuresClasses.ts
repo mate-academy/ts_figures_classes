@@ -1,20 +1,21 @@
+type Shape = 'triangle' | 'circle' | 'rectangle';
+type Color = 'red' | 'green' | 'blue';
+
 export interface Figure {
-  shape: string;
-  color: string;
+  shape: Shape;
+  color: Color;
   getArea(): number;
 }
 
 export class Triangle implements Figure {
-  shape: string;
+  shape: Shape = 'triangle';
 
   constructor(
-    public color: string,
+    public color: Color,
     public a: number,
     public b: number,
     public c: number,
   ) {
-    this.shape = 'triangle';
-
     if (this.a >= this.b + this.c) {
       throw new Error("sides 1, 2 and 3 can't form a triangle");
     }
@@ -29,23 +30,22 @@ export class Triangle implements Figure {
   }
 
   getArea(): number {
-    const s = 0.5 * (this.a + this.b + this.c);
+    const area = 0.5 * (this.a + this.b + this.c);
     const square
-      = Math.sqrt(s * (s - this.a) * (s - this.b) * (s - this.c)) * 100;
+      = Math.sqrt(area * (area - this.a)
+      * (area - this.b) * (area - this.c)) * 100;
 
     return Math.floor(square) / 100;
   }
 }
 
 export class Circle implements Figure {
-  shape: string;
+  shape: Shape = 'circle';
 
   constructor(
-    public color: string,
+    public color: Color,
     public a: number,
   ) {
-    this.shape = 'circle';
-
     if (this.a <= 0) {
       throw new Error("Can't form a Circle");
     }
@@ -54,29 +54,25 @@ export class Circle implements Figure {
   getArea(): number {
     const square = 100 * (Math.PI * (this.a * this.a));
 
-    return Math.floor(+square) / 100;
+    return Math.floor(square) / 100;
   }
 }
 
 export class Rectangle implements Figure {
-  shape: string;
+  shape: Shape = 'rectangle';
 
   constructor(
-    public color: string,
+    public color: Color,
     public a: number,
     public b: number,
   ) {
-    this.shape = 'rectangle';
-
     if (this.a <= 0 || this.b <= 0) {
       throw new Error("Can't form a Rectangle");
     }
   }
 
   getArea(): number {
-    const square = this.a * this.b;
-
-    return square;
+    return this.a * this.b;
   }
 }
 
