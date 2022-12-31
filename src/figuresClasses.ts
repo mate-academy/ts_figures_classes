@@ -5,6 +5,9 @@ export interface Figure {
   getArea(): number
 }
 
+const anError = 'Invalid data.Value can\'t be less than 1.';
+let area:number;
+
 export class Triangle implements Figure {
   public shape: Figure.shape;
 
@@ -16,20 +19,19 @@ export class Triangle implements Figure {
   ) {
     this.shape = 'triangle';
 
-    if (a <= 0
-            || b <= 0
-            || c <= 0
-            || a + b <= c
-            || b + c <= a
-            || c + a <= b
-    ) {
-      throw new Error('Invalid data.Value can\'t be less than 1.');
+    const isInvalidValue:boolean = this.a <= 0 && this.b <= 0 && this.c <= 0;
+
+    if (isInvalidValue || this.a + this.b <= this.c
+            || this.b + this.c <= this.a
+            || this.c + this.a <= this.b) {
+      throw new Error(anError);
     }
   }
 
   getArea():number {
     const sum = (this.a + this.b + this.c) / 2;
-    const area = Math.sqrt(sum * (sum - this.a)
+
+    area = Math.sqrt(sum * (sum - this.a)
           * (sum - this.b) * (sum - this.c));
 
     return Math.floor(area * 100) / 100;
@@ -46,12 +48,12 @@ export class Circle {
     this.shape = 'circle';
 
     if (this.radius <= 0) {
-      throw new Error('Invalid data.Value can\'t be less than 1.');
+      throw new Error(anError);
     }
   }
 
   getArea():number {
-    const area = Math.PI * (this.radius ** 2);
+    area = Math.PI * (this.radius ** 2);
 
     return Math.floor(area * 100) / 100;
   }
@@ -69,12 +71,12 @@ export class Rectangle {
 
     if (this.height <= 0
             || this.width <= 0) {
-      throw new Error('Invalid data.Value can\'t be less than 1.');
+      throw new Error(anError);
     }
   }
 
   getArea():number {
-    const area = this.width * this.height;
+    area = this.width * this.height;
 
     return Math.floor(area * 100) / 100;
   }
