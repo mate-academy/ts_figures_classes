@@ -19,20 +19,27 @@ export class Triangle implements Figure {
   ) {
     this.shape = 'triangle';
 
-    const isInvalidValue:boolean = this.a <= 0 && this.b <= 0 && this.c <= 0;
+    const sides = [a, b, c];
+    const biggestSide:number = Math.max(...sides);
+    const perimeter: number = sides.reduce(
+      (sum: number, side: number): number => {
+        return sum + side;
+      }, 0,
+    );
 
-    if (isInvalidValue || this.a + this.b <= this.c
-            || this.b + this.c <= this.a
-            || this.c + this.a <= this.b) {
+    const hasTooShortSide = sides.some((side:number):boolean => side <= 0);
+    const hasTooLongSide = biggestSide >= perimeter - biggestSide;
+
+    if (hasTooShortSide || hasTooLongSide) {
       throw new Error(anError);
     }
   }
 
   getArea():number {
-    const sum = (this.a + this.b + this.c) / 2;
+    const semiperimeter = (this.a + this.b + this.c) / 2;
 
-    area = Math.sqrt(sum * (sum - this.a)
-          * (sum - this.b) * (sum - this.c));
+    area = Math.sqrt(semiperimeter * (semiperimeter - this.a)
+          * (semiperimeter - this.b) * (semiperimeter - this.c));
 
     return Math.floor(area * 100) / 100;
   }
