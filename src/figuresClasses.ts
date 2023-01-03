@@ -69,7 +69,8 @@ export class Rectangle implements Figure {
     const isValidRectangle = wigth > 0 && height > 0;
 
     if (!isValidRectangle) {
-      throw new Error('The entered sides can\t form a rectangle');
+      throw new Error('The entered sides can\t form a rectangle. Values should'
+      + ' be greater than 0!');
     }
   }
 
