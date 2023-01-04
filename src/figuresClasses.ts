@@ -24,7 +24,7 @@ export class Triangle implements Figure {
       || b + c <= a
       || a + c <= b
     ) {
-      throw new Error('invalid numbers');
+      throw new Error('Incorrect triangle!');
     }
   }
 
@@ -50,7 +50,7 @@ export class Circle implements Figure {
     public radius: number,
   ) {
     if (radius <= 0) {
-      throw new Error('invalid number');
+      throw new Error('Use correct radius');
     }
   }
 
@@ -70,7 +70,7 @@ export class Rectangle implements Figure {
     public height: number,
   ) {
     if (wigth <= 0 || height <= 0) {
-      throw new Error('invalid numbers');
+      throw new Error('Use correct width or height');
     }
   }
 
