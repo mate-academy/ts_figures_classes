@@ -5,15 +5,27 @@ export interface Figure {
   getArea(): number,
 }
 
+enum Color {
+  red,
+  green,
+  blue
+}
+
+enum Shape {
+  triangle = 'triangle',
+  circle = 'circle',
+  rectangle = 'rectangle'
+}
+
 function getTruncNum(number: number) {
   return Math.trunc(number * 100) / 100;
 }
 
 export class Triangle {
-  public shape: Figure['shape'] = 'triangle';
+  public shape: string = Shape.triangle;
 
   constructor(
-    public color: Figure,
+    public color = Color,
     public sideA: number,
     public sideB: number,
     public sideC: number,
@@ -42,10 +54,10 @@ export class Triangle {
 }
 
 export class Circle {
-  public shape: Figure['shape'] = 'circle';
+  public shape: string = Shape.circle;
 
   constructor(
-    public color: Figure,
+    public color = Color,
     public radius: number,
   ) {
     if (radius <= 0) {
@@ -61,10 +73,10 @@ export class Circle {
 }
 
 export class Rectangle {
-  public shape: Figure['shape'] = 'rectangle';
+  public shape: string = Shape.rectangle;
 
   constructor(
-    public color: Figure,
+    public color = Color,
     public height: number,
     public width: number,
   ) {
@@ -80,6 +92,6 @@ export class Rectangle {
   }
 }
 
-export function getInfo(figure: Triangle | Circle | Rectangle) {
+export function getInfo(figure: Triangle | Circle | Rectangle):string {
   return `A ${figure.color} ${figure.shape} - ${figure.getArea()}`;
 }
