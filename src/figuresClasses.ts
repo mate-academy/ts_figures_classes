@@ -25,7 +25,7 @@ export class Triangle {
   public shape: string = Shape.triangle;
 
   constructor(
-    public color = Color,
+    public color: Color,
     public sideA: number,
     public sideB: number,
     public sideC: number,
@@ -57,7 +57,7 @@ export class Circle {
   public shape: string = Shape.circle;
 
   constructor(
-    public color = Color,
+    public color: Color,
     public radius: number,
   ) {
     if (radius <= 0) {
@@ -76,7 +76,7 @@ export class Rectangle {
   public shape: string = Shape.rectangle;
 
   constructor(
-    public color = Color,
+    public color: Color,
     public height: number,
     public width: number,
   ) {
