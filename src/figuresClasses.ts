@@ -10,9 +10,9 @@ export interface Figure {
 type Shapes = 'triangle' | 'circle' | 'rectangle';
 
 function checkForNegatives(...inputs: number[]): void {
-  const FindnegativeNumber = [...inputs].find((num) => num <= 0);
+  const foundNegativeNumber = [...inputs].find((num) => num <= 0);
 
-  if (FindnegativeNumber) {
+  if (foundNegativeNumber) {
     throw new Error('not possible form a triangle');
   }
 }
