@@ -1,84 +1,78 @@
+enum Shape {
+  Triangle = 'triangle',
+  Circle = 'circle',
+  Rectangle = 'rectangle',
+}
+
+type Color = 'red' | 'green' | 'blue';
+
 export interface Figure {
-  shape: 'triangle'| 'circle' | 'rectangle',
-  color: 'red' | 'green' | 'blue',
-  getArea(): number,
+  shape: Shape;
+  color: Color;
+  getArea(): number;
 }
 
-function getTruncNum(number: number): number {
-  return Math.trunc(number * 100) / 100;
-}
-
-export class Triangle {
-  public shape: Figure['shape'] = 'triangle';
+export class Triangle implements Figure {
+  shape = Shape.Triangle;
 
   constructor(
-    public color: Figure,
-    public sideA: number,
-    public sideB: number,
-    public sideC: number,
+    public color: Color,
+    public a: number,
+    public b: number,
+    public c: number,
   ) {
-    if ([sideA, sideB, sideC].some((n) => n <= 0)) {
-      throw new Error('One side is less or equal than 0');
+    if (a <= 0 || b <= 0 || c <= 0) {
+      throw new Error('Invalid input values');
     }
 
-    const sumOfSides1 = sideA >= sideB + sideC;
-    const sumOfSides2 = sideB >= sideA + sideC;
-    const sumOfSides3 = sideC >= sideB + sideA;
-
-    if (sumOfSides1 || sumOfSides2 || sumOfSides3) {
-      throw new Error('One side longest than a sum of two others');
+    if (a >= b + c || c >= a + b || b >= a + c) {
+      throw new Error('Invalid input values');
     }
   }
 
   getArea(): number {
-    const perimeter = (this.sideA + this.sideB + this.sideC) / 2;
-    const area = Math.sqrt(perimeter
-      * (perimeter - this.sideA) * (perimeter - this.sideB)
-      * (perimeter - this.sideC));
+    const perimeter = (this.a + this.b + this.c) / 2;
 
-    return getTruncNum(area);
+    return Math.round(Math.sqrt(perimeter * (perimeter - this.a)
+      * (perimeter - this.b) * (perimeter - this.c)) * 100) / 100;
   }
 }
 
-export class Circle {
-  public shape: Figure['shape'] = 'circle';
+export class Circle implements Figure {
+  shape = Shape.Circle;
 
   constructor(
-    public color: Figure,
+    public color: Color,
     public radius: number,
   ) {
     if (radius <= 0) {
-      throw new Error('Radius is less or equal than 0');
+      throw new Error('Invalid input values');
     }
   }
 
   getArea():number {
-    const area = Math.PI * (this.radius * this.radius);
-
-    return getTruncNum(area);
+    return Math.floor(Math.PI * this.radius ** 2 * 100) / 100;
   }
 }
 
 export class Rectangle {
-  public shape: Figure['shape'] = 'rectangle';
+  shape = Shape.Rectangle;
 
   constructor(
-    public color: Figure,
+    public color: Color,
     public height: number,
     public width: number,
   ) {
     if (height <= 0 || width <= 0) {
-      throw new Error('Height / width is less or equal than 0');
+      throw new Error('Invalid input values');
     }
   }
 
   getArea():number {
-    const area = this.height * this.width;
-
-    return area;
+    return Math.floor(this.width * this.height * 100) / 100;
   }
 }
 
-export function getInfo(figure: Triangle | Circle | Rectangle): string {
+export function getInfo(figure: Figure): string {
   return `A ${figure.color} ${figure.shape} - ${figure.getArea()}`;
 }
