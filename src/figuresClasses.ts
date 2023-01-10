@@ -1,12 +1,12 @@
 export enum Color {
-  Red,
-  Green,
-  Blue,
+  red,
+  green,
+  blue,
 }
 export enum Shape {
-  Triangle = 'triangle',
-  Circle = 'circle',
-  Rectangle = 'rectangle',
+  triangle = 'TRIANGLE',
+  circle = 'CIRCLE',
+  rectangle = 'RECTANGLE',
 }
 
 export interface Figure {
@@ -16,7 +16,7 @@ export interface Figure {
 }
 
 export class Triangle implements Figure {
-  shape = Shape.Triangle;
+  shape = Shape.triangle;
 
   longestSide = 0;
 
@@ -36,14 +36,14 @@ export class Triangle implements Figure {
       }
 
       if (side <= 0) {
-        throw new Error('Short side error');
+        throw new Error('One of the sides is too short');
       }
     });
 
     this.sumOfSides = [...args].reduce((partialSum, a) => partialSum + a, 0);
 
     if (this.longestSide >= (this.sumOfSides - this.longestSide)) {
-      throw new Error('Long side error');
+      throw new Error('Triangle proportion is incorrect');
     }
   }
 
@@ -59,7 +59,7 @@ export class Triangle implements Figure {
 }
 
 export class Circle implements Figure {
-  shape = Shape.Circle;
+  shape = Shape.circle;
 
   constructor(
     public color: Color,
@@ -68,7 +68,7 @@ export class Circle implements Figure {
     this.radius = radius;
 
     if (radius <= 0) {
-      throw new Error('Radius error');
+      throw new Error('Radius is too short');
     }
   }
 
@@ -80,7 +80,7 @@ export class Circle implements Figure {
 }
 
 export class Rectangle implements Figure {
-  shape = Shape.Rectangle;
+  shape = Shape.rectangle;
 
   sides: [number, number];
 
@@ -93,7 +93,7 @@ export class Rectangle implements Figure {
 
     this.sides.forEach((side) => {
       if (side <= 0) {
-        throw new Error('Short side error');
+        throw new Error('One of the sides is too short');
       }
     });
   }
