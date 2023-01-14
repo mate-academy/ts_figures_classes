@@ -15,6 +15,31 @@ export interface Figure {
   getArea: Function;
 }
 
+export function checkForErrors(item: Figure, ...args: number[]): void {
+  switch (item.shape) {
+    case Shape.Triangle:
+      [...args].forEach((side) => {
+        if (side <= 0) {
+          throw new Error('One of the sides is too short');
+        }
+      });
+      break;
+    case Shape.Circle:
+      if ([...args][0] <= 0) {
+        throw new Error('Radius is too short');
+      }
+      break;
+    case Shape.Rectangle:
+      [...args].forEach((side) => {
+        if (side <= 0) {
+          throw new Error('One of the sides is too short');
+        }
+      });
+      break;
+    default:
+  }
+}
+
 export class Triangle implements Figure {
   shape = Shape.Triangle;
 
@@ -28,15 +53,12 @@ export class Triangle implements Figure {
     public color: Color,
     ...args: [number, number, number]
   ) {
+    checkForErrors(this, ...[...args]);
     this.sides = [...args];
 
     this.sides.forEach((side) => {
       if (side > this.longestSide) {
         this.longestSide = side;
-      }
-
-      if (side <= 0) {
-        throw new Error('One of the sides is too short');
       }
     });
 
@@ -65,11 +87,8 @@ export class Circle implements Figure {
     public color: Color,
     public radius: number,
   ) {
+    checkForErrors(this, radius);
     this.radius = radius;
-
-    if (radius <= 0) {
-      throw new Error('Radius is too short');
-    }
   }
 
   getArea(): number {
@@ -88,7 +107,7 @@ export class Rectangle implements Figure {
     public color: Color,
     ...args: [number, number]
   ) {
-    this.color = color;
+    checkForErrors(this, ...[...args]);
     this.sides = [...args];
 
     this.sides.forEach((side) => {
