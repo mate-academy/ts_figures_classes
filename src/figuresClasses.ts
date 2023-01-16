@@ -1,5 +1,14 @@
-type Shape = 'triangle' | 'circle' | 'rectangle';
-type Color = 'red' | 'green' | 'blue';
+enum Shape {
+  t = 'triangle',
+  c = 'circle',
+  r = 'rectangle',
+}
+
+enum Color {
+  r = 'red',
+  g = 'green',
+  b = 'blue'
+}
 
 export interface Figure {
   shape: Shape,
@@ -8,7 +17,7 @@ export interface Figure {
 }
 
 export class Triangle implements Figure {
-  shape: Shape = 'triangle';
+  shape = Shape.t;
 
   constructor(
     public color: Color,
@@ -17,15 +26,13 @@ export class Triangle implements Figure {
     public c: number,
   ) {
     if (this.a < 1 || this.b < 1 || this.c < 1) {
-      throw new Error('Error');
-    }
-
-    if (this.a < 1 || this.b < 1 || this.c < 1) {
-      throw new Error('Error');
+      throw new Error('Some length is <= 0');
     }
 
     if (this.c >= (this.a + this.b)) {
-      throw new Error('Error');
+      const error = 'The longest side of a tngl less than a sum of two others';
+
+      throw new Error(error);
     }
   }
 
@@ -38,14 +45,14 @@ export class Triangle implements Figure {
 }
 
 export class Circle implements Figure {
-  shape: Shape = 'circle';
+  shape = Shape.c;
 
   constructor(
     public color: Color,
     public radius: number,
   ) {
     if (this.radius < 1) {
-      throw new Error('Error');
+      throw new Error('Radius less then 1');
     }
   }
 
@@ -57,7 +64,7 @@ export class Circle implements Figure {
 }
 
 export class Rectangle implements Figure {
-  shape: Shape = 'rectangle';
+  shape = Shape.r;
 
   constructor(
     public color: Color,
@@ -65,7 +72,7 @@ export class Rectangle implements Figure {
     public b: number,
   ) {
     if (this.a < 1 || this.b < 1) {
-      throw new Error('Error');
+      throw new Error('Some length is <= 0');
     }
   }
 
