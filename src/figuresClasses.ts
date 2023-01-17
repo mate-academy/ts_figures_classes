@@ -29,7 +29,7 @@ export class Triangle implements Figure {
 
     if (aSide + bSide <= cSide || aSide + cSide <= bSide
       || bSide + cSide <= aSide) {
-      throw new Error('these sides can\'t form a thiangle');
+      throw new Error('these sides can\'t form a triangle');
     }
   }
 }
