@@ -22,6 +22,10 @@ export function checkForErrors(item: Figure, ...args: number[]): void {
         if (side <= 0) {
           throw new Error('One of the sides is too short');
         }
+
+        if (item.longestSide >= (item.sumOfSides - item.longestSide)) {
+          throw new Error('Triangle proportion is incorrect');
+        }
       });
       break;
     case Shape.Circle:
@@ -51,10 +55,12 @@ export class Triangle implements Figure {
 
   constructor(
     public color: Color,
-    ...args: [number, number, number]
+    a: number,
+    b: number,
+    c: number,
   ) {
-    checkForErrors(this, ...[...args]);
-    this.sides = [...args];
+    checkForErrors(this, a, b, c);
+    this.sides = [a, b, c];
 
     this.sides.forEach((side) => {
       if (side > this.longestSide) {
@@ -62,11 +68,8 @@ export class Triangle implements Figure {
       }
     });
 
-    this.sumOfSides = [...args].reduce((partialSum, a) => partialSum + a, 0);
-
-    if (this.longestSide >= (this.sumOfSides - this.longestSide)) {
-      throw new Error('Triangle proportion is incorrect');
-    }
+    this.sumOfSides
+      = [a, b, c].reduce((partialSum, side) => partialSum + side, 0);
   }
 
   getArea(): number {
@@ -105,16 +108,11 @@ export class Rectangle implements Figure {
 
   constructor(
     public color: Color,
-    ...args: [number, number]
+    a: number,
+    b: number,
   ) {
-    checkForErrors(this, ...[...args]);
-    this.sides = [...args];
-
-    this.sides.forEach((side) => {
-      if (side <= 0) {
-        throw new Error('One of the sides is too short');
-      }
-    });
+    checkForErrors(this, a, b);
+    this.sides = [a, b];
   }
 
   getArea(): number {
