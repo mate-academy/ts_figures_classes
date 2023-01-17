@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/lines-between-class-members */
 function roundToNDecimalPlaces(num: number, decimalPlaces: number): number {
   const factorOfTen = 10 ** decimalPlaces;
 
@@ -6,6 +7,7 @@ function roundToNDecimalPlaces(num: number, decimalPlaces: number): number {
 
 type Shape = 'triangle' | 'circle' | 'rectangle';
 type Color = 'red' | 'green' | 'blue';
+type TupleOf3Numbers = [number, number, number];
 
 export interface Figure {
   shape: Shape;
@@ -15,12 +17,11 @@ export interface Figure {
 
 export class Triangle implements Figure {
   readonly shape = 'triangle';
+  readonly sides: TupleOf3Numbers;
 
   color: Color;
 
-  readonly sides: [number, number, number];
-
-  constructor(color: Color, ...sides: [number, number, number]) {
+  constructor(color: Color, ...sides: TupleOf3Numbers) {
     if (!Triangle.isSidesValid(sides)) {
       throw new Error('Given triangle sides are not valid');
     }
@@ -65,7 +66,6 @@ export class Circle implements Figure {
   readonly shape = 'circle';
 
   color: Color;
-
   radius: number;
 
   constructor(color: Color, radius: number) {
@@ -88,9 +88,7 @@ export class Rectangle implements Figure {
   readonly shape = 'rectangle';
 
   color: Color;
-
   width: number;
-
   height: number;
 
   constructor(color: Color, width: number, height: number) {
