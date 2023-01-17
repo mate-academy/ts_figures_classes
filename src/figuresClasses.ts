@@ -1,13 +1,13 @@
 enum Shape {
-  t = 'triangle',
-  c = 'circle',
-  r = 'rectangle',
+  Triangle = 'triangle',
+  Circle = 'circle',
+  Rectangle = 'rectangle',
 }
 
 enum Color {
-  r = 'red',
-  g = 'green',
-  b = 'blue'
+  Red = 'red',
+  Green = 'green',
+  Blue = 'blue'
 }
 
 export interface Figure {
@@ -17,7 +17,7 @@ export interface Figure {
 }
 
 export class Triangle implements Figure {
-  shape = Shape.t;
+  shape = Shape.Triangle;
 
   constructor(
     public color: Color,
@@ -45,7 +45,7 @@ export class Triangle implements Figure {
 }
 
 export class Circle implements Figure {
-  shape = Shape.c;
+  shape = Shape.Circle;
 
   constructor(
     public color: Color,
@@ -64,7 +64,7 @@ export class Circle implements Figure {
 }
 
 export class Rectangle implements Figure {
-  shape = Shape.r;
+  shape = Shape.Rectangle;
 
   constructor(
     public color: Color,
