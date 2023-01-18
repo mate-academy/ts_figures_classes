@@ -21,7 +21,7 @@ export class Triangle implements Figure {
       && this.c < this.b + this.a;
 
     if (!isTriangle) {
-      throw new Error('triangle is immosible');
+      throw new Error('The biggest side should be less then sum of others');
     }
   }
 
@@ -31,7 +31,7 @@ export class Triangle implements Figure {
     * (semiperimeter - this.b)
     * (semiperimeter - this.c));
 
-    return +area.toFixed(2);
+    return Math.floor(area * 100) / 100;
   }
 }
 
@@ -43,14 +43,14 @@ export class Circle implements Figure {
     public radius: number,
   ) {
     if (this.radius <= 0) {
-      throw new Error('circle is impossible');
+      throw new Error('circle radius should be more then 0');
     }
   }
 
   getArea(): number {
     const area = Math.PI * this.radius * this.radius;
 
-    return +area.toFixed(2);
+    return Math.floor(area * 100) / 100;
   }
 }
 
@@ -63,17 +63,17 @@ export class Rectangle implements Figure {
     public width: number,
   ) {
     if (this.height <= 0 || this.width <= 0) {
-      throw new Error('rectangle is impossible');
+      throw new Error('width or height should be more then 0');
     }
   }
 
   getArea(): number {
     const area = this.width * this.height;
 
-    return +area.toFixed(2);
+    return Math.floor(area * 100) / 100;
   }
 }
 
 export function getInfo(figure: Triangle| Circle| Rectangle): string {
-  return `A ${figure.color} rectangle - ${figure.getArea()}`;
+  return `A ${figure.color} ${figure.shape} - ${figure.getArea()}`;
 }
