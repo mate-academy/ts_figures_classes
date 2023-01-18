@@ -58,15 +58,15 @@ export class Rectangle implements Figure {
   constructor(
     public color: string,
     public height: number,
-    public weight: number,
+    public width: number,
   ) {
-    if (height <= 0 || weight <= 0) {
+    if (height <= 0 || width <= 0) {
       throw new Error('Sides can`t be under 0');
     }
   }
 
   getArea(): number {
-    const sqrt:number = this.height * this.weight;
+    const sqrt:number = this.height * this.width;
 
     return Math.floor(sqrt * 100) / 100;
   }
