@@ -15,19 +15,8 @@ export interface Figure {
   getArea: Function;
 }
 
-export function checkForErrors(item: Figure, ...args: number[]): void {
+function checkForErrors(item: Figure, ...args: number[]): void {
   switch (item.shape) {
-    case Shape.Triangle:
-      [...args].forEach((side) => {
-        if (side <= 0) {
-          throw new Error('One of the sides is too short');
-        }
-
-        if (item.longestSide >= (item.sumOfSides - item.longestSide)) {
-          throw new Error('Triangle proportion is incorrect');
-        }
-      });
-      break;
     case Shape.Circle:
       if ([...args][0] <= 0) {
         throw new Error('Radius is too short');
@@ -59,17 +48,24 @@ export class Triangle implements Figure {
     b: number,
     c: number,
   ) {
-    checkForErrors(this, a, b, c);
-    this.sides = [a, b, c];
-
-    this.sides.forEach((side) => {
+    [a, b, c].forEach((side) => {
       if (side > this.longestSide) {
         this.longestSide = side;
       }
+
+      if (side <= 0) {
+        throw new Error('One of the sides is too short');
+      }
     });
+
+    this.sides = [a, b, c];
 
     this.sumOfSides
       = [a, b, c].reduce((partialSum, side) => partialSum + side, 0);
+
+    if (this.longestSide >= (this.sumOfSides - this.longestSide)) {
+      throw new Error('Triangle proportion is incorrect');
+    }
   }
 
   getArea(): number {
