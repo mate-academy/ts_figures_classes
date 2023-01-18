@@ -1,5 +1,14 @@
-type Shape = 'triangle'| 'circle'| 'rectangle';
-type Color = 'red' | 'green' | 'blue';
+enum Shape {
+  Triangle = 'triangle',
+  Circle = 'circle',
+  Rectangle = 'rectangle',
+}
+
+enum Color {
+  Red = 'red',
+  Green = 'green',
+  Blue = 'blue'
+}
 
 export interface Figure {
   shape: Shape;
@@ -7,12 +16,16 @@ export interface Figure {
   getArea(): number;
 }
 
-function roundedArea(number: number): number {
-  return Math.floor(number * 100) / 100;
+function getRoundedArea(area: number): number {
+  return Math.floor(area * 100) / 100;
+}
+
+function checkValidSides([...args]: number[]): boolean {
+  return args.every((side) => side > 0);
 }
 
 export class Triangle implements Figure {
-  shape: Shape = 'triangle';
+  public shape = Shape.Triangle;
 
   constructor(
     public color: Color,
@@ -21,17 +34,16 @@ export class Triangle implements Figure {
     public c: number,
   ) {
     const triangleSides = [a, b, c];
-    const checkValidSides = triangleSides.every((side) => side > 0);
+
+    if (!checkValidSides(triangleSides)) {
+      throw new Error('Side length cannot be zero or takes negative value.');
+    }
 
     triangleSides.sort((shortest, longest) => (longest - shortest));
 
     const longestSide = triangleSides.shift();
     const sumOfShortestSides = triangleSides.reduce((total, side) => (
       total + side));
-
-    if (!checkValidSides) {
-      throw new Error('Side length cannot be zero or takes negative value.');
-    }
 
     if (longestSide >= sumOfShortestSides) {
       throw new Error('Length of biggest side cannot '
@@ -40,35 +52,36 @@ export class Triangle implements Figure {
   }
 
   getArea(): number {
-    const s = (this.a + this.b + this.c) / 2;
+    const halfPerimeter = (this.a + this.b + this.c) / 2;
 
-    const area = Math.sqrt(
-      s * (s - this.a) * (s - this.b) * (s - this.c),
-    );
+    const area = Math.sqrt(halfPerimeter
+      * (halfPerimeter - this.a)
+      * (halfPerimeter - this.b)
+      * (halfPerimeter - this.c));
 
-    return roundedArea(area);
+    return getRoundedArea(area);
   }
 }
 
 export class Circle implements Figure {
-  shape: Shape = 'circle';
+  public shape = Shape.Circle;
 
   constructor(
     public color: Color,
     public radius: number,
   ) {
-    if (this.radius <= 0) {
-      throw new Error('Radius length cannot be zero or negative.');
+    if (!checkValidSides([radius])) {
+      throw new Error('Radius length cannot be zero or takes negative value.');
     }
   }
 
   getArea(): number {
-    return roundedArea(Math.PI * this.radius ** 2);
+    return getRoundedArea(Math.PI * this.radius ** 2);
   }
 }
 
 export class Rectangle implements Figure {
-  shape: Shape = 'rectangle';
+  public shape = Shape.Rectangle;
 
   constructor(
     public color: Color,
@@ -76,15 +89,14 @@ export class Rectangle implements Figure {
     public height: number,
   ) {
     const rectangleSides = [width, height];
-    const checkValidSides = rectangleSides.some((side) => side <= 0);
 
-    if (checkValidSides) {
-      throw new Error('Side length cannot be zero or negative.');
+    if (!checkValidSides(rectangleSides)) {
+      throw new Error('Side length cannot be zero or takes negative value.');
     }
   }
 
   getArea(): number {
-    return roundedArea(this.width * this.height);
+    return getRoundedArea(this.width * this.height);
   }
 }
 
