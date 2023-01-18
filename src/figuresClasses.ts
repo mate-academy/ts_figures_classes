@@ -32,19 +32,11 @@ export interface Figure {
 export class Triangle implements Figure {
   public shape: Shape = 'triangle';
 
-  public color: Color;
-
-  public a: number;
-
-  public b: number;
-
-  public c: number;
-
   constructor(
-    color: Color,
-    a: number,
-    b: number,
-    c: number,
+    public color: Color,
+    public a: number,
+    public b: number,
+    public c: number,
   ) {
     if (!isPositive(a, b, c) || !triangleSideChecker(a, b, c)) {
       throw new Error(
@@ -52,11 +44,6 @@ export class Triangle implements Figure {
           + 'or the longest side of a triangle is >= than a sum of two others',
       );
     }
-
-    this.color = color;
-    this.a = a;
-    this.b = b;
-    this.c = c;
   }
 
   getArea(): number {
@@ -70,20 +57,13 @@ export class Triangle implements Figure {
 export class Circle implements Figure {
   public shape: Shape = 'circle';
 
-  public color: Color;
-
-  public radius: number;
-
   constructor(
-    color: Color,
-    radius: number,
+    public color: Color,
+    public radius: number,
   ) {
     if (!isPositive(radius)) {
       throw new Error('incorrect radius (value  <= 0)');
     }
-
-    this.color = color;
-    this.radius = radius;
   }
 
   getArea(): number {
@@ -94,24 +74,14 @@ export class Circle implements Figure {
 export class Rectangle implements Figure {
   public shape: Shape = 'rectangle';
 
-  public color: Color;
-
-  public height: number;
-
-  public width: number;
-
   constructor(
-    color: Color,
-    width: number,
-    height: number,
+    public color: Color,
+    public width: number,
+    public height: number,
   ) {
     if (!isPositive(width, height)) {
       throw new Error('incorrect width or height (value  <= 0)');
     }
-
-    this.color = color;
-    this.width = width;
-    this.height = height;
   }
 
   getArea(): number {
