@@ -7,6 +7,10 @@ export interface Figure {
   getArea(): number,
 }
 
+function getRound(data: number): number {
+  return Math.floor(data * 100) / 100;
+}
+
 export class Triangle implements Figure {
   public shape: Shape = 'triangle';
 
@@ -20,13 +24,9 @@ export class Triangle implements Figure {
       throw new Error('Side length below 0');
     }
 
-    const arr = [];
+    const arr = [a, b, c];
 
-    arr.push(a);
-    arr.push(b);
-    arr.push(c);
-
-    arr.sort((x, y) => y - x);
+    arr.sort((side1, side2) => side2 - side1);
 
     if (arr[0] >= (arr[1] + arr[2])) {
       throw new Error('Side length below 0');
@@ -39,7 +39,7 @@ export class Triangle implements Figure {
       semiP * (semiP - this.a) * (semiP - this.b) * (semiP - this.c),
     );
 
-    return Math.floor(square * 100) / 100;
+    return getRound(square);
   }
 }
 
@@ -58,7 +58,7 @@ export class Circle implements Figure {
   getArea():number {
     const square = Math.PI * this.radius * this.radius;
 
-    return Math.floor(square * 100) / 100;
+    return getRound(square);
   }
 }
 
