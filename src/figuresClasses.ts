@@ -20,7 +20,6 @@ export interface Figure {
 export class Triangle implements Figure {
   shape = Shape.Triangle;
 
-  // eslint-disable-next-line no-useless-constructor
   constructor(
     public color: Color,
     public a: number,
@@ -48,7 +47,6 @@ export class Triangle implements Figure {
 export class Circle {
   shape = Shape.Circle;
 
-  // eslint-disable-next-line no-useless-constructor
   constructor(
     public color: Color,
     public radius: number,
@@ -66,7 +64,6 @@ export class Circle {
 export class Rectangle {
   public shape = Shape.Rectangle;
 
-  // eslint-disable-next-line no-useless-constructor
   constructor(
     public color: Color,
     public width: number,
