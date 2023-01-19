@@ -18,7 +18,7 @@ export interface Figure {
 
 function validateSides(...args: number[]): void {
   if (args.some((side: number) => side <= 0)) {
-    throw new Error('Sides are not valid');
+    throw new Error('All sides have to be greater that 0');
   }
 }
 
