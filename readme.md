@@ -36,4 +36,3 @@ getInfo(redRectangle) === 'A red rectangle - 15';
 const greenCircle = new Circle('green', 1);
 getInfo(greenCircle) === 'A green circle - 3.14';
 ```
-The sum of the lengths of any two sides of a triangle is greater than the length of the third side.

@@ -1,33 +1,35 @@
 
 export interface Figure {
-  shape:string;
-  color:string;
-  getArea:Function;
+  shape: string;
+  color: string;
+  getArea(): number;
 }
 
 export class Triangle implements Figure {
   shape = 'triangle';
 
-  getArea():number {
-    const p:number = 0.5 * (this.aSide + this.bSide + this.cSide);
+  getArea(): number {
+    const semiPerimeter: number = 0.5 * (this.aSide + this.bSide + this.cSide);
 
-    const s:number = Math.floor(Math.sqrt(p * (p - this.aSide)
-    * (p - this.bSide) * (p - this.cSide)) * 100) / 100;
+    const area: number = Math.floor(Math.sqrt(semiPerimeter
+      * (semiPerimeter - this.aSide)
+    * (semiPerimeter - this.bSide) * (semiPerimeter - this.cSide)) * 100) / 100;
 
-    return s;
+    return area;
   }
 
   constructor(
-    public color:string,
-    public aSide:number,
-    public bSide:number,
-    public cSide:number,
+    public color: string,
+    public aSide: number,
+    public bSide: number,
+    public cSide: number,
   ) {
     if (aSide <= 0 || bSide <= 0 || cSide <= 0) {
       throw new Error('invalid side length');
     }
 
-    if (aSide + bSide <= cSide || aSide + cSide <= bSide
+    if (aSide + bSide <= cSide
+      || aSide + cSide <= bSide
       || bSide + cSide <= aSide) {
       throw new Error('these sides can\'t form a triangle');
     }
@@ -37,13 +39,13 @@ export class Triangle implements Figure {
 export class Circle implements Figure {
   shape = 'circle';
 
-  getArea():number {
+  getArea(): number {
     return Math.floor(this.radius ** 2 * Math.PI * 100) / 100;
   }
 
   constructor(
-    public color:string,
-    public radius:number,
+    public color: string,
+    public radius: number,
   ) {
     if (radius <= 0) {
       throw new Error('invalid side length');
@@ -59,9 +61,9 @@ export class Rectangle implements Figure {
   }
 
   constructor(
-    public color:string,
-    public width:number,
-    public height:number,
+    public color: string,
+    public width: number,
+    public height: number,
   ) {
     if (width <= 0 || height <= 0) {
       throw new Error('invalid side length');
