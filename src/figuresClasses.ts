@@ -7,8 +7,12 @@ export interface Figure {
 export class Triangle implements Figure {
   public shape = 'triangle';
 
-  constructor(public color: string, public a: number,
-    public b: number, public c: number) {
+  constructor(
+    public color: string,
+    public a: number,
+    public b: number,
+    public c: number,
+  ) {
     const biggestSide: number = Math.max(a, b, c);
     const error: string = `Sides ${a}, ${b}`
     + `and ${c} can't form a triangle`;
@@ -48,7 +52,10 @@ export class Triangle implements Figure {
 export class Circle implements Figure {
   public shape = 'circle';
 
-  constructor(public color: string, public radius: number) {
+  constructor(
+    public color: string,
+    public radius: number,
+  ) {
     if (radius <= 0) {
       throw new Error('Radius is not valid');
     }
@@ -65,8 +72,11 @@ export class Circle implements Figure {
 export class Rectangle implements Figure {
   public shape = 'rectangle';
 
-  constructor(public color: string, public width: number,
-    public heigh: number) {
+  constructor(
+    public color: string,
+    public width: number,
+    public heigh: number,
+  ) {
     if (width <= 0 || heigh <= 0) {
       throw new Error('Rectangle is not valid');
     }
