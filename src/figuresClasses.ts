@@ -7,6 +7,12 @@ export interface Figure {
   getArea(): number;
 }
 
+function checkSizes(...sizes: number[]): void {
+  if (sizes.every((size) => size <= 0)) {
+    throw new Error('Invalid size, each side should be greater than 0');
+  }
+}
+
 export class Triangle implements Figure {
   shape: Shape = 'triangle';
 
@@ -16,9 +22,7 @@ export class Triangle implements Figure {
     public b: number,
     public c: number,
   ) {
-    if (this.a <= 0 || this.b <= 0 || this.c <= 0) {
-      throw new Error('Invalid size, each side should be greater than 0');
-    }
+    checkSizes(this.a, this.b, this.c);
 
     if (this.a + this.b <= this.c
       || this.a + this.c <= this.b
