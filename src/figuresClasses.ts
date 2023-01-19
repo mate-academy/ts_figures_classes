@@ -26,12 +26,9 @@ export class Triangle implements Figure {
       throw new Error('your error message');
     }
 
-    let sides: number[] = [this.a, this.b, this.c];
+    const sides: number[] = [this.a, this.b, this.c];
     const max: number = Math.max(...sides);
-
-    sides = sides.filter((n) => n !== max);
-
-    const sumOfLess = sides.reduce((x, y) => x + y);
+    const sumOfLess = sides.filter((n) => n !== max).reduce((x, y) => x + y, 0);
 
     if (max >= sumOfLess) {
       throw new Error('your error message');
