@@ -1,9 +1,9 @@
-function rounding(result: number): number {
+function getRound(result: number): number {
   return Math.floor(result * 100) / 100;
 }
 
-type Shape = 'triangle'| 'circle' | 'rectangle';
-type Color = 'red' |'green' | 'blue';
+type Shape = 'triangle' | 'circle' | 'rectangle';
+type Color = 'red' | 'green' | 'blue';
 
 export interface Figure {
   shape: Shape;
@@ -20,27 +20,25 @@ export class Triangle implements Figure {
     public b: number,
     public c: number,
   ) {
-    const triangleCheckSides = [a, b, c].sort((i, k) => i - k);
+    const sides = [a, b, c].sort((i, k) => i - k);
 
-    if (triangleCheckSides[2] >= triangleCheckSides[1] + triangleCheckSides[0]
-      || a === 0
-      || b === 0
-      || c === 0
+    if (sides[2] >= sides[1] + sides[0]
+      || sides.some((side) => side <= 0)
     ) {
-      throw new Error('your error message');
+      throw new Error('Invalid value');
     }
   }
 
   getArea(): number {
-    const trianglePerimeter: number = (this.a + this.b + this.c) / 2;
+    const triangleHalfPerimeter: number = (this.a + this.b + this.c) / 2;
     const triangleArea: number = Math.sqrt(
-      trianglePerimeter
-      * (trianglePerimeter - this.a)
-      * (trianglePerimeter - this.b)
-      * (trianglePerimeter - this.c),
+      triangleHalfPerimeter
+      * (triangleHalfPerimeter - this.a)
+      * (triangleHalfPerimeter - this.b)
+      * (triangleHalfPerimeter - this.c),
     );
 
-    return rounding(triangleArea);
+    return getRound(triangleArea);
   }
 }
 
@@ -57,7 +55,7 @@ export class Circle implements Figure {
   }
 
   getArea(): number {
-    return rounding((this.radius ** 2) * Math.PI);
+    return getRound((this.radius ** 2) * Math.PI);
   }
 }
 
@@ -75,7 +73,7 @@ export class Rectangle {
   }
 
   getArea(): number {
-    return rounding(this.width * this.heigth);
+    return getRound(this.width * this.heigth);
   }
 }
 
