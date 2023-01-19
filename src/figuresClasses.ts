@@ -7,6 +7,10 @@ export interface Figure {
   getArea(): number,
 }
 
+function checkIsNegative(...sides: number[]): boolean {
+  return sides.some((side) => side <= 0);
+}
+
 export class Triangle implements Figure {
   shape: Shape = 'triangle';
 
@@ -17,12 +21,11 @@ export class Triangle implements Figure {
     public c: number,
   ) {
     const sides = [a, b, c];
-    const negativeLength = sides.some((side) => side <= 0);
     const sumOfSides = sides.reduce((sum, side) => sum + side, 0);
     const biggestSide = Math.max(...sides);
     const isBiggest = biggestSide >= sumOfSides - biggestSide;
 
-    if (negativeLength) {
+    if (checkIsNegative(...sides)) {
       throw new Error('One of the sides is negative');
     }
 
@@ -47,7 +50,7 @@ export class Circle implements Figure {
     public color: Color,
     public radius: number,
   ) {
-    if (radius <= 0) {
+    if (checkIsNegative(radius)) {
       throw new Error('The radius is zero or less');
     }
   }
@@ -67,7 +70,7 @@ export class Rectangle implements Figure {
     public height: number,
     public width: number,
   ) {
-    if (height < 0 || width < 0) {
+    if (checkIsNegative(height, width)) {
       throw new Error('One of the sides is negative');
     }
   }
