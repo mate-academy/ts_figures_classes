@@ -7,6 +7,14 @@ export interface Figure {
   getArea: () => number;
 }
 
+export function isPositive(...args: number[]): void {
+  args.forEach((side) => {
+    if (side <= 0) {
+      throw new Error('length cannot be less than or equal to zero');
+    }
+  });
+}
+
 export class Triangle implements Figure {
   shape: Shape = 'triangle';
 
@@ -18,9 +26,7 @@ export class Triangle implements Figure {
   ) {
     const perimeter = a + b + c;
 
-    if (a <= 0 || b <= 0 || c <= 0) {
-      throw new Error('length cannot be less than or equal to zero');
-    }
+    isPositive(a, b, c);
 
     if (a >= perimeter - a || b >= perimeter - b || c >= perimeter - c) {
       throw new Error(`sides ${a}, ${b} and ${c} can't form a triangle`);
@@ -42,9 +48,7 @@ export class Circle implements Figure {
     public color: string,
     public radius: number,
   ) {
-    if (radius <= 0) {
-      throw new Error('length cannot be less than or equal to zero');
-    }
+    isPositive(radius);
   }
 
   getArea = (): number => {
@@ -62,9 +66,7 @@ export class Rectangle implements Figure {
     public width: number,
     public height: number,
   ) {
-    if (width <= 0 || height <= 0) {
-      throw new Error('length cannot be less than or equal to zero');
-    }
+    isPositive(width, height);
   }
 
   getArea = (): number => {
