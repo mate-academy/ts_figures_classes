@@ -1,14 +1,32 @@
+enum Color {
+  Red = 'red',
+  Green = 'green',
+  Blue = 'blue',
+}
+
+enum Shape {
+  Triangle = 'triangle',
+  Circle = 'circle',
+  Rectangle = 'rectangle',
+}
+
 export interface Figure {
-  color: 'red' | 'green' | 'blue',
-  shape: 'triangle' | 'circle' | 'rectangle',
+  color: Color,
+  shape: Shape,
   getArea(): number
 }
 
+function validateSides(...args: number[]): void {
+  if (args.some((side: number) => side <= 0)) {
+    throw new Error('Sides are not valid');
+  }
+}
+
 export class Triangle implements Figure {
-  public shape = 'triangle';
+  public shape = Shape.Triangle;
 
   constructor(
-    public color: string,
+    public color: Color,
     public a: number,
     public b: number,
     public c: number,
@@ -42,23 +60,22 @@ export class Triangle implements Figure {
   }
 
   getArea(): number {
-    const s: number = (this.a + this.b + this.c) / 2;
+    const semiperimeter: number = (this.a + this.b + this.c) / 2;
 
-    return +Math.sqrt(s * ((s - this.a) * (s - this.b) * (s - this.c)))
+    return +Math.sqrt(semiperimeter * ((semiperimeter - this.a)
+    * (semiperimeter - this.b) * (semiperimeter - this.c)))
       .toFixed(2);
   }
 }
 
 export class Circle implements Figure {
-  public shape = 'circle';
+  public shape = Shape.Circle;
 
   constructor(
-    public color: string,
+    public color: Color,
     public radius: number,
   ) {
-    if (radius <= 0) {
-      throw new Error('Radius is not valid');
-    }
+    validateSides(radius);
 
     this.color = color;
     this.radius = radius;
@@ -70,16 +87,14 @@ export class Circle implements Figure {
 }
 
 export class Rectangle implements Figure {
-  public shape = 'rectangle';
+  public shape = Shape.Rectangle;
 
   constructor(
-    public color: string,
+    public color: Color,
     public width: number,
     public heigh: number,
   ) {
-    if (width <= 0 || heigh <= 0) {
-      throw new Error('Rectangle is not valid');
-    }
+    validateSides(width, heigh);
 
     this.color = color;
     this.width = width;
