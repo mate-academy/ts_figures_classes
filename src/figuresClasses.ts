@@ -62,16 +62,16 @@ export class Rectangle implements Figure {
 
   constructor(
     public color: Color,
-    public weight: number,
+    public width: number,
     public height: number,
   ) {
-    if (this.weight <= 0 || this.height <= 0) {
+    if (this.width <= 0 || this.height <= 0) {
       throw new Error('Parameters must be greater than 0');
     }
   }
 
   getArea(): number {
-    return this.weight * this.height;
+    return this.width * this.height;
   }
 }
 
