@@ -5,9 +5,9 @@ enum Color {
 }
 
 enum Shape {
-  triangle = 'triangle',
-  circle = 'circle',
-  rectangle = 'rectangle',
+  Triangle = 'triangle',
+  Circle = 'circle',
+  Rectangle = 'rectangle',
 }
 
 export interface Figure {
@@ -17,7 +17,7 @@ export interface Figure {
 }
 
 export class Triangle implements Figure {
-  shape = Shape.triangle;
+  shape = Shape.Triangle;
 
   constructor(
     public color: Color,
@@ -46,7 +46,7 @@ export class Triangle implements Figure {
 }
 
 export class Circle implements Figure {
-  shape = Shape.circle;
+  shape = Shape.Circle;
 
   constructor(
     public color: Color,
@@ -58,14 +58,14 @@ export class Circle implements Figure {
   }
 
   getArea(): number {
-    const areaCircle = Math.PI * this.radius * this.radius;
+    const areaCircle = Math.PI * this.radius ** 2;
 
     return Math.floor(areaCircle * 100) / 100;
   }
 }
 
 export class Rectangle implements Figure {
-  shape = Shape.rectangle;
+  shape = Shape.Rectangle;
 
   constructor(
     public color: Color,
