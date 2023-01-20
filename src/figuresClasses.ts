@@ -12,15 +12,17 @@ enum Color {
 
 const roundtoHundredths = (num: number): number => Math.floor(num * 100) / 100;
 
+const isPositive = (...params: number[]): void => {
+  params.forEach((num) => {
+    if (num <= 0) {
+      throw new Error('All values have to be more than 0');
+    }
+  });
+};
+
 export interface Figure {
   shape: Shape;
   color: Color;
-  a?: number;
-  b?: number;
-  c?: number;
-  radius?: number;
-  width?: number;
-  height?: number;
   getArea(): number;
 }
 
@@ -33,9 +35,7 @@ export class Triangle implements Figure {
     public b: number,
     public c: number,
   ) {
-    if (a <= 0 || b <= 0 || c <= 0) {
-      throw new Error('All values have to be more than 0');
-    }
+    isPositive(a, b, c);
 
     if (a + b <= c || a + c <= b || b + c <= a) {
       throw new Error('This figure is not a valid triangle');
@@ -61,9 +61,7 @@ export class Circle implements Figure {
     public color: Color,
     public radius: number,
   ) {
-    if (radius <= 0) {
-      throw new Error('All values have to be more than 0');
-    }
+    isPositive(radius);
   }
 
   getArea(): number {
@@ -79,9 +77,7 @@ export class Rectangle implements Figure {
     public width: number,
     public height: number,
   ) {
-    if (width <= 0 || height <= 0) {
-      throw new Error('All values have to be more than 0');
-    }
+    isPositive(width, height);
   }
 
   getArea(): number {
