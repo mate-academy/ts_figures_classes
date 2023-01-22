@@ -13,8 +13,8 @@ export class Triangle implements Figure {
     public b: number,
     public c: number,
   ) {
-    if (a === 0 || b === 0 || c === 0) {
-      throw new Error('Resulting value should be even number');
+    if (a <= 0 || b <= 0 || c <= 0) {
+      throw new Error('Each side should be positive number');
     }
 
     const sides: number[] = [a, b, c];
@@ -23,7 +23,7 @@ export class Triangle implements Figure {
     sides.splice(sides.indexOf(longest, 1));
 
     if (longest >= sides[0] + sides[1]) {
-      throw new Error('Resulting value should be even number');
+      throw new Error('The longest side should be less than other\'s sum');
     }
 
     this.color = color;
@@ -51,7 +51,7 @@ export class Circle implements Figure {
     public radius: number,
   ) {
     if (radius <= 0) {
-      throw new Error('Resulting value should be even number');
+      throw new Error('Radius should be positive number');
     }
     this.color = color;
     this.radius = radius;
@@ -71,7 +71,7 @@ export class Rectangle implements Figure {
     public height: number,
   ) {
     if (width <= 0 || height <= 0) {
-      throw new Error('Resulting value should be even number');
+      throw new Error('Each side should be positive number');
     }
     this.color = color;
     this.width = width;
