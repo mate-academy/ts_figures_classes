@@ -47,9 +47,7 @@ export class Circle implements Figure {
     public color: Color,
     public radius: number,
   ) {
-    if (this.radius <= 0) {
-      throw new Error('radius size must be positive');
-    }
+    checkSizes(this.radius);
   }
 
   getArea(): number {
