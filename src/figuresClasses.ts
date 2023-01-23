@@ -16,13 +16,13 @@ export interface Figure {
   getArea(): number;
 }
 
-function getInvalidSides(...args: number[]): boolean {
+function checkInvalidSides(...args: number[]): boolean {
   const sorted = args.sort((x, y) => x - y);
 
   return (sorted[0] + sorted[1]) <= sorted[2];
 }
 
-function getZeroValues(...args: number[]): boolean {
+function checkZeroValues(...args: number[]): boolean {
   return args.some((el) => el <= 0);
 }
 
@@ -35,7 +35,7 @@ export class Triangle implements Figure {
     public b: number,
     public c: number,
   ) {
-    if (getZeroValues(a, b, c) || getInvalidSides(a, b, c)) {
+    if (checkZeroValues(a, b, c) || checkInvalidSides(a, b, c)) {
       throw new Error('Invalid input data');
     }
   }
@@ -58,7 +58,7 @@ export class Circle implements Figure {
     public color: GetColor,
     public radius: number,
   ) {
-    if (getZeroValues(radius)) {
+    if (checkZeroValues(radius)) {
       throw new Error('Invalid input data');
     }
   }
@@ -78,7 +78,7 @@ export class Rectangle implements Figure {
     public width: number,
     public height: number,
   ) {
-    if (getZeroValues(width, height)) {
+    if (checkZeroValues(width, height)) {
       throw new Error('Invalid input data');
     }
   }
