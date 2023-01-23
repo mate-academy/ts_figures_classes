@@ -27,10 +27,11 @@ export class Triangle implements Figure {
   }
 
   getArea(): number {
-    const p = (this.a + this.b + this.c) / 2;
+    const perimetr = (this.a + this.b + this.c) / 2;
 
     return Math.floor(
-      Math.sqrt(p * (p - this.a)) * (p - this.b) * (p - this.c) * 100,
+      Math.sqrt(perimetr * (perimetr - this.a))
+      * (perimetr - this.b) * (perimetr - this.c) * 100,
     ) / 100;
   }
 }
@@ -42,9 +43,13 @@ export class Circle implements Figure {
     public color: Color,
     public radius: number,
   ) {
-    if (this.radius <= 0) {
+    if (!this.validLength) {
       throw new Error('Radius can not be less than 0 or be equal 0');
     }
+  }
+
+  validLength(): boolean {
+    return this.radius > 0;
   }
 
   getArea(): number {
@@ -60,9 +65,13 @@ export class Rectangle implements Figure {
     public width: number,
     public height: number,
   ) {
-    if (this.width <= 0 || this.height <= 0) {
+    if (!this.validLength()) {
       throw new Error('Invalid element length');
     }
+  }
+
+  validLength(): boolean {
+    return this.width > 0 || this.height > 0;
   }
 
   getArea(): number {
