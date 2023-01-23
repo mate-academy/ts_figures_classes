@@ -6,8 +6,14 @@ export interface Figure {
   getArea(): number;
 }
 
+enum Shape {
+  triangle = 'triangle',
+  circle = 'circle',
+  rectangle = 'rectangle',
+}
+
 export class Triangle implements Figure {
-  shape = 'triangle';
+  shape = Shape.triangle;
 
   constructor(
     public color: string,
@@ -36,7 +42,7 @@ export class Triangle implements Figure {
 }
 
 export class Circle implements Figure {
-  shape = 'circle';
+  shape = Shape.circle;
 
   constructor(
     public color: string,
@@ -48,14 +54,12 @@ export class Circle implements Figure {
   }
 
   getArea(): number {
-    const radius = Math.PI * this.radius ** 2;
-
-    return (Math.floor(radius * 100) / 100);
+    return Math.floor(Math.PI * this.radius ** 2 * 100) / 100;
   }
 }
 
 export class Rectangle implements Figure {
-  shape = 'rectangle';
+  shape = Shape.rectangle;
 
   constructor(
     public color: string,
