@@ -1,6 +1,6 @@
 export interface Figure {
-  color: string;
-  shape: string;
+  color: string | 'green' | 'red' | 'blue';
+  shape: string | 'triangle' | 'circle' | 'rectangle';
 
   getArea() : number;
 }
@@ -14,11 +14,11 @@ export class Triangle implements Figure {
     public shape: string = 'triangle',
   ) {
     if (this.a <= 0 || this.b <= 0 || this.c <= 0) {
-      throw new Error('Error');
+      throw new Error('Error number is negative');
     }
 
     if (this.c >= (this.b + this.a)) {
-      throw new Error('Error');
+      throw new Error('Error the longest side less sum');
     }
   }
 
@@ -40,7 +40,7 @@ export class Circle implements Figure {
     public shape: string = 'circle',
   ) {
     if (radius < 0) {
-      throw new Error('Error');
+      throw new Error('Error number is negative');
     }
   }
 
@@ -59,7 +59,7 @@ export class Rectangle implements Figure {
     public shape: string = 'rectangle',
   ) {
     if (width <= 0 || height <= 0) {
-      throw new Error('Error');
+      throw new Error('Error number is negative');
     }
   }
 
