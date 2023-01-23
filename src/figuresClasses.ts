@@ -5,7 +5,7 @@ enum Shape {
 }
 
 enum Color {
-  red = 'red',
+  Red = 'red',
   Green = 'green',
   Blue = 'blue',
 }
