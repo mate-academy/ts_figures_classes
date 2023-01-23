@@ -25,13 +25,19 @@ export class Triangle implements Figure {
     public b: number,
     public c: number,
   ) {
-    if (this.a >= this.b + this.c
-      || this.b >= this.a + this.c
-      || this.c >= this.b + this.a
-      || this.a <= 0
-      || this.b <= 0
-      || this.c <= 0) {
-      throw new Error('The length of triangle is not correct');
+    const triangleSides = [a, b, c];
+    const sumOfSides = triangleSides.reduce((sum, side) => sum + side, 0);
+    const longestSide = Math.max(...triangleSides);
+
+    const isTriangle = longestSide < (sumOfSides - longestSide);
+    const isPositive = triangleSides.every((side) => side > 0);
+
+    if (!isTriangle) {
+      throw new Error(`${longestSide} is bigger then sum of two other sides`);
+    }
+
+    if (!isPositive) {
+      throw new Error('All sides should be positive');
     }
   }
 
