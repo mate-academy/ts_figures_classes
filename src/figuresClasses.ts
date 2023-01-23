@@ -1,9 +1,9 @@
-// import { NumericLiteral } from '@babel/types';
 export type Shape = 'triangle' | 'circle' | 'rectangle';
+export type Color = 'red' | 'green'| 'blue';
 
 export interface Figure {
   shape: Shape;
-  color: string;
+  color: Color;
   getArea: () => number;
 }
 
@@ -19,7 +19,7 @@ export class Triangle implements Figure {
   shape: Shape = 'triangle';
 
   constructor(
-    public color: string,
+    public color: Color,
     public a: number,
     public b: number,
     public c: number,
@@ -45,7 +45,7 @@ export class Circle implements Figure {
   shape : Shape = 'circle';
 
   constructor(
-    public color: string,
+    public color: Color,
     public radius: number,
   ) {
     isPositive(radius);
@@ -62,7 +62,7 @@ export class Rectangle implements Figure {
   shape: Shape = 'rectangle';
 
   constructor(
-    public color: string,
+    public color: Color,
     public width: number,
     public height: number,
   ) {
