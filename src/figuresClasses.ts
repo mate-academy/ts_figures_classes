@@ -16,8 +16,8 @@ export interface Figure {
   getArea(): number;
 }
 
-function isNegative(first: number, second: number, third: number = 1): void {
-  if (first <= 0 || second <= 0 || third <= 0) {
+function CheckNegativeNumber(...args: number[]): void {
+  if (args.some((item: number) => item <= 0)) {
     throw new Error('Numbers are negative. Input positive numbers');
   }
 }
@@ -31,7 +31,7 @@ export class Triangle implements Figure {
     public b: number,
     public c: number,
   ) {
-    isNegative(a, b, c);
+    CheckNegativeNumber(a, b, c);
 
     const isTriangle = a + b <= c || a + c <= b || c + b <= a;
 
@@ -56,9 +56,7 @@ export class Circle implements Figure {
     public color: Color,
     public radius: number,
   ) {
-    if (radius <= 0) {
-      throw new Error('Radius is negative. Input positive radius');
-    }
+    CheckNegativeNumber(radius);
   }
 
   getArea(): number {
@@ -76,7 +74,7 @@ export class Rectangle implements Figure {
     public width: number,
     public height: number,
   ) {
-    isNegative(width, height);
+    CheckNegativeNumber(width, height);
   }
 
   getArea(): number {
