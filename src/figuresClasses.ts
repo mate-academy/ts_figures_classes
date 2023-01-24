@@ -1,7 +1,9 @@
 // import { strict } from "assert";
 
+type UserColor = 'red' | 'green' | 'blue';
+
 export interface Figure {
-  color: string;
+  color: UserColor;
   shape: string;
   getArea(): number;
 }
@@ -16,7 +18,7 @@ export class Triangle implements Figure {
   shape = Shape.triangle;
 
   constructor(
-    public color: string,
+    public color: UserColor,
     public sideA: number,
     public sideB: number,
     public sideC: number,
@@ -45,7 +47,7 @@ export class Circle implements Figure {
   shape = Shape.circle;
 
   constructor(
-    public color: string,
+    public color: UserColor,
     public radius: number,
   ) {
     if (this.radius <= 0) {
@@ -62,7 +64,7 @@ export class Rectangle implements Figure {
   shape = Shape.rectangle;
 
   constructor(
-    public color: string,
+    public color: UserColor,
     public width: number,
     public height: number,
   ) {
