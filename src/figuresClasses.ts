@@ -4,9 +4,15 @@ enum Shape {
   RectangleShape = 'rectangle',
 }
 
+enum Color {
+  Red = 'red',
+  Green = 'green',
+  Blue = 'blue'
+}
+
 export interface Figure {
   shape:Shape,
-  color: 'red' | 'green' | 'blue',
+  color: Color,
   getArea(): number
 }
 
@@ -18,7 +24,7 @@ export class Triangle implements Figure {
   shape = Shape.TriangleShape;
 
   constructor(
-    public color: 'red' | 'green' | 'blue',
+    public color: Color,
     public a: number,
     public b: number,
     public c: number,
