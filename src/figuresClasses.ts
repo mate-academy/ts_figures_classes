@@ -20,11 +20,14 @@ export class Triangle implements Figure {
     const sumOtherSides = (a + b + c) - longestSide;
 
     if (longestSide >= sumOtherSides) {
-      throw new Error('Incorrect values of the sides of the triangle');
+      throw new Error('Incorrect values'
+        + ' a side of a triangle cannot be greater'
+          + ' than the sum of the other two sides');
     }
 
     if (a <= 0 || b <= 0 || c <= 0) {
-      throw new Error('Incorrect values of the sides of the triangle');
+      throw new Error('Incorrect values,'
+        + ' a side of a triangle cannot be less than zero');
     }
   }
 
