@@ -16,7 +16,7 @@ export class Triangle implements Figure {
     public b: number,
     public c: number,
   ) {
-    const numbers = [a, b, c];
+    const numbers: number[] = [a, b, c];
     const negative = numbers.some((el) => el <= 0);
     const sides = numbers.sort((x, y) => y - x);
     const invalidSize = sides[0] >= sides[1] + sides[2];
