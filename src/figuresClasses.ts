@@ -1,6 +1,8 @@
+type Color ='red' | 'green' | 'blue';
+
 export interface Figure {
   shape: 'triangle' | 'circle' | 'rectangle';
-  color: 'red' | 'green' | 'blue';
+  color: Color;
   getArea(): number;
 }
 
@@ -8,7 +10,7 @@ export class Triangle implements Figure {
   shape: 'triangle';
 
   constructor(
-    public color: 'red' | 'green' | 'blue',
+    public color: Color,
     public a: number,
     public b: number,
     public c: number,
@@ -38,7 +40,7 @@ export class Circle implements Figure {
   shape: 'circle';
 
   constructor(
-    public color: 'red' | 'green' | 'blue',
+    public color: Color,
     public radius: number,
   ) {
     this.color = color;
@@ -51,10 +53,9 @@ export class Circle implements Figure {
   }
 
   getArea(): number {
-    // i know it not good but i don't know how rigth rounded down
-    return +(3.1415 * +((this.radius ** 2))
-      .toFixed(2))
-      .toFixed(2);
+    const area = Math.PI * (this.radius ** 2);
+
+    return Math.floor(area * 100) / 100;
   }
 }
 
@@ -62,7 +63,7 @@ export class Rectangle implements Figure {
   shape: 'rectangle';
 
   constructor(
-    public color: 'red' | 'green' | 'blue',
+    public color: Color,
     public heigth: number,
     public width: number,
   ) {
@@ -77,7 +78,7 @@ export class Rectangle implements Figure {
   }
 
   getArea(): number {
-    return +(this.heigth * this.width).toFixed(2);
+    return Math.floor(this.heigth * this.width);
   }
 }
 
