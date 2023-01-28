@@ -1,6 +1,18 @@
+enum Shape {
+  triangle = 'triangle',
+  rectangle = 'rectangle',
+  circle = 'circle',
+}
+
+enum Color {
+  red = 'red',
+  green = 'green',
+  blue = 'blue',
+}
+
 export interface Figure {
-  shape: string;
-  color: string;
+  shape: Shape;
+  color: Color;
   getArea: () => number;
 }
 
@@ -15,16 +27,14 @@ export function rounded(area: number): number {
 }
 
 export class Triangle implements Figure {
-  shape: string;
+  shape = Shape.triangle;
 
   constructor(
-    public color: string,
+    public color: Color,
     public firstSide: number,
     public secondSide: number,
     public thirdSide: number,
   ) {
-    this.shape = 'triangle';
-
     const sortSide = [firstSide, secondSide, thirdSide].sort((a, b) => a - b);
     const [a, b, c] = sortSide;
 
@@ -46,15 +56,13 @@ export class Triangle implements Figure {
 }
 
 export class Rectangle implements Figure {
-  shape: string;
+  shape = Shape.rectangle;
 
   constructor(
-    public color: string,
+    public color: Color,
     public firstSide: number,
     public secondSide: number,
   ) {
-    this.shape = 'rectangle';
-
     if (firstSide <= 0 || secondSide <= 0) {
       throw new Error('throws an error');
     }
@@ -68,14 +76,12 @@ export class Rectangle implements Figure {
 }
 
 export class Circle implements Figure {
-  shape: string;
+  shape = Shape.circle;
 
   constructor(
-    public color: string,
+    public color: Color,
     public hight: number,
   ) {
-    this.shape = 'circle';
-
     if (hight <= 0) {
       throw new Error(`throws an error: hight cant be ${hight}`);
     }
