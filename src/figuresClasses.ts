@@ -31,7 +31,7 @@ export class Triangle implements Figure {
     const p = (this.a + this.b + this.c) / 2;
     const area = Math.sqrt(p * (p - this.a) * (p - this.b) * (p - this.c));
 
-    return +area.toFixed(2);
+    return Math.floor(area * 100) / 100;
   }
 }
 
@@ -50,7 +50,7 @@ export class Circle {
   getArea(): number {
     const area: number = Math.PI * (this.radius ** 2);
 
-    return +area.toFixed(2);
+    return Math.floor(area * 100) / 100;
   }
 }
 
