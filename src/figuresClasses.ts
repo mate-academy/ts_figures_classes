@@ -1,87 +1,77 @@
 
-// function triangle(a: number, b: number, c: number): boolean {
-//   if (a + b < c || a + c < b || c + b < a) {
-//     return false;
-//   }
-
-//   if (a < 0 || b < 0 || c < 0) {
-//     return false;
-//   }
-
-//   return true;
-// }
-
-enum Shape {
-  triangle,
-  circle,
-  rectangle,
-}
-
-enum Color {
-  red,
-  green,
-  blue,
-}
+type Shape = 'triangle' | 'circle' | 'rectangle';
+type Color = 'red' | 'green' | 'blue';
 
 export interface Figure {
-  shape: Shape,
-  color: Color,
-  a: number,
-  b: number,
-  c: number,
-  getArea(): number,
+  shape: Shape;
+  color: Color;
+  getArea(): number
 }
 
-export class Triangle {
-  // eslint-disable-next-line no-useless-constructor
+export class Triangle implements Figure {
+  public shape: Shape = 'triangle';
+
   constructor(
-    public shape: string,
-    public color: string,
+    public color: Color,
     public a: number,
     public b: number,
     public c: number,
-  ) {}
+  ) {
+    if (this.a >= this.b + this.c
+      || this.b >= this.a + this.c || this.c >= this.a + this.b) {
+      throw new Error('enter valid data');
+    }
+
+    if (this.a <= 0 || this.b <= 0 || this.c <= 0) {
+      throw new Error('enter valid data');
+    }
+  }
 
   getArea(): number {
-    return (this.a + this.b + this.c) / 2;
+    const p = (this.a + this.b + this.c) / 2;
+    const area = Math.sqrt(p * (p - this.a) * (p - this.b) * (p - this.c));
+
+    return +area.toFixed(2);
   }
 }
 
 export class Circle {
-  // eslint-disable-next-line no-useless-constructor
+  public shape: Shape = 'circle';
+
   constructor(
-    public shape: string,
-    public color: string,
-    public r: number,
-  ) {}
+    public color: Color,
+    public radius: number,
+  ) {
+    if (this.radius <= 0) {
+      throw new Error('enter valid data');
+    }
+  }
 
   getArea(): number {
-    return Math.PI * this.r * this.r;
+    const area: number = Math.PI * (this.radius ** 2);
+
+    return +area.toFixed(2);
   }
 }
 
 export class Rectangle {
-  // eslint-disable-next-line no-useless-constructor
+  public shape: Shape = 'rectangle';
+
   constructor(
-    public shape: string,
-    public color: string,
-    public a: number,
-    public b: number,
-  ) {}
+    public color: Color,
+    public height: number,
+    public width: number,
+  ) {
+    if (this.height <= 0 || this.width <= 0) {
+      throw new Error('enter valid data');
+    }
+  }
 
   getArea(): number {
-    return this.a * this.b;
+    return this.height * this.width;
   }
 }
 
 export function getInfo(figure: Figure): string {
-  if (figure.c !== undefined) {
-    return `A ${figure.color} ${figure.shape} - ${figure.getArea()}`;
-  }
-
-  if (figure.b !== undefined) {
-    return `A ${figure.color} ${figure.shape} - ${figure.getArea()}`;
-  }
-
   return `A ${figure.color} ${figure.shape} - ${figure.getArea()}`;
 }
