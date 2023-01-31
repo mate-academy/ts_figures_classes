@@ -1,6 +1,18 @@
+enum Shape {
+  triangle = 'triangle',
+  circle = 'circle',
+  rectangle = 'rectangle',
+}
+
+enum Color {
+  red,
+  green,
+  blue,
+}
+
 export interface Figure {
-  shape: 'triangle' | 'circle' | 'rectangle',
-  color: 'red' | 'green' | 'blue',
+  shape: Shape,
+  color: Color,
   getArea(): number,
 }
 
@@ -9,10 +21,10 @@ function roundNumber(area: number): number {
 }
 
 export class Triangle {
-  shape = 'triangle';
+  shape = Shape.triangle;
 
   constructor(
-    public color: 'red' | 'green' | 'blue',
+    public color: Color,
     public a: number,
     public b: number,
     public c: number,
@@ -38,10 +50,10 @@ export class Triangle {
 }
 
 export class Circle {
-  shape = 'circle';
+  shape = Shape.circle;
 
   constructor(
-    public color: 'red' | 'green' | 'blue',
+    public color: Color,
     public radius: number,
   ) {
     if (radius <= 0) {
@@ -57,10 +69,10 @@ export class Circle {
 }
 
 export class Rectangle {
-  shape = 'rectangle';
+  shape = Shape.rectangle;
 
   constructor(
-    public color: 'red' | 'green' | 'blue',
+    public color: Color,
     public width: number,
     public height: number,
   ) {
