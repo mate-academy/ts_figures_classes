@@ -13,18 +13,18 @@ export class Triangle implements Figure {
     public b: number,
     public c: number,
   ) {
-    switch (true) {
-      case this.a <= 0:
-      case this.b <= 0:
-      case this.c <= 0:
-        throw new Error('The side length must be greater than 0');
-      case this.a >= this.b + this.c:
-      case this.b >= this.a + this.c:
-      case this.c >= this.b + this.a:
-        throw new Error(
-          'The longest side length must be less sum of other two sides',
-        );
-      default:
+    if (this.a <= 0 || this.b <= 0 || this.c <= 0) {
+      throw new Error('The side length must be greater than 0');
+    }
+
+    if (
+      this.a >= this.b + this.c
+      || this.b >= this.a + this.c
+      || this.c >= this.b + this.a
+    ) {
+      throw new Error(
+        'The longest side length must be less sum of other two sides',
+      );
     }
   }
 
@@ -43,10 +43,8 @@ export class Circle implements Figure {
   public shape: string = 'circle';
 
   constructor(public color: string, public radius: number) {
-    switch (true) {
-      case this.radius <= 0:
-        throw new Error('The radius must be greater than 0');
-      default:
+    if (this.radius <= 0) {
+      throw new Error('The radius must be greater than 0');
     }
   }
 
@@ -63,11 +61,8 @@ export class Rectangle implements Figure {
     public width: number,
     public height: number,
   ) {
-    switch (true) {
-      case this.width <= 0:
-      case this.height <= 0:
-        throw new Error('The side length must be greater than 0');
-      default:
+    if (this.width <= 0 || this.height <= 0) {
+      throw new Error('The side length must be greater than 0');
     }
   }
 
