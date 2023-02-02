@@ -52,9 +52,9 @@ export class Triangle implements Figure {
   }
 
   getArea(): number {
-    const semiPerim = (this.a + this.b + this.c) / 2;
-    const area = (semiPerim * (semiPerim - this.a) * (
-      semiPerim - this.b) * (semiPerim - this.c)) ** 0.5;
+    const semiPerimeter = (this.a + this.b + this.c) / 2;
+    const area = (semiPerimeter * (semiPerimeter - this.a) * (
+      semiPerimeter - this.b) * (semiPerimeter - this.c)) ** 0.5;
 
     return roundDown(area);
   }
