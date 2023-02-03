@@ -6,18 +6,14 @@ export interface Figure {
 }
 
 function isTrianglePossible(a: number, b: number, c:number): boolean {
-  const sum = [a, b, c];
-  const largest = Math.max(a, b, c);
+  const sides = [a, b, c];
+  const largest = Math.max(...sides);
 
-  for (let i = 0; i < 3; i += 1) {
-    if (sum[i] === largest) {
-      sum[i] = 0;
-    }
-  }
+  const twoShorterSides = sides.filter((side) => side !== largest);
+  const sumOfShorterSides
+  = twoShorterSides.reduce((total, side) => total + side, 0);
 
-  const whatIsLeft = sum.reduce((total, x) => total + x, 0);
-
-  if (largest >= whatIsLeft) {
+  if (largest >= sumOfShorterSides) {
     return false;
   }
 
@@ -48,10 +44,10 @@ export class Triangle implements Figure {
   }
 
   getArea(): number {
-    const semiP = (this.a + this.b + this.c) / 2;
+    const halfPerimeter = (this.a + this.b + this.c) / 2;
     const triangleSquare
-      = Math.sqrt(semiP * (semiP - this.a)
-      * (semiP - this.b) * (semiP - this.c));
+      = Math.sqrt(halfPerimeter * (halfPerimeter - this.a)
+      * (halfPerimeter - this.b) * (halfPerimeter - this.c));
 
     return +triangleSquare.toFixed(2);
   }
