@@ -8,7 +8,7 @@ export interface Figure {
 }
 
 const rounded = (number: number): number => {
-  return Math.floor(parseFloat(number.toString()) * 100) / 100;
+  return Math.floor(number * 100) / 100;
 };
 
 export class Triangle implements Figure {
