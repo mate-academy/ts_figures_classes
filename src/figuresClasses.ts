@@ -19,7 +19,7 @@ export class Triangle implements Figure {
     this.shape = 'triangle';
 
     if ((a + b <= c) || (a + c <= b) || (b + c <= a)) {
-      throw new Error('This is not a triangle');
+      throw new Error('This is not a correct triangle');
     }
   }
 
@@ -64,7 +64,7 @@ export class Rectangle implements Figure {
     this.shape = 'rectangle';
 
     if (this.width <= 0 || this.height <= 0) {
-      throw new Error('This is not a rectangle');
+      throw new Error('This is not a correct rectangle');
     }
   }
 
