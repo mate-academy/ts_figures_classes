@@ -19,7 +19,9 @@ export class Triangle implements Figure {
     this.shape = 'triangle';
 
     if ((a + b <= c) || (a + c <= b) || (b + c <= a)) {
-      throw new Error('This is not a correct triangle');
+      throw new Error(
+        'One side of the triangle must be less than sum of two others',
+      );
     }
   }
 
@@ -44,7 +46,7 @@ export class Circle implements Figure {
     this.shape = 'circle';
 
     if (radius <= 0) {
-      throw new Error('This is not a correct circle');
+      throw new Error('The radius of the circle must be greater than 0.');
     }
   }
 
@@ -64,7 +66,7 @@ export class Rectangle implements Figure {
     this.shape = 'rectangle';
 
     if (this.width <= 0 || this.height <= 0) {
-      throw new Error('This is not a correct rectangle');
+      throw new Error('Width and height of rectangle must be greater than 0.');
     }
   }
 
