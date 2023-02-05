@@ -28,7 +28,7 @@ export class Triangle implements Figure {
     const oppositeSides = (this.sideA + this.sideB + this.sideC) - longestSide;
 
     if (longestSide >= oppositeSides) {
-      throw new Error('Not a triangle!');
+      throw new Error('Resulting value should be even number');
     }
   }
 
