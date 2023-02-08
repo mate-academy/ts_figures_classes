@@ -2,17 +2,25 @@ function rounded(n: number): number {
   return Math.floor(n * 100) / 100;
 }
 
+enum Shape {
+  Triangle = 'triangle',
+  Circle = 'circle',
+  Rectangle = 'rectangle'
+}
+
+type Color = 'red' | 'green' | 'blue';
+
 export interface Figure {
-  shape: string;
+  shape: Shape;
   color: string;
   getArea(): number;
 }
 
 export class Triangle implements Figure {
-  shape: string;
+  shape = Shape.Triangle;
 
   constructor(
-    public color: string,
+    public color: Color,
     public a: number,
     public b: number,
     public c: number,
@@ -21,8 +29,6 @@ export class Triangle implements Figure {
     if (a <= 0 || b <= 0 || c <= 0 || this.checkSide()) {
       throw new Error('error message');
     }
-
-    this.shape = 'triangle';
   }
 
   getArea(): number {
@@ -39,17 +45,15 @@ export class Triangle implements Figure {
 }
 
 export class Circle implements Figure {
-  shape: string;
+  shape = Shape.Circle;
 
   constructor(
-    public color: string,
+    public color: Color,
     public radius: number,
   ) {
     if (radius <= 0) {
       throw new Error('error message');
     }
-
-    this.shape = 'circle';
   }
 
   getArea(): number {
@@ -58,10 +62,10 @@ export class Circle implements Figure {
 }
 
 export class Rectangle implements Figure {
-  shape: string;
+  shape = Shape.Rectangle;
 
   constructor(
-    public color: string,
+    public color: Color,
     public width: number,
     public height: number,
 
@@ -69,8 +73,6 @@ export class Rectangle implements Figure {
     if (width <= 0 || height <= 0) {
       throw new Error('error message');
     }
-
-    this.shape = 'rectangle';
   }
 
   getArea(): number {

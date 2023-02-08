@@ -7,7 +7,6 @@
     "init": "mate-scripts init",
     "start": "mate-scripts start",
     "test:only": "mate-scripts test",
-    "postinstall": "npm run update",
     "lint": "eslint src/*.ts",
     "test": "npm run lint && npm run test:only"
   },
