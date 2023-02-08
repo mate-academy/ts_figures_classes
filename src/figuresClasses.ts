@@ -12,7 +12,7 @@ type Color = 'red' | 'green' | 'blue';
 
 export interface Figure {
   shape: Shape;
-  color: string;
+  color: Color;
   getArea(): number;
 }
 
