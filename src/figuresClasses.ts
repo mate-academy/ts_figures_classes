@@ -1,7 +1,8 @@
-type Color ='red' | 'green' | 'blue';
+type Color = 'red' | 'green' | 'blue';
+type Shape = 'triangle' | 'circle' | 'rectangle';
 
 export interface Figure {
-  shape: 'triangle' | 'circle' | 'rectangle';
+  shape: Shape;
   color: Color;
   getArea(): number;
 }
@@ -15,15 +16,20 @@ export class Triangle implements Figure {
     public b: number,
     public c: number,
   ) {
-    this.color = color;
-    this.a = a;
-    this.b = b;
-    this.c = c;
     this.shape = 'triangle';
 
-    if (this.c >= this.a + this.b) {
+    if (this.c <= 0 || this.a <= 0 || this.b <= 0) {
       throw new Error(
-        'the longest side of a triangle is than a sum of two others',
+        'the side of the triangle must be bigger than zero',
+      );
+    }
+
+    if (this.c >= this.a + this.b
+      || this.a >= this.c + this.b
+      || this.b >= this.a + this.c
+    ) {
+      throw new Error(
+        'the side of a triangle is bigger than a sum of two others',
       );
     }
   }
@@ -73,7 +79,7 @@ export class Rectangle implements Figure {
     this.shape = 'rectangle';
 
     if (this.width <= 0 || this.heigth <= 0) {
-      throw new Error('width and heigth could more than 0');
+      throw new Error('width and heigth must be more than 0');
     }
   }
 
