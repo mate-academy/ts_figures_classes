@@ -11,7 +11,7 @@ hundredths.
 In addition to a `color` constructors should accept required data:
 - sides `a`, `b` and `c` for a triangle;
 - a `radius` for a circle;
-- a `width` and a `height` for a rectangle.
+- a `widthany length is <= 0` and a `height` for a rectangle.
 
 The constructors should `throw new Error('your error message')` if:
 - any length is <= 0
