@@ -12,20 +12,30 @@ export interface Figure {
 }
 
 export class Triangle implements Figure {
-  shape: Shape = 'triangle';
-
   constructor(
-    public color: Color,
+    public color: Figure['color'],
     public a: number,
     public b: number,
     public c: number,
+    public shape: Figure['shape'] = 'triangle',
   ) {
-    const sides = [a, b, c].sort((d, e) => d - e);
-
-    if (sides[2] >= sides[0] + sides[1]
-        || sides.some((side) => side <= 0)
+    if (
+      a.toString().length <= 0
+      || b.toString().length <= 0
+      || c.toString().length <= 0
     ) {
       throw new Error('Invalid value');
+    }
+
+    const arrayOfSides: number[] = [];
+
+    arrayOfSides.push(a, b, c);
+    arrayOfSides.sort((first, second) => second - first);
+
+    const sumOfTwoSides: number = arrayOfSides[1] + arrayOfSides[2];
+
+    if (arrayOfSides[0] >= sumOfTwoSides) {
+      throw new Error('longest side must be >= sum of two others');
     }
   }
 
