@@ -25,6 +25,7 @@ module.exports = {
     '@typescript-eslint/indent': ['error', 2],
     '@typescript-eslint/explicit-function-return-type': 'error',
     '@typescript-eslint/no-explicit-any': 'error',
+    '@typescript-eslint/lines-between-class-members': 'off',
     'max-classes-per-file': 'off',
     'no-new': 'off',
   },
