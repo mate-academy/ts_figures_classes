@@ -1,7 +1,13 @@
 export interface Figure {
   shape: string;
   color: string;
-  getArea(): number;
+  getArea: () => number;
+}
+
+enum Shapes {
+  triangle = 'triangle',
+  rectangle = 'rectangle',
+  circle = 'circle',
 }
 
 export function getInfo(figure: Figure): string {
@@ -9,10 +15,8 @@ export function getInfo(figure: Figure): string {
 }
 
 export class Triangle implements Figure {
-  shape = 'triangle';
-
+  shape = Shapes.triangle;
   color: string;
-
   sides: number[];
 
   constructor(color: string, a: number, b: number, c: number) {
@@ -38,10 +42,8 @@ export class Triangle implements Figure {
 }
 
 export class Circle implements Figure {
-  shape = 'circle';
-
+  shape = Shapes.circle;
   color: string;
-
   radius: number;
 
   constructor(color: string, radius: number) {
@@ -61,12 +63,9 @@ export class Circle implements Figure {
 }
 
 export class Rectangle implements Figure {
-  shape = 'rectangle';
-
+  shape = Shapes.rectangle;
   color: string;
-
   width: number;
-
   height: number;
 
   constructor(color: string, width: number, height: number) {
