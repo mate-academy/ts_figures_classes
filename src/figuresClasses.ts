@@ -23,17 +23,20 @@ export class Triangle implements Figure {
     }
 
     if (a <= 0 || b <= 0 || c <= 0) {
-      throw new Error('Error. One of sides less or equals 0');
+      throw new Error(`
+        Error: sides ${a}, ${b}, ${c} can't form a ${this.shape}
+      `);
     }
   }
 
   getArea(): number {
-    const s = (this.a + this.b + this.c) / 2;
-    const aDiff = s - this.a;
-    const bDiff = s - this.b;
-    const cDiff = s - this.c;
+    const { a, b, c } = this;
+    const p = (a + b + c) / 2;
+    const aDiff = p - a;
+    const bDiff = p - b;
+    const cDiff = p - c;
 
-    return Math.round(Math.sqrt(s * aDiff * bDiff * cDiff) * 100) / 100;
+    return Math.round(Math.sqrt(p * aDiff * bDiff * cDiff) * 100) / 100;
   }
 }
 
@@ -45,7 +48,7 @@ export class Circle implements Figure {
     public radius: number,
   ) {
     if (radius <= 0) {
-      throw new Error('Error. The radius is less than 0');
+      throw new Error(`Error. The radius can't form a ${this.shape}`);
     }
   }
 
@@ -63,7 +66,9 @@ export class Rectangle implements Figure {
     public height: number,
   ) {
     if (width <= 0 || height <= 0) {
-      throw new Error('Error. One of sids is less than 0');
+      throw new Error(`
+        Error. Your width and height can't form a ${this.shape}
+      `);
     }
   }
 
