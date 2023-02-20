@@ -17,11 +17,13 @@ export class Triangle implements Figure {
     public c: number,
   ) {
     if (c >= a + b || b >= a + c || a >= b + c) {
-      throw new Error('Error');
+      throw new Error(`
+        Error: sides ${a}, ${b}, ${c} can't form a ${this.shape}
+      `);
     }
 
     if (a <= 0 || b <= 0 || c <= 0) {
-      throw new Error('Error');
+      throw new Error('Error. One of sides less or equals 0');
     }
   }
 
@@ -36,7 +38,7 @@ export class Triangle implements Figure {
 }
 
 export class Circle implements Figure {
-  shape: Shape = 'circle';
+  public shape: Shape = 'circle';
 
   constructor(
     public color: Color,
@@ -53,7 +55,7 @@ export class Circle implements Figure {
 }
 
 export class Rectangle implements Figure {
-  shape: Shape = 'rectangle';
+  public shape: Shape = 'rectangle';
 
   constructor(
     public color: Color,
@@ -66,7 +68,7 @@ export class Rectangle implements Figure {
   }
 
   getArea(): number {
-    return this.width * this.height;
+    return Math.floor(this.width * this.height * 100) / 100;
   }
 }
 
