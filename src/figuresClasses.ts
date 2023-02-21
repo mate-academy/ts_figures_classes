@@ -23,26 +23,30 @@ function negativeCheck(value: number): void {
 export class Triangle implements Figure {
   constructor(
     public color: Color,
-    public a: number,
-    public b: number,
-    public c: number,
+    public firstSide: number,
+    public secondSide: number,
+    public thirdSide: number,
     public shape = Shape.Triangle,
   ) {
-    negativeCheck(a);
-    negativeCheck(b);
-    negativeCheck(c);
+    negativeCheck(firstSide);
+    negativeCheck(secondSide);
+    negativeCheck(thirdSide);
 
-    if ((a > b && a > c && a >= b + c)
-      || (b > a && b > c && b >= a + c)
-      || (c > b && c > a && c >= b + a)) {
+    const maxValue = Math.max(firstSide, secondSide, thirdSide);
+    const sumWithoutmaxValue = firstSide + secondSide + thirdSide - maxValue;
+
+    if (maxValue >= sumWithoutmaxValue) {
       throw new Error(`The longest side of a triangle 
         shouldn't be less than a sum of two others`);
     }
   }
 
   getArea(): number {
-    const p = (this.a + this.b + this.c) / 2;
-    const doubleValue = p * (p - this.a) * (p - this.b) * (p - this.c);
+    const halfPerimeter
+      = (this.firstSide + this.secondSide + this.thirdSide) / 2;
+    const doubleValue
+      = halfPerimeter * (halfPerimeter - this.firstSide)
+      * (halfPerimeter - this.secondSide) * (halfPerimeter - this.thirdSide);
 
     return validSquare(Math.sqrt(doubleValue));
   }
