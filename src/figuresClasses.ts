@@ -15,14 +15,29 @@ export interface Figure {
   getArea(): number;
 }
 
+function roundedDown(number: number): number {
+  return Math.floor(number * 100) / 100;
+}
+
+function negativeNumber(numbers: number[]):boolean {
+  const validNumbers = numbers.filter((num) => num <= 0);
+
+  if (validNumbers.length <= 0) {
+    return false;
+  }
+
+  throw new Error('all numbers must be positive');
+}
+
 export class Triangle implements Figure {
   public shape = Shape.triangle;
 
   getArea(): number {
-    const s = 0.5 * (this.a + this.b + this.c);
-    const A = Math.sqrt(s * (s - this.a) * (s - this.b) * (s - this.c));
+    const semiperimeter = 0.5 * (this.a + this.b + this.c);
+    const areaA = Math.sqrt(semiperimeter * (semiperimeter - this.a)
+    * (semiperimeter - this.b) * (semiperimeter - this.c));
 
-    return Math.floor(A * 100) / 100;
+    return roundedDown(areaA);
   }
 
   constructor(
@@ -32,11 +47,13 @@ export class Triangle implements Figure {
     public c: number,
   ) {
     const arraySides = [a, b, c];
-    const positiveFilter = arraySides.filter((num) => num <= 0);
     const sides = arraySides.sort((current, next) => next - current);
 
-    if (positiveFilter.length > 0 || sides[0] >= sides[1] + sides[2]) {
-      throw new Error('can`t formed triangle');
+    negativeNumber(arraySides);
+
+    if (sides[0] >= sides[1] + sides[2]) {
+      throw new Error(`the longest side of a triangle is more or equal
+      than a sum of two others`);
     }
   }
 }
@@ -45,16 +62,14 @@ export class Circle implements Figure {
   public shape = Shape.circle;
 
   getArea():number {
-    return Math.floor(this.radius ** 2 * Math.PI * 100) / 100;
+    return roundedDown(this.radius ** 2 * Math.PI);
   }
 
   constructor(
     public color: Color,
     public radius: number,
   ) {
-    if (radius <= 0) {
-      throw new Error('radius must be positive number');
-    }
+    negativeNumber([radius]);
   }
 }
 
@@ -62,7 +77,7 @@ export class Rectangle implements Figure {
   public shape = Shape.rectangle;
 
   getArea():number {
-    return Math.floor(this.width * this.height);
+    return roundedDown(this.width * this.height);
   }
 
   constructor(
@@ -70,9 +85,7 @@ export class Rectangle implements Figure {
     public width: number,
     public height: number,
   ) {
-    if (width <= 0 || height <= 0) {
-      throw new Error('all sides must be positive numbers');
-    }
+    negativeNumber([width, height]);
   }
 }
 
