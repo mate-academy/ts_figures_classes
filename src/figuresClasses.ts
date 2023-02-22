@@ -21,12 +21,13 @@ function negativeCheck(value: number): void {
   }
 }
 export class Triangle implements Figure {
+  public shape: Shape = Shape.Triangle;
+
   constructor(
     public color: Color,
     public firstSide: number,
     public secondSide: number,
     public thirdSide: number,
-    public shape = Shape.Triangle,
   ) {
     negativeCheck(firstSide);
     negativeCheck(secondSide);
@@ -53,10 +54,11 @@ export class Triangle implements Figure {
 }
 
 export class Circle implements Figure {
+  public shape: Shape = Shape.Circle;
+
   constructor(
     public color: Color,
     public radius: number,
-    public shape = Shape.Circle,
   ) {
     negativeCheck(radius);
   }
@@ -67,11 +69,12 @@ export class Circle implements Figure {
 }
 
 export class Rectangle implements Figure {
+  public shape: Shape = Shape.Rectangle;
+
   constructor(
     public color: Color,
     public width: number,
     public height: number,
-    public shape = Shape.Rectangle,
   ) {
     negativeCheck(width);
     negativeCheck(height);
