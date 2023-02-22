@@ -4,11 +4,7 @@ enum Shape {
   rectangle = 'rectangle',
 }
 
-enum Color {
-  red = 'red',
-  green = 'green',
-  blue = 'blue'
-}
+type Color = 'red' | 'green' | 'blue';
 
 export interface Figure {
   shape: Shape;
@@ -26,8 +22,7 @@ export class Triangle implements Figure {
     public c: number,
   ) {
     if (c >= a + b || b >= a + c || a >= b + c) {
-      throw new Error(`The longest side of a triangle 
-        shouldn't be less than a sum of two others`);
+      throw new Error('Not a triangle');
     }
 
     if (a <= 0 || b <= 0 || c <= 0) {
@@ -67,7 +62,7 @@ export class Rectangle implements Figure {
     public width: number,
     public height: number,
   ) {
-    if (width <= 0 || height <= 0) {
+    if (width < 0 || height < 0) {
       throw new Error('Error. One of sids is less than 0');
     }
   }
