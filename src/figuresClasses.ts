@@ -1,21 +1,45 @@
 // import { getTypeParameterOwner } from 'typescript';
 
+enum ShapeType {
+  Triangle = 'triangle',
+  Circle = 'circle',
+  Rectangle = 'rectangle',
+}
+
+enum ColorType {
+  Red = 'red',
+  Green = 'green',
+  Blue = 'blue',
+}
+
 export interface Figure {
-  shape: string;
-  color: string;
+  shape: ShapeType;
+  color: ColorType;
   getArea(): number;
 }
 
 export class Triangle implements Figure {
-  shape = 'triangle';
+  shape = ShapeType.Triangle;
 
   constructor(
-    public color: string,
-    public a: number,
-    public b: number,
-    public c: number,
+    color: ColorType,
+    private a: number,
+    private b: number,
+    private c: number,
   ) {
-    const sides = [a, b, c];
+    this.validateSides();
+    this.color = color;
+  }
+
+  getArea(): number {
+    const { a, b, c } = this;
+    const s = (a + b + c) / 2;
+
+    return Math.floor(Math.sqrt(s * (s - a) * (s - b) * (s - c)) * 100) / 100;
+  }
+
+  private validateSides(): void {
+    const sides = [this.a, this.b, this.c];
 
     if (sides.some((side) => side <= 0)) {
       throw new Error('All sides must have positive length');
@@ -27,21 +51,14 @@ export class Triangle implements Figure {
       );
     }
   }
-
-  getArea(): number {
-    const { a, b, c } = this;
-    const s = (a + b + c) / 2;
-
-    return Math.floor(Math.sqrt(s * (s - a) * (s - b) * (s - c)) * 100) / 100;
-  }
 }
 
-export class Circle {
-  shape = 'circle';
+export class Circle implements Figure {
+  shape = ShapeType.Circle;
 
   constructor(
-    public color: string,
-    public radius: number,
+    public color: ColorType,
+    private radius: number,
   ) {
     if (radius <= 0) {
       throw new Error('Radius must have a positive length');
@@ -53,23 +70,27 @@ export class Circle {
   }
 }
 
-export class Rectangle {
-  shape = 'rectangle';
+export class Rectangle implements Figure {
+  shape = ShapeType.Rectangle;
 
   constructor(
-    public color: string,
-    public width: number,
-    public height: number,
+    public color: ColorType,
+    private width: number,
+    private height: number,
   ) {
-    const dim = [width, height];
-
-    if (dim.some((el) => el <= 0)) {
-      throw new Error('All sides must have a positive length');
-    }
+    this.validateSides();
   }
 
   getArea(): number {
     return Math.floor(this.width * this.height);
+  }
+
+  private validateSides(): void {
+    const dim = [this.width * this.height];
+
+    if (dim.some((el) => el <= 0)) {
+      throw new Error('All sides must have a positive length');
+    }
   }
 }
 
