@@ -31,12 +31,12 @@ export class Triangle implements Figure {
   }
 
   getArea(): number {
-    const s = (this.a + this.b + this.c) / 2;
-    const aDiff = s - this.a;
-    const bDiff = s - this.b;
-    const cDiff = s - this.c;
+    const p = (this.a + this.b + this.c) / 2;
+    const aDiff = p - this.a;
+    const bDiff = p - this.b;
+    const cDiff = p - this.c;
 
-    return Math.round(Math.sqrt(s * aDiff * bDiff * cDiff) * 100) / 100;
+    return Math.round(Math.sqrt(p * aDiff * bDiff * cDiff) * 100) / 100;
   }
 }
 
@@ -62,8 +62,8 @@ export class Rectangle implements Figure {
     public width: number,
     public height: number,
   ) {
-    if (width < 0 || height < 0) {
-      throw new Error('Error. One of sids is less than 0');
+    if (width <= 0 || height <= 0) {
+      throw new Error('Width or height length cannot be zero or less');
     }
   }
 
