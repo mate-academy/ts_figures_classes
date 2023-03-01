@@ -1,22 +1,39 @@
-type ShapesType = 'triangle' | 'circle' | 'rectangle';
-type ColorsType = 'red' | 'green' | 'blue';
+enum Shapes {
+  triangle = 'triangle',
+  circle = 'circle',
+  rectangle = 'rectangle'
+}
+
+type Colors = 'red' | 'green' | 'blue';
 
 export interface Figure {
-  shape : ShapesType,
-  color: ColorsType,
+  shape : Shapes,
+  color: Colors,
   getArea(): number,
 }
 
+function checkSides(...sides: number[]): void {
+  if (Math.min(...sides) <= 0) {
+    throw new Error('Sides must be more tha 0');
+  }
+}
+
+function roundArea(area: number): number {
+  return Math.floor(area * 100) / 100;
+}
+
 export class Triangle implements Figure {
-  shape : ShapesType = 'triangle';
+  shape = Shapes.triangle;
 
   constructor(
-    public color: ColorsType,
+    public color: Colors,
     public a: number = 0,
     public b: number = 0,
     public c: number = 0,
   ) {
-    if (a <= 0 || b <= 0 || c <= 0 || a + b <= c) {
+    checkSides(a, b, c);
+
+    if (a + b <= c || a + c <= b || c + b <= a) {
       throw new Error('Enter valid values');
     }
   }
@@ -25,42 +42,42 @@ export class Triangle implements Figure {
     const s = (this.a + this.b + this.c) / 2;
     const area = Math.sqrt(s * (s - this.a) * (s - this.b) * (s - this.c));
 
-    return Math.floor(area * 100) / 100;
+    return roundArea(area);
   }
 }
 
 export class Circle implements Figure {
-  shape: ShapesType = 'circle';
+  shape = Shapes.circle;
 
   constructor(
-    public color: ColorsType,
+    public color: Colors,
     public radius: number = 0,
   ) {
-    if (radius <= 0) {
-      throw new Error('Enter valid value');
-    }
+    checkSides(radius);
   }
 
   getArea(): number {
-    return Math.floor((Math.PI * this.radius ** 2) * 100) / 100;
+    const area = Math.PI * this.radius ** 2;
+
+    return roundArea(area);
   }
 }
 
 export class Rectangle implements Figure {
-  shape: ShapesType = 'rectangle';
+  shape = Shapes.rectangle;
 
   constructor(
-    public color: ColorsType,
+    public color: Colors,
     public width: number = 0,
     public height: number = 0,
   ) {
-    if (width <= 0 || height <= 0) {
-      throw new Error('Eneter valid values');
-    }
+    checkSides(width, height);
   }
 
   getArea(): number {
-    return Math.floor((this.width * this.height * 100)) / 100;
+    const area = this.width * this.height;
+
+    return roundArea(area);
   }
 }
 
