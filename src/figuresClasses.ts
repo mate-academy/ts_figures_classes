@@ -1,5 +1,16 @@
-type Shape = 'triangle' | 'circle' | 'rectangle';
+enum Shapes {
+  Triangle = 'triangle',
+  Circle = 'circle',
+  Rectangle = 'rectangle',
+}
+
 type Color = 'red' | 'green' | 'blue';
+
+export interface Figure {
+  shape: Shapes;
+  color: Color;
+  getArea: () => number;
+}
 
 function sidesLengthCheck(...sides: number[]): void {
   if (Math.min(...sides) <= 0) {
@@ -7,14 +18,12 @@ function sidesLengthCheck(...sides: number[]): void {
   }
 }
 
-export interface Figure {
-  shape: Shape;
-  color: Color;
-  getArea: () => number;
+function roundExpression(expression: number): number {
+  return Math.floor((expression) * 100) / 100;
 }
 
 export class Triangle implements Figure {
-  shape: Shape = 'triangle';
+  shape = Shapes.Triangle;
 
   constructor(
     public color: Color,
@@ -37,12 +46,12 @@ export class Triangle implements Figure {
     const area: number = Math.sqrt([this.a, this.b, this.c]
       .reduce((prev, curr) => prev * (semiP - curr), semiP));
 
-    return Math.round(area * 100) / 100;
+    return roundExpression(area);
   }
 }
 
 export class Circle implements Figure {
-  shape: Shape = 'circle';
+  shape = Shapes.Circle;
 
   constructor(
     public color: Color,
@@ -54,12 +63,12 @@ export class Circle implements Figure {
   }
 
   getArea(): number {
-    return Math.floor(Math.PI * this.radius ** 2 * 100) / 100;
+    return roundExpression(Math.PI * this.radius ** 2);
   }
 }
 
 export class Rectangle implements Figure {
-  shape: Shape = 'rectangle';
+  shape = Shapes.Rectangle;
 
   constructor(
     public color: Color,
@@ -70,7 +79,7 @@ export class Rectangle implements Figure {
   }
 
   getArea(): number {
-    return Math.round(this.width * this.height * 100) / 100;
+    return roundExpression(this.width * this.height);
   }
 }
 
