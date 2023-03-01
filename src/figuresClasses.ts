@@ -4,6 +4,8 @@ export interface Figure {
   getArea(): number;
 }
 
+const errorMessage = 'The digit cannot be less than 0 or equal to 0';
+
 export class Triangle implements Figure {
   shape = 'triangle';
 
@@ -14,7 +16,7 @@ export class Triangle implements Figure {
     public c: number,
   ) {
     if (a <= 0 || b <= 0 || c <= 0) {
-      throw new Error('The digit cannot be less than 0 or equal to 0');
+      throw new Error(errorMessage);
     }
 
     const maxSide = Math.max(a, b, c);
@@ -25,10 +27,13 @@ export class Triangle implements Figure {
   }
 
   getArea(): number {
-    const sum = 0.5 * (this.a + this.b + this.c);
+    const semiPerimeter = 0.5 * (this.a + this.b + this.c);
     const area = Math.floor(
       Math.sqrt(
-        sum * (sum - this.a) * (sum - this.b) * (sum - this.c),
+        semiPerimeter
+        * (semiPerimeter - this.a)
+        * (semiPerimeter - this.b)
+        * (semiPerimeter - this.c),
       ) * 100,
     ) / 100;
 
@@ -41,7 +46,7 @@ export class Circle implements Figure {
 
   constructor(public color: string, public radius: number) {
     if (this.radius <= 0) {
-      throw new Error('The digit cannot be less than 0 or equal to 0');
+      throw new Error(errorMessage);
     }
   }
 
@@ -59,7 +64,7 @@ export class Rectangle implements Figure {
     public height: number,
   ) {
     if (this.width <= 0 || this.height <= 0) {
-      throw new Error('The digit cannot be less than 0 or equal to 0');
+      throw new Error(errorMessage);
     }
   }
 
