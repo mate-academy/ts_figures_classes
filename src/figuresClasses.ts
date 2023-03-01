@@ -4,7 +4,11 @@ enum Shapes {
   Rectangle = 'rectangle',
 }
 
-type Color = 'red' | 'green' | 'blue';
+enum Color {
+  Red = 'red',
+  Green = 'green',
+  Blue = 'blue'
+}
 
 export interface Figure {
   shape: Shapes;
@@ -12,7 +16,7 @@ export interface Figure {
   getArea: () => number;
 }
 
-function sidesLengthCheck(...sides: number[]): void {
+function checkSidesLength(...sides: number[]): void {
   if (Math.min(...sides) <= 0) {
     throw new Error('Side lengths should always be positive numbers!');
   }
@@ -31,12 +35,12 @@ export class Triangle implements Figure {
     private b: number,
     private c: number,
   ) {
-    sidesLengthCheck(a, b, c);
+    checkSidesLength(a, b, c);
 
     if (a >= b + c || b >= c + a || c >= a + b) {
       throw new Error(
         'The sum of the lengths of any two sides of a triangle '
-        + 'is always greater than the length of the third side!',
+          + 'is always greater than the length of the third side!',
       );
     }
   }
@@ -75,7 +79,7 @@ export class Rectangle implements Figure {
     private width: number,
     private height: number,
   ) {
-    sidesLengthCheck(height, width);
+    checkSidesLength(height, width);
   }
 
   getArea(): number {
