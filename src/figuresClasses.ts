@@ -1,32 +1,40 @@
+type Shape = 'triangle' | 'circle' | 'rectangle';
+type Color = 'red' | 'green' | 'blue';
+
 export interface Figure {
-  shape: 'triangle' | 'circle' | 'rectangle',
-  color: 'red' | 'green' | 'blue',
-  getArea(): number,
+  shape: Shape;
+  color: Color;
+  getArea(): number;
 }
 
 export function checkTriangle(sides:number[]):boolean {
   const maxSide = Math.max(...sides);
-  let sum = 0;
+  const sum = sides
+    .filter((el:number) => el !== maxSide)
+    .reduce((a, b) => a + b, 0);
 
-  sides.forEach((el:number) => {
-    if (el !== maxSide) {
-      sum += el;
-    }
-  });
+  return sum <= maxSide;
+}
 
-  return sum >= maxSide;
+export function checkSides(sides:number[]):boolean {
+  return sides.some((el:number) => el <= 0);
 }
 
 export class Triangle implements Figure {
+  shape: Shape = 'triangle';
+
   constructor(
-    public shape: 'triangle',
-    public color: 'red' | 'green' | 'blue',
+    public color: Color,
     public a: number,
     public b: number,
     public c: number,
   ) {
-    if (a <= 0 || b <= 0 || c <= 0 || checkTriangle([a, b, c])) {
-      throw new Error('Incorrect data');
+    if (checkSides([a, b, c])) {
+      throw new Error('Incorrect data: non-positive sides(s)');
+    }
+
+    if (checkTriangle([a, b, c])) {
+      throw new Error('Incorrect data: not a triangle');
     }
   }
 
@@ -34,46 +42,47 @@ export class Triangle implements Figure {
     const s = (this.a + this.b + this.c) / 2;
     const area = Math.sqrt(s * ((s - this.a) * (s - this.b) * (s - this.c)));
 
-    return Math.round(100 * area) / 100;
+    return +(area).toFixed(2);
   }
 }
 
 export class Circle implements Figure {
+  shape: Shape = 'circle';
+
   constructor(
-    public shape: 'circle',
-    public color: 'red' | 'green' | 'blue',
+    public color: Color,
     public radius: number,
-    public height: number,
   ) {
-    if (radius <= 0) {
-      throw new Error('Incorrect data');
+    if (checkSides([radius])) {
+      throw new Error('Incorrect data: non-positive radius');
     }
   }
 
   getArea(): number {
-    return Math.round(Math.PI * (this.radius ** 2) * 100) / 100;
+    const res = Math.PI * (this.radius ** 2);
+
+    return +(res).toFixed(2);
   }
 }
 
 export class Rectangle implements Figure {
+  shape: Shape = 'rectangle';
+
   constructor(
-    public shape: 'rectangle',
-    public color: 'red' | 'green' | 'blue',
+    public color: Color,
     public width: number,
     public height: number,
   ) {
-    if (width <= 0 || height <= 0) {
-      throw new Error('Incorrect data');
+    if (checkSides([width, height])) {
+      throw new Error('Incorrect data: non-positive sides(s)');
     }
   }
 
   getArea(): number {
-    const square = this.width * this.height;
-
-    return Math.round((square * 100) / 100);
+    return +(this.width * this.height).toFixed(2);
   }
 }
 
-export function getInfo(figure:Figure): string {
+export function getInfo(figure:Figure):string {
   return `A ${figure.color} ${figure.shape} - ${figure.getArea()}`;
 }
