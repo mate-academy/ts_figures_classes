@@ -1,24 +1,20 @@
+type Shape = 'triangle' | 'circle' | 'rectangle';
+type Color = 'red' | 'green' | 'blue';
 export interface Figure {
-  shape: 'triangle' | 'circle' | 'rectangle';
-  color: 'red' | 'green' | 'blue';
+  shape: Shape;
+  color: Color;
   getArea(): number;
 }
 
 export class Triangle implements Figure {
-  shape: 'triangle' = 'triangle';
+  shape: Shape = 'triangle';
 
-  color: 'red' | 'green' | 'blue';
-
-  a: number;
-
-  b: number;
-
-  c: number;
-
-  constructor(color: 'red'
-  | 'green'
-  | 'blue',
-  a: number, b: number, c: number) {
+  constructor(
+    public color: Color,
+    public a: number,
+    public b: number,
+    public c: number,
+  ) {
     this.color = color;
     this.a = a;
     this.b = b;
@@ -29,7 +25,8 @@ export class Triangle implements Figure {
     }
 
     if (this.a + this.b <= this.c
-      || this.a + this.c <= this.b || this.b + this.c <= this.a) {
+      || this.a + this.c <= this.b
+      || this.b + this.c <= this.a) {
       throw new Error('Invalid triangle sides');
     }
   }
@@ -38,18 +35,17 @@ export class Triangle implements Figure {
     const semiP = (this.a + this.b + this.c) / 2;
 
     return +(Math.sqrt(semiP * (semiP - this.a) * (semiP - this.b)
-    * (semiP - this.c))).toFixed(2);
+      * (semiP - this.c))).toFixed(2);
   }
 }
 
 export class Circle implements Figure {
-  shape: 'circle' = 'circle';
+  shape: Shape = 'circle';
 
-  color: 'red' | 'green' | 'blue';
-
-  radius: number;
-
-  constructor(color: 'red' | 'green' | 'blue', radius: number) {
+  constructor(
+    public color: Color,
+    public radius: number,
+  ) {
     this.color = color;
     this.radius = radius;
 
@@ -66,15 +62,13 @@ export class Circle implements Figure {
 }
 
 export class Rectangle implements Figure {
-  shape: 'rectangle' = 'rectangle';
+  shape: Shape = 'rectangle';
 
-  color: 'red' | 'green' | 'blue';
-
-  width: number;
-
-  height: number;
-
-  constructor(color: 'red' | 'green' | 'blue', width: number, height: number) {
+  constructor(
+    public color: Color,
+    public width: number,
+    public height: number,
+  ) {
     this.color = color;
     this.width = width;
     this.height = height;
