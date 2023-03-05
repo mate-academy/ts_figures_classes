@@ -12,14 +12,11 @@ export interface Figure {
   getArea(): number;
 }
 
-function validateLengthes(...lengthes: number[]): void {
-  const maxSide = Math.max(...lengthes);
-  const sidesSum = lengthes.reduce((a, b) => a + b, 0);
+function hasZeroSize(...lengthes: number[]): void {
   const hasNullSize = lengthes.some((number) => number <= 0);
-  const hasImpossibleSize = maxSide >= sidesSum - maxSide;
 
-  if (hasNullSize || (lengthes.length === 3 && hasImpossibleSize)) {
-    throw new Error('impossible sides of figure');
+  if (hasNullSize) {
+    throw new Error('each side or radius must be greater than zero');
   }
 }
 
@@ -32,7 +29,15 @@ export class Triangle implements Figure {
     public b: number,
     public c: number,
   ) {
-    validateLengthes(a, b, c);
+    hasZeroSize(a, b, c);
+
+    const maxSide = Math.max(a, b, c);
+    const sidesSum = a + b + c;
+    const hasImpossibleSize = maxSide >= sidesSum - maxSide;
+
+    if (hasImpossibleSize) {
+      throw new Error('biggest side can\'t be greater that sum of another two');
+    }
   }
 
   getArea(): number {
@@ -52,7 +57,7 @@ export class Circle implements Figure {
     public color: Color,
     public radius: number,
   ) {
-    validateLengthes(this.radius);
+    hasZeroSize(radius);
   }
 
   getArea(): number {
@@ -68,7 +73,7 @@ export class Rectangle implements Figure {
     public a: number,
     public b: number,
   ) {
-    validateLengthes(a, b);
+    hasZeroSize(a, b);
   }
 
   getArea(): number {
