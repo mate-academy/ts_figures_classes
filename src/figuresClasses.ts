@@ -3,6 +3,7 @@ export interface Figure {
   shape: string,
   color: string,
   area: number,
+  getArea(a: number, b: number, c: number): void,
 }
 
 export class Triangle {
@@ -33,8 +34,8 @@ export class Circle {
     this.color = color;
   }
 
-  getArea(r: number) {
-    this.area = + (Math.PI * r**2).toFixed(2);
+  getArea(a: number) {
+    this.area = + (Math.PI * a**2).toFixed(2);
   }
 }
 
