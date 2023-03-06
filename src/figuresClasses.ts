@@ -1,5 +1,14 @@
-type Shape = 'triangle' | 'circle' | 'rectangle';
+enum Shape {
+  Triangle = 'triangle',
+  Circle = 'circle',
+  Rectangle = 'rectangle'
+}
+
 type Color = 'red' | 'green' | 'blue';
+
+function roundingArea(area: number): number {
+  return Math.floor(area * 100) / 100;
+}
 
 export interface Figure {
   shape : Shape,
@@ -8,7 +17,7 @@ export interface Figure {
 }
 
 export class Triangle implements Figure {
-  shape: Shape = 'triangle';
+  readonly shape = Shape.Triangle;
 
   constructor(
     public color: Color,
@@ -36,12 +45,12 @@ export class Triangle implements Figure {
       * (semiperimeter - this.c),
     );
 
-    return Math.floor(area * 100) / 100;
+    return roundingArea(area);
   }
 }
 
 export class Circle implements Figure {
-  shape: Shape = 'circle';
+  readonly shape = Shape.Circle;
 
   constructor(
     public color: Color,
@@ -55,12 +64,12 @@ export class Circle implements Figure {
   getArea(): number {
     const area = Math.PI * this.radius ** 2;
 
-    return Math.floor(area * 100) / 100;
+    return roundingArea(area);
   }
 }
 
 export class Rectangle implements Figure {
-  shape: Shape = 'rectangle';
+  readonly shape = Shape.Rectangle;
 
   constructor(
     public color: Color,
@@ -75,7 +84,7 @@ export class Rectangle implements Figure {
   getArea(): number {
     const area = this.width * this.height;
 
-    return Math.floor(area * 100) / 100;
+    return roundingArea(area);
   }
 }
 
