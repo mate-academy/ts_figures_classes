@@ -1,5 +1,3 @@
-/* eslint-disable comma-dangle */
-/* eslint-disable no-useless-constructor */
 
 enum Shape {
   Triangle = 'triangle',
@@ -10,9 +8,9 @@ enum Shape {
 type Color = 'red' | 'green' | 'blue';
 
 export interface Figure {
-  color: Color
-  shape: Shape
-  getArea(): number
+  color: Color;
+  shape: Shape;
+  getArea(): number;
 }
 
 function formatNumber(number: number): number {
@@ -20,7 +18,7 @@ function formatNumber(number: number): number {
 }
 
 export class Triangle implements Figure {
-  shape = Shape.Triangle;
+  readonly shape = Shape.Triangle;
 
   constructor(
     public color: Color,
@@ -30,7 +28,7 @@ export class Triangle implements Figure {
   ) {
     if (a + b <= c || a + c <= b || c + b <= a) {
       throw new Error(
-        'triangles sides must be less than the sum of the two other sides'
+        'triangles sides must be less than the sum of the two other sides',
       );
     }
 
@@ -53,11 +51,11 @@ export class Triangle implements Figure {
 }
 
 export class Circle implements Figure {
-  shape = Shape.Circle;
+  readonly shape = Shape.Circle;
 
   constructor(
     public color: Color,
-    public radius: number
+    public radius: number,
   ) {
     if (radius <= 0) {
       throw new Error('radius must be greater than zero');
@@ -70,12 +68,12 @@ export class Circle implements Figure {
 }
 
 export class Rectangle implements Figure {
-  shape = Shape.Rectangle;
+  readonly shape = Shape.Rectangle;
 
   constructor(
     public color: Color,
     public width: number,
-    public height: number
+    public height: number,
   ) {
     if (width <= 0 || height <= 0) {
       throw new Error('each side must be greater than zero');
