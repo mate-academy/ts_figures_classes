@@ -8,7 +8,7 @@ enum FigureType {
 
 export interface Figure {
   color: string;
-  shape: string;
+  shape: FigureType;
   getArea(): number;
 }
 
