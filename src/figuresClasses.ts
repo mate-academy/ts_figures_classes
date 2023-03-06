@@ -23,7 +23,7 @@ function checkSideLength(...sides: number[]): void {
 }
 
 export class Triangle implements Figure {
-  shape = Shape.triangle;
+  readonly shape = Shape.triangle;
 
   constructor(
     public color: Color,
@@ -39,18 +39,20 @@ export class Triangle implements Figure {
   }
 
   getArea(): number {
-    const p = (this.a + this.b + this.c) / 2;
+    const { a, b, c } = this;
+    const halfPerimeter = (a + b + c) / 2;
 
-    const area = Math.sqrt(
-      p * (p - this.a) * (p - this.b) * (p - this.c),
-    ) * 100;
+    const area = Math.sqrt(halfPerimeter
+      * (halfPerimeter - a)
+      * (halfPerimeter - b)
+      * (halfPerimeter - c)) * 100;
 
     return roundNumber(area);
   }
 }
 
 export class Circle implements Figure {
-  shape = Shape.circle;
+  readonly shape = Shape.circle;
 
   constructor(
     public color: Color,
@@ -69,7 +71,7 @@ export class Circle implements Figure {
 }
 
 export class Rectangle {
-  shape = Shape.rectangle;
+  readonly shape = Shape.rectangle;
 
   constructor(
     public color: Color,
