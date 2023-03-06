@@ -20,8 +20,12 @@ function hasZeroSize(...lengthes: number[]): void {
   }
 }
 
+function roundNumber(number: number): number {
+  return Math.floor(number * 100) / 100;
+}
+
 export class Triangle implements Figure {
-  shape = Shape.Triangle;
+  readonly shape = Shape.Triangle;
 
   constructor(
     public color: Color,
@@ -41,17 +45,19 @@ export class Triangle implements Figure {
   }
 
   getArea(): number {
-    const p = (this.a + this.b + this.c) / 2;
-    const pA = (p - this.a);
-    const pB = (p - this.b);
-    const pC = (p - this.c);
+    const semiperimeter = (this.a + this.b + this.c) / 2;
+    const spA = (semiperimeter - this.a);
+    const spB = (semiperimeter - this.b);
+    const spC = (semiperimeter - this.c);
 
-    return Math.floor(Math.sqrt(p * pA * pB * pC) * 100) / 100;
+    return roundNumber(
+      Math.sqrt(semiperimeter * spA * spB * spC),
+    );
   }
 }
 
 export class Circle implements Figure {
-  shape = Shape.Circle;
+  readonly shape = Shape.Circle;
 
   constructor(
     public color: Color,
@@ -66,7 +72,7 @@ export class Circle implements Figure {
 }
 
 export class Rectangle implements Figure {
-  shape = Shape.Rectangle;
+  readonly shape = Shape.Rectangle;
 
   constructor(
     public color: Color,
@@ -82,5 +88,10 @@ export class Rectangle implements Figure {
 }
 
 export function getInfo(figure: Figure): string {
-  return `A ${figure.color} ${figure.shape} - ${figure.getArea()}`;
+  const {
+    color,
+    shape,
+  } = figure;
+
+  return `A ${color} ${shape} - ${figure.getArea()}`;
 }
