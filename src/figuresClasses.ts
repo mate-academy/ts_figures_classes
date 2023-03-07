@@ -1,12 +1,6 @@
 type Color = 'red' | 'green' | 'blue';
 type Shape = 'triangle' | 'circle' | 'rectangle';
 
-function validateEdges(...edges: number[]): void {
-  if (edges.some((edge) => edge <= 0)) {
-    throw new Error('Any length should be <= 0');
-  }
-}
-
 export interface Figure {
   shape: Shape;
   color: Color;
@@ -14,65 +8,89 @@ export interface Figure {
   getArea(): number;
 }
 
-export class Triangle implements Figure {
-  public shape: Shape = 'triangle';
+abstract class FigureBase {
+  static roundEdgeValue(value: number): number {
+    return Math.floor(value * 100) / 100;
+  }
 
   constructor(
-    public color: Color,
-    private a: number,
-    private b: number,
-    private c: number,
+    public edges: number[],
   ) {
-    validateEdges(a, b, c);
-    this.validateTriangle();
+    this.validateEdges();
   }
 
-  getArea(): number {
-    const s = 0.5 * (this.a + this.b + this.c);
-
-    return +Math.sqrt(s * (s - this.a) * (s - this.b) * (s - this.c))
-      .toFixed(2);
-  }
-
-  private validateTriangle(): void {
-    if (
-      this.a + this.b <= this.c
-      || this.a + this.c <= this.b
-      || this.b + this.c <= this.a
-    ) {
+  public validateEdges(): void {
+    if (this.edges.some((edge) => edge <= 0)) {
       throw new Error('Any length should be <= 0');
     }
   }
 }
 
-export class Circle implements Figure {
+export class Triangle extends FigureBase implements Figure {
+  public shape: Shape = 'triangle';
+
+  constructor(
+    public color: Color,
+    ...edges: [number, number, number]
+  ) {
+    super(edges);
+    this.validateTriangle();
+  }
+
+  private validateTriangle(): void {
+    const [a, b, c] = this.edges;
+
+    if (
+      a + b <= c
+      || a + c <= b
+      || b + c <= a
+    ) {
+      throw new Error('The longest side of a triangle sould be'
+      + ' >= than a sum of two others');
+    }
+  }
+
+  getArea(): number {
+    const [a, b, c] = this.edges;
+    const s = 0.5 * (a + b + c);
+    const area = Math.sqrt(s * (s - a) * (s - b) * (s - c));
+
+    return FigureBase.roundEdgeValue(area);
+  }
+}
+
+export class Circle extends FigureBase implements Figure {
   public shape: Shape = 'circle';
 
   constructor(
     public color: Color,
-    private radius: number,
+    ...edges: [number]
   ) {
-    validateEdges(radius);
+    super(edges);
   }
 
   getArea(): number {
-    return +(Math.PI * this.radius * this.radius).toFixed(2);
+    const [radius] = this.edges;
+    const area = Math.PI * radius * radius;
+
+    return FigureBase.roundEdgeValue(area);
   }
 }
 
-export class Rectangle implements Figure {
+export class Rectangle extends FigureBase implements Figure {
   public shape: Shape = 'rectangle';
 
   constructor(
     public color: Color,
-    private width: number,
-    private height: number,
+    ...edges: [number, number]
   ) {
-    validateEdges(width, height);
+    super(edges);
   }
 
   getArea(): number {
-    return +(this.width * this.height).toFixed(2);
+    const [width, height] = this.edges;
+
+    return FigureBase.roundEdgeValue(width * height);
   }
 }
 
