@@ -1,13 +1,20 @@
-export interface Figure {
-  color: string,
-  a: number,
-  shape: string,
-  getArea: () => number,
-  b?: number,
-  c?: number,
+enum Shape {
+  Circle = 'circle',
+  Triangle = 'triangle',
+  Rectangle = 'rectangle',
 }
 
-type Color = 'red' | 'green' | 'blue';
+export interface Figure {
+  color: string,
+  shape: Shape,
+  getArea: () => number,
+}
+
+enum Color {
+  Red = 'red',
+  Green = 'green',
+  Blue = 'blue',
+}
 
 function isValid(...args: number[]): void {
   args.forEach((arg) => {
@@ -18,7 +25,7 @@ function isValid(...args: number[]): void {
 }
 
 export class Triangle implements Figure {
-  shape: string;
+  readonly shape = Shape.Triangle;
 
   constructor(
     public color: Color,
@@ -26,8 +33,6 @@ export class Triangle implements Figure {
     public b: number,
     public c: number,
   ) {
-    this.shape = 'triangle';
-
     isValid(a, b, c);
 
     if (a >= b + c || b >= a + c || c >= a + b) {
@@ -45,42 +50,38 @@ export class Triangle implements Figure {
 }
 
 export class Circle implements Figure {
-  shape: string;
+  readonly shape = Shape.Circle;
 
   constructor(
     public color: Color,
-    public a: number,
+    public radius: number,
   ) {
-    this.shape = 'circle';
-
-    isValid(a);
+    isValid(radius);
   }
 
   getArea(): number {
-    const { a } = this;
-    const area: number = a ** 2 * Math.PI;
+    const { radius } = this;
+    const area: number = radius ** 2 * Math.PI;
 
     return Math.floor(area * 100) / 100;
   }
 }
 
 export class Rectangle implements Figure {
-  shape: string;
+  readonly shape = Shape.Rectangle;
 
   constructor(
     public color: Color,
-    public a: number,
-    public b: number,
+    public width: number,
+    public height: number,
   ) {
-    this.shape = 'rectangle';
-
-    isValid(a, b);
+    isValid(width, height);
   }
 
   getArea(): number {
-    const { a, b } = this;
+    const { width, height } = this;
 
-    return a * b;
+    return width * height;
   }
 }
 
