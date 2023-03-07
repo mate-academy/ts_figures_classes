@@ -21,6 +21,12 @@ function formatNumber(number: number): number {
   return Math.floor(number * 100) / 100;
 }
 
+function checkLength(...args: number[]):void {
+  if (!args.every((size) => size > 0)) {
+    throw new Error('each side must be greater than zero');
+  }
+}
+
 export class Triangle implements Figure {
   readonly shape = Shape.Triangle;
 
@@ -36,9 +42,7 @@ export class Triangle implements Figure {
       );
     }
 
-    if (a <= 0 || b <= 0 || c <= 0) {
-      throw new Error('each side must be greater than zero');
-    }
+    checkLength(a, b, c);
   }
 
   getArea(): number {
@@ -61,9 +65,7 @@ export class Circle implements Figure {
     public color: Color,
     public radius: number,
   ) {
-    if (radius <= 0) {
-      throw new Error('radius must be greater than zero');
-    }
+    checkLength(radius);
   }
 
   getArea(): number {
@@ -79,9 +81,7 @@ export class Rectangle implements Figure {
     public width: number,
     public height: number,
   ) {
-    if (width <= 0 || height <= 0) {
-      throw new Error('each side must be greater than zero');
-    }
+    checkLength(width, height);
   }
 
   getArea(): number {
