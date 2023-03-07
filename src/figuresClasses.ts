@@ -7,7 +7,7 @@ enum FigureType {
 }
 
 export interface Figure {
-  color: string;
+  color: Color;
   shape: FigureType;
   getArea(): number;
 }
@@ -21,11 +21,15 @@ export class Triangle implements Figure {
     public b: number,
     public c: number,
   ) {
-    if (this.a < 1 || this.b < 1 || this.c < 1) {
+    if (a <= 0 || b <= 0 || c <= 0) {
       throw new Error('Wrong value for Triangle');
     }
 
-    if (this.a + this.b <= this.c) {
+    if (
+      a + b <= c
+      || a + c <= b
+      || b + c <= a
+    ) {
       throw new Error('Wrong value for Triangle');
     }
   }
