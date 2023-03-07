@@ -4,10 +4,20 @@ enum Shape {
   Rectangle = 'rectangle'
 }
 
-type Color = 'red' | 'green' | 'blue';
+enum Color {
+  Red = 'red',
+  Green = 'green',
+  Blue = 'blue'
+}
 
 function roundingArea(area: number): number {
   return Math.floor(area * 100) / 100;
+}
+
+function checkValidSidesValue(...parametres: number[]): void {
+  if (parametres.some((parameter) => parameter <= 0)) {
+    throw new Error('Every parameter must be bigger than 0');
+  }
 }
 
 export interface Figure {
@@ -25,9 +35,7 @@ export class Triangle implements Figure {
     public b: number = 0,
     public c: number = 0,
   ) {
-    if (a <= 0 || b <= 0 || c <= 0) {
-      throw new Error('Every side must be bigger than 0');
-    }
+    checkValidSidesValue(a, b, c);
 
     if (a + b <= c || a + c <= b || c + b <= a) {
       throw new Error(
@@ -56,9 +64,7 @@ export class Circle implements Figure {
     public color: Color,
     public radius: number = 0,
   ) {
-    if (radius <= 0) {
-      throw new Error('Radius must be bigger than 0');
-    }
+    checkValidSidesValue(radius);
   }
 
   getArea(): number {
@@ -76,9 +82,7 @@ export class Rectangle implements Figure {
     public width: number = 0,
     public height: number = 0,
   ) {
-    if (width <= 0 || height <= 0) {
-      throw new Error('Every side must be bigger than 0');
-    }
+    checkValidSidesValue(width, height);
   }
 
   getArea(): number {
