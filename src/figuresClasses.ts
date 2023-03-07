@@ -2,7 +2,7 @@ export interface Figure {
   color: string,
   a: number,
   shape: string,
-  getArea: object,
+  getArea: () => number,
   b?: number,
   c?: number,
 }
