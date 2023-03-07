@@ -17,12 +17,19 @@ export class Triangle {
   }
 
   getArea(a: number, b: number, c: number): number {
+    const bigest: number = Math.max(a, b, c);
+
+    const sum: number = a + b + c;
+    if (a <= 0 || b <= 0 || c <= 0 ||  (sum - bigest) <= bigest) {
+      throw new Error('your error message');
+    }
+
     const s: number = +((a + b + c) / 2).toFixed(2);
-    const area: number = +(Math.sqrt(s * (s - a) * (s - b) * (s - c))).toFixed(2);
+    const area: number = +Math.sqrt(s * (s - a) * (s - b) * (s - c));
 
-    this.area = area;
+    this.area = +area.toFixed(2);
 
-    return area;
+    return +area.toFixed(2);
   }
 }
 
@@ -64,6 +71,6 @@ export class Rectangle {
   }
 }
 
-export function getInfo(figure: any): string {
+export function getInfo(figure: any): unknown {
   return `A ${figure.color} ${figure.shape} - ${figure.area}`;
 }
