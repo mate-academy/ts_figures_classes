@@ -21,7 +21,7 @@ function makeRoundedNumber(number: number): number {
 }
 
 export class Triangle implements Figure {
-  shape = Shape.Triangle;
+  readonly shape = Shape.Triangle;
 
   constructor(
     public color: Color,
@@ -53,7 +53,7 @@ export class Triangle implements Figure {
 }
 
 export class Circle implements Figure {
-  shape = Shape.Circle;
+  readonly shape = Shape.Circle;
 
   constructor(
     public color: Color,
@@ -71,7 +71,7 @@ export class Circle implements Figure {
 }
 
 export class Rectangle implements Figure {
-  shape = Shape.Rectangle;
+  readonly shape = Shape.Rectangle;
 
   constructor(
     public color: Color,
