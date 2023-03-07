@@ -18,11 +18,11 @@ export class Triangle {
 
   getArea(a: number, b: number, c: number): number {
     const s: number = +((a + b + c) / 2).toFixed(2);
-    const areaTriangle: number = +(Math.sqrt(s * (s - a) * (s - b) * (s - c))).toFixed(2);
+    const area: number = +(Math.sqrt(s * (s - a) * (s - b) * (s - c))).toFixed(2);
 
-    this.area = areaTriangle;
+    this.area = area;
 
-    return areaTriangle;
+    return area;
   }
 }
 
@@ -64,7 +64,6 @@ export class Rectangle {
   }
 }
 
-export function getInfo(figure: any): {} {
-  return `A ${figure.color} ${figure.shape} - ${figure.area}`
-
+export function getInfo(figure: any): string {
+  return `A ${figure.color} ${figure.shape} - ${figure.area}`;
 }
