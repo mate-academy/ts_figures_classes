@@ -1,5 +1,14 @@
-export type Shape = 'triangle' | 'circle' | 'rectangle';
-export type Color = 'red' | 'green' | 'blue';
+export enum Shape {
+  Triangle = 'triangle',
+  Circle = 'circle',
+  Rectangle = 'rectangle'
+}
+
+export enum Color {
+  Red = 'red',
+  Green = 'green',
+  Blue = 'blue'
+}
 
 export interface Figure {
   shape: Shape;
@@ -9,32 +18,15 @@ export interface Figure {
 }
 
 export function isTriangleOk(a: number, b: number, c: number): boolean {
-  const longestSide = Math.max(a, b, c);
-  let isOk: boolean;
+  const sides = [a, b, c];
 
-  switch (longestSide) {
-    case a:
-      isOk = longestSide < (b + c);
-      break;
+  sides.sort((sideA: number, sideB: number) => sideB - sideA);
 
-    case b:
-      isOk = longestSide < (a + c);
-      break;
-
-    case c:
-      isOk = longestSide < (a + b);
-      break;
-
-    default:
-      isOk = false;
-      break;
-  }
-
-  return isOk;
+  return sides[0] < sides[1] + sides[2];
 }
 
 export class Triangle implements Figure {
-  shape: Shape;
+  readonly shape = Shape.Triangle;
 
   constructor(
     public color: Color,
@@ -45,8 +37,6 @@ export class Triangle implements Figure {
     if (a <= 0 || b <= 0 || c <= 0 || !isTriangleOk(a, b, c)) {
       throw new Error('Wrong side length!');
     }
-
-    this.shape = 'triangle';
   }
 
   getArea(): number {
@@ -63,7 +53,7 @@ export class Triangle implements Figure {
 }
 
 export class Circle implements Figure {
-  shape: Shape;
+  readonly shape = Shape.Circle;
 
   constructor(
     public color: Color,
@@ -72,8 +62,6 @@ export class Circle implements Figure {
     if (radius <= 0) {
       throw new Error('Wrong radius!');
     }
-
-    this.shape = 'circle';
   }
 
   getArea(): number {
@@ -82,7 +70,7 @@ export class Circle implements Figure {
 }
 
 export class Rectangle implements Figure {
-  shape: Shape;
+  readonly shape = Shape.Rectangle;
 
   constructor(
     public color: Color,
@@ -92,8 +80,6 @@ export class Rectangle implements Figure {
     if (width <= 0 || height <= 0) {
       throw new Error('Wrong side length!');
     }
-
-    this.shape = 'rectangle';
   }
 
   getArea(): number {
