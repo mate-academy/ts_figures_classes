@@ -11,14 +11,14 @@ enum Shape {
 }
 
 export interface Figure {
-  shape: Shape,
+  readonly shape: Shape,
   color: Color,
   getArea(): number
 }
 
-function checkData(...arr: number[]): void {
-  if (arr.some((el) => el <= 0)) {
-    throw new Error('Data can not be less then zero');
+function checkFigureProperties(...properties: number[]): void {
+  if (properties.some((property: number) => property <= 0)) {
+    throw new Error('Figure properties can not be less then zero');
   }
 }
 
@@ -29,7 +29,7 @@ export class Triangle implements Figure {
     public b: number,
     public c: number,
   ) {
-    checkData(a, b, c);
+    checkFigureProperties(a, b, c);
 
     if (a + b <= c || b + c <= a || c + a <= b) {
       throw new Error('Wrong data:'
@@ -37,7 +37,7 @@ export class Triangle implements Figure {
     }
   }
 
-  shape = Shape.Triangle;
+  readonly shape = Shape.Triangle;
 
   getArea() : number {
     const s = (this.a + this.b + this.c) / 2;
@@ -52,10 +52,10 @@ export class Circle implements Figure {
     public color: Color,
     public radius: number,
   ) {
-    checkData(radius);
+    checkFigureProperties(radius);
   }
 
-  shape = Shape.Circle;
+  readonly shape = Shape.Circle;
 
   getArea() : number {
     return Math.trunc((Math.PI * (this.radius ** 2)) * 100) / 100;
@@ -68,7 +68,7 @@ export class Rectangle {
     public width: number,
     public height: number,
   ) {
-    checkData(width, height);
+    checkFigureProperties(width, height);
   }
 
   shape = Shape.Rectangle;
