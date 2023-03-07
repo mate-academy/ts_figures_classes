@@ -1,10 +1,14 @@
 enum Shape {
-  triangle = 'triangle',
-  circle = 'circle',
-  rectangle = 'rectangle',
+  Triangle = 'triangle',
+  Circle = 'circle',
+  Rectangle = 'rectangle',
 }
 
-type Color = 'red' | 'green' | 'blue';
+enum Color {
+  Red = 'red',
+  Green = 'green',
+  Blue = 'blue',
+}
 
 export interface Figure {
   shape: Shape,
@@ -13,7 +17,7 @@ export interface Figure {
 }
 
 function roundNumber(area: number): number {
-  return Math.floor(area) / 100;
+  return Math.floor((area) * 100) / 100;
 }
 
 function checkSideLength(...sides: number[]): void {
@@ -23,7 +27,7 @@ function checkSideLength(...sides: number[]): void {
 }
 
 export class Triangle implements Figure {
-  readonly shape = Shape.triangle;
+  readonly shape = Shape.Triangle;
 
   constructor(
     public color: Color,
@@ -45,14 +49,14 @@ export class Triangle implements Figure {
     const area = Math.sqrt(halfPerimeter
       * (halfPerimeter - a)
       * (halfPerimeter - b)
-      * (halfPerimeter - c)) * 100;
+      * (halfPerimeter - c));
 
     return roundNumber(area);
   }
 }
 
 export class Circle implements Figure {
-  readonly shape = Shape.circle;
+  readonly shape = Shape.Circle;
 
   constructor(
     public color: Color,
@@ -64,14 +68,14 @@ export class Circle implements Figure {
   }
 
   getArea(): number {
-    const area = (Math.PI * (this.radius ** 2)) * 100;
+    const area = (Math.PI * (this.radius ** 2));
 
     return roundNumber(area);
   }
 }
 
 export class Rectangle {
-  readonly shape = Shape.rectangle;
+  readonly shape = Shape.Rectangle;
 
   constructor(
     public color: Color,
@@ -82,7 +86,7 @@ export class Rectangle {
   }
 
   getArea(): number {
-    const area = this.width * this.height * 100;
+    const area = this.width * this.height;
 
     return roundNumber(area);
   }
