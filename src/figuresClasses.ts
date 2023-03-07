@@ -14,13 +14,15 @@ export class Triangle {
   ) {
     this.shape = shape;
     this.color = color;
-  };
+  }
 
-  getArea(a: number, b: number, c: number) {
-    const s: number = + ((a + b + c) / 2).toFixed(2);
-    const area: number = + (Math.sqrt(s * (s - a) * (s - b) * (s - c))).toFixed(2);
+  getArea(a: number, b: number, c: number): number {
+    const s: number = +((a + b + c) / 2).toFixed(2);
+    const areaTriangle: number = +(Math.sqrt(s * (s - a) * (s - b) * (s - c))).toFixed(2);
 
-    this.area = area;
+    this.area = areaTriangle;
+
+    return areaTriangle;
   }
 }
 
@@ -34,8 +36,12 @@ export class Circle {
     this.color = color;
   }
 
-  getArea(a: number) {
-    this.area = + (Math.PI * a**2).toFixed(2);
+  getArea(a: number): number {
+    const areaCircle = +(Math.PI * a ** 2).toFixed(2);
+
+    this.area = areaCircle;
+
+    return areaCircle;
   }
 }
 
@@ -49,8 +55,12 @@ export class Rectangle {
     this.color = color;
   }
 
-  getArea(a: number, b: number) {
-    this.area = + (a * b).toFixed(2);
+  getArea(a: number, b: number): number {
+    const areaRectangle = +(a * b).toFixed(2);
+
+    this.area = areaRectangle;
+
+    return areaRectangle;
   }
 }
 
