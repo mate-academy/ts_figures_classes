@@ -59,14 +59,14 @@ export class Circle implements Figure {
     public color: Color,
     public radius: number,
   ) {
-    if ([radius].some((number) => number <= 0)) {
+    if (radius <= 0) {
       throw new Error('Error:'
       + 'The specified radius must be greater than 0');
     }
   }
 
   getArea(): number {
-    return Math.floor(Math.PI * this.radius ** 2 * 100) / 100;
+    return makeRoundedNumber(Math.PI * this.radius ** 2);
   }
 }
 
@@ -85,7 +85,7 @@ export class Rectangle implements Figure {
   }
 
   getArea(): number {
-    return this.width * this.height;
+    return makeRoundedNumber(this.width * this.height);
   }
 }
 
