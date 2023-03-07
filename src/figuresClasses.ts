@@ -36,15 +36,11 @@ export class Triangle implements Figure {
     ) {
       throw new Error('Impossible triangle');
     }
-
-    this.a = a;
-    this.b = b;
-    this.c = c;
   }
 
   getArea(): number {
-    const semi = (this.a + this.b + this.c) / 2;
     const { a, b, c } = this;
+    const semi = (a + b + c) / 2;
     const area = Math.sqrt(semi * (semi - a) * (semi - b) * (semi - c));
     const roundedArea = Math.floor(area * 100) / 100;
 
@@ -86,7 +82,10 @@ export class Rectangle implements Figure {
   }
 
   getArea(): number {
-    return this.width * this.height;
+    const area = this.width * this.height;
+    const roundedArea = Math.floor(area * 100) / 100;
+
+    return roundedArea;
   }
 }
 
