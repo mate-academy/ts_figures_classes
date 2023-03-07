@@ -12,7 +12,7 @@ type Color = 'red' | 'green' | 'blue';
 function isValid(...args: number[]): void {
   args.forEach((arg) => {
     if (arg <= 0) {
-      throw new Error('Invalid input');
+      throw new Error('Invalid input: some argument <= 0');
     }
   });
 }
@@ -31,7 +31,7 @@ export class Triangle implements Figure {
     isValid(a, b, c);
 
     if (a >= b + c || b >= a + c || c >= a + b) {
-      throw new Error('Invalid input');
+      throw new Error('Invalid input: hypotenuse >= legs sum');
     }
   }
 
