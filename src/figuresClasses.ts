@@ -16,7 +16,7 @@ enum Color {
   Blue = 'blue',
 }
 
-function isValid(...args: number[]): void {
+function checkForValidInput(...args: number[]): void {
   args.forEach((arg) => {
     if (arg <= 0) {
       throw new Error('Invalid input: some argument <= 0');
@@ -33,7 +33,7 @@ export class Triangle implements Figure {
     public b: number,
     public c: number,
   ) {
-    isValid(a, b, c);
+    checkForValidInput(a, b, c);
 
     if (a >= b + c || b >= a + c || c >= a + b) {
       throw new Error('Invalid input: hypotenuse >= legs sum');
@@ -42,8 +42,9 @@ export class Triangle implements Figure {
 
   getArea(): number {
     const { a, b, c } = this;
-    const area: number = 0.25 * Math.sqrt(((a * a + b * b + c * c) ** 2)
-      - (2 * (a ** 4 + b ** 4 + c ** 4)));
+    const area: number = Math.sqrt(
+      ((a ** 2 + b ** 2 + c ** 2) ** 2) - (2 * (a ** 4 + b ** 4 + c ** 4)),
+    ) / 4;
 
     return Number(area.toFixed(2));
   }
@@ -56,7 +57,7 @@ export class Circle implements Figure {
     public color: Color,
     public radius: number,
   ) {
-    isValid(radius);
+    checkForValidInput(radius);
   }
 
   getArea(): number {
@@ -75,7 +76,7 @@ export class Rectangle implements Figure {
     public width: number,
     public height: number,
   ) {
-    isValid(width, height);
+    checkForValidInput(width, height);
   }
 
   getArea(): number {
@@ -86,7 +87,7 @@ export class Rectangle implements Figure {
 }
 
 export function getInfo(figure: Figure): string {
-  const { color, shape }: Figure = figure;
+  const { color, shape } = figure;
 
   return `A ${color} ${shape} - ${figure.getArea()}`;
 }
