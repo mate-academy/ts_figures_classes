@@ -20,8 +20,9 @@ export class Triangle {
     const bigest: number = Math.max(a, b, c);
 
     const sum: number = a + b + c;
-    if (a <= 0 || b <= 0 || c <= 0 ||  (sum - bigest) <= bigest) {
-      throw new Error('your error message');
+
+    if (a <= 0 || b <= 0 || c <= 0 || (sum - bigest) <= bigest) {
+      throw new Error('The params should be bigger than zero.');
     }
 
     const s: number = +((a + b + c) / 2).toFixed(2);
@@ -71,6 +72,6 @@ export class Rectangle {
   }
 }
 
-export function getInfo(figure: any): unknown {
+export function getInfo(figure: Figure): string {
   return `A ${figure.color} ${figure.shape} - ${figure.area}`;
 }
