@@ -18,7 +18,7 @@ export interface Figure {
 }
 
 abstract class FigureBase {
-  static roundEdgeValue(value: number): number {
+  static roundValue(value: number): number {
     return Math.floor(value * 100) / 100;
   }
 
@@ -28,7 +28,7 @@ abstract class FigureBase {
     this.validateEdges();
   }
 
-  public validateEdges(): void {
+  protected validateEdges(): void {
     if (this.edges.some((edge) => edge <= 0)) {
       throw new Error('Any length should be <= 0');
     }
@@ -36,7 +36,7 @@ abstract class FigureBase {
 }
 
 export class Triangle extends FigureBase implements Figure {
-  public shape = Shape.Triangle;
+  readonly shape = Shape.Triangle;
 
   constructor(
     public color: Color,
@@ -64,12 +64,12 @@ export class Triangle extends FigureBase implements Figure {
     const s = 0.5 * (a + b + c);
     const area = Math.sqrt(s * (s - a) * (s - b) * (s - c));
 
-    return FigureBase.roundEdgeValue(area);
+    return FigureBase.roundValue(area);
   }
 }
 
 export class Circle extends FigureBase implements Figure {
-  public shape = Shape.Circle;
+  readonly shape = Shape.Circle;
 
   constructor(
     public color: Color,
@@ -82,12 +82,12 @@ export class Circle extends FigureBase implements Figure {
     const [radius] = this.edges;
     const area = Math.PI * radius * radius;
 
-    return FigureBase.roundEdgeValue(area);
+    return FigureBase.roundValue(area);
   }
 }
 
 export class Rectangle extends FigureBase implements Figure {
-  public shape = Shape.Rectangle;
+  readonly shape = Shape.Rectangle;
 
   constructor(
     public color: Color,
@@ -99,7 +99,7 @@ export class Rectangle extends FigureBase implements Figure {
   getArea(): number {
     const [width, height] = this.edges;
 
-    return FigureBase.roundEdgeValue(width * height);
+    return FigureBase.roundValue(width * height);
   }
 }
 
