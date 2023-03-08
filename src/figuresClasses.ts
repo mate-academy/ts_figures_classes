@@ -1,20 +1,29 @@
 enum Shapes {
   Triangle = 'triangle',
   Circle = 'circle',
-  Rectangle = 'rectangle'
+  Rectangle = 'rectangle',
 }
 
-type Colors = 'red' | 'blue' | 'green';
+enum Colors {
+  Red = 'red',
+  Blue = 'blue',
+  Green = 'green',
+}
+
 export interface Figure {
   shape: Shapes;
   color: Colors;
   getArea():number;
 }
 
-function wrongLength(...length: number[]): void {
-  if (length.some((el) => el <= 0)) {
-    throw new Error();
+function wrongLength(...figureSideLength: number[]): void {
+  if (figureSideLength.some((sideLength) => sideLength <= 0)) {
+    throw new Error('Side or radius must be greater then zero');
   }
+}
+
+function roundHelper(number: number): number {
+  return Math.floor(number * 100) / 100;
 }
 
 export class Triangle implements Figure {
@@ -29,7 +38,7 @@ export class Triangle implements Figure {
     const sides = [a, b, c].sort((first, second) => second - first);
 
     if (sides[0] >= sides[1] + sides[2]) {
-      throw new Error();
+      throw new Error('The sum of sides cant be greater then the biggest one');
     }
 
     wrongLength(a, b, c);
@@ -41,7 +50,7 @@ export class Triangle implements Figure {
     const spB = (semiPerimeter - this.b);
     const spC = (semiPerimeter - this.c);
 
-    return Math.round(Math.sqrt(semiPerimeter * spA * spB * spC) * 100) / 100;
+    return roundHelper(Math.sqrt(semiPerimeter * spA * spB * spC));
   }
 }
 
@@ -56,7 +65,7 @@ export class Circle implements Figure {
   }
 
   getArea(): number {
-    return Math.floor(this.radius ** 2 * Math.PI * 100) / 100;
+    return roundHelper(this.radius ** 2 * Math.PI);
   }
 }
 
