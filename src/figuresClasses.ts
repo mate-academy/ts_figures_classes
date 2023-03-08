@@ -17,12 +17,18 @@ export interface Figure {
   getArea(): number;
 }
 
-export function isTriangleOk(a: number, b: number, c: number): boolean {
-  const sides = [a, b, c];
+export function areCorrectLengths(...lengths: number[]): boolean {
+  return lengths.every((length: number) => length > 0);
+}
 
+export function isTriangleOk(...sides: number[]): boolean {
   sides.sort((sideA: number, sideB: number) => sideB - sideA);
 
   return sides[0] < sides[1] + sides[2];
+}
+
+export function roundToHundredths(number: number): number {
+  return Math.floor(number * 100) / 100;
 }
 
 export class Triangle implements Figure {
@@ -34,7 +40,7 @@ export class Triangle implements Figure {
     public b: number,
     public c: number,
   ) {
-    if (a <= 0 || b <= 0 || c <= 0 || !isTriangleOk(a, b, c)) {
+    if (!areCorrectLengths(a, b, c) || !isTriangleOk(a, b, c)) {
       throw new Error('Wrong side length!');
     }
   }
@@ -42,13 +48,14 @@ export class Triangle implements Figure {
   getArea(): number {
     const { a, b, c } = this;
     const semiperimeter = (a + b + c) / 2;
-
-    return Math.floor((Math.sqrt(
+    const area = Math.sqrt(
       semiperimeter
       * (semiperimeter - a)
       * (semiperimeter - b)
       * (semiperimeter - c),
-    )) * 100) / 100;
+    );
+
+    return roundToHundredths(area);
   }
 }
 
@@ -59,13 +66,15 @@ export class Circle implements Figure {
     public color: Color,
     public radius: number,
   ) {
-    if (radius <= 0) {
+    if (!areCorrectLengths(radius)) {
       throw new Error('Wrong radius!');
     }
   }
 
   getArea(): number {
-    return Math.floor((Math.PI * (this.radius ** 2)) * 100) / 100;
+    const area = Math.PI * (this.radius ** 2);
+
+    return roundToHundredths(area);
   }
 }
 
@@ -77,13 +86,15 @@ export class Rectangle implements Figure {
     public width: number,
     public height: number,
   ) {
-    if (width <= 0 || height <= 0) {
+    if (!areCorrectLengths(width, height)) {
       throw new Error('Wrong side length!');
     }
   }
 
   getArea(): number {
-    return Math.floor((this.width * this.height) * 100) / 100;
+    const area = this.width * this.height;
+
+    return roundToHundredths(area);
   }
 }
 
