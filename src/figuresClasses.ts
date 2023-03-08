@@ -43,7 +43,7 @@ export class Triangle extends BasedForm {
       .sort((aSide: number, bSide: number) => bSide - aSide);
 
     if (sortedSides[0] >= sortedSides[1] + sortedSides[2]) {
-      throw new Error('every side must be bigger than 0');
+      throw new Error('some side is uncorrect');
     }
   }
 
@@ -70,7 +70,7 @@ export class Circle extends BasedForm {
     super();
 
     if (this.radius <= 0) {
-      throw new Error('chel minyai radius');
+      throw new Error('wrong radius of circle');
     }
   }
 
@@ -92,7 +92,7 @@ export class Rectangle extends BasedForm {
     super();
 
     if (this.width <= 0 || this.height <= 0) {
-      throw new Error('chel minyai radius');
+      throw new Error('some side is to small');
     }
   }
 
