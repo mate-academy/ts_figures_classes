@@ -16,7 +16,7 @@ export interface Figure {
   getArea: () => number;
 }
 
-function arePositive(...args: number[]): void {
+function checkAllSides(...args: number[]): void {
   if (Math.min(...args) <= 0) {
     throw new Error('The length or radius cannot be negative number');
   }
@@ -27,15 +27,15 @@ function getRound(area: number): number {
 }
 
 export class Triangle {
-  shape = Shapes.Triangle;
+  readonly shape = Shapes.Triangle;
 
   constructor(
-    public color: Color,
+    readonly color: Color,
     private a: number,
     private b: number,
     private c: number,
   ) {
-    arePositive(a, b, c);
+    checkAllSides(a, b, c);
 
     const isA = a >= b + c;
     const isB = b >= c + a;
@@ -51,8 +51,10 @@ export class Triangle {
     const semiPerimeter = (a + b + c) / 2;
     const area
     = Math.sqrt(
-      semiPerimeter * (semiPerimeter - a)
-      * (semiPerimeter - b) * (semiPerimeter - c),
+      semiPerimeter
+      * (semiPerimeter - a)
+      * (semiPerimeter - b)
+      * (semiPerimeter - c),
     );
 
     return getRound(area);
@@ -60,13 +62,13 @@ export class Triangle {
 }
 
 export class Circle {
-  shape = Shapes.Circle;
+  readonly shape = Shapes.Circle;
 
   constructor(
-    public color: Color,
+    readonly color: Color,
     private radius: number,
   ) {
-    arePositive(radius);
+    checkAllSides(radius);
   }
 
   getArea(): number {
@@ -75,14 +77,14 @@ export class Circle {
 }
 
 export class Rectangle {
-  shape = Shapes.Rectangle;
+  readonly shape = Shapes.Rectangle;
 
   constructor(
-    public color: Color,
+    readonly color: Color,
     private width: number,
     private height: number,
   ) {
-    arePositive(width, height);
+    checkAllSides(width, height);
   }
 
   getArea(): number {
