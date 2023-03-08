@@ -4,7 +4,11 @@ enum Shapes {
   Rectangle = 'rectangle',
 }
 
-type Colors = 'red' | 'green' | 'blue';
+enum Colors {
+  Red = 'red',
+  Green = 'green',
+  Blue = 'blue',
+}
 
 export interface Figure {
   shape: Shapes,
@@ -12,10 +16,14 @@ export interface Figure {
   getArea(): number,
 }
 
-function validSides(...sides: number[]): void {
+function validateSides(...sides: number[]): void {
   if (sides.some((side) => side <= 0)) {
     throw new Error('Each side value should be bigger than 0!');
   }
+}
+
+function roundValue(area: number): number {
+  return Math.floor(area * 100) / 100;
 }
 
 export class Triangle implements Figure {
@@ -23,22 +31,28 @@ export class Triangle implements Figure {
 
   constructor(
     public color: Colors,
-    public a: number = 0,
-    public b: number = 0,
-    public c: number = 0,
+    public a: number,
+    public b: number,
+    public c: number,
   ) {
-    validSides(a, b, c);
+    validateSides(a, b, c);
 
     if (a + b <= c || a + c <= b || c + b <= a) {
-      throw new Error('Invalid side values!');
+      throw new Error('The longest side should be >= than a sum of two others');
     }
   }
 
   getArea(): number {
-    const s = (this.a + this.b + this.c) / 2;
-    const area = Math.sqrt(s * (s - this.a) * (s - this.b) * (s - this.c));
+    const { a, b, c } = this;
+    const semiperimeter = (a + b + c) / 2;
+    const area = Math.sqrt(
+      semiperimeter
+        * (semiperimeter - a)
+        * (semiperimeter - b)
+        * (semiperimeter - c),
+    );
 
-    return Math.floor(area * 100) / 100;
+    return roundValue(area);
   }
 }
 
@@ -47,15 +61,15 @@ export class Circle implements Figure {
 
   constructor(
     public color: Colors,
-    public radius: number = 0,
+    public radius: number,
   ) {
-    validSides(radius);
+    validateSides(radius);
   }
 
   getArea(): number {
     const area = Math.PI * this.radius ** 2;
 
-    return Math.floor(area * 100) / 100;
+    return roundValue(area);
   }
 }
 
@@ -64,14 +78,15 @@ export class Rectangle implements Figure {
 
   constructor(
     public color: Colors,
-    public a: number = 0,
-    public b: number = 0,
+    public width: number,
+    public height: number,
   ) {
-    validSides(a, b);
+    validateSides(width, height);
   }
 
   getArea(): number {
-    const area = this.a * this.b;
+    const { width, height } = this;
+    const area = width * height;
 
     return area;
   }
