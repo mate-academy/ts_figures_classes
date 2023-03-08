@@ -4,6 +4,12 @@ enum Shape {
   Rectangle = 'rectangle',
 }
 
+enum ShapeError {
+  TRIANGLE_ERROR = 'The specified sides do not form a valid triangle',
+  CIRCLE_ERROR = 'The specified radius must be greater than 0',
+  RECTANGLE_ERROR = 'The width and height must be greater than 0',
+}
+
 enum Color {
   Red = 'red',
   Green = 'green',
@@ -16,22 +22,13 @@ export interface Figure {
   getArea: () => number;
 }
 
-const TRIANGLE_ERROR = 'Error:'
-  + ' The specified sides do not form a valid triangle';
-
-const CIRCLE_ERROR = 'Error:'
-  + 'The specified radius must be greater than 0';
-
-const RECTANGLE_ERROR = 'Error:'
-  + 'The width and height must be greater than 0';
-
 function makeRoundedNumber(number: number): number {
   return Math.floor(number * 100) / 100;
 }
 
-function checkCorrectSides(...numbers: number[]): void {
+function checkCorrectParams(error: ShapeError, ...numbers: number[]): void {
   if (numbers.some((length) => length <= 0)) {
-    throw new Error(TRIANGLE_ERROR);
+    throw new Error(error);
   }
 }
 
@@ -44,14 +41,14 @@ export class Triangle implements Figure {
     public b: number,
     public c: number,
   ) {
-    checkCorrectSides(a, b, c);
+    checkCorrectParams(ShapeError.TRIANGLE_ERROR, a, b, c);
 
     if (
       a + b <= c
       || a + c <= b
       || b + c <= a
     ) {
-      throw new Error(TRIANGLE_ERROR);
+      throw new Error(ShapeError.TRIANGLE_ERROR);
     }
   }
 
@@ -76,9 +73,7 @@ export class Circle implements Figure {
     public color: Color,
     public radius: number,
   ) {
-    if (radius <= 0) {
-      throw new Error(CIRCLE_ERROR);
-    }
+    checkCorrectParams(ShapeError.CIRCLE_ERROR, radius);
   }
 
   getArea(): number {
@@ -97,9 +92,7 @@ export class Rectangle implements Figure {
     public width: number,
     public height: number,
   ) {
-    if (width <= 0 || height <= 0) {
-      throw new Error(RECTANGLE_ERROR);
-    }
+    checkCorrectParams(ShapeError.RECTANGLE_ERROR, width, height);
   }
 
   getArea(): number {
