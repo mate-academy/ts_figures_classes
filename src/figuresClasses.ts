@@ -22,11 +22,11 @@ export interface Figure {
   getArea: () => number;
 }
 
-function makeRoundedNumber(number: number): number {
+function roundNumber(number: number): number {
   return Math.floor(number * 100) / 100;
 }
 
-function checkCorrectParams(error: ShapeError, ...numbers: number[]): void {
+function validateParams(error: ShapeError, ...numbers: number[]): void {
   if (numbers.some((length) => length <= 0)) {
     throw new Error(error);
   }
@@ -41,7 +41,7 @@ export class Triangle implements Figure {
     public b: number,
     public c: number,
   ) {
-    checkCorrectParams(ShapeError.TRIANGLE_ERROR, a, b, c);
+    validateParams(ShapeError.TRIANGLE_ERROR, a, b, c);
 
     if (
       a + b <= c
@@ -59,7 +59,7 @@ export class Triangle implements Figure {
     const semiPerimeterB = semiPerimeter - b;
     const semiPerimeterC = semiPerimeter - c;
 
-    return makeRoundedNumber(Math.sqrt(semiPerimeter
+    return roundNumber(Math.sqrt(semiPerimeter
       * semiPerimeterA
       * semiPerimeterB
       * semiPerimeterC));
@@ -73,14 +73,14 @@ export class Circle implements Figure {
     public color: Color,
     public radius: number,
   ) {
-    checkCorrectParams(ShapeError.CIRCLE_ERROR, radius);
+    validateParams(ShapeError.CIRCLE_ERROR, radius);
   }
 
   getArea(): number {
     const { radius } = this;
     const circleArea = radius ** 2;
 
-    return makeRoundedNumber(Math.PI * circleArea);
+    return roundNumber(Math.PI * circleArea);
   }
 }
 
@@ -92,13 +92,13 @@ export class Rectangle implements Figure {
     public width: number,
     public height: number,
   ) {
-    checkCorrectParams(ShapeError.RECTANGLE_ERROR, width, height);
+    validateParams(ShapeError.RECTANGLE_ERROR, width, height);
   }
 
   getArea(): number {
     const { width, height } = this;
 
-    return makeRoundedNumber(width * height);
+    return roundNumber(width * height);
   }
 }
 
