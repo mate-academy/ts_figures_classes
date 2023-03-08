@@ -10,6 +10,16 @@ enum Color {
   Blue = 'blue',
 }
 
+function round(number: number): number {
+  return Math.floor(number * 100) / 100;
+}
+
+function isInvalid(...numbers: number[]): boolean {
+  return numbers.some((number): boolean => {
+    return number <= 0;
+  });
+}
+
 export interface Figure {
   shape: Shape,
   color: Color,
@@ -27,12 +37,10 @@ export class Triangle implements Figure {
     public c: number,
   ) {
     if (
-      a >= b + c
+      isInvalid(a, b, c)
+      || a >= b + c
       || b >= a + c
       || c >= a + b
-      || a <= 0
-      || b <= 0
-      || c <= 0
     ) {
       throw new Error('Impossible triangle');
     }
@@ -40,9 +48,12 @@ export class Triangle implements Figure {
 
   getArea(): number {
     const { a, b, c } = this;
-    const semi = (a + b + c) / 2;
-    const area = Math.sqrt(semi * (semi - a) * (semi - b) * (semi - c));
-    const roundedArea = Math.floor(area * 100) / 100;
+    const semiPerimeter = (a + b + c) / 2;
+    const area = Math.sqrt(semiPerimeter
+      * (semiPerimeter - a)
+      * (semiPerimeter - b)
+      * (semiPerimeter - c));
+    const roundedArea = round(area);
 
     return roundedArea;
   }
@@ -55,14 +66,14 @@ export class Circle implements Figure {
     public color: Color,
     public radius: number,
   ) {
-    if (radius <= 0) {
+    if (isInvalid(radius)) {
       throw new Error('Impossible circle');
     }
   }
 
   getArea(): number {
     const area = Math.PI * (this.radius ** 2);
-    const roundedArea = Math.floor(area * 100) / 100;
+    const roundedArea = round(area);
 
     return roundedArea;
   }
@@ -76,14 +87,14 @@ export class Rectangle implements Figure {
     public width: number,
     public height: number,
   ) {
-    if (width <= 0 || height <= 0) {
+    if (isInvalid(width, height)) {
       throw new Error('Impossible rectangle');
     }
   }
 
   getArea(): number {
     const area = this.width * this.height;
-    const roundedArea = Math.floor(area * 100) / 100;
+    const roundedArea = round(area);
 
     return roundedArea;
   }
