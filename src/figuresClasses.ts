@@ -18,7 +18,7 @@ export interface Figure {
 
 function arePositive(...args: number[]): void {
   if (Math.min(...args) <= 0) {
-    throw new Error('The length cannot be negative number');
+    throw new Error('The length or radius cannot be negative number');
   }
 }
 
@@ -42,7 +42,7 @@ export class Triangle {
     const isC = c >= a + b;
 
     if (isA || isB || isC) {
-      throw new Error('This is not a triangle, please check sides values');
+      throw new Error('This is not a triangle, please check side`s values');
     }
   }
 
