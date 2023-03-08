@@ -17,7 +17,7 @@ export interface Figure {
   getArea(): number;
 }
 
-abstract class FigureBase {
+abstract class FigureBase implements Figure {
   static roundValue(value: number): number {
     return Math.floor(value * 100) / 100;
   }
@@ -35,7 +35,7 @@ abstract class FigureBase {
   }
 }
 
-export class Triangle extends FigureBase implements Figure {
+export class Triangle extends FigureBase {
   readonly shape = Shape.Triangle;
 
   constructor(
@@ -61,14 +61,15 @@ export class Triangle extends FigureBase implements Figure {
 
   getArea(): number {
     const [a, b, c] = this.edges;
-    const s = 0.5 * (a + b + c);
-    const area = Math.sqrt(s * (s - a) * (s - b) * (s - c));
+    const semiperimeter = 0.5 * (a + b + c);
+    const area = Math.sqrt(semiperimeter * (semiperimeter - a)
+    * (semiperimeter - b) * (semiperimeter - c));
 
     return FigureBase.roundValue(area);
   }
 }
 
-export class Circle extends FigureBase implements Figure {
+export class Circle extends FigureBase {
   readonly shape = Shape.Circle;
 
   constructor(
@@ -80,13 +81,13 @@ export class Circle extends FigureBase implements Figure {
 
   getArea(): number {
     const [radius] = this.edges;
-    const area = Math.PI * radius * radius;
+    const area = Math.PI * radius ** 2;
 
     return FigureBase.roundValue(area);
   }
 }
 
-export class Rectangle extends FigureBase implements Figure {
+export class Rectangle extends FigureBase {
   readonly shape = Shape.Rectangle;
 
   constructor(
