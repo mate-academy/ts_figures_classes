@@ -32,7 +32,7 @@ abstract class BaseFigure implements Figure {
   }
 
   static roundNumber(value: number): number {
-    return Number(value.toFixed(2));
+    return Math.floor(value * 100) / 100;
   }
 }
 
@@ -107,7 +107,7 @@ export class Rectangle extends BaseFigure {
   getArea(): number {
     const { width, height } = this;
 
-    return Math.floor(width * height * 100) / 100;
+    return width * height;
   }
 }
 
