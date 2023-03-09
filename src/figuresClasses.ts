@@ -1,3 +1,9 @@
+enum Shape {
+  Triangle = 'triangle',
+  Rectangle = 'rectangle',
+  Circle = 'circle',
+}
+
 export interface Figure {
   shape: string,
   color: string,
@@ -5,7 +11,7 @@ export interface Figure {
 }
 
 export class Triangle {
-  shape = 'Triangle';
+  shape = Shape.Triangle;
 
   constructor(
     public color: string,
@@ -23,10 +29,15 @@ export class Triangle {
   }
 
   getArea(): number {
-    const p: number = (this.a + this.b + this.c) * 0.5;
+    const halfPerimeter
+    : number = (this.a + this.b + this.c) * 0.5;
 
     const s: number = Math.sqrt(
-      p * (p - this.a) * (p - this.b) * (p - this.c),
+      halfPerimeter
+       * (halfPerimeter
+         - this.a) * (halfPerimeter
+         - this.b) * (halfPerimeter
+         - this.c),
     );
 
     return Math.floor(s * 100) / 100;
@@ -34,7 +45,7 @@ export class Triangle {
 }
 
 export class Circle {
-  shape = 'Circle';
+  shape = Shape.Circle;
 
   constructor(
     public color: string,
@@ -53,7 +64,7 @@ export class Circle {
 }
 
 export class Rectangle {
-  shape = 'Rectangle';
+  shape = Shape.Rectangle;
 
   constructor(
     public color: string,
@@ -73,17 +84,5 @@ export class Rectangle {
 }
 
 export function getInfo(figure: Figure): string {
-  if (figure.shape === 'Circle') {
-    return `A ${figure.color} circle - ${figure.getArea()}`;
-  }
-
-  if (figure.shape === 'Rectangle') {
-    return `A ${figure.color} rectangle - ${figure.getArea()}`;
-  }
-
-  if (figure.shape === 'Triangle') {
-    return `A ${figure.color} triangle - ${figure.getArea()}`;
-  }
-
-  return '';
+  return `A ${figure.color} ${figure.shape} - ${figure.getArea()}`;
 }
