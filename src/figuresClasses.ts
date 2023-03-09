@@ -1,86 +1,94 @@
+enum ShapesType {
+  Triangle = 'triangle',
+  Circle = 'circle',
+  Rectangle = 'rectangle',
+}
+
+enum ColorsType {
+  Red = 'red',
+  Green = 'green',
+  Blue = 'blue',
+}
+
 export interface Figure {
-  shape: string;
-  color: string;
+  shape: ShapesType;
+  color: ColorsType;
   getArea(): number;
 }
 
+function roundArea(value: number): number {
+  return Math.floor(value * 100) / 100;
+}
+
+function isValideSide(...sides: number[]): void {
+  if (sides.some((side) => side <= 0)) {
+    throw new Error(`${ShapesType} sides must be greater than 0`);
+  }
+}
+
 export class Triangle implements Figure {
-  shape = 'triangle';
+  readonly shape = ShapesType.Triangle;
 
-  color: string;
-
-  a: number;
-
-  b: number;
-
-  c: number;
-
-  constructor(color: string, a: number, b: number, c: number) {
-    if (Math.min(a, b, c) <= 0) {
-      throw new Error('Triangle sides must be greater than 0');
-    }
+  constructor(
+    public color: ColorsType,
+    public a: number,
+    public b: number,
+    public c: number,
+  ) {
+    isValideSide(a, b, c);
 
     if (a + b <= c || a + c <= b || b + c <= a) {
       throw new Error('Triangle sides are invalid');
     }
-    this.color = color;
-    this.a = a;
-    this.b = b;
-    this.c = c;
   }
 
   getArea(): number {
-    const p = (this.a + this.b + this.c) / 2;
-    const area = Math.sqrt(p * (p - this.a) * (p - this.b) * (p - this.c));
+    const halfPerimetr = (this.a + this.b + this.c) / 2;
+    const area = Math.sqrt(
+      halfPerimetr
+      * (halfPerimetr - this.a)
+      * (halfPerimetr - this.b)
+      * (halfPerimetr - this.c),
+    );
 
-    return +(area.toFixed(2));
+    return roundArea(area);
   }
 }
 
 export class Circle implements Figure {
-  shape = 'circle';
+  readonly shape = ShapesType.Circle;
 
-  color: string;
-
-  radius: number;
-
-  constructor(color: string, radius: number) {
+  constructor(
+    public color: ColorsType,
+    public radius: number,
+  ) {
     if (radius <= 0) {
       throw new Error('Circle radius must be greater than 0');
     }
-    this.color = color;
-    this.radius = radius;
   }
 
   getArea(): number {
     const area = Math.PI * this.radius ** 2;
 
-    return Math.floor(area * 100) / 100;
+    return roundArea(area);
   }
 }
 
 export class Rectangle implements Figure {
-  shape = 'rectangle';
+  readonly shape = ShapesType.Rectangle;
 
-  color: string;
-
-  width: number;
-
-  height: number;
-
-  constructor(color: string, width: number, height: number) {
-    if (width <= 0 || height <= 0) {
-      throw new Error('Rectangle sides must be greater than 0');
-    }
-    this.color = color;
-    this.width = width;
-    this.height = height;
+  constructor(
+    public color: ColorsType,
+    public width: number,
+    public height: number,
+  ) {
+    isValideSide(width, height);
   }
 
   getArea(): number {
     const area = this.width * this.height;
 
-    return Math.floor(area * 100) / 100;
+    return roundArea(area);
   }
 }
 
