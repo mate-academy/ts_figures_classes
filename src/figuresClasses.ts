@@ -88,7 +88,7 @@ export class Circle extends BaseFigure {
   }
 
   getArea(): number {
-    return Math.floor(Math.PI * this.radius ** 2 * 100) / 100;
+    return BaseFigure.roundNumber((Math.PI * this.radius ** 2));
   }
 }
 
