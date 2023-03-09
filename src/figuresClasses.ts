@@ -18,7 +18,7 @@ export interface Figure {
 
 function checkLength(...args: number[]): void {
   if (args.some((side) => side <= 0)) {
-    throw new Error('Please, enter valid values');
+    throw new Error('Incorrect figure parameters: all values need to be > 0');
   }
 }
 
@@ -27,7 +27,7 @@ function floorArea(area: number): number {
 }
 
 export class Triangle implements Figure {
-  shape = Shape.Triangle;
+  readonly shape = Shape.Triangle;
 
   constructor(
     public color: Color,
@@ -36,7 +36,7 @@ export class Triangle implements Figure {
     public c: number,
   ) {
     if (a + b <= c || a + c <= b || b + c <= a) {
-      throw new Error('Please, enter valid values');
+      throw new Error('Incorrect figure parameters: all values need to be > 0');
     }
 
     checkLength(a, b, c);
@@ -57,7 +57,7 @@ export class Triangle implements Figure {
 }
 
 export class Circle implements Figure {
-  shape = Shape.Circle;
+  readonly shape = Shape.Circle;
 
   constructor(
     public color: Color,
@@ -76,7 +76,7 @@ export class Circle implements Figure {
 }
 
 export class Rectangle implements Figure {
-  shape = Shape.Rectangle;
+  readonly shape = Shape.Rectangle;
 
   constructor(
     public color: Color,
