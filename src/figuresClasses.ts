@@ -20,14 +20,22 @@ export function negativeLength(...length: number[]): boolean {
   return Math.min(...length) <= 0;
 }
 
-export function roundNumbers(area: number): number {
-  return Math.floor(area * 100) / 100;
-}
-
-export interface BaseFigure {
+export interface Figure {
   shape: Shapes,
   color: Colors,
   getArea(): number,
+}
+
+abstract class BaseFigure implements Figure {
+  abstract readonly shape: Shapes;
+
+  abstract color: Colors;
+
+  abstract getArea(): number;
+
+  static roundNumbers(area: number): number {
+    return Math.floor(area * 100) / 100;
+  }
 }
 
 export class Triangle implements BaseFigure {
@@ -60,7 +68,7 @@ export class Triangle implements BaseFigure {
       * (semiperimeter - c),
     );
 
-    return roundNumbers(area);
+    return BaseFigure.roundNumbers(area);
   }
 }
 
@@ -79,7 +87,7 @@ export class Circle implements BaseFigure {
   getArea(): number {
     const { radius } = this;
 
-    return roundNumbers(radius ** 2 * Math.PI);
+    return BaseFigure.roundNumbers(radius ** 2 * Math.PI);
   }
 }
 
@@ -99,7 +107,7 @@ export class Rectangle implements BaseFigure {
   getArea(): number {
     const { width, height } = this;
 
-    return roundNumbers(width * height);
+    return BaseFigure.roundNumbers(width * height);
   }
 }
 
