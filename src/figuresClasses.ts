@@ -22,6 +22,10 @@ function checkFigureProperties(...properties: number[]): void {
   }
 }
 
+function roundNumber(value :number) :number {
+  return Math.trunc(value * 100) / 100;
+}
+
 export class Triangle implements Figure {
   constructor(
     public color: Color,
@@ -40,10 +44,12 @@ export class Triangle implements Figure {
   readonly shape = Shape.Triangle;
 
   getArea() : number {
-    const s = (this.a + this.b + this.c) / 2;
+    const semiperimeter = (this.a + this.b + this.c) / 2;
 
-    return +(Math.sqrt(s * (s - this.a)
-      * (s - this.b) * (s - this.c))).toFixed(2);
+    const area = (Math.sqrt(semiperimeter * (semiperimeter - this.a)
+      * (semiperimeter - this.b) * (semiperimeter - this.c)));
+
+    return roundNumber(area);
   }
 }
 
@@ -58,7 +64,7 @@ export class Circle implements Figure {
   readonly shape = Shape.Circle;
 
   getArea() : number {
-    return Math.trunc((Math.PI * (this.radius ** 2)) * 100) / 100;
+    return roundNumber(((Math.PI * (this.radius ** 2)) * 100) / 100);
   }
 }
 
@@ -71,10 +77,10 @@ export class Rectangle {
     checkFigureProperties(width, height);
   }
 
-  shape = Shape.Rectangle;
+  readonly shape = Shape.Rectangle;
 
   getArea() : number {
-    return +(this.width * this.height).toFixed(2);
+    return roundNumber(this.width * this.height);
   }
 }
 
