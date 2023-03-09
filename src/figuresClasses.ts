@@ -61,13 +61,15 @@ export class Triangle extends BaseFigure {
   }
 
   getArea(): number {
-    const semiperimeter = (this.a + this.b + this.c) / 2;
+    const { a, b, c } = this;
+
+    const semiperimeter = (a + b + c) / 2;
 
     const area = Math.sqrt(
       semiperimeter
-      * (semiperimeter - this.a)
-      * (semiperimeter - this.b)
-      * (semiperimeter - this.c),
+      * (semiperimeter - a)
+      * (semiperimeter - b)
+      * (semiperimeter - c),
     );
 
     return BaseFigure.roundNumber(area);
@@ -103,10 +105,14 @@ export class Rectangle extends BaseFigure {
   }
 
   getArea(): number {
-    return Math.floor(this.width * this.height * 100) / 100;
+    const { width, height } = this;
+
+    return Math.floor(width * height * 100) / 100;
   }
 }
 
 export function getInfo(figure: Figure): string {
-  return `A ${figure.color} ${figure.shape} - ${figure.getArea()}`;
+  const { color, shape } = figure;
+
+  return `A ${color} ${shape} - ${figure.getArea()}`;
 }
