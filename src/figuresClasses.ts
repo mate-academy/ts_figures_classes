@@ -1,4 +1,8 @@
-type Color = 'red' | 'green' | 'blue';
+enum Color {
+  Red = 'red',
+  Green = 'green',
+  Blue = 'blue',
+}
 
 enum FigureType {
   Triangle = 'triangle',
@@ -12,8 +16,28 @@ export interface Figure {
   getArea(): number;
 }
 
+function RoundingToHundredths(number: number): number {
+  return Math.floor(number * 100) / 100;
+}
+
+function checkValue(...sides: number[]): boolean {
+  if (sides.some((side) => side <= 0)) {
+    return true;
+  }
+
+  if (sides.length === 3) {
+    const [a, b, c] = sides;
+
+    if (a + b <= c || a + c <= b || b + c <= a) {
+      return true;
+    }
+  }
+
+  return false;
+}
+
 export class Triangle implements Figure {
-  shape = FigureType.Triangle;
+  readonly shape = FigureType.Triangle;
 
   constructor(
     public color: Color,
@@ -21,64 +45,56 @@ export class Triangle implements Figure {
     public b: number,
     public c: number,
   ) {
-    if (a <= 0 || b <= 0 || c <= 0) {
-      throw new Error('Wrong value for Triangle');
-    }
-
-    if (
-      a + b <= c
-      || a + c <= b
-      || b + c <= a
-    ) {
-      throw new Error('Wrong value for Triangle');
+    if (checkValue(a, b, c)) {
+      throw new Error('Impossible to build a triangle with given sides');
     }
   }
 
   getArea(): number {
     const halfPerimeter = (this.a + this.b + this.c) / 2;
-    const square = Math.sqrt(
+    const area = Math.sqrt(
       halfPerimeter
-       * ((halfPerimeter - this.a)
+       * (halfPerimeter - this.a)
        * (halfPerimeter - this.b)
-       * (halfPerimeter - this.c)),
+       * (halfPerimeter - this.c),
     );
 
-    return Math.floor(square * 100) / 100;
+    return RoundingToHundredths(area);
   }
 }
 
 export class Circle implements Figure {
-  shape = FigureType.Circle;
+  readonly shape = FigureType.Circle;
 
   constructor(
     public color: Color,
     public radius: number,
   ) {
-    if (radius <= 0) {
-      throw new Error('Wrong value for Circle');
+    if (checkValue(radius)) {
+      throw new Error('Impossible to build a circle with given sides');
     }
   }
 
   getArea(): number {
-    return Math.floor((Math.PI * this.radius * this.radius) * 100) / 100;
+    return RoundingToHundredths(Math.PI * this.radius * this.radius);
   }
 }
 
 export class Rectangle implements Figure {
-  shape = FigureType.Rectangle;
+  readonly shape = FigureType.Rectangle;
 
   constructor(
     public color: Color,
     public width: number,
     public height: number,
   ) {
-    if (width <= 0 || height <= 0) {
-      throw new Error('Wrong value for Rectangle');
+    if (checkValue(width, height)) {
+      throw new Error('Impossible to build a rectangle with given sides');
     }
   }
 
   getArea(): number {
-    return this.width * this.height;
+    return RoundingToHundredths(this.width * this.height);
   }
 }
 
