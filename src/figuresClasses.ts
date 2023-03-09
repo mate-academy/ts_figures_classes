@@ -5,9 +5,9 @@ enum Shape {
 }
 
 enum Color {
-  Red = 'triangle',
-  Green = 'circle',
-  Blue = 'rectangle',
+  Red,
+  Green,
+  Blue,
 }
 
 export interface Figure {
@@ -16,7 +16,7 @@ export interface Figure {
   getArea(): number,
 }
 
-abstract class BaseForFigure implements Figure {
+abstract class BaseFigure implements Figure {
   abstract readonly shape: Shape;
 
   abstract color: Color;
@@ -34,7 +34,7 @@ abstract class BaseForFigure implements Figure {
   }
 }
 
-export class Triangle extends BaseForFigure {
+export class Triangle extends BaseFigure {
   readonly shape = Shape.Triangle;
 
   constructor(
@@ -59,20 +59,20 @@ export class Triangle extends BaseForFigure {
   }
 
   getArea(): number {
-    const semiP = (this.a + this.b + this.c) / 2;
+    const semiPerimeter = (this.a + this.b + this.c) / 2;
 
     const area = Math.sqrt(
-      semiP
-      * (semiP - this.a)
-      * (semiP - this.b)
-      * (semiP - this.c),
+      semiPerimeter
+      * (semiPerimeter - this.a)
+      * (semiPerimeter - this.b)
+      * (semiPerimeter - this.c),
     );
 
-    return BaseForFigure.roundNumber(area);
+    return BaseFigure.roundNumber(area);
   }
 }
 
-export class Circle extends BaseForFigure {
+export class Circle extends BaseFigure {
   readonly shape = Shape.Circle;
 
   constructor(
@@ -87,11 +87,11 @@ export class Circle extends BaseForFigure {
   getArea(): number {
     const area = Math.PI * (this.radius ** 2);
 
-    return BaseForFigure.roundNumber(area);
+    return BaseFigure.roundNumber(area);
   }
 }
 
-export class Rectangle extends BaseForFigure {
+export class Rectangle extends BaseFigure {
   readonly shape = Shape.Rectangle;
 
   constructor(
@@ -107,7 +107,7 @@ export class Rectangle extends BaseForFigure {
   getArea(): number {
     const area = this.width * this.height;
 
-    return BaseForFigure.roundNumber(area);
+    return BaseFigure.roundNumber(area);
   }
 }
 
