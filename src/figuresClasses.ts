@@ -1,77 +1,83 @@
+type Shape = 'triangle' | 'circle' | 'rectangle';
 
 export interface Figure {
-  shape: string,
+  shape: Shape,
   color: string,
   area: number,
-  getArea(a: number, b: number, c: number): void,
+  getArea(): void;
 }
 
 export class Triangle {
+  shape: Shape = 'triangle';
+
   constructor(
-    public shape: string,
     public color: string,
-    public area: number,
+    public a: number,
+    public b: number,
+    public c: number,
   ) {
-    this.shape = shape;
     this.color = color;
+    this.a = a;
+    this.b = b;
+    this.c = c;
   }
 
-  getArea(a: number, b: number, c: number): number {
-    const bigest: number = Math.max(a, b, c);
+  getArea(): number {
+    const bigest: number = Math.max(this.a, this.b, this.c);
 
-    const sum: number = a + b + c;
+    const sum: number = this.a + this.b + this.c;
 
-    if (a <= 0 || b <= 0 || c <= 0 || (sum - bigest) <= bigest) {
+    if (this.a <= 0
+      || this.b <= 0
+      || this.c <= 0
+      || (sum - bigest) <= bigest) {
       throw new Error('The params should be bigger than zero.');
     }
 
-    const s: number = +((a + b + c) / 2).toFixed(2);
-    const area: number = +Math.sqrt(s * (s - a) * (s - b) * (s - c));
-
-    this.area = +area.toFixed(2);
+    const s: number = +((this.a + this.b + this.c) / 2).toFixed(2);
+    const area: number
+    = +Math.sqrt(s * (s - this.a) * (s - this.b) * (s - this.c));
 
     return +area.toFixed(2);
   }
 }
 
 export class Circle {
+  shape: Shape = 'circle';
+
   constructor(
-    public shape: string,
     public color: string,
-    public area: number,
+    public radius: number,
   ) {
-    this.shape = shape;
     this.color = color;
+    this.radius = radius;
   }
 
-  getArea(a: number): number {
-    const areaCircle = +(Math.PI * a ** 2).toFixed(2);
-
-    this.area = areaCircle;
+  getArea(): number {
+    const areaCircle = +(Math.PI * this.radius ** 2).toFixed(2);
 
     return areaCircle;
   }
 }
 
 export class Rectangle {
+  shape: Shape = 'rectangle';
+
   constructor(
-    public shape: string,
     public color: string,
-    public area: number,
+    public width: number,
+    public height: number,
   ) {
-    this.shape = shape;
     this.color = color;
   }
 
-  getArea(a: number, b: number): number {
-    const areaRectangle = +(a * b).toFixed(2);
-
-    this.area = areaRectangle;
+  getArea(): number {
+    const areaRectangle = +(this.width * this.height).toFixed(2);
 
     return areaRectangle;
   }
 }
 
 export function getInfo(figure: Figure): string {
-  return `A ${figure.color} ${figure.shape} - ${figure.area}`;
+  return `A ${figure.color} ${figure.shape} - ${figure.getArea()}`;
 }
