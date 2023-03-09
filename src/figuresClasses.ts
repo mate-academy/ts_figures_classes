@@ -22,6 +22,14 @@ abstract class BasedForm implements Figure {
   abstract color: Color;
 
   abstract getArea(): number;
+
+  protected checkAllSides(sides: number[]): void {
+    if (sides.some((value: number) => value <= 0)) {
+      throw new Error(
+        `figure of shape ${this.shape} should have only positive params`,
+      );
+    }
+  }
 }
 
 export class Triangle extends BasedForm {
@@ -35,9 +43,7 @@ export class Triangle extends BasedForm {
   ) {
     super();
 
-    if (a <= 0 || b <= 0 || c <= 0) {
-      throw new Error('every side must be bigger than 0');
-    }
+    this.checkAllSides([a, b, c]);
 
     const sortedSides: number[] = [a, b, c]
       .sort((aSide: number, bSide: number) => bSide - aSide);
@@ -56,7 +62,7 @@ export class Triangle extends BasedForm {
       * (semiperimetr - this.c),
     );
 
-    return +(area.toFixed(2));
+    return Number(area.toFixed(2));
   }
 }
 
@@ -69,9 +75,7 @@ export class Circle extends BasedForm {
   ) {
     super();
 
-    if (this.radius <= 0) {
-      throw new Error('wrong radius of circle');
-    }
+    this.checkAllSides([radius]);
   }
 
   getArea(): number {
@@ -91,15 +95,13 @@ export class Rectangle extends BasedForm {
   ) {
     super();
 
-    if (this.width <= 0 || this.height <= 0) {
-      throw new Error('some side is to small');
-    }
+    this.checkAllSides([this.height, this.width]);
   }
 
   getArea(): number {
     const area = this.width * this.height;
 
-    return +(area.toFixed(2));
+    return Number(area.toFixed(2));
   }
 }
 
