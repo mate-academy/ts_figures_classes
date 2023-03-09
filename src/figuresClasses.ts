@@ -16,14 +16,14 @@ export class Triangle implements Figure {
     if (a <= 0 || b <= 0 || c <= 0) {
       throw new Error(
         'The length of the sides of the triangle'
-        + 'cannot be less or equal to zero'
+        + 'cannot be less or equal to zero',
       );
     }
 
     if (a + b <= c || a + c <= b || b + c <= a) {
       throw new Error(
         'The sum of two sides of a triangle cannot be'
-        + 'less than the length of the third side'
+        + 'less than the length of the third side',
       );
     }
   }
@@ -31,7 +31,7 @@ export class Triangle implements Figure {
   getArea(): number {
     const s: number = (this.a + this.b + this.c) / 2;
     const area: number = Math.sqrt(
-      s * (s - this.a) * (s - this.b) * (s - this.c)
+      s * (s - this.a) * (s - this.b) * (s - this.c),
     );
 
     return +area.toFixed(2);
@@ -48,7 +48,7 @@ export class Circle implements Figure {
     if (radius <= 0) {
       throw new Error(
         'The radius of the circle'
-        + 'cannot be less or equal to zero'
+        + 'cannot be less or equal to zero',
       );
     }
   }
@@ -71,7 +71,7 @@ export class Rectangle implements Figure {
     if (width <= 0 || height <= 0) {
       throw new Error(
         'The width or height of the rectangle'
-        + 'cannot be less or equal to zero'
+        + 'cannot be less or equal to zero',
       );
     }
   }
