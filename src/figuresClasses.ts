@@ -16,6 +16,14 @@ export function isLengthOk(...sides: number[]): boolean {
   return sides[0] < sides[1] + sides[2];
 }
 
+export function isLengthNegative(...lengths : number[]): boolean {
+  return Math.min(...lengths) <= 0;
+}
+
+export function roundToHundrets(area: number): number {
+  return Math.floor(area * 100) / 100;
+}
+
 export interface Figure {
   shape: Shapes;
   color: Colors;
@@ -32,7 +40,7 @@ export class Triangle implements Figure {
     public b: number,
     public c: number,
   ) {
-    if (Math.min(a, b, c) <= 0) {
+    if (isLengthNegative(a, b, c)) {
       throw new Error('Wrong length of the triangle sides');
     }
 
@@ -52,7 +60,7 @@ export class Triangle implements Figure {
         * (semiperimeter - c),
     );
 
-    return +area.toFixed(2);
+    return roundToHundrets(area);
   }
 }
 
@@ -63,7 +71,7 @@ export class Circle implements Figure {
     public color: Colors,
     public radius: number,
   ) {
-    if (radius <= 0) {
+    if (isLengthNegative(radius)) {
       throw new Error('Wrong length of the radius');
     }
   }
@@ -73,7 +81,7 @@ export class Circle implements Figure {
 
     const area = Math.PI * radius ** 2;
 
-    return Math.floor(area * 100) / 100;
+    return roundToHundrets(area);
   }
 }
 
@@ -85,7 +93,7 @@ export class Rectangle implements Figure {
     public width: number,
     public height: number,
   ) {
-    if (Math.min(width, height) <= 0) {
+    if (isLengthNegative(width, height)) {
       throw new Error('Wrong length of sides of rectangle');
     }
   }
@@ -93,7 +101,9 @@ export class Rectangle implements Figure {
   getArea(): number {
     const { width, height } = this;
 
-    return +(width * height).toFixed(2);
+    const area = width * height;
+
+    return roundToHundrets(area);
   }
 }
 
