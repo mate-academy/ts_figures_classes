@@ -12,21 +12,25 @@ export class Triangle implements Figure {
     public c: number,
     public shape = 'triangle',
   ) {
-    if (this.a <= 0 || this.b <= 0 || this.c <= 0) {
+    if (a <= 0 || b <= 0 || c <= 0) {
       throw new Error('Parameter is not valid');
     }
 
-    if (this.c >= this.a + this.b) {
+    if (c >= a + b
+      || b >= c + a
+      || a >= b + c) {
       throw new Error('Parameter is not valid');
     }
   }
 
   getArea(): number {
-    const semiperimeter: number = (this.a + this.b + this.c) / 2;
+    const { a, b, c } = this;
+
+    const semiperimeter: number = (a + b + c) / 2;
     const area: number = Math.sqrt(semiperimeter
-        * (semiperimeter - this.a)
-        * (semiperimeter - this.b)
-        * (semiperimeter - this.c));
+        * (semiperimeter - a)
+        * (semiperimeter - b)
+        * (semiperimeter - c));
 
     return +area.toFixed(2);
   }
@@ -38,7 +42,7 @@ export class Circle implements Figure {
     public radius: number,
     public shape = 'circle',
   ) {
-    if (this.radius <= 0) {
+    if (radius <= 0) {
       throw new Error('Parameter is not valid');
     }
   }
@@ -57,15 +61,13 @@ export class Rectangle implements Figure {
     public height: number,
     public shape = 'rectangle',
   ) {
-    if (this.width <= 0 || this.height <= 0) {
+    if (width <= 0 || height <= 0) {
       throw new Error('Parameter is not valid');
     }
   }
 
   getArea(): number {
-    const area: number = this.height * this.width;
-
-    return area;
+    return +(this.height * this.width).toFixed(2);
   }
 }
 
