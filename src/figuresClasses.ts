@@ -18,26 +18,30 @@ export interface Figure {
 
 function checkSides(shape: Shape, ...sides: number[]): void {
   if (sides.some((side) => side <= 0)) {
-    throw new Error(`Invalid ${shape}`);
+    throw new Error(
+      `Can't build ${shape} with these sides: ${sides.join(', ')}`,
+    );
   }
 
-  if (sides.length > 2) {
+  if (shape === Shape.Triangle) {
     const [a, b, c] = sides.sort(
       (prev, next) => prev - next,
     );
 
     if (c >= a + b) {
-      throw new Error(`Invalid ${shape}`);
+      throw new Error(
+        `Can't build ${shape} with these sides: ${sides.join(', ')}`,
+      );
     }
   }
 }
 
-function toHundrets(area: number): number {
+function roundToHundrets(area: number): number {
   return Math.floor(area * 100) / 100;
 }
 
 export class Triangle implements Figure {
-  shape: Shape = Shape.Triangle;
+  readonly shape: Shape = Shape.Triangle;
 
   constructor(
     public color: Color,
@@ -51,7 +55,7 @@ export class Triangle implements Figure {
   getArea(): number {
     const semiPerimeter = (this.sideA + this.sideB + this.sideC) * 0.5;
 
-    return toHundrets(
+    return roundToHundrets(
       Math.sqrt(
         semiPerimeter
       * (semiPerimeter - this.sideA)
@@ -63,7 +67,7 @@ export class Triangle implements Figure {
 }
 
 export class Circle implements Figure {
-  shape: Shape = Shape.Circle;
+  readonly shape: Shape = Shape.Circle;
 
   constructor(
     public color: Color,
@@ -73,12 +77,12 @@ export class Circle implements Figure {
   }
 
   getArea(): number {
-    return toHundrets((Math.PI * (this.radius ** 2)));
+    return roundToHundrets((Math.PI * (this.radius ** 2)));
   }
 }
 
 export class Rectangle implements Figure {
-  shape: Shape = Shape.Rectangle;
+  readonly shape: Shape = Shape.Rectangle;
 
   constructor(
     public color: Color,
@@ -89,7 +93,7 @@ export class Rectangle implements Figure {
   }
 
   getArea(): number {
-    return toHundrets(this.width * this.height);
+    return roundToHundrets(this.width * this.height);
   }
 }
 
