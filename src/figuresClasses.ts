@@ -1,7 +1,7 @@
 enum Shape {
-  triangle,
-  circle,
-  rectangle
+  triangle = 'triangle',
+  circle = 'circle',
+  rectangle = 'rectangle',
 }
 
 type Color = 'red' | 'green' | 'blue';
