@@ -32,7 +32,7 @@ abstract class BaseFigure implements Figure {
   }
 
   static roundNumber(value: number): number {
-    return Number(value.toFixed(2));
+    return Math.floor(value * 100) / 100;
   }
 }
 
@@ -83,14 +83,10 @@ export class Circle extends BaseFigure {
   ) {
     super();
     this.checkAllSides([radius]);
-
-    if (radius <= 0) {
-      throw new Error('Wrong values of sides');
-    }
   }
 
   getArea(): number {
-    return Math.floor(Math.PI * this.radius ** 2 * 100) / 100;
+    return BaseFigure.roundNumber((Math.PI * this.radius ** 2));
   }
 }
 
@@ -104,14 +100,10 @@ export class Rectangle extends BaseFigure {
   ) {
     super();
     this.checkAllSides([height, width]);
-
-    if (height <= 0 || width <= 0) {
-      throw new Error('Wrong values of sides');
-    }
   }
 
   getArea(): number {
-    return Math.floor(this.width * this.height * 100) / 100;
+    return BaseFigure.roundNumber(this.width * this.height);
   }
 }
 
