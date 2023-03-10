@@ -1,74 +1,95 @@
+enum Shape {
+  Triangle = 'triangle',
+  Circle = 'circle',
+  Rectangle = 'rectangle'
+}
+
+enum Color {
+  Red = 'red',
+  Green = 'green',
+  Blue = 'blue'
+}
+
 export interface Figure {
-  shape: 'triangle' | 'circle' | 'rectangle',
-  color: 'red' | 'green' | 'blue',
-  getArea: () => number,
+  shape: Shape,
+  color: Color,
+  getArea: () => number
+}
+
+function checkSides(shape: Shape, ...sides: number[]): void {
+  if (sides.some((side) => side <= 0)) {
+    throw new Error(`Invalid ${shape}`);
+  }
+
+  if (sides.length > 2) {
+    const [a, b, c] = sides.sort(
+      (prev, next) => prev - next,
+    );
+
+    if (c >= a + b) {
+      throw new Error(`Invalid ${shape}`);
+    }
+  }
+}
+
+function toHundrets(area: number): number {
+  return Math.floor(area * 100) / 100;
 }
 
 export class Triangle implements Figure {
-  shape: 'triangle' = 'triangle';
+  shape: Shape = Shape.Triangle;
 
   constructor(
-    public color: 'red' | 'green' | 'blue',
+    public color: Color,
     public sideA: number,
     public sideB: number,
     public sideC: number,
   ) {
-    if (
-      sideA >= sideB + sideC
-      || sideB >= sideA + sideC
-      || sideC >= sideA + sideB
-      || sideA <= 0
-      || sideB <= 0
-      || sideC <= 0
-    ) {
-      throw new Error('Invalid triangle');
-    }
+    checkSides(this.shape, sideA, sideB, sideC);
   }
 
   getArea(): number {
     const semiPerimeter = (this.sideA + this.sideB + this.sideC) * 0.5;
 
-    return +Math.sqrt(
-      semiPerimeter
+    return toHundrets(
+      Math.sqrt(
+        semiPerimeter
       * (semiPerimeter - this.sideA)
       * (semiPerimeter - this.sideB)
       * (semiPerimeter - this.sideC),
-    ).toFixed(2);
+      ),
+    );
   }
 }
 
 export class Circle implements Figure {
-  shape: 'circle' = 'circle';
+  shape: Shape = Shape.Circle;
 
   constructor(
-    public color: 'red' | 'green' | 'blue',
+    public color: Color,
     public radius: number,
   ) {
-    if (radius <= 0) {
-      throw new Error('Invalid circle');
-    }
+    checkSides(this.shape, radius);
   }
 
   getArea(): number {
-    return Math.trunc((Math.PI * (this.radius ** 2)) * 100) / 100;
+    return toHundrets((Math.PI * (this.radius ** 2)));
   }
 }
 
 export class Rectangle implements Figure {
-  shape: 'rectangle' = 'rectangle';
+  shape: Shape = Shape.Rectangle;
 
   constructor(
-    public color: 'red' | 'green' | 'blue',
+    public color: Color,
     public width: number,
     public height: number,
   ) {
-    if (width <= 0 || height <= 0) {
-      throw new Error('Invalid rectangle');
-    }
+    checkSides(this.shape, width, height);
   }
 
   getArea(): number {
-    return +(this.width * this.height).toFixed(2);
+    return toHundrets(this.width * this.height);
   }
 }
 
