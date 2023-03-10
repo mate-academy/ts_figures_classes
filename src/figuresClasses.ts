@@ -1,4 +1,9 @@
-type Shape = 'triangle' | 'circle' | 'rectangle';
+enum Shape {
+  triangle,
+  circle,
+  rectangle
+}
+
 type Color = 'red' | 'green' | 'blue';
 
 export interface Figure {
@@ -8,7 +13,7 @@ export interface Figure {
 }
 
 export class Triangle {
-  shape: Shape = 'triangle';
+  shape: Shape = Shape.triangle;
 
   constructor(
     public color: Color,
@@ -17,13 +22,14 @@ export class Triangle {
     public c: number,
   ) {
     if (a <= 0 || b <= 0 || c <= 0) {
-      throw new Error(`Any length can't be <= 0`);
+      throw new Error('Any length can not be <= 0');
     }
 
     const longestSide = Math.max(a, b, c);
 
     if (longestSide >= ((a + b + c) - longestSide)) {
-      throw new Error('The longest side of a triangle should be >= than a sum of two others');
+      throw new Error('The longest side of a triangle should'
+      + 'be >= than a sum of two others');
     }
   }
 
@@ -36,14 +42,14 @@ export class Triangle {
 }
 
 export class Circle {
-  shape: Shape = 'circle';
+  shape: Shape = Shape.circle;
 
   constructor(
     public color: Color,
     public radius: number,
   ) {
     if (radius <= 0) {
-      throw new Error(`Radius can't be 0 or less`);
+      throw new Error('Radius can not be 0 or less');
     }
   }
 
@@ -53,7 +59,7 @@ export class Circle {
 }
 
 export class Rectangle {
-  shape: Shape = 'rectangle';
+  shape: Shape = Shape.rectangle;
 
   constructor(
     public color: Color,
@@ -61,7 +67,7 @@ export class Rectangle {
     public height: number,
   ) {
     if (width <= 0 || height <= 0) {
-      throw new Error(`Any length can't be <= 0`);
+      throw new Error('Any length can not be <= 0');
     }
   }
 
