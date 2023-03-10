@@ -2,12 +2,14 @@ enum Shape {
   Triangle = 'triangle',
   Circle = 'circle',
   Rectangle = 'rectangle',
+  Square = 'square'
 }
 
 enum Color {
   Red = 'triangle',
   Green = 'circle',
   Blue = 'rectangle',
+  Orange = 'square',
 }
 
 export interface Figure {
@@ -16,25 +18,21 @@ export interface Figure {
   getArea(): number,
 }
 
-abstract class BaseForFigure implements Figure {
+abstract class BaseFigure implements Figure {
   abstract readonly shape: Shape;
 
   abstract color: Color;
 
   abstract getArea(): number;
 
-  protected checkAllSides(sides: number[]): void {
+  protected checkSize(sides: number[]): void {
     if (sides.some((side) => side <= 0)) {
       throw new Error(`${this.shape} should have only positive params`);
     }
   }
-
-  static roundNumber(value: number): number {
-    return Math.floor(value * 100) / 100;
-  }
 }
 
-export class Triangle extends BaseForFigure {
+export class Triangle extends BaseFigure {
   readonly shape = Shape.Triangle;
 
   constructor(
@@ -45,7 +43,7 @@ export class Triangle extends BaseForFigure {
   ) {
     super();
 
-    this.checkAllSides([a, b, c]);
+    this.checkSize([a, b, c]);
 
     const [
       sideA,
@@ -68,11 +66,11 @@ export class Triangle extends BaseForFigure {
       * (semiP - this.c),
     );
 
-    return BaseForFigure.roundNumber(area);
+    return +area.toFixed(2);
   }
 }
 
-export class Circle extends BaseForFigure {
+export class Circle extends BaseFigure {
   readonly shape = Shape.Circle;
 
   constructor(
@@ -80,19 +78,18 @@ export class Circle extends BaseForFigure {
     public radius: number,
   ) {
     super();
-
-    this.checkAllSides([radius]);
+    this.checkSize([radius]);
   }
 
   getArea(): number {
-    const area = Math.PI * (this.radius ** 2);
+    const circleArea: number = Math.PI * (this.radius ** 2);
 
-    return BaseForFigure.roundNumber(area);
+    return Math.floor(circleArea * 100) / 100;
   }
 }
 
-export class Rectangle extends BaseForFigure {
-  readonly shape = Shape.Rectangle;
+export class Rectangle extends BaseFigure {
+  shape = Shape.Rectangle;
 
   constructor(
     public color: Color,
@@ -100,14 +97,31 @@ export class Rectangle extends BaseForFigure {
     public height: number,
   ) {
     super();
-
-    this.checkAllSides([width, height]);
+    this.checkSize([width, height]);
   }
 
   getArea(): number {
-    const area = this.width * this.height;
+    const rectangleArea: number = this.width * this.height;
 
-    return BaseForFigure.roundNumber(area);
+    return rectangleArea;
+  }
+}
+
+export class Square extends Rectangle {
+  readonly shape = Shape.Square;
+
+  constructor(
+    public color: Color,
+    public side: number,
+  ) {
+    super(color, side, side);
+    this.checkSize([side]);
+  }
+
+  getArea(): number {
+    const squareArea: number = this.side ** 2;
+
+    return squareArea;
   }
 }
 
