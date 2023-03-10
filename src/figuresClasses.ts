@@ -1,21 +1,23 @@
 enum Shape {
   Triangle = 'triangle',
   Circle = 'circle',
-  Rectangle = 'rectangle',
-  Square = 'square'
+  Rectangle = 'rectangle'
 }
 
 enum Color {
   Red = 'triangle',
   Green = 'circle',
-  Blue = 'rectangle',
-  Orange = 'square',
+  Blue = 'rectangle'
 }
 
 export interface Figure {
   shape: Shape,
   color: Color,
   getArea(): number,
+}
+
+export function roundNumber(area: number): number {
+  return Math.floor((area) * 100) / 100;
 }
 
 abstract class BaseFigure implements Figure {
@@ -57,16 +59,16 @@ export class Triangle extends BaseFigure {
   }
 
   getArea(): number {
-    const semiP = (this.a + this.b + this.c) / 2;
+    const halfPerimeter = (this.a + this.b + this.c) / 2;
 
-    const area = Math.sqrt(
-      semiP
-      * (semiP - this.a)
-      * (semiP - this.b)
-      * (semiP - this.c),
+    const triangleArea = Math.sqrt(
+      halfPerimeter
+      * (halfPerimeter - this.a)
+      * (halfPerimeter - this.b)
+      * (halfPerimeter - this.c),
     );
 
-    return +area.toFixed(2);
+    return roundNumber(triangleArea);
   }
 }
 
@@ -84,12 +86,12 @@ export class Circle extends BaseFigure {
   getArea(): number {
     const circleArea: number = Math.PI * (this.radius ** 2);
 
-    return Math.floor(circleArea * 100) / 100;
+    return roundNumber(circleArea);
   }
 }
 
 export class Rectangle extends BaseFigure {
-  shape = Shape.Rectangle;
+  readonly shape = Shape.Rectangle;
 
   constructor(
     public color: Color,
@@ -103,25 +105,18 @@ export class Rectangle extends BaseFigure {
   getArea(): number {
     const rectangleArea: number = this.width * this.height;
 
-    return rectangleArea;
+    return roundNumber(rectangleArea);
   }
 }
 
 export class Square extends Rectangle {
-  readonly shape = Shape.Square;
+  readonly shape = Shape.Rectangle;
 
   constructor(
-    public color: Color,
+    color: Color,
     public side: number,
   ) {
     super(color, side, side);
-    this.checkSize([side]);
-  }
-
-  getArea(): number {
-    const squareArea: number = this.side ** 2;
-
-    return squareArea;
   }
 }
 
