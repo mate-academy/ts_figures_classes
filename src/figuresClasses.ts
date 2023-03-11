@@ -1,5 +1,8 @@
-
-type Colors = 'red' | 'green' | 'blue';
+enum Colors {
+  Red = 'red',
+  Green = 'green',
+  Blue = 'blue',
+}
 
 enum Shape {
   Triangle = 'triangle',
@@ -13,23 +16,23 @@ export interface Figure {
   getArea(): number;
 }
 
-function validateTriangleLength(...shapeSide: number[]): boolean {
+function isNotValidTriangle(...shapeSide: number[]): boolean {
   const sumSides = shapeSide
     .reduce((sideOne: number, sideTwo: number) => sideOne + sideTwo);
 
   return shapeSide.some((side: number) => side >= (sumSides - side));
 }
 
-function validateLength(...lengths : number[]): boolean {
+function isValidLength(...lengths : number[]): boolean {
   return Math.min(...lengths) <= 0;
 }
 
-function helperArea(area: number): number {
+function roundingArea(area: number): number {
   return Math.floor(area * 100) / 100;
 }
 
 export class Triangle implements Figure {
-  shape: Shape = Shape.Triangle;
+  readonly shape: Shape = Shape.Triangle;
 
   constructor(
     public color: Colors,
@@ -37,32 +40,33 @@ export class Triangle implements Figure {
     public b: number,
     public c: number,
   ) {
-    if (validateLength(a, b, c)) {
+    if (isValidLength(a, b, c)) {
       throw new Error('Length of triangle sides should be greater than 0');
     }
 
-    if (validateTriangleLength(a, b, c)) {
+    if (isNotValidTriangle(a, b, c)) {
       throw new Error('The longest side of the triangle must be shorter than'
        + ' the sum of the other two');
     }
   }
 
   getArea(): number {
-    const p = (this.a + this.b + this.c) / 2;
-    const area = Math.sqrt(p * (p - this.a) * (p - this.b) * (p - this.c));
+    const semiPerimeter = (this.a + this.b + this.c) / 2;
+    const area = Math.sqrt(semiPerimeter * (semiPerimeter - this.a)
+     * (semiPerimeter - this.b) * (semiPerimeter - this.c));
 
-    return helperArea(area);
+    return roundingArea(area);
   }
 }
 
 export class Circle implements Figure {
-  shape: Shape = Shape.Circle;
+  readonly shape: Shape = Shape.Circle;
 
   constructor(
     public color: Colors,
     public radius: number,
   ) {
-    if (validateLength(radius)) {
+    if (isValidLength(radius)) {
       throw new Error('Radius of circle should be greater than 0');
     }
   }
@@ -70,19 +74,19 @@ export class Circle implements Figure {
   getArea(): number {
     const area = Math.PI * (this.radius ** 2);
 
-    return helperArea(area);
+    return roundingArea(area);
   }
 }
 
 export class Rectangle implements Figure {
-  shape: Shape = Shape.Rectangle;
+  readonly shape: Shape = Shape.Rectangle;
 
   constructor(
     public color: Colors,
     public width: number,
     public height: number,
   ) {
-    if (validateLength(width, height)) {
+    if (isValidLength(width, height)) {
       throw new Error('Width and height of rectangle should be greater than 0');
     }
   }
@@ -90,7 +94,7 @@ export class Rectangle implements Figure {
   getArea(): number {
     const area = this.width * this.height;
 
-    return helperArea(area);
+    return roundingArea(area);
   }
 }
 
