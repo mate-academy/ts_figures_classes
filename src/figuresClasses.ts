@@ -36,8 +36,10 @@ export class Triangle {
   getArea(): number {
     const sum = 0.5 * (this.a + this.b + this.c);
 
-    return Math.floor(Math.sqrt(sum * (sum - this.a) * (sum - this.b)
-    * (sum - this.c)) * 100) / 100;
+    const square = sum * (sum - this.a) * (sum - this.b)
+    * (sum - this.c);
+
+    return Math.floor(Math.sqrt(square) * 100) / 100;
   }
 }
 
