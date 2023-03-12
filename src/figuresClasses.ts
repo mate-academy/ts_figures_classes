@@ -80,7 +80,7 @@ export class Circle extends BaseFigure {
 
   getArea(): number {
     const area = Math.PI * this.raduis ** 2;
-    
+
     return Math.floor(area * 100) / 100;
   }
 }
@@ -106,5 +106,5 @@ export class Rectangle extends BaseFigure {
 }
 
 export function getInfo(figure: BaseFigure): string {
-  return `A ${figure.color} ${figure.shape} - ${figure.getArea()}`
+  return `A ${figure.color} ${figure.shape} - ${figure.getArea()}`;
 }
