@@ -16,8 +16,22 @@ export interface Figure {
   getArea: () => number;
 }
 
+export function correctLengthChecker(...lengths: number[]): boolean {
+  return lengths.every((length: number) => length > 0);
+}
+
+export function isTrianglePossible(...sides: number[]): boolean {
+  sides.sort((sideA: number, sideB: number) => sideB - sideA);
+
+  return sides[0] < sides[1] + sides[2];
+}
+
+export function roundValueToHundrets(number: number): number {
+  return Math.floor(number * 100) / 100;
+}
+
 export class Triangle {
-  shape = Shapes.Triangle;
+  readonly shape = Shapes.Triangle;
 
   constructor(
     public color: Colors,
@@ -25,55 +39,59 @@ export class Triangle {
     public b: number,
     public c: number,
   ) {
-    if (a <= 0 || b <= 0 || c <= 0) {
+    if (!correctLengthChecker(a, b, c)) {
       throw new Error('Sizes should be positive numbers');
     }
 
-    if (a >= b + c || b >= a + c || c >= a + b) {
+    if (!isTrianglePossible(a, b, c)) {
       throw new Error('Invalid sides size // figure is not a triangle');
     }
   }
 
   getArea(): number {
-    const s = (this.a + this.b + this.c) / 2;
-    const sqrt = s * (s - this.a) * (s - this.b) * (s - this.c);
+    const sidesSemiSum = (this.a + this.b + this.c) / 2;
+    const area = (sidesSemiSum
+      * (sidesSemiSum - this.a)
+      * (sidesSemiSum - this.b)
+      * (sidesSemiSum - this.c))
+      ** 0.5;
 
-    return Math.floor((sqrt ** 0.5) * 100) / 100;
+    return roundValueToHundrets(area);
   }
 }
 
 export class Circle implements Figure {
-  shape = Shapes.Circle;
+  readonly shape = Shapes.Circle;
 
   constructor(
     public color: Colors,
     public radius: number,
   ) {
-    if (radius <= 0) {
+    if (!correctLengthChecker(radius)) {
       throw new Error('Radius should be positive number');
     }
   }
 
   getArea(): number {
-    return Math.floor((Math.PI * this.radius ** 2) * 100) / 100;
+    return roundValueToHundrets(Math.PI * this.radius ** 2);
   }
 }
 
 export class Rectangle {
-  shape = Shapes.Rectangle;
+  readonly shape = Shapes.Rectangle;
 
   constructor(
     public color: Colors,
     public width: number,
     public height: number,
   ) {
-    if (width <= 0 || height <= 0) {
+    if (!correctLengthChecker(width, height)) {
       throw new Error('Sizes should be positive numbers');
     }
   }
 
   getArea(): number {
-    return Math.floor(this.width * this.height * 100) / 100;
+    return roundValueToHundrets(this.width * this.height);
   }
 }
 
