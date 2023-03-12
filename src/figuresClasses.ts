@@ -16,36 +16,41 @@ export interface Figure {
   getArea(): number;
 }
 
+export function checkTriangleSides(a: number, b: number, c: number): void {
+  if (a <= 0 || b <= 0 || c <= 0) {
+    throw new Error('All sides must be greater than 0');
+  }
+
+  if (a + b <= c || a + c <= b || b + c <= a) {
+    throw new Error(`Sides ${a}, ${b}, and ${c} do not form a triangle`);
+  }
+}
+
+export function roundArea(area: number): number {
+  return Math.floor(area * 100) / 100;
+}
+
 export class Triangle implements Figure {
-  shape = Shape.Triangle;
+  readonly shape = Shape.Triangle;
 
-  color: Color;
-
-  a: number;
-
-  b: number;
-
-  c: number;
-
-  constructor(color: Color, a: number, b: number, c: number) {
-    if (a <= 0 || b <= 0 || c <= 0) {
-      throw new Error('All sides must be greater than 0');
-    }
-
-    if (a + b <= c || a + c <= b || b + c <= a) {
-      throw new Error(`Sides ${a}, ${b}, and ${c} do not form a triangle`);
-    }
-    this.color = color;
-    this.a = a;
-    this.b = b;
-    this.c = c;
+  constructor(
+    public color: Color,
+    public a: number,
+    public b: number,
+    public c: number,
+  ) {
+    checkTriangleSides(a, b, c);
   }
 
   getArea(): number {
-    const s = (this.a + this.b + this.c) / 2;
-    const area = Math.sqrt(s * (s - this.a) * (s - this.b) * (s - this.c));
+    const semiperimeter = (this.a + this.b + this.c) / 2;
+    const area
+      = Math.sqrt(semiperimeter
+        * (semiperimeter - this.a)
+        * (semiperimeter - this.b)
+        * (semiperimeter - this.c));
 
-    return Math.floor(area * 100) / 100;
+    return roundArea(area);
   }
 }
 
@@ -67,7 +72,7 @@ export class Circle implements Figure {
   getArea(): number {
     const area = Math.PI * this.radius * this.radius;
 
-    return Math.floor(area * 100) / 100;
+    return roundArea(area);
   }
 }
 
@@ -92,12 +97,10 @@ export class Rectangle implements Figure {
   getArea(): number {
     const area = this.width * this.height;
 
-    return Math.floor(area * 100) / 100;
+    return roundArea(area);
   }
 }
 
 export function getInfo(figure: Figure): string {
-  const area = figure.getArea();
-
-  return `A ${figure.color} ${figure.shape} - ${area}`;
+  return `A ${figure.color} ${figure.shape} - ${figure.getArea()}`;
 }
