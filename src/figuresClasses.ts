@@ -10,7 +10,6 @@ enum Color {
   Blue = 'blue',
 }
 
-
 export interface Figure {
   shape : Shape;
   color : Color;
@@ -19,7 +18,9 @@ export interface Figure {
 
 abstract class BaseFigure implements Figure {
   shape: Shape;
+
   abstract color: Color;
+
   abstract getArea(): number;
 
   protected allSide(sides: number[]): void {
@@ -45,7 +46,7 @@ export class Triangle extends BaseFigure {
     this.allSide([a, b, c]);
 
     const SortSide: number[] = [a, b, c]
-    .sort((prevSide: number, currentSide: number) => prevSide - currentSide);
+      .sort((prevSide: number, currentSide: number) => prevSide - currentSide);
 
     if (SortSide[0] >= SortSide[1] + SortSide[2]) {
       throw new Error('side is not correct');
@@ -58,12 +59,11 @@ export class Triangle extends BaseFigure {
       perimetr
       * (perimetr - this.a)
       * (perimetr - this.b)
-      * (perimetr - this.c)
+      * (perimetr - this.c),
     );
 
     return Number(area.toFixed(2));
   }
-
 }
 
 export class Circle extends BaseFigure {
@@ -95,7 +95,7 @@ export class Rectangle extends BaseFigure {
   ) {
     super();
 
-    this.allSide([this.width, this.height])
+    this.allSide([this.width, this.height]);
   }
 
   getArea(): number {
@@ -103,7 +103,6 @@ export class Rectangle extends BaseFigure {
 
     return Number(area.toFixed(2));
   }
-
 }
 
 export function getInfo(figure: BaseFigure): string {
