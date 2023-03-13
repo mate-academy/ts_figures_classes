@@ -24,8 +24,18 @@ abstract class BaseFigure implements Figure {
   abstract getArea(): number;
 }
 
+function getCorrectLength(...sides: number[]): void {
+  if (Math.min(...sides) <= 0) {
+    throw new Error('Side length should be a positive number!');
+  }
+}
+
+function roundNumbers(expression: number): number {
+  return Math.floor((expression) * 100) / 100;
+}
+
 export class Triangle extends BaseFigure {
-  shape = Shape.Triangle;
+  readonly shape = Shape.Triangle;
 
   constructor(
     public color: Color,
@@ -35,9 +45,7 @@ export class Triangle extends BaseFigure {
   ) {
     super();
 
-    if (Math.min(a, b, c) <= 0) {
-      throw new Error('Side length should be a positive number!');
-    }
+    getCorrectLength(a, b, c);
 
     const [
       sideA,
@@ -60,12 +68,12 @@ export class Triangle extends BaseFigure {
       * (semiperimeter - this.c),
     );
 
-    return +area.toFixed(2);
+    return roundNumbers(area);
   }
 }
 
 export class Circle extends BaseFigure {
-  shape = Shape.Circle;
+  readonly shape = Shape.Circle;
 
   constructor(
     public color: Color,
@@ -81,12 +89,12 @@ export class Circle extends BaseFigure {
   getArea(): number {
     const area = Math.PI * (this.radius ** 2);
 
-    return Math.floor(area * 100) / 100;
+    return roundNumbers(area);
   }
 }
 
 export class Rectangle extends BaseFigure {
-  shape = Shape.Rectangle;
+  readonly shape = Shape.Rectangle;
 
   constructor(
     public color: Color,
@@ -95,9 +103,7 @@ export class Rectangle extends BaseFigure {
   ) {
     super();
 
-    if (Math.min(width, height) <= 0) {
-      throw new Error('Side length should be a positive number!');
-    }
+    getCorrectLength(width, height);
   }
 
   getArea(): number {
