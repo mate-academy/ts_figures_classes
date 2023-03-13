@@ -16,11 +16,11 @@ export interface Figure {
   getArea(): number,
 }
 
-function volueRounding(volue: number): number {
+function roundVolue(volue: number): number {
   return Math.floor(volue * 100) / 100;
 }
 
-function correctSides(...sides: number[]): void {
+function isCorrectSides(...sides: number[]): void {
   if (sides.some((side) => side <= 0)) {
     throw new Error('side of the figure must be bigger than zero');
   }
@@ -38,7 +38,7 @@ export class Triangle implements Figure {
     if (a >= b + c || b >= a + c || c >= a + b) {
       throw new Error('incorrect values for the triangle');
     }
-    correctSides(a, b, c);
+    isCorrectSides(a, b, c);
   }
 
   getArea(): number {
@@ -49,7 +49,7 @@ export class Triangle implements Figure {
       * (halfOfPerimeter - this.c),
     );
 
-    return volueRounding(squareOfTriangle);
+    return roundVolue(squareOfTriangle);
   }
 }
 
@@ -60,11 +60,11 @@ export class Circle implements Figure {
     public color: Color,
     public radius: number,
   ) {
-    correctSides(radius);
+    isCorrectSides(radius);
   }
 
   getArea(): number {
-    return volueRounding(Math.PI * this.radius ** 2);
+    return roundVolue(Math.PI * this.radius ** 2);
   }
 }
 
@@ -76,11 +76,11 @@ export class Rectangle implements Figure {
     public width: number,
     public height: number,
   ) {
-    correctSides(width, height);
+    isCorrectSides(width, height);
   }
 
   getArea(): number {
-    return volueRounding(this.width * this.height);
+    return roundVolue(this.width * this.height);
   }
 }
 
