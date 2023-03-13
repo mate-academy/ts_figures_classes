@@ -1,6 +1,12 @@
+
+enum Color {
+  Red = 'red',
+  Green = 'green',
+  Blue = 'blue',
+}
 export interface Figure {
   shape: string;
-  color: string;
+  color: Color;
   getArea(): number;
 }
 
@@ -8,7 +14,7 @@ export class Triangle implements Figure {
   readonly shape = 'triangle';
 
   constructor(
-    public color: string,
+    public color: Color,
     public a: number,
     public b: number,
     public c: number,
@@ -34,7 +40,7 @@ export class Circle implements Figure {
   readonly shape = 'circle';
 
   constructor(
-    public color: string,
+    public color: Color,
     public radius: number,
   ) {
     if (radius <= 0) {
@@ -51,7 +57,7 @@ export class Rectangle implements Figure {
   readonly shape = 'rectangle';
 
   constructor(
-    public color: string,
+    public color: Color,
     public width: number,
     public height: number,
   ) {
