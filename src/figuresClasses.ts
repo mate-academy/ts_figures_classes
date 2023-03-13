@@ -20,14 +20,10 @@ export function correctLengthChecker(...lengths: number[]): boolean {
   return lengths.every((length: number) => length > 0);
 }
 
-export function isTrianglePossible(...sides: number[]): boolean {
-  sides.sort((sideA: number, sideB: number) => sideB - sideA);
+export function round(number: number, decimal: number): number {
+  const digit = 10 ** decimal;
 
-  return sides[0] < sides[1] + sides[2];
-}
-
-export function roundValueToHundrets(number: number): number {
-  return Math.floor(number * 100) / 100;
+  return Math.floor(number * digit) / digit;
 }
 
 export class Triangle {
@@ -43,9 +39,17 @@ export class Triangle {
       throw new Error('Sizes should be positive numbers');
     }
 
-    if (!isTrianglePossible(a, b, c)) {
+    if (!this.isTrianglePossible()) {
       throw new Error('Invalid sides size // figure is not a triangle');
     }
+  }
+
+  isTrianglePossible(): boolean {
+    const sides = [this.a, this.b, this.c];
+
+    sides.sort((sideA: number, sideB: number) => sideB - sideA);
+
+    return sides[0] < sides[1] + sides[2];
   }
 
   getArea(): number {
@@ -56,7 +60,7 @@ export class Triangle {
       * (sidesSemiSum - this.c))
       ** 0.5;
 
-    return roundValueToHundrets(area);
+    return round(area, 2);
   }
 }
 
@@ -73,7 +77,7 @@ export class Circle implements Figure {
   }
 
   getArea(): number {
-    return roundValueToHundrets(Math.PI * this.radius ** 2);
+    return round(Math.PI * this.radius ** 2, 2);
   }
 }
 
@@ -91,7 +95,7 @@ export class Rectangle {
   }
 
   getArea(): number {
-    return roundValueToHundrets(this.width * this.height);
+    return round(this.width * this.height, 2);
   }
 }
 
