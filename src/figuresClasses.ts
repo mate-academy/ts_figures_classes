@@ -7,12 +7,6 @@ export interface Figure {
   getArea(): number;
 }
 
-export function checkTriangle(sides: number[]): boolean {
-  if (sides instanceof Array) {
-    return true;
-  }
-}
-
 export class Triangle implements Figure {
   shape: Shape = 'triangle';
 
@@ -22,7 +16,7 @@ export class Triangle implements Figure {
     public b: number,
     public c: number,
   ) {
-    if (a <= 0 || b <= 0 || c <= 0 || checkTriangle([a, b, c])) {
+    if (a <= 0 || b <= 0 || c <= 0 || c >= a + b) {
       throw new Error('Incorrect data');
     }
   }
@@ -30,7 +24,9 @@ export class Triangle implements Figure {
   getArea(): number {
     const s: number = (this.a + this.b + this.c) / 2;
     const area = Math.sqrt(
-      s * ((s - this.a) * (s - this.b) * (s - this.c)));
+      s * ((s - this.a) * (s - this.b) * (s - this.c))
+    );
+
     return Math.floor((area * 100) / 100);
   }
 }
