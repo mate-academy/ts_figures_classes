@@ -23,11 +23,11 @@ function isNotValidTriangle(...shapeSide: number[]): boolean {
   return shapeSide.some((side: number) => side >= (sumSides - side));
 }
 
-function isValidLength(...lengths : number[]): boolean {
+function isNotValidLength(...lengths : number[]): boolean {
   return Math.min(...lengths) <= 0;
 }
 
-function roundingArea(area: number): number {
+function roundArea(area: number): number {
   return Math.floor(area * 100) / 100;
 }
 
@@ -40,7 +40,7 @@ export class Triangle implements Figure {
     public b: number,
     public c: number,
   ) {
-    if (isValidLength(a, b, c)) {
+    if (isNotValidLength(a, b, c)) {
       throw new Error('Length of triangle sides should be greater than 0');
     }
 
@@ -55,7 +55,7 @@ export class Triangle implements Figure {
     const area = Math.sqrt(semiPerimeter * (semiPerimeter - this.a)
      * (semiPerimeter - this.b) * (semiPerimeter - this.c));
 
-    return roundingArea(area);
+    return roundArea(area);
   }
 }
 
@@ -66,7 +66,7 @@ export class Circle implements Figure {
     public color: Colors,
     public radius: number,
   ) {
-    if (isValidLength(radius)) {
+    if (isNotValidLength(radius)) {
       throw new Error('Radius of circle should be greater than 0');
     }
   }
@@ -74,7 +74,7 @@ export class Circle implements Figure {
   getArea(): number {
     const area = Math.PI * (this.radius ** 2);
 
-    return roundingArea(area);
+    return roundArea(area);
   }
 }
 
@@ -86,7 +86,7 @@ export class Rectangle implements Figure {
     public width: number,
     public height: number,
   ) {
-    if (isValidLength(width, height)) {
+    if (isNotValidLength(width, height)) {
       throw new Error('Width and height of rectangle should be greater than 0');
     }
   }
@@ -94,7 +94,7 @@ export class Rectangle implements Figure {
   getArea(): number {
     const area = this.width * this.height;
 
-    return roundingArea(area);
+    return roundArea(area);
   }
 }
 
