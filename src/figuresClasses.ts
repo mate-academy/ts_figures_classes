@@ -5,9 +5,9 @@ enum Shape {
 }
 
 enum Color {
-  Red,
-  Green,
-  Blue,
+  Red = 'red',
+  Green = 'green',
+  Blue = 'blue',
 }
 
 export interface Figure {
