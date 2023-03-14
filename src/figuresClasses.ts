@@ -27,7 +27,10 @@ export class Triangle implements Figure {
       s * ((s - this.a) * (s - this.b) * (s - this.c))
     );
 
-    return Math.floor((area * 100) / 100);
+    const sq = Math.floor(area * 100) / 100;
+    sq.toFixed(2);
+    
+    return sq;
   }
 }
 
@@ -70,6 +73,6 @@ export class Rectangle implements Figure {
   }
 }
 
-export function getInfo(figure: string): string {
-  return `A ${this.Color} ${this.Shape} - ${this.getArea(figure)}`;
+export function getInfo(figure: Figure): string {
+  return `A ${figure.color} ${figure.shape} - ${figure.getArea()}`;
 }
