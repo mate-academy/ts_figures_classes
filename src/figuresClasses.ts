@@ -28,9 +28,10 @@ export class Triangle implements Figure {
   }
 
   getArea(): number {
-    const sq: number = (this.a + this.b + this.c) / 2;
-    sq.toFixed(2);
-    return sq;
+    const s: number = (this.a + this.b + this.c) / 2;
+    const area = Math.sqrt(
+      s * ((s - this.a) * (s - this.b) * (s - this.c)));
+    return Math.floor((area * 100) / 100);
   }
 }
 
@@ -42,7 +43,7 @@ export class Circle implements Figure {
     public radius: number,
   ) {
     if (this.radius <= 0) {
-      throw new Error('Parameter is not valid');
+      throw new Error('Incorrect data');
     }
   }
 
