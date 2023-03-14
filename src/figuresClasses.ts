@@ -9,7 +9,6 @@ export interface Figure {
 
 export function checkTriangle(sides: number[]): boolean {
   if (sides instanceof Array) {
-
     return true;
   }
 }
@@ -31,7 +30,6 @@ export class Triangle implements Figure {
   getArea(): number {
     const sq: number = (this.a + this.b + this.c) / 2;
     sq.toFixed(2);
-
     return sq;
   }
 }
@@ -53,7 +51,6 @@ export class Circle implements Figure {
 
     return Math.floor(area * 100) / 100;
   }
-
 }
 
 export class Rectangle implements Figure {
@@ -64,6 +61,9 @@ export class Rectangle implements Figure {
     public width: number,
     public height: number,
   ) {
+    if (width <= 0 || height <= 0) {
+      throw new Error('Incorrect data');
+    }
   }
 
   getArea(): number {
@@ -73,6 +73,6 @@ export class Rectangle implements Figure {
   }
 }
 
-export function getInfo(figure) {
-  return `A ${this.Color} ${this.Shape} - ${this.getArea()}`;
+export function getInfo(figure: string): string {
+  return `A ${this.Color} ${this.Shape} - ${this.getArea(figure)}`;
 }
