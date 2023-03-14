@@ -24,12 +24,13 @@ export class Triangle implements Figure {
   getArea(): number {
     const s: number = (this.a + this.b + this.c) / 2;
     const area = Math.sqrt(
-      s * ((s - this.a) * (s - this.b) * (s - this.c))
+      s * ((s - this.a) * (s - this.b) * (s - this.c)),
     );
 
     const sq = Math.floor(area * 100) / 100;
+
     sq.toFixed(2);
-    
+
     return sq;
   }
 }
