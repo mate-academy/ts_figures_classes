@@ -1,14 +1,27 @@
+
+enum Shapes {
+  triangle = 'triangle',
+  circle = 'circle',
+  rectangle = 'rectangle',
+}
+
+export enum Colors {
+  Red = 'red',
+  Green = 'green',
+  Blue = 'blue'
+}
+
 export interface Figure {
-  shape: 'triangle' | 'circle' | 'rectangle',
-  color: 'red' | 'green' | 'blue',
+  shape: Shapes,
+  color: Colors,
   getArea(): number,
 }
 
 export class Triangle implements Figure {
-  public shape: 'triangle' = 'triangle';
+  public shape: Shapes = Shapes.triangle;
 
   constructor(
-    public color: 'red' | 'green' | 'blue',
+    public color: Colors,
     public a: number,
     public b: number,
     public c: number,
@@ -33,10 +46,10 @@ export class Triangle implements Figure {
 }
 
 export class Circle implements Figure {
-  public shape: 'circle' = 'circle';
+  public shape: Shapes = Shapes.circle;
 
   constructor(
-    public color: 'red' | 'green' | 'blue',
+    public color: Colors,
     public a: number,
   ) {
     if (a <= 0) {
@@ -52,10 +65,10 @@ export class Circle implements Figure {
 }
 
 export class Rectangle implements Figure {
-  public shape: 'rectangle' = 'rectangle';
+  public shape: Shapes = Shapes.rectangle;
 
   constructor(
-    public color: 'red' | 'green' | 'blue',
+    public color: Colors,
     public a: number,
     public b: number,
   ) {
