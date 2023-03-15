@@ -22,11 +22,19 @@ abstract class BaseFigure implements Figure {
   abstract color: Color;
 
   abstract getArea(): number;
-}
 
-function getCorrectLength(...sides: number[]): void {
-  if (Math.min(...sides) <= 0) {
-    throw new Error('Side length should be a positive number!');
+  protected getCorrectLength(...sides: number[]): void {
+    if (Math.min(...sides) <= 0) {
+      throw new Error(
+        `Side length of figure ${this.shape} should be a positive number!`,
+      );
+    }
+  }
+
+  protected getTriangleSides([sideA, sideB, sideC]:number[]): void {
+    if (sideC >= sideA + sideB) {
+      throw new Error(`Impossible to build a ${this.shape} with these sides`);
+    }
   }
 }
 
@@ -45,7 +53,7 @@ export class Triangle extends BaseFigure {
   ) {
     super();
 
-    getCorrectLength(a, b, c);
+    this.getCorrectLength(a, b, c);
 
     const [
       sideA,
@@ -53,9 +61,7 @@ export class Triangle extends BaseFigure {
       sideC,
     ]: number[] = [a, b, c].sort((prev, next) => prev - next);
 
-    if (sideC >= sideA + sideB) {
-      throw new Error('Impossible to build a triangle with these sides');
-    }
+    this.getTriangleSides([sideA, sideB, sideC]);
   }
 
   getArea():number {
@@ -103,7 +109,7 @@ export class Rectangle extends BaseFigure {
   ) {
     super();
 
-    getCorrectLength(width, height);
+    this.getCorrectLength(width, height);
   }
 
   getArea(): number {
