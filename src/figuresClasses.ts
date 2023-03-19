@@ -1,17 +1,20 @@
+type Shape = 'triangle' | 'circle' | 'rectangle';
+type Color = 'red' | 'green' | 'blue';
+
 export interface Figure {
-  color: 'red' | 'green' | 'blue';
-  a: number;
-  shape?: 'triangle' | 'circle' | 'rectangle';
+  shape: Shape,
+  color: Color,
   getArea: () => number;
 }
 
 export class Triangle implements Figure {
+  public shape: Shape = 'triangle';
+
   constructor(
     public color: 'red' | 'green' | 'blue',
     public a: number,
     public b: number,
     public c: number,
-    public shape?: 'triangle',
   ) {
     if (a <= 0 || b <= 0 || c <= 0) {
       throw new Error('One of the figure\'s sides less or 0');
@@ -27,16 +30,19 @@ export class Triangle implements Figure {
   getArea(): number {
     const { a, b, c } = this;
     const s = (a + b + c) / 2; // semiperimeter
+    const area = Math.sqrt(s * (s - a) * (s - b) * (s - c));
+    const aroundArea = (Math.floor(area * 100)) / 100;
 
-    return Math.sqrt(s * (s - a) * (s - b) * (s - c));
+    return aroundArea;
   }
 }
 
 export class Circle {
+  public shape: Shape = 'circle';
+
   constructor(
     public color: 'red' | 'green' | 'blue',
     public a: number,
-    public shape?: 'circle',
   ) {
     if (a <= 0) {
       throw new Error('One of the figure\'s sides less or 0');
@@ -53,11 +59,12 @@ export class Circle {
 }
 
 export class Rectangle {
+  public shape: Shape = 'rectangle';
+
   constructor(
     public color: 'red' | 'green' | 'blue',
     public a: number,
     public b: number,
-    public shape?: 'rectangle',
   ) {
     if (a <= 0 || b <= 0) {
       throw new Error('One of the figure\'s sides less or 0');
@@ -72,17 +79,5 @@ export class Rectangle {
 }
 
 export function getInfo(figure: Figure): string {
-  if (figure.shape === 'triangle') {
-    return `A ${figure.color} triangle - ${figure.getArea()}`;
-  }
-
-  if (figure.shape === 'circle') {
-    return `A ${figure.color} circle - ${figure.getArea()}`;
-  }
-
-  if (figure.shape === 'rectangle') {
-    return `A ${figure.color} rectangle - ${figure.getArea()}`;
-  }
-
-  return 'error';
+  return `A ${figure.color} ${figure.shape} - ${figure.getArea()}`;
 }
