@@ -19,7 +19,7 @@ export class Triangle implements Figure {
     this.shape = 'triangle';
 
     if (a <= 0 || b <= 0 || c <= 0) {
-      throw new Error('Side length is 0.');
+      throw new Error('The length of each side must be greater than 0');
     }
 
     let longSide: number;
@@ -37,7 +37,9 @@ export class Triangle implements Figure {
     }
 
     if (longSide >= sumOfSides) {
-      throw new Error('Sides 1, 2 and 3 can not form a triangle.');
+      throw new Error('The longest side of a triangle\n'
+      + 'greater than or equal sum of two others.\n'
+      + 'They can not form a triangle.');
     }
   }
 
@@ -59,7 +61,7 @@ export class Circle implements Figure {
     this.shape = 'circle';
 
     if (radius <= 0) {
-      throw new Error('Radius is 0.');
+      throw new Error('Radius must be greater than 0.');
     }
   }
 
@@ -79,7 +81,7 @@ export class Rectangle implements Figure {
     this.shape = 'rectangle';
 
     if (width <= 0 || height <= 0) {
-      throw new Error('Method not implemented.');
+      throw new Error('The length of each side must be greater than 0');
     }
   }
 
