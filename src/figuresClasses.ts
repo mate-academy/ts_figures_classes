@@ -8,7 +8,7 @@ export interface Figure {
   getArea(): number;
 }
 
-export function isValidSides(a: number, b = 1, c = 1): boolean {
+export function isInvalidSides(a: number, b = 1, c = 1): boolean {
   if (a <= 0 || b <= 0 || c <= 0) {
     return true;
   }
@@ -32,7 +32,7 @@ export class Triangle implements Figure {
       || sideB >= sideA + sideC
       || sideC >= sideA + sideB;
 
-    if (isValidSides(sideA, sideB, sideC)) {
+    if (isInvalidSides(sideA, sideB, sideC)) {
       throw new Error('invalid values');
     }
 
@@ -56,7 +56,7 @@ export class Circle implements Figure {
     public radius: number,
     readonly shape: Shape = 'circle',
   ) {
-    if (isValidSides(this.radius)) {
+    if (isInvalidSides(this.radius)) {
       throw new Error('invalid values');
     }
   }
@@ -75,7 +75,7 @@ export class Rectangle implements Figure {
     public height: number,
     readonly shape: Shape = 'rectangle',
   ) {
-    if (isValidSides(this.width, this.height)) {
+    if (isInvalidSides(this.width, this.height)) {
       throw new Error('invalid values');
     }
   }
