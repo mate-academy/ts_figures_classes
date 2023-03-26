@@ -9,8 +9,10 @@ function numberRound(x: number): number {
   return Math.floor(x * 100) / 100;
 }
 
+type Shape = 'triangle' | 'circle' | 'rectangle';
+
 export class Triangle implements Figure {
-  public shape: string = 'triangle';
+  public shape: Shape = 'triangle';
 
   constructor(
     public color: string,
@@ -34,7 +36,7 @@ export class Triangle implements Figure {
 }
 
 export class Circle implements Figure {
-  public shape: string = 'circle';
+  public shape: Shape = 'circle';
 
   constructor(
     public color: string,
@@ -51,7 +53,7 @@ export class Circle implements Figure {
 }
 
 export class Rectangle implements Figure {
-  public shape: string = 'rectangle';
+  public shape: Shape = 'rectangle';
 
   constructor(
     public color: string,
