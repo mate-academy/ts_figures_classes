@@ -2,7 +2,7 @@
 export interface Figure {
   shape: string;
   color: string;
-  getArea(): number | never;
+  getArea(): number;
 }
 
 function numberRound(x: number): number {
@@ -10,14 +10,14 @@ function numberRound(x: number): number {
 }
 
 export enum Shape {
-  triangle = 'triangle',
-  circle = 'circle',
-  rectangle = 'rectangle',
+  Triangle = 'TRIANGLE',
+  Circle = 'CIRCLE',
+  Rectangle = 'RECTANGLE',
 
 }
 
 export class Triangle implements Figure {
-  public shape = Shape.triangle;
+  public shape = Shape.Triangle;
 
   constructor(
     public color: string,
@@ -25,13 +25,13 @@ export class Triangle implements Figure {
     public b: number,
     public c: number,
   ) {
-    if (a <= 0 || b <= 0 || c <= 0
+    if ([a, b, c].some((x: number) => x <= 0)
       || Math.max(a, b, c) >= (a + b + c - Math.max(a, b, c))) {
       throw new Error('the entered data is incorrect');
     }
   }
 
-  getArea(): number | never {
+  getArea(): number {
     const s: number = (this.a + this.b + this.c) / 2;
 
     return numberRound(
@@ -41,7 +41,7 @@ export class Triangle implements Figure {
 }
 
 export class Circle implements Figure {
-  public shape = Shape.circle;
+  public shape = Shape.Circle;
 
   constructor(
     public color: string,
@@ -52,13 +52,13 @@ export class Circle implements Figure {
     }
   }
 
-  getArea(): number | never {
+  getArea(): number {
     return numberRound(Math.PI * this.radius ** 2);
   }
 }
 
 export class Rectangle implements Figure {
-  public shape = Shape.rectangle;
+  public shape = Shape.Rectangle;
 
   constructor(
     public color: string,
@@ -70,11 +70,13 @@ export class Rectangle implements Figure {
     }
   }
 
-  getArea(): number | never {
+  getArea(): number {
     return numberRound(this.width * this.height);
   }
 }
 
 export function getInfo(figure: Figure): string {
-  return `A ${figure.color} ${figure.shape} - ${figure.getArea()}`;
+  const shape = figure.shape.toLocaleLowerCase();
+
+  return `A ${figure.color} ${shape} - ${figure.getArea()}`;
 }
