@@ -18,19 +18,19 @@ export class Triangle implements Figure {
     public c: number,
   ) {
     if (a <= 0 || b <= 0 || c <= 0) {
-      throw new Error('Negative value entered');
+      throw new Error('Length of side(s) is less or equal to 0');
     }
 
     if (a >= b + c || b >= a + c || c >= a + b) {
-      throw new Error('Impossible triangle');
+      throw new Error('This is not a triangle');
     }
   }
 
   getArea(): number {
     const p = (this.a + this.b + this.c) / 2;
     const s = Math.sqrt(p * (p - this.a)
-    * (p - this.b)
-    * (p - this.c));
+      * (p - this.b)
+      * (p - this.c));
 
     return +s.toFixed(2);
   }
@@ -44,7 +44,7 @@ export class Circle implements Figure {
     public radius: number,
   ) {
     if (radius <= 0) {
-      throw new Error('Impossible radius');
+      throw new Error('The length of radius is less or equal to 0');
     }
   }
 
@@ -64,7 +64,7 @@ export class Rectangle implements Figure {
     public height: number,
   ) {
     if (width <= 0 || height <= 0) {
-      throw new Error('Negative value entered');
+      throw new Error('The length of height/width is less or equals 0');
     }
   }
 
