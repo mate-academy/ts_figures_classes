@@ -11,20 +11,20 @@ export interface Figure {
 const isNotATriangle = (a: number, b: number, c: number): boolean => {
   const temp = [a, b, c].sort((a, b) => a - b);
 
-  return temp[2] >= temp[0] + temp[1] ? true : false;
+  return temp[2] >= temp[0] + temp[1];
 };
 
 const lengthIsLessThanZero = (...params: colorOrNumber[]): boolean => {
   return params.some((param) => {
     if (typeof param === "string") {
-      return !param.length ? true : false;
+      return !param.length;
     }
 
-    return !param || param < 0 ? true : false;
+    return !param || param < 0;
   });
 };
 
-const round = (formula: number): number => {
+const getRoundingDown = (formula: number): number => {
   return Math.floor(formula * 100) / 100;
 };
 
@@ -47,9 +47,16 @@ export class Triangle implements Figure {
   shape: Shapes = "triangle";
 
   getArea(): number {
-    const s = (this.a + this.b + this.c) / 2;
+    const semiPerimeter = (this.a + this.b + this.c) / 2;
 
-    return round(Math.sqrt(s * (s - this.a) * (s - this.b) * (s - this.c)));
+    const square = Math.sqrt(
+      semiPerimeter *
+        (semiPerimeter - this.a) *
+        (semiPerimeter - this.b) *
+        (semiPerimeter - this.c)
+    );
+
+    return getRoundingDown(square);
   }
 }
 
@@ -63,7 +70,7 @@ export class Circle implements Figure {
   shape: Shapes = "circle";
 
   getArea(): number {
-    return round(Math.PI * this.radius ** 2);
+    return getRoundingDown(Math.PI * this.radius ** 2);
   }
 }
 
@@ -81,7 +88,7 @@ export class Rectangle implements Figure {
   shape: Shapes = "rectangle";
 
   getArea(): number {
-    return round(this.width * this.height);
+    return getRoundingDown(this.width * this.height);
   }
 }
 
