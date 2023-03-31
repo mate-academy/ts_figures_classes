@@ -16,8 +16,8 @@ export interface Figure {
   getArea(): number,
 }
 
-function roundVolue(volue: number): number {
-  return Math.floor(volue * 100) / 100;
+function roundValue(value: number): number {
+  return Math.floor(value * 100) / 100;
 }
 
 function isCorrectSides(...sides: number[]): void {
@@ -49,7 +49,7 @@ export class Triangle implements Figure {
       * (halfOfPerimeter - this.c),
     );
 
-    return roundVolue(squareOfTriangle);
+    return roundValue(squareOfTriangle);
   }
 }
 
@@ -64,7 +64,7 @@ export class Circle implements Figure {
   }
 
   getArea(): number {
-    return roundVolue(Math.PI * this.radius ** 2);
+    return roundValue(Math.PI * this.radius ** 2);
   }
 }
 
@@ -80,7 +80,7 @@ export class Rectangle implements Figure {
   }
 
   getArea(): number {
-    return roundVolue(this.width * this.height);
+    return roundValue(this.width * this.height);
   }
 }
 
