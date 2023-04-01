@@ -1,7 +1,7 @@
 enum Shape {
-  triangle,
-  circle,
-  rectangle,
+  Triangle = 'triangle',
+  Circle = 'circle',
+  Rectangle = 'rectangle',
 }
 
 type Color = 'red' | 'blue' | 'green';
@@ -14,7 +14,7 @@ export interface Figure {
 }
 
 export class Triangle implements Figure {
-  public shape: Shape = Shape.triangle;
+  public shape: Shape = Shape.Triangle;
 
   public a: number;
 
@@ -27,7 +27,7 @@ export class Triangle implements Figure {
     ...args : number[]
   ) {
     if (args.some((side) => side <= 0)) {
-      throw new Error('Invalid sides value!');
+      throw new Error('One side cannot be bigger than other two!');
     }
 
     const longestSide = Math.max(...args);
@@ -35,7 +35,7 @@ export class Triangle implements Figure {
     if (longestSide >= args
       .filter((side) => side !== longestSide)
       .reduce((sum, side) => sum + side)) {
-      throw new Error('Invalid sides value!');
+      throw new Error('Side value cannot be lesser than 1!');
     }
 
     [this.a, this.b, this.c] = args;
@@ -53,11 +53,11 @@ export class Triangle implements Figure {
 }
 
 export class Circle implements Figure {
-  public shape: Shape = Shape.circle;
+  public shape: Shape = Shape.Circle;
 
   constructor(public color: Color, public radius: number) {
     if (radius <= 0) {
-      throw new Error('Invalid radius value!');
+      throw new Error('Radius value cannot be lesser than 1!');
     }
   }
 
@@ -67,7 +67,7 @@ export class Circle implements Figure {
 }
 
 export class Rectangle implements Figure {
-  public shape: Shape = Shape.rectangle;
+  public shape: Shape = Shape.Rectangle;
 
   constructor(
     public color: Color,
@@ -75,7 +75,7 @@ export class Rectangle implements Figure {
     public height: number,
   ) {
     if (width <= 0 || height <= 0) {
-      throw new Error('Invalid values!');
+      throw new Error('Side value cannot be lesser than 1!');
     }
   }
 
@@ -85,5 +85,5 @@ export class Rectangle implements Figure {
 }
 
 export function getInfo(figure: Figure): string {
-  return `A ${figure.color} ${Shape[figure.shape]} - ${figure.getArea()}`;
+  return `A ${figure.color} ${figure.shape} - ${figure.getArea()}`;
 }
