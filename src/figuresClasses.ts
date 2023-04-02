@@ -6,6 +6,10 @@ enum Shape {
 
 type Color = 'red' | 'blue' | 'green';
 
+function roundDownToHundreths(value: number): number {
+  return Math.floor(value * 100) / 100;
+}
+
 export interface Figure {
   shape: Shape;
   color: Color;
@@ -44,11 +48,11 @@ export class Triangle implements Figure {
   getArea(): number {
     const semiperimeter = 0.5 * (this.a + this.b + this.c);
 
-    return Number(Math
+    return roundDownToHundreths(Math
       .sqrt(semiperimeter
         * (semiperimeter - this.a)
         * (semiperimeter - this.b)
-        * (semiperimeter - this.c)).toFixed(2));
+        * (semiperimeter - this.c)));
   }
 }
 
@@ -62,7 +66,7 @@ export class Circle implements Figure {
   }
 
   getArea(): number {
-    return Math.floor((Math.PI * (this.radius ** 2)) * 100) / 100;
+    return roundDownToHundreths((Math.PI * (this.radius ** 2)));
   }
 }
 
@@ -80,7 +84,7 @@ export class Rectangle implements Figure {
   }
 
   getArea(): number {
-    return Number((this.width * this.height).toFixed(2));
+    return roundDownToHundreths(this.height * this.width);
   }
 }
 
