@@ -4,7 +4,7 @@ type Shape = 'triangle' | 'circle' | 'rectangle';
 export interface Figure {
   color: Color,
   shape: Shape,
-  getArea(): number,
+  getArea: () => number,
 }
 
 export class Triangle implements Figure {
@@ -24,10 +24,10 @@ export class Triangle implements Figure {
   }
 
   getArea(): number {
-    const p = (this.a + this.b + this.c) / 2;
+    const semiPerimeter = (this.a + this.b + this.c) / 2;
 
-    return Math.trunc(Math.sqrt(p * (p - this.a) * (p - this.b)
-    * (p - this.c)) * 100) / 100;
+    return Math.trunc(Math.sqrt(semiPerimeter * (semiPerimeter - this.a)
+    * (semiPerimeter - this.b) * (semiPerimeter - this.c)) * 100) / 100;
   }
 }
 
