@@ -57,7 +57,7 @@ export class Circle implements Figure, CircleRaduis {
     public r: number,
   ) {
     if (r <= 0) {
-      throw new Error('One of your sides is less than 0');
+      throw new Error('Radius is less or equal 0');
     }
   }
 
