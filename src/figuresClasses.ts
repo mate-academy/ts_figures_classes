@@ -8,7 +8,7 @@ export interface Figure {
 }
 
 export class Triangle implements Figure {
-  shape: Shape;
+  shape: Shape = 'triangle';
 
   constructor(
     public color: Color,
@@ -16,8 +16,6 @@ export class Triangle implements Figure {
     public b: number,
     public c: number,
   ) {
-    this.shape = 'triangle';
-
     if (this.a <= 0 || this.b <= 0 || this.c <= 0) {
       throw new Error('sides should have positive length');
     }
@@ -37,14 +35,12 @@ export class Triangle implements Figure {
 }
 
 export class Circle {
-  shape: Shape;
+  shape: Shape = 'circle';
 
   constructor(
     public color: Color,
     public radius: number,
   ) {
-    this.shape = 'circle';
-
     if (this.radius <= 0) {
       throw new Error('radius should have positive length');
     }
@@ -56,15 +52,13 @@ export class Circle {
 }
 
 export class Rectangle {
-  shape: Shape;
+  shape: Shape = 'rectangle';
 
   constructor(
     public color: Color,
     public width: number,
     public height: number,
   ) {
-    this.shape = 'rectangle';
-
     if (this.width <= 0 || this.height <= 0) {
       throw new Error('sides should have positive length');
     }
