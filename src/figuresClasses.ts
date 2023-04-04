@@ -1,6 +1,10 @@
 type Color = 'red' | 'blue' | 'green';
 type Shape = 'triangle' | 'circle' | 'rectangle';
 
+function roundToTwoDecimals(num: number): number {
+  return Math.trunc(num * 100) / 100;
+}
+
 export interface Figure {
   color: Color,
   shape: Shape,
@@ -25,9 +29,10 @@ export class Triangle implements Figure {
 
   getArea(): number {
     const semiPerimeter = (this.a + this.b + this.c) / 2;
+    const area = Math.sqrt(semiPerimeter * (semiPerimeter - this.a)
+    * (semiPerimeter - this.b) * (semiPerimeter - this.c));
 
-    return Math.trunc(Math.sqrt(semiPerimeter * (semiPerimeter - this.a)
-    * (semiPerimeter - this.b) * (semiPerimeter - this.c)) * 100) / 100;
+    return roundToTwoDecimals(area);
   }
 }
 
@@ -46,7 +51,9 @@ export class Circle {
   }
 
   getArea(): number {
-    return Math.trunc(Math.PI * this.radius * this.radius * 100) / 100;
+    const area = Math.PI * this.radius * this.radius;
+
+    return roundToTwoDecimals(area);
   }
 }
 
@@ -66,7 +73,9 @@ export class Rectangle {
   }
 
   getArea(): number {
-    return Math.trunc(this.width * this.height * 100) / 100;
+    const area = this.width * this.height;
+
+    return roundToTwoDecimals(area);
   }
 }
 
