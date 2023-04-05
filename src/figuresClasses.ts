@@ -49,7 +49,7 @@ export class Circle {
   getArea(): number {
     const result = Math.PI * (this.radius * this.radius);
 
-    return Math.round(result * 100) / 100;
+    return Math.floor(result * 100) / 100;
   }
 }
 
