@@ -1,16 +1,19 @@
+type Shape = 'triangle' | 'circle' | 'rectangle';
+type Color = 'red' | 'green' | 'blue';
+
 export interface Figure {
-  shape: 'triangle' | 'circle' | 'rectangle';
-  color: 'red' | 'green' | 'blue';
+  shape: Shape;
+  color: Color;
   getArea: number;
 }
 
 export class Triangle {
   shape = 'triangle';
 
-  color: 'red' | 'green' | 'blue';
+  color: Color;
 
   constructor(
-    color: 'red' | 'green' | 'blue',
+    color: Color,
     private a: number,
     private b: number,
     private c: number,
@@ -30,19 +33,21 @@ export class Triangle {
   }
 
   getArea(): number {
-    const p: number = (this.a + this.b + this.c) / 2;
+    const { a, b, c } = this;
+    const semiPerimeter = (a + b + c) / 2;
+    const p: number = (semiPerimeter);
 
-    return +Math.sqrt(p
-      * (p - this.a) * (p - this.b) * (p - this.c)).toFixed(2);
+    return Number(Math.sqrt(p
+      * (p - a) * (p - b) * (p - c)).toFixed(2));
   }
 }
 export class Circle {
   shape = 'circle';
 
-  color: 'red' | 'green' | 'blue';
+  color: Color;
 
   constructor(
-    color: 'red' | 'green' | 'blue',
+    color: Color,
     private radius: number,
   ) {
     if (radius <= 0) {
@@ -61,10 +66,10 @@ export class Circle {
 export class Rectangle {
   shape = 'rectangle';
 
-  color: 'red' | 'green' | 'blue';
+  color: Color;
 
   constructor(
-    color: 'red' | 'green' | 'blue',
+    color: Color,
     private width: number,
     private heigth: number,
   ) {
@@ -78,7 +83,7 @@ export class Rectangle {
   }
 
   getArea(): number {
-    return +(this.width * this.heigth);
+    return Number(this.width * this.heigth);
   }
 }
 
