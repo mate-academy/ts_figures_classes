@@ -16,8 +16,6 @@ function checkOnError(...args: number[]): void {
 export class Triangle implements Figure {
   shape: string = 'triangle';
 
-  area: number = 0;
-
   constructor(
     public color: Color,
     public a: number,
@@ -49,10 +47,8 @@ export class Triangle implements Figure {
   }
 }
 
-export class Circle {
+export class Circle implements Figure {
   shape: string = 'circle';
-
-  area: number = 0;
 
   constructor(
     public color: Color,
@@ -66,7 +62,7 @@ export class Circle {
   }
 }
 
-export class Rectangle {
+export class Rectangle implements Figure {
   shape: string = 'rectangle';
 
   constructor(
