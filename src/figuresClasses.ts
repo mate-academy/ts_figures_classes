@@ -20,7 +20,9 @@ export class Triangle implements Figure {
       throw new Error('Any side of triangle can not be zero or lower');
     }
 
-    if (Math.max(a, b, c) >= a + b + c - Math.max(a, b, c)) {
+    const longestSide = Math.max(a, b, c);
+
+    if (longestSide >= a + b + c - longestSide) {
       throw new Error(
         'Longest side couldnt be equal or bigger than sum of two other ones',
       );
