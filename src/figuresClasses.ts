@@ -20,11 +20,6 @@ export class Triangle implements Figure {
     if (a + b <= c || a + c <= b || b + c <= a) {
       throw new Error(`Sides ${a}, ${b}, and ${c} don't form a valid triangle`);
     }
-
-    this.color = color;
-    this.a = a;
-    this.b = b;
-    this.c = c;
   }
 
   getArea(): number {
@@ -46,9 +41,6 @@ export class Circle implements Figure {
     if (radius <= 0) {
       throw new Error('The radius of the circle must be greater than 0');
     }
-
-    this.color = color;
-    this.radius = radius;
   }
 
   getArea(): number {
@@ -67,10 +59,6 @@ export class Rectangle {
     if (width <= 0 || height <= 0) {
       throw new Error('The width and height must be greater than 0');
     }
-
-    this.color = color;
-    this.width = width;
-    this.height = height;
   }
 
   getArea(): number {
