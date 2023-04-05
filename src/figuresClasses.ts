@@ -4,11 +4,14 @@ export interface Figure {
   getArea(): number;
 }
 
+type Shape = 'triangle' | 'circle' | 'rectangle';
+type Color = 'red' | 'green' | 'blue';
+
 export class Triangle implements Figure {
-  shape = 'triangle';
+  shape: Shape = 'triangle';
 
   constructor(
-    public color: string,
+    public color: Color,
     public a: number,
     public b: number,
     public c: number,
@@ -23,19 +26,23 @@ export class Triangle implements Figure {
   }
 
   getArea(): number {
-    const s = (this.a + this.b + this.c) / 2;
+    const { a, b, c } = this;
+    const semiPerimeter = (a + b + c) / 2;
+    const area = (semiPerimeter
+      * (semiPerimeter - a)
+      * (semiPerimeter - b)
+      * (semiPerimeter - c)
+    );
 
-    return Math.floor(
-      100 * Math.sqrt(s * (s - this.a) * (s - this.b) * (s - this.c)),
-    ) / 100;
+    return Math.floor(100 * Math.sqrt(area)) / 100;
   }
 }
 
 export class Circle implements Figure {
-  shape = 'circle';
+  shape: Shape = 'circle';
 
   constructor(
-    public color: string,
+    public color: Color,
     public radius: number,
   ) {
     if (radius <= 0) {
@@ -49,10 +56,10 @@ export class Circle implements Figure {
 }
 
 export class Rectangle {
-  shape = 'rectangle';
+  shape: Shape = 'rectangle';
 
   constructor(
-    public color: string,
+    public color: Color,
     public width: number,
     public height: number,
   ) {
