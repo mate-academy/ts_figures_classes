@@ -21,7 +21,7 @@ function checkSideLength(...args: number[]): void {
     if (args.length === 1) {
       throw new Error('Circle radius can not be 0 or less');
     }
-    throw new Error('All sides have to be more than 0');
+    throw new Error('All sides must be greater than 0');
   }
 }
 
