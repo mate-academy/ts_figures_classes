@@ -17,7 +17,7 @@ export interface Figure {
 }
 
 export class Triangle implements Figure {
-  shape: Shape;
+  shape: Shape = Shape.Triangle;
 
   constructor(
     public color: Colors,
@@ -25,14 +25,12 @@ export class Triangle implements Figure {
     public b: number,
     public c: number,
   ) {
-    this.shape = Shape.Triangle;
-
-    if (this.a <= 0 || this.b <= 0 || this.c <= 0) {
+    if (a <= 0 || b <= 0 || c <= 0) {
       throw new Error('Side length must be a positive number');
     }
 
-    const maxSideLength = Math.max(this.a, this.b, this.c);
-    const perimeter = this.a + this.b + this.c;
+    const maxSideLength = Math.max(a, b, c);
+    const perimeter = a + b + c;
 
     if (maxSideLength >= (perimeter - maxSideLength)) {
       throw new Error('Side cannot be greater than the sum of the other two');
@@ -54,15 +52,13 @@ export class Triangle implements Figure {
 }
 
 export class Circle implements Figure {
-  shape: Shape;
+  shape: Shape = Shape.Circle;
 
   constructor(
     public color: Colors,
     public radius: number,
   ) {
-    this.shape = Shape.Circle;
-
-    if (this.radius <= 0) {
+    if (radius <= 0) {
       throw new Error('Radius length must be a positive number');
     }
   }
@@ -73,16 +69,14 @@ export class Circle implements Figure {
 }
 
 export class Rectangle implements Figure {
-  shape: Shape;
+  shape: Shape = Shape.Rectangle;
 
   constructor(
     public color: Colors,
     public width: number,
     public height: number,
   ) {
-    this.shape = Shape.Rectangle;
-
-    if (this.width <= 0 || this.height <= 0) {
+    if (width <= 0 || height <= 0) {
       throw new Error('Side length must be a positive number');
     }
   }
