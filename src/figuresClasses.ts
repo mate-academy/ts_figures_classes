@@ -18,7 +18,10 @@ export interface Figure {
 
 function checkSideLength(...args: number[]): void {
   if (args.some((sideLength) => (sideLength <= 0))) {
-    throw new Error('Error');
+    if (args.length === 1) {
+      throw new Error('Circle radius can not be 0 or less');
+    }
+    throw new Error('All sides have to be more than 0');
   }
 }
 
@@ -34,7 +37,7 @@ export class Triangle implements Figure {
     checkSideLength(a, b, c);
 
     if (a >= b + c || b >= a + c || c >= b + a) {
-      throw new Error('Sides a, b, c cannot form a trianble');
+      throw new Error('Sides a, b, c cannot form a triangle');
     }
   }
 
