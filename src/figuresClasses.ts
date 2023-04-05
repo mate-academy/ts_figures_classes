@@ -1,28 +1,17 @@
+type Shape = 'triangle' | 'circle' | 'rectangle';
+type Color = 'red' | 'green' | 'blue';
+
 export interface Figure {
-  color: string;
-  shape: string;
+  color: Color;
+  shape: Shape;
+  getArea() : number;
 }
 
-interface TriangleShape {
-  a: number;
-  b: number;
-  c: number;
-}
-
-interface CircleRaduis {
-  r: number;
-}
-
-interface RectangleShape {
-  a: number;
-  b: number;
-}
-
-export class Triangle implements Figure, TriangleShape {
-  shape = 'triangle';
+export class Triangle implements Figure {
+  shape: Shape = 'triangle';
 
   constructor(
-    public color: string,
+    public color: Color,
     public a: number,
     public b: number,
     public c: number,
@@ -42,35 +31,41 @@ export class Triangle implements Figure, TriangleShape {
   }
 
   getArea():number {
-    const p = (this.a + this.b + this.c) / 2;
-    const square = Math.sqrt(p * (p - this.a) * (p - this.b) * (p - this.c));
+    const { a, b, c } = this;
+    const semiPerimeter = (a + b + c) / 2;
+    const square = Math.sqrt(
+      semiPerimeter
+      * (semiPerimeter - a)
+      * (semiPerimeter - b)
+      * (semiPerimeter - c),
+    );
 
     return Number(square.toFixed(2));
   }
 }
 
-export class Circle implements Figure, CircleRaduis {
-  shape = 'circle';
+export class Circle implements Figure {
+  shape: Shape = 'circle';
 
   constructor(
-    public color: string,
-    public r: number,
+    public color: Color,
+    public radius: number,
   ) {
-    if (r <= 0) {
+    if (radius <= 0) {
       throw new Error('Radius is less or equal 0');
     }
   }
 
   getArea():number {
-    return Math.floor((Math.PI * this.r ** 2) * 100) / 100;
+    return Math.floor((Math.PI * this.radius ** 2) * 100) / 100;
   }
 }
 
-export class Rectangle implements Figure, RectangleShape {
-  shape = 'rectangle';
+export class Rectangle implements Figure {
+  shape: Shape = 'rectangle';
 
   constructor(
-    public color: string,
+    public color: Color,
     public a: number,
     public b: number,
   ) {
@@ -87,6 +82,6 @@ export class Rectangle implements Figure, RectangleShape {
   }
 }
 
-export function getInfo(figure: Triangle | Circle | Rectangle): string {
+export function getInfo(figure: Figure): string {
   return `A ${figure.color} ${figure.shape} - ${figure.getArea()}`;
 }
