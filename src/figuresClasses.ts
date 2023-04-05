@@ -1,19 +1,92 @@
+enum Shapes {
+  Triangle = 'triangle',
+  Circle = 'circle',
+  Rectangle = 'rectangle',
+}
+
+enum Colors {
+  Red = 'red',
+  Green = 'green',
+  Blue = 'blue',
+}
+
 export interface Figure {
-
+  shape: Shapes;
+  color: Colors;
+  getArea: () => number;
 }
 
-export class Triangle {
-
+function checkSideLength(...args: number[]): void {
+  if (args.some((sideLength) => (sideLength <= 0))) {
+    throw new Error('Error');
+  }
 }
 
-export class Circle {
+export class Triangle implements Figure {
+  shape = Shapes.Triangle;
 
+  constructor(
+    public color: Colors,
+    public a: number,
+    public b: number,
+    public c: number,
+  ) {
+    checkSideLength(a, b, c);
+
+    if (a >= b + c || b >= a + c || c >= b + a) {
+      throw new Error('Sides a, b, c cannot form a trianble');
+    }
+  }
+
+  getArea(): number {
+    const semiPerimeter: number = (this.a + this.b + this.c) / 2;
+
+    const triangleArea: number = Math.sqrt(
+      semiPerimeter
+      * (semiPerimeter - this.a)
+      * (semiPerimeter - this.b)
+      * (semiPerimeter - this.c),
+    );
+
+    return Number(triangleArea.toFixed(2));
+  }
 }
 
-export class Rectangle {
+export class Circle implements Figure {
+  shape = Shapes.Circle;
 
+  constructor(
+    public color: Colors,
+    public radius: number,
+  ) {
+    checkSideLength(radius);
+  }
+
+  getArea(): number {
+    const circleArea = Math.floor(Math.PI * (this.radius ** 2) * 100) / 100;
+
+    return Number(circleArea.toFixed(2));
+  }
 }
 
-export function getInfo(figure) {
+export class Rectangle implements Figure {
+  shape = Shapes.Rectangle;
 
+  constructor(
+    public color: Colors,
+    public width: number,
+    public height: number,
+  ) {
+    checkSideLength(width, height);
+  }
+
+  getArea(): number {
+    const rectangleArea = this.width * this.height;
+
+    return Number(rectangleArea.toFixed(2));
+  }
+}
+
+export function getInfo(figure: Figure): string {
+  return `A ${figure.color} ${figure.shape} - ${figure.getArea()}`;
 }
