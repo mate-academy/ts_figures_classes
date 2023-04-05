@@ -22,16 +22,19 @@ export class Triangle implements Figure {
         || a >= b + c
         || b >= a + c
         || c >= a + b) {
-      throw new Error('your error messaage');
+      throw new Error('Resulting value should be even number');
     }
   }
 
   getArea(): number {
     const { a, b, c } = this;
-    const p: number = (a + b + c) / 2;
-    const S = Math.sqrt(p * (p - a) * (p - b) * (p - c));
+    const semiPerimeter: number = (a + b + c) / 2;
+    const area = Math.sqrt(semiPerimeter
+      * (semiPerimeter - a)
+      * (semiPerimeter - b)
+      * (semiPerimeter - c));
 
-    return Number(S.toFixed(2));
+    return Number(area.toFixed(2));
   }
 }
 
@@ -43,7 +46,7 @@ export class Circle implements Figure {
     public radius: number,
   ) {
     if (radius <= 0) {
-      throw new Error('your error message');
+      throw new Error('Resulting value should be even number');
     }
   }
 
@@ -61,7 +64,7 @@ export class Rectangle implements Figure {
     public height: number,
   ) {
     if (width <= 0 || height <= 0) {
-      throw new Error('your error message');
+      throw new Error('Resulting value should be even number');
     }
   }
 
