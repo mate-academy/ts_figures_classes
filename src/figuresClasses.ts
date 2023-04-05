@@ -22,7 +22,7 @@ export class Triangle implements Figure {
     this.shape = 'triangle';
 
     if (a <= 0 || b <= 0 || c <= 0) {
-      throw new Error('Side of triangle can\'t be less than or equal to 0');
+      throw new Error('Side of triangle can not be less than or equal to 0');
     }
 
     if (a + b <= c || b + c <= a || a + c <= b) {
@@ -49,7 +49,7 @@ export class Circle implements Figure {
     this.shape = 'circle';
 
     if (a <= 0) {
-      throw new Error('Circle radius can\'t be less than or equal to 0');
+      throw new Error('Circle radius can not be less than or equal to 0');
     }
   }
 
@@ -69,7 +69,7 @@ export class Rectangle implements Figure {
     this.shape = 'rectangle';
 
     if (a <= 0 || b <= 0) {
-      throw new Error('Sides of rectangle can\'t be less than or equal to 0');
+      throw new Error('Sides of rectangle can not be less than or equal to 0');
     }
   }
 
