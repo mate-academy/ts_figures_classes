@@ -1,8 +1,8 @@
-
+type Shape = 'triangle' | 'circle' | 'rectangle';
 type Color = 'red' | 'blue' | 'green';
 
 export interface Figure {
-  shape: string,
+  shape: Shape,
   color: Color,
   getArea: () => number,
 }
@@ -14,7 +14,7 @@ function checkOnError(...args: number[]): void {
 }
 
 export class Triangle implements Figure {
-  shape: string = 'triangle';
+  shape: Shape = 'triangle';
 
   constructor(
     public color: Color,
@@ -34,7 +34,8 @@ export class Triangle implements Figure {
   }
 
   getArea(): number {
-    const halfOfSumaOfTriangle = (this.a + this.b + this.c) / 2;
+    const { a, b, c } = this;
+    const halfOfSumaOfTriangle = (a + b + c) / 2;
 
     const area: number = Math.sqrt(
       halfOfSumaOfTriangle
@@ -48,7 +49,7 @@ export class Triangle implements Figure {
 }
 
 export class Circle implements Figure {
-  shape: string = 'circle';
+  shape: Shape = 'circle';
 
   constructor(
     public color: Color,
@@ -63,7 +64,7 @@ export class Circle implements Figure {
 }
 
 export class Rectangle implements Figure {
-  shape: string = 'rectangle';
+  shape: Shape = 'rectangle';
 
   constructor(
     public color: Color,
