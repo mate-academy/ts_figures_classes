@@ -30,10 +30,11 @@ export class Triangle implements Figure {
   }
 
   getArea(): number {
-    const p = (this.a + this.b + this.c) / 2;
+    const { a, b, c } = this;
+    const p = (a + b + c) / 2;
 
     return Math.floor(
-      (Math.sqrt(p * (p - this.a) * (p - this.b) * (p - this.c))) * 100,
+      (Math.sqrt(p * (p - a) * (p - b) * (p - c))) * 100,
     ) / 100;
   }
 }
