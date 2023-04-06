@@ -43,9 +43,13 @@ export class Triangle implements Figure {
   }
 
   getArea(): number {
-    const p: number = (this.a + this.b + this.c) / 2;
+    const { a, b, c } = this;
+    const semiPerimeter = (a + b + c) / 2;
     const area: number = Math.sqrt(
-      p * (p - this.a) * (p - this.b) * (p - this.c),
+      semiPerimeter
+      * (semiPerimeter - this.a)
+      * (semiPerimeter - this.b)
+      * (semiPerimeter - this.c),
     );
 
     return Math.round(area * 100) / 100;
@@ -71,7 +75,6 @@ export class Circle implements Figure {
     const area: number = Math.PI * this.r ** 2;
 
     return Math.floor(area * 100) / 100;
-    // return area.toFixed(2);
   }
 }
 
