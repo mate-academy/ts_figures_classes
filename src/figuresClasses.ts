@@ -11,7 +11,7 @@ export interface Figure {
 }
 
 export class Triangle implements Figure {
-  shape = 'triangle';
+  public shape = 'triangle';
 
   constructor(
     public color: Color,
@@ -29,15 +29,16 @@ export class Triangle implements Figure {
   }
 
   getArea(): number {
-    const s = (this.a + this.b + this.c) / 2;
-    const area = Math.sqrt(s * (s - this.a) * (s - this.b) * (s - this.c));
+    const { a, b, c } = this;
+    const s = (a + b + c) / 2;
+    const area = Math.sqrt(s * (s - a) * (s - b) * (s - c));
 
     return parseFloat(area.toFixed(2));
   }
 }
 
 export class Circle implements Figure {
-  shape = 'circle';
+  public shape = 'circle';
 
   constructor(
     public color: Color,
@@ -54,7 +55,7 @@ export class Circle implements Figure {
 }
 
 export class Rectangle implements Figure {
-  shape = 'rectangle';
+  public shape = 'rectangle';
 
   constructor(
     public color: Color,
