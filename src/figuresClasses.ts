@@ -1,17 +1,14 @@
-enum Color {
-  Red = 'red',
-  Green = 'green',
-  Blue = 'blue'
-}
+type Color = 'red' | 'green' | 'blue';
+type Shape = 'triangle' | 'circle' | 'rectangle';
 
 export interface Figure {
-  shape: string;
+  shape: Shape;
   color: Color;
   getArea(): number;
 }
 
 export class Triangle implements Figure {
-  public shape = 'triangle';
+  shape: Shape = 'triangle';
 
   constructor(
     public color: Color,
@@ -39,7 +36,7 @@ export class Triangle implements Figure {
 }
 
 export class Circle implements Figure {
-  public shape = 'circle';
+  shape: Shape = 'circle';
 
   constructor(
     public color: Color,
@@ -56,7 +53,7 @@ export class Circle implements Figure {
 }
 
 export class Rectangle implements Figure {
-  public shape = 'rectangle';
+  shape: Shape = 'rectangle';
 
   constructor(
     public color: Color,
