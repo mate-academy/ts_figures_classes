@@ -47,7 +47,9 @@ export class Triangle implements Figure {
       return geron;
     };
 
-    return Math.floor(geronFormula(this.a, this.b, this.c) * 100) / 100;
+    const { a, b, c } = this;
+
+    return Math.floor(geronFormula(a, b, c) * 100) / 100;
   }
 }
 
@@ -82,7 +84,9 @@ export class Rectangle implements Figure {
   }
 
   getArea(): number {
-    return Math.floor((this.width * this.height) * 100) / 100;
+    const { width, height } = this;
+
+    return Math.floor((width * height) * 100) / 100;
   }
 }
 
