@@ -4,14 +4,11 @@ export type Colors = 'red' | 'green' | 'blue';
 export interface Figure {
   shape: Shapes;
   color: Colors;
-  a: number;
-  b?: number;
-  c?: number;
   getArea: () => number;
 }
 
 export class Triangle implements Figure {
-  public shape: Shapes;
+  public shape: Shapes = 'triangle';
 
   constructor(
     public color: Colors,
@@ -19,8 +16,6 @@ export class Triangle implements Figure {
     public b: number,
     public c: number,
   ) {
-    this.shape = 'triangle';
-
     if (a <= 0 || b <= 0 || c <= 0) {
       throw new Error('Side of triangle can not be less than or equal to 0');
     }
@@ -31,23 +26,23 @@ export class Triangle implements Figure {
   }
 
   getArea(): number {
-    const semiPer = (this.a + this.b + this.c) / 2;
-    // eslint-disable-next-line
-    const area = Math.sqrt(semiPer * (semiPer - this.a) * (semiPer - this.b) * (semiPer - this.c))
+    const { a, b, c } = this;
+    const semiPer = (a + b + c) / 2;
+    const area = Math.sqrt(
+      semiPer * (semiPer - this.a) * (semiPer - this.b) * (semiPer - this.c),
+    );
 
     return Math.floor(area * 100) / 100;
   }
 }
 
 export class Circle implements Figure {
-  public shape: Shapes;
+  public shape: Shapes = 'circle';
 
   constructor(
     public color: Colors,
     public a: number,
   ) {
-    this.shape = 'circle';
-
     if (a <= 0) {
       throw new Error('Circle radius can not be less than or equal to 0');
     }
@@ -59,15 +54,13 @@ export class Circle implements Figure {
 }
 
 export class Rectangle implements Figure {
-  public shape: Shapes;
+  public shape: Shapes = 'rectangle';
 
   constructor(
     public color: Colors,
     public a: number,
     public b: number,
   ) {
-    this.shape = 'rectangle';
-
     if (a <= 0 || b <= 0) {
       throw new Error('Sides of rectangle can not be less than or equal to 0');
     }
