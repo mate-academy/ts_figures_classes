@@ -12,7 +12,7 @@ export interface Figure {
 }
 
 export class Triangle {
-  shape: Shape;
+  public shape: Shape = Shape.Triangle;
 
   constructor(
     public color: Color,
@@ -20,8 +20,6 @@ export class Triangle {
     public b: number,
     public c: number,
   ) {
-    this.shape = Shape.Triangle;
-
     if (this.a <= 0 || this.b <= 0 || this.c <= 0) {
       throw new Error('One of the arguments are negative');
     }
@@ -35,12 +33,14 @@ export class Triangle {
   }
 
   getArea(): number {
-    const perimetr = (this.a + this.b + this.c) / 2;
+    const { a, b, c } = this;
+
+    const perimetr = (a + b + c) / 2;
     const area = Math.sqrt(
       perimetr
-      * (perimetr - this.a)
-      * (perimetr - this.b)
-      * (perimetr - this.c),
+      * (perimetr - a)
+      * (perimetr - b)
+      * (perimetr - c),
     );
 
     return Math.floor(area * 100) / 100;
@@ -48,14 +48,12 @@ export class Triangle {
 }
 
 export class Circle {
-  shape: Shape;
+  public shape: Shape = Shape.Circle;
 
   constructor(
     public color: Color,
     public radius: number,
   ) {
-    this.shape = Shape.Circle;
-
     if (this.radius <= 0) {
       throw new Error('Value cant be negative or 0');
     }
@@ -67,7 +65,7 @@ export class Circle {
 }
 
 export class Rectangle {
-  shape: Shape;
+  public shape: Shape = Shape.Rectangle;
 
   constructor(
     public color: Color,
@@ -77,8 +75,6 @@ export class Rectangle {
     if (width <= 0 || height <= 0) {
       throw new Error('One of the arguments are negative');
     }
-
-    this.shape = Shape.Rectangle;
   }
 
   getArea(): number {
