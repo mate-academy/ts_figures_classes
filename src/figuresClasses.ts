@@ -4,9 +4,13 @@ export interface Figure {
   getArea(): number;
 }
 
+type Color = 'red' | 'green' | 'blue';
+
+type Shape = 'triangle' | 'circle' | 'rectangle';
+
 export class Triangle implements Figure {
   constructor(
-    public color: 'red' | 'green' | 'blue',
+    public color: Color,
     public a: number,
     public b: number,
     public c: number,
@@ -20,11 +24,15 @@ export class Triangle implements Figure {
     }
   }
 
-  shape: 'triangle' = 'triangle';
+  shape: Shape = 'triangle';
 
   getArea(): number {
-    const s = (this.a + this.b + this.c) / 2;
-    const area = Math.sqrt(s * (s - this.a) * (s - this.b) * (s - this.c));
+    const { a, b, c } = this;
+    const semiPerimeter = (a + b + c) / 2;
+    const area = Math.sqrt(semiPerimeter
+      * (semiPerimeter - a)
+      * (semiPerimeter - b)
+      * (semiPerimeter - c));
 
     return Math.floor(area * 100) / 100;
   }
@@ -40,7 +48,7 @@ export class Circle implements Figure {
     }
   }
 
-  shape: 'circle' = 'circle';
+  shape: Shape = 'circle';
 
   getArea(): number {
     const area = Math.PI * this.radius ** 2;
@@ -60,7 +68,7 @@ export class Rectangle implements Figure {
     }
   }
 
-  shape: 'rectangle' = 'rectangle';
+  shape: Shape = 'rectangle';
 
   getArea(): number {
     const area = this.width * this.height;
