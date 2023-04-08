@@ -14,7 +14,7 @@ export class Triangle implements Figure {
     public c: number,
   ) {
     if (a >= b + c || b >= a + c || c >= a + b || Math.min(a, b, c) <= 0) {
-      throw new Error('your error message');
+      throw new Error('A triangle with such sides is impossible');
     }
   }
 
@@ -34,7 +34,7 @@ export class Circle implements Figure {
     public radius: number,
   ) {
     if (radius <= 0) {
-      throw new Error('your error message');
+      throw new Error('Radius cannot be less than zero');
     }
   }
 
@@ -54,7 +54,7 @@ export class Rectangle implements Figure {
     public b: number,
   ) {
     if (Math.min(a, b) <= 0) {
-      throw new Error('your error message');
+      throw new Error('Check your sides. Some of them is less than zero');
     }
   }
 
