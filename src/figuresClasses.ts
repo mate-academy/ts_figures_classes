@@ -1,19 +1,68 @@
 export interface Figure {
-
+  shape: string;
+  color: string;
+  getArea: Function;
 }
 
-export class Triangle {
+export class Triangle implements Figure {
+  shape: string = 'triangle';
 
+  constructor(
+    public color: string,
+    public a: number,
+    public b: number,
+    public c: number,
+  ) {
+    if (a >= b + c || b >= a + c || c >= a + b || Math.min(a, b, c) <= 0) {
+      throw new Error('your error message');
+    }
+  }
+
+  getArea(): number {
+    const s = (this.a + this.b + this.c) / 2;
+    const area = Math.sqrt(s * (s - this.a) * (s - this.b) * (s - this.c));
+
+    return +area.toFixed(2);
+  }
 }
 
-export class Circle {
+export class Circle implements Figure {
+  shape: string = 'circle';
 
+  constructor(
+    public color: string,
+    public radius: number,
+  ) {
+    if (radius <= 0) {
+      throw new Error('your error message');
+    }
+  }
+
+  getArea(): number {
+    const circleSquareInStr = (Math.PI * (this.radius ** 2)).toString();
+
+    return +circleSquareInStr.slice(0, circleSquareInStr.lastIndexOf('.') + 3);
+  }
 }
 
-export class Rectangle {
+export class Rectangle implements Figure {
+  shape: string = 'rectangle';
 
+  constructor(
+    public color: string,
+    public a: number,
+    public b: number,
+  ) {
+    if (Math.min(a, b) <= 0) {
+      throw new Error('your error message');
+    }
+  }
+
+  getArea(): number {
+    return +(this.a * this.b).toFixed(2);
+  }
 }
 
-export function getInfo(figure) {
-
+export function getInfo(figure: Figure): string {
+  return `A ${figure.color} ${figure.shape} - ${figure.getArea()}`;
 }
