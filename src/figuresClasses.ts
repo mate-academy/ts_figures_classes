@@ -1,7 +1,7 @@
 export interface Figure {
   shape: string;
   color: string;
-  getArea: Function;
+  getArea: () => number;
 }
 
 export class Triangle implements Figure {
@@ -39,9 +39,9 @@ export class Circle implements Figure {
   }
 
   getArea(): number {
-    const circleSquareInStr = (Math.PI * (this.radius ** 2)).toString();
+    const s = Math.PI * this.radius * this.radius;
 
-    return +circleSquareInStr.slice(0, circleSquareInStr.lastIndexOf('.') + 3);
+    return (Math.floor(s * 100) / 100);
   }
 }
 
