@@ -14,10 +14,13 @@ export interface Figure {
 export class Triangle implements Figure {
   shape: Shape = 'triangle';
 
-  color: Color; // eslint-disable-line
-  a: number; // eslint-disable-line
-  b: number; // eslint-disable-line
-  c: number; // eslint-disable-line
+  color: Color;
+
+  a: number;
+
+  b: number;
+
+  c: number;
 
   constructor(color: Color, a: number, b: number, c: number) {
     const theLongestSide = Math.max(a, b, c);
@@ -35,16 +38,18 @@ export class Triangle implements Figure {
 
   getArea(): number {
     const p = (this.a + this.b + this.c) / 2;
+    const area = Math.sqrt(p * (p - this.a) * (p - this.b) * (p - this.c));
 
-    return toTwoNumsAfter(Math.sqrt(p * (p - this.a) * (p - this.b) * (p - this.c))); // eslint-disable-line
+    return toTwoNumsAfter(area);
   }
 }
 
 export class Circle {
   shape: Shape = 'circle';
 
-  color: Color; // eslint-disable-line
-  radius: number; // eslint-disable-line
+  color: Color;
+
+  radius: number;
 
   constructor(color: Color, radius: number) {
     if (radius <= 0) {
@@ -56,16 +61,20 @@ export class Circle {
   }
 
   getArea(): number {
-    return toTwoNumsAfter(Math.PI * this.radius ** 2);
+    const area = Math.PI * this.radius ** 2;
+
+    return toTwoNumsAfter(area);
   }
 }
 
 export class Rectangle {
   shape: Shape = 'rectangle';
 
-  color: Color; // eslint-disable-line
-  width: number; // eslint-disable-line
-  height: number; // eslint-disable-line
+  color: Color;
+
+  width: number;
+
+  height: number;
 
   constructor(color: Color, width: number, height: number) {
     if (width <= 0 || height <= 0) {
@@ -78,7 +87,9 @@ export class Rectangle {
   }
 
   getArea(): number {
-    return toTwoNumsAfter(this.width * this.height);
+    const area = this.width * this.height;
+
+    return toTwoNumsAfter(area);
   }
 }
 
