@@ -4,8 +4,14 @@ export interface Figure {
   getArea: () => number;
 }
 
+enum Shape {
+  Triangle = 'triangle',
+  Circle = 'circle',
+  Rectangle = 'rectangle',
+}
+
 export class Triangle implements Figure {
-  public shape = 'triangle';
+  public shape = Shape.Triangle;
 
   constructor(
     public color: string,
@@ -13,18 +19,18 @@ export class Triangle implements Figure {
     private b:number,
     private c: number,
   ) {
-    if (
-      a < 0
-      || b < 0
-      || c < 0
-    ) {
-      throw new Error('all values should be positive');
+    this.checkSides();
+  }
+
+  private checkSides(): void {
+    if (this.a < 0 || this.b < 0 || this.c < 0) {
+      throw new Error('All values should be positive');
     }
 
     if (
-      a + b <= c
-      || a + c <= b
-      || b + c <= a
+      this.a + this.b <= this.c
+      || this.a + this.c <= this.b
+      || this.b + this.c <= this.a
     ) {
       throw new Error('Impossible to create triangle from that values');
     }
@@ -45,13 +51,17 @@ export class Triangle implements Figure {
 }
 
 export class Circle implements Figure {
-  public shape = 'circle';
+  public shape = Shape.Circle;
 
   constructor(
     public color: string,
     private radius: number,
   ) {
-    if (radius < 0) {
+    this.checkSides();
+  }
+
+  private checkSides(): void {
+    if (this.radius < 0) {
       throw new Error('Radius should be positive');
     }
   }
@@ -62,14 +72,18 @@ export class Circle implements Figure {
 }
 
 export class Rectangle implements Figure {
-  public shape = 'rectangle';
+  public shape = Shape.Rectangle;
 
   constructor(
     public color: string,
     private width: number,
     private height: number,
   ) {
-    if (width < 0 || height < 0) {
+    this.checkSides();
+  }
+
+  private checkSides(): void {
+    if (this.width < 0 || this.height < 0) {
       throw new Error('Width and height should be positive');
     }
   }
