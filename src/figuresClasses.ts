@@ -1,13 +1,13 @@
-export interface Figure {
-  color: string;
-  shape: string;
-  getArea: () => number;
-}
-
 enum Shape {
   Triangle = 'triangle',
   Circle = 'circle',
   Rectangle = 'rectangle',
+}
+
+export interface Figure {
+  color: string;
+  shape: Shape;
+  getArea: () => number;
 }
 
 export class Triangle implements Figure {
