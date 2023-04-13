@@ -1,3 +1,5 @@
+import { normalize } from './normalize';
+
 type Shape = 'triangle' | 'circle' | 'rectangle';
 type Color = 'red' | 'green' | 'blue';
 
@@ -41,10 +43,8 @@ export class Triangle implements Figure {
   getArea(): number {
     const p = (this.a + this.b + this.c) / 2;
     const S = Math.sqrt(p * (p - this.a) * (p - this.b) * (p - this.c));
-    const normalizeArea: string = S.toFixed(3);
-    const area: number = +normalizeArea.slice(0, -1);
 
-    return area;
+    return normalize(S);
   }
 }
 
@@ -66,10 +66,8 @@ export class Circle implements Figure {
 
   getArea(): number {
     const S = Math.PI * (this.radius * this.radius);
-    const normalizeArea: string = S.toFixed(3);
-    const area: number = +normalizeArea.slice(0, -1);
 
-    return area;
+    return normalize(S);
   }
 }
 
@@ -94,10 +92,8 @@ export class Rectangle implements Figure {
 
   getArea(): number {
     const S = this.height * this.width;
-    const normalizeArea: string = S.toFixed(3);
-    const area: number = +normalizeArea.slice(0, -1);
 
-    return area;
+    return normalize(S);
   }
 }
 
