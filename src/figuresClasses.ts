@@ -1,10 +1,13 @@
 type Shape = 'triangle' | 'circle' | 'rectangle';
 type Color = 'red' | 'green' |'blue';
 
+function getRounding(number: number): number {
+  return Math.floor(number * 100) / 100;
+}
+
 export interface Figure {
   shape: Shape,
   color: Color,
-
   getArea: () => number;
 }
 
@@ -30,14 +33,12 @@ export class Triangle implements Figure {
 
   getArea(): number {
     const halfOfAPerimeter = (this.a + this.b + this.c) / 2;
-    const square = Math.floor(
-      Math.sqrt(halfOfAPerimeter
+    const square = Math.sqrt(halfOfAPerimeter
         * (halfOfAPerimeter - this.a)
         * (halfOfAPerimeter - this.b)
-        * (halfOfAPerimeter - this.c)) * 100,
-    ) / 100;
+        * (halfOfAPerimeter - this.c));
 
-    return square;
+    return getRounding(square);
   }
 }
 
@@ -54,7 +55,9 @@ export class Circle implements Figure {
   }
 
   getArea(): number {
-    return Math.floor(Math.PI * this.radius ** 2 * 100) / 100;
+    const area = Math.PI * this.radius ** 2;
+
+    return getRounding(area);
   }
 }
 
@@ -73,7 +76,9 @@ export class Rectangle implements Figure {
   }
 
   getArea(): number {
-    return Math.floor(this.width * this.height * 100) / 100;
+    const area = this.width * this.height;
+
+    return getRounding(area);
   }
 }
 
