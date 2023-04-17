@@ -1,14 +1,16 @@
+type Shape = 'triangle' | 'circle' | 'rectangle';
+type Color = 'red' | 'green' | 'blue';
 export interface Figure {
-  shape: string;
-  color: string;
+  shape: Shape;
+  color: Color;
   getArea(): number;
 }
 
 export class Triangle implements Figure {
-  public shape: string = 'triangle';
+  public shape: Shape = 'triangle';
 
   constructor(
-    public color: string,
+    public color: Color,
     public sideA: number,
     public sideB: number,
     public sideC: number,
@@ -21,7 +23,8 @@ export class Triangle implements Figure {
   }
 
   getArea(): number {
-    const s = (this.sideA + this.sideB + this.sideC) / 2;
+    const { sideA, sideB, sideC } = this;
+    const s = (sideA + sideB + sideC) / 2;
     const area = Math.floor(100 * (Math
       .sqrt(s * (s - this.sideA) * (s - this.sideB) * (s - this.sideC)))) / 100;
 
@@ -30,9 +33,9 @@ export class Triangle implements Figure {
 }
 
 export class Circle implements Figure {
-  public shape: string = 'circle';
+  public shape: Shape = 'circle';
 
-  constructor(public color: string, public radius: number) {
+  constructor(public color: Color, public radius: number) {
     if (radius <= 0) {
       throw new Error('Radius must be a positive number');
     }
@@ -46,10 +49,10 @@ export class Circle implements Figure {
 }
 
 export class Rectangle implements Figure {
-  public shape: string = 'rectangle';
+  public shape: Shape = 'rectangle';
 
   constructor(
-    public color: string,
+    public color: Color,
     public sideA: number,
     public sideB: number,
   ) {
