@@ -16,7 +16,7 @@ export interface Figure {
   getArea(): number,
 }
 
-function roundValue(value: number): number {
+function getRoundValue(value: number): number {
   return Math.floor(value * 100) / 100;
 }
 
@@ -49,7 +49,7 @@ export class Triangle implements Figure {
       * (halfOfPerimeter - this.c),
     );
 
-    return roundValue(squareOfTriangle);
+    return getRoundValue(squareOfTriangle);
   }
 }
 
@@ -64,7 +64,7 @@ export class Circle implements Figure {
   }
 
   getArea(): number {
-    return roundValue(Math.PI * this.radius ** 2);
+    return getRoundValue(Math.PI * this.radius ** 2);
   }
 }
 
@@ -80,7 +80,7 @@ export class Rectangle implements Figure {
   }
 
   getArea(): number {
-    return roundValue(this.width * this.height);
+    return getRoundValue(this.width * this.height);
   }
 }
 
