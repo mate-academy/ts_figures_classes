@@ -7,6 +7,12 @@ export interface Figure {
   getArea: () => number;
 }
 
+function checkSides(a: number, b = 1, c = 1): void {
+  if (a <= 0 || b <= 0 || c <= 0) {
+    throw new Error('Any side can`t be equil or less then 0');
+  }
+}
+
 export class Triangle implements Figure {
   shape: Shape = 'triangle';
 
@@ -16,9 +22,7 @@ export class Triangle implements Figure {
     public b: number,
     public c: number,
   ) {
-    if (a <= 0 || b <= 0 || c <= 0) {
-      throw new Error('Any side can`t be equil or less then 0');
-    }
+    checkSides(a, b, c);
 
     if (a + b <= c || b + c <= a || a + c <= b) {
       throw new Error(`sides ${a}, ${b} and ${c} can\`t form a triangle`);
@@ -40,9 +44,7 @@ export class Circle implements Figure {
     public color: Color,
     public a: number,
   ) {
-    if (a <= 0) {
-      throw new Error('Any side can`t be equil or less then 0');
-    }
+    checkSides(a);
   }
 
   getArea(): number {
@@ -58,9 +60,7 @@ export class Rectangle implements Figure {
     public a: number,
     public b: number,
   ) {
-    if (a <= 0 || b <= 0) {
-      throw new Error('Any side can`t be equil or less then 0');
-    }
+    checkSides(a, b);
   }
 
   getArea(): number {
