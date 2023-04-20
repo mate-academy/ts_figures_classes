@@ -19,11 +19,11 @@ export class Triangle implements Figure {
     this.sides = [...args].sort((a, b) => a - b);
 
     if (this.sides.some((side) => side <= 0)) {
-      throw new Error();
+      throw new Error('At least one property is less than 0');
     }
 
     if (this.sides[0] + this.sides[1] <= this.sides[2]) {
-      throw new Error();
+      throw new Error('Not a triangle');
     }
   }
 
@@ -48,7 +48,7 @@ export class Circle implements Figure {
     this.radius = radius;
 
     if (this.radius <= 0) {
-      throw new Error();
+      throw new Error('At least one property is less than 0');
     }
   }
 
@@ -73,7 +73,7 @@ export class Rectangle implements Figure {
     this.height = height;
 
     if (this.width <= 0 || this.height <= 0) {
-      throw new Error();
+      throw new Error('At least one property is less than 0');
     }
   }
 
