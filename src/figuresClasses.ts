@@ -1,5 +1,5 @@
-type Shape = 'triangle' | 'circle' | 'rectangle';
-type Color = 'red' | 'green' | 'blue';
+enum Shape { 'triangle', 'circle', 'rectangle' }
+enum Color { 'red', 'green', 'blue' }
 
 export interface Figure {
   shape: Shape;
@@ -20,9 +20,9 @@ export class Triangle implements Figure {
 
   getArea(): number {
     const half = (this.a
-            + this.b
-            + this.c)
-            / 2;
+      + this.b
+      + this.c)
+      / 2;
 
     return Math.floor(+((Math.sqrt(
       half
@@ -58,8 +58,8 @@ export class Circle implements Figure {
   radius: number;
 
   getArea(): number {
-    return Math.floor(+(((2 * Math.PI * this.radius * this.radius) / 2)
-    * 100)) / 100;
+    return Math.floor(((2 * Math.PI * this.radius * this.radius) / 2)
+      * 100) / 100;
   }
 
   constructor(color: Color, radius: number) {
@@ -97,6 +97,6 @@ export class Rectangle implements Figure {
   }
 }
 
-export function getInfo(figure:Figure): string {
+export function getInfo(figure: Figure): string {
   return `A ${figure.color} ${figure.shape} - ${figure.getArea()}`;
 }
