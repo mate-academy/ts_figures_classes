@@ -4,13 +4,15 @@ export interface Figure {
   getArea: () => number;
 }
 
-const validator: (...args: number[]) => void = (...params: number[]) => {
+const lengthValidator: (...args: number[]) => void = (...params: number[]) => {
   params.forEach((parm) => {
     if (parm <= 0) {
       throw new Error('Length should be > 0! Thank you!');
     }
   });
+};
 
+const shapeValidator: (...args: number []) => void = (...params: number[]) => {
   if (params.length === 3) {
     if (params[0] + params[1] <= params[2]
       || params[0] + params[2] <= params[1]
@@ -30,8 +32,8 @@ export class Triangle implements Figure {
     public b: number,
     public c: number,
   ) {
-    validator(a, b, c);
-
+    lengthValidator(a, b, c);
+    shapeValidator(a, b, c);
     this.shape = 'triangle';
   }
 
@@ -54,7 +56,7 @@ export class Circle implements Figure {
     public color: 'red' | 'green' | 'blue',
     public radius: number,
   ) {
-    validator(radius);
+    lengthValidator(radius);
     this.shape = 'circle';
   }
 
@@ -73,7 +75,7 @@ export class Rectangle {
     public width: number,
     public height: number,
   ) {
-    validator(width, height);
+    lengthValidator(width, height);
     this.shape = 'rectangle';
   }
 
