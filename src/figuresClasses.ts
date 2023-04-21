@@ -1,5 +1,10 @@
 type Color = 'red' | 'green' | 'blue';
-type Shape = 'triangle' | 'circle' | 'rectangle';
+
+enum Shape {
+  triangle = 'triangle',
+  circle = 'circle',
+  rectangle = 'rectangle',
+}
 
 export interface Figure {
   shape: Shape,
@@ -8,7 +13,7 @@ export interface Figure {
 }
 
 export class Triangle implements Figure {
-  shape: Shape= 'triangle';
+  shape = Shape.triangle;
 
   constructor(public color: Color, public a: number,
     public b: number, public c: number) {
@@ -30,14 +35,18 @@ export class Triangle implements Figure {
   }
 
   private isValidTriangle(): boolean {
-    const [a, b, c] = [this.a, this.b, this.c].sort((x, y) => x - y);
+    const [a, b, c] = this.getSortedSides();
 
     return a + b > c;
+  }
+
+  private getSortedSides(): number[] {
+    return [this.a, this.b, this.c].sort((x, y) => x - y);
   }
 }
 
 export class Circle implements Figure {
-  shape: Shape = 'circle';
+  shape = Shape.circle;
 
   constructor(public color: Color, public r: number) {
     if (r <= 0) {
@@ -51,7 +60,7 @@ export class Circle implements Figure {
 }
 
 export class Rectangle implements Figure {
-  shape: Shape = 'rectangle';
+  shape = Shape.rectangle;
 
   constructor(public color: Color, public a: number, public b: number) {
     if (a <= 0 || b <= 0) {
