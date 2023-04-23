@@ -10,6 +10,12 @@ function checkError(...sides: number[]): void {
   }
 }
 
+enum Shape {
+  triangle = 'triangle',
+  circle = 'circle',
+  rectangle = 'rectangle'
+}
+
 export interface Figure {
   shape: string,
   color: string,
@@ -17,7 +23,7 @@ export interface Figure {
 }
 
 export class Triangle implements Figure {
-  shape: string = 'triangle';
+  shape: Shape = Shape.triangle;
 
   constructor(
     public color: string,
@@ -26,7 +32,6 @@ export class Triangle implements Figure {
     public c: number,
   ) {
     checkError(this.a, this.b, this.c);
-    this.shape = 'triangle';
   }
 
   getArea(): number {
@@ -38,14 +43,13 @@ export class Triangle implements Figure {
 }
 
 export class Circle implements Figure {
-  shape: string = 'circle';
+  shape: Shape = Shape.circle;
 
   constructor(
     public color: string,
     public radius: number,
   ) {
     checkError(this.radius);
-    this.shape = 'circle';
   }
 
   getArea(): number {
@@ -55,7 +59,7 @@ export class Circle implements Figure {
 }
 
 export class Rectangle implements Figure {
-  shape: string = 'rectangle';
+  shape: Shape = Shape.rectangle;
 
   constructor(
     public color: string,
@@ -63,7 +67,6 @@ export class Rectangle implements Figure {
     public height: number,
   ) {
     checkError(this.width, this.height);
-    this.shape = 'rectangle';
   }
 
   getArea(): number {
