@@ -1,14 +1,33 @@
+
+enum Shape {
+  Triangle = 'triangle',
+  Circle = 'circle',
+  Rectangle = 'rectangle',
+}
+
+enum Color {
+  Red = 'red',
+  Green = 'green',
+  Blue = 'blue',
+}
+
 export interface Figure {
-  shape: string;
-  color: string;
+  shape: Shape;
+  color: Color;
   getArea(): number;
 }
 
+let result: number;
+
+function roundingExpressions(expression: number): number {
+  return Math.floor(expression * 100) / 100;
+}
+
 export class Triangle implements Figure {
-  shape: string = 'triangle';
+  shape = Shape.Triangle;
 
   constructor(
-    public color: string,
+    public color: Color,
     public a: number,
     public b: number,
     public c: number,
@@ -25,16 +44,17 @@ export class Triangle implements Figure {
   getArea(): number {
     const p = (this.a + this.b + this.c) / 2;
 
-    return Math.floor((Math.sqrt(p
-      * (p - this.a) * (p - this.b) * (p - this.c))) * 100) / 100;
+    result = Math.sqrt(p * (p - this.a) * (p - this.b) * (p - this.c));
+
+    return roundingExpressions(result);
   }
 }
 
 export class Circle implements Figure {
-  shape: string = 'circle';
+  shape = Shape.Circle;
 
   constructor(
-    public color: string,
+    public color: Color,
     public radius: number,
   ) {
     if (radius <= 0) {
@@ -43,15 +63,17 @@ export class Circle implements Figure {
   }
 
   getArea(): number {
-    return Math.floor(Math.PI * this.radius * this.radius * 100) / 100;
+    result = Math.PI * this.radius * this.radius;
+
+    return roundingExpressions(result);
   }
 }
 
 export class Rectangle implements Figure {
-  shape: string = 'rectangle';
+  shape = Shape.Rectangle;
 
   constructor(
-    public color: string,
+    public color: Color,
     public width: number,
     public height: number,
   ) {
@@ -61,7 +83,9 @@ export class Rectangle implements Figure {
   }
 
   getArea(): number {
-    return Math.floor(this.width * this.height * 100) / 100;
+    result = this.width * this.height;
+
+    return roundingExpressions(result);
   }
 }
 
