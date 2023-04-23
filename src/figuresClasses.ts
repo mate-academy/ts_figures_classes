@@ -1,6 +1,6 @@
 export interface Figure {
   color: 'red' | 'green' | 'blue';
-  shape: string;
+  shape: 'circle' | 'triangle' | 'rectangle';
   getArea: () => number;
 }
 
