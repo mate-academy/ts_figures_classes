@@ -64,7 +64,7 @@ export class Rectangle implements Figure {
 
   sides: number[];
 
-  constructor(color:Color, ...args: number[]) {
+  constructor(color: Color, ...args: number[]) {
     this.shape = 'rectangle';
     this.color = color;
     this.sides = [...args];
