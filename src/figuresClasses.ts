@@ -1,12 +1,13 @@
+type Shape ='triangle' | 'circle' | 'rectangle';
 
 export interface Figure {
-  shape: string;
+  shape: Shape;
   color: string;
   getArea(): number;
 }
 
 export class Triangle implements Figure {
-  shape: string;
+  shape: 'triangle';
 
   color: string;
 
@@ -16,7 +17,7 @@ export class Triangle implements Figure {
 
   c: number;
 
-  private s: number;
+  private halfSides: number;
 
   constructor(color: string, a: number, b: number, c: number) {
     this.shape = 'triangle';
@@ -24,7 +25,7 @@ export class Triangle implements Figure {
     this.a = a;
     this.b = b;
     this.c = c;
-    this.s = (this.a + this.b + this.c) / 2;
+    this.halfSides = (this.a + this.b + this.c) / 2;
     this.checkSides();
   }
 
@@ -41,13 +42,13 @@ export class Triangle implements Figure {
   }
 
   getArea(): number {
-    return Math.round((Math.sqrt(this.s * (this.s - this.a)
-    * (this.s - this.b) * (this.s - this.c))) * 100) / 100;
+    return Math.round((Math.sqrt(this.halfSides * (this.halfSides - this.a)
+    * (this.halfSides - this.b) * (this.halfSides - this.c))) * 100) / 100;
   }
 }
 
 export class Circle implements Figure {
-  shape: string;
+  shape: 'circle';
 
   color: string;
 
@@ -74,7 +75,7 @@ export class Circle implements Figure {
 }
 
 export class Rectangle implements Figure {
-  shape: string;
+  shape: 'rectangle';
 
   color: string;
 
