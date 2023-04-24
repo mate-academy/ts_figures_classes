@@ -1,9 +1,13 @@
-enum Color {
-  'red', 'green', 'blue'
+enum Shape {
+  'triangle',
+  'circle',
+  'rectangle',
 }
 
+type Color = 'red' | 'green' | 'blue';
+
 export interface Figure {
-  shape: 'triangle' | 'circle' |'rectangle';
+  shape: Shape;
   color: Color;
   getArea: Function;
 }
@@ -14,28 +18,27 @@ export class Triangle implements Figure {
     public a: number,
     public b: number,
     public c: number,
-    public shape: 'triangle',
+    public shape: Shape.triangle,
   ) {
-    if ((this.a <= 0 || this.b <= 0 || this.c <= 0)
-        || this.c >= (this.a + this.b) || this.b >= (this.a + this.c)
-        || this.a >= (this.b + this.c)) {
-      throw new Error('ERROR');
+    if ((a <= 0 || b <= 0 || c <= 0)) {
+      throw new Error('All values must be positive');
+    }
+
+    if (c >= (a + b) || b >= (a + c)
+        || a >= (b + c)) {
+      throw new Error(
+        'The longest side must be greater or equal than a sum of two others',
+      );
     }
 
     this.shape = 'triangle';
-    this.color = color;
-    this.a = a;
-    this.b = b;
-    this.c = c;
   }
 
   getArea(): number {
     const s = (this.a + this.b + this.c) / 2;
-    const a = +(
-      Math.sqrt(s * (s - this.a) * (s - this.b) * (s - this.c))
-    ).toFixed(2);
+    const a = Math.sqrt(s * (s - this.a) * (s - this.b) * (s - this.c));
 
-    return a;
+    return Math.floor(a * 100) / 100;
   }
 }
 
@@ -43,21 +46,17 @@ export class Circle implements Figure {
   constructor(
     public color: Color,
     public radius: number,
-    public shape: 'circle',
+    public shape: Shape.circle,
   ) {
-    if (this.radius <= 0) {
-      throw new Error('ERROR');
+    if (radius <= 0) {
+      throw new Error('Radius must be positive');
     }
 
     this.shape = 'circle';
-    this.color = color;
-    this.radius = radius;
   }
 
   getArea(): number {
-    const a = Math.floor(Math.PI * (this.radius ** 2) * 100) / 100;
-
-    return a;
+    return Math.floor(Math.PI * (this.radius ** 2) * 100) / 100;
   }
 }
 
@@ -66,15 +65,12 @@ export class Rectangle implements Figure {
     public color: Color,
     public width: number,
     public height: number,
-    public shape: 'rectangle',
+    public shape: Shape.rectangle,
   ) {
-    if (this.width <= 0 || this.height <= 0) {
-      throw new Error('ERROR');
+    if (width <= 0 || height <= 0) {
+      throw new Error('Width and height must be positive');
     }
     this.shape = 'rectangle';
-    this.color = color;
-    this.width = width;
-    this.height = height;
   }
 
   getArea(): number {
