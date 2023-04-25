@@ -4,11 +4,7 @@ export enum Shape {
   Rectangle = 'rectangle',
 }
 
-export enum Color {
-  Red = 'red',
-  Green = 'green',
-  Blue = 'blue,'
-}
+type Color = 'red' | 'green' | 'blue';
 
 export interface Figure {
   color: Color;
@@ -31,10 +27,6 @@ export class Triangle implements Figure {
       || a + c <= b) {
       throw new Error(`Sides ${a}, ${b} and ${c} can't form a traingle`);
     }
-
-    this.a = a;
-    this.b = b;
-    this.c = c;
   }
 
   getArea(): number {
@@ -51,7 +43,7 @@ export class Circle implements Figure {
 
   constructor(public color: Color, public radius: number) {
     if (radius <= 0) {
-      throw new Error('Radius have to be positive');
+      throw new Error('Radius has to be positive');
     }
     this.radius = radius;
   }
