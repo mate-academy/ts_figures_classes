@@ -1,5 +1,13 @@
-enum Shape { 'triangle', 'circle', 'rectangle' }
-enum Color { 'red', 'green', 'blue' }
+enum Shape {
+  triangle = 'triangle',
+  circle = 'circle',
+  rectangle = 'rectangle'
+}
+enum Color {
+  red = 'red',
+  green = 'green',
+  blue = 'blue'
+}
 
 export interface Figure {
   shape: Shape;
@@ -42,8 +50,8 @@ export class Triangle implements Figure {
       throw new Error('not triangle');
     }
 
-    this.shape = 'triangle';
-    this.color = color;
+    this.shape = Shape.triangle;
+    this.color = Color[color];
     this.a = a;
     this.b = b;
     this.c = c;
@@ -66,8 +74,8 @@ export class Circle implements Figure {
     if (radius <= 0) {
       throw new Error('all values have to be greater than 0');
     }
-    this.shape = 'circle';
-    this.color = color;
+    this.shape = Shape.circle;
+    this.color = Color[color];
     this.radius = radius;
   }
 }
@@ -90,8 +98,8 @@ export class Rectangle implements Figure {
     if (width <= 0 || height <= 0) {
       throw new Error('all values have to be greater than 0');
     }
-    this.shape = 'rectangle';
-    this.color = color;
+    this.shape = Shape.rectangle;
+    this.color = Color[color];
     this.width = width;
     this.height = height;
   }
