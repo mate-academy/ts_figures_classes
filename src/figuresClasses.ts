@@ -40,11 +40,7 @@ export class Triangle implements Figure {
 export class Circle implements Figure {
   public shape;
 
-  public color;
-
-  public radius;
-
-  constructor(color: 'red' | 'green' | 'blue', radius: number) {
+  constructor(public color: 'red' | 'green' | 'blue', public radius: number) {
     this.shape = 'circle';
     this.color = color;
     this.radius = radius;
@@ -62,14 +58,12 @@ export class Circle implements Figure {
 export class Rectangle implements Figure {
   public shape;
 
-  public color;
-
   public sides;
 
-  constructor(color: 'red' | 'green' | 'blue', ...sides: number[]) {
+  constructor(public color: 'red' | 'green' | 'blue', ...args: number[]) {
     this.shape = 'rectangle';
     this.color = color;
-    this.sides = [...sides].sort();
+    this.sides = [...args].sort();
 
     if (this.sides[0] <= 0) {
       throw new Error('Rectangle not possible with given sides!');
