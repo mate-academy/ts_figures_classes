@@ -28,11 +28,11 @@ export class Triangle implements Figure {
     }
   }
 
-  private halfSides = (this.a + this.b + this.c) / 2;
-
   getArea(): number {
-    return Math.round((Math.sqrt(this.halfSides * (this.halfSides - this.a)
-    * (this.halfSides - this.b) * (this.halfSides - this.c))) * 100) / 100;
+    const halfSides = (this.a + this.b + this.c) / 2;
+
+    return Math.round((Math.sqrt(halfSides * (halfSides - this.a)
+      * (halfSides - this.b) * (halfSides - this.c))) * 100) / 100;
   }
 }
 
