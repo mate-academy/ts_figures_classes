@@ -45,7 +45,6 @@ export class Circle implements Figure {
     if (radius <= 0) {
       throw new Error('Radius has to be positive');
     }
-    this.radius = radius;
   }
 
   getArea(): number {
