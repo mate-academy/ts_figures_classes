@@ -1,33 +1,26 @@
-type Shape ='triangle' | 'circle' | 'rectangle';
+enum Shape {
+  triangle = 'triangle',
+  circle = 'circle',
+  rectangle = 'rectangle'
+}
+
+type Color = 'green' | 'red' | 'blue';
 
 export interface Figure {
   shape: Shape;
-  color: string;
+  color: Color;
   getArea(): number;
 }
 
 export class Triangle implements Figure {
-  shape: 'triangle';
+  shape = Shape.triangle;
 
-  color: string;
-
-  a: number;
-
-  b: number;
-
-  c: number;
-
-  private halfSides: number;
-
-  constructor(color: string, a: number, b: number, c: number) {
-    this.shape = 'triangle';
-    this.color = color;
-    this.a = a;
-    this.b = b;
-    this.c = c;
-    this.halfSides = (this.a + this.b + this.c) / 2;
+  constructor(public color: Color,
+    public a: number, public b: number, public c: number) {
     this.checkSides();
   }
+
+  private halfSides = (this.a + this.b + this.c) / 2;
 
   private checkSides(): void {
     if (this.a + this.b <= this.c
@@ -48,16 +41,9 @@ export class Triangle implements Figure {
 }
 
 export class Circle implements Figure {
-  shape: 'circle';
+  shape: Shape.circle;
 
-  color: string;
-
-  radius: number;
-
-  constructor(color: string, radius: number) {
-    this.shape = 'circle';
-    this.color = color;
-    this.radius = radius;
+  constructor(public color: Color, public radius: number) {
     this.checkMeth();
   }
 
@@ -75,19 +61,10 @@ export class Circle implements Figure {
 }
 
 export class Rectangle implements Figure {
-  shape: 'rectangle';
+  shape: Shape.rectangle;
 
-  color: string;
-
-  a: number;
-
-  b: number;
-
-  constructor(color: string, a: number, b: number) {
-    this.shape = 'rectangle';
-    this.color = color;
-    this.a = a;
-    this.b = b;
+  constructor(public color: Color,
+    public a: number, public b: number) {
     this.checkSides();
   }
 
