@@ -17,22 +17,18 @@ export class Triangle implements Figure {
 
   constructor(public color: Color,
     public a: number, public b: number, public c: number) {
-    this.checkSides();
-  }
-
-  private halfSides = (this.a + this.b + this.c) / 2;
-
-  private checkSides(): void {
-    if (this.a + this.b <= this.c
-      || this.b + this.c <= this.a
-      || this.c + this.a <= this.b) {
+    if (a + b <= c
+      || b + c <= a
+      || c + a <= b) {
       throw new Error('That is not a triagnle!');
     }
 
-    if (this.a <= 0 || this.b <= 0 || this.c <= 0) {
+    if (a <= 0 || b <= 0 || c <= 0) {
       throw new Error('Side value should be more than 0');
     }
   }
+
+  private halfSides = (this.a + this.b + this.c) / 2;
 
   getArea(): number {
     return Math.round((Math.sqrt(this.halfSides * (this.halfSides - this.a)
@@ -44,11 +40,7 @@ export class Circle implements Figure {
   shape: Shape.circle;
 
   constructor(public color: Color, public radius: number) {
-    this.checkMeth();
-  }
-
-  private checkMeth(): void {
-    if (this.radius <= 0) {
+    if (radius <= 0) {
       throw new Error('It should be positive value');
     }
   }
@@ -65,11 +57,7 @@ export class Rectangle implements Figure {
 
   constructor(public color: Color,
     public a: number, public b: number) {
-    this.checkSides();
-  }
-
-  private checkSides(): void {
-    if (this.a <= 0 || this.b <= 0) {
+    if (a <= 0 || b <= 0) {
       throw new Error('Enter correct value of side');
     }
   }
