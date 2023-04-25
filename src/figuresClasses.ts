@@ -1,20 +1,25 @@
+type Color = 'red' | 'green' | 'blue';
+
+enum Shape {
+  triangle = 'triangle',
+  circle = 'circle',
+  rectangle = 'rectangle',
+}
+
 export interface Figure {
-  shape: 'triangle' | 'circle' | 'rectangle'
-  color: 'red' | 'green' | 'blue'
+  shape: Shape
+  color: Color
 
   getArea(): number;
 }
 
-type Color = 'red' | 'green' | 'blue';
-type Shape = 'triangle' | 'circle' | 'rectangle';
-
 export class Triangle implements Figure {
-  shape: Shape = 'triangle';
+  shape = Shape.triangle;
 
   constructor(public color: Color,
     public a: number, public b: number, public c: number) {
     if (a <= 0 || b <= 0 || c <= 0) {
-      throw new Error('All values must be higher than 0');
+      throw new Error('All values must be greater than 0');
     }
 
     if (a + b <= c || a + c <= b || b + c <= a) {
@@ -33,11 +38,11 @@ export class Triangle implements Figure {
 }
 
 export class Circle implements Figure {
-  shape: Shape = 'circle';
+  shape = Shape.circle;
 
   constructor(public color: Color, public r: number) {
     if (r <= 0) {
-      throw new Error('All values must be higher than 0');
+      throw new Error('All values must be greater than 0');
     }
   }
 
@@ -47,11 +52,11 @@ export class Circle implements Figure {
 }
 
 export class Rectangle implements Figure {
-  shape: Shape = 'rectangle';
+  shape = Shape.rectangle;
 
   constructor(public color: Color, public a: number, public b: number) {
     if (a <= 0 || b <= 0) {
-      throw new Error('All values must be higher than 0');
+      throw new Error('All values must be greater than 0');
     }
   }
 
