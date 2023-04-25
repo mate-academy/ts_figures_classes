@@ -1,7 +1,7 @@
 enum Shape {
   triangle = 'triangle',
   circle = 'circle',
-  rectangle = 'rectangle'
+  rectangle = 'rectangle',
 }
 
 type Color = 'green' | 'red' | 'blue';
@@ -37,7 +37,7 @@ export class Triangle implements Figure {
 }
 
 export class Circle implements Figure {
-  shape: Shape.circle;
+  shape = Shape.circle;
 
   constructor(public color: Color, public radius: number) {
     if (radius <= 0) {
@@ -53,7 +53,7 @@ export class Circle implements Figure {
 }
 
 export class Rectangle implements Figure {
-  shape: Shape.rectangle;
+  shape = Shape.rectangle;
 
   constructor(public color: Color,
     public a: number, public b: number) {
