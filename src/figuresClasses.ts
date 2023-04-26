@@ -9,8 +9,6 @@ export class Triangle implements Figure {
 
   sides: number[];
 
-  color: 'red' | 'green' | 'blue';
-
   constructor(
     color: 'red' | 'green' | 'blue',
     a: number,
@@ -32,14 +30,14 @@ export class Triangle implements Figure {
 
   getArea(): number {
     const [a, b, c] = [...this.sides];
-    const perimeter = (a + b + c);
+    const perimeter = (a + b + c) / 2;
 
     return Math.floor(
       Math.sqrt(
-        perimeter / 2
-        * (perimeter / 2 - a)
-        * (perimeter / 2 - b)
-        * (perimeter / 2 - c),
+        perimeter
+        * (perimeter - a)
+        * (perimeter - b)
+        * (perimeter - c),
       ) * 100,
     ) / 100;
   }
