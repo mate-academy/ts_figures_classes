@@ -16,7 +16,7 @@ export class Triangle implements Figure {
     public b: number,
     public c: number,
   ) {
-    if (a <= 0 || b <= 0 || c <= 0 || c >= a + b || a >= b + c || b >= a + c) {
+    if (c >= a + b || a >= b + c || b >= a + c) {
       throw new Error(`Sides ${a}, ${b} and ${c} can't form a triangle`);
     }
   }
