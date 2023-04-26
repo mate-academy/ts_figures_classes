@@ -1,21 +1,33 @@
+export enum Shape {
+  Triangle = 'triangle',
+  Circle = 'circle',
+  Rectangle = 'rectangle',
+}
+
+export enum Color {
+  Red = 'red',
+  Green = 'green',
+  Blue = 'blue',
+}
+
 export interface Figure {
-  shape: 'triangle' | 'circle' | 'rectangle';
-  color: 'red' | 'green' | 'blue';
+  shape: Shape;
+  color: Color;
   getArea(): number;
 }
 
 export class Triangle implements Figure {
-  shape: 'triangle';
+  shape: Shape.Triangle;
 
   sides: number[];
 
   constructor(
-    color: 'red' | 'green' | 'blue',
+    color: Color,
     a: number,
     b: number,
     c: number,
   ) {
-    this.shape = 'triangle';
+    this.shape = Shape.Triangle;
     this.color = color;
     this.sides = [a, b, c];
 
@@ -44,14 +56,14 @@ export class Triangle implements Figure {
 }
 
 export class Circle implements Figure {
-  shape: 'circle';
+  shape: Shape.Circle;
 
   radius: number;
 
-  color: 'red' | 'green' | 'blue';
+  color: Color;
 
-  constructor(color: 'red' | 'green' | 'blue', radius: number) {
-    this.shape = 'circle';
+  constructor(color: Color, radius: number) {
+    this.shape = Shape.Circle;
     this.radius = radius;
     this.color = color;
 
@@ -66,18 +78,18 @@ export class Circle implements Figure {
 }
 
 export class Rectangle implements Figure {
-  shape: 'rectangle';
+  shape: Shape.Rectangle;
 
   sides: number[];
 
-  color: 'red' | 'green' | 'blue';
+  color: Color;
 
   constructor(
-    color: 'red' | 'green' | 'blue',
+    color: Shape.Rectangle,
     width: number,
     height: number,
   ) {
-    this.shape = 'rectangle';
+    this.shape = Shape.Rectangle;
     this.color = color;
     this.sides = [width, height];
 
@@ -94,5 +106,6 @@ export class Rectangle implements Figure {
 }
 
 export function getInfo(figure: Figure): string {
-  return `A ${figure.color} ${figure.shape} - ${figure.getArea()}`;
+  return `A ${Color[figure.color]} ${Shape[figure.shape]} 
+    - ${figure.getArea()}`;
 }
