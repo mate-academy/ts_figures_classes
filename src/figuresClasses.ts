@@ -15,25 +15,16 @@ export interface Figure {
 export class Triangle implements Figure {
   shape: Shape.Triangle;
 
-  sideA: number;
-
-  sideB: number;
-
-  sideC: number;
-
   color: Color;
 
   constructor(
     color: Color,
-    a: number,
-    b: number,
-    c: number,
+    private a: number,
+    private b: number,
+    private c: number,
   ) {
     this.shape = Shape.Triangle;
     this.color = color;
-    this.sideA = a;
-    this.sideB = b;
-    this.sideC = c;
 
     if (a <= 0 || b <= 0 || c <= 0) {
       throw new Error('All properties should be positive!');
@@ -45,14 +36,14 @@ export class Triangle implements Figure {
   }
 
   getArea(): number {
-    const perimeter = (this.sideA + this.sideB + this.sideC);
+    const perimeter = (this.a + this.b + this.c);
 
     return Math.floor(
       Math.sqrt(
         perimeter / 2
-        * (perimeter / 2 - this.sideA)
-        * (perimeter / 2 - this.sideB)
-        * (perimeter / 2 - this.sideC),
+        * (perimeter / 2 - this.a)
+        * (perimeter / 2 - this.b)
+        * (perimeter / 2 - this.c),
       ) * 100,
     ) / 100;
     // Heron's formula
@@ -62,13 +53,10 @@ export class Triangle implements Figure {
 export class Circle implements Figure {
   shape: Shape.Circle;
 
-  radius: number;
-
   color: Color;
 
-  constructor(color: Color, radius: number) {
+  constructor(color: Color, private radius: number) {
     this.shape = Shape.Circle;
-    this.radius = radius;
     this.color = color;
 
     if (radius <= 0) {
@@ -84,21 +72,15 @@ export class Circle implements Figure {
 export class Rectangle implements Figure {
   shape: Shape.Rectangle;
 
-  width: number;
-
-  height: number;
-
   color: Color;
 
   constructor(
     color: Color,
-    width: number,
-    height: number,
+    private width: number,
+    private height: number,
   ) {
     this.shape = Shape.Rectangle;
     this.color = color;
-    this.width = width;
-    this.height = height;
 
     if (width <= 0 || height <= 0) {
       throw new Error('All properties should be positive!');
