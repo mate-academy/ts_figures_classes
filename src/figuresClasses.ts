@@ -14,8 +14,6 @@ export interface Figure {
 export class Triangle implements Figure {
   shape: Shape;
 
-  color: Color;
-
   getArea(): number {
     const half = (this.a
       + this.b
@@ -32,7 +30,7 @@ export class Triangle implements Figure {
   }
 
   constructor(
-    color: Color,
+    public color: Color,
     public a: number,
     public b: number,
     public c: number,
@@ -46,43 +44,37 @@ export class Triangle implements Figure {
     }
 
     this.shape = Shape.triangle;
-    this.color = color;
-    this.a = a;
-    this.b = b;
-    this.c = c;
   }
 }
 
 export class Circle implements Figure {
   shape: Shape;
 
-  color: Color;
-
   getArea(): number {
     return Math.floor((Math.PI * this.radius * this.radius)
       * 100) / 100;
   }
 
-  constructor(color: Color, public radius: number) {
+  constructor(public color: Color, public radius: number) {
     if (radius <= 0) {
       throw new Error('all values have to be greater than 0');
     }
     this.shape = Shape.circle;
-    this.color = color;
-    this.radius = radius;
   }
 }
 
 export class Rectangle implements Figure {
   shape: Shape;
 
-  color: Color;
-
   getArea(): number {
     return Math.floor(this.width * this.height * 100) / 100;
   }
 
-  constructor(color: Color, public width: number, public height: number) {
+  constructor(
+    public color: Color,
+    public width: number,
+    public height: number,
+  ) {
     if (width <= 0) {
       throw new Error(`all values have to be > 0 width is: ${width}`);
     }
@@ -92,9 +84,6 @@ export class Rectangle implements Figure {
     }
 
     this.shape = Shape.rectangle;
-    this.color = color;
-    this.width = width;
-    this.height = height;
   }
 }
 
