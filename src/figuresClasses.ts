@@ -1,29 +1,30 @@
+type Color = 'red' | 'green' | 'blue';
+
+enum Shape {
+  Triangle = 'triangle',
+  Circle = 'circle',
+  Rectangle = 'rectangle'
+}
+
 export interface Figure {
-  shape: 'triangle' | 'circle' |'rectangle',
-  color: 'red' | 'green' | 'blue',
+  shape: Shape,
+  color: Color,
   getArea: Function,
 }
 
 export class Triangle implements Figure {
-  constructor(public color: 'red' | 'green' | 'blue', public a: number,
-    public b: number, public c: number, public shape: 'triangle' = 'triangle') {
-    const theLongest = Math.max(a, b, c);
+  constructor(public color: Color, public a: number,
+    public b: number, public c: number, public shape = Shape.Triangle) {
     const sides = [a, b, c];
-    const shorterSides = sides.filter((x) => x !== theLongest);
+    const sortedSides = sides.sort((sideA, sideB) => sideA - sideB);
 
-    if (theLongest >= shorterSides[0] + shorterSides[1]) {
+    if (sortedSides[2] >= sortedSides[0] + sortedSides[1]) {
       throw new Error('This is not a triangle!');
     }
 
-    if (this.a <= 0 || this.b <= 0 || this.c <= 0) {
+    if (a <= 0 || b <= 0 || c <= 0) {
       throw new Error('This is not a triangle!');
     }
-
-    this.color = color;
-    this.a = a;
-    this.b = b;
-    this.c = c;
-    this.shape = 'triangle';
   }
 
   getArea(): number {
@@ -36,34 +37,25 @@ export class Triangle implements Figure {
 }
 
 export class Circle implements Figure {
-  constructor(public color: 'red' | 'green' | 'blue',
-    public r: number, public shape: 'circle' = 'circle') {
-    if (this.r <= 0) {
+  constructor(public color: Color,
+    public radius: number, public shape = Shape.Circle) {
+    if (radius <= 0) {
       throw new Error('This is not a circle!');
     }
-
-    this.shape = 'circle';
-    this.color = color;
-    this.r = r;
   }
 
   getArea(): number {
-    return Math.floor(Math.PI * (this.r ** 2) * 100) / 100;
+    return Math.floor(Math.PI * (this.radius ** 2) * 100) / 100;
   }
 }
 
 export class Rectangle implements Figure {
-  constructor(public color:'red' | 'green' | 'blue',
+  constructor(public color: Color,
     public a: number, public b: number,
-    public shape: 'rectangle' = 'rectangle') {
-    if (this.a <= 0 || this.b <= 0) {
+    public shape = Shape.Rectangle) {
+    if (a <= 0 || b <= 0) {
       throw new Error('This is not a rectangle!');
     }
-
-    this.shape = 'rectangle';
-    this.color = color;
-    this.a = a;
-    this.b = b;
   }
 
   getArea(): number {
@@ -71,6 +63,6 @@ export class Rectangle implements Figure {
   }
 }
 
-export function getInfo(figure: Triangle | Circle | Rectangle): string {
+export function getInfo(figure: Figure): string {
   return `A ${figure.color} ${figure.shape} - ${figure.getArea()}`;
 }
