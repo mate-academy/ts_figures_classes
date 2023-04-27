@@ -20,28 +20,27 @@ export class Triangle implements Figure {
 
   color: Color;
 
-  a: number;
-
-  b: number;
-
-  c: number;
-
   getArea(): number {
     const half = (this.a
       + this.b
       + this.c)
       / 2;
 
-    return Math.floor(+((Math.sqrt(
+    return Math.floor((Math.sqrt(
       half
       * (half - this.a)
       * (half - this.b)
       * (half - this.c),
     )
-      * 100))) / 100;
+      * 100)) / 100;
   }
 
-  constructor(color: Color, a: number, b: number, c: number) {
+  constructor(
+    color: Color,
+    public a: number,
+    public b: number,
+    public c: number,
+  ) {
     if (a <= 0 || b <= 0 || c <= 0) {
       throw new Error('all values have to be greater than 0');
     }
@@ -51,7 +50,7 @@ export class Triangle implements Figure {
     }
 
     this.shape = Shape.triangle;
-    this.color = Color[color];
+    this.color = color;
     this.a = a;
     this.b = b;
     this.c = c;
@@ -63,19 +62,17 @@ export class Circle implements Figure {
 
   color: Color;
 
-  radius: number;
-
   getArea(): number {
-    return Math.floor(((2 * Math.PI * this.radius * this.radius) / 2)
+    return Math.floor((Math.PI * this.radius * this.radius)
       * 100) / 100;
   }
 
-  constructor(color: Color, radius: number) {
+  constructor(color: Color, public radius: number) {
     if (radius <= 0) {
       throw new Error('all values have to be greater than 0');
     }
     this.shape = Shape.circle;
-    this.color = Color[color];
+    this.color = color;
     this.radius = radius;
   }
 }
@@ -85,21 +82,21 @@ export class Rectangle implements Figure {
 
   color: Color;
 
-  width: number;
-
-  height: number;
-
   getArea(): number {
-    return +((this.width * this.height)
-      .toFixed(2));
+    return Math.floor(this.width * this.height * 100) / 100;
   }
 
-  constructor(color: Color, width: number, height: number) {
-    if (width <= 0 || height <= 0) {
-      throw new Error('all values have to be greater than 0');
+  constructor(color: Color, public width: number, public height: number) {
+    if (width <= 0) {
+      throw new Error(`all values have to be > 0 width is: ${width}`);
     }
+
+    if (height <= 0) {
+      throw new Error(`all values have to be > 0 but height is: ${height}`);
+    }
+
     this.shape = Shape.rectangle;
-    this.color = Color[color];
+    this.color = color;
     this.width = width;
     this.height = height;
   }
