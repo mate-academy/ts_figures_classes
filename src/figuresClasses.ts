@@ -24,21 +24,20 @@ export class Triangle implements Figure {
   public c: number;
 
   constructor(color: Color, a: number, b: number, c: number) {
+    if (a + b <= c
+      || a + c <= b
+      || b + c <= a
+      || a <= 0
+      || b <= 0
+      || c <= 0) {
+      throw new Error('Triangle not possible with given sides!');
+    }
+
     this.shape = Shape.Triangle;
     this.color = color;
     this.a = a;
     this.b = b;
     this.c = c;
-
-    const sides: number[] = [a, b, c].sort(); /* Sort helps with detecting 0s
-                                      if they were not in the first position */
-
-    if ((sides[0] + sides[1] <= sides[2])
-    || (sides[2] + sides[0] <= sides[1])
-    || (sides[2] + sides[1] <= sides[0])
-    || sides[0] <= 0) {
-      throw new Error('Triangle not possible with given sides!');
-    }
   }
 
   getArea(): number {
@@ -63,13 +62,13 @@ export class Circle implements Figure {
   public radius: number;
 
   constructor(color: Color, radius: number) {
-    this.shape = Shape.Circle;
-    this.color = color;
-    this.radius = radius;
-
     if (radius <= 0) {
       throw new Error('Circle not possible with given radius!');
     }
+
+    this.shape = Shape.Circle;
+    this.color = color;
+    this.radius = radius;
   }
 
   getArea(): number {
@@ -87,16 +86,14 @@ export class Rectangle implements Figure {
   public width: number;
 
   constructor(color: Color, width: number, height: number) {
+    if (width <= 0 || height <= 0) {
+      throw new Error('Rectangle not possible with given sides!');
+    }
+
     this.shape = Shape.Rectangle;
     this.color = color;
     this.width = width;
     this.height = height;
-
-    const sides = [width, height].sort();
-
-    if (sides[0] <= 0) {
-      throw new Error('Rectangle not possible with given sides!');
-    }
   }
 
   getArea(): number {
