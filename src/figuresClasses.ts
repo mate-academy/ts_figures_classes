@@ -4,21 +4,39 @@ export interface Figure {
   getArea(): number,
 }
 
+enum Shape {
+  Triangle = 'triangle',
+  Circle = 'circle',
+  Rectangle = 'rectangle',
+}
+
+type Color = 'red' | 'green' | 'blue';
+
 export class Triangle implements Figure {
-  public shape;
+  public color: Color;
 
-  public sides;
+  public shape: Shape;
 
-  constructor(public color: 'red' | 'green' | 'blue', ...args: number[]) {
-    this.shape = 'triangle';
+  public a: number;
+
+  public b: number;
+
+  public c: number;
+
+  constructor(color: Color, a: number, b: number, c: number) {
+    this.shape = Shape.Triangle;
     this.color = color;
-    this.sides = [...args].sort(); /* Sort helps with detecting 0s if they
-                                      were not in the first position */
+    this.a = a;
+    this.b = b;
+    this.c = c;
 
-    if ((this.sides[0] + this.sides[1] <= this.sides[2])
-    || (this.sides[2] + this.sides[0] <= this.sides[1])
-    || (this.sides[2] + this.sides[1] <= this.sides[0])
-    || this.sides[0] <= 0) {
+    const sides: number[] = [a, b, c].sort(); /* Sort helps with detecting 0s
+                                      if they were not in the first position */
+
+    if ((sides[0] + sides[1] <= sides[2])
+    || (sides[2] + sides[0] <= sides[1])
+    || (sides[2] + sides[1] <= sides[0])
+    || sides[0] <= 0) {
       throw new Error('Triangle not possible with given sides!');
     }
   }
@@ -26,10 +44,10 @@ export class Triangle implements Figure {
   getArea(): number {
     /* I hate math and therefore hate you for this,
     but as requested, Heron's formula */
-    const semiPer: number = (this.sides[0] + this.sides[1] + this.sides[2]) / 2;
-    const bracket1: number = semiPer - this.sides[0];
-    const bracket2: number = semiPer - this.sides[1];
-    const bracket3: number = semiPer - this.sides[2];
+    const semiPer: number = (this.a + this.b + this.c) / 2;
+    const bracket1: number = semiPer - this.a;
+    const bracket2: number = semiPer - this.b;
+    const bracket3: number = semiPer - this.c;
     const squaredResult: number = semiPer * bracket1 * bracket2 * bracket3;
     const result: number = Math.sqrt(squaredResult);
 
@@ -38,10 +56,14 @@ export class Triangle implements Figure {
 }
 
 export class Circle implements Figure {
-  public shape;
+  public color: Color;
 
-  constructor(public color: 'red' | 'green' | 'blue', public radius: number) {
-    this.shape = 'circle';
+  public shape: Shape;
+
+  public radius: number;
+
+  constructor(color: Color, radius: number) {
+    this.shape = Shape.Circle;
     this.color = color;
     this.radius = radius;
 
@@ -56,27 +78,32 @@ export class Circle implements Figure {
 }
 
 export class Rectangle implements Figure {
-  public shape;
+  public color: Color;
 
-  public sides;
+  public shape: Shape;
 
-  constructor(public color: 'red' | 'green' | 'blue', ...args: number[]) {
-    this.shape = 'rectangle';
+  public height: number;
+
+  public width: number;
+
+  constructor(color: Color, width: number, height: number) {
+    this.shape = Shape.Rectangle;
     this.color = color;
-    this.sides = [...args].sort();
+    this.width = width;
+    this.height = height;
 
-    if (this.sides[0] <= 0) {
+    const sides = [width, height].sort();
+
+    if (sides[0] <= 0) {
       throw new Error('Rectangle not possible with given sides!');
     }
   }
 
   getArea(): number {
-    return this.sides[0] * this.sides[1];
+    return this.width * this.height;
   }
 }
 
-export function getInfo(
-  figure: {['color']: string, ['shape']: string, ['getArea']: Function},
-): string {
+export function getInfo(figure: Figure): string {
   return `A ${figure.color} ${figure.shape} - ${figure.getArea()}`;
 }
