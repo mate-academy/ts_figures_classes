@@ -16,16 +16,20 @@ export class Triangle implements Figure {
     const longestSide = Math.max(a, b, c);
     const sum = a + b + c;
 
-    if ((a <= 0 || b <= 0 || c <= 0) || longestSide >= (sum - longestSide)) {
+    const sideIsLessThanZero = a <= 0 || b <= 0 || c <= 0;
+    const invalidSideLength = longestSide >= (sum - longestSide);
+
+    if (sideIsLessThanZero || invalidSideLength) {
       throw new Error('Invalid triangle sides');
     }
   }
 
   getArea(): number {
-    const sP: number = (this.a + this.b + this.c) / 2;
+    const { a, b, c } = this;
 
-    const area: number
-      = Math.sqrt(sP * (sP - this.a) * (sP - this.b) * (sP - this.c));
+    const sP: number = (a + b + c) / 2;
+
+    const area: number = Math.sqrt(sP * (sP - a) * (sP - b) * (sP - c));
 
     return Math.trunc(area * 100) / 100;
   }
@@ -44,7 +48,9 @@ export class Circle implements Figure {
   }
 
   getArea(): number {
-    const area: number = Math.PI * (this.radius * this.radius);
+    const { radius } = this;
+
+    const area: number = Math.PI * (radius * radius);
 
     return Math.trunc(area * 100) / 100;
   }
@@ -64,12 +70,16 @@ export class Rectangle implements Figure {
   }
 
   getArea(): number {
-    const area: number = this.width * this.height;
+    const { width, height } = this;
+
+    const area: number = width * height;
 
     return Math.trunc(area * 100) / 100;
   }
 }
 
 export function getInfo(figure: Figure): string {
-  return `A ${figure.color} ${figure.shape} - ${figure.getArea()}`;
+  const { color, shape } = figure;
+
+  return `A ${color} ${shape} - ${figure.getArea()}`;
 }
