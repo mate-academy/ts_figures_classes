@@ -1,25 +1,39 @@
+type Color = 'red' | 'green' | 'blue';
+
 export interface Figure {
   shape: 'triangle' | 'circle' | 'rectangle';
-  color: 'red' | 'green' | 'blue'
+  color: Color
   getArea(): number
 }
 
+enum Shape {
+  Triangle = 'triangle',
+  Circle = 'circle',
+  Rectangle = 'rectangle',
+}
+
 export class Triangle implements Figure {
-  shape: 'triangle';
+  shape: Shape.Triangle;
 
-  sides: number[];
+  sideA: number;
 
-  color: 'red' | 'green' | 'blue';
+  sideB: number;
+
+  sideC: number;
+
+  color: Color;
 
   constructor(
-    color: 'red' | 'green' | 'blue',
+    color: Color,
     a: number,
     b: number,
     c: number,
   ) {
-    this.shape = 'triangle';
+    this.shape = Shape.Triangle;
     this.color = color;
-    this.sides = [a, b, c];
+    this.sideA = a;
+    this.sideB = b;
+    this.sideC = c;
 
     if (a <= 0 || b <= 0 || c <= 0) {
       throw new Error('All properties should be positive!');
@@ -31,15 +45,14 @@ export class Triangle implements Figure {
   }
 
   getArea(): number {
-    const [a, b, c] = [...this.sides];
-    const perimeter = (a + b + c);
+    const perimeter = (this.sideA + this.sideB + this.sideC);
 
     return Math.floor(
       Math.sqrt(
         perimeter / 2
-        * (perimeter / 2 - a)
-        * (perimeter / 2 - b)
-        * (perimeter / 2 - c),
+        * (perimeter / 2 - this.sideA)
+        * (perimeter / 2 - this.sideB)
+        * (perimeter / 2 - this.sideC),
       ) * 100,
     ) / 100;
     // Heron's formula
@@ -47,14 +60,14 @@ export class Triangle implements Figure {
 }
 
 export class Circle implements Figure {
-  shape: 'circle';
+  shape: Shape.Circle;
 
   radius: number;
 
-  color: 'red' | 'green' | 'blue';
+  color: Color;
 
-  constructor(color: 'red' | 'green' | 'blue', radius: number) {
-    this.shape = 'circle';
+  constructor(color: Color, radius: number) {
+    this.shape = Shape.Circle;
     this.radius = radius;
     this.color = color;
 
@@ -69,20 +82,23 @@ export class Circle implements Figure {
 }
 
 export class Rectangle implements Figure {
-  shape: 'rectangle';
+  shape: Shape.Rectangle;
 
-  sides: number[];
+  width: number;
 
-  color: 'red' | 'green' | 'blue';
+  height: number;
+
+  color: Color;
 
   constructor(
-    color: 'red' | 'green' | 'blue',
+    color: Color,
     width: number,
     height: number,
   ) {
-    this.shape = 'rectangle';
+    this.shape = Shape.Rectangle;
     this.color = color;
-    this.sides = [width, height];
+    this.width = width;
+    this.height = height;
 
     if (width <= 0 || height <= 0) {
       throw new Error('All properties should be positive!');
@@ -90,9 +106,7 @@ export class Rectangle implements Figure {
   }
 
   getArea(): number {
-    const [width, height] = [...this.sides];
-
-    return Math.floor(width * height * 100) / 100;
+    return Math.floor(this.width * this.height * 100) / 100;
   }
 }
 
