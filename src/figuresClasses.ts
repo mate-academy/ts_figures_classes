@@ -1,6 +1,6 @@
-type Color = 'red' | 'green' | 'blue';
+export type Color = 'red' | 'green' | 'blue';
 
-enum Shape {
+export enum Shape {
   Triangle = 'triangle',
   Circle = 'circle',
   Rectangle = 'rectangle',
