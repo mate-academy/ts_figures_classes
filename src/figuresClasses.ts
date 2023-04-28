@@ -5,12 +5,10 @@ export interface Figure {
 }
 
 export class Triangle implements Figure {
-  shape: string;
-
-  color: string;
+  shape = 'triangle';
 
   constructor(
-    color: string,
+    public color: string,
     private a: number,
     private b: number,
     private c: number,
@@ -26,7 +24,6 @@ export class Triangle implements Figure {
       throw new Error('Invalid triangle sides');
     }
 
-    this.shape = 'triangle';
     this.color = color;
   }
 
@@ -39,19 +36,16 @@ export class Triangle implements Figure {
 }
 
 export class Circle implements Figure {
-  shape: string;
-
-  color: string;
+  shape = 'circle';
 
   constructor(
-    color: string,
+    public color: string,
     private radius: number,
   ) {
     if (radius <= 0) {
       throw new Error('Circle radius must be greater than 0');
     }
 
-    this.shape = 'circle';
     this.color = color;
     this.radius = radius;
   }
@@ -64,12 +58,10 @@ export class Circle implements Figure {
 }
 
 export class Rectangle implements Figure {
-  shape: string;
-
-  color: string;
+  shape = 'rectangle';
 
   constructor(
-    color: string,
+    public color: string,
     private width: number,
     private height: number,
   ) {
@@ -77,7 +69,6 @@ export class Rectangle implements Figure {
       throw new Error('Rectangle width and height must be greater than 0');
     }
 
-    this.shape = 'rectangle';
     this.color = color;
     this.height = height;
     this.width = width;
