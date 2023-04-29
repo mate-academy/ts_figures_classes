@@ -23,8 +23,6 @@ export class Triangle implements Figure {
     ) {
       throw new Error('Invalid triangle sides');
     }
-
-    this.color = color;
   }
 
   getArea(): number {
@@ -45,9 +43,6 @@ export class Circle implements Figure {
     if (radius <= 0) {
       throw new Error('Circle radius must be greater than 0');
     }
-
-    this.color = color;
-    this.radius = radius;
   }
 
   getArea(): number {
@@ -68,10 +63,6 @@ export class Rectangle implements Figure {
     if (this.width <= 0 || this.height <= 0) {
       throw new Error('Rectangle width and height must be greater than 0');
     }
-
-    this.color = color;
-    this.height = height;
-    this.width = width;
   }
 
   getArea(): number {
