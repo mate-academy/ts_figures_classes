@@ -15,9 +15,6 @@ export class Rectangle implements Figure {
     if (width <= 0 || height <= 0) {
       throw new Error('Invalid width or height');
     }
-    this.color = color;
-    this.width = width;
-    this.height = height;
   }
 
   getArea(): number {
@@ -35,8 +32,6 @@ export class Circle implements Figure {
     if (radius <= 0) {
       throw new Error('Invalid radius');
     }
-    this.color = color;
-    this.radius = radius;
   }
 
   getArea(): number {
@@ -53,19 +48,15 @@ export class Triangle implements Figure {
     public sideB: number,
     public sideC: number,
   ) {
-    if (sideA <= 0 || sideB <= 0 || sideC <= 0) {
+    if (this.sideA <= 0 || this.sideB <= 0 || this.sideC <= 0) {
       throw new Error('Invalid side length');
     }
 
-    if (sideA + sideB <= sideC
-        || sideA + sideC <= sideB
-        || sideB + sideC <= sideA) {
+    if (this.sideA + this.sideB <= this.sideC
+        || this.sideA + this.sideC <= this.sideB
+        || this.sideB + this.sideC <= this.sideA) {
       throw new Error('Invalid sides for a triangle');
     }
-    this.color = color;
-    this.sideA = sideA;
-    this.sideB = sideB;
-    this.sideC = sideC;
   }
 
   getArea(): number {
