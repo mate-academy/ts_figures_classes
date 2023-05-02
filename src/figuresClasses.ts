@@ -2,8 +2,8 @@ type Shape = 'triangle' | 'circle' | 'rectangle';
 type Color = 'red' | 'green' | 'blue';
 
 export interface Figure {
-  shape: Color;
-  color: Shape;
+  shape: Shape;
+  color: Color;
 
   getArea(): number;
 }
