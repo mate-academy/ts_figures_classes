@@ -3,7 +3,7 @@ type Color = 'red' | 'green' | 'blue';
 
 export interface Figure {
   shape: Color;
-  color : Shape;
+  color: Shape;
 
   getArea(): number;
 }
@@ -12,10 +12,10 @@ export class Triangle implements Figure {
   shape: Shape = 'triangle';
 
   constructor(
-    public color : Color,
-    public a:number,
-    public b:number,
-    public c:number,
+    public color: Color,
+    public a: number,
+    public b: number,
+    public c: number,
   ) {
     const max = Math.max(this.a, this.b, this.c);
 
@@ -29,28 +29,29 @@ export class Triangle implements Figure {
     const semiperimeter = (this.a + this.b + this.c) / 2;
     const underSqrt = semiperimeter
       * (semiperimeter - this.a)
-      * (semiperimeter - this.b) * (semiperimeter - this.c);
-    const AreaLong = Math.sqrt(underSqrt);
-    const Area = +((AreaLong).toFixed(2));
+      * (semiperimeter - this.b)
+      * (semiperimeter - this.c);
+    const areaLong = Math.sqrt(underSqrt);
+    const area = +((areaLong).toFixed(2));
 
-    return Area;
+    return area;
   }
 }
 
 export class Circle implements Figure {
   shape: Shape = 'circle';
 
-  constructor(public color : Color, public radius: number) {
+  constructor(public color: Color, public radius: number) {
     if (this.radius <= 0) {
       throw new Error(`Error ${this.radius} less than or equal 0`);
     }
   }
 
   getArea(): number {
-    const AreaLong = Math.PI * this.radius * this.radius;
-    const Area = (Math.floor(AreaLong * 100)) / 100;
+    const areaLong = Math.PI * this.radius * this.radius;
+    const area = (Math.floor(areaLong * 100)) / 100;
 
-    return Area;
+    return area;
   }
 }
 
@@ -58,9 +59,9 @@ export class Rectangle implements Figure {
   shape: Shape = 'rectangle';
 
   constructor(
-    public color : Color,
+    public color: Color,
     public width: number,
-    public height : number,
+    public height: number,
   ) {
     if (this.width <= 0 || this.height <= 0) {
       throw new Error(`Error ${this.width} or
