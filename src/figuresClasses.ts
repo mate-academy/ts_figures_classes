@@ -15,12 +15,7 @@ export class Triangle implements Figure {
     public b: number,
     public c: number,
   ) {
-    if (a <= 0
-      || b <= 0
-      || c <= 0
-      || a + b <= c
-      || a + c <= b
-      || c + b <= a) {
+    if (a >= (b + c) || b >= (a + c) || c >= (b + a)) {
       throw new Error('Please enter the correct value of the sides');
     }
   }
