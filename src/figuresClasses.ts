@@ -12,7 +12,7 @@ export interface Figure {
 }
 
 export class Triangle implements Figure {
-  shape: Shape;
+  shape = Shape.triangle;
 
   getArea(): number {
     const half = (this.a
@@ -42,13 +42,11 @@ export class Triangle implements Figure {
     if (a + b <= c || a + c <= b || b + c <= a) {
       throw new Error('not triangle');
     }
-
-    this.shape = Shape.triangle;
   }
 }
 
 export class Circle implements Figure {
-  shape: Shape;
+  shape = Shape.circle;
 
   getArea(): number {
     return Math.floor((Math.PI * this.radius * this.radius)
@@ -59,12 +57,11 @@ export class Circle implements Figure {
     if (radius <= 0) {
       throw new Error('all values have to be greater than 0');
     }
-    this.shape = Shape.circle;
   }
 }
 
 export class Rectangle implements Figure {
-  shape: Shape;
+  shape = Shape.rectangle;
 
   getArea(): number {
     return Math.floor(this.width * this.height * 100) / 100;
@@ -82,8 +79,6 @@ export class Rectangle implements Figure {
     if (height <= 0) {
       throw new Error(`all values have to be > 0 but height is: ${height}`);
     }
-
-    this.shape = Shape.rectangle;
   }
 }
 
