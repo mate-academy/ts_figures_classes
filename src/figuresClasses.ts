@@ -13,17 +13,14 @@ enum Shape {
 type Color = 'red' | 'green' | 'blue';
 
 export class Triangle implements Figure {
-  public color: Color;
+  shape: Shape;
 
-  public shape: Shape;
-
-  public a: number;
-
-  public b: number;
-
-  public c: number;
-
-  constructor(color: Color, a: number, b: number, c: number) {
+  constructor(
+    public color: Color,
+    public a: number,
+    public b: number,
+    public c: number,
+  ) {
     if (a + b <= c
       || a + c <= b
       || b + c <= a
@@ -34,20 +31,16 @@ export class Triangle implements Figure {
     }
 
     this.shape = Shape.Triangle;
-    this.color = color;
-    this.a = a;
-    this.b = b;
-    this.c = c;
   }
 
   getArea(): number {
     /* I hate math and therefore hate you for this,
     but as requested, Heron's formula */
     const semiPer: number = (this.a + this.b + this.c) / 2;
-    const bracket1: number = semiPer - this.a;
-    const bracket2: number = semiPer - this.b;
-    const bracket3: number = semiPer - this.c;
-    const squaredResult: number = semiPer * bracket1 * bracket2 * bracket3;
+    const sMinusA: number = semiPer - this.a;
+    const sMinusB: number = semiPer - this.b;
+    const sMinusC: number = semiPer - this.c;
+    const squaredResult: number = semiPer * sMinusA * sMinusB * sMinusC;
     const result: number = Math.sqrt(squaredResult);
 
     return (Math.round(result * 100)) / 100;
@@ -55,20 +48,14 @@ export class Triangle implements Figure {
 }
 
 export class Circle implements Figure {
-  public color: Color;
+  shape: Shape;
 
-  public shape: Shape;
-
-  public radius: number;
-
-  constructor(color: Color, radius: number) {
+  constructor(public color: Color, public radius: number) {
     if (radius <= 0) {
       throw new Error('Circle not possible with given radius!');
     }
 
     this.shape = Shape.Circle;
-    this.color = color;
-    this.radius = radius;
   }
 
   getArea(): number {
@@ -77,23 +64,18 @@ export class Circle implements Figure {
 }
 
 export class Rectangle implements Figure {
-  public color: Color;
+  shape: Shape;
 
-  public shape: Shape;
-
-  public height: number;
-
-  public width: number;
-
-  constructor(color: Color, width: number, height: number) {
+  constructor(
+    public color: Color,
+    public width: number,
+    public height: number,
+  ) {
     if (width <= 0 || height <= 0) {
       throw new Error('Rectangle not possible with given sides!');
     }
 
     this.shape = Shape.Rectangle;
-    this.color = color;
-    this.width = width;
-    this.height = height;
   }
 
   getArea(): number {
