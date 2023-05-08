@@ -1,10 +1,12 @@
+enum FigureShape {
+  Triangle = 'triangle',
+  Circle = 'circle',
+  Rectangle = 'rectangle',
+}
+
 export interface Figure {
-  shape: 'string';
-  color: 'string';
-  radius?: number;
-  a?: number;
-  b?: number;
-  c?: number;
+  shape: FigureShape.Triangle | FigureShape.Circle | FigureShape.Rectangle;
+  color: string;
 
   getArea(): number;
 }
@@ -13,11 +15,11 @@ const roundedNum = (num: number): number => {
   return Math.floor(num * 100) / 100;
 };
 
-export class Triangle {
-  shape = this.constructor.name;
+export class Triangle implements Figure {
+  shape = FigureShape.Triangle;
 
   constructor(
-    public color: string,
+    public color: 'red' | 'green ' | 'blue',
     public a: number,
     public b: number,
     public c: number,
@@ -41,11 +43,11 @@ export class Triangle {
   }
 }
 
-export class Circle {
-  shape = this.constructor.name;
+export class Circle implements Figure {
+  shape = FigureShape.Circle;
 
   constructor(
-    public color: string,
+    public color: 'red' | 'green ' | 'blue',
     public radius: number,
   ) {
     if (this.radius <= 0) {
@@ -62,11 +64,11 @@ export class Circle {
   }
 }
 
-export class Rectangle {
-  shape = this.constructor.name;
+export class Rectangle implements Figure {
+  shape = FigureShape.Rectangle;
 
   constructor(
-    public color: string,
+    public color: 'red' | 'green ' | 'blue',
     public a: number,
     public b: number,
   ) {
@@ -87,5 +89,5 @@ export class Rectangle {
 export function getInfo(figure: Figure): string {
   return `A ${
     figure.color
-  } ${(figure.shape).toLowerCase()} - ${figure.getArea()}`;
+  } ${(figure.shape)} - ${figure.getArea()}`;
 }
