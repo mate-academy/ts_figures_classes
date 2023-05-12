@@ -17,9 +17,11 @@ export class Triangle implements Figure {
     public c: number,
   ) {
     if (a <= 0 || b <= 0 || c <= 0) {
-      throw new Error('Wrong sides');
-    } else if ((a + b <= c) || (a + c <= b) || (b + c <= a)) {
-      throw new Error('This triangle doesn`t exist');
+      throw new Error('The sides can not be zero or less then zero');
+    }
+
+    if ((a + b <= c) || (a + c <= b) || (b + c <= a)) {
+      throw new Error('Triangle with this sides doesn`t exist');
     }
   }
 
@@ -45,7 +47,7 @@ export class Circle implements Figure {
     public radius: number,
   ) {
     if (radius <= 0) {
-      throw new Error('Wrong sides');
+      throw new Error('The radius can not be zero or less then zero');
     }
   }
 
@@ -65,7 +67,7 @@ export class Rectangle implements Figure {
     public height: number,
   ) {
     if (height <= 0 || width <= 0) {
-      throw new Error('Wrong sides');
+      throw new Error('The sides can not be zero or less then zero');
     }
   }
 
