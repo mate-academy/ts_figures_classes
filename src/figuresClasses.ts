@@ -16,31 +16,34 @@ export class Triangle implements Figure {
 
   constructor(
     color: Color,
-    a: number,
-    b: number,
-    c: number,
+    sideA: number,
+    sideB: number,
+    sideC: number,
   ) {
-    if (a <= 0
-      || b <= 0
-      || c <= 0) {
+    if (sideA <= 0
+      || sideB <= 0
+      || sideC <= 0) {
       throw new Error('Length of each side should be greater than 0');
     }
 
-    if (a + b <= c
-      || a + c <= b
-      || b + c <= a) {
+    if (sideA + sideB <= sideC
+      || sideA + sideC <= sideB
+      || sideA + sideC <= sideA) {
       throw new Error('Entered sides cant from a triangle');
     }
 
     this.color = color;
-    this.sides = [a, b, c];
+    this.sides = [sideA, sideB, sideC];
   }
 
   getArea(): number {
-    const [a, b, c] = this.sides;
-    const s = (a + b + c) / 2;
+    const [sideA, sideB, sideC] = this.sides;
+    const semiPerimeter = (sideA + sideB + sideC) / 2;
 
-    return Number((Math.sqrt(s * (s - a) * (s - b) * (s - c))).toFixed(2));
+    return Math.floor(Math.sqrt(semiPerimeter
+      * (semiPerimeter - sideA)
+      * (semiPerimeter - sideB)
+      * (semiPerimeter - sideC)) * 100) / 100;
   }
 }
 
@@ -61,7 +64,7 @@ export class Circle {
   }
 
   getArea(): number {
-    return Number((Math.PI * (this.radius ** 2)).toFixed(2));
+    return Math.floor((Math.PI * (this.radius ** 2)) * 100) / 100;
   }
 }
 
@@ -89,7 +92,7 @@ export class Rectangle {
   }
 
   getArea(): number {
-    return Number((this.width * this.height).toFixed(2));
+    return Math.floor((this.width * this.height) * 100) / 100;
   }
 }
 
