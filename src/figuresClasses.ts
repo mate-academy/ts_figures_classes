@@ -100,17 +100,5 @@ export class Rectangle implements Figure {
 }
 
 export function getInfo(figure: Figure): string {
-  let result: string = '';
-  const formattedString
-    = `A ${figure.color} ${figure.shape} - ${figure.getArea()}`;
-
-  if (figure.shape === 'triangle') {
-    result = formattedString;
-  } else if (figure.shape === 'circle') {
-    result = formattedString;
-  } else if (figure.shape === 'rectangle') {
-    result = formattedString;
-  }
-
-  return result;
+  return `A ${figure.color} ${figure.shape} - ${figure.getArea()}`;
 }
