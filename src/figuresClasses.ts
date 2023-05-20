@@ -7,7 +7,7 @@ export interface Figure {
   getArea: () => number
 }
 
-const transformArea = (area : number):number => {
+const transformArea = (area: number): number => {
   return Number.isInteger(area) ? area
     : Number(area.toFixed(2));
 };
@@ -25,11 +25,11 @@ export class Triangle implements Figure {
 
   constructor(color: Color, sideA: number, sideB: number, sideC: number) {
     if (sideA <= 0 || sideB <= 0 || sideC <= 0
-       || sideA >= (sideB + sideC)
-        || sideB >= (sideA + sideC)
-        || sideC >= (sideB + sideA)
+      || sideA >= (sideB + sideC)
+      || sideB >= (sideA + sideC)
+      || sideC >= (sideB + sideA)
     ) {
-      throw new Error('your error message');
+      throw new Error('Invalid data');
     }
     this.sideA = sideA;
     this.sideB = sideB;
@@ -38,7 +38,7 @@ export class Triangle implements Figure {
     this.shape = 'triangle';
   }
 
-  getArea():number {
+  getArea(): number {
     const semiPerimeter = (this.sideA + this.sideB + this.sideC) / 2;
 
     return transformArea(Math.sqrt(
@@ -58,15 +58,15 @@ export class Circle implements Figure {
 
   constructor(color: Color, radius: number) {
     if (radius <= 0) {
-      throw new Error('your error message');
+      throw new Error('Invalid data');
     }
     this.radius = radius;
     this.color = color;
     this.shape = 'circle';
   }
 
-  getArea():number {
-    return transformArea((Math.PI * (this.radius * this.radius)));
+  getArea(): number {
+    return transformArea((Math.PI * (this.radius ** 2)));
   }
 }
 
@@ -79,9 +79,9 @@ export class Rectangle implements Figure {
 
   shape: Shape;
 
-  constructor(color:Color, width: number, height: number) {
+  constructor(color: Color, width: number, height: number) {
     if (width <= 0 || height <= 0) {
-      throw new Error('your error message');
+      throw new Error('Invalid data');
     }
     this.width = width;
     this.height = height;
@@ -89,11 +89,11 @@ export class Rectangle implements Figure {
     this.shape = 'rectangle';
   }
 
-  getArea():number {
+  getArea(): number {
     return transformArea(this.width * this.height);
   }
 }
 
-export function getInfo(figure: Figure):string {
+export function getInfo(figure: Figure): string {
   return `A ${figure.color} ${figure.shape} - ${figure.getArea()}`;
 }
