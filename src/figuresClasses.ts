@@ -5,7 +5,7 @@ export interface Figure {
 }
 
 export class Triangle implements Figure {
-  shape: 'triangle' | 'circle' | 'rectangle';
+  shape: 'triangle';
 
   constructor(
     public color: 'red' | 'green' | 'blue',
@@ -18,7 +18,7 @@ export class Triangle implements Figure {
     const hasZeroLengthSide = sides.some((side) => side <= 0);
     const longestSide = Math.max(...sides);
     const hasTooLongSide = sides.reduce((sum, side) => sum + side)
-    - longestSide < longestSide;
+    - longestSide <= longestSide;
 
     if (hasZeroLengthSide) {
       throw new Error('Invalid side length. '
@@ -28,15 +28,6 @@ export class Triangle implements Figure {
     if (hasTooLongSide) {
       throw new Error('Invalid triangle sides. '
       + 'The sum of any two sides must be greater than the third side.');
-    }
-
-    if (
-      A + B <= C
-      || B + C <= A
-      || C + A <= B
-    ) {
-      throw new Error(`sides ${this.A}, ${this.B}`
-      + `and ${this.C} can't form a triangle`);
     }
 
     this.shape = 'triangle';
@@ -53,7 +44,7 @@ export class Triangle implements Figure {
 }
 
 export class Circle implements Figure {
-  shape: 'triangle' | 'circle' | 'rectangle';
+  shape:'circle';
 
   constructor(
     public color: 'red' | 'green' | 'blue',
@@ -75,7 +66,7 @@ export class Circle implements Figure {
 }
 
 export class Rectangle implements Figure {
-  shape: 'triangle' | 'circle' | 'rectangle';
+  shape: 'rectangle';
 
   constructor(
     public color: 'red' | 'green' | 'blue',
