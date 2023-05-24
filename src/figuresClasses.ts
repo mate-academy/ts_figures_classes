@@ -20,12 +20,12 @@ export class Triangle implements Figure {
       throw new Error('All sides of the triangle must be greater than zero');
     }
 
-    const longestSideTriangle = Math.max(this.a, this.b, this.c);
+    const sides = [this.a, this.b, this.c];
+    const longestSide = Math.max(...sides);
+    const hasTooLongSide = sides
+      .reduce((sum, side) => sum + side, 0) - longestSide <= longestSide;
 
-    if (longestSideTriangle >= this.a + this.b
-      || longestSideTriangle >= this.b + this.c
-      || longestSideTriangle >= this.c + this.a
-    ) {
+    if (hasTooLongSide) {
       throw new Error('Longest side of triangle should be less '
         + 'than the sum of the other two sides');
     }
@@ -70,7 +70,9 @@ export class Rectangle implements Figure {
   }
 
   getArea(): number {
-    return this.width * this.height;
+    const area = this.width * this.height;
+
+    return Math.round(area * 100) / 100;
   }
 }
 
