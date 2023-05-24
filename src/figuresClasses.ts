@@ -9,12 +9,12 @@ export class Triangle {
   public shape = 'triangle';
 
   constructor(public color: string, public a: number, public b: number, public c: number) {
-    if (this.a <= 0 || this.b <= 0 || this.c <= 0) {
-      throw new Error('your error message');
+    if (a <= 0 || b <= 0 || c <= 0) {
+      throw new Error(`This is not a ${this.shape}.`);
     }
 
     if (a + b <= c || b + c <= a || c + a <= b) {
-      throw new Error('your error message');
+      throw new Error(`This is not a ${this.shape}.`);
     }
   }
 
@@ -30,8 +30,8 @@ export class Circle {
   public shape = 'circle';
 
   constructor(public color: string, public radius: number) {
-    if (this.radius <= 0) {
-      throw new Error('your error message');
+    if (radius <= 0) {
+      throw new Error(`This is not a ${this.shape}.`);
     }
   }
 
@@ -46,8 +46,8 @@ export class Rectangle {
   public shape = 'rectangle';
 
   constructor(public color: string, public width: number, public height: number) {
-    if (this.width <= 0 || this.height <= 0) {
-      throw new Error('your error message');
+    if (width <= 0 || height <= 0) {
+      throw new Error(`This is not a ${this.shape}.`);
     }
   }
 
