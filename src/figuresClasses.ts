@@ -1,14 +1,14 @@
 /* eslint-disable max-len */
+type Shape = 'triangle' | 'circle' | 'rectangle';
+type Color = 'red' | 'green' | 'blue';
 export interface Figure {
-  shape: 'triangle' | 'circle' | 'rectangle';
-  color: 'red' | 'green' | 'blue';
+  shape: Shape;
+  color: Color;
   getArea(): number;
 }
 
-export class Triangle {
-  public shape = 'triangle';
-
-  constructor(public color: string, public a: number, public b: number, public c: number) {
+export class Triangle implements Figure {
+  constructor(public color: Color, public a: number, public b: number, public c: number, public shape: Shape = 'triangle') {
     if (a <= 0 || b <= 0 || c <= 0) {
       throw new Error(`This is not a ${this.shape}.`);
     }
@@ -26,10 +26,8 @@ export class Triangle {
   }
 }
 
-export class Circle {
-  public shape = 'circle';
-
-  constructor(public color: string, public radius: number) {
+export class Circle implements Figure {
+  constructor(public color: Color, public radius: number, public shape: Shape = 'circle') {
     if (radius <= 0) {
       throw new Error(`This is not a ${this.shape}.`);
     }
@@ -42,10 +40,8 @@ export class Circle {
   }
 }
 
-export class Rectangle {
-  public shape = 'rectangle';
-
-  constructor(public color: string, public width: number, public height: number) {
+export class Rectangle implements Figure {
+  constructor(public color: Color, public width: number, public height: number, public shape: Shape = 'rectangle') {
     if (width <= 0 || height <= 0) {
       throw new Error(`This is not a ${this.shape}.`);
     }
