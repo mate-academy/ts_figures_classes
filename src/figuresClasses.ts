@@ -13,17 +13,10 @@ const transformArea = (area: number): number => {
 };
 
 export class Triangle implements Figure {
-  sideA: number;
-
-  sideB: number;
-
-  sideC: number;
-
-  color: Color;
-
   shape: Shape;
 
-  constructor(color: Color, sideA: number, sideB: number, sideC: number) {
+  constructor(public color: Color, public sideA: number,
+    public sideB: number, public sideC: number) {
     if (sideA <= 0 || sideB <= 0 || sideC <= 0
       || sideA >= (sideB + sideC)
       || sideB >= (sideA + sideC)
@@ -31,10 +24,6 @@ export class Triangle implements Figure {
     ) {
       throw new Error('Cannot create triangle with these sides');
     }
-    this.sideA = sideA;
-    this.sideB = sideB;
-    this.sideC = sideC;
-    this.color = color;
     this.shape = 'triangle';
   }
 
