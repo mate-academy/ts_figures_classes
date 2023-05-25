@@ -29,7 +29,7 @@ export class Triangle implements Figure {
       || sideB >= (sideA + sideC)
       || sideC >= (sideB + sideA)
     ) {
-      throw new Error('Invalid data');
+      throw new Error('Cannot create triangle with these sides');
     }
     this.sideA = sideA;
     this.sideB = sideB;
@@ -58,7 +58,7 @@ export class Circle implements Figure {
 
   constructor(color: Color, radius: number) {
     if (radius <= 0) {
-      throw new Error('Invalid data');
+      throw new Error('Cannot create circle with negative radius');
     }
     this.radius = radius;
     this.color = color;
@@ -82,7 +82,7 @@ export class Rectangle implements Figure {
 
   constructor(color: Color, width: number, height: number) {
     if (width <= 0 || height <= 0) {
-      throw new Error('Invalid data');
+      throw new Error('Cannot create rectangle with these sides');
     }
     this.width = width;
     this.height = height;
