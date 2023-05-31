@@ -9,33 +9,19 @@ export interface Figure {
 export class Triangle implements Figure {
   shape: Shape = 'triangle';
 
-  color: Color;
-
-  a: number;
-
-  b: number;
-
-  c: number;
-
-  constructor(color: Color, a: number, b: number, c: number) {
-    this.color = color;
-    this.a = a;
-    this.b = b;
-    this.c = c;
-
+  constructor(
+    public color: Color,
+    public a: number,
+    public b: number,
+    public c: number,
+  ) {
     if (this.a <= 0 || this.b <= 0 || this.c <= 0) {
       throw new Error('sides must be bigger than 0');
     }
 
-    if (this.a > this.b && this.a > this.c && this.a >= (this.b + this.c)) {
-      throw new Error('sides 1, 2 and 3 cant form a triangle');
-    }
-
-    if (this.b > this.a && this.b > this.c && this.b >= (this.a + this.c)) {
-      throw new Error('sides 1, 2 and 3 cant form a triangle');
-    }
-
-    if (this.c > this.a && this.c > this.b && this.c >= (this.a + this.b)) {
+    if (this.a >= (this.b + this.c)
+    || this.b >= (this.a + this.c)
+    || this.c >= (this.a + this.b)) {
       throw new Error('sides 1, 2 and 3 cant form a triangle');
     }
   }
@@ -54,14 +40,10 @@ export class Triangle implements Figure {
 export class Circle implements Figure {
   shape: Shape = 'circle';
 
-  color: Color;
-
-  a: number;
-
-  constructor(color: Color, a: number) {
-    this.color = color;
-    this.a = a;
-
+  constructor(
+    public color: Color,
+    public a: number,
+  ) {
     if (this.a <= 0) {
       throw new Error('radius must be bigger than 0');
     }
@@ -77,17 +59,11 @@ export class Circle implements Figure {
 export class Rectangle implements Figure {
   shape: Shape = 'rectangle';
 
-  color: Color;
-
-  a: number;
-
-  b: number;
-
-  constructor(color: Color, a: number, b: number) {
-    this.color = color;
-    this.a = a;
-    this.b = b;
-
+  constructor(
+    public color: Color,
+    public a: number,
+    public b: number,
+  ) {
     if (this.a <= 0 || this.b <= 0) {
       throw new Error('sides must be bigger than 0');
     }
