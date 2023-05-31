@@ -19,15 +19,24 @@ export class Triangle implements Figure {
     const isUnValidSides = this.a < 0 || this.b < 0 || this.c < 0;
 
     if (isUnValidSides) {
-      throw new Error('side cannot be negtive');
+      throw new Error('sides cannot be negtive');
+    }
+
+    const isUnValidWidths = (this.a >= (this.b + this.c))
+      || (this.b >= (this.a + this.c))
+      || (this.c >= (this.a + this.b));
+
+    if (isUnValidWidths) {
+      throw new Error('side cannot be larger than two other sides');
     }
   }
 
   getArea(): number {
     const s = (this.a + this.b + this.c) / 2;
     const multipleOfS = s * (s - this.a) * (s - this.b) * (s - this.c);
+    const result = Math.sqrt(multipleOfS);
 
-    return Math.sqrt(multipleOfS);
+    return +result.toFixed(2);
   }
 }
 
@@ -46,7 +55,9 @@ export class Circle implements Figure {
   }
 
   getArea(): number {
-    return Math.PI * (this.radius ** 2);
+    const result = Math.PI * (this.radius ** 2);
+
+    return +result.toFixed(2);
   }
 }
 
@@ -66,7 +77,9 @@ export class Rectangle implements Figure {
   }
 
   getArea(): number {
-    return this.width * this.height;
+    const result = this.width * this.height;
+
+    return +result.toFixed(2);
   }
 }
 
