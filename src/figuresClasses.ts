@@ -13,7 +13,7 @@ export interface Figure {
   getArea(): number;
 }
 
-export class Triangle implements Figure {
+export class Triangle {
   shape = Shape.Triangle;
 
   constructor(
@@ -52,7 +52,7 @@ export class Triangle implements Figure {
   }
 }
 
-export class Circle implements Figure {
+export class Circle {
   shape = Shape.Circle;
 
   constructor(
@@ -69,7 +69,7 @@ export class Circle implements Figure {
   }
 }
 
-export class Rectangle implements Figure {
+export class Rectangle {
   shape = Shape.Rectangle;
 
   constructor(
