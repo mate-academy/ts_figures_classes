@@ -36,7 +36,7 @@ export class Triangle implements Figure {
     const multipleOfS = s * (s - this.a) * (s - this.b) * (s - this.c);
     const result = Math.sqrt(multipleOfS);
 
-    return +result.toFixed(2);
+    return Math.floor(result * 100) / 100;
   }
 }
 
@@ -57,7 +57,7 @@ export class Circle implements Figure {
   getArea(): number {
     const result = Math.PI * (this.radius ** 2);
 
-    return +result.toFixed(2);
+    return Math.floor(result * 100) / 100;
   }
 }
 
@@ -79,7 +79,7 @@ export class Rectangle implements Figure {
   getArea(): number {
     const result = this.width * this.height;
 
-    return +result.toFixed(2);
+    return Math.floor(result * 100) / 100;
   }
 }
 
