@@ -13,17 +13,17 @@ export class Triangle implements Figure {
     public b: number,
     public c: number,
   ) {
-    if (this.isInvalid()) {
+    if (!this.isValid()) {
       throw new Error('Impossible to create triangle with such parameters');
     }
   }
 
-  isInvalid(): boolean {
+  isValid(): boolean {
     const sides = [this.a, this.b, this.c].sort((a, b) => b - a);
     const isSideTooSmall = sides.some((side) => side <= 0);
     const isSideTooLarge = sides[0] >= sides[1] + sides[2];
 
-    return isSideTooSmall || isSideTooLarge;
+    return !isSideTooSmall && !isSideTooLarge;
   }
 
   getArea(): number {
@@ -70,6 +70,6 @@ export class Rectangle implements Figure {
   }
 }
 
-export function getInfo(figure): string {
+export function getInfo(figure: Figure): string {
   return `A ${figure.color} ${figure.shape} - ${figure.getArea()}`;
 }
