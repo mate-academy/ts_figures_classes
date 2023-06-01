@@ -16,27 +16,28 @@ export class Triangle implements Figure {
     public b: number,
     public c: number,
   ) {
-    const isUnValidSides = this.a < 0 || this.b < 0 || this.c < 0;
+    const isValidSides = this.a > 0 && this.b > 0 && this.c > 0;
 
-    if (isUnValidSides) {
+    if (!isValidSides) {
       throw new Error('sides cannot be negtive');
     }
 
-    const isUnValidWidths = (this.a >= (this.b + this.c))
+    const isSideBiggerThanTwoOthers = (this.a >= (this.b + this.c))
       || (this.b >= (this.a + this.c))
       || (this.c >= (this.a + this.b));
 
-    if (isUnValidWidths) {
+    if (isSideBiggerThanTwoOthers) {
       throw new Error('side cannot be larger than two other sides');
     }
   }
 
   getArea(): number {
     const s = (this.a + this.b + this.c) / 2;
-    const multipleOfS = s * (s - this.a) * (s - this.b) * (s - this.c);
-    const result = Math.sqrt(multipleOfS);
+    const triangleArea = Math.sqrt(
+      s * (s - this.a) * (s - this.b) * (s - this.c),
+    );
 
-    return Math.floor(result * 100) / 100;
+    return Math.floor(triangleArea * 100) / 100;
   }
 }
 
@@ -47,9 +48,9 @@ export class Circle implements Figure {
     public color: FigureColor,
     public radius: number,
   ) {
-    const isUnValidRadius = this.radius < 0;
+    const isValidRadius = this.radius > 0;
 
-    if (isUnValidRadius) {
+    if (!isValidRadius) {
       throw new Error('side cannot be negtive');
     }
   }
@@ -69,9 +70,9 @@ export class Rectangle implements Figure {
     public width: number,
     public height: number,
   ) {
-    const isUnValidSides = this.width < 0 || this.height < 0;
+    const isValidSides = this.width > 0 && this.height > 0;
 
-    if (isUnValidSides) {
+    if (!isValidSides) {
       throw new Error('side cannot be negtive');
     }
   }
