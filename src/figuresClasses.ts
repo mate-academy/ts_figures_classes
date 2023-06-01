@@ -7,6 +7,18 @@ export interface Figure {
   getArea(): number;
 }
 
+function validateTriangle(a: number, b: number, c: number): void {
+  if (a <= 0 || b <= 0 || c <= 0) {
+    throw new Error('Size cant be <= 0');
+  } else if (
+    a >= b + c
+    || b >= a + c
+    || c >= a + b
+  ) {
+    throw new Error('Wrong size of triangle sides');
+  }
+}
+
 export class Triangle implements Figure {
   shape: Shapes = 'triangle';
 
@@ -16,15 +28,7 @@ export class Triangle implements Figure {
     public b: number,
     public c: number,
   ) {
-    if (a <= 0 || b <= 0 || c <= 0) {
-      throw new Error('Size cant be <= 0');
-    } else if (
-      a >= b + c
-      || b >= a + c
-      || c >= a + b
-    ) {
-      throw new Error('Wrong size of triangle sides');
-    }
+    validateTriangle(a, b, c);
   }
 
   getArea(): number {
