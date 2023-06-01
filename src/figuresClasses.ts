@@ -1,10 +1,10 @@
 export interface Figure {
   shape:string,
   color:string,
-  getArea: () =>{}
+  getArea: () => number,
 }
 
-function roundedDownToHundredths(area:number):number {
+function roundDownToHundredths(area:number):number {
   return Math.floor(area * 100) / 100;
 }
 
@@ -17,13 +17,10 @@ export class Triangle implements Figure {
     public b:number,
     public c:number,
   ) {
-    if (!this.isValidSides()) {
+    if (!this.AreValidSides()) {
       throw new Error('incorrect sides of triangle');
     }
-
-    if (!this.isTriangle()) {
-      throw new Error('this is not triangle');
-    }
+    this.checkIsTriangle();
 
     this.color = color;
   }
@@ -32,19 +29,21 @@ export class Triangle implements Figure {
     const p = (this.a + this.b + this.c) / 2;
     const area = Math.sqrt(p * (p - this.a) * (p - this.b) * (p - this.c));
 
-    return roundedDownToHundredths(area);
+    return roundDownToHundredths(area);
   };
 
-  private isValidSides():boolean {
+  private AreValidSides():boolean {
     return this.a > 0 && this.b > 0 && this.c > 0;
   }
 
-  private isTriangle():boolean {
+  private checkIsTriangle():void {
     const sides = [this.a, this.b, this.c];
 
     sides.sort((a, b) => a - b);
 
-    return sides[0] + sides[1] > sides[2];
+    if (sides[0] + sides[1] <= sides[2]) {
+      throw new Error('this is not triangle');
+    }
   }
 }
 
@@ -62,7 +61,7 @@ export class Circle implements Figure {
   getArea = ():number => {
     const area = Math.PI * this.radius * this.radius;
 
-    return roundedDownToHundredths(area);
+    return roundDownToHundredths(area);
   };
 }
 
