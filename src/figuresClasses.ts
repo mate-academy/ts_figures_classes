@@ -1,3 +1,9 @@
+function validateFigure(...paramentrs: number[]): void {
+  if (paramentrs.some((el) => el <= 0)) {
+    throw new Error('Error: unacceptable parameter provided.');
+  }
+}
+
 export interface Figure {
   shape: string;
   color: string;
@@ -15,13 +21,14 @@ export class Triangle implements Figure {
   ) {
     this.shape = 'triangle';
 
-    function properTriangle(
+    function isItProperTriangle(
       aSide: number,
       bSide: number,
       cSide: number,
     ): boolean {
       const allSides = [aSide, bSide, cSide];
-      const longgestSide = Math.max(aSide, bSide, cSide);
+      const longgestSide = allSides
+        .sort((currentSide, nextSide) => nextSide - currentSide)[0];
       const sumOfshorterSides = allSides
         .filter((side) => side !== longgestSide)
         .reduce((total, side) => total + side);
@@ -29,23 +36,22 @@ export class Triangle implements Figure {
       return longgestSide < sumOfshorterSides;
     }
 
-    if (this.a <= 0
-      || this.b <= 0
-      || this.c <= 0
-      || !properTriangle(this.a, this.b, this.c)
-    ) {
-      throw new Error('Error: unacceptable parameter provided.');
+    validateFigure(this.a, this.b, this.c);
+
+    if (!isItProperTriangle(this.a, this.b, this.c)) {
+      throw new Error('Error: the longest side of a triangle'
+      + ' is bigger (or equal) than a sum of two others');
     }
   }
 
   getArea(): number {
-    const halfP = (this.a + this.b + this.c) / 2;
+    const halfPerimeter = (this.a + this.b + this.c) / 2;
 
     return Math.floor(Math.sqrt(
-      halfP
-      * (halfP - this.a)
-      * (halfP - this.b)
-      * (halfP - this.c),
+      halfPerimeter
+      * (halfPerimeter - this.a)
+      * (halfPerimeter - this.b)
+      * (halfPerimeter - this.c),
     ) * 100) / 100;
   }
 }
@@ -59,9 +65,7 @@ export class Circle implements Figure {
   ) {
     this.shape = 'circle';
 
-    if (this.radius <= 0) {
-      throw new Error('Error: unacceptable parameter provided.');
-    }
+    validateFigure(this.radius);
   }
 
   getArea(): number {
@@ -79,9 +83,7 @@ export class Rectangle implements Figure {
   ) {
     this.shape = 'rectangle';
 
-    if (this.width <= 0 || this.height <= 0) {
-      throw new Error('Error: unacceptable parameter provided.');
-    }
+    validateFigure(this.width, this.height);
   }
 
   getArea(): number {
