@@ -43,8 +43,6 @@ export class Circle implements Figure {
     public color: Color,
     public radius: number,
   ) {
-    this.radius = radius;
-
     if (this.radius <= 0) {
       throw new Error('Enter a valid radius value');
     }
@@ -74,7 +72,5 @@ export class Rectangle implements Figure {
 }
 
 export function getInfo(figure: Figure): string {
-  const figureArea = (figure.getArea() * 100) / 100;
-
-  return `A ${figure.color} ${figure.shape} - ${figureArea}`;
+  return `A ${figure.color} ${figure.shape} - ${figure.getArea()}`;
 }
