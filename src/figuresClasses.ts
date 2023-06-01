@@ -13,18 +13,28 @@ export class Triangle implements Figure {
     public b: number,
     public c: number,
   ) {
-    if (this.a <= 0 || this.b <= 0 || this.c <= 0
-      || this.a + this.b <= this.c || this.a + this.c <= this.b
-      || this.b + this.c <= this.a) {
-      throw new Error('This figure is not a triangle');
+    this.validateInput();
+  }
+
+  private validateInput(): void {
+    if (
+      this.a <= 0
+      || this.b <= 0
+      || this.c <= 0
+      || this.a + this.b <= this.c
+      || this.a + this.c <= this.b
+      || this.b + this.c <= this.a
+    ) {
+      throw new Error('Error: the sides do not form a triangle');
     }
   }
 
   getArea(): number {
     const perimeter = (this.a + this.b + this.c) / 2;
 
-    const squareOfTriangle = Math.sqrt(perimeter * ((perimeter - this.a)
-    * (perimeter - this.b) * (perimeter - this.c)));
+    const squareOfTriangle = Math.sqrt(perimeter * (
+      (perimeter - this.a) * (perimeter - this.b) * (perimeter - this.c)
+    ));
 
     return Math.floor(100 * squareOfTriangle) / 100;
   }
@@ -38,7 +48,7 @@ export class Circle implements Figure {
     public radius: number,
   ) {
     if (this.radius <= 0) {
-      throw new Error('This figure is not a circle');
+      throw new Error('Error: radius of a circle is not valid');
     }
   }
 
@@ -56,7 +66,7 @@ export class Rectangle implements Figure {
     public height: number,
   ) {
     if (this.width <= 0 || this.height <= 0) {
-      throw new Error('This figure is not a rectangle');
+      throw new Error('Error: the sides do not form a rectangle');
     }
   }
 
