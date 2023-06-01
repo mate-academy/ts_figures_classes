@@ -7,7 +7,7 @@ export interface Figure {
   getArea(): number;
 }
 
-function getRoundNumber(area: number): number {
+function getRoundedDownArea(area: number): number {
   return Math.floor(area * 100) / 100;
 }
 export class Triangle implements Figure {
@@ -35,7 +35,7 @@ export class Triangle implements Figure {
       * (semiperimeter - this.b)
       * (semiperimeter - this.c));
 
-    return getRoundNumber(area);
+    return getRoundedDownArea(area);
   }
 }
 
@@ -54,7 +54,7 @@ export class Circle {
   getArea(): number {
     const area = (this.radius ** 2) * Math.PI;
 
-    return getRoundNumber(area);
+    return getRoundedDownArea(area);
   }
 }
 
@@ -74,7 +74,7 @@ export class Rectangle {
   getArea(): number {
     const area = this.width * this.height;
 
-    return getRoundNumber(area);
+    return getRoundedDownArea(area);
   }
 }
 
