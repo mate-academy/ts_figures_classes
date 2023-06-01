@@ -1,8 +1,6 @@
 type Shape = 'triangle' | 'circle' | 'rectangle';
 type Color = 'red' | 'green' | 'blue';
 
-const error = new Error('somethig went wrong');
-
 export interface Figure {
   shape: Shape,
   color: Color,
@@ -18,18 +16,21 @@ export class Triangle implements Figure {
     public b: number,
     public c: number,
   ) {
+    if (a <= 0 || b <= 0 || c <= 0) {
+      throw new Error('Triangle sides must be greater than 0');
+    }
+
     if (!this.isValidTriangle()) {
-      throw error;
+      throw new Error(
+        `${this.a}, ${this.b} and ${this.c} cannot form a triangle`,
+      );
     }
   }
 
   isValidTriangle(): boolean {
     const { a, b, c } = this;
 
-    return a > 0
-      && b > 0
-      && c > 0
-      && a < b + c
+    return a < b + c
       && b < a + c
       && c < a + b;
   }
@@ -52,7 +53,9 @@ export class Circle implements Figure {
     public radius: number,
   ) {
     if (!this.isValidCircle()) {
-      throw error;
+      throw new Error(
+        `The circle's radius must be greater than 0. ${this.radius} < 0`,
+      );
     }
   }
 
@@ -76,7 +79,10 @@ export class Rectangle implements Figure {
     public h: number,
   ) {
     if (!this.isValidRectagle()) {
-      throw error;
+      throw new Error(
+        'Width and height must be greater than 0.'
+        + ` Your values - w: ${this.w} & h: ${this.h}`,
+      );
     }
   }
 
