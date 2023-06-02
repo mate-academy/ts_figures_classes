@@ -52,7 +52,10 @@ export class Circle {
 
   radius: number;
 
-  constructor(color: Color, radius: number) {
+  constructor(
+    public color: Color, 
+    public radius: number
+  ) {
     if (radius <= 0) {
       throw new Error('Radius should be greater than 0');
     }
