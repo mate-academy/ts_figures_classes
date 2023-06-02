@@ -16,27 +16,29 @@ export class Triangle implements Figure {
     public sideB: number,
     public sideC: number,
   ) {
-    if (sideA <= 0 || sideB <= 0 || sideC <= 0) {
+    this.validateParameters();
+  }
+
+  validateParameters(): void {
+    if (this.sideA <= 0 || this.sideB <= 0 || this.sideC <= 0) {
       throw new Error('No one side cannot be less than or equal to 0');
     }
 
-    const sides: number[] = [sideA, sideB, sideC].sort(
+    const sides: number[] = [this.sideA, this.sideB, this.sideC].sort(
       (current, next) => next - current,
     );
 
     if (sides[0] >= sides[1] + sides[2]) {
-      throw new Error(`sides ${sideA}, `
-        + `${sideB} and ${sideC} can't form a triangle`);
+      throw new Error(`sides ${this.sideA}, `
+        + `${this.sideB} and ${this.sideC} can't form a triangle`);
     }
   }
 
   getArea(): number {
     const p: number = (this.sideA + this.sideB + this.sideC) / 2;
 
-    return Math.floor(
-      Math.sqrt(p * (p - this.sideA) * (p - this.sideB) * (p - this.sideC))
-      * 100,
-    ) / 100;
+    return Math.floor(Math.sqrt(p * (p - this.sideA) * (p - this.sideB)
+      * (p - this.sideC)) * 100) / 100;
   }
 }
 
