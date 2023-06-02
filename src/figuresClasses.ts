@@ -77,9 +77,9 @@ export class Rectangle {
   height: number;
 
   constructor(
-    color: Color,
-    width: number,
-    height: number,
+    public color: Color,
+    public width: number,
+    public height: number,
   ) {
     if (width <= 0 || height <= 0) {
       throw new Error('Width and height should be greater than 0');
