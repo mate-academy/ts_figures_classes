@@ -60,8 +60,6 @@ export class Circle {
       throw new Error('Radius should be greater than 0');
     }
 
-    this.color = color;
-    this.radius = radius;
   }
 
   getArea(): number {
