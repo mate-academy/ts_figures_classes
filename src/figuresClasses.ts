@@ -32,8 +32,6 @@ export class Triangle implements Figure {
       throw new Error('Entered sides cant from a triangle');
     }
 
-    this.color = color;
-    this.sides = [sideA, sideB, sideC];
   }
 
   getArea(): number {
