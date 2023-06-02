@@ -85,9 +85,6 @@ export class Rectangle {
       throw new Error('Width and height should be greater than 0');
     }
 
-    this.color = color;
-    this.width = width;
-    this.height = height;
   }
 
   getArea(): number {
