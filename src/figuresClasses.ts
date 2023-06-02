@@ -25,19 +25,27 @@ export class Triangle implements Figure {
     public b: number,
     public c: number,
   ) {
-    if (a <= 0 || b <= 0 || c <= 0) {
+    this.validateTriangle();
+  }
+
+  validateTriangle():boolean {
+    if (this.a <= 0 || this.b <= 0 || this.c <= 0) {
       throw new Error('Invalid side value of triangle');
     }
 
-    if (a >= b + c || b >= a + c || c >= a + b) {
+    if (this.a >= this.b + this.c
+      || this.b >= this.a + this.c
+      || this.c >= this.a + this.b) {
       throw new Error('Sides cannot form a triangle');
     }
+
+    return true;
   }
 
   getArea():number {
-    const p:number = (this.a + this.b + this.c) / 2;
-    const triangleArea = Math.sqrt(p
-      * (p - this.a) * (p - this.b) * (p - this.c));
+    const { a, b, c } = this;
+    const p:number = (a + b + c) / 2;
+    const triangleArea = Math.sqrt(p * (p - a) * (p - b) * (p - c));
 
     return Math.floor(triangleArea * 100) / 100;
   }
