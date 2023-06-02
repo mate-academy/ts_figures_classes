@@ -7,6 +7,18 @@ export interface Figure {
   getArea(): number;
 }
 
+function validateFigure(...sides: number[]): void {
+  if (sides.some((el) => el <= 0)) {
+    throw new Error('Figure lenght must be > 0');
+  }
+
+  sides.sort((min, max) => min - max);
+
+  if (sides[sides.length - 1] >= sides[0] + sides[1]) {
+    throw new Error('Figure lenght must be > 0');
+  }
+}
+
 export class Triangle {
   public shape: Figure['shape'] = 'triangle';
 
@@ -16,21 +28,7 @@ export class Triangle {
     public b: number,
     public c: number,
   ) {
-    this.validateTriangle();
-  }
-
-  validateTriangle(): void {
-    if (this.a <= 0 || this.b <= 0 || this.c <= 0) {
-      throw new Error('Figure lenght must be > 0');
-    }
-
-    const sidesArray: number[] = [this.a, this.b, this.c];
-
-    sidesArray.sort((min, max) => min - max);
-
-    if (sidesArray[sidesArray.length - 1] >= sidesArray[0] + sidesArray[1]) {
-      throw new Error('Figure lenght must be > 0');
-    }
+    validateFigure(this.a, this.b, this.c);
   }
 
   getArea(): number {
@@ -54,13 +52,7 @@ export class Circle {
     public color: Color,
     public radius: number,
   ) {
-    this.validateTriangle();
-  }
-
-  validateTriangle(): void {
-    if (this.radius <= 0) {
-      throw new Error('Figure lenght must be > 0');
-    }
+    validateFigure(this.radius);
   }
 
   getArea(): number {
@@ -78,13 +70,7 @@ export class Rectangle {
     public width: number,
     public height: number,
   ) {
-    this.validateTriangle();
-  }
-
-  validateTriangle(): void {
-    if (this.width <= 0 || this.height <= 0) {
-      throw new Error('Figure lenght must be > 0');
-    }
+    validateFigure(this.width, this.height);
   }
 
   getArea(): number {
