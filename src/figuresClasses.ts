@@ -15,10 +15,10 @@ export class Triangle implements Figure {
   sides: number[];
 
   constructor(
-    color: Color,
-    sideA: number,
-    sideB: number,
-    sideC: number,
+    public color: Color,
+    public sideA: number,
+    public sideB: number,
+    public sideC: number,
   ) {
     if (sideA <= 0
       || sideB <= 0
