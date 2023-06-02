@@ -36,7 +36,7 @@ export class Triangle implements Figure {
 
   getArea(): number {
     const [sideA, sideB, sideC] = this.sides;
-    const semiPerimeter = (sideA + sideB + sideC) / 2;
+    const semiPerimeter = (this.sideA + this.sideB + this.sideC) / 2;
 
     return Math.floor(Math.sqrt(semiPerimeter
       * (semiPerimeter - sideA)
