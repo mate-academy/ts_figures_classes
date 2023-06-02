@@ -14,15 +14,20 @@ export class Triangle implements Figure {
 
   public sides: number[] = [];
 
-  constructor(public color: Color, ...sides: number[]) {
+  constructor(
+    public color: Color,
+    ...sides: number[]
+  ) {
     const longestSide = Math.max(...sides);
     const sumOfAllSides = sides.reduce((perimiter, side) => perimiter + side);
     const sumOfSmallSides = sumOfAllSides - longestSide;
 
-    if (longestSide >= sumOfSmallSides
-      || sides[0] <= 0 || sides[1] <= 0 || sides[2] <= 0
-    ) {
-      throw new Error('Triangle with given sides isn\'t exist');
+    if (longestSide >= sumOfSmallSides) {
+      throw new Error('Triangle with given sides doesn\'t exist');
+    }
+
+    if (sides[0] <= 0 || sides[1] <= 0 || sides[2] <= 0) {
+      throw new Error('The triangle side must be greater than zero!');
     }
 
     this.color = color;
@@ -49,9 +54,12 @@ export class Triangle implements Figure {
 export class Circle implements Figure {
   public shape: Shape = 'circle';
 
-  constructor(public color: Color, public radius: number) {
+  constructor(
+    public color: Color,
+    public radius: number,
+  ) {
     if (radius <= 0) {
-      throw new Error('Circle with given radius isn\'t exist');
+      throw new Error('Circle with given radius doesn\'t exist');
     }
 
     this.color = color;
@@ -69,11 +77,14 @@ export class Circle implements Figure {
 export class Rectangle implements Figure {
   public shape: Shape = 'rectangle';
 
-  public sides = [];
+  public sides: number[] = [];
 
-  constructor(public color: Color, ...sides: number[]) {
+  constructor(
+    public color: Color,
+    ...sides: number[]
+  ) {
     if (sides[0] <= 0 || sides[1] <= 0) {
-      throw new Error('Rectangle with given sides isn\'t exist');
+      throw new Error('The rectangle side must be greater than zero!');
     }
 
     this.color = color;
