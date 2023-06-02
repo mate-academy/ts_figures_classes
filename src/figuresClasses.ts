@@ -70,7 +70,7 @@ export class Circle implements Figure {
 
   validateParameters(): void {
     if (this.radius <= 0) {
-      throw new Error(`Radius ${this.radius} can't, Clark Kent`);
+      throw new Error(`Radius ${this.radius} can't, form a cirlce`);
     }
   }
 }
