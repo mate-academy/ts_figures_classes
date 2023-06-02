@@ -1,6 +1,3 @@
-// import { get } from "http";
-// import { type } from "os";
-
 type Shape = 'triangle' | 'circle' | 'rectangle';
 type Color = 'red' | 'green' | 'blue';
 
@@ -20,7 +17,7 @@ export class Triangle implements Figure {
     public c: number,
   ) {
     if (this.a <= 0 || this.b <= 0 || this.c <= 0) {
-      throw new Error('There is uncorrect numbers of arguments!');
+      throw new Error('The parameters have wrong values!');
     }
 
     if (
@@ -28,7 +25,9 @@ export class Triangle implements Figure {
       || this.b >= this.a + this.c
       || this.c >= this.a + this.b
     ) {
-      throw new Error('There is uncorrect numbers of arguments!');
+      throw new Error(
+        `The longest side of a ${this.shape} is longer than sum of two others!`,
+      );
     }
   }
 
@@ -69,7 +68,7 @@ export class Rectangle implements Figure {
     public height: number,
   ) {
     if (width <= 0 || height <= 0) {
-      throw new Error('There is uncorrect numbers of arguments!');
+      throw new Error('The parameters have wrong values!');
     }
   }
 
