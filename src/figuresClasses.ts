@@ -16,7 +16,9 @@ export class Triangle implements Figure {
       throw new Error("One of the figure's sides is less than or equal to 0");
     }
 
-    if (Math.max(a, b, c) >= a + b + c - Math.max(a, b, c)) {
+    const longestSide = Math.max(a, b, c);
+
+    if (longestSide >= a + b + c - longestSide) {
       throw new Error(`Sides ${a}, ${b}, and ${c} cannot form a triangle`);
     }
   }
