@@ -1,50 +1,52 @@
-type Shape = 'triangle' | 'circle' | 'rectangle';
+enum Shape {
+  triangle = 'triangle',
+  circle = 'cirle',
+  rectangle = 'rectangle',
+}
+
 type Color = 'red' | 'green' | 'blue';
 
 export interface Figure {
-  shape: string;
+  shape: Shape;
   color: Color;
+
+  a?: number;
+  b?: number;
+  c?: number;
   radius?: number;
-  sides?: number[];
+
   getArea: () => number;
 }
 
 export class Triangle implements Figure {
-  public shape: Shape = 'triangle';
-
-  public sides: number[] = [];
+  public shape: Shape = Shape.triangle;
 
   constructor(
     public color: Color,
-    ...sides: number[]
+    public sideA: number,
+    public sideB: number,
+    public sideC: number,
   ) {
-    const longestSide = Math.max(...sides);
-    const sumOfAllSides = sides.reduce((perimiter, side) => perimiter + side);
+    const longestSide = Math.max(sideA, sideB, sideC);
+    const sumOfAllSides = sideA + sideB + sideC;
     const sumOfSmallSides = sumOfAllSides - longestSide;
 
     if (longestSide >= sumOfSmallSides) {
       throw new Error('Triangle with given sides doesn\'t exist');
     }
 
-    if (sides[0] <= 0 || sides[1] <= 0 || sides[2] <= 0) {
+    if (sideA <= 0 || sideB <= 0 || sideC <= 0) {
       throw new Error('The triangle side must be greater than zero!');
     }
-
-    this.color = color;
-    this.sides = sides;
   }
 
   getArea(): number {
-    const sideA = this.sides[0];
-    const sideB = this.sides[1];
-    const sideC = this.sides[2];
-
-    const semiPerimeter = (sideA + sideB + sideC) / 2;
+    const semiPerimeter = (this.sideA + this.sideB + this.sideC) / 2;
     const area = Math.sqrt(
       semiPerimeter
-      * (semiPerimeter - sideA)
-      * (semiPerimeter - sideB)
-      * (semiPerimeter - sideC),
+      * (semiPerimeter - this.sideA)
+      * (semiPerimeter - this.sideB)
+      * (semiPerimeter - this.sideC),
     );
 
     return Math.floor(area * 100) / 100;
@@ -52,7 +54,7 @@ export class Triangle implements Figure {
 }
 
 export class Circle implements Figure {
-  public shape: Shape = 'circle';
+  public shape: Shape = Shape.circle;
 
   constructor(
     public color: Color,
@@ -61,40 +63,30 @@ export class Circle implements Figure {
     if (radius <= 0) {
       throw new Error('Circle with given radius doesn\'t exist');
     }
-
-    this.color = color;
-    this.radius = radius;
   }
 
   getArea(): number {
-    const { radius } = this;
-    const area = Math.PI * (radius ** 2);
+    const area = Math.PI * (this.radius ** 2);
 
     return Math.floor(area * 100) / 100;
   }
 }
 
 export class Rectangle implements Figure {
-  public shape: Shape = 'rectangle';
-
-  public sides: number[] = [];
+  public shape: Shape = Shape.rectangle;
 
   constructor(
     public color: Color,
-    ...sides: number[]
+    public sideA: number,
+    public sideB: number,
   ) {
-    if (sides[0] <= 0 || sides[1] <= 0) {
+    if (sideA <= 0 || sideB <= 0) {
       throw new Error('The rectangle side must be greater than zero!');
     }
-
-    this.color = color;
-    this.sides = sides;
   }
 
   getArea(): number {
-    const sideA = this.sides[0];
-    const sideB = this.sides[1];
-    const area = sideA * sideB;
+    const area = this.sideA * this.sideB;
 
     return Math.floor(area * 100) / 100;
   }
