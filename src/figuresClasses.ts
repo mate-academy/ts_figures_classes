@@ -1,9 +1,26 @@
 type Shape = 'triangle' | 'circle' | 'rectangle';
 type Color = 'red' | 'green' | 'blue';
+
 export interface Figure {
   shape: Shape;
   color: Color;
   getArea(): number;
+}
+
+function validateTriangle(a: number, b: number, c: number): void {
+  if (
+    a <= 0
+    || b <= 0
+    || c <= 0
+  ) {
+    throw new Error('Each side should have length greater than 0');
+  } else if (
+    a >= b + c
+    || b >= a + c
+    || c >= a + b
+  ) {
+    throw new Error(`Sides ${a}, ${b} and ${c} couldn't be a triangle`);
+  }
 }
 
 export class Triangle implements Figure {
@@ -15,17 +32,7 @@ export class Triangle implements Figure {
     public b: number,
     public c: number,
   ) {
-    if (a <= 0
-      || b <= 0
-      || c <= 0) {
-      throw new Error('Each side should have length greaten than 0');
-    }
-
-    if (a + b <= c
-      || a + c <= b
-      || b + c <= a) {
-      throw new Error(`Sides ${this.a}, ${this.b} and ${this.c} couldn't be a triangle`);
-    }
+    validateTriangle(a, b, c);
   }
 
   getArea(): number {

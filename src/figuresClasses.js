@@ -1,6 +1,18 @@
 "use strict";
 exports.__esModule = true;
 exports.getInfo = exports.Rectangle = exports.Circle = exports.Triangle = void 0;
+function validateTriangle(a, b, c) {
+    if (a <= 0
+        || b <= 0
+        || c <= 0) {
+        throw new Error('Each side should have length greater than 0');
+    }
+    else if (a >= b + c
+        || b >= a + c
+        || c >= a + b) {
+        throw new Error("Sides " + a + ", " + b + " and " + c + " couldn't be a triangle");
+    }
+}
 var Triangle = /** @class */ (function () {
     function Triangle(color, a, b, c) {
         this.color = color;
@@ -8,16 +20,7 @@ var Triangle = /** @class */ (function () {
         this.b = b;
         this.c = c;
         this.shape = 'triangle';
-        if (a <= 0
-            || b <= 0
-            || c <= 0) {
-            throw new Error('Each side should have length greaten than 0');
-        }
-        if (a + b <= c
-            || a + c <= b
-            || b + c <= a) {
-            throw new Error("Sides " + this.a + ", " + this.b + " and " + this.c + " couldn't be a triangle");
-        }
+        validateTriangle(a, b, c);
     }
     Triangle.prototype.getArea = function () {
         var _a = this, a = _a.a, b = _a.b, c = _a.c;
