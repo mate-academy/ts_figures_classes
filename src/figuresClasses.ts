@@ -9,12 +9,6 @@ type Color = 'red' | 'green' | 'blue';
 export interface Figure {
   shape: Shape;
   color: Color;
-
-  a?: number;
-  b?: number;
-  c?: number;
-  radius?: number;
-
   getArea: () => number;
 }
 
@@ -23,30 +17,30 @@ export class Triangle implements Figure {
 
   constructor(
     public color: Color,
-    public sideA: number,
-    public sideB: number,
-    public sideC: number,
+    public a: number,
+    public b: number,
+    public c: number,
   ) {
-    const longestSide = Math.max(sideA, sideB, sideC);
-    const sumOfAllSides = sideA + sideB + sideC;
+    const longestSide = Math.max(a, b, c);
+    const sumOfAllSides = a + b + c;
     const sumOfSmallSides = sumOfAllSides - longestSide;
 
     if (longestSide >= sumOfSmallSides) {
       throw new Error('Triangle with given sides doesn\'t exist');
     }
 
-    if (sideA <= 0 || sideB <= 0 || sideC <= 0) {
+    if (a <= 0 || b <= 0 || c <= 0) {
       throw new Error('The triangle side must be greater than zero!');
     }
   }
 
   getArea(): number {
-    const semiPerimeter = (this.sideA + this.sideB + this.sideC) / 2;
+    const semiPerimeter = (this.a + this.b + this.c) / 2;
     const area = Math.sqrt(
       semiPerimeter
-      * (semiPerimeter - this.sideA)
-      * (semiPerimeter - this.sideB)
-      * (semiPerimeter - this.sideC),
+      * (semiPerimeter - this.a)
+      * (semiPerimeter - this.b)
+      * (semiPerimeter - this.c),
     );
 
     return Math.floor(area * 100) / 100;
@@ -77,16 +71,16 @@ export class Rectangle implements Figure {
 
   constructor(
     public color: Color,
-    public sideA: number,
-    public sideB: number,
+    public width: number,
+    public height: number,
   ) {
-    if (sideA <= 0 || sideB <= 0) {
+    if (width <= 0 || height <= 0) {
       throw new Error('The rectangle side must be greater than zero!');
     }
   }
 
   getArea(): number {
-    const area = this.sideA * this.sideB;
+    const area = this.width * this.height;
 
     return Math.floor(area * 100) / 100;
   }
