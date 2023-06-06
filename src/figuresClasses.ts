@@ -8,92 +8,97 @@ export interface Figure {
 }
 
 export class Triangle implements Figure {
-  shape: Shape = 'triangle';
-
-  color: Color;
-
-  sides: number[];
+  public shape: Shape = 'triangle';
 
   constructor(
     public color: Color,
-    public sideA: number,
-    public sideB: number,
-    public sideC: number,
+    public a: number,
+    public b: number,
+    public c: number,
   ) {
-    if (sideA <= 0
-      || sideB <= 0
-      || sideC <= 0) {
-      throw new Error('Length of each side should be greater than 0');
+    if (!this.isValidTriangle()) {
+      throw new Error(
+        `Sides ${this.a}, ${this.b} and ${this.c} cannot form a triangle`,
+      );
     }
+  }
 
-    if (sideA + sideB <= sideC
-      || sideA + sideC <= sideB
-      || sideA + sideC <= sideA) {
-      throw new Error('Entered sides cant from a triangle');
-    }
+  isValidTriangle(): boolean {
+    const { a, b, c } = this;
 
+    return a > 0
+      && b > 0
+      && c > 0
+      && a < b + c
+      && b < a + c
+      && c < a + b;
   }
 
   getArea(): number {
-    const [sideA, sideB, sideC] = this.sides;
-    const semiPerimeter = (this.sideA + this.sideB + this.sideC) / 2;
+    const { a, b, c } = this;
 
-    return Math.floor(Math.sqrt(semiPerimeter
-      * (semiPerimeter - sideA)
-      * (semiPerimeter - sideB)
-      * (semiPerimeter - sideC)) * 100) / 100;
+    const s: number = (a + b + c) / 2;
+    const area: number = Math.sqrt(s * (s - a) * (s - b) * (s - c));
+
+    return Math.floor(area * 100) / 100;
   }
 }
 
-export class Circle {
-  shape: Shape = 'circle';
-
-  color: Color;
-
-  radius: number;
+export class Circle implements Figure {
+  public shape: Shape = 'circle';
 
   constructor(
-    public color: Color, 
-    public radius: number
+    public color: Color,
+    public radius: number,
   ) {
-    if (radius <= 0) {
-      throw new Error('Radius should be greater than 0');
+    if (!this.isValidCircle()) {
+      throw new Error(
+        `Radius ${this.radius} cannot form a circle`,
+      );
     }
+  }
 
+  isValidCircle(): boolean {
+    return this.radius > 0;
   }
 
   getArea(): number {
-    return Math.floor((Math.PI * (this.radius ** 2)) * 100) / 100;
+    const area = Math.PI * (this.radius ** 2);
+
+    return Math.floor(area * 100) / 100;
   }
 }
 
-export class Rectangle {
-  shape: Shape = 'rectangle';
-
-  color: Color;
-
-  width: number;
-
-  height: number;
+export class Rectangle implements Figure {
+  public shape: Shape = 'rectangle';
 
   constructor(
     public color: Color,
     public width: number,
     public height: number,
   ) {
-    if (width <= 0 || height <= 0) {
-      throw new Error('Width and height should be greater than 0');
+    if (!this.isValidRectangle()) {
+      throw new Error(
+        `Width ${this.width} and height ${this.height} cannot form a rectangle`,
+      );
     }
+  }
 
+  isValidRectangle(): boolean {
+    const { width, height } = this;
+
+    return width > 0 && height > 0;
   }
 
   getArea(): number {
-    return Math.floor((this.width * this.height) * 100) / 100;
+    const { width, height } = this;
+
+    const area = width * height;
+
+    return Math.floor(area * 100) / 100;
   }
 }
 
-export function getInfo(figure: Figure): string {
-  const figureArea = figure.getArea();
-
-  return `A ${figure.color} ${figure.shape} - ${figureArea}`;
+export function getInfo(figure: Triangle | Circle | Rectangle): string {
+  return `A ${figure.color} ${figure.shape} - ${figure.getArea()}`;
 }
