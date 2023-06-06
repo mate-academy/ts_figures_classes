@@ -22,8 +22,8 @@ export class Triangle implements Figure {
 
     const sides = [this.a, this.b, this.c];
     const longestSide = Math.max(...sides);
-    const isValidTriangle = sides
-      .reduce((sum, side) => sum + side, 0) - longestSide <= longestSide;
+    const perimeter = this.a + this.b + this.c;
+    const isValidTriangle = perimeter - longestSide <= longestSide;
 
     if (isValidTriangle) {
       throw new Error('Side1 + Side2 should be greater than Side3');
