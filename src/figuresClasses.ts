@@ -12,17 +12,17 @@ export class Triangle implements Figure {
 
   constructor(
     public color: Color,
-    public a: number,
-    public b: number,
-    public c: number,
+    public side1: number,
+    public side2: number,
+    public side3: number,
   ) {
-    if (this.a <= 0 || this.b <= 0 || this.c <= 0) {
+    if (this.side1 <= 0 || this.side2 <= 0 || this.side3 <= 0) {
       throw new Error('Sides of the triangle must be > 0');
     }
 
-    const sides = [this.a, this.b, this.c];
+    const sides = [this.side1, this.side2, this.side3];
     const longestSide = Math.max(...sides);
-    const perimeter = this.a + this.b + this.c;
+    const perimeter = this.side1 + this.side2 + this.side3;
     const isValidTriangle = perimeter - longestSide <= longestSide;
 
     if (isValidTriangle) {
@@ -31,11 +31,11 @@ export class Triangle implements Figure {
   }
 
   getArea(): number {
-    const p = (this.a + this.b + this.c) / 2;
+    const p = (this.side1 + this.side2 + this.side3) / 2;
 
     return Math.floor(
-      Math.sqrt(p * (p - this.a)
-      * (p - this.b) * (p - this.c)) * 100,
+      Math.sqrt(p * (p - this.side1)
+      * (p - this.side2) * (p - this.side3)) * 100,
     ) / 100;
   }
 }
