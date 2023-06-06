@@ -8,9 +8,14 @@ export interface Figure {
 }
 
 function validateFigure(...sides: number[]): void {
-  if (sides.some((el) => el <= 0)) {
-    throw new Error('Figure lenght must be > 0');
-  }
+  sides.some((el) => {
+    if (el <= 0) {
+      throw new Error(`Figure parameters: ${el}
+      cannot be 0 or a negative number`);
+    }
+
+    return true;
+  });
 
   sides.sort((min, max) => min - max);
 
@@ -19,8 +24,12 @@ function validateFigure(...sides: number[]): void {
   }
 }
 
+function toPrecision(area: number):number {
+  return Math.floor(area * 100) / 100;
+}
+
 export class Triangle {
-  public shape: Figure['shape'] = 'triangle';
+  public shape: Shape = 'triangle';
 
   constructor(
     public color: Color,
@@ -32,21 +41,21 @@ export class Triangle {
   }
 
   getArea(): number {
-    const halfPerimeter = (this.a + this.b + this.c) / 2;
+    const semiPerimeter = (this.a + this.b + this.c) / 2;
 
-    const area:number = Math.sqrt(
-      halfPerimeter
-      * (halfPerimeter - this.a)
-      * (halfPerimeter - this.b)
-      * (halfPerimeter - this.c),
+    const area: number = Math.sqrt(
+      semiPerimeter
+      * (semiPerimeter - this.a)
+      * (semiPerimeter - this.b)
+      * (semiPerimeter - this.c),
     );
 
-    return Math.floor(area * 100) / 100;
+    return toPrecision(area);
   }
 }
 
 export class Circle {
-  public shape: Figure['shape'] = 'circle';
+  public shape: Shape = 'circle';
 
   constructor(
     public color: Color,
@@ -58,12 +67,12 @@ export class Circle {
   getArea(): number {
     const area: number = Math.PI * this.radius * this.radius;
 
-    return Math.floor(area * 100) / 100;
+    return toPrecision(area);
   }
 }
 
 export class Rectangle {
-  public shape: Figure['shape'] = 'rectangle';
+  public shape: Shape = 'rectangle';
 
   constructor(
     public color: Color,
@@ -74,9 +83,9 @@ export class Rectangle {
   }
 
   getArea(): number {
-    const area: number = this.width * this.height;
+    const area: number = Math.round(this.width * this.height);
 
-    return Math.round(area);
+    return area;
   }
 }
 
