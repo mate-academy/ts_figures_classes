@@ -17,7 +17,7 @@ export class Triangle implements Figure {
     public c: number,
   ) {
     if (this.a <= 0 || this.b <= 0 || this.c <= 0) {
-      throw new Error('a, b and c must be > 0');
+      throw new Error('Sides of the triangle must be > 0');
     }
 
     const sides = [this.a, this.b, this.c];
@@ -26,15 +26,17 @@ export class Triangle implements Figure {
       .reduce((sum, side) => sum + side, 0) - longestSide <= longestSide;
 
     if (isValidTriangle) {
-      throw new Error('a + b should be greater than c');
+      throw new Error('Side1 + Side2 should be greater than Side3');
     }
   }
 
   getArea(): number {
     const p = (this.a + this.b + this.c) / 2;
 
-    return Math.floor(Math.sqrt(p * (p - this.a)
-      * (p - this.b) * (p - this.c)) * 100) / 100;
+    return Math.floor(
+      Math.sqrt(p * (p - this.a)
+      * (p - this.b) * (p - this.c)) * 100,
+    ) / 100;
   }
 }
 
@@ -46,7 +48,7 @@ export class Circle implements Figure {
     public radius: number,
   ) {
     if (this.radius <= 0) {
-      throw new Error('R should be > 0');
+      throw new Error('Radius should be > 0');
     }
   }
 
