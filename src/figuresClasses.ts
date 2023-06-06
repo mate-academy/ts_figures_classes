@@ -10,8 +10,12 @@ export interface Figure {
 export class Triangle implements Figure {
   public shape: Shape = 'triangle';
 
-  constructor(public color: Color,
-    public a: number, public b: number, public c: number) {
+  constructor(
+    public color: Color,
+    public a: number, 
+    public b: number, 
+    public c: number,
+  ) {
     if (a <= 0 || b <= 0 || c <= 0) {
       throw new Error("One of the figure's sides is less than or equal to 0");
     }
