@@ -16,16 +16,23 @@ export class Triangle implements Figure {
     public side2: number,
     public side3: number,
   ) {
+    this.validateSides();
+    this.validateTriangle();
+  }
+
+  private validateSides(): void {
     if (this.side1 <= 0 || this.side2 <= 0 || this.side3 <= 0) {
       throw new Error('Sides of the triangle must be > 0');
     }
+  }
 
+  private validateTriangle(): void {
     const sides = [this.side1, this.side2, this.side3];
     const longestSide = Math.max(...sides);
     const perimeter = this.side1 + this.side2 + this.side3;
-    const isValidTriangle = perimeter - longestSide <= longestSide;
+    const isValidTriangle = perimeter - longestSide > longestSide;
 
-    if (isValidTriangle) {
+    if (!isValidTriangle) {
       throw new Error('Side1 + Side2 should be greater than Side3');
     }
   }
