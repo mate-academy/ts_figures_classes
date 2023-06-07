@@ -54,6 +54,10 @@ export class Circle implements Figure {
     public color: Color,
     public radius: number,
   ) {
+    this.validateRadius();
+  }
+
+  private validateRadius(): void {
     if (this.radius <= 0) {
       throw new Error('Radius should be > 0');
     }
@@ -72,6 +76,10 @@ export class Rectangle implements Figure {
     public width: number,
     public height: number,
   ) {
+    this.validateWidthHeight();
+  }
+
+  private validateWidthHeight(): void {
     if (this.width < 0 || this.height < 0) {
       throw new Error('width and height should be > 0');
     }
