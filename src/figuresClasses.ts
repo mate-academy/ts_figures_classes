@@ -8,19 +8,10 @@ export interface Figure {
 }
 
 function validateFigure(...sides: number[]): void {
-  sides.some((el) => {
-    if (el <= 0) {
-      throw new Error(`Figure parameters: ${el}
-      cannot be 0 or a negative number`);
-    }
+  const areSideLengthsNatural = sides.every((side) => side > 0);
 
-    return true;
-  });
-
-  sides.sort((min, max) => min - max);
-
-  if (sides[sides.length - 1] >= sides[0] + sides[1]) {
-    throw new Error('Figure lenght must be > 0');
+  if (!areSideLengthsNatural) {
+    throw new Error('Length of a side should be a natural number');
   }
 }
 
@@ -38,6 +29,20 @@ export class Triangle {
     public c: number,
   ) {
     validateFigure(this.a, this.b, this.c);
+    this.validateTriangleSides();
+  }
+
+  validateTriangleSides(): boolean {
+    const sides = [this.a, this.b, this.c];
+
+    sides.sort((min, max) => min - max);
+
+    if (sides[sides.length - 1] >= sides[0] + sides[1]) {
+      throw new Error(`The longest side: ${[sides.length - 1]}
+     must be >= than a sum of two others`);
+    } else {
+      return true;
+    }
   }
 
   getArea(): number {
