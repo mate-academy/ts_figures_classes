@@ -17,21 +17,21 @@ export class Triangle implements Figure {
     public c: number,
   ) {
     if (a <= 0 || b <= 0 || c <= 0) {
-      throw new Error('triangle cannot exist');
+      throw new Error('The side has zero or negative length');
     }
 
     if (a >= b + c || b >= a + c || c >= a + b) {
-      throw new Error('triangle cannot exist');
+      throw new Error('this sides can\'t form a triangle');
     }
   }
 
   getArea(): number {
     const s = 0.5 * (this.a + this.b + this.c);
-    const Trianglearea = Math.sqrt(
+    const triangleArea = Math.sqrt(
       s * (s - this.a) * (s - this.b) * (s - this.c),
     );
 
-    return Math.floor(100 * Trianglearea) / 100;
+    return Math.floor(100 * triangleArea) / 100;
   }
 }
 
@@ -43,7 +43,7 @@ export class Circle implements Figure {
     public radius: number,
   ) {
     if (radius <= 0) {
-      throw new Error('circle cannot exist');
+      throw new Error('The radius is 0 or less');
     }
   }
 
