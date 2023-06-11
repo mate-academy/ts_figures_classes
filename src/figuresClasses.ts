@@ -16,7 +16,7 @@ export class Triangle implements Figure {
     public b:number,
     public c:number,
   ) {
-    if (a < 0 || b < 0 || c < 0) {
+    if (a <= 0 || b <= 0 || c <= 0) {
       throw new Error('The side is a positive value');
     }
 
@@ -41,7 +41,7 @@ export class Circle implements Figure {
     public color: Color,
     public radius:number,
   ) {
-    if (radius < 0) {
+    if (radius <= 0) {
       throw new Error('Radius is a positive value');
     }
     this.color = color;
@@ -61,7 +61,7 @@ export class Rectangle implements Figure {
     public width:number,
     public height:number,
   ) {
-    if (width < 0 || height < 0) {
+    if (width <= 0 || height <= 0) {
       throw new Error('The side is a positive value');
     }
   }
