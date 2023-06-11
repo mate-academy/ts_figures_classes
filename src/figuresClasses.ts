@@ -2,19 +2,19 @@ type Shape = 'triangle' | 'circle' | 'rectangle';
 type Color = 'red' | 'green' | 'blue';
 
 export interface Figure {
-  shape:Shape;
-  color:Color;
-  getArea():number;
+  shape: Shape;
+  color: Color;
+  getArea(): number;
 }
 
 export class Triangle implements Figure {
-  public shape:Shape ='triangle';
+  public shape: Shape = 'triangle';
 
   constructor(
-    public color:Color,
-    public a:number,
-    public b:number,
-    public c:number,
+    public color: Color,
+    public a: number,
+    public b: number,
+    public c: number,
   ) {
     if (a <= 0 || b <= 0 || c <= 0) {
       throw new Error('The side is a positive value');
@@ -26,20 +26,23 @@ export class Triangle implements Figure {
     }
   }
 
-  getArea():number {
-    const p :number = (this.a + this.b + this.c) / 2;
-    const s :number = p * (p - this.a) * (p - this.b) * (p - this.c);
+  getArea(): number {
+    const { a, b, c } = this;
+    const halfPerimeter: number = (a + b + c) / 2;
+    const area: number = Math.sqrt(halfPerimeter * (halfPerimeter - a
+    ) * (halfPerimeter - b
+    ) * (halfPerimeter - c));
 
-    return Math.floor(Math.sqrt(s) * 100) / 100;
+    return Math.floor(area * 100) / 100;
   }
 }
 
 export class Circle implements Figure {
-  public shape:Shape = 'circle';
+  public shape: Shape = 'circle';
 
   constructor(
     public color: Color,
-    public radius:number,
+    public radius: number,
   ) {
     if (radius <= 0) {
       throw new Error('Radius is a positive value');
@@ -48,7 +51,7 @@ export class Circle implements Figure {
     this.radius = radius;
   }
 
-  getArea():number {
+  getArea(): number {
     return Math.floor(Math.PI * (this.radius ** 2) * 100) / 100;
   }
 }
@@ -57,20 +60,20 @@ export class Rectangle implements Figure {
   public shape: Shape = 'rectangle';
 
   constructor(
-    public color:Color,
-    public width:number,
-    public height:number,
+    public color: Color,
+    public width: number,
+    public height: number,
   ) {
     if (width <= 0 || height <= 0) {
       throw new Error('The side is a positive value');
     }
   }
 
-  getArea():number {
+  getArea(): number {
     return Math.floor(this.width * this.height * 100) / 100;
   }
 }
 
-export function getInfo(figure:Figure):string {
+export function getInfo(figure: Figure): string {
   return `A ${figure.color} ${figure.shape} - ${figure.getArea()}`;
 }
