@@ -22,7 +22,7 @@ export class Triangle implements Figure {
 
     if (a + b <= c || a + c <= b || b + c <= a) {
       throw new Error(`The longest side of a triangle cannot be greater
-        than the sum of the other two`);
+        than the sum of other two`);
     }
   }
 
@@ -38,7 +38,7 @@ export class Circle implements Figure {
   public shape:Shape = 'circle';
 
   constructor(
-    public color:'red' | 'green' | 'blue',
+    public color: Color,
     public radius:number,
   ) {
     if (radius < 0) {
@@ -57,7 +57,7 @@ export class Rectangle implements Figure {
   public shape: Shape = 'rectangle';
 
   constructor(
-    public color:'red' | 'green' | 'blue',
+    public color:Color,
     public width:number,
     public height:number,
   ) {
