@@ -12,6 +12,14 @@ export class Triangle implements Figure {
   sides: number[];
 
   constructor(color: string, a: number, b: number, c: number) {
+    this.triangleValidator(a, b, c);
+
+    this.shape = 'triangle';
+    this.color = color;
+    this.sides = [a, b, c];
+  }
+
+  triangleValidator = (a: number, b: number, c: number) :void => {
     if (a <= 0 || b <= 0 || c <= 0) {
       throw new Error('Length of each side must be greater than 0.');
     }
@@ -19,11 +27,7 @@ export class Triangle implements Figure {
     if (a + b <= c || a + c <= b || b + c <= a) {
       throw new Error('The sides cannot form a triangle.');
     }
-
-    this.shape = 'triangle';
-    this.color = color;
-    this.sides = [a, b, c];
-  }
+  };
 
   getArea(): number {
     const [a, b, c] = this.sides;
@@ -42,14 +46,18 @@ export class Circle implements Figure {
   radius: number;
 
   constructor(color: string, radius: number) {
-    if (radius <= 0) {
-      throw new Error('Radius must be greater than 0.');
-    }
+    this.circleValidator(radius);
 
     this.shape = 'circle';
     this.color = color;
     this.radius = radius;
   }
+
+  circleValidator = (radius: number) :void => {
+    if (radius <= 0) {
+      throw new Error('Radius must be greater than 0.');
+    }
+  };
 
   getArea(): number {
     const area = Math.PI * this.radius ** 2;
@@ -68,15 +76,19 @@ export class Rectangle {
   height: number;
 
   constructor(color: string, width: number, height: number) {
-    if (width <= 0 || height <= 0) {
-      throw new Error('Side must be greater than 0.');
-    }
+    this.rectangleValidator(width, height);
 
     this.shape = 'rectangle';
     this.color = color;
     this.width = width;
     this.height = height;
   }
+
+  rectangleValidator = (width: number, height: number) :void => {
+    if (width <= 0 || height <= 0) {
+      throw new Error('Side must be greater than 0.');
+    }
+  };
 
   getArea(): number {
     const area = this.width * this.height;
