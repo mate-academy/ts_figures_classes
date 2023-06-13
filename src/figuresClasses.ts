@@ -16,9 +16,14 @@ export class Triangle {
     private b: number,
     private c: number,
   ) {
-    if (a <= 0 || b <= 0 || c <= 0 || a >= b + c
-      || b >= a + c || c >= a + b) {
-      throw new Error('not the right size of the side of the triangle');
+    if (a <= 0 || b <= 0 || c <= 0) {
+      throw new Error('the sides of the triangle must be greater than zero');
+    }
+
+    if (a >= b + c || b >= a + c || c >= a + b) {
+      throw new Error(`
+      the longest side of a triangle is >= than a sum of two others
+      `);
     }
   }
 
@@ -36,10 +41,10 @@ export class Circle {
 
   constructor(
     public color: Color,
-    public radius: number,
+    private radius: number,
   ) {
     if (radius <= 0) {
-      throw new Error('the radius cannot be less than ab or equal to 0');
+      throw new Error('the radius cannot be less or equal to 0');
     }
   }
 
@@ -53,8 +58,8 @@ export class Rectangle {
 
   constructor(
     public color: Color,
-    public width: number,
-    public height: number,
+    private width: number,
+    private height: number,
   ) {
     if (width <= 0 || height <= 0) {
       throw new Error('side cannot be less than or equal to 0');
