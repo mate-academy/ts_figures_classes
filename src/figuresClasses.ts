@@ -10,7 +10,7 @@ export interface Figure {
 function isPositiveNumber(figure: object): never | void {
   const numbers = Object.values(figure);
 
-  numbers.forEach((n): never | void => {
+  numbers.forEach((n): void => {
     if (n <= 0) {
       throw new Error('Should be a positive number');
     }
