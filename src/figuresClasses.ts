@@ -13,6 +13,7 @@ export class Triangle implements Figure {
     if (a <= 0 || b <= 0 || c <= 0) {
       throw new Error('Invalid side length. Sides must be greater than 0.');
     }
+
     if (a + b <= c || a + c <= b || b + c <= a) {
       throw new Error(
         'Invalid triangle. Sum of any two sides must be > than third side.',
@@ -50,6 +51,7 @@ export class Circle implements Figure {
 
   getArea(): number {
     const area = Math.PI * this.radius * this.radius;
+
     return Math.floor(area * 100) / 100;
   }
 }
@@ -75,6 +77,7 @@ export class Rectangle implements Figure {
 
   getArea(): number {
     const area = this.width * this.height;
+
     return Math.floor(area * 100) / 100;
   }
 }

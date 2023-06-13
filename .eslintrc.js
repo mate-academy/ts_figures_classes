@@ -22,6 +22,11 @@ module.exports = {
     '@typescript-eslint/no-explicit-any': 'error',
     'max-classes-per-file': 'off',
     'no-new': 'off',
-    '@typescript-eslint/lines-between-class-members': ['error', 'always'],
+    '@typescript-eslint/lines-between-class-members': 'off',
+    // '@typescript-eslint/lines-between-class-members': [
+    //   'error',
+    //   'always',
+    //   { exceptAfterSingleLine: true },
+    // ],
   },
 };
