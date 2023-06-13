@@ -1,8 +1,5 @@
 module.exports = {
-  extends: [
-    'airbnb-typescript/base',
-    '@mate-academy/eslint-config',
-  ],
+  extends: ['airbnb-typescript/base', '@mate-academy/eslint-config'],
   env: {
     jest: true,
     es2021: true,
@@ -13,9 +10,7 @@ module.exports = {
     sourceType: 'module',
     project: './tsconfig.json',
   },
-  plugins: [
-    '@typescript-eslint', 'jest',
-  ],
+  plugins: ['@typescript-eslint', 'jest'],
   rules: {
     'arrow-body-style': 'off',
     'no-unused-vars': 'off',
@@ -27,5 +22,11 @@ module.exports = {
     '@typescript-eslint/no-explicit-any': 'error',
     'max-classes-per-file': 'off',
     'no-new': 'off',
+    '@typescript-eslint/lines-between-class-members': 'off',
+    // '@typescript-eslint/lines-between-class-members': [
+    //   'error',
+    //   'always',
+    //   { exceptAfterSingleLine: true },
+    // ],
   },
 };
