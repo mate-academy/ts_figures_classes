@@ -4,13 +4,11 @@ type Color = 'red' | 'green' | 'blue';
 export interface Figure {
   shape: Shape;
   color: Color;
-  area: number;
+  getArea(): number;
 }
 
-export class Triangle {
+export class Triangle implements Figure {
   shape: Shape;
-
-  area: number;
 
   constructor(
     public color: Color,
@@ -27,7 +25,6 @@ export class Triangle {
     }
 
     this.shape = 'triangle';
-    this.area = this.getArea();
   }
 
   getArea(): number {
@@ -38,10 +35,8 @@ export class Triangle {
   }
 }
 
-export class Circle {
+export class Circle implements Figure {
   shape: Shape;
-
-  area: number;
 
   constructor(
     public color: Color,
@@ -52,7 +47,6 @@ export class Circle {
     }
 
     this.shape = 'circle';
-    this.area = this.getArea();
   }
 
   getArea(): number {
@@ -60,10 +54,8 @@ export class Circle {
   }
 }
 
-export class Rectangle {
+export class Rectangle implements Figure {
   shape: Shape;
-
-  area: number;
 
   constructor(
     public color: Color,
@@ -75,7 +67,6 @@ export class Rectangle {
     }
 
     this.shape = 'rectangle';
-    this.area = this.getArea();
   }
 
   getArea(): number {
@@ -84,5 +75,5 @@ export class Rectangle {
 }
 
 export function getInfo(figure: Figure): string {
-  return `A ${figure.color} ${figure.shape} - ${figure.area}`;
+  return `A ${figure.color} ${figure.shape} - ${figure.getArea()}`;
 }
