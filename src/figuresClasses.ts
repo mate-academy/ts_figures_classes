@@ -1,13 +1,16 @@
+type Shape = 'triangle' | 'circle' | 'rectangle';
+type Color = 'red' | 'green' | 'blue';
+
 export interface Figure {
-  shape: 'triangle' | 'circle' | 'rectangle';
-  color: 'red' | 'green' | 'blue';
+  shape: Shape;
+  color: Color
   getArea(): number;
 }
 
 export class Triangle implements Figure {
-  shape: 'triangle' | 'circle' | 'rectangle';
+  shape: 'triangle';
 
-  color: 'red' | 'green' | 'blue';
+  color: Color;
 
   a: number;
 
@@ -16,7 +19,7 @@ export class Triangle implements Figure {
   c: number;
 
   constructor(
-    color: 'red' | 'green' | 'blue',
+    color: Color,
     a: number, b: number, c: number,
   ) {
     this.shape = 'triangle';
@@ -53,13 +56,13 @@ export class Triangle implements Figure {
 }
 
 export class Circle implements Figure {
-  shape: 'triangle' | 'circle' | 'rectangle';
+  shape: 'circle';
 
-  color: 'red' | 'green' | 'blue';
+  color: Color;
 
   radius: number;
 
-  constructor(color: 'red' | 'green' | 'blue', radius: number) {
+  constructor(color: Color, radius: number) {
     this.shape = 'circle';
     this.color = color;
     this.radius = radius;
@@ -77,15 +80,15 @@ export class Circle implements Figure {
 }
 
 export class Rectangle implements Figure {
-  shape: 'triangle' | 'circle' | 'rectangle';
+  shape: 'rectangle';
 
-  color: 'red' | 'green' | 'blue';
+  color: Color;
 
   width: number;
 
   height: number;
 
-  constructor(color: 'red' | 'green' | 'blue', width: number, height: number) {
+  constructor(color: Color, width: number, height: number) {
     this.shape = 'rectangle';
     this.color = color;
     this.width = width;
