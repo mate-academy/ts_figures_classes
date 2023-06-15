@@ -2,7 +2,7 @@ type Shape = 'triangle' | 'circle' | 'rectangle';
 type Color = 'red' | 'green' | 'blue';
 
 export interface Figure {
-  shape?: Shape,
+  shape: Shape,
   color: Color,
   getArea(): number,
 }
@@ -16,17 +16,16 @@ export class Triangle implements Figure {
     public b: number,
     public c: number,
   ) {
-    const sides
-      = Object.values(this)
-        .filter((value) => typeof value === 'number')
-        .sort((x, y) => x - y);
+    const sortedSides = [a, b, c].sort((x, y) => x - y);
 
     if (
-      Object.values(this).some((value) => typeof value === 'number'
-      && value <= 0)
-      || sides[0] + sides[1] <= sides[2]
+      [a, b, c].some((value) => value <= 0)
+      || sortedSides[0] + sortedSides[1] <= sortedSides[2]
     ) {
-      throw new Error('Invalid sides values');
+      throw new Error(
+        'Every side must be greater than zero'
+        + 'and the longest one must be shorter than sum of tho others.',
+      );
     }
   }
 
@@ -34,7 +33,7 @@ export class Triangle implements Figure {
     const s = (this.a + this.b + this.c) / 2;
     const square = Math.sqrt(s * (s - this.a) * (s - this.b) * (s - this.c));
 
-    return Number.isInteger(square) ? square : +square.toFixed(2);
+    return Math.trunc(square * 100) / 100;
   }
 }
 
@@ -45,18 +44,15 @@ export class Circle implements Figure {
     public color: Color,
     public radius: number,
   ) {
-    if (
-      Object.values(this).some((value) => typeof value === 'number'
-      && value <= 0)
-    ) {
-      throw new Error('Radius is invalid');
+    if (radius <= 0) {
+      throw new Error('The radius must be greater than zero.');
     }
   }
 
   getArea(): number {
     const square = Math.PI * this.radius ** 2;
 
-    return Number.isInteger(square) ? square : Math.trunc(square * 100) / 100;
+    return Math.trunc(square * 100) / 100;
   }
 }
 
@@ -68,18 +64,15 @@ export class Rectangle implements Figure {
     public width: number,
     public height: number,
   ) {
-    if (
-      Object.values(this).some((value) => typeof value === 'number'
-      && value <= 0)
-    ) {
-      throw new Error('The sides must be more than zero');
+    if ([width, height].some((value) => value <= 0)) {
+      throw new Error('Every side must be greater than zero');
     }
   }
 
   getArea(): number {
     const square = this.width * this.height;
 
-    return Number.isInteger(square) ? square : +square.toFixed(2);
+    return Math.trunc(square * 100) / 100;
   }
 }
 
