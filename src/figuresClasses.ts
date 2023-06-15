@@ -1,13 +1,7 @@
 export interface Figure {
   color: string,
-  getArea(): number,
-  a?: number,
-  b?: number,
-  c?: number,
-  radius?: number,
-  width?: number,
-  height?:number,
   shape: string,
+  getArea(): number,
 }
 
 export class Triangle implements Figure {
@@ -19,22 +13,22 @@ export class Triangle implements Figure {
     public b: number,
     public c: number,
   ) {
-    this.getArea();
+    if (this.a <= 0 || this.b <= 0 || this.c <= 0) {
+      throw new Error('The triangle\'s side can\'t by less than 1');
+    }
+
+    if (this.a + this.b <= this.c
+      || this.b + this.c <= this.a
+      || this.c + this.b <= this.a) {
+      throw new Error(`It's not a ${this.shape}`);
+    }
   }
 
   getArea():number {
-    if (this.a + this.b > this.c) {
-      if (this.b + this.c > this.a) {
-        if (this.a + this.c > this.b) {
-          const perimetr = (this.a + this.b + this.c) / 2;
+    const perim = (this.a + this.b + this.c) / 2;
+    const area = perim * (perim - this.a) * (perim - this.b) * (perim - this.c);
 
-          return Math.floor(Math.sqrt(perimetr * (perimetr - this.a)
-          * (perimetr - this.b) * (perimetr - this.c)) * 100) / 100;
-        }
-      }
-    }
-
-    throw new Error(`It's not a ${this.shape}`);
+    return Math.floor(Math.sqrt(area) * 100) / 100;
   }
 }
 
@@ -69,7 +63,7 @@ export class Rectangle implements Figure {
   }
 
   getArea():number {
-    return this.width * this.height;
+    return Math.floor(this.width * this.height * 100) / 100;
   }
 }
 
