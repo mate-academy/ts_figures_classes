@@ -30,16 +30,12 @@ export class Triangle implements Figure {
 }
 
 export class Circle implements Figure {
-  shape: string;
+  shape: string = 'circle';
 
   constructor(public color: string, public radius: number) {
     if (radius <= 0) {
       throw new Error('Radius must be greater than 0');
     }
-
-    this.color = color;
-    this.shape = 'circle';
-    this.radius = radius;
   }
 
   getArea(): number {
@@ -48,7 +44,7 @@ export class Circle implements Figure {
 }
 
 export class Rectangle implements Figure {
-  shape: string;
+  shape: string = 'rectangle';
 
   constructor(
     public color: string,
@@ -58,11 +54,6 @@ export class Rectangle implements Figure {
     if (width <= 0 || height <= 0) {
       throw new Error('Length of sides must be greater than 0');
     }
-
-    this.color = color;
-    this.height = height;
-    this.width = width;
-    this.shape = 'rectangle';
   }
 
   getArea(): number {
