@@ -24,7 +24,7 @@ export class Triangle implements Figure {
     ) {
       throw new Error(
         'Every side must be greater than zero'
-        + 'and the longest one must be shorter than sum of tho others.',
+        + 'and the longest one must be shorter than sum of two others.',
       );
     }
   }
