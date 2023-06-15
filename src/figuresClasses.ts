@@ -7,7 +7,7 @@ export interface Figure {
   radius?: number,
   width?: number,
   height?:number,
-  shape?: string,
+  shape: string,
 }
 
 export class Triangle implements Figure {
