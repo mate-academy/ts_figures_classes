@@ -8,7 +8,7 @@ export interface Figure {
 }
 
 export class Triangle implements Figure {
-  shape: TypeOfFigure;
+  shape: TypeOfFigure = 'triangle';
 
   constructor(
     public color: Color,
@@ -16,8 +16,6 @@ export class Triangle implements Figure {
     public b: number,
     public c: number,
   ) {
-    this.shape = 'triangle';
-
     if (a + b <= c || a + c <= b || b + c <= a) {
       throw new Error('A triangle with such sides does not exist');
     }
@@ -33,14 +31,12 @@ export class Triangle implements Figure {
 }
 
 export class Circle implements Figure {
-  shape: TypeOfFigure;
+  shape: TypeOfFigure ='circle';
 
   constructor(
     public color: Color,
     public radius: number,
   ) {
-    this.shape = 'circle';
-
     if (radius <= 0) {
       throw new Error('Radius should be positive');
     }
@@ -54,15 +50,13 @@ export class Circle implements Figure {
 }
 
 export class Rectangle implements Figure {
-  shape: TypeOfFigure;
+  shape: TypeOfFigure = 'rectangle';
 
   constructor(
     public color: Color,
     public width: number,
     public height: number,
   ) {
-    this.shape = 'rectangle';
-
     if (width <= 0 || height <= 0) {
       throw new Error('Width and length must be positive');
     }
