@@ -1,6 +1,8 @@
 
-type Shape = 'triangle' | 'circle' | 'rectangle';
-type Color = 'red' | 'green' | 'blue';
+enum Shape {
+  triangle = 'triangle', circle = 'circle', rectangle = 'rectangle'
+}
+type Color = 'red' | 'blue' | 'green';
 
 export interface Figure {
   shape: Shape;
@@ -9,38 +11,25 @@ export interface Figure {
 }
 
 export class Triangle implements Figure {
-  public shape: Shape = 'triangle';
-
-  public color: Color;
-
-  public a: number;
-
-  public b: number;
-
-  public c: number;
+  public shape: Shape = Shape.triangle;
 
   constructor(
-    color: Color,
-    a: number,
-    b: number,
-    c: number,
+    public color: Color,
+    public a: number,
+    public b: number,
+    public c: number,
   ) {
-    this.color = color;
-    this.a = a;
-    this.b = b;
-    this.c = c;
-
     const sidesArr = [a, b, c];
 
     sidesArr.sort((x:number, y:number):number => (x > y ? -1 : 1));
 
     if (sidesArr[0]
       >= (sidesArr.reduce((x:number, y:number) => x + y, 0) - sidesArr[0])) {
-      throw new Error('your error message');
+      throw new Error('The biggest side should be <= than sum of two other');
     }
 
     if (a <= 0 || b <= 0 || c <= 0) {
-      throw new Error('your error message');
+      throw new Error('Side can\'t be <= 0');
     }
   }
 
@@ -55,21 +44,14 @@ export class Triangle implements Figure {
 }
 
 export class Circle {
-  public shape: Shape = 'circle';
-
-  public color: Color;
-
-  public radius: number;
+  public shape: Shape = Shape.circle;
 
   constructor(
-    color: Color,
-    radius:number,
+    public color: Color,
+    public radius:number,
   ) {
-    this.color = color;
-    this.radius = radius;
-
     if (radius <= 0) {
-      throw new Error('your error message');
+      throw new Error('Radius can\'t be <= 0');
     }
   }
 
@@ -79,25 +61,15 @@ export class Circle {
 }
 
 export class Rectangle {
-  public shape: Shape = 'rectangle';
-
-  public color: Color;
-
-  public height: number;
-
-  public width: number;
+  public shape: Shape = Shape.rectangle;
 
   constructor(
-    color: Color,
-    height: number,
-    width: number,
+    public color: Color,
+    public height: number,
+    public width: number,
   ) {
-    this.color = color;
-    this.height = height;
-    this.width = width;
-
     if (height <= 0 || width <= 0) {
-      throw new Error('your error message');
+      throw new Error('Side can\'t be <= 0');
     }
   }
 
