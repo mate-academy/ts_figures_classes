@@ -4,8 +4,10 @@ export interface Figure {
   getArea(): number;
 }
 
+export type ColorType = 'red' | 'green' | 'blue';
+
 export class Triangle {
-  shape: string;
+  shape: 'triangle';
 
   a: number;
 
@@ -13,20 +15,23 @@ export class Triangle {
 
   c: number;
 
-  color: Figure;
+  color: string;
 
   constructor(
-    color: Figure,
+    color: ColorType,
     a: number,
     b: number,
     c: number,
   ) {
     if (a <= 0 || b <= 0 || c <= 0) {
-      throw new Error('your error message');
+      throw new Error('Length of sides should be greater than 0');
     }
 
     if (a >= b + c || b >= a + c || c >= a + b) {
-      throw new Error('your error message');
+      throw new Error(
+        'Longest side of a triangle should'
+        + ' be less than the sum of the other two sides',
+      );
     }
 
     this.color = color;
@@ -46,18 +51,18 @@ export class Triangle {
 }
 
 export class Circle {
-  shape: string;
+  shape: 'circle';
 
-  color: Figure;
+  color: string;
 
   a: number;
 
   constructor(
-    color: Figure,
+    color: ColorType,
     a: number,
   ) {
     if (a <= 0) {
-      throw new Error('your error message');
+      throw new Error('Radius should be greater than 0');
     }
 
     this.shape = 'circle';
@@ -73,21 +78,21 @@ export class Circle {
 }
 
 export class Rectangle {
-  shape: string;
+  shape: 'rectangle';
 
-  color: Figure;
+  color: string;
 
   a: number;
 
   b: number;
 
   constructor(
-    color: Figure,
+    color: ColorType,
     a: number,
     b: number,
   ) {
     if (a <= 0 || b <= 0) {
-      throw new Error('your error message');
+      throw new Error('Length and width should be greater than 0');
     }
 
     this.shape = 'rectangle';
