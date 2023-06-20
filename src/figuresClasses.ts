@@ -1,30 +1,20 @@
+type Colors = 'red' | 'green' | 'blue';
+type Shapes = 'triangle' | 'circle' | 'rectangle';
 export interface Figure {
-  color: 'red' | 'green' | 'blue';
-  shape: 'triangle' | 'circle' | 'rectangle';
+  color: Colors;
+  shape: Shapes;
   getArea(): number;
 }
 
-export class Triangle {
-  color: string;
-
-  a: number;
-
-  b: number;
-
-  c: number;
-
+export class Triangle implements Figure {
   shape: 'triangle';
 
   constructor(
-    color: string,
-    a: number,
-    b: number,
-    c: number,
+    public color: Colors,
+    public a: number,
+    public b: number,
+    public c: number,
   ) {
-    this.color = color;
-    this.a = a;
-    this.b = b;
-    this.c = c;
     this.shape = 'triangle';
 
     if (this.a + this.b <= this.c
@@ -51,19 +41,13 @@ export class Triangle {
   }
 }
 
-export class Circle {
-  color: string;
-
-  radius: number;
-
+export class Circle implements Figure {
   shape: 'circle';
 
   constructor(
-    color: string,
-    radius: number,
+    public color: Colors,
+    public radius: number,
   ) {
-    this.color = color;
-    this.radius = radius;
     this.shape = 'circle';
 
     if (this.radius <= 0) {
@@ -76,23 +60,14 @@ export class Circle {
   }
 }
 
-export class Rectangle {
-  color: string;
-
-  width: number;
-
-  height: number;
-
+export class Rectangle implements Figure {
   shape: 'rectangle';
 
   constructor(
-    color: string,
-    width: number,
-    height: number,
+    public color: Colors,
+    public width: number,
+    public height: number,
   ) {
-    this.color = color;
-    this.width = width;
-    this.height = height;
     this.shape = 'rectangle';
 
     if (this.width <= 0 || this.height <= 0) {
