@@ -1,5 +1,14 @@
-type Color = 'green' | 'red' | 'blue';
-type Shape = 'triangle' | 'circle' | 'rectangle';
+enum Color {
+  green = 'green',
+  red = 'red',
+  blue = 'blue',
+}
+
+enum Shape {
+  triangle = 'triangle',
+  circle = 'circle',
+  rectangle = 'rectangle',
+}
 
 export interface Figure {
   color: Color;
@@ -8,20 +17,20 @@ export interface Figure {
 }
 
 export class Triangle implements Figure {
-  public shape: Shape = 'triangle';
+  public shape = Shape.triangle;
 
   constructor(
-    public color: Color,
+    public color = Color.green,
     public a: number,
     public b: number,
     public c: number,
   ) {
     if (a <= 0 || b <= 0 || c <= 0) {
-      throw new Error('Error');
+      throw new Error('Invalid side length');
     }
 
     if (c >= a + b || a >= b + c || b >= a + c) {
-      throw new Error('Error');
+      throw new Error('Invalid side length');
     }
   }
 
@@ -30,19 +39,19 @@ export class Triangle implements Figure {
     const area = Math.sqrt(square * (square - this.a)
     * (square - this.b) * (square - this.c));
 
-    return +area.toFixed(2);
+    return Math.floor(100 * area) / 100;
   }
 }
 
 export class Circle implements Figure {
-  public shape: Shape = 'circle';
+  public shape = Shape.circle;
 
   constructor(
-    public color: Color,
+    public color = Color.red,
     public a: number,
   ) {
     if (a <= 0) {
-      throw new Error('Error');
+      throw new Error('Invalid side length');
     }
   }
 
@@ -55,15 +64,15 @@ export class Circle implements Figure {
 }
 
 export class Rectangle implements Figure {
-  public shape: Shape = 'rectangle';
+  public shape = Shape.rectangle;
 
   constructor(
-    public color: Color,
+    public color = Color.blue,
     public width: number,
     public height: number,
   ) {
     if (width <= 0 || height <= 0) {
-      throw new Error('Error');
+      throw new Error('Invalid side length');
     }
   }
 
