@@ -71,7 +71,7 @@ export class Rectangle implements Figure {
   }
 
   getArea(): number {
-    return this.width * this.height;
+    return +(this.width * this.height).toFixed(2);
   }
 }
 
