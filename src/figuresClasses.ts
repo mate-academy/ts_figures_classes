@@ -9,19 +9,11 @@ export type ColorType = 'red' | 'green' | 'blue';
 export class Triangle {
   shape: 'triangle';
 
-  a: number;
-
-  b: number;
-
-  c: number;
-
-  color: string;
-
   constructor(
-    color: ColorType,
-    a: number,
-    b: number,
-    c: number,
+    public color: ColorType,
+    public a: number,
+    public b: number,
+    public c: number,
   ) {
     if (a <= 0 || b <= 0 || c <= 0) {
       throw new Error('Length of sides should be greater than 0');
@@ -53,13 +45,9 @@ export class Triangle {
 export class Circle {
   shape: 'circle';
 
-  color: string;
-
-  a: number;
-
   constructor(
-    color: ColorType,
-    a: number,
+    public color: ColorType,
+    public a: number,
   ) {
     if (a <= 0) {
       throw new Error('Radius should be greater than 0');
@@ -80,16 +68,10 @@ export class Circle {
 export class Rectangle {
   shape: 'rectangle';
 
-  color: string;
-
-  a: number;
-
-  b: number;
-
   constructor(
-    color: ColorType,
-    a: number,
-    b: number,
+    public color: ColorType,
+    public a: number,
+    public b: number,
   ) {
     if (a <= 0 || b <= 0) {
       throw new Error('Length and width should be greater than 0');
