@@ -17,14 +17,23 @@ export class Triangle implements Figure {
     public sideB: number,
     public sideC: number,
   ) {
-    if (sideA === 0 || sideB === 0 || sideC === 0) {
+    this.validateTriangle();
+  }
+
+  validateTriangle(): void {
+    const a = this.sideA;
+    const b = this.sideB;
+    const c = this.sideC;
+
+    if (a <= 0 || b <= 0 || c <= 0) {
       throw Error('Lengths of the sides must be greater than 0.');
     }
 
-    if (
-      Math.max(sideA, sideB, sideC)
-      >= sideA + sideB + sideC - Math.max(sideA, sideB, sideC)
-    ) {
+    const isSuchTringlePossible = (
+      Math.max(a, b, c) >= a + b + c - Math.max(a, b, c)
+    );
+
+    if (isSuchTringlePossible) {
       throw Error(
         'No side can be greater than the sum of the other two sides.',
       );
