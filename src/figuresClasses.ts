@@ -7,8 +7,17 @@ function isValidTriangle(sides: number[]): boolean {
   return longestSide >= restSides[0] + restSides[1];
 }
 
-type Color = 'red' | 'green' | 'blue';
-type Shape = 'triangle' | 'circle' | 'rectangle';
+enum Color {
+  Red = 'red',
+  Green = 'green',
+  Blue = 'blue',
+}
+
+enum Shape {
+  Triangle = 'triangle',
+  Circle = 'circle',
+  Rectangle = 'rectangle',
+}
 
 export interface Figure {
   shape: Shape;
@@ -17,7 +26,7 @@ export interface Figure {
 }
 
 export class Triangle implements Figure {
-  shape: Shape = 'triangle';
+  shape: Shape.Triangle = Shape.Triangle;
 
   constructor(
     public color: Color,
@@ -30,9 +39,8 @@ export class Triangle implements Figure {
       || c <= 0
       || isValidTriangle([a, b, c])
     ) {
-      throw new Error('your error message');
+      throw new Error('Parameter is not valid');
     }
-    this.shape = 'triangle';
   }
 
   getArea = (): number => {
@@ -46,14 +54,14 @@ export class Triangle implements Figure {
 }
 
 export class Circle implements Figure {
-  shape: Shape = 'circle';
+  shape: Shape.Circle = Shape.Circle;
 
   constructor(
     public color: Color,
     public radius: number = 0,
   ) {
     if (radius <= 0) {
-      throw new Error('your error message');
+      throw new Error('Parameter is not valid');
     }
   }
 
@@ -65,7 +73,7 @@ export class Circle implements Figure {
 }
 
 export class Rectangle implements Figure {
-  shape: Shape = 'rectangle';
+  shape: Shape.Rectangle = Shape.Rectangle;
 
   constructor(
     public color: Color,
@@ -73,7 +81,7 @@ export class Rectangle implements Figure {
     public height: number = 0,
   ) {
     if (width <= 0 || height <= 0) {
-      throw new Error('your error message');
+      throw new Error('Parameter is not valid');
     }
   }
 
