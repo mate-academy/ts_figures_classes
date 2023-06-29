@@ -2,13 +2,13 @@ export interface Figure {
   shape: string,
   area: number,
   color: string,
-}
+};
 
 export class Triangle {
-  readonly shape: string = "Triangle";
+  readonly shape: string = 'Triangle';
   private area: number = 0;
   constructor(
-    readonly color: "red" | "green" | "blue",
+    readonly color: 'red' | 'green' | 'blue',
     readonly a: number,
     readonly b: number,
     readonly c: number,
@@ -22,15 +22,15 @@ export class Triangle {
 
   getArea() {
     const s = (this.a + this.b + this.c) / 2;
-    this.area = Math.sqrt(s * (s - this.a) * (s - this.b) * (s - this.c));
+    return this.area = Math.sqrt(s * (s - this.a) * (s - this.b) * (s - this.c));
   }
-}
+};
 
 export class Circle {
-  readonly shape: string = "Circle";
+  readonly shape: string = 'Circle';
   private area: number = 0;
   constructor(
-    readonly color: "red" | "green" | "blue",
+    readonly color: 'red' | 'green' | 'blue',
     readonly a: number,
   ) {
     if (a <= 0) {
@@ -41,17 +41,17 @@ export class Circle {
   }
 
   getArea() {
-    this.area = 2 * Math.PI * this.a;
+    return this.area = 2 * Math.PI * this.a;
   }
-}
+};
 
 export class Rectangle {
-  readonly shape: string = "Rectangle";
+  readonly shape: string = 'Rectangle';
   private area: number = 0;
-  readonly color: "red" | "green" | "blue";
+  readonly color: 'red' | 'green' | 'blue';
   readonly a: number;
   readonly b: number;
-  constructor(color: "red" | "green" | "blue", a: number, b: number) {
+  constructor(color: 'red' | 'green' | 'blue', a: number, b: number) {
     this.color = color;
     this.a = a;
     this.b = b;
@@ -63,10 +63,10 @@ export class Rectangle {
   }
 
   getArea() {
-    this.area = this.a * this.b;
+    return this.area = this.a * this.b;
   }
-}
+};
 
 export function getInfo(figure: Figure) {
-  return `A ${figure.color} ${figure.shape} - ${figure.area}`
-}
+  return `A ${figure.color} ${figure.shape} - ${figure.area}`;
+};
