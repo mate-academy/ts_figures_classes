@@ -9,6 +9,7 @@ export interface Figure {
 
 export class Triangle implements Figure {
   public shape: Shapes = 'triangle';
+
   constructor(
     public color: Colors,
     public a: number,
@@ -47,6 +48,7 @@ export class Triangle implements Figure {
 
 export class Circle implements Figure {
   public shape: Shapes = 'circle';
+
   constructor(
     public color: Colors,
     public radius: number,
@@ -55,6 +57,7 @@ export class Circle implements Figure {
       throw new Error(`${radius} impossible value for radius`);
     }
   }
+  
   getArea(): number {
     const area = Math.PI * this.radius ** 2;
 
@@ -64,21 +67,22 @@ export class Circle implements Figure {
 
 export class Rectangle implements Figure {
   public shape: Shapes = 'rectangle';
+
   constructor(
     public color: Colors,
     public width: number,
     public height: number,
   ) {
     if (width <= 0 && height <= 0) {
-      throw new Error ('Data entered incorrectly');
+      throw new Error('Data entered incorrectly');
     }
 
-    if(width <= 0) {
-      throw new Error ('Width data entered incorrectly');
+    if (width <= 0) {
+      throw new Error('Width data entered incorrectly');
     }
 
     if (height <= 0) {
-      throw new Error ('Height data entered incorrectly')
+      throw new Error('Height data entered incorrectly');
     }
   }
 
