@@ -57,7 +57,7 @@ export class Circle implements Figure {
       throw new Error(`${radius} impossible value for radius`);
     }
   }
-  
+
   getArea(): number {
     const area = Math.PI * this.radius ** 2;
 
