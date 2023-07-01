@@ -22,8 +22,8 @@ export class Triangle implements Figure {
     switch (min.length) {
       case 3:
         throw new Error(
-          `${min[0]}, ${min[1]} and ${min[2]} invalid data entered`
-          );
+          `${min[0]}, ${min[1]} and ${min[2]} invalid data entered`,
+        );
 
       case 2:
         throw new Error(`${min[0]} and ${min[1]} invalid data entered`);
