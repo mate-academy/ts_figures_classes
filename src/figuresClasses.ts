@@ -21,9 +21,9 @@ export class Triangle implements Figure {
 
     switch (min.length) {
       case 3:
-        throw new Error(`
-          ${min[0]}, ${min[1]} and ${min[2]} invalid data entered`
-        );
+        throw new Error(
+          `${min[0]}, ${min[1]} and ${min[2]} invalid data entered`
+          );
 
       case 2:
         throw new Error(`${min[0]} and ${min[1]} invalid data entered`);
@@ -31,7 +31,8 @@ export class Triangle implements Figure {
       case 1:
         throw new Error(`${min[0]} Invalid data entered`);
 
-
+      default:
+        break;
     }
 
     if (max >= a + b || max >= a + c || max >= b + c) {
