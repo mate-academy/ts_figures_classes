@@ -1,13 +1,14 @@
 type Color = 'red' | 'green' | 'blue';
+type Shape = 'triangle' | 'circle' | 'rectangle';
 
 export interface Figure {
-  shape: string;
+  shape: Shape;
   color: Color;
   getArea(): number;
 }
 
 export class Triangle implements Figure {
-  shape = 'triangle';
+  shape: Shape = 'triangle';
 
   constructor(
     public color: Color,
@@ -30,15 +31,16 @@ export class Triangle implements Figure {
   }
 
   getArea(): number {
-    const p = (this.a + this.b + this.c) / 2;
-    const S = Math.sqrt(p * (p - this.a) * (p - this.b) * (p - this.c));
+    const halfP = (this.a + this.b + this.c) / 2;
+    const S = Math.sqrt(halfP
+      * (halfP - this.a) * (halfP - this.b) * (halfP - this.c));
 
     return Math.floor(S * 100) / 100;
   }
 }
 
 export class Circle implements Figure {
-  shape = 'circle';
+  shape: Shape = 'circle';
 
   constructor(
     public color: Color,
@@ -57,7 +59,7 @@ export class Circle implements Figure {
 }
 
 export class Rectangle implements Figure {
-  shape = 'rectangle';
+  shape: Shape = 'rectangle';
 
   constructor(
     public color: Color,
