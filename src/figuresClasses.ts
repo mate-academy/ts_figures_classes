@@ -19,8 +19,9 @@ export class Triangle implements Figure {
       throw new Error();
     }
 
-    if (this.a >= this.b + this.c || this.b >= this.a + this.c
-      || this.c >= this.b + this.a) {
+    const biggestSide = Math.max(this.a, this.b, this.c);
+
+    if (biggestSide >= this.b + this.c + this.a - biggestSide) {
       throw new Error();
     }
   }
