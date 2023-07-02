@@ -5,7 +5,7 @@ export interface Figure {
 }
 
 export class Triangle implements Figure {
-  shape: 'triangle' | 'circle' | 'rectangle';
+  shape: 'triangle';
 
   constructor(
     public color: 'green' | 'red' | 'blue',
@@ -16,13 +16,13 @@ export class Triangle implements Figure {
     this.shape = 'triangle';
 
     if (this.a <= 0 || this.b <= 0 || this.c <= 0) {
-      throw new Error();
+      throw new Error('Every side of the triangle must be greater than 0');
     }
 
     const biggestSide = Math.max(this.a, this.b, this.c);
 
     if (biggestSide >= this.b + this.c + this.a - biggestSide) {
-      throw new Error();
+      throw new Error('Every side must be less than two other together');
     }
   }
 
@@ -39,7 +39,7 @@ export class Triangle implements Figure {
 }
 
 export class Circle implements Figure {
-  shape: 'triangle' | 'circle' | 'rectangle';
+  shape: 'circle';
 
   constructor(
     public color: 'green' | 'red' | 'blue',
@@ -48,7 +48,7 @@ export class Circle implements Figure {
     this.shape = 'circle';
 
     if (this.radius <= 0) {
-      throw new Error();
+      throw new Error('Radius of the circle must be greater than 0');
     }
   }
 
@@ -58,7 +58,7 @@ export class Circle implements Figure {
 }
 
 export class Rectangle implements Figure {
-  shape: 'triangle' | 'circle' | 'rectangle';
+  shape: 'rectangle';
 
   constructor(
     public color: 'green' | 'red' | 'blue',
@@ -68,7 +68,7 @@ export class Rectangle implements Figure {
     this.shape = 'rectangle';
 
     if (this.width <= 0 || this.height <= 0) {
-      throw new Error();
+      throw new Error('Every side of the rectangle must be greater than 0');
     }
   }
 
