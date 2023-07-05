@@ -18,24 +18,25 @@ export class Triangle implements Figure {
   ) {
     this.shape = 'triangle';
 
-    if (this.a <= 0
-        || this.b <= 0
-        || this.c <= 0
-    ) {
+    const anySideIsValid = this.a <= 0 || this.b <= 0 || this.c <= 0;
+
+    if (anySideIsValid) {
       throw new Error('Any side length must be more 0');
     }
 
-    if (this.a >= this.b + this.c
-        || this.b >= this.a + this.c
-        || this.c >= this.b + this.a
-    ) {
+    const oneSideIsValid = this.a >= this.b + this.c
+    || this.b >= this.a + this.c
+    || this.c >= this.b + this.a;
+
+    if (oneSideIsValid) {
       throw new Error('Side of triangle must be less than sum of two others');
     }
   }
 
   getArea(): number {
-    const s = (this.a + this.b + this.c) * 0.5;
-    const area = Math.sqrt(s * (s - this.a) * (s - this.b) * (s - this.c));
+    const { a, b, c } = this;
+    const s = (a + b + c) * 0.5;
+    const area = Math.sqrt(s * (s - a) * (s - b) * (s - c));
 
     return +area.toFixed(2);
   }
@@ -72,9 +73,7 @@ export class Rectangle implements Figure {
   ) {
     this.shape = 'rectangle';
 
-    if (this.width <= 0
-        || this.height <= 0
-    ) {
+    if (this.width <= 0 || this.height <= 0) {
       throw new Error('Any side length must be more 0');
     }
   }
@@ -85,5 +84,7 @@ export class Rectangle implements Figure {
 }
 
 export function getInfo(figure: Figure): string {
-  return (`A ${figure.color} ${figure.shape} - ${figure.getArea()}`);
+  const { color, shape, getArea } = figure;
+
+  return (`A ${color} ${shape} - ${getArea()}`);
 }
