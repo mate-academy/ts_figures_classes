@@ -36,7 +36,7 @@ export class Triangle implements Figure {
     this.c = c;
 
     if (a <= 0 || b <= 0 || c <= 0 || c >= (a + b)) {
-      throw new Error('Error');
+      throw new Error('Invalid value');
     }
   }
 }
