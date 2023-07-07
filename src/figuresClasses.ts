@@ -10,10 +10,22 @@ export interface Figure {
   height?: number;
 }
 
-export class Triangle implements Figure {
-  shape: string;
+enum Figures {
+  Triangle = 'triangle',
+  Circle = 'circle',
+  Rectangle = 'rectangle',
+}
 
-  color: string;
+enum Color {
+  Red = 'red',
+  Green = 'green',
+  Blue = 'blue'
+}
+
+export class Triangle implements Figure {
+  shape: Figures.Triangle;
+
+  color: Color;
 
   a: number;
 
@@ -21,63 +33,63 @@ export class Triangle implements Figure {
 
   c: number;
 
+  constructor(color: Color, a: number, b: number, c: number) {
+    this.shape = Figures.Triangle;
+    this.color = color;
+    this.a = a;
+    this.b = b;
+    this.c = c;
+
+    if (a <= 0 || b <= 0 || c <= 0) {
+      throw new Error('Invalid side length');
+    }
+
+    if (c >= (a + b)) {
+      throw new Error('Incorrect side lengths for a triangle');
+    }
+  }
+
   getArea(): number {
     const s = (this.a + this.b + this.c) / 2;
     const result = Math.sqrt(s * ((s - this.a) * (s - this.b) * (s - this.c)));
 
     return +(result).toFixed(2);
   }
-
-  constructor(color: string, a: number, b: number, c: number) {
-    this.shape = 'triangle';
-    this.color = color;
-    this.a = a;
-    this.b = b;
-    this.c = c;
-
-    if (a <= 0 || b <= 0 || c <= 0 || c >= (a + b)) {
-      throw new Error('Invalid value');
-    }
-  }
 }
 
 export class Circle implements Figure {
-  shape: string;
+  shape: Figures.Circle;
 
-  color: string;
+  color: Color;
 
   radius: number;
 
-  getArea(): number {
-    return Math.floor((Math.PI * this.radius ** 2) * 100) / 100;
-  }
-
-  constructor(color: string, radius: number) {
-    this.shape = 'circle';
+  constructor(color: Color, radius: number) {
+    this.shape = Figures.Circle;
     this.color = color;
     this.radius = radius;
 
     if (radius <= 0) {
-      throw new Error('Error');
+      throw new Error('Inalid radius');
     }
+  }
+
+  getArea(): number {
+    return Math.floor((Math.PI * this.radius ** 2) * 100) / 100;
   }
 }
 
 export class Rectangle implements Figure {
-  shape: string;
+  shape: Figures.Rectangle;
 
-  color: string;
+  color: Color;
 
   width: number;
 
   height: number;
 
-  getArea(): number {
-    return +(this.height * this.width).toFixed(2);
-  }
-
-  constructor(color: string, width: number, height: number) {
-    this.shape = 'rectangle';
+  constructor(color: Color, width: number, height: number) {
+    this.shape = Figures.Rectangle;
     this.color = color;
     this.width = width;
     this.height = height;
@@ -85,6 +97,10 @@ export class Rectangle implements Figure {
     if (width <= 0 || height <= 0) {
       throw new Error('Error');
     }
+  }
+
+  getArea(): number {
+    return +(this.height * this.width).toFixed(2);
   }
 }
 
