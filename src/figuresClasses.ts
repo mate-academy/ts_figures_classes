@@ -1,4 +1,4 @@
-/* eslint-disable*/
+/* eslint-disable @typescript-eslint/lines-between-class-members */
 enum Color {
   Red = 'red',
   Blue = 'blue',
