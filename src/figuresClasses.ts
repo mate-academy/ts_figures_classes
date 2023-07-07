@@ -1,15 +1,3 @@
-export interface Figure {
-  shape: string;
-  color: string;
-  getArea() : number;
-  a?: number;
-  b?: number;
-  c?: number;
-  radius?: number;
-  width?: number;
-  height?: number;
-}
-
 enum Figures {
   Triangle = 'triangle',
   Circle = 'circle',
@@ -20,6 +8,18 @@ enum Color {
   Red = 'red',
   Green = 'green',
   Blue = 'blue'
+}
+
+export interface Figure {
+  shape: Figures;
+  color: Color;
+  getArea() : number;
+  a?: number;
+  b?: number;
+  c?: number;
+  radius?: number;
+  width?: number;
+  height?: number;
 }
 
 export class Triangle implements Figure {
@@ -44,7 +44,7 @@ export class Triangle implements Figure {
       throw new Error('Invalid side length');
     }
 
-    if (c >= (a + b)) {
+    if (a >= b + c || b >= a + c || c >= b + a) {
       throw new Error('Incorrect side lengths for a triangle');
     }
   }
@@ -95,7 +95,7 @@ export class Rectangle implements Figure {
     this.height = height;
 
     if (width <= 0 || height <= 0) {
-      throw new Error('Error');
+      throw new Error('Invalid side length');
     }
   }
 
