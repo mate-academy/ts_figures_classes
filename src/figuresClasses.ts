@@ -1,7 +1,7 @@
 enum Shape {
-  triangle = 'triangle',
-  circle = 'circle',
-  rectangle = 'rectangle',
+  Triangle = 'triangle',
+  Circle = 'circle',
+  Rectangle = 'rectangle',
 }
 
 type Color = 'red' | 'green' | 'blue';
@@ -14,7 +14,7 @@ export interface Figure {
 }
 
 export class Triangle implements Figure {
-  public shape = Shape.triangle;
+  public shape = Shape.Triangle;
 
   private area = 0;
 
@@ -67,7 +67,7 @@ export class Triangle implements Figure {
 }
 
 export class Circle implements Figure {
-  public shape = Shape.circle;
+  public shape = Shape.Circle;
 
   private area = 0;
 
@@ -90,7 +90,7 @@ export class Circle implements Figure {
 }
 
 export class Rectangle implements Figure {
-  public shape = Shape.rectangle;
+  public shape = Shape.Rectangle;
 
   private area = 0;
 
