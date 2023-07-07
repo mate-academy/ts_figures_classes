@@ -1,5 +1,14 @@
-type ShapeType = 'triangle' | 'circle' | 'rectangle';
-type ColorType = 'red' | 'green' | 'blue';
+enum ShapeType{
+  Triangle = 'triangle',
+  Circle = 'circle',
+  Rectangle = 'rectangle',
+}
+
+enum ColorType {
+  Red = 'red',
+  Green = 'green',
+  Blue = 'blue',
+}
 
 export interface Figure {
   shape: ShapeType,
@@ -8,7 +17,7 @@ export interface Figure {
 }
 
 export class Triangle implements Figure {
-  shape: ShapeType = 'triangle';
+  shape: ShapeType = ShapeType.Triangle;
 
   constructor(
     public color: ColorType,
@@ -16,7 +25,12 @@ export class Triangle implements Figure {
     public b: number,
     public c: number,
   ) {
-    if (Math.max(a, b, c) >= a + b + c - Math.max(a, b, c)) {
+    if (
+      a <= 0
+      || b <= 0
+      || c <= 0
+      || Math.max(a, b, c) >= a + b + c - Math.max(a, b, c)
+    ) {
       throw new Error('Wrong length of side');
     }
   }
@@ -36,7 +50,7 @@ export class Triangle implements Figure {
 }
 
 export class Circle implements Figure {
-  shape: ShapeType = 'circle';
+  shape: ShapeType = ShapeType.Circle;
 
   constructor(
     public color: ColorType,
@@ -55,7 +69,7 @@ export class Circle implements Figure {
 }
 
 export class Rectangle implements Figure {
-  shape: ShapeType = 'rectangle';
+  shape: ShapeType = ShapeType.Rectangle;
 
   constructor(
     public color: ColorType,
