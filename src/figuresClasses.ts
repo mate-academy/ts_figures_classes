@@ -14,12 +14,6 @@ export interface Figure {
   shape: Figures;
   color: Color;
   getArea() : number;
-  a?: number;
-  b?: number;
-  c?: number;
-  radius?: number;
-  width?: number;
-  height?: number;
 }
 
 export class Triangle implements Figure {
