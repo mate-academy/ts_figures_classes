@@ -1,27 +1,36 @@
+/* eslint-disable*/
+enum Color {
+  Red = 'red',
+  Blue = 'blue',
+  Green = 'green',
+}
+
+enum Shape {
+  Triangle = 'triangle',
+  Circle = 'circle',
+  Rectangle = 'rectangle',
+}
+
 export interface Figure {
-  shape: string;
-  color: string;
+  shape: Shape;
+  color: Color;
   getArea(): number;
 }
 
-export class Triangle implements Figure {
-  color: string;
-
-  shape: string;
-
+export class Triangle {
+  color: Color;
+  shape: Shape;
   a: number;
-
   b: number;
-
   c: number;
 
   constructor(
-    color: string,
+    color: Color,
     a: number,
     b: number,
     c: number,
   ) {
-    this.shape = 'triangle';
+    this.shape = Shape.Triangle;
     this.color = color;
     this.a = a;
     this.b = b;
@@ -52,17 +61,15 @@ export class Triangle implements Figure {
 }
 
 export class Circle {
-  color: string;
-
-  shape: string;
-
+  color: Color;
+  shape: Shape;
   radius: number;
 
   constructor(
-    color: string,
+    color: Color,
     radius: number,
   ) {
-    this.shape = 'circle';
+    this.shape = Shape.Circle;
     this.radius = radius;
     this.color = color;
 
@@ -79,20 +86,17 @@ export class Circle {
 }
 
 export class Rectangle {
-  color: string;
-
-  shape: string;
-
+  color: Color;
+  shape: Shape;
   width: number;
-
   height: number;
 
   constructor(
-    color: string,
+    color: Color,
     width: number,
     height: number,
   ) {
-    this.shape = 'rectangle';
+    this.shape = Shape.Rectangle;
     this.color = color;
     this.width = width;
     this.height = height;
