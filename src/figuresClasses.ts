@@ -24,7 +24,7 @@ export class Triangle {
       || b <= 0
       || c <= 0
     ) {
-      throw new Error('wrong radius length');
+      throw new Error('Wrong radius length');
     }
 
     if (
@@ -32,7 +32,7 @@ export class Triangle {
       || b >= a + c
       || c >= a + b
     ) {
-      throw new Error(`sides ${a}, ${b} and ${c} can't form a triangle`);
+      throw new Error(`Sides ${a}, ${b} and ${c} can't form a triangle`);
     }
 
     this.a = a;
@@ -60,7 +60,7 @@ export class Circle {
 
   constructor(color: Color, r: number) {
     if (r <= 0) {
-      throw new Error('wrong radius length');
+      throw new Error('Wrong radius length');
     }
 
     this.r = r;
@@ -84,7 +84,7 @@ export class Rectangle {
 
   constructor(color: Color, a: number, b: number) {
     if (a <= 0 || b <= 0) {
-      throw new Error('wrong sides length');
+      throw new Error('Wrong sides length');
     }
 
     this.a = a;
