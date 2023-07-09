@@ -1,13 +1,13 @@
 enum Shape {
-  triangle = 'triangle',
-  circle = 'circle',
-  rectangle = 'rectangle',
+  Triangle = 'triangle',
+  Circle = 'circle',
+  Rectangle = 'rectangle',
 }
 
 enum Color {
-  red = 'red',
-  green = 'green',
-  blue = 'blue',
+  Red = 'red',
+  Green = 'green',
+  Blue = 'blue',
 }
 
 export interface Figure {
@@ -21,7 +21,7 @@ function roundToHundredth(area: number): number {
 }
 
 export class Triangle implements Figure {
-  shape = Shape.triangle;
+  shape = Shape.Triangle;
 
   getArea = (): number => {
     const semiperimeter = (this.a + this.b + this.c) / 2;
@@ -58,7 +58,7 @@ export class Triangle implements Figure {
 }
 
 export class Circle implements Figure {
-  shape = Shape.circle;
+  shape = Shape.Circle;
 
   getArea = (): number => {
     const circleArea = Math.PI * (this.radius ** 2);
@@ -77,7 +77,7 @@ export class Circle implements Figure {
 }
 
 export class Rectangle {
-  shape = Shape.rectangle;
+  shape = Shape.Rectangle;
 
   getArea = (): number => {
     const rectangleArea = this.height * this.width;
