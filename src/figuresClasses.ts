@@ -1,9 +1,19 @@
-export type Shape = 'triangle' | 'circle' | 'rectangle';
-export type Color = 'red' | 'green' | 'blue';
+enum Shape {
+  triangle = 'triangle',
+  circle = 'circle',
+  rectangle = 'rectangle',
+}
+
+enum Color {
+  'red',
+  'green',
+  'blue',
+}
 
 export interface Figure {
   shape: Shape,
   color: Color,
+  getArea(): number,
 }
 
 const getRounded = (num: number): number => {
@@ -11,7 +21,7 @@ const getRounded = (num: number): number => {
 };
 
 export class Triangle implements Figure {
-  shape: 'triangle';
+  shape: Shape.triangle;
 
   constructor(
     public color: Color,
@@ -19,17 +29,24 @@ export class Triangle implements Figure {
     public b: number,
     public c: number,
   ) {
-    this.shape = 'triangle';
+    this.shape = Shape.triangle;
 
     if (
       a <= 0
       || b <= 0
       || c <= 0
-      || c >= a + b
+    ) {
+      throw new Error('The length of the side should be more than 0');
+    }
+
+    if (
+      c >= a + b
       || b >= a + c
       || a >= b + c
     ) {
-      throw new Error('Enter correct data');
+      throw new Error(
+        'The length of the side should be more than sum of other two sides',
+      );
     }
   }
 
@@ -46,16 +63,16 @@ export class Triangle implements Figure {
 }
 
 export class Circle implements Figure {
-  shape: 'circle';
+  shape: Shape.circle;
 
   constructor(
     public color: Color,
     public radius: number,
   ) {
-    this.shape = 'circle';
+    this.shape = Shape.circle;
 
     if (radius <= 0) {
-      throw new Error('Enter correct data');
+      throw new Error('The length of the radius should be more than 0');
     }
   }
 
@@ -67,17 +84,17 @@ export class Circle implements Figure {
 }
 
 export class Rectangle implements Figure {
-  shape: 'rectangle';
+  shape: Shape.rectangle;
 
   constructor(
     public color: Color,
     public width: number,
     public height: number,
   ) {
-    this.shape = 'rectangle';
+    this.shape = Shape.rectangle;
 
     if (width <= 0 || height <= 0) {
-      throw new Error('Enter correct data');
+      throw new Error('The length of the sides should be more than 0');
     }
   }
 
@@ -86,8 +103,6 @@ export class Rectangle implements Figure {
   }
 }
 
-export type MixFigure = Circle | Triangle | Rectangle;
-
-export function getInfo(figure: MixFigure): string {
+export function getInfo(figure: Figure): string {
   return `A ${figure.color} ${figure.shape} - ${figure.getArea()}`;
 }
