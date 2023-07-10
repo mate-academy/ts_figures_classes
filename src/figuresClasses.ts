@@ -1,14 +1,26 @@
+enum Shape {
+  Triangle = 'triangle',
+  Circle = 'circle',
+  Rectangle = 'rectangle',
+}
+
+enum Color {
+  Red = 'red',
+  Green = 'green',
+  Blue = 'blue',
+}
+
 export interface Figure {
-  shape: 'triangle' | 'circle' | 'rectangle';
-  color: 'red' | 'green' | 'blue';
+  shape: Shape;
+  color: Color;
   getArea(): number;
 }
 
 export class Triangle implements Figure {
-  shape: 'triangle';
+  shape: Shape.Triangle;
 
   constructor(
-    public color: 'red' | 'green' | 'blue',
+    public color: Color,
     public a: number,
     public b: number,
     public c: number,
@@ -25,7 +37,7 @@ export class Triangle implements Figure {
       );
     }
 
-    this.shape = 'triangle';
+    this.shape = Shape.Triangle;
   }
 
   getArea(): number {
@@ -38,17 +50,17 @@ export class Triangle implements Figure {
 }
 
 export class Circle implements Figure {
-  shape: 'circle';
+  shape: Shape.Circle;
 
   constructor(
-    public color: 'red' | 'green' | 'blue',
+    public color: Color,
     public radius: number,
   ) {
     if (radius <= 0) {
       throw new Error('Radius must be a positive number');
     }
 
-    this.shape = 'circle';
+    this.shape = Shape.Circle;
   }
 
   getArea(): number {
@@ -59,10 +71,10 @@ export class Circle implements Figure {
 }
 
 export class Rectangle implements Figure {
-  shape: 'rectangle';
+  shape: Shape.Rectangle;
 
   constructor(
-    public color: 'red' | 'green' | 'blue',
+    public color: Color,
     public width: number,
     public height: number,
   ) {
@@ -70,7 +82,7 @@ export class Rectangle implements Figure {
       throw new Error('All sides must be a positive numbers');
     }
 
-    this.shape = 'rectangle';
+    this.shape = Shape.Rectangle;
   }
 
   getArea(): number {
