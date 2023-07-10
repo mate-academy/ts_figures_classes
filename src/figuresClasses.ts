@@ -4,10 +4,10 @@ type Color = 'red' | 'green' | 'blue';
 export interface Figure {
   shape: Shape;
   color: Color;
-  getArea: () => number;
+  getArea(): number;
 }
 
-export class Triangle {
+export class Triangle implements Figure {
   a: number;
 
   b: number;
@@ -16,7 +16,7 @@ export class Triangle {
 
   color: Color;
 
-  shape: Shape;
+  shape: Shape = 'triangle';
 
   constructor(color: Color, a: number, b: number, c: number) {
     if (
@@ -39,7 +39,6 @@ export class Triangle {
     this.b = b;
     this.c = c;
     this.color = color;
-    this.shape = 'triangle';
   }
 
   getArea(): number {
@@ -51,12 +50,12 @@ export class Triangle {
   }
 }
 
-export class Circle {
+export class Circle implements Figure {
   r: number;
 
   color: Color;
 
-  shape: Shape;
+  shape: Shape = 'circle';
 
   constructor(color: Color, r: number) {
     if (r <= 0) {
@@ -65,7 +64,6 @@ export class Circle {
 
     this.r = r;
     this.color = color;
-    this.shape = 'circle';
   }
 
   getArea(): number {
@@ -73,14 +71,14 @@ export class Circle {
   }
 }
 
-export class Rectangle {
+export class Rectangle implements Figure {
   a: number;
 
   b: number;
 
   color: Color;
 
-  shape: Shape;
+  shape: Shape = 'rectangle';
 
   constructor(color: Color, a: number, b: number) {
     if (a <= 0 || b <= 0) {
@@ -90,7 +88,6 @@ export class Rectangle {
     this.a = a;
     this.b = b;
     this.color = color;
-    this.shape = 'rectangle';
   }
 
   getArea(): number {
