@@ -4,6 +4,8 @@ type Color = 'red' | 'green' | 'blue';
 export interface Figure {
   shape: Shape;
   color: Color;
+
+  getArea(): number;
 }
 
 export class Triangle implements Figure {
@@ -30,8 +32,8 @@ export class Triangle implements Figure {
   getArea(): number {
     const p: number = (this.a + this.b + this.c) / 2;
 
-    return Math.round(Math.sqrt(p * (p - this.a) * (p - this.b) * (p - this.c))
-      * 100) / 100;
+    return Number(Math.sqrt(p * (p - this.a) * (p - this.b) * (p - this.c))
+      .toFixed(2));
   }
 }
 
@@ -70,10 +72,14 @@ export class Rectangle implements Figure {
   }
 
   getArea(): number {
-    return Math.floor(this.a * this.b * 100) / 100;
+    return Number((this.a * this.b).toFixed(2));
   }
 }
 
 export function getInfo(figure: Figure): string {
-  return `A ${figure.color} ${figure.shape} - ${figure.getArea()}`;
+  if (figure instanceof Circle || Triangle || Rectangle) {
+    return `A ${figure.color} ${figure.shape} - ${figure.getArea()}`;
+  }
+
+  return 'Error!';
 }
