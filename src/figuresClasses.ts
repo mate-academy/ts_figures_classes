@@ -1,4 +1,8 @@
-type Shape = 'triangle' | 'circle' | 'rectangle';
+enum Shape {
+  triangle = 'triangle',
+  circle = 'circle',
+  rectangle = 'rectangle'
+}
 type Color = 'red' | 'green' | 'blue';
 
 export interface Figure {
@@ -27,7 +31,7 @@ export class Triangle implements Figure {
       throw new Error('Invalid triangle sides');
     }
 
-    this.shape = 'triangle';
+    this.shape = Shape.triangle;
     this.color = color;
     this.a = a;
     this.b = b;
@@ -57,7 +61,7 @@ export class Circle implements Figure {
       throw new Error('Invalid radius');
     }
 
-    this.shape = 'circle';
+    this.shape = Shape.circle;
     this.color = color;
     this.radius = radius;
   }
@@ -83,7 +87,7 @@ export class Rectangle {
       throw new Error('Invalid width or height');
     }
 
-    this.shape = 'rectangle';
+    this.shape = Shape.rectangle;
     this.color = color;
     this.width = width;
     this.height = height;
