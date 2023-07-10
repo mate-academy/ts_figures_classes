@@ -1,5 +1,14 @@
-type Shape = 'triangle' | 'circle' | 'rectangle';
-type Color = 'red' | 'green' | 'blue';
+export enum Shape {
+  triangle = 'triangle',
+  circle = 'circle',
+  rectangle = 'rectangle',
+}
+
+export enum Color {
+  red = 'red',
+  green = 'green',
+  blue = 'blue',
+}
 
 export function isTriangle(a: number, b: number, c: number): boolean {
   if (a === 0 || b === 0 || c === 0) {
@@ -33,7 +42,7 @@ export class Triangle implements Figure {
     public b: number,
     public c: number,
   ) {
-    this.shape = 'triangle';
+    this.shape = Shape.triangle;
 
     if (isTriangle(this.a, this.b, this.c)) {
       throw new Error('It is not a triangle');
@@ -57,7 +66,7 @@ export class Circle implements Figure {
     public color: Color,
     public radius: number,
   ) {
-    this.shape = 'circle';
+    this.shape = Shape.circle;
 
     if (this.radius <= 0) {
       throw new Error('It is not a circle');
@@ -77,7 +86,7 @@ export class Rectangle implements Figure {
     public width: number,
     public height: number,
   ) {
-    this.shape = 'rectangle';
+    this.shape = Shape.rectangle;
 
     if (this.width <= 0 || this.height <= 0) {
       throw new Error('It is not a rectangle');
