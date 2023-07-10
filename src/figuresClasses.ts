@@ -1,9 +1,12 @@
 export interface Figure {
   shape: 'triangle' | 'circle' | 'rectangle';
   color: 'red' | 'green' | 'blue';
+  getArea(): number;
 }
 
 export class Triangle implements Figure {
+  public shape: Figure['shape'] = 'triangle';
+
   public a: number;
 
   public b: number;
@@ -11,7 +14,6 @@ export class Triangle implements Figure {
   public c: number;
 
   constructor(
-    public shape: Figure['shape'],
     public color: Figure['color'],
     a: number,
     b: number,
@@ -34,10 +36,12 @@ export class Triangle implements Figure {
 }
 
 export class Circle implements Figure {
+  public shape: Figure['shape'] = 'circle';
+
   public radius: number;
 
+
   constructor(
-    public shape: Figure['shape'],
     public color: Figure['color'],
     radius: number,
   ) {
@@ -48,17 +52,22 @@ export class Circle implements Figure {
     }
   }
 
-  // getArea(): number {
-  //   return Math.PI * this.radius * this.radius;
-  // }
+  getArea(): number {
+    return Math.PI * this.radius * this.radius;
+  }
 }
 
-export class Rectangle {
+export class Rectangle implements Figure {
   public width: number;
 
   public height: number;
 
-  constructor(width: number, height: number) {
+  constructor(
+    public shape: Figure['shape'] = 'rectangle',
+    public color: Figure['color'],
+    width: number,
+    height: number,
+  ) {
     this.width = width;
     this.height = height;
   }
@@ -68,6 +77,16 @@ export class Rectangle {
   }
 }
 
-export function getInfo(figure) {
+export function getInfo(figure: Figure): string {
+  const area = figure.getArea();
+  const { shape, color } = figure;
 
-};
+  return `A ${color} ${shape} - ${area}`;
+}
+
+// console.log(getInfo(greenCircle));
+
+// const greenCircle = new Circle('green', 1);
+
+const triangle = new Triangle('red', 0, 2, 1);
+console.log(triangle);
