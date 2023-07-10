@@ -1,14 +1,26 @@
+enum Shape {
+  Triangle = 'triangle',
+  Circle = 'circle',
+  Rectangle = 'rectangle',
+}
+
+enum Color {
+  Red = 'red',
+  Green = 'green',
+  Blue = 'blue',
+}
+
 export interface Figure {
-  shape: 'triangle' | 'circle' | 'rectangle';
-  color: 'red' | 'green' | 'blue';
+  shape: Shape;
+  color: Color;
   getArea(): number;
 }
 
 export class Triangle implements Figure {
-  shape: 'triangle';
+  public shape = Shape.Triangle;
 
   constructor(
-    public color: 'red' | 'green' | 'blue',
+    public color: Color,
     public a: number,
     public b: number,
     public c: number,
@@ -24,8 +36,6 @@ export class Triangle implements Figure {
         'The sum of any two sides must be greater than the third one',
       );
     }
-
-    this.shape = 'triangle';
   }
 
   getArea(): number {
@@ -38,10 +48,10 @@ export class Triangle implements Figure {
 }
 
 export class Circle implements Figure {
-  shape: 'circle';
+  public shape = Shape.Circle;
 
   constructor(
-    public color: 'red' | 'green' | 'blue',
+    public color: Color,
     public radius: number,
   ) {
     if (radius <= 0) {
@@ -49,8 +59,6 @@ export class Circle implements Figure {
         'Radius must be positive number',
       );
     }
-
-    this.shape = 'circle';
   }
 
   getArea(): number {
@@ -61,10 +69,10 @@ export class Circle implements Figure {
 }
 
 export class Rectangle implements Figure {
-  public shape: 'rectangle';
+  public shape = Shape.Rectangle;
 
   constructor(
-    public color: 'red' | 'green' | 'blue',
+    public color: Color,
     public width: number,
     public height: number,
   ) {
@@ -73,8 +81,6 @@ export class Rectangle implements Figure {
         'Sides must be positive numbers',
       );
     }
-
-    this.shape = 'rectangle';
   }
 
   getArea(): number {
