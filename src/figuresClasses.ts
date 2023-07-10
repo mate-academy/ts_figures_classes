@@ -1,6 +1,9 @@
+type Shape = 'triangle' | 'circle' | 'rectangle';
+type Color = 'red' | 'green' | 'blue';
+
 export interface Figure {
-  form: 'triangle' | 'circle' | 'rectangle',
-  color: 'red' | 'green' | 'blue',
+  form: Shape;
+  color: Color;
 }
 
 export class Triangle {
@@ -12,7 +15,7 @@ export class Triangle {
     public shape: Figure['form'],
   ) {
     if (sideA && sideB && sideC) {
-      let sides = [+sideA, +sideB, +sideC];
+      let sides = [sideA, sideB, sideC];
       const maxSide = Math.max(...sides);
 
       sides = sides.filter((num) => num !== maxSide);
@@ -68,9 +71,9 @@ export class Circle {
   }
 
   public getArea(): number {
-    const area = Math.PI * (this.radius ?? 0) ** 2;
+    const area = Math.PI * (this.radius) ** 2;
 
-    return +(Math.floor(area * 100) / 100).toFixed(2);
+    return +(Math.floor(area * 100) / 100);
   }
 }
 
@@ -99,11 +102,11 @@ export class Rectangle {
 }
 
 export function getInfo(
-  obj: {
+  figure: {
     color: Figure['color'],
     shape: Figure['form'],
     getArea: Function,
   },
 ): string {
-  return `A ${obj.color} ${obj.shape} - ${obj.getArea()}`;
+  return `A ${figure.color} ${figure.shape} - ${figure.getArea()}`;
 }
