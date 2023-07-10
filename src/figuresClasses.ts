@@ -25,15 +25,28 @@ export class Triangle implements Figure {
     public b: number,
     public c: number,
   ) {
-    if (a <= 0
-      || b <= 0
-      || c <= 0
-      || a + b <= c
-      || b + c <= a
-      || c + a <= b) {
-      throw new Error(
-        `Sides ${a}, ${b} and ${c} can't form a triangle`,
-      );
+    switch (true) {
+      case a <= 0:
+      case b <= 0:
+      case c <= 0:
+        throw new Error(
+          'One or more sides have a value less than or equal to 0',
+        );
+
+      case a + b <= c:
+        throw new Error(
+          `Side ${c} is smaller than the sum of sides ${a} and ${b}`,
+        );
+      case b + c <= a:
+        throw new Error(
+          `Side ${a} is smaller than the sum of sides ${b} and ${c}`,
+        );
+      case c + a <= b:
+        throw new Error(
+          `Side ${b} is smaller than the sum of sides ${a} and ${c}`,
+        );
+
+      default:
     }
   }
 
