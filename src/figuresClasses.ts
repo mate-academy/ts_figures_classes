@@ -1,6 +1,18 @@
+export enum Shape {
+  Triangle = 'triangle',
+  Circle = 'circle',
+  Rectangle = 'rectangle'
+}
+
+export enum Color {
+  Red = 'red',
+  Green = 'green',
+  Blue = 'blue',
+}
+
 export interface Figure {
-  shape: string;
-  color: string;
+  shape: Shape;
+  color: Color;
   getArea(): number;
 }
 
@@ -11,13 +23,13 @@ export function getInfo(figure: Figure): string {
 }
 
 export class Triangle implements Figure {
-  shape: string = 'triangle';
+  shape: Shape = Shape.Triangle;
 
-  color: string;
+  color: Color;
 
   sides: number[];
 
-  constructor(color: string, a: number, b: number, c: number) {
+  constructor(color: Color, a: number, b: number, c: number) {
     if (a <= 0 || b <= 0 || c <= 0) {
       throw new Error('Lengths of sides should be greater than 0');
     }
@@ -40,13 +52,13 @@ export class Triangle implements Figure {
 }
 
 export class Circle implements Figure {
-  shape: string = 'circle';
+  shape: Shape = Shape.Circle;
 
-  color: string;
+  color: Color;
 
   radius: number;
 
-  constructor(color: string, radius: number) {
+  constructor(color: Color, radius: number) {
     if (radius <= 0) {
       throw new Error('Radius should be greater than 0');
     }
@@ -63,15 +75,15 @@ export class Circle implements Figure {
 }
 
 export class Rectangle implements Figure {
-  shape: string = 'rectangle';
+  shape: Shape = Shape.Rectangle;
 
-  color: string;
+  color: Color;
 
   width: number;
 
   height: number;
 
-  constructor(color: string, width: number, height: number) {
+  constructor(color: Color, width: number, height: number) {
     if (width <= 0 || height <= 0) {
       throw new Error('Width and height should be greater than 0');
     }
