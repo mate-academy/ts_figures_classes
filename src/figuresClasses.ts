@@ -84,7 +84,7 @@ export class Rectangle implements Figure {
 }
 
 export function getInfo(figure: Figure): string {
-  const output = Object.getPrototypeOf(figure)
+  const output = figure !== null
     ? `A ${figure.color} ${figure.shape} - ${figure.getArea()}`
     : 'Incorrect data';
 
