@@ -1,4 +1,9 @@
-type Shape = 'triangle' | 'circle' | 'rectangle';
+enum Shape {
+  Triangle = 'triangle',
+  Circle = 'circle',
+  Rectangle = 'rectangle'
+}
+
 type Color = 'red' | 'green' | 'blue';
 
 export interface Figure {
@@ -8,7 +13,7 @@ export interface Figure {
 }
 
 export class Triangle implements Figure {
-  shape: Shape;
+  shape: Shape.Triangle;
 
   constructor(
     public color: Color,
@@ -24,7 +29,7 @@ export class Triangle implements Figure {
       throw new Error('sides 1, 2 and 3 can\'t form a triangle');
     }
 
-    this.shape = 'triangle';
+    this.shape = Shape.Triangle;
   }
 
   getArea(): number {
@@ -36,7 +41,7 @@ export class Triangle implements Figure {
 }
 
 export class Circle implements Figure {
-  shape: Shape;
+  shape: Shape.Circle;
 
   constructor(
     public color: Color,
@@ -45,7 +50,7 @@ export class Circle implements Figure {
     if (radius <= 0) {
       throw new Error('incorect radius');
     }
-    this.shape = 'circle';
+    this.shape = Shape.Circle;
   }
 
   getArea(): number {
@@ -56,7 +61,7 @@ export class Circle implements Figure {
 }
 
 export class Rectangle implements Figure {
-  shape: Shape;
+  shape: Shape.Rectangle;
 
   constructor(
     public color: Color,
@@ -67,7 +72,7 @@ export class Rectangle implements Figure {
       throw new Error('incorect side length');
     }
 
-    this.shape = 'rectangle';
+    this.shape = Shape.Rectangle;
   }
 
   getArea(): number {
