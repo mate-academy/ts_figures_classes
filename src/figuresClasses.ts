@@ -1,27 +1,33 @@
+enum Shapes {
+  triangle = 'triangle',
+  circle = 'circle',
+  rectangle = 'rectangle',
+}
+
+type Colors = 'red' | 'green' | 'blue';
+
 export interface Figure {
-  shape: string,
-  color: string,
-  a?: number;
-  b?: number;
-  c?: number;
-  radius?: number;
-  width?: number;
-  height?: number;
+  shape: Shapes,
+  color: Colors,
   getArea(): number;
 }
 
 export class Triangle implements Figure {
-  shape = 'triangle';
+  shape = Shapes.triangle;
 
   constructor(
-    public color: string,
+    public color: Colors,
     public a: number,
     public b: number,
     public c: number,
   ) {
     // eslint-disable-next-line max-len
     if (a + b <= c || a + c <= b || b + c <= a || a <= 0 || b <= 0 || c <= 0) {
-      throw new Error();
+      throw new Error(
+        `This triangle does not exist.
+        Enter correct length of figure's sides
+        (bigger than 0 and sum of two sides should be less than third side)`,
+      );
     }
   }
 
@@ -36,14 +42,16 @@ export class Triangle implements Figure {
 }
 
 export class Circle implements Figure {
-  shape = 'circle';
+  shape = Shapes.circle;
 
   constructor(
-    public color: string,
+    public color: Colors,
     public radius: number,
   ) {
     if (radius <= 0) {
-      throw new Error();
+      throw new Error(
+        'This circle does not exist. Enter correct radius(bigger than 0)',
+      );
     }
   }
 
@@ -54,15 +62,18 @@ export class Circle implements Figure {
 }
 
 export class Rectangle implements Figure {
-  shape = 'rectangle';
+  shape = Shapes.rectangle;
 
   constructor(
-    public color: string,
+    public color: Colors,
     public width: number,
     public height: number,
   ) {
     if (width <= 0 || height <= 0) {
-      throw new Error();
+      throw new Error(
+        `This rectangle doesn't exist.
+        Enter correct length of figure's sides(bigger than 0)`,
+      );
     }
   }
 
@@ -73,13 +84,9 @@ export class Rectangle implements Figure {
 }
 
 export function getInfo(figure: Figure): string {
-  switch (Object.getPrototypeOf(figure)) {
-    case Triangle.prototype:
-    case Circle.prototype:
-    case Rectangle.prototype:
-      return `A ${figure.color} ${figure.shape} - ${figure.getArea()}`;
+  const output = Object.getPrototypeOf(figure)
+    ? `A ${figure.color} ${figure.shape} - ${figure.getArea()}`
+    : 'Incorrect data';
 
-    default:
-      return 'Incorrect data';
-  }
+  return output;
 }
