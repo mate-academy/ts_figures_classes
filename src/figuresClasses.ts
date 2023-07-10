@@ -1,21 +1,30 @@
+export enum Shape {
+  triangle = 'triangle',
+  circle = 'circle',
+  rectangle = 'rectangle',
+}
+
+export enum Color {
+  red,
+  green,
+  blue,
+}
+
 export interface Figure {
-  shape: string,
-  color: string,
+  shape: Shape,
+  color: Color,
   getArea(): number,
 }
 
 export class Triangle implements Figure {
-  public shape: string;
+  shape: Shape = Shape.triangle;
 
-  public color: string;
-
-  a: number;
-
-  b: number;
-
-  c: number;
-
-  constructor(color: string, a: number, b: number, c: number) {
+  constructor(
+    public color: Color,
+    public a: number,
+    public b: number,
+    public c: number,
+  ) {
     if (a <= 0 || b <= 0 || c <= 0) {
       throw new Error('Length of sides must be greater then 0');
     }
@@ -23,11 +32,6 @@ export class Triangle implements Figure {
     if (a + b <= c || b + c <= a || a + c <= b) {
       throw new Error('Sum of two sides must be greater than the third side');
     }
-    this.shape = 'triangle';
-    this.color = color;
-    this.a = a;
-    this.b = b;
-    this.c = c;
   }
 
   getArea(): number {
@@ -42,19 +46,15 @@ export class Triangle implements Figure {
 }
 
 export class Circle implements Figure {
-  shape: string;
+  shape: Shape = Shape.circle;
 
-  color: string;
-
-  radius: number;
-
-  constructor(color: string, radius: number) {
+  constructor(
+    public color: Color,
+    public radius: number,
+  ) {
     if (radius <= 0) {
       throw new Error('Radius must be greater than 0');
     }
-    this.shape = 'circle';
-    this.color = color;
-    this.radius = radius;
   }
 
   getArea(): number {
@@ -65,22 +65,16 @@ export class Circle implements Figure {
 }
 
 export class Rectangle implements Figure {
-  shape: string;
+  shape: Shape = Shape.rectangle;
 
-  color: string;
-
-  width: number;
-
-  height: number;
-
-  constructor(color: string, width: number, height: number) {
+  constructor(
+    public color: Color,
+    public width: number,
+    public height: number,
+  ) {
     if (width <= 0 || height <= 0) {
       throw new Error('Length of sides must be greater then 0');
     }
-    this.shape = 'rectangle';
-    this.color = color;
-    this.width = width;
-    this.height = height;
   }
 
   getArea(): number {
