@@ -19,7 +19,7 @@ export class Triangle implements Figure {
     b: number,
     c: number,
   ) {
-    if (a <= 0 || b <= 0 || c <= 0) {
+    if (a <= 0 || b <= 0 || c <= 0 || a + b <= c || a + c <= b || b + c <= a) {
       throw new Error('error message');
     }
 
@@ -30,8 +30,9 @@ export class Triangle implements Figure {
 
   getArea(): number {
     const s = (this.a + this.b + this.c) / 2;
+    const area = Math.sqrt(s * (s - this.a) * (s - this.b) * (s - this.c));
 
-    return Math.sqrt(s * (s - this.a) * (s - this.b) * (s - this.c));
+    return Number(area.toFixed(2));
   }
 }
 
@@ -39,7 +40,6 @@ export class Circle implements Figure {
   public shape: Figure['shape'] = 'circle';
 
   public radius: number;
-
 
   constructor(
     public color: Figure['color'],
@@ -53,21 +53,29 @@ export class Circle implements Figure {
   }
 
   getArea(): number {
-    return Math.PI * this.radius * this.radius;
+    const area = Math.PI * this.radius * this.radius;
+    const roundedArea = Math.floor(area * 100) / 100;
+
+    return Number(roundedArea.toFixed(2));
   }
 }
 
 export class Rectangle implements Figure {
+  public shape: Figure['shape'] = 'rectangle';
+
   public width: number;
 
   public height: number;
 
   constructor(
-    public shape: Figure['shape'] = 'rectangle',
     public color: Figure['color'],
     width: number,
     height: number,
   ) {
+    if (width <= 0 || height <= 0) {
+      throw new Error('error message');
+    }
+
     this.width = width;
     this.height = height;
   }
@@ -83,10 +91,3 @@ export function getInfo(figure: Figure): string {
 
   return `A ${color} ${shape} - ${area}`;
 }
-
-// console.log(getInfo(greenCircle));
-
-// const greenCircle = new Circle('green', 1);
-
-const triangle = new Triangle('red', 0, 2, 1);
-console.log(triangle);
