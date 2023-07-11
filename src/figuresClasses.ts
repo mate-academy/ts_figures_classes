@@ -1,17 +1,22 @@
+import { Shape, Color } from './types';
+
 interface Figure {
-  shape: string,
+  shape: Shape,
   color: string,
   getArea: () => number,
 }
 
 export class Triangle implements Figure {
-  shape: string = 'triangle';
-
-  color: string;
+  shape: Shape = Shape.Triangle;
 
   sides: number[];
 
-  constructor(color: string, a: number, b: number, c: number) {
+  constructor(
+    public color: Color,
+    public a: number,
+    public b: number,
+    public c: number,
+  ) {
     if (a <= 0 || b <= 0 || c <= 0) {
       throw new Error('Each side must be longer than 0!');
     }
@@ -20,7 +25,6 @@ export class Triangle implements Figure {
       throw new Error('One side can not be longer than two other!');
     }
 
-    this.color = color;
     this.sides = [a, b, c];
   }
 
@@ -34,19 +38,15 @@ export class Triangle implements Figure {
 }
 
 export class Circle implements Figure {
-  shape: string = 'circle';
+  shape: Shape = Shape.Circle;
 
-  color: string;
-
-  radius: number;
-
-  constructor(color: string, radius: number) {
+  constructor(
+    public color: Color,
+    public radius: number,
+  ) {
     if (radius <= 0) {
       throw new Error('Radius can not be lower 0 or 0');
     }
-
-    this.color = color;
-    this.radius = radius;
   }
 
   getArea = (): number => {
@@ -57,21 +57,16 @@ export class Circle implements Figure {
 }
 
 export class Rectangle implements Figure {
-  shape: string = 'rectangle';
+  shape: Shape = Shape.Rectangle;
 
-  color: string;
-
-  width: number;
-
-  height: number;
-
-  constructor(color: string, width: number, height: number) {
+  constructor(
+    public color: Color,
+    public width: number,
+    public height: number,
+  ) {
     if (width <= 0 || height <= 0) {
       throw new Error('Width or heigth can not be lower 0 or 0!');
     }
-    this.color = color;
-    this.width = width;
-    this.height = height;
   }
 
   getArea = (): number => {
