@@ -38,11 +38,6 @@ export class Triangle implements Figure {
     if (isTriangle(this.a, this.b, this.c)) {
       throw new Error('is not a triangle');
     }
-
-    this.color = color;
-    this.a = a;
-    this.b = b;
-    this.c = c;
   }
 
   getArea(): number {
@@ -61,9 +56,6 @@ export class Circle implements Figure {
     if (this.radius <= 0) {
       throw new Error('the number is not positive');
     }
-
-    this.color = color;
-    this.radius = radius;
   }
 
   getArea(): number {
@@ -84,10 +76,6 @@ export class Rectangle implements Figure {
     if (this.width <= 0 || this.height <= 0) {
       throw new Error('the number is not positive');
     }
-
-    this.color = color;
-    this.width = width;
-    this.height = height;
   }
 
   getArea(): number {
