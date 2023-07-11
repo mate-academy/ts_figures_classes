@@ -1,9 +1,14 @@
 type Shape = 'triangle' | 'circle' | 'rectangle';
 type Color = 'red' | 'green' | 'blue';
 export interface Figure {
-  shape: Shape
+  shape: 'triangle' | 'circle' | 'rectangle'
   color: Color
   getArea: ()=>{}
+}
+enum FigureForm {
+  Triangle = 'triangle',
+  Circle = 'circle',
+  Rectangle = 'rectangle'
 }
 
 function getTriangle(a:number, b:number, c:number) : boolean {
@@ -82,11 +87,11 @@ export class Rectangle {
 
 export function getInfo(figure: Figure): string {
   switch (figure.shape) {
-    case 'circle':
+    case FigureForm.Circle:
       return `A ${figure.color} circle - ${figure.getArea()}`;
-    case 'triangle':
+    case FigureForm.Triangle:
       return `A ${figure.color} triangle - ${figure.getArea()}`;
-    case 'rectangle':
+    case FigureForm.Rectangle:
       return `A ${figure.color} rectangle - ${figure.getArea()}`;
     default:
       return '';
