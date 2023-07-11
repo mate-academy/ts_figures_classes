@@ -38,7 +38,7 @@ export class Triangle implements Figure {
     public c: number,
   ) {
     if (isTriangle(this.a, this.b, this.c)) {
-      throw new Error('throws an error');
+      throw new Error('Parameter is not valid');
     }
   }
 
@@ -58,7 +58,7 @@ export class Circle implements Figure {
     public radius: number,
   ) {
     if (this.radius <= 0) {
-      throw new Error('throws an error');
+      throw new Error('Parameter is not valid');
     }
   }
 
@@ -78,7 +78,7 @@ export class Rectangle {
     public height: number,
   ) {
     if (width <= 0 || height <= 0) {
-      throw new Error('throws an error');
+      throw new Error('Parameter is not valid');
     }
   }
 
