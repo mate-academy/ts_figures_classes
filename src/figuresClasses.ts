@@ -50,7 +50,7 @@ export class Circle {
     public radius: number,
   ) {
     if (this.radius <= 0) {
-      throw new Error('Error');
+      throw new Error('Radius cannot be equal 0');
     }
 
     this.color = color;
@@ -71,7 +71,7 @@ export class Rectangle {
     public height: number,
   ) {
     if (this.width <= 0 || this.height <= 0) {
-      throw new Error('Error');
+      throw new Error('Width and Height should be bigger than 0');
     }
 
     this.color = color;
