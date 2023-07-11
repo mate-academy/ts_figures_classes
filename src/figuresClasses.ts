@@ -1,6 +1,17 @@
+enum Shape {
+  Triangle = 'triangle',
+  Circle = 'circle',
+  Rectangle = 'rectangle',
+}
+
+enum Color {
+  Red = 'red',
+  Green = 'green',
+  Blue = 'blue'
+}
 export interface Figure {
-  shape: 'triangle' | 'circle' | 'rectangle';
-  color: 'red' | 'green' | 'blue';
+  shape: Shape;
+  color: Color;
   getArea(): number;
 }
 
@@ -9,15 +20,15 @@ const roundNumber = (num: number): number => {
 };
 
 export class Triangle implements Figure {
-  shape: 'triangle';
+  shape: Shape.Triangle;
 
   constructor(
-    public color: Figure['color'],
+    public color: Color,
     public a: number,
     public b: number,
     public c: number,
   ) {
-    this.shape = 'triangle';
+    this.shape = Shape.Triangle;
 
     const arrayOfNumbers = [a, b, c];
     const maxNumber = Math.max(...arrayOfNumbers);
@@ -44,13 +55,13 @@ export class Triangle implements Figure {
 }
 
 export class Circle implements Figure {
-  shape: 'circle';
+  shape: Shape.Circle;
 
   constructor(
     public color: Figure['color'],
     public radius: number,
   ) {
-    this.shape = 'circle';
+    this.shape = Shape.Circle;
 
     if (radius <= 0) {
       throw new Error(`Radius ${radius} can't form a circle`);
@@ -65,14 +76,14 @@ export class Circle implements Figure {
 }
 
 export class Rectangle implements Figure {
-  shape: 'rectangle';
+  shape: Shape.Rectangle;
 
   constructor(
     public color: Figure['color'],
     public width: number,
     public height: number,
   ) {
-    this.shape = 'rectangle';
+    this.shape = Shape.Rectangle;
 
     if (width <= 0 || height <= 0) {
       throw new Error(
@@ -86,8 +97,6 @@ export class Rectangle implements Figure {
   }
 }
 
-export type MixedFigure = Circle | Rectangle | Triangle;
-
-export function getInfo(figure: MixedFigure): string {
+export function getInfo(figure: Figure): string {
   return `A ${figure.color} ${figure.shape} - ${figure.getArea()}`;
 }
