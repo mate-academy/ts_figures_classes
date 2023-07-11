@@ -3,7 +3,7 @@ type Color = 'red' | 'green' | 'blue';
 export interface Figure {
   shape: 'triangle' | 'circle' | 'rectangle'
   color: Color
-  getArea: ()=>{}
+  getArea: () => number
 }
 enum FigureForm {
   Triangle = 'triangle',
@@ -11,7 +11,7 @@ enum FigureForm {
   Rectangle = 'rectangle'
 }
 
-function getTriangle(a:number, b:number, c:number) : boolean {
+function trianglePossible(a:number, b:number, c:number) : boolean {
   if (a === 0 || b === 0 || c === 0) {
     return true;
   }
@@ -36,7 +36,7 @@ export class Triangle implements Figure {
     public c: number,
 
   ) {
-    if (getTriangle(this.a, this.b, this.c)) {
+    if (trianglePossible(this.a, this.b, this.c)) {
       throw new Error('its not triangle');
     }
   }
