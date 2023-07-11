@@ -8,19 +8,16 @@ export interface Figure {
 }
 
 export class Triangle implements Figure {
-  sideA: number;
-
-  sideB: number;
-
-  sideC: number;
-
-  color: Color;
-
   shape: Shape = 'triangle';
 
-  constructor(color: Color, sideA: number, sideB: number, sideC: number) {
+  constructor(
+    public color: Color,
+    private sideA: number,
+    private sideB: number,
+    private sideC: number,
+  ) {
     if (sideA <= 0 || sideB <= 0 || sideC <= 0) {
-      throw new Error('Some length is less than zero');
+      throw new Error('Some length is less than or equal to zero');
     }
 
     if (sideA + sideB <= sideC
@@ -28,10 +25,6 @@ export class Triangle implements Figure {
       || sideA + sideC <= sideB) {
       throw new Error('Such triangle cannot exist');
     }
-    this.color = color;
-    this.sideA = sideA;
-    this.sideB = sideB;
-    this.sideC = sideC;
   }
 
   getArea = (): number => {
@@ -45,18 +38,15 @@ export class Triangle implements Figure {
 }
 
 export class Circle implements Figure {
-  radius: number;
-
   shape: Shape = 'circle';
 
-  color: Color;
-
-  constructor(color: Color, radius: number) {
+  constructor(
+    public color: Color,
+    private radius: number,
+  ) {
     if (radius <= 0) {
       throw new Error('Radius is less than zero');
     }
-    this.color = color;
-    this.radius = radius;
   }
 
   getArea = (): number => {
@@ -65,21 +55,16 @@ export class Circle implements Figure {
 }
 
 export class Rectangle implements Figure {
-  sideA: number;
-
-  sideB: number;
-
-  color: Color;
-
   shape: Shape = 'rectangle';
 
-  constructor(color: Color, sideA: number, sideB: number) {
+  constructor(
+    public color: Color,
+    private sideA: number,
+    private sideB: number,
+  ) {
     if (sideA <= 0 || sideB <= 0) {
       throw new Error('Some length is less than zero');
     }
-    this.color = color;
-    this.sideA = sideA;
-    this.sideB = sideB;
   }
 
   getArea = (): number => {
