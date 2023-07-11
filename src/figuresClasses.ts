@@ -1,9 +1,9 @@
-type SetFigures = 'triangle' | 'circle' | 'rectangle';
-type SetColors = 'red' | 'green' | 'blue';
+type Shape = 'triangle' | 'circle' | 'rectangle';
+type Color = 'red' | 'green' | 'blue';
 
 export interface Figure {
-  shape: SetFigures;
-  color: SetColors;
+  shape: Shape;
+  color: Color;
   getArea(): number;
 }
 
@@ -23,20 +23,20 @@ function isTriangle(side1: number, side2: number, side3: number): boolean {
 }
 
 export class Triangle implements Figure {
-  public shape: SetFigures = 'triangle';
+  public shape: Shape = 'triangle';
 
   constructor(
-    public color: SetColors,
+    public color: Color,
     public a: number,
     public b: number,
     public c: number,
   ) {
     if (this.a <= 0 || this.b <= 0 || this.c <= 0) {
-      throw new Error('your error message');
+      throw new Error('the number is not positive');
     }
 
     if (isTriangle(this.a, this.b, this.c)) {
-      throw new Error('your error message');
+      throw new Error('is not a triangle');
     }
 
     this.color = color;
@@ -55,11 +55,11 @@ export class Triangle implements Figure {
 }
 
 export class Circle implements Figure {
-  public shape: SetFigures = 'circle';
+  public shape: Shape = 'circle';
 
-  constructor(public color: SetColors, public radius: number) {
+  constructor(public color: Color, public radius: number) {
     if (this.radius <= 0) {
-      throw new Error('your error message');
+      throw new Error('the number is not positive');
     }
 
     this.color = color;
@@ -74,15 +74,15 @@ export class Circle implements Figure {
 }
 
 export class Rectangle implements Figure {
-  public shape: SetFigures = 'rectangle';
+  public shape: Shape = 'rectangle';
 
   constructor(
-    public color: SetColors,
+    public color: Color,
     public width: number,
     public height: number,
   ) {
     if (this.width <= 0 || this.height <= 0) {
-      throw new Error('your error message');
+      throw new Error('the number is not positive');
     }
 
     this.color = color;
@@ -91,9 +91,7 @@ export class Rectangle implements Figure {
   }
 
   getArea(): number {
-    const s: number = this.width * this.height;
-
-    return s;
+    return this.width * this.height;
   }
 }
 
