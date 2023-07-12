@@ -26,19 +26,20 @@ export class Triangle {
     ));
 
     if (sides[0] >= sides[1] + sides[2]) {
-      throw new Error('Error');
+      throw new Error('Side should be bigger than 0.');
     }
 
     if (this.a <= 0 || this.b <= 0 || this.c <= 0) {
-      throw new Error('Error');
+      throw new Error('It is not a triangle.');
     }
-    this.color = color;
   }
 
   getArea(): number {
     const s = (this.a + this.b + this.c) / 2;
 
-    return Math.sqrt(s * (s - this.a) * (s - this.b) * (s - this.c));
+    const area = Math.sqrt(s * (s - this.a) * (s - this.b) * (s - this.c));
+
+    return Math.floor(area * 100) / 100;
   }
 }
 
@@ -52,13 +53,12 @@ export class Circle {
     if (this.radius <= 0) {
       throw new Error('Radius cannot be equal 0');
     }
-
-    this.color = color;
-    this.radius = radius;
   }
 
   getArea(): number {
-    return Math.floor((Math.PI * this.radius ** 2) * 100) / 100;
+    const area = Math.PI * (this.radius ** 2);
+
+    return Math.floor(area * 100) / 100;
   }
 }
 
@@ -73,17 +73,15 @@ export class Rectangle {
     if (this.width <= 0 || this.height <= 0) {
       throw new Error('Width and Height should be bigger than 0');
     }
-
-    this.color = color;
   }
 
   getArea(): number {
-    return this.width * this.height;
+    const area = this.width * this.height;
+
+    return Math.floor(area * 100) / 100;
   }
 }
 
 export function getInfo(figure: Figure): string {
-  const figureArea = Number(figure.getArea().toFixed(2));
-
-  return `A ${figure.color} ${figure.shape} - ${figureArea}`;
+  return `A ${figure.color} ${figure.shape} - ${figure.getArea()}`;
 }
