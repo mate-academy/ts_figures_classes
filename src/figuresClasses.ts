@@ -1,4 +1,8 @@
-type Shape = 'triangle' | 'circle' | 'rectangle';
+enum Shape {
+  Triangle = 'triangle',
+  Circle = 'circle',
+  Rectangle = 'rectangle',
+}
 type Color = 'red' | 'green' | 'blue';
 
 export interface Figure {
@@ -8,7 +12,7 @@ export interface Figure {
 }
 
 export class Triangle implements Figure {
-  public shape: Shape = 'triangle';
+  public shape: Shape = Shape.Triangle;
 
   constructor(
     public color: Color,
@@ -17,19 +21,25 @@ export class Triangle implements Figure {
     public c: number,
   ) {
     if (a <= 0 || b <= 0 || c <= 0) {
-      throw new Error('Wrong data');
+      throw new Error('Value cannot be 0 or less');
     }
 
     if (a >= b + c) {
-      throw new Error('Wrong data');
+      throw new Error(
+        'The longest side of a triangle is >= than a sum of two others',
+      );
     }
 
     if (c >= b + a) {
-      throw new Error('Wrong data');
+      throw new Error(
+        'The longest side of a triangle is >= than a sum of two others',
+      );
     }
 
     if (b >= a + c) {
-      throw new Error('Wrong data');
+      throw new Error(
+        'The longest side of a triangle is >= than a sum of two others',
+      );
     }
   }
 
@@ -42,14 +52,14 @@ export class Triangle implements Figure {
 }
 
 export class Circle implements Figure {
-  public shape: Shape = 'circle';
+  public shape: Shape = Shape.Circle;
 
   constructor(
     public color: Color,
     public radius: number,
   ) {
     if (radius <= 0) {
-      throw new Error('Wrong data');
+      throw new Error('Value cannot be 0 or less');
     }
   }
 
@@ -59,7 +69,7 @@ export class Circle implements Figure {
 }
 
 export class Rectangle implements Figure {
-  public shape: Shape = 'rectangle';
+  public shape: Shape = Shape.Rectangle;
 
   constructor(
     public color: Color,
@@ -67,7 +77,7 @@ export class Rectangle implements Figure {
     public height: number,
   ) {
     if (height <= 0 || width <= 0) {
-      throw new Error('Wrong data');
+      throw new Error('Value cannot be 0 or less');
     }
   }
 
