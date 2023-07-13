@@ -8,9 +8,7 @@ export class Triangle implements Figure {
   public shape: Figure['shape'] = 'triangle';
 
   public a: number;
-
   public b: number;
-
   public c: number;
 
   constructor(
@@ -20,7 +18,7 @@ export class Triangle implements Figure {
     c: number,
   ) {
     if (a <= 0 || b <= 0 || c <= 0 || a + b <= c || a + c <= b || b + c <= a) {
-      throw new Error('error message');
+      throw new Error('Entered sides a, b, c must be able to form a trangle');
     }
 
     this.a = a;
@@ -38,7 +36,6 @@ export class Triangle implements Figure {
 
 export class Circle implements Figure {
   public shape: Figure['shape'] = 'circle';
-
   public radius: number;
 
   constructor(
@@ -48,7 +45,7 @@ export class Circle implements Figure {
     this.radius = radius;
 
     if (radius <= 0) {
-      throw new Error('error message');
+      throw new Error('Radius must be a positive number greater than zero.');
     }
   }
 
@@ -62,9 +59,7 @@ export class Circle implements Figure {
 
 export class Rectangle implements Figure {
   public shape: Figure['shape'] = 'rectangle';
-
   public width: number;
-
   public height: number;
 
   constructor(
@@ -73,7 +68,9 @@ export class Rectangle implements Figure {
     height: number,
   ) {
     if (width <= 0 || height <= 0) {
-      throw new Error('error message');
+      throw new Error(
+        'Width and height must be greater than 0 to form a rectangle',
+      );
     }
 
     this.width = width;
