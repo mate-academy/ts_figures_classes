@@ -30,8 +30,8 @@ export class Triangle implements Figure {
   getArea(): number {
     const s: number = (this.a + this.b + this.c) / 2;
 
-    return +Math.sqrt(s * (s - this.a) * (s - this.b) * (s - this.c))
-      .toFixed(2);
+    return Number(Math.sqrt(s * (s - this.a) * (s - this.b) * (s - this.c))
+      .toFixed(2));
   }
 }
 
@@ -58,15 +58,15 @@ export class Rectangle {
   constructor(
     public color: Color,
     public width: number,
-    public heigth: number,
+    public height: number,
   ) {
-    if (width <= 0 || heigth <= 0) {
+    if (width <= 0 || height <= 0) {
       throw new Error('width and height must be > 0');
     }
   }
 
   getArea(): number {
-    return +(this.width * this.heigth).toFixed(2);
+    return Number((this.width * this.height).toFixed(2));
   }
 }
 
