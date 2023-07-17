@@ -5,22 +5,16 @@ export interface Figure {
   shape: FigureShape;
   color: FigureColor;
   getArea(): number;
-
 }
 
 export class Triangle implements Figure {
   shape: FigureShape;
 
-  public color: FigureColor;
-
-  public a: number;
-
-  public b: number;
-
-  public c: number;
-
   constructor(
-    color: FigureColor, a: number, b: number, c: number,
+    public color: FigureColor,
+    public a: number,
+    public b: number,
+    public c: number,
 
   ) {
     if (a <= 0 || b <= 0 || c <= 0) {
@@ -49,11 +43,10 @@ export class Triangle implements Figure {
 export class Circle implements Figure {
   shape: FigureShape;
 
-  public color: FigureColor;
-
-  public radius: number;
-
-  constructor(color: FigureColor, radius: number) {
+  constructor(
+    public color: FigureColor,
+    public radius: number,
+  ) {
     this.shape = 'circle';
     this.color = color;
     this.radius = radius;
@@ -71,13 +64,11 @@ export class Circle implements Figure {
 export class Rectangle implements Figure {
   shape: FigureShape;
 
-  public color: FigureColor;
-
-  public width: number;
-
-  public height: number;
-
-  constructor(color: FigureColor, width: number, height: number) {
+  constructor(
+    public color: FigureColor,
+    public width: number,
+    public height: number,
+  ) {
     this.shape = 'rectangle';
     this.color = color;
     this.width = width;
