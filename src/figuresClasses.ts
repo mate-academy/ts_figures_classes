@@ -1,4 +1,14 @@
-type Shape = 'triangle' | 'circle' | 'rectangle';
+enum Shape {
+  Triangle = 'triangle',
+  Circle = 'circle',
+  Rectangle = 'rectangle'
+}
+
+const ERRORS = {
+  ONLY_POSITIVE: 'All numbers must be positive',
+  LONGEST_SIDE: 'The longest side of a triangle is >= than a sum of two others',
+};
+
 type Color = 'red' | 'green' | 'blue';
 
 export interface Figure {
@@ -8,7 +18,7 @@ export interface Figure {
 }
 
 export class Triangle implements Figure {
-  shape: Shape = 'triangle';
+  shape: Shape = Shape.Triangle;
 
   color: Color;
 
@@ -25,15 +35,11 @@ export class Triangle implements Figure {
     this.c = c;
 
     if (a <= 0 || b <= 0 || c <= 0) {
-      throw new Error(
-        'All numbers must be positive',
-      );
+      throw new Error(ERRORS.ONLY_POSITIVE);
     }
 
     if (a + c <= b || a + b <= c || c + b <= a) {
-      throw new Error(
-        'The longest side of a triangle is >= than a sum of two others',
-      );
+      throw new Error(ERRORS.LONGEST_SIDE);
     }
   }
 
@@ -46,7 +52,7 @@ export class Triangle implements Figure {
 }
 
 export class Circle implements Figure {
-  shape: Shape = 'circle';
+  shape: Shape = Shape.Circle;
 
   color: Color;
 
@@ -57,9 +63,7 @@ export class Circle implements Figure {
     this.radius = r;
 
     if (r <= 0) {
-      throw new Error(
-        'All numbers must be positive',
-      );
+      throw new Error(ERRORS.ONLY_POSITIVE);
     }
   }
 
@@ -70,8 +74,8 @@ export class Circle implements Figure {
   }
 }
 
-export class Rectangle {
-  shape: Shape = 'rectangle';
+export class Rectangle implements Figure {
+  shape: Shape = Shape.Rectangle;
 
   color: Color;
 
@@ -85,9 +89,7 @@ export class Rectangle {
     this.h = h;
 
     if (h <= 0 || w <= 0) {
-      throw new Error(
-        'All numbers must be positive',
-      );
+      throw new Error(ERRORS.ONLY_POSITIVE);
     }
   }
 
