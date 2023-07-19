@@ -7,14 +7,14 @@ enum Shape {
 }
 
 export interface Figure {
-  shape: Shape.Triangle | Shape.Circle | Shape.Rectangle;
+  shape: Shape;
   color: Colors;
 
   getArea(): number;
 }
 
 export class Triangle implements Figure {
-  shape: Shape = Shape.Triangle;
+  shape = Shape.Triangle;
 
   constructor(
     public color: Colors,
@@ -24,7 +24,7 @@ export class Triangle implements Figure {
   ) {
     const sides = [this.a, this.b, this.c];
 
-    sides.sort((x: number, y: number) => y - x);
+    sides.sort((x, y) => y - x);
 
     if (sides[0] >= sides[1] + sides[2]) {
       throw new Error('Error');
@@ -45,7 +45,7 @@ export class Triangle implements Figure {
 }
 
 export class Circle implements Figure {
-  shape: Shape = Shape.Circle;
+  shape = Shape.Circle;
 
   constructor(
     public color: Colors,
@@ -62,7 +62,7 @@ export class Circle implements Figure {
 }
 
 export class Rectangle implements Figure {
-  shape: Shape = Shape.Rectangle;
+  shape = Shape.Rectangle;
 
   constructor(
     public color: Colors,
