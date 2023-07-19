@@ -10,15 +10,15 @@ export class Triangle implements Figure {
   public sides: number[];
 
   constructor(public color: string, ...sides: number[]) {
+    const condition1 = sides[0] + sides[1] <= sides[2];
+    const condition2 = sides[1] + sides[2] <= sides[0];
+    const condition3 = sides[0] + sides[2] <= sides[1];
+
     if (sides.some((side: number) => side <= 0)) {
       throw new Error('Error: sides must be greater than 0');
     }
 
-    if (
-      sides[0] + sides[1] <= sides[2]
-      || sides[1] + sides[2] <= sides[0]
-      || sides[0] + sides[2] <= sides[1]
-    ) {
+    if (condition1 || condition2 || condition3) {
       throw new Error(
         'Error: sum of any two sides must be greater than the third side',
       );
@@ -77,6 +77,6 @@ export class Rectangle {
   }
 }
 
-export function getInfo({ color, shape, getArea }: Figure): string {
-  return `A ${color} ${shape} - ${getArea()}`;
+export function getInfo(figure: Figure): string {
+  return `A ${figure.color} ${figure.shape} - ${figure.getArea()}`;
 }
