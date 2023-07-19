@@ -77,6 +77,6 @@ export class Rectangle {
   }
 }
 
-export function getInfo(figure: Figure): string {
-  return `A ${figure.color} ${figure.shape} - ${figure.getArea()}`;
+export function getInfo({ color, shape, getArea }: Figure): string {
+  return `A ${color} ${shape} - ${getArea()}`;
 }
