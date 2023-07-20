@@ -1,89 +1,93 @@
-type FigureShape = 'triangle' | 'circle' | 'rectangle';
-type FigureColor = 'red' | 'green' | 'blue';
-
-export interface Figure {
-  shape: FigureShape;
-  color: FigureColor;
-  getArea(): number;
+enum Shape {
+  Triangle = 'triangle',
+  Circle = 'circle',
+  Rectangle = 'rectangle',
 }
 
+enum Color {
+  Red = 'red',
+  Green = 'green',
+  Blue = 'blue',
+}
+
+export interface Figure {
+  shape: Shape,
+  color: Color,
+  getArea(): number,
+}
+
+const getRounded = (num: number): number => {
+  return Math.floor(num * 100) / 100;
+};
+
 export class Triangle implements Figure {
-  shape: FigureShape;
+  shape = Shape.Triangle;
 
   constructor(
-    public color: FigureColor,
+    public color: Color,
     public a: number,
     public b: number,
     public c: number,
-
   ) {
     if (a <= 0 || b <= 0 || c <= 0) {
-      throw new Error('Length of sides must be greater than 0.');
+      throw new Error('The side length should be more than 0');
     }
 
-    if (a + b <= c || b + c <= a || c + a <= b) {
-      throw new Error('The longest side must be greater than others side.');
+    if (c >= a + b || b >= a + c || a >= b + c) {
+      throw new Error(
+        'The side length should be less than the sum of other two sides',
+      );
     }
-
-    this.shape = 'triangle';
-    this.color = color;
-    this.a = a;
-    this.b = b;
-    this.c = c;
   }
 
   getArea(): number {
-    const p: number = (this.a + this.b + this.c) / 2;
+    const semiPerim = (this.a + this.b + this.c) * 0.5;
+    const area = semiPerim * (semiPerim - this.a)
+    * (semiPerim - this.b) * (semiPerim - this.c);
 
-    return Number(Math.sqrt(p * (p - this.a)
-    * (p - this.b) * (p - this.c)).toFixed(2));
+    return getRounded(Math.sqrt(area));
   }
 }
 
 export class Circle implements Figure {
-  shape: FigureShape;
+  shape = Shape.Circle;
 
   constructor(
-    public color: FigureColor,
+    public color: Color,
     public radius: number,
   ) {
-    this.shape = 'circle';
-    this.color = color;
-    this.radius = radius;
-
     if (radius <= 0) {
-      throw new Error('Radius must be greater than 0.');
+      throw new Error('The radius should be greater than 0');
     }
   }
 
   getArea(): number {
-    return Math.trunc(Math.PI * this.radius ** 2 * 100) / 100;
+    const area = this.radius * this.radius * Math.PI;
+
+    return getRounded(area);
   }
 }
 
 export class Rectangle implements Figure {
-  shape: FigureShape;
+  shape = Shape.Rectangle;
 
   constructor(
-    public color: FigureColor,
+    public color: Color,
     public width: number,
     public height: number,
   ) {
-    this.shape = 'rectangle';
-    this.color = color;
-    this.width = width;
-    this.height = height;
-
     if (width <= 0 || height <= 0) {
-      throw new Error('Each side must be greater 0.');
+      throw new Error('The side length should be greater than 0');
     }
   }
 
   getArea(): number {
-    return this.width * this.height;
+    const area = this.width * this.height;
+
+    return getRounded(area);
   }
 }
 
 export function getInfo(figure: Figure): string {
-  return `A${figure.color} ${figure.shape} - ${figure.getArea()}`;
+  return `A ${figure.color} ${figure.shape} - ${figure.getArea()}`;
 }
