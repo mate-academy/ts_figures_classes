@@ -1,28 +1,24 @@
 type Shape = 'triangle' | 'circle' | 'rectangle';
+type Color = 'red' | 'green' | 'blue';
 
 export interface Figure {
   shape: Shape,
-  color: 'red' | 'green' | 'blue',
-  // width: number;
-  // height: number;
-  // radius: number;
-  // a: number;
-  // b: number;
-  // c: number;
+  color: Color,
 }
 
 export class Triangle implements Figure {
   shape: Shape = 'triangle';
 
   constructor(
-    public color: 'red' | 'green' | 'blue',
+    public color: Color,
     public a: number,
     public b: number,
     public c: number,
   ) {
-    if ((a < 0) || (b < 0) || (c < 0)
+    if ((a <= 0) || (b <= 0) || (c <= 0)
     || (a >= b + c) || (b >= a + c) || (c >= a + b)) {
-      throw new Error('your error message');
+      throw new Error('Error: one of the sides <= 0'
+      + 'or the longest side of a triangle is >= than a sum of two others');
     }
   }
 
@@ -39,11 +35,11 @@ export class Circle implements Figure {
   shape: Shape = 'circle';
 
   constructor(
-    public color: 'red' | 'green' | 'blue',
+    public color: Color,
     public radius: number,
   ) {
-    if (radius < 0) {
-      throw new Error('your error message');
+    if (radius <= 0) {
+      throw new Error('Error: radius <= 0');
     }
   }
 
@@ -56,12 +52,12 @@ export class Rectangle implements Figure {
   shape: Shape = 'rectangle';
 
   constructor(
-    public color: 'red' | 'green' | 'blue',
+    public color: Color,
     public width: number,
     public height: number,
   ) {
-    if ((width < 0) || (height < 0)) {
-      throw new Error('your error message');
+    if ((width <= 0) || (height <= 0)) {
+      throw new Error('Error: width <= 0 or height <= 0');
     }
   }
 
@@ -69,23 +65,6 @@ export class Rectangle implements Figure {
     return Number(this.width * this.height);
   }
 }
-// export class Rectangle implements Figure {
-//   shape: Shape = 'rectangle';
-
-//   constructor(
-//     public color: 'red' | 'green' | 'blue',
-//     public width: number,
-//     public height: number,
-//   ) {
-//     if ((width < 0) || (height < 0)) {
-//       throw new Error('your error message');
-//     }
-//   }
-
-//   getArea(): number {
-//     return Number(this.width * this.height);
-//   }
-// }
 
 export function getInfo(figure: Triangle | Circle | Rectangle): string {
   return `A ${figure.color} ${figure.shape} - ${figure.getArea()}`;
