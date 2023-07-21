@@ -11,16 +11,12 @@ export interface Figure {
 export class Triangle implements Figure {
   shape: Shape = 'triangle';
 
-  color: Color;
-
   constructor(
-    color: Color,
+    public color: Color,
     private a: number,
     private b: number,
     private c: number,
   ) {
-    this.color = color;
-
     if (this.a <= 0 || this.b <= 0 || this.c <= 0) {
       throw new Error('All sides must be greater than 0');
     }
@@ -44,14 +40,10 @@ export class Triangle implements Figure {
 export class Circle implements Figure {
   shape: Shape = 'circle';
 
-  color: Color;
-
   constructor(
-    color: Color,
+    public color: Color,
     private r: number,
   ) {
-    this.color = color;
-
     if (this.r <= 0) {
       throw new Error('Radius must be greater than 0');
     }
@@ -68,15 +60,11 @@ export class Circle implements Figure {
 export class Rectangle implements Figure {
   shape: Shape = 'rectangle';
 
-  color: Color;
-
   constructor(
-    color: Color,
+    public color: Color,
     private width: number,
     private height: number,
   ) {
-    this.color = color;
-
     if (this.width <= 0 || this.height <= 0) {
       throw new Error('Side must be greater than 0');
     }
