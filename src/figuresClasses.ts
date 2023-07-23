@@ -25,7 +25,7 @@ export class Triangle implements Figure {
 
     sides.sort((x, y) => y - x);
 
-    if (sides[0] >= sides[1] + sides[2]) {
+    if (a >= b + c || b >= a + c || c >= a + b) {
       throw new Error('Attention, your triangle is not correct');
     }
 
@@ -35,10 +35,15 @@ export class Triangle implements Figure {
   }
 
   getArea(): number {
-    const square = (this.a + this.b + this.c) / 2;
+    const {
+      a,
+      b,
+      c,
+    } = this;
+    const square = (a + b + c) / 2;
 
     const area = Math.sqrt(
-      square * (square - this.a) * (square - this.b) * (square - this.c),
+      square * (square - a) * (square - b) * (square - c),
     );
 
     return Math.floor(area * 100) / 100;
@@ -76,9 +81,12 @@ export class Rectangle implements Figure {
   }
 
   getArea(): number {
-    const result = this.width * this.height;
+    const {
+      width,
+      height,
+    } = this;
 
-    return result;
+    return width * height;
   }
 }
 
