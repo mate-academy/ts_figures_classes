@@ -1,6 +1,9 @@
+type Shape = 'triangle' | 'circle' | 'rectangle';
+type Color = 'red' | 'green' | 'blue';
+
 export interface Figure {
-  shape: 'triangle' | 'circle' | 'rectangle',
-  color: 'red' | 'green' | 'blue',
+  shape: Shape,
+  color: Color,
 }
 
 interface ITriangle extends Figure {
@@ -31,10 +34,10 @@ const throwErrorTriangle = (): Error => {
 };
 
 export class Triangle implements ITriangle {
-  readonly shape: 'triangle' | 'circle' | 'rectangle';
+  readonly shape: 'triangle';
 
   constructor(
-    readonly color: 'red' | 'green' | 'blue',
+    readonly color: Color,
     readonly side1: number,
     readonly side2: number,
     readonly side3: number,
@@ -43,17 +46,14 @@ export class Triangle implements ITriangle {
     throwErrorOnNegativeValue(side2);
     throwErrorOnNegativeValue(side3);
 
-    if (!(side1 + side2 > side3)) {
+    if (
+      !(side1 + side2 > side3)
+      || !(side2 + side3 > side1)
+      || !(side1 + side3 > side2)
+    ) {
       throwErrorTriangle();
     }
 
-    if (!(side2 + side3 > side1)) {
-      throwErrorTriangle();
-    }
-
-    if (!(side1 + side3 > side2)) {
-      throwErrorTriangle();
-    }
     this.color = color;
     this.side1 = side1;
     this.side2 = side2;
@@ -75,10 +75,10 @@ export class Triangle implements ITriangle {
 }
 
 export class Circle implements ICircle {
-  readonly shape: 'triangle' | 'circle' | 'rectangle';
+  readonly shape: 'circle';
 
   constructor(
-    readonly color: 'red' | 'green' | 'blue',
+    readonly color: Color,
     readonly radius: number,
   ) {
     throwErrorOnNegativeValue(radius);
@@ -96,7 +96,7 @@ export class Rectangle implements IRectangle {
   readonly shape = 'rectangle';
 
   constructor(
-    readonly color: 'red' | 'green' | 'blue',
+    readonly color: Color,
     readonly width: number,
     readonly height: number,
   ) {
