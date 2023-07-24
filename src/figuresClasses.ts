@@ -19,10 +19,16 @@ interface IRectangle extends Figure {
 }
 
 function throwErrorOnNegativeValue(variable: number): Error | void {
-  if (variable < 1) {
-    throw new Error("Don't write plz negative numbers");
+  if (variable <= 0) {
+    throw new Error('This side can\'t be less than 0');
   }
 }
+
+const throwErrorTriangle = (): Error => {
+  throw new Error(
+    'This triangle does not exist. Sum of 2 sides must be more than 3rd side',
+  );
+};
 
 export class Triangle implements ITriangle {
   readonly shape: 'triangle' | 'circle' | 'rectangle';
@@ -38,15 +44,15 @@ export class Triangle implements ITriangle {
     throwErrorOnNegativeValue(side3);
 
     if (!(side1 + side2 > side3)) {
-      throw new Error();
+      throwErrorTriangle();
     }
 
     if (!(side2 + side3 > side1)) {
-      throw new Error();
+      throwErrorTriangle();
     }
 
     if (!(side1 + side3 > side2)) {
-      throw new Error();
+      throwErrorTriangle();
     }
     this.color = color;
     this.side1 = side1;
