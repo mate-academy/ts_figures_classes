@@ -1,19 +1,91 @@
+type Color = 'red' | 'green' | 'blue';
+
+enum Shape {
+  Triangle = 'triangle',
+  Circle = 'circle',
+  Rectangle = 'rectangle'
+}
+
+export function rounding(value: number): number {
+  return Math.floor(100 * value) / 100;
+}
+
 export interface Figure {
-
+  shape: Shape;
+  color: Color;
+  getArea(): number;
 }
 
-export class Triangle {
+export class Triangle implements Figure {
+  public shape = Shape.Triangle;
 
+  constructor(
+    public color: Color,
+    public a: number,
+    public b: number,
+    public c: number,
+  ) {
+    if (a <= 0 || b <= 0 || c <= 0) {
+      throw new Error('Length of sides must be greater than 0.');
+    }
+
+    if (a >= b + c || b >= a + c || c >= a + b) {
+      throw new Error('Invalid triangle sides.'
+      + 'Sides 1, 2 and 3 can\'t form a triangle');
+    }
+  }
+
+  getArea(): number {
+    const { a, b, c } = this;
+    const p: number = (a + b + c) / 2;
+
+    const area: number
+      = Math.sqrt(p * (p - a) * (p - b) * (p - c));
+
+    return rounding(area);
+  }
 }
 
-export class Circle {
+export class Circle implements Figure {
+  public shape = Shape.Circle;
 
+  constructor(
+    public color: Color,
+    public radius: number,
+  ) {
+    if (radius <= 0) {
+      throw new Error('Radius cannot be 0 or less');
+    }
+  }
+
+  getArea(): number {
+    const area: number = Math.PI * this.radius * this.radius;
+
+    return rounding(area);
+  }
 }
 
-export class Rectangle {
+export class Rectangle implements Figure {
+  public shape = Shape.Rectangle;
 
+  constructor(
+    public color: Color,
+    public width: number,
+    public height: number,
+  ) {
+    if (width <= 0 || height <= 0) {
+      throw new Error('Sides cannot be 0 or less');
+    }
+  }
+
+  getArea(): number {
+    const { width, height } = this;
+    const area: number = width * height;
+
+    return rounding(area);
+  }
 }
 
-export function getInfo(figure) {
-
+export function getInfo(figure: Figure): string {
+  return `A ${figure.color} ${figure.shape} - ${figure.getArea()}`;
 }
