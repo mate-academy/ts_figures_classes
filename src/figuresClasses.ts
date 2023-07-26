@@ -6,6 +6,10 @@ enum Shape {
   Rectangle = 'rectangle'
 }
 
+export function rounding(value: number): number {
+  return Math.floor(100 * value) / 100;
+}
+
 export interface Figure {
   shape: Shape;
   color: Color;
@@ -38,7 +42,7 @@ export class Triangle implements Figure {
     const area: number
       = Math.sqrt(p * (p - a) * (p - b) * (p - c));
 
-    return Math.floor(100 * area) / 100;
+    return rounding(area);
   }
 }
 
@@ -57,7 +61,7 @@ export class Circle implements Figure {
   getArea(): number {
     const area: number = Math.PI * this.radius * this.radius;
 
-    return Math.floor(100 * area) / 100;
+    return rounding(area);
   }
 }
 
@@ -78,7 +82,7 @@ export class Rectangle implements Figure {
     const { width, height } = this;
     const area: number = width * height;
 
-    return Math.floor(100 * area) / 100;
+    return rounding(area);
   }
 }
 
