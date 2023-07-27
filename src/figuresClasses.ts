@@ -18,29 +18,15 @@ export interface Figure {
 }
 
 export class Triangle {
-  color: Color;
-
-  shape: Shape;
-
-  a: number;
-
-  b: number;
-
-  c: number;
+  shape = Shape.Triangle;
 
   constructor(
-    color: Color,
+    public color: Color,
 
-    a: number,
-    b: number,
-    c: number,
+    public a: number,
+    public b: number,
+    public c: number,
   ) {
-    this.shape = Shape.Triangle;
-    this.color = color;
-    this.a = a;
-    this.b = b;
-    this.c = c;
-
     if (this.a <= 0
         || this.b <= 0
         || this.c <= 0
@@ -60,20 +46,12 @@ export class Triangle {
 }
 
 export class Circle {
-  color: Color;
-
-  shape: Shape;
-
-  radius: number;
+  shape = Shape.Circle;
 
   constructor(
-    color: Color,
-    radius: number,
+    public color: Color,
+    public radius: number,
   ) {
-    this.shape = Shape.Circle;
-    this.radius = radius;
-    this.color = color;
-
     if (radius <= 0) {
       throw new Error('your error message');
     }
@@ -87,26 +65,13 @@ export class Circle {
 }
 
 export class Rectangle {
-  color: Color;
-
-  shape: Shape;
-
-  width: number;
-
-  height: number;
+  shape = Shape.Rectangle;
 
   constructor(
-    color: Color,
-
-    width: number,
-
-    height: number,
+    public color: Color,
+    public width: number,
+    public height: number,
   ) {
-    this.shape = Shape.Rectangle;
-    this.color = color;
-    this.width = width;
-    this.height = height;
-
     if (this.width <= 0 || this.height <= 0) {
       throw new Error('your error message');
     }
