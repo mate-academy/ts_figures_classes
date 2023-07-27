@@ -65,17 +65,17 @@ export class Rectangle implements Figure {
   constructor(
     public color: Color,
     public width: number,
-    public heigth: number,
+    public height: number,
   ) {
     this.shape = 'rectangle';
 
-    if (width <= 0 || heigth <= 0) {
+    if (width <= 0 || height <= 0) {
       throw new Error('Rectangle sides must be > 0');
     }
   }
 
   getArea(): number {
-    return roundToHundredths(this.width * this.heigth);
+    return roundToHundredths(this.width * this.height);
   }
 }
 
