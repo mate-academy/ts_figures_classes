@@ -1,21 +1,32 @@
+enum EnumShape {
+  triangle = 'triangle',
+  circle = 'circle',
+  rectangle = 'rectangle',
+}
+
+enum EnumColor {
+  red = 'red',
+  green = 'green',
+  blue = 'blue',
+}
+
 export interface Figure {
-  shape: 'triangle' | 'circle' | 'rectangle',
-  color: 'red' | 'green' | 'blue',
+  shape: EnumShape,
+  color: EnumColor,
   getArea(): number
 }
 
 export class Triangle implements Figure {
-  shape: 'triangle';
+  shape = EnumShape.triangle;
 
   area!: number;
 
   constructor(
-    public color: 'red' | 'green' | 'blue',
+    public color: EnumColor,
     public a: number,
     public b: number,
     public c: number,
   ) {
-    this.shape = 'triangle';
     this.color = color;
 
     if (this.a <= 0 || this.b <= 0 || this.c <= 0) {
@@ -41,15 +52,14 @@ export class Triangle implements Figure {
 }
 
 export class Circle implements Figure {
-  shape: 'circle';
+  shape = EnumShape.circle;
 
   area!: number;
 
   constructor(
-    public color: 'red' | 'green' | 'blue',
+    public color: EnumColor,
     public radius: number,
   ) {
-    this.shape = 'circle';
     this.color = color;
 
     if (this.radius <= 0) {
@@ -67,16 +77,15 @@ export class Circle implements Figure {
 }
 
 export class Rectangle {
-  shape: 'rectangle';
+  shape = EnumShape.rectangle;
 
   area!: number;
 
   constructor(
-    public color: 'red' | 'green' | 'blue',
+    public color: EnumColor,
     public width: number,
     public height: number,
   ) {
-    this.shape = 'rectangle';
     this.color = color;
 
     if (this.height <= 0 || this.width <= 0) {
