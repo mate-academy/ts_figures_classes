@@ -1,21 +1,28 @@
 export interface Figure {
-  color: 'red' | 'green' | 'blue';
   getArea(): number | Error
+}
+
+export enum Color {
+  Red = 'red',
+  Green = 'green',
+  Blue = 'blue',
+}
+
+export enum Shape {
+  Triangle = 'triangle',
+  Circle = 'circle',
+  Rectangle = 'rectangle',
 }
 
 export class Triangle implements Figure {
   shape = 'triangle';
 
   constructor(
-    public color: 'red' | 'green' | 'blue',
-    public aSide: number,
-    public bSide: number,
-    public cSide: number,
+    public color: Color,
+    public a: number,
+    public b: number,
+    public c: number,
   ) {
-    const a: number = aSide;
-    const b: number = bSide;
-    const c: number = cSide;
-
     if (a <= 0 || b <= 0 || c <= 0) {
       throw new Error('one of sides is equal 0 or less');
     }
@@ -26,9 +33,9 @@ export class Triangle implements Figure {
   }
 
   getArea(): number | Error {
-    const a: number = this.aSide;
-    const b: number = this.bSide;
-    const c: number = this.cSide;
+    const { a } = this;
+    const { b } = this;
+    const { c } = this;
 
     const s: number = (a + b + c) / 2;
     const area: number = s * (s - a) * (s - b) * (s - c);
@@ -56,16 +63,16 @@ export class Rectangle implements Figure {
 
   constructor(
     public color: 'red' | 'green' | 'blue',
-    public aSide: number,
-    public bSide: number,
+    public a: number,
+    public b: number,
   ) {
-    if (aSide <= 0 || bSide <= 0) {
+    if (a <= 0 || b <= 0) {
       throw new Error('one of sides is equal 0 or less');
     }
   }
 
   getArea(): number | Error {
-    return this.aSide * this.bSide;
+    return this.a * this.b;
   }
 }
 
