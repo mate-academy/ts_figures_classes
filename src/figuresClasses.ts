@@ -1,7 +1,3 @@
-export interface Figure {
-  getArea(): number | Error
-}
-
 export enum Color {
   Red = 'red',
   Green = 'green',
@@ -14,8 +10,14 @@ export enum Shape {
   Rectangle = 'rectangle',
 }
 
+export interface Figure {
+  shape: Shape,
+  color: Color,
+  getArea(): number
+}
+
 export class Triangle implements Figure {
-  shape = 'triangle';
+  shape = Shape.Triangle;
 
   constructor(
     public color: Color,
@@ -32,22 +34,20 @@ export class Triangle implements Figure {
     }
   }
 
-  getArea(): number | Error {
-    const { a } = this;
-    const { b } = this;
-    const { c } = this;
+  getArea(): number {
+    const { a, b, c } = this;
 
-    const s: number = (a + b + c) / 2;
-    const area: number = s * (s - a) * (s - b) * (s - c);
+    const s = (a + b + c) / 2;
+    const area = s * (s - a) * (s - b) * (s - c);
 
     return Math.floor(Math.sqrt(area) * 100) / 100;
   }
 }
 
 export class Circle implements Figure {
-  shape = 'circle';
+  shape = Shape.Circle;
 
-  constructor(public color: 'red' | 'green' | 'blue', public radius: number) {
+  constructor(public color: Color, public radius: number) {
     if (radius <= 0) {
       throw new Error('radius is equal 0 or less');
     }
@@ -59,10 +59,10 @@ export class Circle implements Figure {
 }
 
 export class Rectangle implements Figure {
-  shape = 'rectangle';
+  shape = Shape.Rectangle;
 
   constructor(
-    public color: 'red' | 'green' | 'blue',
+    public color: Color,
     public a: number,
     public b: number,
   ) {
@@ -71,7 +71,7 @@ export class Rectangle implements Figure {
     }
   }
 
-  getArea(): number | Error {
+  getArea(): number {
     return this.a * this.b;
   }
 }
