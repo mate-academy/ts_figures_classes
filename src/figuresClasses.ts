@@ -1,22 +1,6 @@
 type Shape = 'triangle' | 'circle' | 'rectangle';
 type Color = 'red' | 'green' | 'blue';
 
-// export function getArea(): number {
-//   if (this.b === undefined && this.c === undefined && this.a !== undefined) {
-//     return Math.PI * this.a ** 2;
-//   }
-
-//   if (this.a !== undefined && this.b !== undefined && this.c === undefined) {
-//     return this.a * this.b;
-//   }
-
-//   if (this.a !== undefined && this.b !== undefined && this.c !== undefined) {
-//     return ((this.a + this.b + this.c) / 2);
-//   }
-
-//   return 0;
-// }
-
 export interface Figure {
   shape: Shape,
   color: Color,
@@ -33,7 +17,7 @@ export class Circle implements Figure {
   ) {
     if (this.a <= 0) {
       throw new
-      Error(`it is impossible to form a circle with radius ${this.a}`);
+      Error('the circle cannot have a radius <= 0');
     }
   }
 
@@ -51,8 +35,7 @@ export class Rectangle implements Figure {
     public b: number,
   ) {
     if (this.a <= 0 || this.b <= 0) {
-      throw new
-      Error(`it is impossible to form a rectangle with sides ${a} and ${b}`);
+      throw new Error(`sides ${a} and ${b} can't form a rectangle`);
     }
   }
 
@@ -73,8 +56,7 @@ export class Triangle implements Figure {
     if (this.a <= 0 || this.b <= 0 || this.c <= 0
       || this.a + this.b <= this.c || this.c + this.b <= this.a
       || this.c + this.a <= this.b) {
-      throw new
-      Error(`sides ${this.a}, ${this.b} and ${this.c} can't form a triangle`);
+      throw new Error(`sides ${a}, ${b} and ${c} can't form a triangle`);
     }
   }
 
