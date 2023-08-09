@@ -13,7 +13,7 @@ export interface Figure {
 }
 
 export class Triangle implements Figure {
-  shape: Shape.Triangle;
+  public shape = Shape.Triangle;
 
   constructor(
     public color: Color,
@@ -24,8 +24,6 @@ export class Triangle implements Figure {
     if (a >= (b + c) || b >= (a + c) || c >= (a + b)) {
       throw new Error('invalid side length for triangle');
     }
-
-    this.shape = Shape.Triangle;
   }
 
   getArea(): number {
@@ -40,7 +38,7 @@ export class Triangle implements Figure {
 }
 
 export class Circle implements Figure {
-  shape: Shape.Circle;
+  public shape = Shape.Circle;
 
   constructor(
     public color: Color,
@@ -49,8 +47,6 @@ export class Circle implements Figure {
     if (radius <= 0) {
       throw new Error('radius must be > 0');
     }
-
-    this.shape = Shape.Circle;
   }
 
   getArea(): number {
@@ -59,7 +55,7 @@ export class Circle implements Figure {
 }
 
 export class Rectangle implements Figure {
-  shape: Shape.Rectangle;
+  public shape = Shape.Rectangle;
 
   constructor(
     public color: Color,
@@ -69,8 +65,6 @@ export class Rectangle implements Figure {
     if (width <= 0 || height <= 0) {
       throw new Error('width must be > 0, height must be > 0');
     }
-
-    this.shape = Shape.Rectangle;
   }
 
   getArea(): number {
