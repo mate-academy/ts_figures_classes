@@ -26,9 +26,9 @@ export class Triangle implements Figure {
     this.sideB = sideB;
     this.sideC = sideC;
 
-    if ((this.sideA + this.sideB < this.sideC + 1
-      || this.sideB + this.sideC < this.sideA + 1
-      || this.sideC + this.sideA < this.sideB + 1)) {
+    if ((this.sideA + this.sideB <= this.sideC
+      || this.sideB + this.sideC <= this.sideA
+      || this.sideC + this.sideA <= this.sideB)) {
       throw new Error('sides 1, 2 and 3 can\'t form a triangle');
     }
 
@@ -62,7 +62,7 @@ export class Circle implements Figure {
     this.color = color;
     this.radius = radius;
 
-    if (this.radius < 0) {
+    if (this.radius <= 0) {
       throw new Error('radius can\'t form a circle');
     }
   }
@@ -92,14 +92,14 @@ export class Rectangle {
     this.width = width;
     this.height = height;
 
-    if ((this.width < 0
-      || this.height < 0)) {
+    if ((this.width <= 0
+      || this.height <= 0)) {
       throw new Error('width or height can\'t form a rectangle');
     }
   }
 
   getArea(): number {
-    return this.height * this.width;
+    return Math.floor(this.height * this.width * 100) / 100;
   }
 }
 
