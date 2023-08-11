@@ -1,14 +1,22 @@
-export interface Figure {
-  shape: 'triangle' | 'circle' | 'rectangle',
-  color: 'red' | 'green' | 'blue',
-  getArea(): number;
+enum Shape {
+  Trian = 'triangle',
+  Circ = 'circle',
+  Rect = 'rectangle'
 }
 
-export class Triangle {
-  public shape: 'triangle'= 'triangle';
+export interface Figure {
+  color: 'red' | 'green' | 'blue',
+  getArea(): number,
+  shape: Shape;
+}
+
+type Color = 'red' | 'green' | 'blue';
+
+export class Triangle implements Figure {
+  public shape = Shape.Trian;
 
   constructor(
-    public color: 'red' | 'green' | 'blue',
+    public color: Color,
     public a: number,
     public b: number,
     public c: number,
@@ -32,11 +40,11 @@ export class Triangle {
   }
 }
 
-export class Circle {
-  public shape: 'circle' = 'circle';
+export class Circle implements Figure {
+  public shape = Shape.Circ;
 
   constructor(
-    public color: 'red' | 'green' | 'blue',
+    public color: Color,
     public radius: number,
   ) {
     if (radius <= 0) {
@@ -51,11 +59,11 @@ export class Circle {
   }
 }
 
-export class Rectangle {
-  public shape: 'rectangle' = 'rectangle';
+export class Rectangle implements Figure {
+  public shape = Shape.Rect;
 
   constructor(
-    public color: 'red' | 'green' | 'blue',
+    public color: Color,
     public width: number,
     public height: number,
   ) {
