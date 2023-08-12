@@ -4,13 +4,13 @@ enum Shape {
   Rect = 'rectangle'
 }
 
+type Color = 'red' | 'green' | 'blue';
+
 export interface Figure {
-  color: 'red' | 'green' | 'blue',
+  color: Color,
   getArea(): number,
   shape: Shape;
 }
-
-type Color = 'red' | 'green' | 'blue';
 
 export class Triangle implements Figure {
   public shape = Shape.Trian;
