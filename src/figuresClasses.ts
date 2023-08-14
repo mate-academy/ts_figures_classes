@@ -24,13 +24,17 @@ export class Triangle implements Figure {
   ) {
     this.shape = 'triangle';
 
-    if (a <= 0 || b <= 0 || c <= 0) {
+    if (this.a <= 0 || this.b <= 0 || this.c <= 0) {
       throw new Error(`sides of a ${this.shape} should have positive numbers`);
     }
 
-    if (a + b <= c || b + c <= a || c + a <= b) {
+    if (
+      this.a + this.b <= this.c
+      || this.b + this.c <= this.a
+      || this.c + this.a <= this.b
+    ) {
       throw new Error(
-        `sides ${a}, ${b}, and ${c} cannot form a triangle.`,
+        `sides ${this.a}, ${this.b}, and ${this.c} cannot form a triangle.`
       );
     }
   }
@@ -52,7 +56,7 @@ export class Circle implements Figure {
   ) {
     this.shape = 'circle';
 
-    if (radius <= 0) {
+    if (this.radius <= 0) {
       throw new Error(`radius of a ${this.shape} should have positive numbers`);
     }
   }
@@ -72,7 +76,7 @@ export class Rectangle implements Figure {
   ) {
     this.shape = 'rectangle';
 
-    if (width <= 0 || height <= 0) {
+    if (this.width <= 0 || this.height <= 0) {
       throw new Error(`sides of a ${this.shape} should have positive numbers`);
     }
   }
