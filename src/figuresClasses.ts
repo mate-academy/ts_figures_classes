@@ -32,7 +32,7 @@ export class Triangle implements Figure {
       || sideB + sideC <= sideA
       || sideC + sideA <= sideB
     ) {
-      throw new Error('It is not a triangle!');
+      throw new Error('Those values can\'t form a triangle.');
     }
 
     this.shape = 'triangle';
@@ -63,7 +63,7 @@ export class Circle implements Figure {
     radius: number,
   ) {
     if (radius <= 0) {
-      throw new Error('All sides should be positive numbers!');
+      throw new Error('Radius should be a positive number!');
     }
 
     this.shape = 'circle';
