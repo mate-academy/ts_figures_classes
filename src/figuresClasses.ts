@@ -34,7 +34,7 @@ export class Triangle implements Figure {
       || this.c + this.a <= this.b
     ) {
       throw new Error(
-        `sides ${this.a}, ${this.b}, and ${this.c} cannot form a triangle.`
+        `sides ${this.a}, ${this.b}, and ${this.c} cannot form a triangle.`,
       );
     }
   }
