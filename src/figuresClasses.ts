@@ -19,9 +19,12 @@ export class Triangle implements Figure {
     const longestSide = [a, b, c].sort((side1, side2) => side2 - side1);
 
     if (longestSide[0] >= (longestSide[1] + longestSide[2])) {
-      throw new Error('Check entered sides!');
+      throw new Error(
+        'The longest side of a triangle must be less than the '
+        + 'sum of the other two sides!',
+      );
     } else if (a <= 0 || b <= 0 || c <= 0) {
-      throw new Error('Check entered sides!');
+      throw new Error('All sides must be greater than 0!');
     }
   }
 
@@ -43,7 +46,7 @@ export class Circle implements Figure {
     public radius: number,
   ) {
     if (radius <= 0) {
-      throw new Error('Check entered sides!');
+      throw new Error('Radius must be greater than 0!');
     }
   }
 
@@ -64,13 +67,13 @@ export class Rectangle implements Figure {
     public height: number,
   ) {
     if (width <= 0 || height <= 0) {
-      throw new Error('Check entered sides!');
+      throw new Error('Width and height must be greater than 0!');
     }
   }
 
   getArea(): number {
     const { width, height } = this;
-    const area = Math.floor(100 * (width * height)) / 100;
+    const area = Math.round(100 * (width * height)) / 100;
 
     return area;
   }
