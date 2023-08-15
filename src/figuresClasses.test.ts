@@ -1,6 +1,6 @@
 import { Triangle, Rectangle, Circle, getInfo } from './figuresClasses';
 
-describe('Class "Triangle"', () => {
+describe("Class 'Triangle'", () => {
   test('should be declared', () => {
     expect(Triangle)
       .toBeInstanceOf(Function);
@@ -13,14 +13,14 @@ describe('Class "Triangle"', () => {
       .toBeInstanceOf(Triangle);
   });
 
-  test('should have a public property "shape"', () => {
+  test("should have a public property 'shape'", () => {
     const triangle = new Triangle('green', 3, 4, 5);
 
     expect(triangle)
       .toHaveProperty('shape');
   });
 
-  test('should have a public property "color"', () => {
+  test("should have a public property 'color'", () => {
     const triangle = new Triangle('green', 3, 4, 5);
 
     expect(triangle)
@@ -39,7 +39,7 @@ describe('Class "Triangle"', () => {
     }).toThrow(Error);
   });
 
-  test('should have a method "getArea"', () => {
+  test("should have a method 'getArea'", () => {
     const triangle = new Triangle('green', 3, 4, 5);
 
     expect(triangle.getArea)
@@ -47,7 +47,7 @@ describe('Class "Triangle"', () => {
   });
 });
 
-describe('Method "getArea" of class "Triangle"', () => {
+describe("Method 'getArea' of class 'Triangle'", () => {
   test('should return a number', () => {
     const triangle = new Triangle('green', 3, 4, 5);
 
@@ -63,7 +63,7 @@ describe('Method "getArea" of class "Triangle"', () => {
   });
 });
 
-describe('Class "Circle"', () => {
+describe("Class 'Circle'", () => {
   test('should be declared', () => {
     expect(Circle)
       .toBeInstanceOf(Function);
@@ -76,14 +76,14 @@ describe('Class "Circle"', () => {
       .toBeInstanceOf(Circle);
   });
 
-  test('should have a public property "shape"', () => {
+  test("should have a public property 'shape'", () => {
     const circle = new Circle('red', 6);
 
     expect(circle)
       .toHaveProperty('shape');
   });
 
-  test('should have a public property "color"', () => {
+  test("should have a public property 'color'", () => {
     const circle = new Circle('red', 6);
 
     expect(circle)
@@ -96,7 +96,7 @@ describe('Class "Circle"', () => {
     }).toThrow(Error);
   });
 
-  test('should have a method "getArea"', () => {
+  test("should have a method 'getArea'", () => {
     const circle = new Circle('red', 6);
 
     expect(circle.getArea)
@@ -104,7 +104,7 @@ describe('Class "Circle"', () => {
   });
 });
 
-describe('Method "getArea" of class "Circle"', () => {
+describe("Method 'getArea' of class 'Circle'", () => {
   test('should return a number', () => {
     const circle = new Circle('red', 6);
 
@@ -120,7 +120,7 @@ describe('Method "getArea" of class "Circle"', () => {
   });
 });
 
-describe('Class "Rectangle"', () => {
+describe("Class 'Rectangle'", () => {
   test('should be declared', () => {
     expect(Rectangle)
       .toBeInstanceOf(Function);
@@ -133,14 +133,14 @@ describe('Class "Rectangle"', () => {
       .toBeInstanceOf(Rectangle);
   });
 
-  test('should have a public property "shape"', () => {
+  test("should have a public property 'shape'", () => {
     const rectangle = new Rectangle('blue', 8, 10);
 
     expect(rectangle)
       .toHaveProperty('shape');
   });
 
-  test('should have a public property "color"', () => {
+  test("should have a public property 'color'", () => {
     const rectangle = new Rectangle('blue', 8, 10);
 
     expect(rectangle)
@@ -153,7 +153,7 @@ describe('Class "Rectangle"', () => {
     }).toThrow(Error);
   });
 
-  test('should have a method "getArea"', () => {
+  test("should have a method 'getArea'", () => {
     const rectangle = new Rectangle('blue', 8, 10);
 
     expect(rectangle.getArea)
@@ -161,7 +161,7 @@ describe('Class "Rectangle"', () => {
   });
 });
 
-describe('Method "getArea" of class "Rectangle"', () => {
+describe("Method 'getArea' of class 'Rectangle'", () => {
   test('should return a number', () => {
     const rectangle = new Rectangle('blue', 8, 10);
 
@@ -177,7 +177,7 @@ describe('Method "getArea" of class "Rectangle"', () => {
   });
 });
 
-describe('Function "getInfo"', () => {
+describe("Function 'getInfo'", () => {
   test('should be declared', () => {
     expect(getInfo)
       .toBeInstanceOf(Function);
