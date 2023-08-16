@@ -1,13 +1,13 @@
 export interface Figure {
-  shape: string;
-  color: string;
+  shape: 'triangle' | 'circle' | 'rectangle';
+  color: 'red' | 'green' | 'blue';
   getArea(): number;
 }
 
 export class Triangle implements Figure {
-  shape = 'triangle';
+  color: Figure['color'];
 
-  color: string;
+  shape: Figure['shape'] = 'triangle';
 
   a: number;
 
@@ -15,7 +15,7 @@ export class Triangle implements Figure {
 
   c: number;
 
-  constructor(color: string, a: number, b: number, c: number) {
+  constructor(color: Figure['color'], a: number, b: number, c: number) {
     if (a <= 0 || b <= 0 || c <= 0 || a + b <= c || b + c <= a || c + a <= b) {
       throw new Error('Invalid sides for a triangle');
     }
@@ -33,13 +33,13 @@ export class Triangle implements Figure {
 }
 
 export class Circle implements Figure {
-  shape = 'circle';
+  shape: Figure['shape'] = 'circle';
 
-  color: string;
+  color: Figure['color'];
 
   radius: number;
 
-  constructor(color: string, radius: number) {
+  constructor(color: Figure['color'], radius: number) {
     if (radius <= 0) {
       throw new Error('Invalid radius for a circle');
     }
@@ -53,15 +53,15 @@ export class Circle implements Figure {
 }
 
 export class Rectangle implements Figure {
-  shape = 'rectangle';
+  shape: Figure['shape'] = 'rectangle';
 
-  color: string;
+  color: Figure['color'];
 
   width: number;
 
   height: number;
 
-  constructor(color: string, width: number, height: number) {
+  constructor(color: Figure['color'], width: number, height: number) {
     if (width <= 0 || height <= 0) {
       throw new Error('Invalid dimensions for a rectangle');
     }
