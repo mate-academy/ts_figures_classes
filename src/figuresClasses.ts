@@ -5,9 +5,9 @@ export interface Figure {
 }
 
 export class Triangle implements Figure {
-  shape: 'triangle' = 'triangle';
+  shape: Figure['shape'] = 'triangle';
 
-  color: 'red' | 'green' | 'blue';
+  color: Figure['color'];
 
   side1: number;
 
@@ -42,9 +42,9 @@ export class Triangle implements Figure {
 }
 
 export class Circle implements Figure {
-  shape: 'circle' = 'circle';
+  shape: Figure['shape'] = 'circle';
 
-  color: 'red' | 'green' | 'blue';
+  color: Figure['color'];
 
   radius: number;
 
@@ -65,10 +65,10 @@ export class Circle implements Figure {
   }
 }
 
-export class Rectangle {
-  shape: 'rectangle' = 'rectangle';
+export class Rectangle implements Figure {
+  shape: Figure['shape'] = 'rectangle';
 
-  color: 'red' | 'green' | 'blue';
+  color: Figure['color'];
 
   side1: number;
 
