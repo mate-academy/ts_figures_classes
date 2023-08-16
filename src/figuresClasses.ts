@@ -5,9 +5,9 @@ export interface Figure {
 }
 
 export class Triangle implements Figure {
-  shape: 'triangle' = 'triangle';
+  shape: Figure['shape'] = 'triangle';
 
-  color: 'red' | 'green' | 'blue';
+  color: Figure['color'];
 
   sideA: number;
 
@@ -16,7 +16,7 @@ export class Triangle implements Figure {
   sideC: number;
 
   constructor(
-    color: 'red' | 'green' | 'blue',
+    color: Figure['color'],
     sideA: number,
     sideB: number,
     sideC: number,
@@ -49,14 +49,14 @@ export class Triangle implements Figure {
 }
 
 export class Circle implements Figure {
-  shape: 'circle' = 'circle';
+  shape: Figure['shape'] = 'circle';
 
-  color: 'red' | 'green' | 'blue';
+  color: Figure['color'];
 
   radius: number;
 
   constructor(
-    color: 'red' | 'green' | 'blue',
+    color: Figure['color'],
     radius: number,
   ) {
     this.color = color;
@@ -75,16 +75,16 @@ export class Circle implements Figure {
 }
 
 export class Rectangle implements Figure {
-  shape: 'rectangle' = 'rectangle';
+  shape: Figure['shape'] = 'rectangle';
 
-  color: 'red' | 'green' | 'blue';
+  color: Figure['color'];
 
   width: number;
 
   height: number;
 
   constructor(
-    color: 'red' | 'green' | 'blue',
+    color: Figure['color'],
     width: number,
     height: number,
   ) {
