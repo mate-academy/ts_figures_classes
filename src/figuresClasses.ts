@@ -31,9 +31,6 @@ export class Triangle implements Figure {
     this.shape = shape;
   }
 
-  // P=√p⋅(p−a)⋅(p−b)⋅(p−c), gdzie:
-  //  p – połowa obwodu trójkąta p=½(a+b+c),
-
   getArea(): number {
     const partCircuit = (this.a + this.b + this.c) / 2;
 
