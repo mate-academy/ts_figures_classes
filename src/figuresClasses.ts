@@ -8,15 +8,16 @@ export interface Figure {
 }
 
 export class Triangle implements Figure {
+  shape: Shape = 'triangle';
+
   constructor(
     public color: Color,
     public a: number,
     public b: number,
     public c: number,
-    public shape: Shape = 'triangle',
   ) {
     if (a <= 0 || b <= 0 || c <= 0) {
-      throw new Error('message');
+      throw new Error('Triangle`s sides can`t be <= 0');
     }
 
     let hypotenuse = a;
@@ -30,7 +31,7 @@ export class Triangle implements Figure {
     }
 
     if (hypotenuse >= (a + b + c - hypotenuse)) {
-      throw new Error('sides 1, 2 and 3 can`t form a triangle');
+      throw new Error(`Sides ${a}, ${b} and ${c} can't form a triangle`);
     }
   }
 
@@ -43,14 +44,15 @@ export class Triangle implements Figure {
   }
 }
 
-export class Circle {
+export class Circle implements Figure {
+  shape: Shape = 'circle';
+
   constructor(
     public color: Color,
     public radius: number,
-    public shape: Shape = 'circle',
   ) {
     if (radius <= 0) {
-      throw new Error('message');
+      throw new Error('Circle`s radius can`t be <= 0');
     }
   }
 
@@ -59,15 +61,16 @@ export class Circle {
   }
 }
 
-export class Rectangle {
+export class Rectangle implements Figure {
+  shape: Shape = 'rectangle';
+
   constructor(
     public color: Color,
     public width: number,
     public height: number,
-    public shape: Shape = 'rectangle',
   ) {
     if (width <= 0 || height <= 0) {
-      throw new Error('message');
+      throw new Error('Rectangle`s sides can`t be <= 0');
     }
   }
 
