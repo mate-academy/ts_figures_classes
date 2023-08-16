@@ -1,19 +1,92 @@
+type Shape = 'triangle' | 'circle' | 'rectangle';
+type Color = 'red' | 'green' | 'blue';
+
 export interface Figure {
+  shape: Shape;
+  color: Color;
+  getArea: () => number;
 
 }
 
-export class Triangle {
+export class Triangle implements Figure {
+  shape: Shape;
 
+  color: Color;
+
+  sides: number[];
+
+  constructor(color: Color, a: number, b: number, c: number) {
+    if (a <= 0 || b <= 0 || c <= 0) {
+      throw new Error('Side must be greater than 0!');
+    }
+
+    const sortedSides = [a, b, c].sort((x, y) => x - y);
+
+    if (sortedSides[2] >= sortedSides[0] + sortedSides[1]) {
+      throw new Error('cannot form triangle!');
+    }
+
+    this.shape = 'triangle';
+    this.color = color;
+    this.sides = sortedSides;
+  }
+
+  getArea(): number {
+    const [a, b, c] = this.sides;
+    const s = (a + b + c) / 2;
+
+    return +Math.sqrt(s * (s - a) * (s - b) * (s - c)).toFixed(2);
+  }
 }
 
-export class Circle {
+export class Circle implements Figure {
+  shape: Shape;
 
+  color: Color;
+
+  radius: number;
+
+  constructor(color: Color, radius: number) {
+    if (radius <= 0) {
+      throw new Error('radius must be greater than 0!');
+    }
+
+    this.shape = 'circle';
+    this.color = color;
+    this.radius = radius;
+  }
+
+  getArea(): number {
+    const area = Math.PI * this.radius ** 2;
+
+    return Math.floor(area * 100) / 100;
+  }
 }
 
 export class Rectangle {
+  shape: Shape;
 
+  color: Color;
+
+  sides: number[];
+
+  constructor(color: Color, width: number, height: number) {
+    if (width <= 0 || height <= 0 || width === height) {
+      throw new Error('not a rectangle');
+    }
+
+    this.shape = 'rectangle';
+    this.color = color;
+    this.sides = [width, height];
+  }
+
+  getArea(): number {
+    const [width, height] = this.sides;
+
+    return +(width * height).toFixed(2);
+  }
 }
 
-export function getInfo(figure) {
-
+export function getInfo(figure: Figure): string {
+  return `A ${figure.color} ${figure.shape} - ${figure.getArea()}`;
 }
