@@ -6,9 +6,9 @@ function roundAreaToHundreths(area: number): number {
 }
 
 export interface Figure {
-  getInfo(): string;
   shape: Shape;
   color: Color;
+  getInfo(): string;
 }
 
 export class Triangle implements Figure {
@@ -25,7 +25,7 @@ export class Triangle implements Figure {
   constructor(color: Color, a: number, b: number, c: number) {
     if (a <= 0 || b <= 0 || c <= 0) {
       throw new
-      Error('Verily, the sides ought to be numbers of positive countenance.');
+      Error('Milord! Verily, sides of negative length cannot come to be.');
     }
 
     const sides = [a, b, c].sort((x, y) => x - y);
