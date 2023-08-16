@@ -7,13 +7,13 @@ export interface Figure {
 }
 
 export class Triangle implements Figure {
-  shape: Shape = 'triangle';
+  shape: Figure['shape'];
 
-  color: Color;
+  color: Figure['color'];
 
   sides: number[];
 
-  constructor(color: Color, a: number, b: number, c: number) {
+  constructor(color: Figure['color'], a: number, b: number, c: number) {
     if (a <= 0 || b <= 0 || c <= 0) {
       throw new Error('Length of side should be grater than 0');
     }
@@ -38,13 +38,13 @@ export class Triangle implements Figure {
 }
 
 export class Circle implements Figure {
-  shape: Shape = 'circle';
+  shape: Figure['shape'];
 
-  color: Color;
+  color: Figure['color'];
 
   radius: number;
 
-  constructor(color: Color, radius: number) {
+  constructor(color: Figure['color'], radius: number) {
     if (radius <= 0) {
       throw new Error('Radius should be greater than 0');
     }
@@ -62,15 +62,15 @@ export class Circle implements Figure {
 }
 
 export class Rectangle implements Figure {
-  shape: Shape = 'rectangle';
+  shape: Figure['shape'];
 
-  color: Color;
+  color: Figure['color'];
 
   width: number;
 
   height: number;
 
-  constructor(color: Color, width: number, height: number) {
+  constructor(color: Figure['color'], width: number, height: number) {
     if (width <= 0 || height <= 0) {
       throw new Error('Width and height should be greater than 0');
     }
