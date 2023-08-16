@@ -1,13 +1,16 @@
+type Color = 'red' | 'green' | 'blue';
+type Shape = 'triangle' | 'circle' | 'rectangle';
+
 export interface Figure {
-  shape: 'triangle' | 'circle' | 'rectangle',
-  color: 'red' | 'green' | 'blue',
+  shape: Shape,
+  color: Color,
   getArea(): number,
 }
 
 export class Triangle implements Figure {
-  color: Figure['color'];
+  color: Color;
 
-  shape: Figure['shape'] = 'triangle';
+  shape: Shape = 'triangle';
 
   a: number;
 
@@ -35,9 +38,9 @@ export class Triangle implements Figure {
 }
 
 export class Circle implements Figure {
-  color: Figure['color'];
+  color: Color;
 
-  shape: Figure['shape'] = 'circle';
+  shape: Shape = 'circle';
 
   radius: number;
 
@@ -58,9 +61,9 @@ export class Circle implements Figure {
 }
 
 export class Rectangle implements Figure {
-  color: Figure['color'];
+  color: Color;
 
-  shape: Figure['shape'] = 'rectangle';
+  shape: Shape= 'rectangle';
 
   width: number;
 
