@@ -7,7 +7,7 @@ export interface Figure {
 
 export class Triangle implements Figure {
   constructor(
-    public color: 'red' | 'green' | 'blue',
+    public color: Figure['color'],
     public a: number,
     public b: number,
     public c: number,
@@ -37,7 +37,7 @@ export class Triangle implements Figure {
     this.shape = 'triangle';
   }
 
-  shape: 'triangle';
+  shape: Figure['shape'];
 
   getArea():number {
     const p = 0.5 * (this.a + this.b + this.c);
@@ -49,7 +49,7 @@ export class Triangle implements Figure {
 
 export class Circle implements Figure {
   constructor(
-    public color: 'red' | 'green' | 'blue',
+    public color: Figure['color'],
     public radius: number,
   ) {
     if (radius <= 0) {
@@ -58,7 +58,7 @@ export class Circle implements Figure {
     this.shape = 'circle';
   }
 
-  shape: 'circle';
+  shape: Figure['shape'];
 
   getArea(): number {
     return Math.floor((Math.PI * this.radius ** 2) * 100) / 100;
@@ -67,7 +67,7 @@ export class Circle implements Figure {
 
 export class Rectangle implements Figure {
   constructor(
-    public color: 'red' | 'green' | 'blue',
+    public color: Figure['color'],
     public width: number,
     public height: number,
   ) {
@@ -77,7 +77,7 @@ export class Rectangle implements Figure {
     this.shape = 'rectangle';
   }
 
-  shape: 'rectangle';
+  shape: Figure['shape'];
 
   getArea(): number {
     return this.width * this.height;
