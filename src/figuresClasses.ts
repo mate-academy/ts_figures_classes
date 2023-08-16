@@ -16,9 +16,9 @@ export class Triangle implements Figure {
     public b: number,
     public c: number,
   ) {
-    const longestSide = [a, b, c].sort((side1, side2) => side2 - side1);
+    const sortedSides = [a, b, c].sort((side1, side2) => side2 - side1);
 
-    if (longestSide[0] >= (longestSide[1] + longestSide[2])) {
+    if (sortedSides[0] >= (sortedSides[1] + sortedSides[2])) {
       throw new Error(
         'The longest side of a triangle must be less than the '
         + 'sum of the other two sides!',
