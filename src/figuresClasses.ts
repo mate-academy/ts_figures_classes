@@ -1,12 +1,13 @@
 export interface Figure {
   shape: 'triangle' | 'circle' | 'rectangle';
   color: 'red' | 'green' | 'blue';
+  getArea(): number;
 }
 
 export class Triangle implements Figure {
-  constructor(public color: 'red' | 'green' | 'blue',
+  constructor(public color: Figure['color'],
     public a: number, public b: number,
-    public c: number, public shape: 'triangle' = 'triangle') {
+    public c: number, public shape: Figure['shape'] = 'triangle') {
     if (a >= b + c || b >= a + c || c >= a + b
         || a <= 0 || b <= 0 || c <= 0) {
       throw new Error('Wrong triangle sides');
@@ -22,8 +23,8 @@ export class Triangle implements Figure {
 }
 
 export class Circle implements Figure {
-  constructor(public color: 'red' | 'green' | 'blue',
-    public r: number, public shape: 'circle' = 'circle') {
+  constructor(public color: Figure['color'],
+    public r: number, public shape: Figure['shape'] = 'circle') {
     if (r <= 0) {
       throw new Error('Wrong radius');
     }
@@ -35,9 +36,9 @@ export class Circle implements Figure {
 }
 
 export class Rectangle implements Figure {
-  constructor(public color: 'red' | 'green' | 'blue',
+  constructor(public color: Figure['color'],
     public a: number, public b: number,
-    public shape: 'rectangle' = 'rectangle') {
+    public shape: Figure['shape'] = 'rectangle') {
     if (a <= 0 || b <= 0) {
       throw new Error('Wrong side length');
     }
@@ -48,6 +49,6 @@ export class Rectangle implements Figure {
   }
 }
 
-export function getInfo(figure: object): string {
+export function getInfo(figure: Figure): string {
   return `A ${figure.color} ${figure.shape} - ${figure.getArea()}`;
 }
