@@ -9,13 +9,13 @@ export interface Figure {
 }
 
 export class Triangle implements Figure {
-  shape: Shape;
+  shape: Figure['shape'] = 'triangle';
 
-  color: Color;
+  color: Figure['color'];
 
   sides: number[];
 
-  constructor(color: Color, a: number, b: number, c: number) {
+  constructor(color: Figure['color'], a: number, b: number, c: number) {
     if (a <= 0 || b <= 0 || c <= 0) {
       throw new Error('Side must be greater than 0!');
     }
@@ -40,13 +40,13 @@ export class Triangle implements Figure {
 }
 
 export class Circle implements Figure {
-  shape: Shape;
+  shape: Figure['shape'] = 'circle';
 
-  color: Color;
+  color: Figure['color'];
 
   radius: number;
 
-  constructor(color: Color, radius: number) {
+  constructor(color: Figure['color'], radius: number) {
     if (radius <= 0) {
       throw new Error('radius must be greater than 0!');
     }
@@ -64,26 +64,27 @@ export class Circle implements Figure {
 }
 
 export class Rectangle {
-  shape: Shape;
+  shape: Figure['shape'] = 'rectangle';
 
-  color: Color;
+  color: Figure['color'];
 
-  sides: number[];
+  width: number;
 
-  constructor(color: Color, width: number, height: number) {
+  height: number;
+
+  constructor(color: Figure['color'], width: number, height: number) {
     if (width <= 0 || height <= 0 || width === height) {
       throw new Error('not a rectangle');
     }
 
     this.shape = 'rectangle';
     this.color = color;
-    this.sides = [width, height];
+    this.width = width;
+    this.height = height;
   }
 
   getArea(): number {
-    const [width, height] = this.sides;
-
-    return +(width * height).toFixed(2);
+    return +(this.width * this.height).toFixed(2);
   }
 }
 
