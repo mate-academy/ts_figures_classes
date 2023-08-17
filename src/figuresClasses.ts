@@ -5,9 +5,9 @@ export interface Figure {
 }
 
 export class Triangle implements Figure {
-  public shape: 'triangle' = 'triangle';
+  public shape: Figure['shape'] = 'triangle';
 
-  public color: 'red' | 'green' | 'blue';
+  public color: Figure['color'];
 
   public a: number;
 
@@ -16,9 +16,9 @@ export class Triangle implements Figure {
   public c: number;
 
   constructor(
-    color: 'red' | 'green' | 'blue',
+    color: Figure['color'],
     a: number, b: number, c: number,
-    shape: 'triangle' = 'triangle',
+    shape: Figure['shape'] = 'triangle',
   ) {
     if (a <= 0 || b <= 0 || c <= 0 || a >= b + c || b >= a + c || c >= a + b) {
       throw new Error('Error');
@@ -42,13 +42,13 @@ export class Triangle implements Figure {
 }
 
 export class Circle implements Figure {
-  public shape: 'circle' = 'circle';
+  public shape: Figure['shape'] = 'circle';
 
-  public color: 'red' | 'green' | 'blue';
+  public color: Figure['color'];
 
   public radius: number;
 
-  constructor(color: 'red' | 'green' | 'blue', radius: number) {
+  constructor(color: Figure['color'], radius: number) {
     if (radius <= 0 || radius === undefined) {
       throw new Error('Error');
     }
@@ -62,15 +62,15 @@ export class Circle implements Figure {
 }
 
 export class Rectangle {
-  public shape: 'rectangle' = 'rectangle';
+  public shape: Figure['shape'] = 'rectangle';
 
-  public color: 'red' | 'green' | 'blue';
+  public color: Figure['color'];
 
   public a: number;
 
   public b: number;
 
-  constructor(color: 'red' | 'green' | 'blue', a: number, b: number) {
+  constructor(color: Figure['color'], a: number, b: number) {
     if (a <= 0 || b <= 0 || b === undefined) {
       throw new Error('Error');
     }
