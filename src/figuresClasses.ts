@@ -1,13 +1,13 @@
 export interface Figure {
-  shape: string;
-  color: string;
-  getArea: ()=> number;
+  shape: 'triangle' | 'circle' | 'rectangle';
+  color: 'red' | 'blue' | 'green';
+  getArea(): number;
 }
 
 export class Triangle implements Figure {
-  shape: 'triangle' = 'triangle';
+  shape: Figure['shape'] = 'triangle';
 
-  color: string;
+  color: Figure['color'];
 
   a: number;
 
@@ -16,7 +16,7 @@ export class Triangle implements Figure {
   c: number;
 
   constructor(
-    color: string, a: number, b: number, c: number,
+    color: Figure['color'], a: number, b: number, c: number,
   ) {
     this.color = color;
     this.a = a;
@@ -35,10 +35,9 @@ export class Triangle implements Figure {
   }
 
   getArea(): number {
-    // Oblicz połowę obwodu
     const s = (this.a + this.b + this.c) / 2;
 
-    // wzór Herona
+    //  Heron
     const area = Math.sqrt(s * (s - this.a) * (s - this.b) * (s - this.c));
 
     return area;
@@ -46,14 +45,14 @@ export class Triangle implements Figure {
 }
 
 export class Circle implements Figure {
-  shape: 'circle' = 'circle';
+  shape: Figure['shape'] = 'circle';
 
-  color: string;
+  color: Figure['color'];
 
   radius: number;
 
   constructor(
-    color: string, radius: number,
+    color: Figure['color'], radius: number,
   ) {
     this.color = color;
     this.radius = radius;
@@ -64,7 +63,6 @@ export class Circle implements Figure {
   }
 
   getArea(): number {
-    // Oblicz
     const pi = Math.PI;
     const area = pi * this.radius ** 2;
 
@@ -75,16 +73,16 @@ export class Circle implements Figure {
 }
 
 export class Rectangle implements Figure {
-  shape: 'rectangle' = 'rectangle';
+  shape: Figure['shape'] = 'rectangle';
 
-  color: string;
+  color: Figure['color'];
 
   width: number;
 
   height: number;
 
   constructor(
-    color: string, width: number, height: number,
+    color: Figure['color'], width: number, height: number,
   ) {
     this.color = color;
     this.width = width;
@@ -96,7 +94,6 @@ export class Rectangle implements Figure {
   }
 
   getArea(): number {
-    // Oblicz
     const area = this.width * this.height;
 
     return area;
