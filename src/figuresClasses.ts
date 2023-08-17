@@ -12,9 +12,9 @@ export interface Figure {
 }
 
 export class Triangle implements Figure {
-  shape: Shape = 'triangle';
+  shape: Figure['shape'] = 'triangle';
 
-  color: Color;
+  color: Figure['color'];
 
   a: number;
 
@@ -56,9 +56,9 @@ export class Triangle implements Figure {
 }
 
 export class Rectangle implements Figure {
-  shape: Shape = 'rectangle';
+  shape: Figure['shape'] = 'rectangle';
 
-  color: Color;
+  color: Figure['color'];
 
   width: number;
 
@@ -87,9 +87,9 @@ export class Rectangle implements Figure {
 }
 
 export class Circle implements Figure {
-  shape: Shape = 'circle';
+  shape: Figure['shape'] = 'circle';
 
-  color: Color;
+  color: Figure['color'];
 
   radius: number;
 
