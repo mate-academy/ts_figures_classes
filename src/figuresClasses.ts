@@ -15,20 +15,15 @@ export class Triangle implements Figure {
 
   side3: number;
 
-  constructor(color: 'red' | 'green' | 'blue',
-    side1: number, side2: number,
-    side3: number) {
+  constructor(color: Figure['color'],
+    side1: number, side2: number, side3: number) {
     this.color = color;
     this.side1 = side1;
     this.side2 = side2;
     this.side3 = side3;
 
-    if (side1 + side2 <= side3
-      || side1 + side3 <= side2
-      || side2 + side3 <= side1
-      || side1 <= 0
-      || side2 <= 0
-      || side3 <= 0) {
+    if (side1 + side2 <= side3 || side1 + side3 <= side2
+      || side2 + side3 <= side1 || side1 <= 0 || side2 <= 0 || side3 <= 0) {
       throw new Error('side 1, 2, 3 cannot form a triangle');
     }
   }
@@ -48,13 +43,12 @@ export class Circle implements Figure {
 
   radius: number;
 
-  constructor(color: 'red' | 'green' | 'blue',
-    radius: number) {
+  constructor(color: Figure['color'], radius: number) {
     this.color = color;
     this.radius = radius;
 
     if (radius <= 0) {
-      throw new Error('can not create circle with this radius');
+      throw new Error('cannot create circle with this radius');
     }
   }
 
@@ -74,15 +68,13 @@ export class Rectangle implements Figure {
 
   side2: number;
 
-  constructor(color: 'red' | 'green' | 'blue',
-    side1: number,
-    side2: number) {
+  constructor(color: Figure['color'], side1: number, side2: number) {
     this.color = color;
     this.side1 = side1;
     this.side2 = side2;
 
     if (side1 <= 0 || side2 <= 0) {
-      throw new Error('can not create rectangle with this sides');
+      throw new Error('cannot create rectangle with these sides');
     }
   }
 
@@ -93,6 +85,6 @@ export class Rectangle implements Figure {
   }
 }
 
-export function getInfo(figure): string {
+export function getInfo(figure: Figure): string {
   return `A ${figure.color} ${figure.shape} - ${figure.getArea()}`;
 }
