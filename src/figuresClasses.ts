@@ -1,14 +1,14 @@
 export interface Figure {
-  shape: string;
-  color: string;
+  shape: 'triangle' | 'circle' | 'rectangle';
+  color: 'red' | 'green' | 'blue';
   getArea(): number;
 }
 
-export class Triangle {
-  shape: string = 'triangle';
+export class Triangle implements Figure {
+  shape: Figure['shape'] = 'triangle';
 
   constructor(
-    public color: string,
+    public color: Figure['color'],
     public a: number,
     public b: number,
     public c: number,
@@ -30,10 +30,10 @@ export class Triangle {
   }
 }
 
-export class Circle {
-  shape: string = 'circle';
+export class Circle implements Figure {
+  shape: Figure['shape'] = 'circle';
 
-  constructor(public color: string, public radius: number) {
+  constructor(public color: Figure['color'], public radius: number) {
     if (radius <= 0) {
       throw new Error('Radius must be greater than 0');
     }
@@ -44,11 +44,11 @@ export class Circle {
   }
 }
 
-export class Rectangle {
-  shape: string = 'rectangle';
+export class Rectangle implements Figure {
+  shape: Figure['shape'] = 'rectangle';
 
   constructor(
-    public color: string,
+    public color: Figure['color'],
     public width: number,
     public height: number,
   ) {
