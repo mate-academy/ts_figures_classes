@@ -7,7 +7,7 @@ export interface Figure {
 export class Triangle implements Figure {
   shape: 'triangle';
 
-  color: 'red' | 'green' | 'blue';
+  color: Figure['color'];
 
   a: number;
 
@@ -15,7 +15,7 @@ export class Triangle implements Figure {
 
   c: number;
 
-  constructor(color: 'red' | 'green' | 'blue', a: number,
+  constructor(color: Figure['color'], a: number,
     b: number, c: number) {
     if (a <= 0 || b <= 0 || c <= 0 || a + b <= c || a + c <= b || b + c <= a) {
       throw new Error('Invalid sides value');
@@ -38,11 +38,11 @@ export class Triangle implements Figure {
 export class Circle implements Figure {
   shape: 'circle';
 
-  color: 'red' | 'green' | 'blue';
+  color: Figure['color'];
 
   r: number;
 
-  constructor(color: 'red' | 'green' | 'blue', r: number) {
+  constructor(color: Figure['color'], r: number) {
     if (r <= 0) {
       throw new Error('Invalid radius value');
     }
@@ -61,13 +61,13 @@ export class Circle implements Figure {
 export class Rectangle implements Figure {
   shape: 'rectangle';
 
-  color: 'red' | 'green' | 'blue';
+  color: Figure['color'];
 
   a: number;
 
   b: number;
 
-  constructor(color: 'red' | 'green' | 'blue', a: number, b: number) {
+  constructor(color: Figure['color'], a: number, b: number) {
     if (a <= 0 || b <= 0) {
       throw new Error('Invalid sides value');
     }
