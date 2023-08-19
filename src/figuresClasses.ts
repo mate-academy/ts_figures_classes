@@ -1,11 +1,17 @@
+enum Shapes {
+  triangle = 'triangle',
+  circle = 'circle',
+  rectangle = 'rectangle',
+}
+
 export interface Figure {
-  shape: string;
+  shape: Shapes;
   color: string;
   getArea(): number;
 }
 
 export class Triangle {
-  shape = 'triangle';
+  shape: Shapes = Shapes.triangle;
 
   constructor(
     public color: string,
@@ -19,15 +25,16 @@ export class Triangle {
   }
 
   getArea(): number {
-    const p = (this.a + this.b + this.c) / 2;
-    const area = Math.sqrt(p * (p - this.a) * (p - this.b) * (p - this.c));
+    const { a, b, c } = this;
+    const p = (a + b + c) / 2;
+    const area = Math.sqrt(p * (p - a) * (p - b) * (p - c));
 
-    return Math.round(area * 100) / 100; // Round to two decimal places
+    return Math.round(area * 100) / 100;
   }
 }
 
 export class Circle {
-  shape = 'circle';
+  shape: Shapes = Shapes.circle;
 
   constructor(
     public color: string,
@@ -46,7 +53,7 @@ export class Circle {
 }
 
 export class Rectangle {
-  shape = 'rectangle';
+  shape: Shapes = Shapes.rectangle;
 
   constructor(
     public color: string,
@@ -61,7 +68,7 @@ export class Rectangle {
   getArea(): number {
     const area = this.width * this.height;
 
-    return Math.round(area * 100) / 100; // Round to two decimal places
+    return Math.round(area * 100) / 100;
   }
 }
 
