@@ -13,11 +13,6 @@ export class Triangle implements Figure {
     public b: number,
     public c: number,
   ) {
-    this.color = color;
-    this.a = a;
-    this.b = b;
-    this.c = c;
-
     if (a <= 0 || b <= 0 || c <= 0) {
       throw new Error('Side of triangle should by positive number!');
     }
@@ -42,9 +37,6 @@ export class Circle implements Figure {
     public color: Figure['color'],
     public radius : number,
   ) {
-    this.color = color;
-    this.radius = radius;
-
     if (radius <= 0) {
       throw new Error('Radius should be a positive number!');
     }
@@ -63,10 +55,6 @@ export class Rectangle implements Figure {
     public width: number,
     public height: number,
   ) {
-    this.color = color;
-    this.width = width;
-    this.height = height;
-
     if (width <= 0 || height <= 0) {
       throw new Error('You cannot build a rectangle!');
     }
