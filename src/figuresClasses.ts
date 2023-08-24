@@ -4,7 +4,7 @@ export interface Figure {
   getArea(): number;
 }
 
-export class Triangle {
+export class Triangle implements Figure {
   shape: Figure['shape'] = 'triangle';
 
   constructor(
@@ -13,11 +13,6 @@ export class Triangle {
     public b: number,
     public c: number,
   ) {
-    this.color = color;
-    this.a = a;
-    this.b = b;
-    this.c = c;
-
     if (a <= 0 || b <= 0 || c <= 0) {
       throw new Error('Side of triangle should by positive number!');
     }
@@ -36,16 +31,13 @@ export class Triangle {
   }
 }
 
-export class Circle {
+export class Circle implements Figure {
   shape: Figure['shape'] = 'circle';
 
   constructor(
     public color: Figure['color'],
     public radius: number,
   ) {
-    this.color = color;
-    this.radius = radius;
-
     if (radius <= 0) {
       throw new Error('Radius should be a positive number!');
     }
@@ -56,7 +48,7 @@ export class Circle {
   }
 }
 
-export class Rectangle {
+export class Rectangle implements Figure {
   shape: Figure['shape'] = 'rectangle';
 
   constructor(
@@ -64,10 +56,6 @@ export class Rectangle {
     public width: number,
     public height: number,
   ) {
-    this.color = color;
-    this.width = width;
-    this.height = height;
-
     if (width <= 0 || height <= 0) {
       throw new Error('You cannot build a rectangle!');
     }
