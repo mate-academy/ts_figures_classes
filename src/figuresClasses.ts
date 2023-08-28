@@ -18,7 +18,7 @@ export class Triangle implements Figure {
   sides: number[];
 
   constructor(
-    public color: 'red' | 'green' | 'blue',
+    public color: Color,
     public a: number,
     public b: number,
     public c: number,
@@ -31,7 +31,6 @@ export class Triangle implements Figure {
       throw new Error('the longest side must be >= than a sum of two others');
     }
     this.shape = Shape.Triangle;
-    this.color = color;
     this.sides = [a, b, c];
   }
 
@@ -50,7 +49,7 @@ export class Circle implements Figure {
   shape: Shape.Circle;
 
   constructor(
-    public color: 'red' | 'green' | 'blue',
+    public color: Color,
     public radius: number,
   ) {
     if (radius <= 0) {
@@ -58,8 +57,6 @@ export class Circle implements Figure {
     }
 
     this.shape = Shape.Circle;
-    this.color = color;
-    this.radius = radius;
   }
 
   getArea(): number {
@@ -73,7 +70,7 @@ export class Rectangle implements Figure {
   shape: Shape.Rectangle;
 
   constructor(
-    public color: 'red' | 'green' | 'blue',
+    public color: Color,
     public height: number,
     public width: number,
   ) {
@@ -81,9 +78,6 @@ export class Rectangle implements Figure {
       throw new Error('Width and height must be greater than 0');
     }
     this.shape = Shape.Rectangle;
-    this.color = color;
-    this.width = width;
-    this.height = height;
   }
 
   getArea(): number {
