@@ -28,20 +28,19 @@ export class Triangle implements Figure {
   ) {
     this.shape = Shape.Triangle;
 
-    if (this.a <= 0 || this.b <= 0 || this.c <= 0) {
+    if (a <= 0 || b <= 0 || c <= 0) {
       throw new Error('Please enter valid positive numbers');
     }
 
-    if (this.a + this.b <= this.c
-      || this.a + this.c <= this.b
-      || this.c + this.b <= this.a) {
+    if (a + b <= c || a + c <= b || c + b <= a) {
       throw new Error('This sides can\'t form a triangle');
     }
   }
 
   getArea(): number {
-    const s = (this.a + this.b + this.c) / 2;
-    const area = s * (s - this.a) * (s - this.b) * (s - this.c);
+    const { a, b, c } = this;
+    const s = (a + b + c) / 2;
+    const area = s * (s - a) * (s - b) * (s - c);
 
     return Math.floor(Math.sqrt(area) * 100) / 100;
   }
@@ -56,13 +55,14 @@ export class Circle implements Figure {
   ) {
     this.shape = Shape.Circle;
 
-    if (this.radius <= 0) {
+    if (radius <= 0) {
       throw new Error('Please enter valid positive number');
     }
   }
 
   getArea(): number {
-    const area = Math.PI * (this.radius ** 2);
+    const { radius } = this;
+    const area = Math.PI * (radius ** 2);
 
     return Math.floor(area * 100) / 100;
   }
@@ -78,16 +78,18 @@ export class Rectangle implements Figure {
   ) {
     this.shape = Shape.Rectangle;
 
-    if (this.width <= 0 || this.height <= 0) {
+    if (width <= 0 || height <= 0) {
       throw new Error('Please enter valid positive numbers');
     }
   }
 
   getArea(): number {
-    return Math.floor(this.width * this.height * 100) / 100;
+    const { width, height } = this;
+
+    return Math.floor(width * height * 100) / 100;
   }
 }
 
-export function getInfo(figure): string {
+export function getInfo(figure: Figure): string {
   return `A ${figure.color} ${figure.shape} - ${figure.getArea()}`;
 }
