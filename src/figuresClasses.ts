@@ -1,5 +1,14 @@
-type Shape = 'triangle' | 'circle' | 'rectangle';
-type Color = 'red' | 'green' | 'blue';
+enum Shape {
+  triangle = 'triangle',
+  circle = 'circle',
+  rectangle = 'rectangle',
+}
+
+enum Color {
+  red = 'red',
+  green = 'green',
+  blue = 'blue',
+}
 
 export interface Figure {
   shape: Shape;
@@ -9,36 +18,23 @@ export interface Figure {
 }
 
 export class Triangle implements Figure {
-  public shape: Shape = 'triangle';
-
-  public color: Color;
-
-  public a: number;
-
-  public b: number;
-
-  public c: number;
+  public shape: Shape = Shape.triangle;
 
   constructor(
-    color: Color,
-    a: number,
-    b: number,
-    c: number,
+    public color: Color,
+    public a: number,
+    public b: number,
+    public c: number,
   ) {
     if (a <= 0 || b <= 0 || c <= 0) {
       throw new Error('Invalid side(`s) length');
     }
 
-    const logestSide = Math.max(a, b, c);
+    const longestSide = Math.max(a, b, c);
 
-    if (logestSide >= a + b + c - logestSide) {
+    if (longestSide >= a + b + c - longestSide) {
       throw new Error('Invalide sides values');
     }
-
-    this.color = color;
-    this.a = a;
-    this.b = b;
-    this.c = c;
   }
 
   getArea(): number {
@@ -50,22 +46,15 @@ export class Triangle implements Figure {
 }
 
 export class Circle implements Figure {
-  public shape: Shape = 'circle';
-
-  public color: Color;
-
-  public radius: number;
+  public shape: Shape = Shape.circle;
 
   constructor(
-    color: Color,
-    radius: number,
+    public color: Color,
+    public radius: number,
   ) {
     if (radius <= 0) {
       throw new Error('Invalid radius length');
     }
-
-    this.color = color;
-    this.radius = radius;
   }
 
   getArea(): number {
@@ -74,26 +63,16 @@ export class Circle implements Figure {
 }
 
 export class Rectangle implements Figure {
-  public shape: Shape = 'rectangle';
-
-  public color: Color;
-
-  public width: number;
-
-  public height: number;
+  public shape: Shape = Shape.rectangle;
 
   constructor(
-    color: Color,
-    width: number,
-    height: number,
+    public color: Color,
+    public width: number,
+    public height: number,
   ) {
     if (width <= 0 || height <= 0) {
       throw new Error('Invalid side(`s) length');
     }
-
-    this.color = color;
-    this.width = width;
-    this.height = height;
   }
 
   getArea(): number {
