@@ -2,6 +2,10 @@ function isTrianglePossible(a: number, b: number, c: number): boolean {
   return a + b > c && a + c > b && b + c > a;
 }
 
+function roundDownFloat(number: number, amountOfDecimals: number = 2): number {
+  return Math.floor(number * 10 ** amountOfDecimals) / 10 ** amountOfDecimals;
+}
+
 export interface Figure {
   shape: string,
   color: string,
@@ -35,9 +39,7 @@ export class Triangle implements Figure {
       * (semiperimeter - this.c)
     ) ** 0.5;
 
-    const areaToTwoNumbersAfterComma = Math.floor(area * 100) / 100;
-
-    return areaToTwoNumbersAfterComma;
+    return roundDownFloat(area);
   }
 }
 
@@ -56,9 +58,7 @@ export class Circle implements Figure {
   getArea(): number {
     const area = this.radius ** 2 * Math.PI;
 
-    const areaToTwoNumbersAfterComma = Math.floor(area * 100) / 100;
-
-    return areaToTwoNumbersAfterComma;
+    return roundDownFloat(area);
   }
 }
 
@@ -78,9 +78,7 @@ export class Rectangle implements Figure {
   getArea(): number {
     const area = this.height * this.width;
 
-    const areaToTwoNumbersAfterComma = Math.floor(area * 100) / 100;
-
-    return areaToTwoNumbersAfterComma;
+    return roundDownFloat(area);
   }
 }
 
