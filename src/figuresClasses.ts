@@ -8,11 +8,11 @@ export interface Figure {
 
 export class Triangle implements Figure {
   constructor(
-    public color:Color,
+    public color: Color,
     public a: number,
     public b: number,
     public c: number,
-    public shape:Shape = 'triangle',
+    public shape: Shape = 'triangle',
   ) {
     if (this.a <= 0 || this.b <= 0 || this.c <= 0) {
       throw new Error('your error message');
@@ -20,9 +20,9 @@ export class Triangle implements Figure {
 
     const longestSide: number = Math.max(this.a, this.b, this.c);
 
-   const perimeter = this.a + this.b + this.c
-    if (perimeter - longestSide <= longestSide)
-      {
+    const perimeter = this.a + this.b + this.c;
+
+    if (perimeter - longestSide <= longestSide) {
       throw new Error('your error message');
     }
   }
@@ -39,7 +39,7 @@ export class Circle implements Figure {
   constructor(
     public color: Color,
     public a: number,
-    public shape:Shape = 'circle',
+    public shape: Shape = 'circle',
   ) {
     if (this.a <= 0) {
       throw new Error('your error message');
@@ -59,7 +59,7 @@ export class Rectangle implements Figure {
     public color: Color,
     public a: number,
     public b: number,
-    public shape:Shape = 'rectangle',
+    public shape: Shape = 'rectangle',
   ) {
     if (this.a <= 0 || this.b <= 0) {
       throw new Error('your error message');
@@ -73,6 +73,6 @@ export class Rectangle implements Figure {
   }
 }
 
-export function getInfo(figure: Figure):string {
+export function getInfo(figure: Figure): string {
   return `A ${figure.color} ${figure.shape} - ${figure.getArea()}`;
 }
