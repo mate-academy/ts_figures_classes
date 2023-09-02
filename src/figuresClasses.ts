@@ -20,9 +20,9 @@ export class Triangle implements Figure {
 
     const longestSide: number = Math.max(this.a, this.b, this.c);
 
-    if ((longestSide === this.a && this.a >= this.b + this.c)
-      || (longestSide === this.b && this.b >= this.a + this.c)
-      || (longestSide === this.c && this.c >= this.b + this.a)) {
+   const perimeter = this.a + this.b + this.c
+    if (perimeter - longestSide <= longestSide)
+      {
       throw new Error('your error message');
     }
   }
