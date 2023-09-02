@@ -18,11 +18,11 @@ export class Triangle implements Figure {
     public b: number,
     public c: number,
   ) {
-    const arr = [a, b, c]
+    const arayOfSides = [a, b, c]
       .sort((number1: number, number2: number) => number2 - number1);
-    const check = arr[0] >= (arr[1] + arr[2]);
+    const invalidTriangle = arayOfSides[0] >= (arayOfSides[1] + arayOfSides[2]);
 
-    if (check === true) {
+    if (invalidTriangle === true) {
       throw new Error(`sides ${a}, ${b} and ${c} can't form a triangle`);
     }
 
@@ -53,9 +53,9 @@ export class Circle implements Figure {
   }
 
   getArea(): number {
-    const area = Math.PI * (this.radius * this.radius);
+    const circleArea = Math.PI * (this.radius * this.radius);
 
-    return Math.floor(area * 100) / 100;
+    return Math.floor(circleArea * 100) / 100;
   }
 }
 
