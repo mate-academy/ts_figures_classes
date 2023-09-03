@@ -1,19 +1,31 @@
+enum Color {
+  Red = 'red',
+  Green = 'green',
+  Blue = 'blue',
+}
+
+enum Shape {
+  Triangle = 'triangle',
+  Circle = 'circle',
+  Rectangle = 'rectangle',
+}
+
 export interface Figure {
-  shape: string;
-  color: string;
+  shape: Shape;
+  color: Color;
   getArea(): number;
 }
 
 export class Triangle implements Figure {
-  public shape: string;
+  public shape: Shape;
 
   constructor(
-    public color: string,
+    public color: Color,
     public a: number,
     public b: number,
     public c: number,
   ) {
-    this.shape = 'triangle';
+    this.shape = Shape.Triangle;
 
     if (a <= 0 || b <= 0 || c <= 0) {
       throw new Error('side cannot be less than or equal to zero');
@@ -37,10 +49,10 @@ export class Triangle implements Figure {
 }
 
 export class Circle implements Figure {
-  public shape: string;
+  public shape: Shape;
 
-  constructor(public color: string, public radius: number) {
-    this.shape = 'circle';
+  constructor(public color: Color, public radius: number) {
+    this.shape = Shape.Circle;
 
     if (radius <= 0) {
       throw new Error('side cannot be less than or equal to zero');
@@ -53,14 +65,14 @@ export class Circle implements Figure {
 }
 
 export class Rectangle implements Figure {
-  public shape: string;
+  public shape: Shape;
 
   constructor(
-    public color: string,
+    public color: Color,
     public width: number,
     public height: number,
   ) {
-    this.shape = 'rectangle';
+    this.shape = Shape.Rectangle;
 
     if (width <= 0 || height <= 0) {
       throw new Error('side cannot be less than or equal to zero');
