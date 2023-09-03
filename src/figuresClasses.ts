@@ -22,7 +22,7 @@ export class Triangle implements Figure {
     const maxSide = Math.max(this.a, this.b, this.c);
     const sumTwoSmallerSides = sidesSum - maxSide;
 
-    if (a <= 0 && b <= 0 && c <= 0 && maxSide >= sumTwoSmallerSides) {
+    if (a <= 0 || b <= 0 || c <= 0 || maxSide >= sumTwoSmallerSides) {
       throw new Error(`sides ${a}, ${b} and ${c} can't form a triangle`);
     }
   }
