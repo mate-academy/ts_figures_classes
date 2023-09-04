@@ -1,94 +1,103 @@
+enum Shape {
+  Triangle = 'triangle',
+  Circle = 'circle',
+  Rectangle = 'rectangle',
+}
+
+enum Color {
+  Red = 'red',
+  Green = 'green',
+  Blue = 'blue',
+}
+
 export interface Figure {
-  shape: string;
-  color: string;
+  shape: Shape;
+  color: Color;
   getArea(): number;
 }
 
+function normalizeArea(areaValue: number): number {
+  return Math.trunc(areaValue * 100) / 100;
+}
+
+const ERROR_MESSAGE = 'Range Error. Value cannot be <= 0!';
+
 export class Triangle implements Figure {
-  shape = 'triangle';
+  public shape: Shape = Shape.Triangle;
 
-  color: string;
+  constructor(
+    public color: Color,
+    public a: number,
+    public b: number,
+    public c: number,
+  ) {
+    const longestSide = Math.max(a, b, c);
 
-  a: number;
-
-  b: number;
-
-  c: number;
-
-  constructor(color: string, a: number, b: number, c: number) {
     if (a <= 0 || b <= 0 || c <= 0) {
-      throw new Error('Invalid side length');
+      throw new Error(ERROR_MESSAGE);
     }
 
-    const sides = [a, b, c].sort((x, y) => x - y);
-
-    if (sides[2] >= sides[0] + sides[1]) {
-      throw new Error('Invalid triangle sides');
+    if (a + b + c - longestSide <= longestSide) {
+      throw new Error('Inconsistent length of triangle sides');
     }
-
-    this.color = color;
-    this.a = a;
-    this.b = b;
-    this.c = c;
   }
 
   getArea(): number {
-    const s = (this.a + this.b + this.c) / 2;
-    const area = Math.sqrt(s * (s - this.a) * (s - this.b) * (s - this.c));
+    const { a, b, c } = this;
+    const semiPerimeter = (a + b + c) / 2;
+    const area = Math.sqrt(
+      semiPerimeter
+      * (semiPerimeter - a)
+      * (semiPerimeter - b)
+      * (semiPerimeter - c),
+    );
 
-    return Math.round(area * 100) / 100;
+    return normalizeArea(area);
   }
 }
 
 export class Circle implements Figure {
-  shape = 'circle';
+  public shape: Shape = Shape.Circle;
 
-  color: string;
-
-  radius: number;
-
-  constructor(color: string, radius: number) {
+  constructor(
+    public color: Color,
+    public radius: number,
+  ) {
     if (radius <= 0) {
-      throw new Error('Invalid radius');
+      throw new Error(ERROR_MESSAGE);
     }
-
-    this.color = color;
-    this.radius = radius;
   }
 
   getArea(): number {
     const area = Math.PI * this.radius ** 2;
 
-    return Math.floor(area * 100) / 100;
+    return normalizeArea(area);
   }
 }
 
 export class Rectangle implements Figure {
-  shape = 'rectangle';
+  public shape: Shape = Shape.Rectangle;
 
-  color: string;
-
-  width: number;
-
-  height: number;
-
-  constructor(color: string, width: number, height: number) {
+  constructor(
+    public color: Color,
+    public width: number,
+    public height: number,
+  ) {
     if (width <= 0 || height <= 0) {
-      throw new Error('Invalid side length');
+      throw new Error(ERROR_MESSAGE);
     }
-
-    this.color = color;
-    this.width = width;
-    this.height = height;
   }
 
   getArea(): number {
     const area = this.width * this.height;
 
-    return Math.round(area * 100) / 100;
+    return normalizeArea(area);
   }
 }
 
 export function getInfo(figure: Figure): string {
-  return `A ${figure.color} ${figure.shape} - ${figure.getArea()}`;
+  const { color, shape } = figure;
+  const getArea = figure.getArea();
+
+  return `A ${color} ${shape} - ${getArea}`;
 }
