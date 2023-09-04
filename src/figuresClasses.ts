@@ -1,11 +1,17 @@
+export enum Shape {
+  Triangle = 'triangle',
+  Circle = 'circle',
+  Rectangle = 'rectangle',
+}
+
 export interface Figure {
-  shape: 'triangle' | 'circle' | 'rectangle';
+  shape: Shape;
   color: 'red' | 'green' | 'blue';
   getArea(): number;
 }
 
 export class Triangle implements Figure {
-  shape: 'triangle' | 'circle' | 'rectangle';
+  shape: Shape = Shape.Triangle;
 
   constructor(
     public color: 'red' | 'green' | 'blue',
@@ -22,8 +28,6 @@ export class Triangle implements Figure {
       || a + c <= b) {
       throw new Error('Not valid data, your param of sides are not right');
     }
-
-    this.shape = 'triangle';
   }
 
   getArea(): number {
@@ -35,7 +39,7 @@ export class Triangle implements Figure {
 }
 
 export class Circle implements Figure {
-  shape: 'triangle' | 'circle' | 'rectangle';
+  shape: Shape = Shape.Circle;
 
   constructor(
     public color: 'red' | 'green' | 'blue',
@@ -44,8 +48,6 @@ export class Circle implements Figure {
     if (radius <= 0) {
       throw new Error('Enter valid data');
     }
-
-    this.shape = 'circle';
   }
 
   getArea(): number {
@@ -56,7 +58,7 @@ export class Circle implements Figure {
 }
 
 export class Rectangle implements Figure {
-  shape: 'triangle' | 'circle' | 'rectangle';
+  shape: Shape = Shape.Rectangle;
 
   constructor(
     public color: 'red' | 'green' | 'blue',
@@ -66,8 +68,6 @@ export class Rectangle implements Figure {
     if (width <= 0 || height <= 0) {
       throw new Error('Enter a valid data');
     }
-
-    this.shape = 'rectangle';
   }
 
   getArea(): number {
