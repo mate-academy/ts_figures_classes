@@ -1,12 +1,8 @@
-// type Shape = 'triangle' | 'circle' | 'rectangle';
-
 enum Shape {
   Triangle = 'triangle',
   Circle = 'circle',
   Rectangle = 'rectangle',
 }
-
-// type Color = 'red' | 'green' | 'blue';
 
 enum Color {
   Red = 'red',
@@ -24,7 +20,7 @@ function normalizeArea(areaValue: number): number {
   return Math.trunc(areaValue * 100) / 100;
 }
 
-const ERROR_MESSAGE = 'Value cannot be <= 0!';
+const ERROR_MESSAGE = 'Range Error. Value cannot be <= 0!';
 
 export class Triangle implements Figure {
   public shape: Shape = Shape.Triangle;
