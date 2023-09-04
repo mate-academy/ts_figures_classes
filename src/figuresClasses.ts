@@ -4,11 +4,15 @@ enum Shape {
   Rectangle = 'rectangle',
 }
 
-type Color = 'red' | 'green' | 'blue';
+enum Color {
+  Red ='red',
+  Green = 'green',
+  Blue = 'blue'
+}
 
 const ERRORS = {
-  INVALID_SIDE: 'All sides should be have only positive numbers',
-  INVALID_RADIUS: 'Radius should be have only positive numbers',
+  INVALID_SIDE: 'All sides should have only positive numbers',
+  INVALID_RADIUS: 'Radius should have only positive numbers',
   NOT_TRIANGLE: 'It isn`t a triangle',
 };
 
@@ -67,7 +71,7 @@ export class Circle implements Figure {
   }
 
   getArea(): number {
-    const area = (Math.PI * this.radius ** 2);
+    const area = Math.PI * this.radius ** 2;
 
     return roundDownToHundredths(area);
   }
@@ -94,5 +98,8 @@ export class Rectangle {
 }
 
 export function getInfo(figure: Figure): string {
-  return `A ${figure.color} ${figure.shape} - ${figure.getArea()}`;
+  const area = figure.getArea();
+  const { color, shape } = figure;
+
+  return `A ${color} ${shape} - ${area}`;
 }
