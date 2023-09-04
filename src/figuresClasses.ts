@@ -1,7 +1,16 @@
-type Shape = 'triangle' | 'circle' | 'rectangle';
-type Color = 'red' | 'green' | 'blue';
+enum Shape {
+  triangle = 'triangle',
+  circle = 'circle',
+  rectangle = 'rectangle',
+}
 
-const ERROR_MESSAGE = 'Invalid sides for this figure';
+enum Color{
+  red = 'red',
+  green = 'green',
+  blue = 'blue',
+}
+
+const INVALID_SIZE_ERROR = 'Invalid sides for this figure';
 
 export interface Figure {
   shape: Shape,
@@ -11,7 +20,7 @@ export interface Figure {
 }
 
 export class Triangle implements Figure {
-  shape: Shape = 'triangle';
+  shape = Shape.triangle;
 
   constructor(
     public color: Color,
@@ -20,7 +29,7 @@ export class Triangle implements Figure {
     public c: number,
   ) {
     if (this.a <= 0 || this.b <= 0 || this.c <= 0) {
-      throw new Error(ERROR_MESSAGE);
+      throw new Error(INVALID_SIZE_ERROR);
     }
 
     const sides = [a, b, c];
@@ -34,7 +43,7 @@ export class Triangle implements Figure {
     });
 
     if (biggestSide >= sumOfOtherSides) {
-      throw new Error(ERROR_MESSAGE);
+      throw new Error(INVALID_SIZE_ERROR);
     }
   }
 
@@ -48,14 +57,14 @@ export class Triangle implements Figure {
 }
 
 export class Circle implements Figure {
-  shape: Shape = 'circle';
+  shape = Shape.circle;
 
   constructor(
     public color: Color,
     public radius: number,
   ) {
     if (radius <= 0) {
-      throw new Error(ERROR_MESSAGE);
+      throw new Error(INVALID_SIZE_ERROR);
     }
   }
 
@@ -67,7 +76,7 @@ export class Circle implements Figure {
 }
 
 export class Rectangle implements Figure {
-  shape: Shape = 'rectangle';
+  shape = Shape.rectangle;
 
   constructor(
     public color: Color,
@@ -75,7 +84,7 @@ export class Rectangle implements Figure {
     public height: number,
   ) {
     if (width <= 0 || height <= 0) {
-      throw new Error(ERROR_MESSAGE);
+      throw new Error(INVALID_SIZE_ERROR);
     }
   }
 
