@@ -1,4 +1,4 @@
-const ERROR_MESSAGE = 'Invalid values entered';
+const ERROR_MESSAGE_FOR_WRONG_VALUES = 'Invalid values entered';
 
 enum Shape {
   Triangle = 'triangle',
@@ -6,7 +6,11 @@ enum Shape {
   Rectangle = 'rectangle'
 }
 
-type Color = 'red' | 'blue' | 'green';
+enum Color {
+  Red = 'red',
+  Blue = 'blue',
+  Green = 'green',
+}
 
 export interface Figure {
   shape: Shape;
@@ -31,28 +35,28 @@ export class Triangle implements Figure {
     public c: number,
   ) {
     if (a <= 0 || b <= 0 || c <= 0) {
-      throw new Error(ERROR_MESSAGE);
+      throw new Error(ERROR_MESSAGE_FOR_WRONG_VALUES);
     }
 
     const longestSide = Math.max(a, b, c);
     const sumOfSides = a + b + c;
 
     if (sumOfSides - longestSide <= longestSide) {
-      throw new Error(ERROR_MESSAGE);
+      throw new Error(ERROR_MESSAGE_FOR_WRONG_VALUES);
     }
   }
 
   getArea(): number {
-    const semiPerimeter = (this.a + this.b + this.c) / 2;
-
-    return roundDown(
-      Math.sqrt(
-        semiPerimeter
-          * (semiPerimeter - this.a)
-          * (semiPerimeter - this.b)
-          * (semiPerimeter - this.c),
-      ),
+    const { a, b, c } = this;
+    const semiPerimeter = (a + b + c) / 2;
+    const area = Math.sqrt(
+      semiPerimeter
+        * (semiPerimeter - a)
+        * (semiPerimeter - b)
+        * (semiPerimeter - c),
     );
+
+    return roundDown(area);
   }
 }
 
@@ -64,12 +68,14 @@ export class Circle implements Figure {
     public radius: number,
   ) {
     if (radius <= 0) {
-      throw new Error(ERROR_MESSAGE);
+      throw new Error(ERROR_MESSAGE_FOR_WRONG_VALUES);
     }
   }
 
   getArea(): number {
-    return roundDown(Math.PI * (this.radius ** 2));
+    const area = Math.PI * (this.radius ** 2);
+
+    return roundDown(area);
   }
 }
 
@@ -82,15 +88,21 @@ export class Rectangle implements Figure {
     public height: number,
   ) {
     if (width <= 0 || height <= 0) {
-      throw new Error(ERROR_MESSAGE);
+      throw new Error(ERROR_MESSAGE_FOR_WRONG_VALUES);
     }
   }
 
   getArea(): number {
-    return roundDown(this.height * this.width);
+    const { height, width } = this;
+    const area = height * width;
+
+    return roundDown(area);
   }
 }
 
 export function getInfo(figure: Figure): string {
-  return `A ${figure.color} ${figure.shape} - ${figure.getArea()}`;
+  const { color, shape } = figure;
+  const area = figure.getArea();
+
+  return `A ${color} ${shape} - ${area}`;
 }
