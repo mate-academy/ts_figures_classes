@@ -1,41 +1,43 @@
-enum Shapes {
-  triangle = 'triangle',
-  circle = 'circle',
-  rectangle = 'rectangle'
+enum Shape {
+  Triangle = 'triangle',
+  Circle = 'circle',
+  Rectangle = 'rectangle'
 }
 
-enum Colors {
-  red = 'red',
-  green = 'green',
-  blue = 'blue'
+enum Color {
+  Red = 'red',
+  Green = 'green',
+  Blue = 'blue'
 }
 
 export interface Figure {
-  shape: Shapes;
-  color: Colors;
+  shape: Shape;
+  color: Color;
 
   getArea: () => number;
 }
 
 export class Triangle implements Figure {
-  shape: Shapes.triangle = Shapes.triangle;
+  public shape: Shape.Triangle = Shape.Triangle;
 
   constructor(
-    public color: Colors,
+    public color: Color,
     public a: number,
     public b: number,
     public c: number,
   ) {
-    const arayOfSides = [a, b, c]
-      .sort((number1: number, number2: number) => number2 - number1);
-    const invalidTriangle = arayOfSides[0] >= (arayOfSides[1] + arayOfSides[2]);
-
-    if (invalidTriangle === true) {
-      throw new Error(`sides ${a}, ${b} and ${c} can't form a triangle`);
-    }
-
     if (a <= 0 || b <= 0 || c <= 0) {
       throw new Error('invalid side length');
+    }
+
+    const triangleSides = [a, b, c]
+      .sort((sideA: number, sideB: number) => sideB - sideA);
+    const isTriangleInvalid = triangleSides[0] >= (
+      triangleSides[1] + triangleSides[2]
+    );
+
+    if (isTriangleInvalid) {
+      throw new Error(`sides ${a}, ${b} and ${c} can't form a triangle`);
     }
   }
 
@@ -49,10 +51,10 @@ export class Triangle implements Figure {
 }
 
 export class Circle implements Figure {
-  shape: Shapes.circle = Shapes.circle;
+  public shape: Shape.Circle = Shape.Circle;
 
   constructor(
-    public color: Colors,
+    public color: Color,
     public radius: number,
   ) {
     if (radius <= 0) {
@@ -68,10 +70,10 @@ export class Circle implements Figure {
 }
 
 export class Rectangle implements Figure {
-  shape: Shapes.rectangle = Shapes.rectangle;
+  public shape: Shape.Rectangle = Shape.Rectangle;
 
   constructor(
-    public color: Colors,
+    public color: Color,
     public width: number,
     public height: number,
   ) {
@@ -86,7 +88,9 @@ export class Rectangle implements Figure {
 }
 
 export function getInfo(figure: Figure): string {
+  const { color, shape } = figure;
+
   const square = figure.getArea();
 
-  return `A ${figure.color} ${figure.shape} - ${square}`;
+  return `A ${color} ${shape} - ${square}`;
 }
