@@ -1,8 +1,17 @@
+function roundNumber(value: number): number {
+  return Math.floor(value * 100) / 100;
+}
+
 function heronFormula(a: number, b: number, c: number): number {
   const s: number = (a + b + c) / 2;
 
-  return Math.floor(Math.sqrt(s * (s - a) * (s - b) * (s - c)) * 100) / 100;
+  return roundNumber(Math.sqrt(s * (s - a) * (s - b) * (s - c)));
 }
+
+const error = {
+  valueError: 'Value cant be zero or less',
+  triangleError: 'Side value cant be more than sum of two other sides',
+};
 
 enum Shape {
   Triangle = 'triangle',
@@ -23,7 +32,7 @@ export interface Figure {
 }
 
 export class Triangle implements Figure {
-  shape = Shape.Triangle;
+  public shape = Shape.Triangle;
 
   constructor(
     public color: Color,
@@ -32,14 +41,14 @@ export class Triangle implements Figure {
     public side3: number,
   ) {
     if (side1 <= 0 || side2 <= 0 || side3 <= 0) {
-      throw new Error('Sides value cant be zero or less');
+      throw new Error(error.valueError);
     }
 
     if (side1 + side2 <= side3
       || side1 + side3 <= side2
       || side2 + side3 <= side1
     ) {
-      throw new Error('Side value cant be more than sum of two other sides');
+      throw new Error(error.triangleError);
     }
   }
 
@@ -49,24 +58,24 @@ export class Triangle implements Figure {
 }
 
 export class Circle implements Figure {
-  shape = Shape.Circle;
+  public shape = Shape.Circle;
 
   constructor(
     public color: Color,
     public radius: number,
   ) {
     if (radius <= 0) {
-      throw new Error('Circle radius value cant be zero or less');
+      throw new Error(error.valueError);
     }
   }
 
   getArea(): number {
-    return Math.floor(Math.PI * (this.radius ** 2) * 100) / 100;
+    return roundNumber(Math.PI * (this.radius ** 2));
   }
 }
 
 export class Rectangle implements Figure {
-  shape = Shape.Rectangle;
+  public shape = Shape.Rectangle;
 
   constructor(
     public color: Color,
@@ -74,12 +83,12 @@ export class Rectangle implements Figure {
     public height: number,
   ) {
     if (width <= 0 || height <= 0) {
-      throw new Error('Rectangle side value cant be zero or less');
+      throw new Error(error.valueError);
     }
   }
 
   getArea(): number {
-    return Math.floor(this.width * this.height * 100) / 100;
+    return roundNumber(this.width * this.height);
   }
 }
 
