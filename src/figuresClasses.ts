@@ -2,7 +2,7 @@ type Shape = 'triangle' | 'circle' | 'rectangle';
 type Color = 'red' | 'green' | 'blue';
 
 function roundToHundredths(num: number): number {
-  return Math.round(num * 100) / 100;
+  return Math.floor(num * 100) / 100;
 }
 
 export interface Figure {
