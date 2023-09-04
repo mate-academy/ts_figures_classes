@@ -1,8 +1,4 @@
-enum Shape {
-  Triangle = 'triangle',
-  Circle = 'circle',
-  Rectangle = 'rectangle',
-}
+type Shape = 'triangle' | 'circle' | 'rectangle';
 
 type Color = 'red' | 'green' | 'blue';
 
@@ -13,7 +9,7 @@ export interface Figure {
 }
 
 export class Triangle implements Figure {
-  shape = Shape.Triangle;
+  shape: Shape = 'triangle';
 
   constructor(
     public color: Color,
@@ -21,15 +17,24 @@ export class Triangle implements Figure {
     public b: number,
     public c: number,
   ) {
-    if (a >= b + c || a <= Math.abs(b - c) || a <= 0 || b <= 0 || c <= 0) {
-      throw new Error('Invalid triangle sides');
+    if (a >= b + c || a <= Math.abs(b - c)) {
+      throw new Error('Given sides of the triangle can\'t form a triangle');
+    }
+
+    if (a <= 0 || b <= 0 || c <= 0) {
+      throw new Error(
+        'One or more sides of the triangle are less or equal zero',
+      );
     }
   }
 
   getArea(): number {
-    const p: number = (this.a + this.b + this.c) / 2;
+    const semiPerimeter: number = (this.a + this.b + this.c) / 2;
     const area = Math.floor(
-      Math.sqrt(p * (p - this.a) * (p - this.b) * (p - this.c))
+      Math.sqrt(semiPerimeter
+        * (semiPerimeter - this.a)
+        * (semiPerimeter - this.b)
+        * (semiPerimeter - this.c))
       * 100,
     ) / 100;
 
@@ -38,26 +43,24 @@ export class Triangle implements Figure {
 }
 
 export class Circle implements Figure {
-  shape = Shape.Circle;
+  shape: Shape = 'circle';
 
   constructor(
     public color: Color,
     public radius: number,
   ) {
     if (radius <= 0) {
-      throw new Error('Invalid circle radius');
+      throw new Error('Radius of the circle is less or equal zero');
     }
   }
 
   getArea(): number {
-    const area = Math.floor(100 * Math.PI * (this.radius ** 2)) / 100;
-
-    return area;
+    return Math.floor(100 * Math.PI * (this.radius ** 2)) / 100;
   }
 }
 
 export class Rectangle implements Figure {
-  shape = Shape.Rectangle;
+  shape: Shape = 'rectangle';
 
   constructor(
     public color: Color,
@@ -65,14 +68,14 @@ export class Rectangle implements Figure {
     public height: number,
   ) {
     if (width <= 0 || height <= 0) {
-      throw new Error('Invalid rectangle sides');
+      throw new Error(
+        'One or both sides of the rectangle are les or equal zero',
+      );
     }
   }
 
   getArea(): number {
-    const area: number = this.width * this.height;
-
-    return area;
+    return this.width * this.height;
   }
 }
 
