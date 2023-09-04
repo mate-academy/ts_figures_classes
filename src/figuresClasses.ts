@@ -1,5 +1,14 @@
-type Color = 'red' | 'green' | 'blue';
-type Shape = 'triangle'| 'circle' | 'rectangle';
+enum Color {
+  Red = 'red',
+  Green ='green',
+  Blue ='blue',
+}
+
+enum Shape {
+  Triangle = 'triangle',
+  Circle ='circle',
+  Rectangle ='rectangle',
+}
 
 export interface Figure {
   shape: Shape,
@@ -17,13 +26,11 @@ function isGoodTriangle(...sides:number[]):boolean {
 }
 
 function toFixedArea(area:number):number {
-  const fixed = 10 ** 2;
-
-  return Math.floor(area * fixed) / fixed;
+  return Math.floor(area * 100) / 100;
 }
 
 export class Triangle {
-  public readonly shape:Shape = 'triangle';
+  public readonly shape:Shape = Shape.Triangle;
 
   constructor(
     public color: Color,
@@ -42,13 +49,15 @@ export class Triangle {
   }
 
   getArea():number {
-    const semiperimeter:number = (this.a + this.b + this.c) / 2;
+    const { a, b, c } = this;
+
+    const semiperimeter:number = (a + b + c) / 2;
 
     const area = Math.sqrt(
       semiperimeter
-      * (semiperimeter - this.a)
-      * (semiperimeter - this.b)
-      * (semiperimeter - this.c),
+      * (semiperimeter - a)
+      * (semiperimeter - b)
+      * (semiperimeter - c),
     );
 
     return toFixedArea(area);
@@ -56,7 +65,7 @@ export class Triangle {
 }
 
 export class Circle {
-  public readonly shape:Shape = 'circle';
+  public readonly shape:Shape = Shape.Circle;
 
   constructor(
     public color: Color,
@@ -75,7 +84,7 @@ export class Circle {
 }
 
 export class Rectangle {
-  public readonly shape:Shape = 'rectangle';
+  public readonly shape:Shape = Shape.Rectangle;
 
   constructor(
     public color: Color,
@@ -88,12 +97,16 @@ export class Rectangle {
   }
 
   getArea():number {
-    const area = this.width * this.height;
+    const { width, height } = this;
+    const area = width * height;
 
     return toFixedArea(area);
   }
 }
 
 export function getInfo(figure:Figure):string {
-  return `A ${figure.color} ${figure.shape} - ${figure.getArea()}`;
+  const { color, shape } = figure;
+  const area = figure.getArea();
+
+  return `A ${color} ${shape} - ${area}`;
 }
