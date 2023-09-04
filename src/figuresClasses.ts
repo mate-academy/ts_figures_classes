@@ -2,17 +2,21 @@ type Shape = 'triangle' | 'circle' | 'rectangle';
 type Color = 'red' | 'green' | 'blue';
 
 function getArea(): number {
-  const s = (this.a + this.b + this.c) / 2;
-
   switch (this.shape) {
-    case 'triangle':
+    case 'triangle': {
+      const s = (this.a + this.b + this.c) / 2;
+
       return Math.floor(
         Math.sqrt(s * (s - this.a) * (s - this.b) * (s - this.c)) * 100,
       ) / 100;
+    }
+
     case 'circle':
       return Math.floor(this.radius ** 2 * Math.PI * 100) / 100;
+
     case 'rectangle':
       return this.width * this.height;
+
     default:
       return 0;
   }
