@@ -4,20 +4,27 @@ export interface Figure {
   getArea(): number;
 }
 
+function roundToTwoDecimals(n: number): number {
+  return Math.floor(n * 100) / 100;
+}
+
 export class Triangle implements Figure {
   public shape: Figure['shape'] = 'triangle';
 
   constructor(
     public color: Figure['color'],
-    public a: number,
-    public b: number,
-    public c: number,
+    public sideA: number,
+    public sideB: number,
+    public sideC: number,
   ) {
-    if ([a, b, c].some((side) => side <= 0)) {
+    if ([sideA, sideB, sideC].some((side) => side <= 0)) {
       throw new Error('A side can\'t have length <= 0');
     }
 
-    if (a >= (b + c) || b >= (a + c) || c >= (a + b)
+    if (
+      sideA >= (sideB + sideC)
+      || sideB >= (sideA + sideC)
+      || sideC >= (sideA + sideB)
     ) {
       throw new Error(
         'The longest side of a triangle is >= than a sum of two others',
@@ -26,12 +33,17 @@ export class Triangle implements Figure {
   }
 
   getArea(): number {
-    const { a, b, c } = this;
+    const { sideA, sideB, sideC } = this;
 
-    const s = (a + b + c) / 2;
-    const area = Math.sqrt(s * (s - a) * (s - b) * (s - c));
+    const semiperimeter = (sideA + sideB + sideC) / 2;
+    const area = Math.sqrt(
+      semiperimeter
+      * (semiperimeter - sideA)
+      * (semiperimeter - sideB)
+      * (semiperimeter - sideC),
+    );
 
-    return Math.floor(area * 100) / 100;
+    return roundToTwoDecimals(area);
   }
 }
 
@@ -51,7 +63,7 @@ export class Circle implements Figure {
     const { radius } = this;
     const area = Math.PI * (radius ** 2);
 
-    return Math.floor(area * 100) / 100;
+    return roundToTwoDecimals(area);
   }
 }
 
@@ -60,18 +72,18 @@ export class Rectangle implements Figure {
 
   constructor(
     public color: Figure['color'],
-    public a: number,
-    public b: number,
+    public sideA: number,
+    public sideB: number,
   ) {
-    if (a <= 0 || b <= 0) {
+    if (sideA <= 0 || sideB <= 0) {
       throw new Error('A side of rectangle can\'t be <= 0');
     }
   }
 
   getArea(): number {
-    const area = this.a * this.b;
+    const area = this.sideA * this.sideB;
 
-    return Math.floor(area * 100) / 100;
+    return roundToTwoDecimals(area);
   }
 }
 
