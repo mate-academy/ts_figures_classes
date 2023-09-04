@@ -1,6 +1,10 @@
 type Shapes = 'triangle' | 'circle' | 'rectangle';
 type Colors = 'red' | 'green' | 'blue';
 
+function getTwoDecimalPlaces(area:number): number {
+  return Math.floor(area * 100) / 100;
+}
+
 export interface Figure {
   shape: Shapes,
   color: Colors,
@@ -25,11 +29,12 @@ export class Triangle implements Figure {
   }
 
   getArea(): number {
-    const diff: number = (this.a + this.b + this.c) / 2;
-    const a: number
-      = Math.sqrt(diff * (diff - this.a) * (diff - this.b) * (diff - this.c));
+    const halfPerimeter: number = (this.a + this.b + this.c) / 2;
+    const triangleArea: number
+      = Math.sqrt(halfPerimeter * (halfPerimeter - this.a)
+        * (halfPerimeter - this.b) * (halfPerimeter - this.c));
 
-    return Math.round(a * 100) / 100;
+    return getTwoDecimalPlaces(triangleArea);
   }
 }
 
@@ -48,7 +53,7 @@ export class Circle implements Figure {
   getArea(): number {
     const circleArea: number = Math.PI * (this.radius ** 2);
 
-    return Math.floor(circleArea * 100) / 100;
+    return getTwoDecimalPlaces(circleArea);
   }
 }
 
@@ -66,7 +71,9 @@ export class Rectangle implements Figure {
   }
 
   getArea(): number {
-    return Math.round((this.width * this.height) * 100) / 100;
+    const rectangleArea = this.width * this.height;
+
+    return getTwoDecimalPlaces(rectangleArea);
   }
 }
 
