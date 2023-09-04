@@ -18,6 +18,11 @@ const ERROR_MESSAGE_CIRCLE = `${MAIN_ERROR_MESSAGE}:
 const ERROR_MESSAGE_RECTANGLE = `${MAIN_ERROR_MESSAGE}:
   width or height of a rectangle is smaller than 0`;
 
+const handleRound = (square: number): number => Math.floor(square * 100) / 100;
+const isTriangleValid = (a: number, b: number, c: number): boolean => {
+  return a + b <= c || a + c <= b || c + b <= a || a <= 0 || b <= 0 || c <= 0;
+};
+
 export interface Figure {
   shape: Shape;
   color: Color;
@@ -34,17 +39,20 @@ export class Triangle implements Figure {
     public b: number,
     public c: number,
   ) {
-    if (a + b <= c || a + c <= b || c + b <= a) {
+    if (isTriangleValid(a, b, c)) {
       throw new Error(ERROR_MESSAGE_TRIANGLE);
     }
   }
 
   getArea(): number {
     const { a, b, c } = this;
-    const p = (a + b + c) / 2;
-    const square = Math.sqrt(p * (p - a) * (p - b) * (p - c));
+    const semiperimeter = (a + b + c) / 2;
+    const square = Math.sqrt(semiperimeter
+      * (semiperimeter - a)
+      * (semiperimeter - b)
+      * (semiperimeter - c));
 
-    return Math.floor(square * 100) / 100;
+    return handleRound(square);
   }
 }
 export class Circle implements Figure {
@@ -63,7 +71,7 @@ export class Circle implements Figure {
     const { radius } = this;
     const square = Math.PI * (radius ** 2);
 
-    return Math.floor(square * 100) / 100;
+    return handleRound(square);
   }
 }
 
@@ -89,6 +97,7 @@ export class Rectangle implements Figure {
 
 export function getInfo(figure: Figure): string {
   const { color, shape } = figure;
+  const square = figure.getArea();
 
-  return `A ${color} ${shape} - ${figure.getArea()}`;
+  return `A ${color} ${shape} - ${square}`;
 }
