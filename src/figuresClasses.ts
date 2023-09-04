@@ -1,13 +1,13 @@
 enum Color {
   Red = 'red',
-  Green ='green',
-  Blue ='blue',
+  Green = 'green',
+  Blue = 'blue',
 }
 
 enum Shape {
   Triangle = 'triangle',
-  Circle ='circle',
-  Rectangle ='rectangle',
+  Circle = 'circle',
+  Rectangle = 'rectangle',
 }
 
 export interface Figure {
