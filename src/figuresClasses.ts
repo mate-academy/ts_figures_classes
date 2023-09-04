@@ -1,4 +1,4 @@
-const ERROR_MESSAGE = 'Value cannot be <= 0!';
+const INVALID_VALUE_ERROR_MESSAGE = 'Value cannot be <= 0!';
 
 function formatNumber(number: number): number {
   return Math.floor(number * 100) / 100;
@@ -32,7 +32,7 @@ export class Triangle implements Figure {
     public c: number,
   ) {
     if (a <= 0 || b <= 0 || c <= 0) {
-      throw new Error(ERROR_MESSAGE);
+      throw new Error(INVALID_VALUE_ERROR_MESSAGE);
     }
 
     if (a + b <= c || a + c <= b || b + c <= a) {
@@ -61,7 +61,7 @@ export class Circle implements Figure {
     public radius: number,
   ) {
     if (radius <= 0) {
-      throw new Error(ERROR_MESSAGE);
+      throw new Error(INVALID_VALUE_ERROR_MESSAGE);
     }
   }
 
@@ -81,7 +81,7 @@ export class Rectangle implements Figure {
     public height: number,
   ) {
     if (width <= 0 || height <= 0) {
-      throw new Error(ERROR_MESSAGE);
+      throw new Error(INVALID_VALUE_ERROR_MESSAGE);
     }
   }
 
@@ -93,5 +93,8 @@ export class Rectangle implements Figure {
 }
 
 export function getInfo(figure: Figure): string {
-  return `A ${figure.color} ${figure.shape} - ${figure.getArea()}`;
+  const { color, shape } = figure;
+  const area = figure.getArea();
+
+  return `A ${color} ${shape} - ${area}`;
 }
