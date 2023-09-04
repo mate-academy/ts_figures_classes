@@ -1,7 +1,20 @@
-type Shape = 'triangle' | 'circle' | 'rectangle';
-type Color = 'red' | 'green' | 'blue';
+enum Shape {
+  triangle = 'triangle',
+  circle = 'circle',
+  rectangle = 'rectangle',
+}
 
-const ERROR_MESSAGE = 'Invalid sides for this figure';
+enum Color{
+  red = 'red',
+  green = 'green',
+  blue = 'blue',
+}
+
+const INVALID_SIZE_ERROR = 'Invalid sides for this figure';
+
+function roundNumberToHundreds(num: number): number {
+  return Math.floor(num * 100) / 100;
+}
 
 export interface Figure {
   shape: Shape,
@@ -11,7 +24,7 @@ export interface Figure {
 }
 
 export class Triangle implements Figure {
-  shape: Shape = 'triangle';
+  shape = Shape.triangle;
 
   constructor(
     public color: Color,
@@ -20,7 +33,7 @@ export class Triangle implements Figure {
     public c: number,
   ) {
     if (this.a <= 0 || this.b <= 0 || this.c <= 0) {
-      throw new Error(ERROR_MESSAGE);
+      throw new Error(INVALID_SIZE_ERROR);
     }
 
     const sides = [a, b, c];
@@ -34,40 +47,44 @@ export class Triangle implements Figure {
     });
 
     if (biggestSide >= sumOfOtherSides) {
-      throw new Error(ERROR_MESSAGE);
+      throw new Error(INVALID_SIZE_ERROR);
     }
   }
 
   getArea(): number {
     const p = (this.a + this.b + this.c) / 2;
-    const triangleSquareFormula = Math.sqrt(p * (p - this.a)
-    * (p - this.b) * (p - this.c));
+    const triangleSquareFormula = Math.sqrt(
+      p
+      * (p - this.a)
+      * (p - this.b)
+      * (p - this.c),
+    );
 
-    return Math.floor((triangleSquareFormula) * 100) / 100;
+    return roundNumberToHundreds(triangleSquareFormula);
   }
 }
 
 export class Circle implements Figure {
-  shape: Shape = 'circle';
+  shape = Shape.circle;
 
   constructor(
     public color: Color,
     public radius: number,
   ) {
     if (radius <= 0) {
-      throw new Error(ERROR_MESSAGE);
+      throw new Error(INVALID_SIZE_ERROR);
     }
   }
 
   getArea(): number {
-    const circleSquareFormula = Math.PI * this.radius * this.radius;
+    const circleSquareFormula = Math.PI * this.radius ** 2;
 
-    return Math.floor((circleSquareFormula) * 100) / 100;
+    return roundNumberToHundreds(circleSquareFormula);
   }
 }
 
 export class Rectangle implements Figure {
-  shape: Shape = 'rectangle';
+  shape = Shape.rectangle;
 
   constructor(
     public color: Color,
@@ -75,17 +92,20 @@ export class Rectangle implements Figure {
     public height: number,
   ) {
     if (width <= 0 || height <= 0) {
-      throw new Error(ERROR_MESSAGE);
+      throw new Error(INVALID_SIZE_ERROR);
     }
   }
 
   getArea(): number {
     const rectangleSquareFormula = this.width * this.height;
 
-    return Math.floor((rectangleSquareFormula));
+    return roundNumberToHundreds(rectangleSquareFormula);
   }
 }
 
 export function getInfo(figure: Figure): string {
-  return `A ${figure.color} ${figure.shape} - ${figure.getArea()}`;
+  const { color, shape } = figure;
+  const figureArea = figure.getArea();
+
+  return `A ${color} ${shape} - ${figureArea}`;
 }
