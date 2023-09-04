@@ -3,20 +3,30 @@ function isTrianglePossible(a: number, b: number, c: number): boolean {
 }
 
 function roundDownFloat(number: number, amountOfDecimals: number = 2): number {
-  return Math.floor(number * 10 ** amountOfDecimals) / 10 ** amountOfDecimals;
+  const numbersAfterFloat = 10 ** amountOfDecimals;
+
+  return Math.floor(number * numbersAfterFloat) / numbersAfterFloat;
 }
 
+enum Shape {
+  Triangle = 'triangle',
+  Circle = 'circle',
+  Rectangle = 'rectangle',
+}
+
+type Color = 'red'|'blue'|'green';
+
 export interface Figure {
-  shape: string,
-  color: string,
+  shape: Shape,
+  color: Color,
   getArea: Function,
 }
 
 export class Triangle implements Figure {
-  public shape = 'triangle';
+  public shape = Shape.Triangle;
 
   constructor(
-    public color: string,
+    public color: Color,
     public a: number,
     public b: number,
     public c: number,
@@ -31,23 +41,22 @@ export class Triangle implements Figure {
   }
 
   getArea(): number {
-    const semiperimeter = (this.a + this.b + this.c) * 0.5;
+    const semiperimeter = (this.a + this.b + this.c) / 2;
 
-    const area = (semiperimeter
+    const area = Math.sqrt(semiperimeter
       * (semiperimeter - this.a)
       * (semiperimeter - this.b)
-      * (semiperimeter - this.c)
-    ) ** 0.5;
+      * (semiperimeter - this.c));
 
     return roundDownFloat(area);
   }
 }
 
 export class Circle implements Figure {
-  public shape = 'circle';
+  public shape = Shape.Circle;
 
   constructor(
-    public color: string,
+    public color: Color,
     public radius: number,
   ) {
     if (this.radius <= 0) {
@@ -63,10 +72,10 @@ export class Circle implements Figure {
 }
 
 export class Rectangle implements Figure {
-  public shape = 'rectangle';
+  public shape = Shape.Rectangle;
 
   constructor(
-    public color: string,
+    public color: Color,
     public width: number,
     public height: number,
   ) {
@@ -83,5 +92,8 @@ export class Rectangle implements Figure {
 }
 
 export function getInfo(figure: Figure): string {
-  return `A ${figure.color} ${figure.shape} - ${figure.getArea()}`;
+  const figureArea = figure.getArea();
+  const { color, shape } = figure;
+
+  return `A ${color} ${shape} - ${figureArea}`;
 }
