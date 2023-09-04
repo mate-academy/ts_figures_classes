@@ -15,25 +15,15 @@ export interface Figure {
 export class Triangle implements Figure {
   shape = Shape.Triangle;
 
-  a: number;
-
-  b: number;
-
-  c: number;
-
   constructor(
     public color: Color,
-    a: number,
-    b: number,
-    c: number,
+    public a: number,
+    public b: number,
+    public c: number,
   ) {
     if (a >= b + c || a <= Math.abs(b - c) || a <= 0 || b <= 0 || c <= 0) {
-      throw new Error('Impossible triangle sides');
+      throw new Error('Invalid triangle sides');
     }
-
-    this.a = a;
-    this.b = b;
-    this.c = c;
   }
 
   getArea(): number {
@@ -50,14 +40,13 @@ export class Triangle implements Figure {
 export class Circle implements Figure {
   shape = Shape.Circle;
 
-  radius: number;
-
-  constructor(public color: Color, radius: number) {
+  constructor(
+    public color: Color,
+    public radius: number,
+  ) {
     if (radius <= 0) {
-      throw new Error('Radius is less or equals zero');
+      throw new Error('Invalid circle radius');
     }
-
-    this.radius = radius;
   }
 
   getArea(): number {
@@ -70,17 +59,14 @@ export class Circle implements Figure {
 export class Rectangle implements Figure {
   shape = Shape.Rectangle;
 
-  width: number;
-
-  height: number;
-
-  constructor(public color: Color, width: number, height: number) {
+  constructor(
+    public color: Color,
+    public width: number,
+    public height: number,
+  ) {
     if (width <= 0 || height <= 0) {
-      throw new Error('Rectangle sides are not possible');
+      throw new Error('Invalid rectangle sides');
     }
-
-    this.width = width;
-    this.height = height;
   }
 
   getArea(): number {
