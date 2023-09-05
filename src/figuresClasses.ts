@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 type Shapes = 'triangle' | 'circle' | 'rectangle';
 type Colors = 'red' | 'green' | 'blue';
 
@@ -29,10 +28,14 @@ export class Triangle implements Figure {
   }
 
   getArea(): number {
-    const s = (this.a + this.b + this.c) / 2;
+    const semiperimeter = (this.a + this.b + this.c) / 2;
 
-    return +Math.sqrt(s * (s - this.a) * (s - this.b) * (s - this.c))
-      .toFixed(2);
+    return +Math.sqrt(
+      semiperimeter
+      * (semiperimeter - this.a)
+      * (semiperimeter - this.b)
+      * (semiperimeter - this.c),
+    ).toFixed(2);
   }
 }
 
@@ -49,9 +52,9 @@ export class Circle implements Figure {
   }
 
   getArea(): number {
-    const value = (Math.PI * (this.radius ** 2));
+    const circleSquare = (Math.PI * (this.radius ** 2));
 
-    return Math.floor(value * 100) / 100;
+    return Math.floor(circleSquare * 100) / 100;
   }
 }
 
