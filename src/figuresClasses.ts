@@ -1,6 +1,20 @@
-type FigureShape = 'triangle' | 'circle' | 'rectangle';
-type FigureColor = 'red' | 'green' | 'blue';
+enum FigureShape {
+  Triangle = 'triangle',
+  Circle = 'circle',
+  Rectangle = 'rectangle',
+}
+enum FigureColor {
+  Red = 'red',
+  Green = 'green',
+  Blue = 'blue',
+}
 type AreaCallback = () => number;
+
+function roundDownToHundreds(number: number): number {
+  return Math.floor(number * 100) / 100;
+}
+// eslint-disable-next-line
+const ERROR_MESSAGE_WRONG_ARGS = 'Error, all arguments should be numbers above 0';
 
 export interface Figure {
   shape: FigureShape,
@@ -9,7 +23,7 @@ export interface Figure {
 }
 
 export class Triangle implements Figure {
-  shape: FigureShape = 'triangle';
+  shape: FigureShape = FigureShape.Triangle;
 
   constructor(
     public color: FigureColor,
@@ -17,8 +31,10 @@ export class Triangle implements Figure {
     public b: number,
     public c: number,
   ) {
-    if (a * b * c <= 0) {
-      throw new Error('You have entered incorrect data');
+    const minNumber = Math.min(a, b, c);
+
+    if (minNumber <= 0) {
+      throw new Error(ERROR_MESSAGE_WRONG_ARGS);
     }
 
     if (a + b <= c || b + c <= a || a + c <= b) {
@@ -27,37 +43,39 @@ export class Triangle implements Figure {
   }
 
   getArea(): number {
-    const sp = (this.a + this.b + this.c) / 2;
-    const aDifference = sp - this.a;
-    const bDiffernece = sp - this.b;
-    const cDifference = sp - this.c;
-    const area = Math.sqrt(sp * aDifference * bDiffernece * cDifference);
+    const semiPerimiter = (this.a + this.b + this.c) / 2;
+    const aDifference = semiPerimiter - this.a;
+    const bDiffernece = semiPerimiter - this.b;
+    const cDifference = semiPerimiter - this.c;
+    const area = Math.sqrt(
+      semiPerimiter * aDifference * bDiffernece * cDifference,
+    );
 
-    return Math.floor(area * 100) / 100;
+    return roundDownToHundreds(area);
   }
 }
 
 export class Circle implements Figure {
-  shape: FigureShape = 'circle';
+  shape: FigureShape = FigureShape.Circle;
 
   constructor(
     public color: FigureColor,
     public radius: number,
   ) {
     if (radius < 0) {
-      throw new Error('You have entered incorrect data');
+      throw new Error(ERROR_MESSAGE_WRONG_ARGS);
     }
   }
 
   getArea(): number {
-    const area = Math.PI * (this.radius * this.radius);
+    const area = Math.PI * (this.radius ** 2);
 
-    return Math.floor(area * 100) / 100;
+    return roundDownToHundreds(area);
   }
 }
 
 export class Rectangle {
-  shape: FigureShape = 'rectangle';
+  shape: FigureShape = FigureShape.Rectangle;
 
   constructor(
     public color: FigureColor,
@@ -65,19 +83,18 @@ export class Rectangle {
     public height: number,
   ) {
     if (width < 0 || height < 0) {
-      throw new Error('You have entered incorrect data');
+      throw new Error(ERROR_MESSAGE_WRONG_ARGS);
     }
   }
 
   getArea(): number {
-    const area = this.width * this.height;
-
-    return area;
+    return this.width * this.height;
   }
 }
 
 export function getInfo(figure: Figure): string {
+  const { color, shape } = figure;
   const area: number = figure.getArea();
 
-  return `A ${figure.color} ${figure.shape} - ${area}`;
+  return `A ${color} ${shape} - ${area}`;
 }
