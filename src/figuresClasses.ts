@@ -16,6 +16,10 @@ interface Figure {
   getArea(): number;
 }
 
+function roundArea(area: number): number {
+  return +area.toFixed(2);
+}
+
 export class Triangle implements Figure {
   public shape: Shape = Shape.Triangle;
 
@@ -25,21 +29,26 @@ export class Triangle implements Figure {
     public b: number,
     public c: number,
   ) {
-    if (a <= 0 || b <= 0 || c <= 0 || a + b <= c || a + c <= b || b + c <= a) {
+    if (a <= 0 || b <= 0 || c <= 0) {
       throw new Error('Invalid triangle: Sides do not form a valid triangle.');
+    }
+
+    if (a + b <= c || a + c <= b || b + c <= a) {
+      throw new Error('Invalid circle:'
+      + 'Triangle inequality theorem not satisfied.');
     }
   }
 
   getArea(): number {
-    const s = (this.a + this.b + this.c) / 2;
-    const area = (Math.sqrt(
-      s
-      * (s - this.a)
-      * (s - this.b)
-      * (s - this.c),
-    )).toFixed(2);
+    const semiPerimetr = (this.a + this.b + this.c) / 2;
+    const area = Math.sqrt(
+      semiPerimetr
+      * (semiPerimetr - this.a)
+      * (semiPerimetr - this.b)
+      * (semiPerimetr - this.c),
+    );
 
-    return +area;
+    return roundArea(area);
   }
 }
 
@@ -56,9 +65,9 @@ export class Circle implements Figure {
   }
 
   getArea(): number {
-    const area = (Math.PI * this.radius ** 2).toFixed(2);
+    const area = Math.PI * this.radius ** 2;
 
-    return +area;
+    return roundArea(area);
   }
 }
 
@@ -71,14 +80,15 @@ export class Rectangle implements Figure {
     public height: number,
   ) {
     if (width <= 0 || height <= 0) {
-      throw new Error('Invalid rectangle: w and h must be greater than 0.');
+      throw new Error('Invalid circle:'
+      + 'width and height must be greater than 0.');
     }
   }
 
   getArea(): number {
-    const area = (this.width * this.height).toFixed(2);
+    const area = this.width * this.height;
 
-    return +area;
+    return roundArea(area);
   }
 }
 
