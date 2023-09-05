@@ -6,9 +6,9 @@ import {
 } from './utils/errorMessage';
 
 enum Shape {
-  triangle = 'triangle',
-  circle = 'triangle',
-  rectangle = 'triangle',
+  triangle = 'Triangle',
+  circle = 'Circle',
+  rectangle = 'Rectangle',
 }
 
 enum Color {
