@@ -1,7 +1,14 @@
+import {
+  INVALID_SIDE_LENGTH_ERROR,
+  GEOMETRIC_INCONSISTENCY_ERROR,
+  INCORRECT_RADIUS,
+  INVALID_RECTANGLE_SIDE_LENGTH,
+} from './utils/errorMessage';
+
 type Shapes = 'triangle' | 'circle' | 'rectangle';
 type Colors = 'red' | 'green' | 'blue';
 
-function getTwoDecimalPlaces(area:number): number {
+function getTwoDecimalPlaces(area: number): number {
   return Math.floor(area * 100) / 100;
 }
 
@@ -20,11 +27,15 @@ export class Triangle implements Figure {
     public b: number,
     public c: number,
   ) {
-    if ((this.a <= 0 || this.b <= 0 || this.c <= 0)
-    || (this.a >= this.b + this.c
-    || this.b >= this.a + this.c
-    || this.c >= this.a + this.b)) {
-      throw new Error('ERROR - not a triangle');
+    const isSideLengthCorrect = a <= 0 || b <= 0 || c <= 0;
+    const isSumOfSideLengthGreater = a >= b + c || b >= a + c || c >= a + b;
+
+    if (isSideLengthCorrect) {
+      throw new Error(INVALID_SIDE_LENGTH_ERROR);
+    }
+
+    if (isSumOfSideLengthGreater) {
+      throw new Error(GEOMETRIC_INCONSISTENCY_ERROR);
     }
   }
 
@@ -46,7 +57,7 @@ export class Circle implements Figure {
     public radius: number,
   ) {
     if (this.radius <= 0) {
-      throw new Error('ERROR - not a circle');
+      throw new Error(INCORRECT_RADIUS);
     }
   }
 
@@ -66,7 +77,7 @@ export class Rectangle implements Figure {
     public height: number,
   ) {
     if (this.width <= 0 || this.height <= 0) {
-      throw new Error('ERROR - not a rectangle');
+      throw new Error(INVALID_RECTANGLE_SIDE_LENGTH);
     }
   }
 
