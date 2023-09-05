@@ -11,16 +11,27 @@ enum Color {
 }
 
 const MAIN_ERROR_MESSAGE = 'Invalid values';
-const ERROR_MESSAGE_TRIANGLE = `${MAIN_ERROR_MESSAGE}:
+const ERROR_MESSAGE_TRIANGLE_LENGTH = `${MAIN_ERROR_MESSAGE}:
   the longest side of a triangle is >= than a sum of two others`;
+const ERROR_MESSAGE_TRIANGLE_SIDES = `${MAIN_ERROR_MESSAGE}:
+  Side is smaller then 0`;
 const ERROR_MESSAGE_CIRCLE = `${MAIN_ERROR_MESSAGE}:
   radius of a circle is smaller than 0`;
 const ERROR_MESSAGE_RECTANGLE = `${MAIN_ERROR_MESSAGE}:
   width or height of a rectangle is smaller than 0`;
 
-const handleRound = (square: number): number => Math.floor(square * 100) / 100;
-const isTriangleValid = (a: number, b: number, c: number): boolean => {
-  return a + b <= c || a + c <= b || c + b <= a || a <= 0 || b <= 0 || c <= 0;
+const handleNumberRound = (square: number): number => {
+  return Math.floor(square * 100) / 100;
+};
+
+const isTriangleNotValid = (a: number, b: number, c: number): void => {
+  if (a + b <= c || a + c <= b || c + b <= a) {
+    throw new Error(ERROR_MESSAGE_TRIANGLE_LENGTH);
+  }
+
+  if (a <= 0 || b <= 0 || c <= 0) {
+    throw new Error(ERROR_MESSAGE_TRIANGLE_SIDES);
+  }
 };
 
 export interface Figure {
@@ -39,9 +50,7 @@ export class Triangle implements Figure {
     public b: number,
     public c: number,
   ) {
-    if (isTriangleValid(a, b, c)) {
-      throw new Error(ERROR_MESSAGE_TRIANGLE);
-    }
+    isTriangleNotValid(a, b, c);
   }
 
   getArea(): number {
@@ -52,7 +61,7 @@ export class Triangle implements Figure {
       * (semiperimeter - b)
       * (semiperimeter - c));
 
-    return handleRound(square);
+    return handleNumberRound(square);
   }
 }
 export class Circle implements Figure {
@@ -71,7 +80,7 @@ export class Circle implements Figure {
     const { radius } = this;
     const square = Math.PI * (radius ** 2);
 
-    return handleRound(square);
+    return handleNumberRound(square);
   }
 }
 
