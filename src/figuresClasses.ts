@@ -12,7 +12,7 @@ type TColor = 'red' | 'green' | 'blue';
 
 export interface Figure {
   shape: Shape;
-  color: string;
+  color: TColor;
   getArea(): number;
 }
 
@@ -36,9 +36,10 @@ export class Triangle implements Figure {
   }
 
   getArea(): number {
-    const s = (this.a + this.b + this.c) / 2;
+    const area = (this.a + this.b + this.c) / 2;
 
-    return +Math.sqrt(s * (s - this.a) * (s - this.b) * (s - this.c))
+    return +Math
+      .sqrt(area * (area - this.a) * (area - this.b) * (area - this.c))
       .toFixed(2);
   }
 }
