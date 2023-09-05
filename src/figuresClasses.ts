@@ -27,22 +27,24 @@ export class Triangle implements Figure {
     public c: number,
   ) {
     if (a <= 0 || b <= 0 || c <= 0) {
-      throw new Error('invalid side(s)');
+      throw new Error('side length cannot be negative or zero');
     }
 
     const longestSide = Math.max(a, b, c);
     const otherSidesSum = a + b + c - longestSide;
 
     if (longestSide >= otherSidesSum) {
-      throw new Error('invalid sides');
+      // eslint-disable-next-line max-len
+      throw new Error('longest side cannot be equal to or greater than the sum of two other sides');
     }
   }
 
   getArea(): number {
     const { a, b, c } = this;
-    const p = 0.5 * (a + b + c);
+    const semPer = 0.5 * (a + b + c);
+    const area = Math.sqrt(semPer * (semPer - a) * (semPer - b) * (semPer - c));
 
-    return Math.floor(Math.sqrt(p * (p - a) * (p - b) * (p - c)) * 100) / 100;
+    return Math.floor(area * 100) / 100;
   }
 }
 
@@ -54,7 +56,7 @@ export class Circle implements Figure {
     public radius: number,
   ) {
     if (radius <= 0) {
-      throw new Error('invalid radius');
+      throw new Error('radius cannot be negative or zero');
     }
   }
 
@@ -72,7 +74,7 @@ export class Rectangle implements Figure {
     public height: number,
   ) {
     if (width <= 0 || height <= 0) {
-      throw new Error('invalid side(s)');
+      throw new Error('width and height cannot be negative or zero');
     }
   }
 
