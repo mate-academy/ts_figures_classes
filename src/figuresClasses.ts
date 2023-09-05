@@ -4,18 +4,19 @@ export interface Figure {
   getArea(): number;
 }
 
+enum Shape {
+  Triangle = 'triangle',
+  Circle = 'circle',
+  Rectangle = 'rectangle',
+}
+
+type TColor = 'blue' | 'red' | 'green';
+
 export class Triangle implements Figure {
-  shape: string;
+  shape: Shape.Triangle;
 
-  color: string;
-
-  a: number;
-
-  b: number;
-
-  c: number;
-
-  constructor(color: string, a: number, b: number, c: number) {
+  constructor(public color: TColor, public a: number,
+    public b: number, public c: number) {
     if (a <= 0 || b <= 0 || c <= 0) {
       throw new Error('Side lengths must be greater than 0');
     }
@@ -23,7 +24,7 @@ export class Triangle implements Figure {
     if (a + b <= c || c + b <= a || c + a <= b) {
       throw new Error('Invalid triangle sides');
     }
-    this.shape = 'triangle';
+    this.shape = Shape.Triangle;
     this.color = color;
     this.a = a;
     this.b = b;
@@ -41,11 +42,7 @@ export class Triangle implements Figure {
 export class Circle implements Figure {
   shape: string;
 
-  color: string;
-
-  radius: number;
-
-  constructor(color: string, radius: number) {
+  constructor(public color: TColor, public radius: number) {
     if (radius <= 0) {
       throw new Error();
     }
@@ -62,13 +59,8 @@ export class Circle implements Figure {
 export class Rectangle implements Figure {
   shape: string;
 
-  color: string;
-
-  width: number;
-
-  height: number;
-
-  constructor(color: string, width: number, height: number) {
+  constructor(public color: TColor,
+    public width: number, public height: number) {
     if (width <= 0 || height <= 0) {
       throw new Error();
     }
