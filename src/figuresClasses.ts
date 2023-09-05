@@ -1,6 +1,18 @@
-type Shape = 'triangle' | 'circle' | 'rectangle';
+enum Shape {
+  Triangle = 'triangle',
+  Circle = 'circle',
+  Rectangle = 'rectangle',
+}
 
-type Color = 'red' | 'green' | 'blue';
+enum Color {
+  Red = 'red',
+  Green = 'green',
+  Blue = 'blue',
+}
+
+function roundToHundreths(value: number): number {
+  return Math.floor(value * 100) / 100;
+}
 
 export interface Figure {
   shape: Shape;
@@ -9,7 +21,7 @@ export interface Figure {
 }
 
 export class Triangle implements Figure {
-  shape: Shape = 'triangle';
+  shape = Shape.Triangle;
 
   constructor(
     public color: Color,
@@ -30,20 +42,17 @@ export class Triangle implements Figure {
 
   getArea(): number {
     const semiPerimeter: number = (this.a + this.b + this.c) / 2;
-    const area = Math.floor(
-      Math.sqrt(semiPerimeter
-        * (semiPerimeter - this.a)
-        * (semiPerimeter - this.b)
-        * (semiPerimeter - this.c))
-      * 100,
-    ) / 100;
+    const area = roundToHundreths(Math.sqrt(semiPerimeter
+      * (semiPerimeter - this.a)
+      * (semiPerimeter - this.b)
+      * (semiPerimeter - this.c)));
 
     return area;
   }
 }
 
 export class Circle implements Figure {
-  shape: Shape = 'circle';
+  shape = Shape.Circle;
 
   constructor(
     public color: Color,
@@ -55,12 +64,12 @@ export class Circle implements Figure {
   }
 
   getArea(): number {
-    return Math.floor(100 * Math.PI * (this.radius ** 2)) / 100;
+    return roundToHundreths(Math.PI * (this.radius ** 2));
   }
 }
 
 export class Rectangle implements Figure {
-  shape: Shape = 'rectangle';
+  shape = Shape.Rectangle;
 
   constructor(
     public color: Color,
@@ -69,7 +78,7 @@ export class Rectangle implements Figure {
   ) {
     if (width <= 0 || height <= 0) {
       throw new Error(
-        'One or both sides of the rectangle are les or equal zero',
+        'One or both sides of the rectangle are less or equal zero',
       );
     }
   }
@@ -80,7 +89,8 @@ export class Rectangle implements Figure {
 }
 
 export function getInfo(figure: Figure): string {
-  const info = `A ${figure.color} ${figure.shape} - ${figure.getArea()}`;
+  const figureArea = figure.getArea();
+  const info = `A ${figure.color} ${figure.shape} - ${figureArea}`;
 
   return info;
 }
