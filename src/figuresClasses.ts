@@ -1,4 +1,4 @@
-const ERROR_MESSAGE = 'Value cannot be <= 0!';
+const ERROR_MESSAGE: string = 'Value cannot be <= 0!';
 
 function circledNumber(number: number): number {
   return Math.floor(number * 100) / 100;
@@ -33,9 +33,9 @@ export class Triangle implements Figure {
       throw new Error(ERROR_MESSAGE);
     }
 
-    if (this.a + this.b <= this.c
-      || this.b + this.c <= this.a
-      || this.c + this.a <= this.b) {
+    if (a + b <= c
+      || b + c <= a
+      || c + a <= b) {
       throw new Error(
         `sides ${this.a}, ${this.b} and ${this.c} can't form a triangle`,
       );
@@ -43,12 +43,12 @@ export class Triangle implements Figure {
   }
 
   getArea(): number {
-    const s: number = (this.a + this.b + this.c) / 2;
+    const subPerimetr: number = (this.a + this.b + this.c) / 2;
     const area: number = Math.sqrt(
-      s
-      * (s - this.a)
-      * (s - this.b)
-      * (s - this.c),
+      subPerimetr
+      * (subPerimetr - this.a)
+      * (subPerimetr - this.b)
+      * (subPerimetr - this.c),
     );
 
     return circledNumber(area);
