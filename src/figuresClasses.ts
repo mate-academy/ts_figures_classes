@@ -45,8 +45,12 @@ export class Triangle implements Figure {
   }
 
   getArea(): number {
-    const s = (this.a + this.b + this.c) / 2;
-    const area = Math.sqrt(s * (s - this.a) * (s - this.b) * (s - this.c));
+    const halfPerimeter = (this.a + this.b + this.c) / 2;
+    const area = Math.sqrt(
+      halfPerimeter * (halfPerimeter - this.a)
+      * (halfPerimeter - this.b)
+      * (halfPerimeter - this.c),
+    );
 
     return getValidArea(area);
   }
@@ -91,6 +95,7 @@ export class Rectangle implements Figure {
 
 export function getInfo(figure: Figure): string {
   const area = figure.getArea();
+  const { color, shape } = figure;
 
-  return `A ${figure.color} ${figure.shape} - ${area}`;
+  return `A ${color} ${shape} - ${area}`;
 }
