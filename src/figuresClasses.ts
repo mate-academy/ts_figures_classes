@@ -10,8 +10,8 @@ enum FigureColor {
 }
 type AreaCallback = () => number;
 
-function roundDownToHundreds(number: number): number {
-  return Math.floor(number * 100) / 100;
+function roundDownToHundreds(value: number): number {
+  return Math.floor(value * 100) / 100;
 }
 // eslint-disable-next-line
 const ERROR_MESSAGE_WRONG_ARGS = 'Error, all arguments should be numbers above 0';
@@ -94,7 +94,7 @@ export class Rectangle {
 
 export function getInfo(figure: Figure): string {
   const { color, shape } = figure;
-  const area: number = figure.getArea();
+  const area = figure.getArea();
 
   return `A ${color} ${shape} - ${area}`;
 }
