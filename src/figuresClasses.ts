@@ -29,25 +29,29 @@ export class Triangle implements Figure {
     const maxSideLength = Math.max(a, b, c);
 
     if (a <= 0 || b <= 0 || c <= 0) {
-      throw new Error('Incorrect side length');
+      throw new Error(
+        'The length of a side cannot be negative or equal to zero',
+      );
     }
 
     if (maxSideLength >= a + b + c - maxSideLength) {
-      throw new Error('Incorrect side length');
+      throw new Error(
+        'The length of a side cannot be greater than the sum of the other two',
+      );
     }
   }
 
   public getArea(): number {
     const { a, b, c } = this;
-    const halfThePerimeter: number = (a + b + c) / 2;
-    const sqrt: number = Math.sqrt(
-      halfThePerimeter
-      * (halfThePerimeter - a)
-      * (halfThePerimeter - b)
-      * (halfThePerimeter - c),
+    const semiperimeter: number = (a + b + c) / 2;
+    const area: number = Math.sqrt(
+      semiperimeter
+      * (semiperimeter - a)
+      * (semiperimeter - b)
+      * (semiperimeter - c),
     );
 
-    return Math.floor((sqrt * 100)) / 100;
+    return Math.floor((area * 100)) / 100;
   }
 }
 
@@ -59,7 +63,9 @@ export class Circle implements Figure {
     public radius: number,
   ) {
     if (radius <= 0) {
-      throw new Error('Incorrect radius length');
+      throw new Error(
+        'The length of a radius cannot be negative or equal to zero',
+      );
     }
   }
 
@@ -77,7 +83,9 @@ export class Rectangle implements Figure {
     public height: number,
   ) {
     if (width <= 0 || height <= 0) {
-      throw new Error('Incorrect side length');
+      throw new Error(
+        'The length of a side cannot be negative or equal to zero',
+      );
     }
   }
 
