@@ -27,21 +27,27 @@ export class Triangle implements Figure {
     public c: number,
   ) {
     if (a <= 0 || b <= 0 || c <= 0) {
-      throw new Error('Invalid sides');
+      throw new Error(
+        'incorrect side lengths, enter the correct values ​​greater than 0',
+      );
     }
 
     const longSide = Math.max(a, b, c);
 
     if (longSide >= a + b + c - longSide) {
-      throw new Error('Invalide sides');
+      throw new Error('incorrect side lengths, enter the correct values');
     }
   }
 
   getArea(): number {
-    const p = (this.a + this.b + this.c) / 2;
+    const perimetr = (this.a + this.b + this.c) / 2;
 
     return Math.floor(
-      Math.sqrt(p * (p - this.a) * (p - this.b) * (p - this.c)) * 100,
+      Math.sqrt(
+        perimetr * (perimetr - this.a)
+        * (perimetr - this.b)
+        * (perimetr - this.c),
+      ) * 100,
     ) / 100;
   }
 }
@@ -54,7 +60,7 @@ export class Circle implements Figure {
     public radius: number,
   ) {
     if (radius <= 0) {
-      throw new Error('Invalid radius length');
+      throw new Error('radius is incorrect, enter a value greater than 0');
     }
   }
 
@@ -72,7 +78,9 @@ export class Rectangle implements Figure {
     public height: number,
   ) {
     if (width <= 0 || height <= 0) {
-      throw new Error('Invalid sides');
+      throw new Error(
+        'incorrect side lengths, enter the correct values ​​greater than 0',
+      );
     }
   }
 
