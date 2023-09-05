@@ -37,16 +37,15 @@ export class Triangle implements Figure {
   }
 
   public getArea(): number {
-    const semiperimeter: number = 0.5 * (this.a + this.b + this.c);
-
-    return roundToTwoDecimals(
-      Math.sqrt(
-        semiperimeter
-        * (semiperimeter - this.a)
-        * (semiperimeter - this.b)
-        * (semiperimeter - this.c),
-      ),
+    const semiperimeter = (this.a + this.b + this.c) / 2;
+    const area = Math.sqrt(
+      semiperimeter
+      * (semiperimeter - this.a)
+      * (semiperimeter - this.b)
+      * (semiperimeter - this.c),
     );
+
+    return roundToTwoDecimals(area);
   }
 }
 
@@ -86,5 +85,8 @@ export class Rectangle implements Figure {
 }
 
 export function getInfo(figure: Figure): string {
-  return `A ${figure.color} ${figure.shape} - ${figure.getArea()}`;
+  const { color, shape } = figure;
+  const area = figure.getArea();
+
+  return `A ${color} ${shape} - ${area}`;
 }
