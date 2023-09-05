@@ -3,6 +3,8 @@ const ERROR_ANY_SIDE_BELOW_OR_IS_ZERO
 const ERROR_CANNOT_FORM_TRIANGLE
   = 'Error, the longest side of a triangle is >= than a sum of two others';
 
+const roundArea = (area: number) :number => Math.trunc(area * 100) / 100;
+
 enum Shape {
   Triangle = 'triangle',
   Circle = 'circle',
@@ -41,13 +43,17 @@ export class Triangle implements Figure {
     }
   }
 
-  public getArea(): number {
+  public getArea= (): number => {
     const semiPerimeter = (this.a + this.b + this.c) / 2;
-    const area = Math.sqrt(semiPerimeter * (semiPerimeter - this.a)
-      * (semiPerimeter - this.b) * (semiPerimeter - this.c));
+    const area = Math.sqrt(
+      semiPerimeter
+      * (semiPerimeter - this.a)
+      * (semiPerimeter - this.b)
+      * (semiPerimeter - this.c),
+    );
 
-    return Math.trunc(area * 100) / 100;
-  }
+    return roundArea(area);
+  };
 }
 
 export class Circle implements Figure {
@@ -55,18 +61,18 @@ export class Circle implements Figure {
 
   constructor(
     public color: Color,
-    public a: number,
+    public radius: number,
   ) {
-    if (a <= 0) {
+    if (radius <= 0) {
       throw new Error(ERROR_ANY_SIDE_BELOW_OR_IS_ZERO);
     }
   }
 
-  public getArea(): number {
-    const area = Math.PI * this.a ** 2;
+  public getArea= (): number => {
+    const area = Math.PI * this.radius ** 2;
 
-    return Math.trunc(area * 100) / 100;
-  }
+    return roundArea(area);
+  };
 }
 
 export class Rectangle {
@@ -82,13 +88,15 @@ export class Rectangle {
     }
   }
 
-  public getArea(): number {
+  public getArea = (): number => {
     return this.a * this.b;
-  }
+  };
 }
 
-export function getInfo(
-  figure: Triangle | Circle | Rectangle,
-): string {
-  return `A ${figure.color} ${figure.shape} - ${figure.getArea()}`;
+export function getInfo({
+  color,
+  shape,
+  getArea,
+}: Figure): string {
+  return `A ${color} ${shape} - ${getArea()}`;
 }
