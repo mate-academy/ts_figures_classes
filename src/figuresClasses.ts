@@ -1,6 +1,7 @@
 const ERROR_MESSAGE = {
-  wrongLength: 'length is <= 0',
-  tooLongSide: 'the longest side of a triangle is >= than a sum of two others',
+  wrongRadius: 'The radius length is <= 0.',
+  wrongLength: 'Side length is <= 0.',
+  tooLongSide: 'The longest side of a triangle is >= than a sum of two others.',
 };
 
 const roundToTwoDecimals = (value: number): number => {
@@ -66,7 +67,7 @@ export class Circle implements Figure {
     public radius: number,
   ) {
     if (radius <= 0) {
-      throw new Error(ERROR_MESSAGE.wrongLength);
+      throw new Error(ERROR_MESSAGE.wrongRadius);
     }
   }
 
