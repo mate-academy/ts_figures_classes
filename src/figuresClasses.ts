@@ -1,13 +1,13 @@
 enum Shape {
-  triangle = 'triangle',
-  circle = 'circle',
-  rectangle = 'rectangle',
+  Triangle = 'triangle',
+  Circle = 'circle',
+  Rectangle = 'rectangle',
 }
 
 enum Color {
-  red = 'red',
-  green = 'green',
-  blue = 'blue',
+  Red = 'red',
+  Green = 'green',
+  Blue = 'blue',
 }
 
 export interface Figure {
@@ -17,8 +17,17 @@ export interface Figure {
   getArea(): number;
 }
 
+function mathFloor(value: number): number {
+  return Math.floor(value) / 100;
+}
+
+const ERROR_SIDE_NULL
+  = 'incorrect side lengths, enter the correct values ​​greater than 0';
+const ERROR_INCORRECT_SIDE = 'incorrect side lengths, enter the correct values';
+const ERROR_RADIUS = 'radius is incorrect, enter a value greater than 0';
+
 export class Triangle implements Figure {
-  public shape: Shape = Shape.triangle;
+  public shape: Shape = Shape.Triangle;
 
   constructor(
     public color: Color,
@@ -27,50 +36,49 @@ export class Triangle implements Figure {
     public c: number,
   ) {
     if (a <= 0 || b <= 0 || c <= 0) {
-      throw new Error(
-        'incorrect side lengths, enter the correct values ​​greater than 0',
-      );
+      throw new Error(ERROR_SIDE_NULL);
     }
 
     const longSide = Math.max(a, b, c);
 
     if (longSide >= a + b + c - longSide) {
-      throw new Error('incorrect side lengths, enter the correct values');
+      throw new Error(ERROR_INCORRECT_SIDE);
     }
   }
 
   getArea(): number {
-    const perimetr = (this.a + this.b + this.c) / 2;
+    const halfPerimetr = (this.a + this.b + this.c) / 2;
+    const sqrtSumSide = Math.sqrt(
+      halfPerimetr * (halfPerimetr - this.a)
+      * (halfPerimetr - this.b)
+      * (halfPerimetr - this.c),
+    ) * 100;
 
-    return Math.floor(
-      Math.sqrt(
-        perimetr * (perimetr - this.a)
-        * (perimetr - this.b)
-        * (perimetr - this.c),
-      ) * 100,
-    ) / 100;
+    return mathFloor(sqrtSumSide);
   }
 }
 
 export class Circle implements Figure {
-  public shape: Shape = Shape.circle;
+  public shape: Shape = Shape.Circle;
 
   constructor(
     public color: Color,
     public radius: number,
   ) {
     if (radius <= 0) {
-      throw new Error('radius is incorrect, enter a value greater than 0');
+      throw new Error(ERROR_RADIUS);
     }
   }
 
   getArea(): number {
-    return Math.floor(Math.PI * (this.radius * this.radius) * 100) / 100;
+    const multipleRadiusPi = Math.PI * (this.radius * this.radius) * 100;
+
+    return mathFloor(multipleRadiusPi);
   }
 }
 
 export class Rectangle implements Figure {
-  public shape: Shape = Shape.rectangle;
+  public shape: Shape = Shape.Rectangle;
 
   constructor(
     public color: Color,
@@ -78,14 +86,14 @@ export class Rectangle implements Figure {
     public height: number,
   ) {
     if (width <= 0 || height <= 0) {
-      throw new Error(
-        'incorrect side lengths, enter the correct values ​​greater than 0',
-      );
+      throw new Error(ERROR_SIDE_NULL);
     }
   }
 
   getArea(): number {
-    return Math.floor(this.height * this.width * 100) / 100;
+    const sqrtRectangle = this.height * this.width * 100;
+
+    return mathFloor(sqrtRectangle);
   }
 }
 
