@@ -28,19 +28,24 @@ export class Triangle implements Figure {
   ) {
     const maxSideLength = Math.max(a, b, c);
 
-    if ((a || b || c) <= 0) {
-      throw new Error('Invalid input values');
+    if (a <= 0 || b <= 0 || c <= 0) {
+      throw new Error('Incorrect side length');
     }
 
     if (maxSideLength >= a + b + c - maxSideLength) {
-      throw new Error('Invalid input values');
+      throw new Error('Incorrect side length');
     }
   }
 
   public getArea(): number {
     const { a, b, c } = this;
-    const p: number = (a + b + c) / 2;
-    const sqrt: number = Math.sqrt(p * (p - a) * (p - b) * (p - c));
+    const halfThePerimeter: number = (a + b + c) / 2;
+    const sqrt: number = Math.sqrt(
+      halfThePerimeter
+      * (halfThePerimeter - a)
+      * (halfThePerimeter - b)
+      * (halfThePerimeter - c),
+    );
 
     return Math.floor((sqrt * 100)) / 100;
   }
@@ -54,7 +59,7 @@ export class Circle implements Figure {
     public radius: number,
   ) {
     if (radius <= 0) {
-      throw new Error('Invalid input values');
+      throw new Error('Incorrect radius length');
     }
   }
 
@@ -72,7 +77,7 @@ export class Rectangle implements Figure {
     public height: number,
   ) {
     if (width <= 0 || height <= 0) {
-      throw new Error('Invalid input values');
+      throw new Error('Incorrect side length');
     }
   }
 
