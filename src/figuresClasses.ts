@@ -1,63 +1,81 @@
+export enum Shape {
+  triangle = 'triangle',
+  circle = 'circle',
+  rectangle = 'rectangle'
+}
+
+export enum Color {
+  red = 'red',
+  green = 'green',
+  blue = 'blue'
+}
+
 export interface Figure {
-  shape: 'triangle' | 'circle' | 'rectangle';
-  color: 'red' | 'green' | 'blue';
+  shape: Shape;
+  color: Color;
 
   getArea(): number;
 }
 
+function getValidArea(area: number): number {
+  return Math.floor(area * 100) / 100;
+}
+
+const errorMessage = 'Number can not be less than 0';
+const errorMessageTriangle = 'These sides can not be used to form a triangle';
+
 export class Triangle implements Figure {
-  shape: 'triangle' = 'triangle';
+  shape: Shape = Shape.triangle;
 
   constructor(
-    public color: 'red' | 'green' | 'blue',
+    public color: Color,
     public a: number,
     public b: number,
     public c: number,
   ) {
     if (this.a <= 0 || this.b <= 0 || this.c <= 0) {
-      throw new Error('Number can not be less than 0');
+      throw new Error(errorMessage);
     }
 
     const longestSide = Math.max(a, b, c);
 
     if ((a + b + c) - longestSide <= longestSide) {
-      throw new Error('These sides can not be used to form a triangle');
+      throw new Error(errorMessageTriangle);
     }
   }
 
   getArea(): number {
-    const s = 0.5 * (this.a + this.b + this.c);
+    const s = (this.a + this.b + this.c) / 2;
+    const area = Math.sqrt(s * (s - this.a) * (s - this.b) * (s - this.c));
 
-    return +(Math.sqrt(
-      s * (s - this.a) * (s - this.b) * (s - this.c),
-    )).toFixed(2);
+    return getValidArea(area);
   }
 }
 
 export class Circle implements Figure {
-  shape: 'circle' = 'circle';
+  shape: Shape = Shape.circle;
 
   constructor(
-    public color: 'red' | 'green' | 'blue',
+    public color: Color,
     public radius: number,
   ) {
     if (this.radius <= 0) {
-      throw new Error('Number can not be less than 0');
+      throw new Error(errorMessage);
     }
   }
 
   getArea(): number {
     const area = Math.PI * (this.radius ** 2);
 
-    return Number(Math.floor(area * 100) / 100);
+    return getValidArea(area);
   }
 }
 
 export class Rectangle implements Figure {
-  shape: 'rectangle' = 'rectangle';
+  shape: Shape = Shape.rectangle;
 
   constructor(
-    public color: 'red' | 'green' | 'blue',
+    public color: Color,
     public width: number,
     public height: number,
   ) {
