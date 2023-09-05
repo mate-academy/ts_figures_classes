@@ -1,10 +1,10 @@
-const errorMessage = {
+const ERROR_MESSAGE = {
   wrongLength: 'length is <= 0',
   tooLongSide: 'the longest side of a triangle is >= than a sum of two others',
 };
 
-const standardArea = (area: number): number => {
-  return Math.floor(area * 100) / 100;
+const roundToTwoDecimals = (value: number): number => {
+  return Math.floor(value * 100) / 100;
 };
 
 enum Shape {
@@ -36,24 +36,25 @@ export class Triangle implements Figure {
     public c: number,
   ) {
     if (a <= 0 || b <= 0 || c <= 0) {
-      throw new Error(errorMessage.wrongLength);
+      throw new Error(ERROR_MESSAGE.wrongLength);
     }
 
-    if (a >= b + c
-      || b >= a + c
-      || c >= b + a) {
-      throw new Error(errorMessage.tooLongSide);
+    if (a >= b + c || b >= a + c || c >= b + a) {
+      throw new Error(ERROR_MESSAGE.tooLongSide);
     }
   }
 
   getArea(): number {
     const semiperimeter = (this.a + this.b + this.c) / 2;
-    const area = Math.sqrt(semiperimeter
+
+    const area = Math.sqrt(
+      semiperimeter
         * (semiperimeter - this.a)
         * (semiperimeter - this.b)
-        * (semiperimeter - this.c));
+        * (semiperimeter - this.c),
+    );
 
-    return standardArea(area);
+    return roundToTwoDecimals(area);
   }
 }
 
@@ -65,12 +66,12 @@ export class Circle implements Figure {
     public radius: number,
   ) {
     if (radius <= 0) {
-      throw new Error(errorMessage.wrongLength);
+      throw new Error(ERROR_MESSAGE.wrongLength);
     }
   }
 
   getArea(): number {
-    return standardArea(Math.PI * (this.radius ** 2));
+    return roundToTwoDecimals(Math.PI * (this.radius ** 2));
   }
 }
 
@@ -83,15 +84,18 @@ export class Rectangle implements Figure {
     public height: number,
   ) {
     if (width <= 0 || height <= 0) {
-      throw new Error(errorMessage.wrongLength);
+      throw new Error(ERROR_MESSAGE.wrongLength);
     }
   }
 
   getArea(): number {
-    return standardArea(this.width * this.height);
+    return roundToTwoDecimals(this.width * this.height);
   }
 }
 
 export function getInfo(figure: Figure): string {
-  return `A ${figure.color} ${figure.shape} - ${figure.getArea()}`;
+  const { color, shape } = figure;
+  const area = figure.getArea();
+
+  return `A ${color} ${shape} - ${area}`;
 }
