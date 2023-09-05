@@ -5,32 +5,41 @@ import {
   INVALID_RECTANGLE_SIDE_LENGTH,
 } from './utils/errorMessage';
 
-type Shapes = 'triangle' | 'circle' | 'rectangle';
-type Colors = 'red' | 'green' | 'blue';
+enum Shape {
+  triangle = 'triangle',
+  circle = 'triangle',
+  rectangle = 'triangle',
+}
+
+enum Color {
+  red = 'red',
+  green = 'green',
+  blue = 'blue',
+}
 
 function getTwoDecimalPlaces(area: number): number {
   return Math.floor(area * 100) / 100;
 }
 
 export interface Figure {
-  shape: Shapes,
-  color: Colors,
+  shape: Shape,
+  color: Color,
   getArea(): number,
 }
 
 export class Triangle implements Figure {
-  public shape: Shapes = 'triangle';
+  public shape: Shape = Shape.triangle;
 
   constructor(
-    public color: Colors,
+    public color: Color,
     public a: number,
     public b: number,
     public c: number,
   ) {
-    const isSideLengthCorrect = a <= 0 || b <= 0 || c <= 0;
+    const isSideLengthIncorrect = a <= 0 || b <= 0 || c <= 0;
     const isSumOfSideLengthGreater = a >= b + c || b >= a + c || c >= a + b;
 
-    if (isSideLengthCorrect) {
+    if (isSideLengthIncorrect) {
       throw new Error(INVALID_SIDE_LENGTH_ERROR);
     }
 
@@ -41,19 +50,22 @@ export class Triangle implements Figure {
 
   getArea(): number {
     const halfPerimeter: number = (this.a + this.b + this.c) / 2;
-    const triangleArea: number
-      = Math.sqrt(halfPerimeter * (halfPerimeter - this.a)
-        * (halfPerimeter - this.b) * (halfPerimeter - this.c));
+    const triangleArea: number = Math.sqrt(
+      halfPerimeter
+      * (halfPerimeter - this.a)
+      * (halfPerimeter - this.b)
+      * (halfPerimeter - this.c),
+    );
 
     return getTwoDecimalPlaces(triangleArea);
   }
 }
 
 export class Circle implements Figure {
-  public shape: Shapes = 'circle';
+  public shape: Shape = Shape.circle;
 
   constructor(
-    public color: Colors,
+    public color: Color,
     public radius: number,
   ) {
     if (this.radius <= 0) {
@@ -69,10 +81,10 @@ export class Circle implements Figure {
 }
 
 export class Rectangle implements Figure {
-  public shape: Shapes = 'rectangle';
+  public shape: Shape = Shape.rectangle;
 
   constructor(
-    public color: Colors,
+    public color: Color,
     public width: number,
     public height: number,
   ) {
@@ -89,5 +101,7 @@ export class Rectangle implements Figure {
 }
 
 export function getInfo(figure: Figure): string {
-  return `A ${figure.color} ${figure.shape} - ${figure.getArea()}`;
+  const { color, shape, getArea } = figure;
+
+  return `A ${color} ${shape} - ${getArea()}`;
 }
