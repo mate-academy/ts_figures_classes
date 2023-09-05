@@ -1,16 +1,24 @@
 
 type Color = 'red' | 'green' | 'blue';
-type Snape = 'triangle' | 'circle' | 'rectangle';
+enum Shape {
+  triangle = 'triangle',
+  circle = 'circle',
+  rectangle = 'rectangle'
+}
 
 export interface Figure {
-  shape: Snape,
+  shape: Shape,
   color: Color,
 
   getArea(): number;
 }
 
+function calculateFigureArea(value: number): number {
+  return Math.floor(value * 100) / 100;
+}
+
 export class Triangle implements Figure {
-  shape: Snape = 'triangle';
+  shape: Shape = Shape.triangle;
 
   constructor(
     public color: Color,
@@ -22,11 +30,15 @@ export class Triangle implements Figure {
     const maxSide = Math.max(this.a, this.b, this.c);
     const sumTwoSmallerSides = sidesSum - maxSide;
 
+    if (maxSide >= sumTwoSmallerSides) {
+      throw new Error('The largest side is less '
+        + 'than the sum of the two smaller sides');
+    }
+
     if (
       a <= 0
       || b <= 0
       || c <= 0
-      || maxSide >= sumTwoSmallerSides
     ) {
       throw new Error(`sides ${a}, ${b} and ${c} can't form a triangle`);
     }
@@ -36,15 +48,19 @@ export class Triangle implements Figure {
     const sidesSum = this.a + this.b + this.c;
     const halfPerimeter = sidesSum / 2;
 
-    return Math.floor(Math.sqrt(sidesSum / 2
+    const area = Math.sqrt(
+      halfPerimeter
       * (halfPerimeter - this.a)
       * (halfPerimeter - this.b)
-      * (halfPerimeter - this.c)) * 100) / 100;
+      * (halfPerimeter - this.c),
+    );
+
+    return calculateFigureArea(area);
   }
 }
 
 export class Circle implements Figure {
-  shape: Snape = 'circle';
+  shape: Shape = Shape.circle;
 
   constructor(
     public color: Color,
@@ -56,12 +72,14 @@ export class Circle implements Figure {
   }
 
   getArea(): number {
-    return Math.floor((Math.PI * this.radius ** 2) * 100) / 100;
+    const area = Math.PI * this.radius ** 2;
+
+    return calculateFigureArea(area);
   }
 }
 
 export class Rectangle {
-  shape: Snape = 'rectangle';
+  shape: Shape = Shape.rectangle;
 
   constructor(
     public color: Color,
@@ -79,5 +97,7 @@ export class Rectangle {
 }
 
 export function getInfo(figure: Figure): string {
-  return `A ${figure.color} ${figure.shape} - ${figure.getArea()}`;
+  const figureArea = figure.getArea();
+
+  return `A ${figure.color} ${figure.shape} - ${figureArea}`;
 }
