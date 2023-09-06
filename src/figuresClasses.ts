@@ -70,7 +70,6 @@ export class Rectangle implements Figure {
 
   constructor(
     public color: Color,
-    public a: number,
     public width: number,
     public height: number,
   ) {
