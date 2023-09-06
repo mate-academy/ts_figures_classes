@@ -16,21 +16,12 @@ export interface Figure {
   getArea: () => number,
 }
 
-function isGoodTriangle(...sides:number[]):boolean {
-  const copySides = [...sides];
-  const max = Math.max(...copySides);
-
-  copySides.splice(copySides.indexOf(max));
-
-  return (copySides[0] + copySides[1]) > max;
-}
-
-function toFixedArea(area:number):number {
+function toFixedArea(area: number): number {
   return Math.floor(area * 100) / 100;
 }
 
 export class Triangle {
-  public readonly shape:Shape = Shape.Triangle;
+  public readonly shape: Shape = Shape.Triangle;
 
   constructor(
     public color: Color,
@@ -38,20 +29,22 @@ export class Triangle {
     public b: number,
     public c: number,
   ) {
+    const maxSide = Math.max(this.a, this.b, this.c);
+
     if (this.a <= 0
       || this.b <= 0
       || this.c <= 0
-      || !isGoodTriangle(this.a, this.b, this.c)) {
+      || maxSide >= this.a + this.b + this.c - maxSide) {
       throw new Error(
         'Length of a, b, c <= 0 or length of max side >= than sum of two other',
       );
     }
   }
 
-  getArea():number {
+  getArea(): number {
     const { a, b, c } = this;
 
-    const semiperimeter:number = (a + b + c) / 2;
+    const semiperimeter: number = (a + b + c) / 2;
 
     const area = Math.sqrt(
       semiperimeter
@@ -65,18 +58,18 @@ export class Triangle {
 }
 
 export class Circle {
-  public readonly shape:Shape = Shape.Circle;
+  public readonly shape: Shape = Shape.Circle;
 
   constructor(
     public color: Color,
     public radius: number,
   ) {
     if (this.radius <= 0) {
-      throw new Error('Length of radius <= 0');
+      throw new Error('Radius <= 0');
     }
   }
 
-  getArea():number {
+  getArea(): number {
     const area = Math.PI * (this.radius ** 2);
 
     return toFixedArea(area);
@@ -84,7 +77,7 @@ export class Circle {
 }
 
 export class Rectangle {
-  public readonly shape:Shape = Shape.Rectangle;
+  public readonly shape: Shape = Shape.Rectangle;
 
   constructor(
     public color: Color,
@@ -92,11 +85,11 @@ export class Rectangle {
     public height: number,
   ) {
     if (this.width <= 0 || this.height <= 0) {
-      throw new Error('Length of width or height <= 0');
+      throw new Error('Width or height <= 0');
     }
   }
 
-  getArea():number {
+  getArea(): number {
     const { width, height } = this;
     const area = width * height;
 
@@ -104,7 +97,7 @@ export class Rectangle {
   }
 }
 
-export function getInfo(figure:Figure):string {
+export function getInfo(figure: Figure): string {
   const { color, shape } = figure;
   const area = figure.getArea();
 
