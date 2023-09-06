@@ -17,7 +17,7 @@ interface Figure {
 }
 
 function roundArea(area: number): number {
-  return +area.toFixed(2);
+  return Math.trunc(area * 100) / 100;
 }
 
 export class Triangle implements Figure {
@@ -30,7 +30,7 @@ export class Triangle implements Figure {
     public c: number,
   ) {
     if (a <= 0 || b <= 0 || c <= 0) {
-      throw new Error('Invalid triangle: Sides do not form a valid triangle.');
+      throw new Error('Invalid triangle: Sides must be greater than 0.');
     }
 
     if (a + b <= c || a + c <= b || b + c <= a) {
@@ -80,7 +80,7 @@ export class Rectangle implements Figure {
     public height: number,
   ) {
     if (width <= 0 || height <= 0) {
-      throw new Error('Invalid circle:'
+      throw new Error('Invalid rectangle:'
       + 'width and height must be greater than 0.');
     }
   }
