@@ -5,8 +5,8 @@ enum Shape {
 }
 
 const ERRORS = {
-  ONLY_POSITIVE: 'All numbers must be positive',
-  LONGEST_SIDE: 'The longest side of a triangle is >= than a sum of two others',
+  onlyPositive: 'All numbers must be positive',
+  longestSide: 'The longest side of a triangle is >= than a sum of two others',
 };
 
 type Color = 'red' | 'green' | 'blue';
@@ -35,17 +35,18 @@ export class Triangle implements Figure {
     this.c = c;
 
     if (a <= 0 || b <= 0 || c <= 0) {
-      throw new Error(ERRORS.ONLY_POSITIVE);
+      throw new Error(ERRORS.onlyPositive);
     }
 
     if (a + c <= b || a + b <= c || c + b <= a) {
-      throw new Error(ERRORS.LONGEST_SIDE);
+      throw new Error(ERRORS.longestSide);
     }
   }
 
   getArea(): number {
-    const s = (this.a + this.b + this.c) / 2;
-    const res = Math.sqrt(s * (s - this.a) * (s - this.b) * (s - this.c));
+    const { a, b, c } = this;
+    const square = (a + b + c) / 2;
+    const res = Math.sqrt(square * (square - a) * (square - b) * (square - c));
 
     return Number(res.toFixed(2));
   }
@@ -58,12 +59,12 @@ export class Circle implements Figure {
 
   radius: number;
 
-  constructor(color: Color, r: number) {
+  constructor(color: Color, radius: number) {
     this.color = color;
-    this.radius = r;
+    this.radius = radius;
 
-    if (r <= 0) {
-      throw new Error(ERRORS.ONLY_POSITIVE);
+    if (radius <= 0) {
+      throw new Error(ERRORS.onlyPositive);
     }
   }
 
@@ -79,22 +80,22 @@ export class Rectangle implements Figure {
 
   color: Color;
 
-  w: number;
+  width: number;
 
-  h: number;
+  height: number;
 
-  constructor(color: Color, w: number, h: number) {
+  constructor(color: Color, width: number, height: number) {
     this.color = color;
-    this.w = w;
-    this.h = h;
+    this.width = width;
+    this.height = height;
 
-    if (h <= 0 || w <= 0) {
-      throw new Error(ERRORS.ONLY_POSITIVE);
+    if (height <= 0 || width <= 0) {
+      throw new Error(ERRORS.onlyPositive);
     }
   }
 
   getArea(): number {
-    return Number((this.w * this.h).toFixed(2));
+    return Number((this.width * this.height).toFixed(2));
   }
 }
 
