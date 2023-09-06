@@ -13,10 +13,14 @@ enum Shape {
 type TColor = 'blue' | 'red' | 'green';
 
 export class Triangle implements Figure {
-  shape: Shape.Triangle;
+  shape = Shape.Triangle;
 
-  constructor(public color: TColor, public a: number,
-    public b: number, public c: number) {
+  constructor(
+    public color: TColor,
+    public a: number,
+    public b: number,
+    public c: number,
+  ) {
     if (a <= 0 || b <= 0 || c <= 0) {
       throw new Error('Side lengths must be greater than 0');
     }
@@ -24,11 +28,6 @@ export class Triangle implements Figure {
     if (a + b <= c || c + b <= a || c + a <= b) {
       throw new Error('Invalid triangle sides');
     }
-    this.shape = Shape.Triangle;
-    this.color = color;
-    this.a = a;
-    this.b = b;
-    this.c = c;
   }
 
   getArea(): number {
@@ -40,15 +39,15 @@ export class Triangle implements Figure {
 }
 
 export class Circle implements Figure {
-  shape: string;
+  shape = Shape.Circle;
 
-  constructor(public color: TColor, public radius: number) {
+  constructor(
+    public color: TColor,
+    public radius: number,
+  ) {
     if (radius <= 0) {
       throw new Error();
     }
-    this.shape = 'circle';
-    this.color = color;
-    this.radius = radius;
   }
 
   getArea(): number {
@@ -57,17 +56,16 @@ export class Circle implements Figure {
 }
 
 export class Rectangle implements Figure {
-  shape: string;
+  shape = Shape.Rectangle;
 
-  constructor(public color: TColor,
-    public width: number, public height: number) {
+  constructor(
+    public color: TColor,
+    public width: number,
+    public height: number,
+  ) {
     if (width <= 0 || height <= 0) {
       throw new Error();
     }
-    this.color = color;
-    this.shape = 'rectangle';
-    this.width = width;
-    this.height = height;
   }
 
   getArea(): number {
@@ -76,7 +74,8 @@ export class Rectangle implements Figure {
 }
 
 export function getInfo(figure: Figure): string {
+  const { color, shape } = figure;
   const area = figure.getArea();
 
-  return `A ${figure.color} ${figure.shape} - ${area}`;
+  return `A ${color} ${shape} - ${area}`;
 }
