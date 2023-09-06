@@ -17,8 +17,8 @@ export interface Figure {
   getArea(): number;
 }
 
-function mathFloor(value: number): number {
-  return Math.floor(value) / 100;
+function roundToHundredths(value: number): number {
+  return Math.floor(value * 100) / 100;
 }
 
 const ERROR_SIDE_NULL
@@ -48,13 +48,13 @@ export class Triangle implements Figure {
 
   getArea(): number {
     const halfPerimetr = (this.a + this.b + this.c) / 2;
-    const sqrtSumSide = Math.sqrt(
+    const triangleArea = Math.sqrt(
       halfPerimetr * (halfPerimetr - this.a)
       * (halfPerimetr - this.b)
       * (halfPerimetr - this.c),
-    ) * 100;
+    );
 
-    return mathFloor(sqrtSumSide);
+    return roundToHundredths(triangleArea);
   }
 }
 
@@ -71,9 +71,9 @@ export class Circle implements Figure {
   }
 
   getArea(): number {
-    const multipleRadiusPi = Math.PI * (this.radius * this.radius) * 100;
+    const multipleRadiusPi = Math.PI * (this.radius * this.radius);
 
-    return mathFloor(multipleRadiusPi);
+    return roundToHundredths(multipleRadiusPi);
   }
 }
 
@@ -91,9 +91,9 @@ export class Rectangle implements Figure {
   }
 
   getArea(): number {
-    const sqrtRectangle = this.height * this.width * 100;
+    const area = this.height * this.width;
 
-    return mathFloor(sqrtRectangle);
+    return roundToHundredths(area);
   }
 }
 
