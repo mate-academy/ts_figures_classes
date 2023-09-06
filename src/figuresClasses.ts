@@ -20,20 +20,12 @@ export interface Figure {
 export class Triangle implements Figure {
   shape: Shape = Shape.Triangle;
 
-  color: Color;
-
-  a: number;
-
-  b: number;
-
-  c: number;
-
-  constructor(color: Color, a: number, b: number, c: number) {
-    this.color = color;
-    this.a = a;
-    this.b = b;
-    this.c = c;
-
+  constructor(
+    public color: Color,
+    public a: number,
+    public b: number,
+    public c: number,
+  ) {
     if (a <= 0 || b <= 0 || c <= 0) {
       throw new Error(ERRORS.onlyPositive);
     }
@@ -45,62 +37,58 @@ export class Triangle implements Figure {
 
   getArea(): number {
     const { a, b, c } = this;
-    const square = (a + b + c) / 2;
-    const res = Math.sqrt(square * (square - a) * (square - b) * (square - c));
+    const halfPerimeter = (a + b + c) / 2;
+    const area = Math.sqrt(
+      halfPerimeter
+      * (halfPerimeter - a)
+      * (halfPerimeter - b)
+      * (halfPerimeter - c),
+    );
 
-    return Number(res.toFixed(2));
+    return Number(area.toFixed(2));
   }
 }
 
 export class Circle implements Figure {
   shape: Shape = Shape.Circle;
 
-  color: Color;
-
-  radius: number;
-
-  constructor(color: Color, radius: number) {
-    this.color = color;
-    this.radius = radius;
-
+  constructor(public color: Color, public radius: number) {
     if (radius <= 0) {
       throw new Error(ERRORS.onlyPositive);
     }
   }
 
   getArea(): number {
-    const res = Math.PI * (this.radius ** 2) * 100;
+    const area = Math.PI * (this.radius ** 2) * 100;
 
-    return Math.floor(res) / 100;
+    return Math.floor(area) / 100;
   }
 }
 
 export class Rectangle implements Figure {
   shape: Shape = Shape.Rectangle;
 
-  color: Color;
-
-  width: number;
-
-  height: number;
-
-  constructor(color: Color, width: number, height: number) {
-    this.color = color;
-    this.width = width;
-    this.height = height;
-
+  constructor(
+    public color: Color,
+    public a: number,
+    public width: number,
+    public height: number,
+  ) {
     if (height <= 0 || width <= 0) {
       throw new Error(ERRORS.onlyPositive);
     }
   }
 
   getArea(): number {
-    return Number((this.width * this.height).toFixed(2));
+    const { width, height } = this;
+
+    return Number((width * height).toFixed(2));
   }
 }
 
 export function getInfo(figure: Figure): string {
-  const square = figure.getArea();
+  const { color, shape, getArea } = figure;
+  const square = getArea();
 
-  return `A ${figure.color} ${figure.shape} - ${square}`;
+  return `A ${color} ${shape} - ${square}`;
 }
