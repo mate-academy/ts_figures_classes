@@ -1,13 +1,17 @@
 enum Shape {
-  triangle = 'triangle',
-  circle = 'circle',
-  rectangle = 'rectangle',
+  Triangle = 'triangle',
+  Circle = 'circle',
+  Rectangle = 'rectangle',
 }
 
 enum Color {
-  red = 'red',
-  green = 'green',
-  blue = 'blue',
+  Red = 'red',
+  Green = 'green',
+  Blue = 'blue',
+}
+
+function roundToTwoDecimals(value: number): number {
+  return Math.floor(value * 100) / 100;
 }
 
 export interface Figure {
@@ -19,7 +23,7 @@ export interface Figure {
 }
 
 export class Triangle implements Figure {
-  public shape: Shape = Shape.triangle;
+  public shape: Shape = Shape.Triangle;
 
   constructor(
     public color: Color,
@@ -28,47 +32,49 @@ export class Triangle implements Figure {
     public c: number,
   ) {
     if (a <= 0 || b <= 0 || c <= 0) {
-      throw new Error('Incorrect Data');
+      throw new Error('One or more sides are not positive');
     }
 
     const longestSide = Math.max(a, b, c);
 
     if (longestSide >= a + b + c - longestSide) {
-      throw new Error('Incorrect Data');
+      throw new Error('The given sides do not form a valid triangle');
     }
   }
 
   getArea(): number {
-    const {
-      a,
-      b,
-      c,
-    } = this;
-    const p = (a + b + c) / 2;
+    const { a, b, c } = this;
+    const semiPerimeter = (a + b + c) / 2;
+    const area = Math.sqrt(semiPerimeter
+      * (semiPerimeter - a)
+      * (semiPerimeter - b)
+      * (semiPerimeter - c));
 
-    return Math.floor(Math.sqrt(p * (p - a) * (p - b) * (p - c)) * 100) / 100;
+    return roundToTwoDecimals(area);
   }
 }
 
 export class Circle implements Figure {
-  public shape: Shape = Shape.circle;
+  public shape: Shape = Shape.Circle;
 
   constructor(
     public color: Color,
     public radius: number,
   ) {
     if (radius <= 0) {
-      throw new Error('Incorrect Data');
+      throw new Error('Radius must be a positive number');
     }
   }
 
   getArea(): number {
-    return Math.floor(Math.PI * (this.radius ** 2) * 100) / 100;
+    const area = Math.PI * (this.radius ** 2);
+
+    return roundToTwoDecimals(area);
   }
 }
 
 export class Rectangle {
-  public shape: Shape = Shape.rectangle;
+  public shape: Shape = Shape.Rectangle;
 
   constructor(
     public color: Color,
@@ -76,17 +82,21 @@ export class Rectangle {
     public height: number,
   ) {
     if (width <= 0 || height <= 0) {
-      throw new Error('Incorrect Data');
+      throw new Error('Width and height must be positive numbers');
     }
   }
 
   getArea(): number {
-    return Math.floor(this.width * this.height);
+    const { width, height } = this;
+    const area = width * height;
+
+    return Math.floor(area);
   }
 }
 
 export function getInfo(figure: Figure): string {
+  const { color, shape } = figure;
   const area = figure.getArea();
 
-  return `A ${figure.color} ${figure.shape} - ${area}`;
+  return `A ${color} ${shape} - ${area}`;
 }
