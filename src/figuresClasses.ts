@@ -12,7 +12,6 @@ export class Triangle implements Figure {
 
   constructor(
     public color: Color,
-
     public a: number,
     public b: number,
     public c: number,
@@ -42,7 +41,6 @@ export class Circle implements Figure {
 
   constructor(
     public color: Color,
-
     public radius: number,
   ) {
     if (this.radius <= 0) {
@@ -60,7 +58,6 @@ export class Rectangle implements Figure {
 
   constructor(
     public color: Color,
-
     public width: number,
     public height: number,
   ) {
