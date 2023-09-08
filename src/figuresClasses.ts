@@ -16,6 +16,10 @@ export interface Figure {
   getArea(): number;
 }
 
+function roundToHundred(num: number): number {
+  return Math.floor(num * 100) / 100;
+}
+
 export class Triangle implements Figure {
   public shape: Shape = Shape.Triangle;
 
@@ -29,20 +33,25 @@ export class Triangle implements Figure {
       throw new Error('side cannot be less than or equal to zero');
     }
 
-    const maxSide: number = Math.max(this.a, this.b, this.c);
-    const sumTwoSide : number = this.a + this.b + this.c - maxSide;
+    const maxSide = Math.max(a, b, c);
+    const sumTwoSide = a + b + c - maxSide;
 
     if (maxSide >= sumTwoSide) {
       throw new
-      Error(`sides ${this.a}, ${this.b} and ${this.c} can't form a triangle`);
+      Error(`sides ${a}, ${b} and ${c} can't form a triangle`);
     }
   }
 
   getArea() : number {
-    const s = 0.5 * (this.a + this.b + this.c);
+    const halfP = 0.5 * (this.a + this.b + this.c);
+    const halfPWithoutA = halfP - this.a;
+    const halfPWithoutB = halfP - this.b;
+    const halfPWithoutC = halfP - this.c;
 
-    return (Math.floor((Math.sqrt(s * (s - this.a) * (s
-      - this.b) * (s - this.c))) * 100)) / 100;
+    const area = Math.sqrt(halfP * halfPWithoutA
+      * halfPWithoutB * halfPWithoutC);
+
+    return roundToHundred(area);
   }
 }
 
@@ -56,7 +65,9 @@ export class Circle implements Figure {
   }
 
   getArea() : number {
-    return (Math.floor(Math.PI * this.radius * this.radius * 100)) / 100;
+    const area = Math.PI * this.radius * this.radius;
+
+    return roundToHundred(area);
   }
 }
 
