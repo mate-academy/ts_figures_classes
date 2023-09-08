@@ -16,11 +16,15 @@ export interface Figure {
   getArea(): number;
 }
 
+function getRoundedValue(value: number): number {
+  return Math.floor(value * 100) / 100;
+}
+
 export class Triangle implements Figure {
-  shape: Figure['shape'] = Shape.Triangle;
+  shape: Shape = Shape.Triangle;
 
   constructor(
-    public color: Figure['color'],
+    public color: Color,
     public a: number,
     public b: number,
     public c: number,
@@ -43,12 +47,12 @@ export class Triangle implements Figure {
       * (semiperimeter - this.c),
     );
 
-    return area;
+    return getRoundedValue(area);
   }
 }
 
 export class Circle implements Figure {
-  shape: Figure['shape'] = Shape.Circle;
+  shape: Shape = Shape.Circle;
 
   constructor(
     public color: Figure['color'],
@@ -60,14 +64,14 @@ export class Circle implements Figure {
   }
 
   getArea(): number {
-    const area = Math.PI * this.radius * this.radius;
+    const area = Math.PI * this.radius ** 2;
 
-    return Math.floor(area * 100) / 100;
+    return getRoundedValue(area);
   }
 }
 
 export class Rectangle {
-  shape: Figure['shape'] = Shape.Rectangle;
+  shape: Shape = Shape.Rectangle;
 
   constructor(
     public color: Figure['color'],
@@ -80,16 +84,13 @@ export class Rectangle {
   }
 
   getArea(): number {
-    return this.width * this.height;
+    return getRoundedValue(this.width * this.height);
   }
 }
 
 export function getInfo(figure: Figure): string {
   const area = figure.getArea();
   const { color, shape } = figure;
-  const formattedArea = area % 1 !== 0
-    ? area.toFixed(2)
-    : area;
 
-  return `A ${color} ${shape} - ${formattedArea}`;
+  return `A ${color} ${shape} - ${area}`;
 }
