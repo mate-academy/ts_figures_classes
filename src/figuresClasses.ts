@@ -4,15 +4,23 @@ export interface Figure {
   getArea(): number,
 }
 
+type Color = 'red' | 'green' | 'blue';
+
+enum Shape {
+  triangle = 'triangle',
+  circle = 'circle',
+  rectangle = 'rectangle',
+}
+
 function roundArea(number: number): number {
   return Math.floor(number * 100) / 100;
 }
 
 export class Triangle implements Figure {
-  public shape = 'triangle';
+  public shape = Shape.triangle;
 
   constructor(
-    public color: string,
+    public color: Color = 'red',
     public a: number,
     public b: number,
     public c: number,
@@ -39,10 +47,10 @@ export class Triangle implements Figure {
 }
 
 export class Circle implements Figure {
-  public shape = 'circle';
+  public shape = Shape.circle;
 
   constructor(
-    public color: string,
+    public color: Color = 'green',
     public radius: number,
   ) {
     if (radius <= 0) {
@@ -59,10 +67,10 @@ export class Circle implements Figure {
 }
 
 export class Rectangle implements Figure {
-  public shape = 'rectangle';
+  public shape = Shape.rectangle;
 
   constructor(
-    public color: string,
+    public color: Color = 'blue',
     public width: number,
     public height: number,
   ) {
