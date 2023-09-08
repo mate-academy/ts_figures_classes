@@ -28,4 +28,9 @@ module.exports = {
     'max-classes-per-file': 'off',
     'no-new': 'off',
   },
+  overrides: [
+    {
+      files: ['*.ts', '*.tsx']
+    }
+  ]
 };
