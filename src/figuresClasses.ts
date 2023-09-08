@@ -1,14 +1,26 @@
+enum Shape {
+  Triangle = 'triangle',
+  Circle = 'circle',
+  Rectangle = 'rectangle',
+}
+
+enum Color {
+  Red = 'red',
+  Green = 'green',
+  Blue = 'blue',
+}
+
 export interface Figure {
-  shape: 'triangle' | 'circle' | 'rectangle';
-  color: 'red' | 'green' | 'blue';
+  shape: Shape;
+  color: Color;
   getArea(): number;
 }
 
 export class Triangle implements Figure {
-  public shape: Figure['shape'] = 'triangle';
+  public shape = Shape.Triangle;
 
   constructor(
-    public color: Figure['color'],
+    public color: Color,
     public a: number,
     public b: number,
     public c: number,
@@ -18,7 +30,9 @@ export class Triangle implements Figure {
     }
 
     if (a + b <= c || a + c <= b || b + c <= a) {
-      throw new Error('Invalid parameters');
+      throw new Error(
+        'The longest side of a triangle is >= than a sum of two others',
+      );
     }
   }
 
@@ -36,10 +50,10 @@ export class Triangle implements Figure {
 }
 
 export class Circle implements Figure {
-  public shape: Figure['shape'] = 'circle';
+  public shape = Shape.Circle;
 
   constructor(
-    public color: Figure['color'],
+    public color: Color,
     public radius: number,
   ) {
     if (radius <= 0) {
@@ -55,10 +69,10 @@ export class Circle implements Figure {
 }
 
 export class Rectangle implements Figure {
-  public shape: Figure['shape'] = 'rectangle';
+  public shape = Shape.Rectangle;
 
   constructor(
-    public color: Figure['color'],
+    public color: Color,
     public width: number,
     public height: number,
   ) {
