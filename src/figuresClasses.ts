@@ -6,15 +6,15 @@ import {
 } from './utils/errorMessage';
 
 enum Shape {
-  triangle = 'Triangle',
-  circle = 'Circle',
-  rectangle = 'Rectangle',
+  Triangle = 'Triangle',
+  Circle = 'Circle',
+  Rectangle = 'Rectangle',
 }
 
 enum Color {
-  red = 'red',
-  green = 'green',
-  blue = 'blue',
+  Red = 'red',
+  Green = 'green',
+  Blue = 'blue',
 }
 
 function getTwoDecimalPlaces(area: number): number {
@@ -28,7 +28,7 @@ export interface Figure {
 }
 
 export class Triangle implements Figure {
-  public shape: Shape = Shape.triangle;
+  public shape: Shape = Shape.Triangle;
 
   constructor(
     public color: Color,
@@ -62,7 +62,7 @@ export class Triangle implements Figure {
 }
 
 export class Circle implements Figure {
-  public shape: Shape = Shape.circle;
+  public shape: Shape = Shape.Circle;
 
   constructor(
     public color: Color,
@@ -81,7 +81,7 @@ export class Circle implements Figure {
 }
 
 export class Rectangle implements Figure {
-  public shape: Shape = Shape.rectangle;
+  public shape: Shape = Shape.Rectangle;
 
   constructor(
     public color: Color,
