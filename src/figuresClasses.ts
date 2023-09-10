@@ -1,4 +1,3 @@
-
 export interface Figure {
   shape: string;
   color: string;
@@ -24,7 +23,7 @@ export class Triangle implements Figure {
     const [a, b, c] = this.sides;
     const s = (a + b + c) / 2;
 
-    return Math.sqrt(s * (s - a) * (s - b) * (s - c));
+    return Number((Math.sqrt(s * (s - a) * (s - b) * (s - c))).toFixed(2));
   }
 
   private isNotTriangle = (sides: [number, number, number]): boolean => {
@@ -50,7 +49,7 @@ export class Circle implements Figure {
   }
 
   getArea(): number {
-    return Math.PI * (this.radius ** 2);
+    return Math.floor(Math.PI * this.radius ** 2 * 100) / 100;
   }
 }
 
@@ -73,12 +72,12 @@ export class Rectangle implements Figure {
   }
 
   getArea(): number {
-    return this.width * this.height;
+    return Number((this.width * this.height).toFixed(2));
   }
 }
 
 export function getInfo(figure: Figure): string {
-  const area = Number(figure.getArea().toFixed(2));
+  const area = figure.getArea();
 
   return `A ${figure.color} ${figure.shape} - ${area}`;
 }
