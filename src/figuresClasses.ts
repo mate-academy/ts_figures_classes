@@ -8,7 +8,7 @@ export interface Figure {
 }
 
 export class Triangle implements Figure {
-  shape: Shape;
+  shape: Shape = 'triangle';
 
   constructor(
     public color: Color,
@@ -20,13 +20,12 @@ export class Triangle implements Figure {
     this.a = a;
     this.b = b;
     this.c = c;
-    this.shape = 'triangle';
 
     if (
       (a <= 0 || b <= 0 || c <= 0)
       || (a >= b + c || b >= a + c || c >= a + b)
     ) {
-      throw new Error('your error message');
+      throw new Error('Incorrect data entered');
     }
   }
 
@@ -40,15 +39,14 @@ export class Triangle implements Figure {
 }
 
 export class Circle implements Figure {
-  shape: Shape;
+  shape: Shape = 'circle';
 
   constructor(public color: Color, public radius: number) {
     this.color = color;
     this.radius = radius;
-    this.shape = 'circle';
 
     if (radius <= 0) {
-      throw new Error('your error message');
+      throw new Error('Incorrect data entered');
     }
   }
 
@@ -60,7 +58,7 @@ export class Circle implements Figure {
 }
 
 export class Rectangle implements Figure {
-  shape: Shape;
+  shape: Shape = 'rectangle';
 
   constructor(
     public color: Color,
@@ -70,10 +68,9 @@ export class Rectangle implements Figure {
     this.color = color;
     this.height = height;
     this.width = width;
-    this.shape = 'rectangle';
 
     if (width <= 0 || height <= 0) {
-      throw new Error('your error message');
+      throw new Error('Incorrect data entered');
     }
   }
 
