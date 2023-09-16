@@ -26,15 +26,15 @@ export class Triangle implements Figure {
     b = 0,
     c = 0,
   ) {
-    this.color = color;
-    this.area = calculateArea(a, b, c);
-
     if (a <= 0 || b <= 0 || c <= 0
       || a >= b + c
       || b >= a + c
       || c >= b + a) {
-      throw new Error('');
+      throw new Error('Invalid triangle: The sum of any two'
+        + 'sides must be greater than the length of the remaining side.');
     }
+    this.color = color;
+    this.area = calculateArea(a, b, c);
   }
 
   getArea(): number {
@@ -51,12 +51,11 @@ export class Circle implements Figure {
     public color: Figure['color'],
     radius: number = 0,
   ) {
+    if (radius <= 0) {
+      throw new Error('Invalid circle: radius must be greater than 0');
+    }
     this.color = color;
     this.area = Math.PI * radius ** 2;
-
-    if (radius <= 0) {
-      throw new Error('');
-    }
   }
 
   getArea(): number {
@@ -74,12 +73,12 @@ export class Rectangle {
     width: number,
     height: number,
   ) {
+    if (width <= 0 || height <= 0) {
+      throw new Error('Invalid rectangle: width and height'
+        + ' of rectangle must be greater than 0');
+    }
     this.color = color;
     this.area = width * height;
-
-    if (width <= 0 || height <= 0) {
-      throw new Error('');
-    }
   }
 
   getArea(): number {
