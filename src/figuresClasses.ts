@@ -13,8 +13,14 @@ export interface Figure {
   getArea(): number,
 }
 
-function isTheBigestSide(a: number, b: number, c: number): boolean {
-  return a + b <= c || b + c <= a || c + a <= b;
+function findTheBigestSide(
+  sideA: number,
+  sideB: number,
+  sideC: number,
+): boolean {
+  return sideA + sideB <= sideC
+    || sideB + sideC <= sideA
+    || sideC + sideA <= sideB;
 }
 
 function roundToHundredths(value: number):number {
@@ -26,21 +32,29 @@ export class Triangle implements Figure {
 
   constructor(
     public color: Color,
-    private a: number,
-    private b: number,
-    private c: number,
+    private sideA: number,
+    private sideB: number,
+    private sideC: number,
   ) {
-    const isBigger = isTheBigestSide(this.a, this.b, this.c);
+    const isBigger = findTheBigestSide(this.sideA, this.sideB, this.sideC);
 
-    if (this.a <= 0 || this.b <= 0 || this.c <= 0 || isBigger) {
+    if (this.sideA <= 0 || this.sideB <= 0 || this.sideC <= 0 || isBigger) {
+      throw new Error('Sides must be > 0');
+    }
+
+    if (!findTheBigestSide) {
       throw new Error('The longest side is greater than a sum of two others');
     }
   }
 
   getArea(): number {
-    const semiPerimeter = (this.a + this.b + this.c) / 2;
-    const triangleArea = Math.sqrt(semiPerimeter * (semiPerimeter - this.a)
-    * (semiPerimeter - this.b) * (semiPerimeter - this.c));
+    const semiPerimeter = (this.sideA + this.sideB + this.sideC) / 2;
+    const triangleArea = Math.sqrt(
+      semiPerimeter
+      * (semiPerimeter - this.sideA)
+      * (semiPerimeter - this.sideB)
+      * (semiPerimeter - this.sideC),
+    );
 
     return roundToHundredths(triangleArea);
   }
@@ -59,7 +73,7 @@ export class Circle implements Figure {
   }
 
   getArea(): number {
-    const circleArea = this.radius * this.radius * Math.PI;
+    const circleArea = Math.PI * this.radius ** 2;
 
     return Math.floor(circleArea * 100) / 100;
   }
@@ -86,5 +100,8 @@ export class Rectangle implements Figure {
 }
 
 export function getInfo(figure: Figure): string {
-  return `A ${figure.color} ${figure.shape} - ${figure.getArea()}`;
+  const { color, shape } = figure;
+  const area = figure.getArea();
+
+  return `A ${color} ${shape} - ${area}`;
 }
