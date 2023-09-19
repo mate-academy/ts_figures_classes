@@ -23,8 +23,10 @@ export class Triangle implements Figure {
 
   getArea(): number {
     const { a, b, c } = this;
-    const s = (a + b + c) / 2;
-    const area = Math.sqrt(s * (s - a) * (s - b) * (s - c)).toFixed(2);
+    const halfPerimeter = (a + b + c) / 2;
+    const area = Math.sqrt(halfPerimeter
+      * (halfPerimeter - a) * (halfPerimeter - b) * (halfPerimeter - c))
+      .toFixed(2);
 
     return +area;
   }
