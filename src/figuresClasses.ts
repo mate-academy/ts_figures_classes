@@ -13,7 +13,7 @@ export interface Figure {
   getArea(): number,
 }
 
-function findTheBigestSide(
+function checkTriangleSidesLength(
   sideA: number,
   sideB: number,
   sideC: number,
@@ -24,7 +24,7 @@ function findTheBigestSide(
 }
 
 function roundToHundredths(value: number):number {
-  return Math.round(value * 100) / 100;
+  return Math.floor(value * 100) / 100;
 }
 
 export class Triangle implements Figure {
@@ -36,13 +36,15 @@ export class Triangle implements Figure {
     private sideB: number,
     private sideC: number,
   ) {
-    const isBigger = findTheBigestSide(this.sideA, this.sideB, this.sideC);
+    const isSidesLengthIncorrect = checkTriangleSidesLength(
+      this.sideA, this.sideB, this.sideC,
+    );
 
-    if (this.sideA <= 0 || this.sideB <= 0 || this.sideC <= 0 || isBigger) {
+    if (this.sideA <= 0 || this.sideB <= 0 || this.sideC <= 0) {
       throw new Error('Sides must be > 0');
     }
 
-    if (!findTheBigestSide) {
+    if (isSidesLengthIncorrect) {
       throw new Error('The longest side is greater than a sum of two others');
     }
   }
@@ -75,7 +77,7 @@ export class Circle implements Figure {
   getArea(): number {
     const circleArea = Math.PI * this.radius ** 2;
 
-    return Math.floor(circleArea * 100) / 100;
+    return roundToHundredths(circleArea);
   }
 }
 
