@@ -31,9 +31,10 @@ export class Triangle implements Figure {
     this.shape = 'triangle';
     checkValidSides([a, b, c]);
 
-    const sides = [a, b, c].sort((x: number, y: number) => x - y);
+    const [sideA, sideB, sideC] = [a, b, c]
+      .sort((x: number, y: number) => x - y);
 
-    if (sides[2] >= sides[0] + sides[1]) {
+    if (sideC >= sideA + sideB) {
       throw new Error(
         'The longest side of a triangle should be '
         + '>= than a sum of two others',
@@ -43,8 +44,8 @@ export class Triangle implements Figure {
 
   getArea(): number {
     const { a, b, c } = this;
-    const s = (a + b + c) / 2;
-    const area = Math.sqrt(s * (s - a) * (s - b) * (s - c));
+    const square = (a + b + c) / 2;
+    const area = Math.sqrt(square * (square - a) * (square - b) * (square - c));
 
     return roundDown(area);
   }
