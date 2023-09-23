@@ -4,7 +4,11 @@ enum Shape {
   Rectangle = 'rectangle',
 }
 
-type Color = 'red' | 'green' | 'blue';
+enum Color {
+  Red = 'red',
+  Green = 'green',
+  Blue = 'blue',
+}
 
 export interface Figure {
   color: Color;
@@ -12,11 +16,11 @@ export interface Figure {
   getArea(): number;
 }
 
-export class Triangle implements Figure {
+export class Triangle {
   shape = Shape.Triangle;
 
   constructor(
-    readonly color: Color,
+    readonly color: string,
     readonly a: number,
     readonly b: number,
     readonly c: number,
@@ -34,11 +38,11 @@ export class Triangle implements Figure {
   }
 }
 
-export class Circle implements Figure {
+export class Circle {
   shape = Shape.Circle;
 
   constructor(
-    readonly color: Color,
+    readonly color: string,
     readonly radius: number,
   ) {
     if (radius <= 0) {
@@ -51,11 +55,11 @@ export class Circle implements Figure {
   }
 }
 
-export class Rectangle implements Figure {
+export class Rectangle {
   shape = Shape.Rectangle;
 
   constructor(
-    readonly color: Color,
+    readonly color: string,
     readonly width: number,
     readonly height: number,
   ) {
@@ -72,5 +76,7 @@ export class Rectangle implements Figure {
 }
 
 export function getInfo(figure: Figure): string {
-  return `A ${figure.color} ${figure.shape} - ${figure.getArea()}`;
+  const { color, shape, getArea } = figure;
+
+  return `A ${color} ${shape} - ${getArea()}`;
 }
