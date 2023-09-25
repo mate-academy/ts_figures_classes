@@ -66,7 +66,7 @@ export class Rectangle implements Figure {
     public height: number,
   ) {
     if (width <= 0 || height <= 0) {
-      throw new Error('One of rectangl\'s side must be greater than 0');
+      throw new Error('One of the rectangl\'s side must be greater than 0');
     }
   }
 
