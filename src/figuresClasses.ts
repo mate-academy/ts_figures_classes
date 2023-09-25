@@ -4,7 +4,7 @@ export interface Figure {
   getArea(): number;
 }
 
-export class Triangle implements Figure {
+export class Triangle {
   shape = 'triangle';
 
   constructor(
@@ -13,12 +13,12 @@ export class Triangle implements Figure {
     public b: number,
     public c: number,
   ) {
-    if (this.a <= 0 || this.b <= 0 || this.c <= 0) {
+    if (a <= 0 || b <= 0 || c <= 0) {
       throw new Error('Invalid triangle sides');
     }
 
-    const max = Math.max(this.a, this.b, this.c);
-    const sum = this.a + this.b + this.c - max;
+    const max = Math.max(a, b, c);
+    const sum = a + b + c - max;
 
     if (max >= sum) {
       throw new Error(
@@ -28,14 +28,16 @@ export class Triangle implements Figure {
   }
 
   getArea(): number {
-    const s = (this.a + this.b + this.c) / 2;
-    const area = Math.sqrt(s * (s - this.a) * (s - this.b) * (s - this.c));
+    const { a, b, c } = this;
+
+    const s = (a + b + c) / 2;
+    const area = Math.sqrt(s * (s - a) * (s - b) * (s - c));
 
     return Math.round(area * 100) / 100;
   }
 }
 
-export class Circle implements Figure {
+export class Circle {
   shape = 'circle';
 
   constructor(public color: string, public radius: number) {
@@ -49,7 +51,7 @@ export class Circle implements Figure {
   }
 }
 
-export class Rectangle implements Figure {
+export class Rectangle {
   shape = 'rectangle';
 
   constructor(
@@ -70,5 +72,7 @@ export class Rectangle implements Figure {
 }
 
 export function getInfo(figure: Figure): string {
-  return `A ${figure.color} ${figure.shape} - ${figure.getArea()}`;
+  const { color, shape } = figure;
+
+  return `A ${color} ${shape} - ${figure.getArea()}`;
 }
