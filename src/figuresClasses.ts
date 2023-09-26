@@ -1,19 +1,81 @@
-export interface Figure {
-
+// Enum for available colors
+export enum Colors {
+  Red = 'red',
+  Green = 'green',
+  Blue = 'blue',
 }
 
-export class Triangle {
-
+interface Figure {
+  shape: string;
+  color: Colors;
+  getArea(): number;
 }
 
-export class Circle {
+// Triangle class
+export class Triangle implements Figure {
+  shape: string = 'triangle';
 
+  constructor(
+    public color: Colors,
+    public a: number,
+    public b: number,
+    public c: number,
+  ) {
+    if (a <= 0 || b <= 0 || c <= 0) {
+      throw new Error('Side lengths should be greater than 0');
+    }
+
+    const sides = [a, b, c].sort((x, y) => x - y);
+
+    if (sides[2] >= sides[0] + sides[1]) {
+      throw new Error(`Sides ${a}, ${b} and ${c} can't form a triangle`);
+    }
+  }
+
+  getArea(): number {
+    const s = (this.a + this.b + this.c) / 2;
+    const area = Math.sqrt(s * (s - this.a) * (s - this.b) * (s - this.c));
+
+    return Math.floor(area * 100) / 100;
+  }
 }
 
-export class Rectangle {
+// Circle class
+export class Circle implements Figure {
+  shape: string = 'circle';
 
+  constructor(public color: Colors, public radius: number) {
+    if (radius <= 0) {
+      throw new Error('Radius should be greater than 0');
+    }
+  }
+
+  getArea(): number {
+    const area = Math.PI * this.radius * this.radius;
+
+    return Math.floor(area * 100) / 100;
+  }
 }
 
-export function getInfo(figure) {
+// Rectangle class
+export class Rectangle implements Figure {
+  shape: string = 'rectangle';
 
+  constructor(
+    public color: Colors,
+    public width: number,
+    public height: number,
+  ) {
+    if (width <= 0 || height <= 0) {
+      throw new Error('Width and height should be greater than 0');
+    }
+  }
+
+  getArea(): number {
+    return Math.floor(this.width * this.height * 100) / 100;
+  }
+}
+
+export function getInfo(figure: Figure): string {
+  return `A ${figure.color} ${figure.shape} - ${figure.getArea()}`;
 }
