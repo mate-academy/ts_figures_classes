@@ -30,14 +30,10 @@ export class Triangle implements Figure {
   }
 
   getArea(): number {
-    const firstSide: number = this.a;
-    const secondSide: number = this.b;
-    const thirdSide: number = this.c;
-
-    const semiPerimetr: number = (firstSide + secondSide + thirdSide) / 2;
-    const firstSideDif: number = semiPerimetr - firstSide;
-    const secondSideDif: number = semiPerimetr - secondSide;
-    const thirdSideDif: number = semiPerimetr - thirdSide;
+    const semiPerimetr: number = (this.a + this.b + this.c) / 2;
+    const firstSideDif: number = semiPerimetr - this.a;
+    const secondSideDif: number = semiPerimetr - this.b;
+    const thirdSideDif: number = semiPerimetr - this.c;
 
     const area: number = Math.sqrt(
       semiPerimetr * firstSideDif * secondSideDif * thirdSideDif,
