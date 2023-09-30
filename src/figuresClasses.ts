@@ -22,22 +22,23 @@ export class Triangle implements Figure {
 
   constructor(
     public color: Color,
-    public a: number,
-    public b: number,
-    public c: number,
+    public sideA: number,
+    public sideB: number,
+    public sideC: number,
   ) {
     isPositiveNumber(this);
 
-    const max = Math.max(this.a, this.b, this.c);
+    const max = Math.max(sideA, sideB, sideC);
 
-    if (max >= this.a + this.b + this.c - max) {
-      throw new Error('Sides 1, 2 and 3 can\'t form a triangle');
+    if (max >= sideA + sideB + sideC - max) {
+      throw new Error('Sides 1, 2, and 3 can\'t form a triangle');
     }
   }
 
   getArea(): number {
-    const s = (this.a + this.b + this.c) / 2;
-    const area = Math.sqrt(s * (s - this.a) * (s - this.b) * (s - this.c));
+    const s = (this.sideA + this.sideB + this.sideC) / 2;
+    const area = Math.sqrt(s * (s - this.sideA)
+      * (s - this.sideB) * (s - this.sideC));
 
     return Math.floor(area * 100) / 100;
   }
