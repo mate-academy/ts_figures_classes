@@ -87,5 +87,8 @@ export class Rectangle implements Figure {
 }
 
 export function getInfo(figure: Figure): string {
-  return `A ${figure.color} ${figure.shape} - ${figure.getArea()}`;
+  const precision = figure instanceof Rectangle ? 0 : 2; // Set precision based on the figure type
+  const area = figure.getArea().toFixed(precision);
+
+  return `A ${figure.color} ${figure.shape} - ${area}`;
 }
