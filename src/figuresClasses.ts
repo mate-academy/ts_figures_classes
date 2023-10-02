@@ -75,7 +75,7 @@ export class Rectangle implements Figure {
     public height: number,
   ) {
     if (width <= 0 || height <= 0) {
-      throw new Error('Side must be greater than zero');
+      throw new Error('Width and height must be greater than zero');
     }
   }
 
@@ -87,7 +87,7 @@ export class Rectangle implements Figure {
 }
 
 export function getInfo(figure: Figure): string {
-  const precision = figure instanceof Rectangle ? 0 : 2; // Set precision based on the figure type
+  const precision = figure instanceof Rectangle ? 0 : 2;
   const area = figure.getArea().toFixed(precision);
 
   return `A ${figure.color} ${figure.shape} - ${area}`;
