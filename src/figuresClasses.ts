@@ -10,43 +10,36 @@ export interface Figure {
 export class Triangle implements Figure {
   shape: Shape = 'triangle';
 
-  color: Color;
-
-  a: number;
-
-  b: number;
-
-  c: number;
-
-  constructor(color: Color, a: number, b: number, c: number) {
-    this.color = color;
-    this.a = a;
-    this.b = b;
-    this.c = c;
-
-    if (this.a <= 0 || this.b <= 0 || this.c <= 0) {
+  constructor(
+    public color: Color,
+    public a: number,
+    public b: number,
+    public c: number,
+  ) {
+    if (a <= 0 || b <= 0 || c <= 0) {
       throw new Error('All sides of triangle must be greater than 0!!!');
     }
 
-    const max = Math.max(this.a, this.b, this.c);
+    const max = Math.max(a, b, c);
 
-    if (max === this.a && max >= this.b + this.c) {
+    if (max === a && max >= b + c) {
       throw new Error("Sum of sides 'b' and 'c' is less than side 'a'!!!");
     }
 
-    if (max === this.b && max >= this.a + this.c) {
+    if (max === b && max >= a + c) {
       throw new Error("Sum of sides 'a' and 'c' is less than side 'b'!!!");
     }
 
-    if (max === this.c && max >= this.a + this.b) {
+    if (max === c && max >= a + b) {
       throw new Error("Sum of sides 'a' and 'b' is less than side 'c'!!!");
     }
   }
 
   getArea(): number {
-    const semiP: number = 1 / 2 * (this.a + this.b + this.c);
+    const { a, b, c } = this;
+    const semiP: number = 1 / 2 * (a + b + c);
     const square: number = Math.sqrt(
-      semiP * (semiP - this.a) * (semiP - this.b) * (semiP - this.c),
+      semiP * (semiP - a) * (semiP - b) * (semiP - c),
     );
 
     return Math.floor(square * 100) / 100;
