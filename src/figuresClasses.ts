@@ -7,32 +7,42 @@ export interface Figure {
   getArea(): number;
 }
 
-export class Triangle {
+export class Triangle implements Figure {
   shape: Shape = 'triangle';
 
   color: Color;
 
-  a: number;
+  sideA: number;
 
-  b: number;
+  sideB: number;
 
-  c: number;
+  sideC: number;
 
-  constructor(color: Color, a: number, b: number, c: number) {
-    if (a <= 0 || b <= 0 || c <= 0 || a + b <= c || a + c <= b || b + c <= a) {
+  constructor(color: Color, sideA: number, sideB: number, sideC: number) {
+    if (
+      sideA <= 0
+      || sideB <= 0
+      || sideC <= 0
+      || sideA + sideB <= sideC
+      || sideA + sideC <= sideB
+      || sideB + sideC <= sideA
+    ) {
       throw new Error('Sides cannot form a triangle');
     }
 
     this.color = color;
-    this.a = a;
-    this.b = b;
-    this.c = c;
+    this.sideA = sideA;
+    this.sideB = sideB;
+    this.sideC = sideC;
   }
 
   getArea(): number {
-    const s = (this.a + this.b + this.c) / 2;
+    const semiPerimeter = (this.sideA + this.sideB + this.sideC) / 2;
 
-    return Math.sqrt(s * (s - this.a) * (s - this.b) * (s - this.c));
+    return Math.sqrt(
+      semiPerimeter * (semiPerimeter - this.sideA)
+      * (semiPerimeter - this.sideB) * (semiPerimeter - this.sideC),
+    );
   }
 }
 
