@@ -16,7 +16,13 @@ export class Triangle implements Figure {
   c: number;
 
   constructor(color: string, a: number, b: number, c: number) {
-    if (a <= 0 || b <= 0 || c <= 0 || a + b <= c || a + c <= b || b + c <= a) {
+    if (a <= 0
+      || b <= 0
+      || c <= 0
+      || a + b <= c
+      || a + c <= b
+      || b + c <= a
+    ) {
       throw new Error('Sides should be positive and form a valid triangle.');
     }
 
