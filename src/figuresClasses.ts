@@ -25,11 +25,6 @@ export class Triangle implements Figure {
     ) {
       throw new Error('Sides should be positive and form a valid triangle.');
     }
-
-    this.color = color;
-    this.a = a;
-    this.b = b;
-    this.c = c;
   }
 
   getArea(): number {
@@ -50,9 +45,6 @@ export class Circle implements Figure {
     if (radius <= 0) {
       throw new Error('Radius should be a positive number.');
     }
-
-    this.color = color;
-    this.radius = radius;
   }
 
   getArea(): number {
@@ -73,10 +65,6 @@ export class Rectangle implements Figure {
     if (width <= 0 || height <= 0) {
       throw new Error('Width and height should be positive numbers.');
     }
-
-    this.color = color;
-    this.width = width;
-    this.height = height;
   }
 
   getArea(): number {
