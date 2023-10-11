@@ -1,3 +1,5 @@
+type Shape = 'triangle'| 'circle' | 'rectangle';
+type Color = 'red' | 'blue' | 'green';
 
 export interface Figure {
   shape: string;
@@ -6,19 +8,21 @@ export interface Figure {
 }
 
 export class Triangle implements Figure {
-  shape: string;
+  shape: Shape;
 
   constructor(
-    public color: string,
+    public color: Color,
     public a: number,
     public b: number,
     public c: number,
   ) {
     this.shape = 'triangle';
 
-    if (a <= 0 || b <= 0 || c <= 0 || a + b <= c
-      || a + c <= b || b + c <= a) {
-      throw new Error('your error message');
+    if (a <= 0 || b <= 0 || c <= 0) {
+      throw new Error('All sides must be greater than 0');
+    } else if (a + b <= c || a + c <= b || b + c <= a) {
+      throw new Error('The longest side of the triangle should be'
+      + 'smaller than a sum of two others');
     }
   }
 
@@ -33,16 +37,16 @@ export class Triangle implements Figure {
 }
 
 export class Circle implements Figure {
-  shape: string;
+  shape: Shape;
 
   constructor(
-    public color: string,
+    public color: Color,
     public radius: number,
   ) {
     this.shape = 'circle';
 
     if (radius <= 0) {
-      throw new Error('your error message');
+      throw new Error('Radius must be greater than 0');
     }
   }
 
@@ -52,17 +56,17 @@ export class Circle implements Figure {
 }
 
 export class Rectangle implements Figure {
-  shape: string;
+  shape: Shape;
 
   constructor(
-    public color: string,
+    public color: Color,
     public width: number,
     public heigth: number,
   ) {
     this.shape = 'rectangle';
 
     if (heigth <= 0 || width <= 0) {
-      throw new Error('your error message');
+      throw new Error('All sides must be greater than 0');
     }
   }
 
