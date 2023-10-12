@@ -7,14 +7,8 @@ export interface Figure {
   getArea(): number;
 }
 
-function isPositiveNumber(figure: object): never | void {
-  const numbers = Object.values(figure);
-
-  numbers.forEach((number): void => {
-    if (number <= 0) {
-      throw new Error('Should be a positive number');
-    }
-  });
+function round(area: number): number {
+  return Math.floor(area * 100) / 100;
 }
 
 export class Triangle implements Figure {
@@ -22,25 +16,27 @@ export class Triangle implements Figure {
 
   constructor(
     public color: Color,
-    public sideA: number,
-    public sideB: number,
-    public sideC: number,
+    private a: number,
+    private b: number,
+    private c: number,
   ) {
-    isPositiveNumber(this);
+    if (a <= 0 || b <= 0 || c <= 0) {
+      throw new Error('The sides of the triangle must be greater than 0');
+    }
 
-    const max = Math.max(sideA, sideB, sideC);
-
-    if (max >= sideA + sideB + sideC - max) {
-      throw new Error('Sides 1, 2, and 3 can\'t form a triangle');
+    if (a + b <= c || a + c <= b || b + c <= a) {
+      throw new Error(
+        'The longest side of a triangle must be less than a sum of two others',
+      );
     }
   }
 
   getArea(): number {
-    const s = (this.sideA + this.sideB + this.sideC) / 2;
-    const area = Math.sqrt(s * (s - this.sideA)
-      * (s - this.sideB) * (s - this.sideC));
+    const sides: number[] = [this.a, this.b, this.c];
+    const p: number = sides.reduce((a, b) => a + b, 0) / 2;
+    const area = Math.sqrt(sides.reduce((a, b) => a * (p - b), p));
 
-    return Math.floor(area * 100) / 100;
+    return round(area);
   }
 }
 
@@ -49,13 +45,15 @@ export class Circle implements Figure {
 
   constructor(
     public color: Color,
-    public radius: number,
+    private radius: number,
   ) {
-    isPositiveNumber(this);
+    if (radius <= 0) {
+      throw new Error('A radius must be greater than 0');
+    }
   }
 
   getArea(): number {
-    return Math.floor(Math.PI * this.radius ** 2 * 100) / 100;
+    return round(Math.PI * this.radius ** 2);
   }
 }
 
@@ -64,17 +62,19 @@ export class Rectangle implements Figure {
 
   constructor(
     public color: Color,
-    public width: number,
-    public height: number,
+    private width: number,
+    private height: number,
   ) {
-    isPositiveNumber(this);
+    if (width <= 0 || height <= 0) {
+      throw new Error('The sides of the rectangle must be greater than 0');
+    }
   }
 
   getArea(): number {
-    return Math.floor(this.width * this.height * 100) / 100;
+    return round(this.width * this.height);
   }
 }
 
-export function getInfo({ color, shape, getArea }: Figure): string {
-  return `A ${color} ${shape} - ${getArea()}`;
+export function getInfo(figure: Figure): string {
+  return `A ${figure.color} ${figure.shape} - ${figure.getArea()}`;
 }
