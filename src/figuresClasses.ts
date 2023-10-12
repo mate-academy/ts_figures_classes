@@ -75,6 +75,8 @@ export class Rectangle implements Figure {
   }
 }
 
-export function getInfo(figure: Figure): string {
-  return `A ${figure.color} ${figure.shape} - ${figure.getArea()}`;
+export function getInfo(figure:Figure): string {
+  const { color, shape, getArea } = figure;
+
+  return `A ${color} ${shape} - ${getArea()}`;
 }
