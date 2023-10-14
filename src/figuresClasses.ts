@@ -17,10 +17,11 @@ export interface Figure {
 export class Triangle implements Figure {
   shape: Shape = Shape.Triangle;
 
-  color: string;
-
   constructor(
-    color:string, public a: number, public b: number, public c: number,
+    public color:string,
+    public a: number,
+    public b: number,
+    public c: number,
   ) {
     if (a <= 0 || b <= 0 || c <= 0) {
       throw new Error('Triangle sides must be greater than 0');
@@ -29,11 +30,6 @@ export class Triangle implements Figure {
     if (a + b <= c || a + c <= b || b + c <= a) {
       throw new Error('Triangle sides arent correct');
     }
-
-    this.color = color;
-    this.a = a;
-    this.b = b;
-    this.c = c;
   }
 
   getArea(): number {
@@ -47,12 +43,10 @@ export class Triangle implements Figure {
 export class Circle implements Figure {
   shape: Shape = Shape.Circle;
 
-  color: string;
-
-  constructor(color: string, public radius: number) {
-    this.radius = radius;
-    this.color = color;
-
+  constructor(
+    public color: string,
+    public radius: number,
+  ) {
     if (radius <= 0) {
       throw new Error('radius cant be less than zero');
     }
@@ -68,13 +62,11 @@ export class Circle implements Figure {
 export class Rectangle implements Figure {
   shape: Shape = Shape.Rectangle;
 
-  color: string;
-
-  constructor(color: string, public width: number, public height: number) {
-    this.color = color;
-    this.width = width;
-    this.height = height;
-
+  constructor(
+    public color: string,
+    public width: number,
+    public height: number,
+  ) {
     if (height <= 0 || width <= 0) {
       throw new Error('Height or width cant be less than zero');
     }
