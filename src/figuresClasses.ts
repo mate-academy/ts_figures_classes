@@ -1,11 +1,21 @@
+function floor(square: number): number {
+  return Math.floor(square * 100) / 100;
+}
+
+enum Shape {
+  Triangle = 'triangle',
+  Circle = 'circle',
+  Rectangle = 'rectangle',
+}
+
 export interface Figure {
-  shape: string,
+  shape: Shape,
   color: string,
   getArea: () => number;
 }
 
 export class Triangle implements Figure {
-  shape: string;
+  shape: Shape = Shape.Triangle;
 
   color: string;
 
@@ -20,7 +30,6 @@ export class Triangle implements Figure {
       throw new Error('Triangle sides arent correct');
     }
 
-    this.shape = 'triangle';
     this.color = color;
     this.a = a;
     this.b = b;
@@ -31,52 +40,50 @@ export class Triangle implements Figure {
     const p = (this.a + this.b + this.c) / 2;
     const area = Math.sqrt(p * (p - this.a) * (p - this.b) * (p - this.c));
 
-    return Math.floor(area * 100) / 100;
+    return floor(area);
   }
 }
 
 export class Circle implements Figure {
-  shape: string;
+  shape: Shape = Shape.Circle;
 
   color: string;
 
   constructor(color: string, public radius: number) {
     this.radius = radius;
     this.color = color;
-    this.shape = 'circle';
 
     if (radius <= 0) {
-      throw new Error('Radies isnt correct');
+      throw new Error('radius cant be less than zero');
     }
   }
 
   getArea(): number {
     const area = (Math.PI * (this.radius ** 2));
 
-    return Math.floor(area * 100) / 100;
+    return floor(area);
   }
 }
 
 export class Rectangle implements Figure {
-  shape: string;
+  shape: Shape = Shape.Rectangle;
 
   color: string;
 
   constructor(color: string, public width: number, public height: number) {
-    this.shape = 'rectangle';
     this.color = color;
     this.width = width;
     this.height = height;
 
     if (height <= 0 || width <= 0) {
-      throw new Error('Height or width of rectangle isnt correct');
+      throw new Error('Height or width cant be less than zero');
     }
   }
 
   getArea(): number {
     const area = this.height * this.width;
 
-    return Math.floor(area * 100) / 100;
+    return floor(area);
   }
 }
 
