@@ -7,13 +7,13 @@ export interface Figure {
 }
 
 export class Triangle implements Figure {
-  public shape: Shape = 'triangle';
+  public readonly shape: Shape = 'triangle';
 
   constructor(
     public color: string,
-    public a: number,
-    public b: number,
-    public c: number,
+    protected a: number,
+    protected b: number,
+    protected c: number,
   ) {
     const maxSide = Math.max(a, b, c);
     const sumOfTwoSides = (a + b + c) - maxSide;
@@ -38,11 +38,11 @@ export class Triangle implements Figure {
 }
 
 export class Circle implements Figure {
-  public shape: Shape = 'circle';
+  public readonly shape: Shape = 'circle';
 
   constructor(
     public color: string,
-    public radius: number,
+    protected radius: number,
   ) {
     if (radius <= 0) {
       throw new Error('Cant form circle with radius <= 0');
@@ -57,12 +57,12 @@ export class Circle implements Figure {
 }
 
 export class Rectangle implements Figure {
-  public shape: Shape = 'rectangle';
+  public readonly shape: Shape = 'rectangle';
 
   constructor(
     public color: string,
-    public width: number,
-    public height: number,
+    protected width: number,
+    protected height: number,
   ) {
     if (Math.min(width, height) <= 0) {
       throw new Error('Cant form rectangle with sides <= 0');
