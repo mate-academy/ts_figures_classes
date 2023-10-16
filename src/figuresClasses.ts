@@ -1,15 +1,27 @@
+enum Colors {
+  Red = 'red',
+  Green = 'green',
+  Blue = 'blue',
+}
+
+enum Shapes {
+  Triangle = 'triangle',
+  Circle = 'circle',
+  Rectangle = 'rectangle',
+}
+
 export interface Figure {
-  shape: string;
-  color: string;
+  shape: Shapes;
+  color: Colors;
   getArea(): number;
 }
 
 export class Triangle implements Figure {
-  shape = 'triangle';
+  shape :Shapes = Shapes.Triangle;
 
   // eslint-disable-next-line no-useless-constructor
   constructor(
-    public color: string,
+    public color: Colors,
     public a: number,
     public b: number,
     public c: number,
@@ -36,11 +48,11 @@ export class Triangle implements Figure {
 }
 
 export class Circle implements Figure {
-  shape = 'circle';
+  shape :Shapes = Shapes.Circle;
 
   // eslint-disable-next-line no-useless-constructor
   constructor(
-    public color: string,
+    public color: Colors,
     public radius: number,
   ) {
     if (this.radius <= 0) {
@@ -54,11 +66,11 @@ export class Circle implements Figure {
 }
 
 export class Rectangle implements Figure {
-  shape = 'rectangle';
+  shape :Shapes = Shapes.Rectangle;
 
   // eslint-disable-next-line no-useless-constructor
   constructor(
-    public color: string,
+    public color: Colors,
     public width: number,
     public height: number,
   ) {
