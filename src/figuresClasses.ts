@@ -53,7 +53,7 @@ export class Circle implements Figure {
   }
 }
 
-export class Rectangle {
+export class Rectangle implements Figure {
   public shape: string = 'rectangle';
 
   constructor(
