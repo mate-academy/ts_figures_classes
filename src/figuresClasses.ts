@@ -1,13 +1,13 @@
 export interface Figure {
-  shape: number,
+  shape: string,
   color: string,
-  name: string,
+  area: number,
 }
 
 export class Triangle {
-  shape: number;
+  shape: string;
 
-  name: string;
+  area: number;
 
   constructor(
     public color: string,
@@ -15,8 +15,8 @@ export class Triangle {
     public b: number,
     public c: number,
   ) {
-    this.name = 'triangle';
-    this.shape = this.getArea();
+    this.shape = 'triangle';
+    this.area = this.getArea();
 
     const sum = this.a + this.b;
 
@@ -34,16 +34,16 @@ export class Triangle {
 }
 
 export class Circle {
-  shape: number;
+  shape: string;
 
-  name: string;
+  area: number;
 
   constructor(
     public color: string,
     public radius: number,
   ) {
-    this.name = 'circle';
-    this.shape = this.getArea();
+    this.shape = 'circle';
+    this.area = this.getArea();
 
     if (this.radius < 0) {
       throw new Error();
@@ -59,17 +59,17 @@ export class Circle {
 }
 
 export class Rectangle {
-  shape: number;
+  shape: string;
 
-  name: string;
+  area: number;
 
   constructor(
     public color: string,
     public width: number,
     public height: number,
   ) {
-    this.name = 'rectangle';
-    this.shape = this.getArea();
+    this.shape = 'rectangle';
+    this.area = this.getArea();
 
     if (this.width < 0 || this.height < 0) {
       throw new Error();
@@ -84,5 +84,5 @@ export class Rectangle {
 }
 
 export function getInfo(figure: Figure): string {
-  return `A ${figure.color} ${figure.name} - ${figure.shape}`;
+  return `A ${figure.color} ${figure.shape} - ${figure.area}`;
 }
