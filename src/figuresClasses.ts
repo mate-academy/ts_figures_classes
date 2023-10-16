@@ -3,7 +3,7 @@ type Shape = 'triangle' | 'circle' | 'rectangle';
 export interface Figure {
   shape: Shape;
   color: string;
-  getArea: Function;
+  getArea(): number;
 }
 
 export class Triangle implements Figure {
