@@ -14,11 +14,11 @@ export class Triangle implements Figure {
     public c: number,
   ) {
     if (a <= 0 || b <= 0 || c <= 0) {
-      throw new Error('Invalid Number');
+      throw new Error('a, b or c are less than zero');
     }
 
     if (a + b <= c || b + c <= a || a + c <= b) {
-      throw new Error('sides 1, 2 and 3 can`t form a triangle');
+      throw new Error('Sides 1, 2 and 3 can`t form a triangle');
     }
   }
 
@@ -39,7 +39,7 @@ export class Circle implements Figure {
     public radius: number,
   ) {
     if (radius <= 0) {
-      throw new Error('Number is not correct');
+      throw new Error('Value is not valid. Radius is less than zero');
     }
   }
 
@@ -59,19 +59,18 @@ export class Rectangle implements Figure {
     public height: number,
   ) {
     if (width <= 0 || height <= 0) {
-      throw new Error('Number is not correct');
+      throw new Error('Value is not valid. Width or Height are less than zero');
     }
   }
 
   getArea(): number {
     const squareRectangle = this.width * this.height;
 
-    return Math.floor(squareRectangle * 100) / 100;
+    return squareRectangle;
   }
 }
 
 export function getInfo(figure: Figure): string {
-  // eslint-disable-next-line max-len
   const result = `A ${figure.color} ${figure.shape} - ${figure.getArea()}`;
 
   return result;
