@@ -21,7 +21,7 @@ export class Triangle {
     const sum = this.a + this.b;
 
     if (a <= 0 || b <= 0 || c <= 0 || c >= sum) {
-      throw new Error();
+      throw new Error('Sides are not positive numbers');
     }
   }
 
@@ -46,7 +46,7 @@ export class Circle {
     this.area = this.getArea();
 
     if (this.radius < 0) {
-      throw new Error();
+      throw new Error('Radius is a not positive number');
     }
   }
 
@@ -72,7 +72,7 @@ export class Rectangle {
     this.area = this.getArea();
 
     if (this.width < 0 || this.height < 0) {
-      throw new Error();
+      throw new Error('All sides should are positive numbers');
     }
   }
 
