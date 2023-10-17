@@ -5,6 +5,8 @@ export interface Figure {
   b?: number;
   c?: number;
   r?: number;
+  width?: number;
+  height?: number;
   getArea(): number;
 }
 
@@ -21,7 +23,11 @@ export class Triangle {
       throw new Error('A triangle should have all sides > 0');
     }
 
-    if (Math.max(a, b, c) === a && a >= b + c) {
+    if (
+      (Math.max(a, b, c) === a && a >= b + c)
+      || (Math.max(a, b, c) === b && b >= a + c)
+      || (Math.max(a, b, c) === c && c >= b + a)
+    ) {
       throw new Error(`sides ${a}, ${b} and ${c} can't form a triangle`);
     }
 
@@ -35,9 +41,9 @@ export class Triangle {
   }
 
   getArea(): number {
-    const p: number = (this.a + this.b + this.c) / 2;
-    const triangleSquare:number
-    = Math.sqrt(p * (p - this.a) * (p - this.b) * (p - this.c));
+    const { a, b, c } = this;
+    const p: number = (a + b + c) / 2;
+    const triangleSquare: number = Math.sqrt(p * (p - a) * (p - b) * (p - c));
 
     return Math.round(triangleSquare * 100) / 100;
   }
@@ -53,7 +59,7 @@ export class Circle {
   }
 
   getArea(): number {
-    return Math.floor(Math.PI * this.r * this.r * 100) / 100;
+    return Math.floor(Math.PI * this.r ** 2 * 100) / 100;
   }
 }
 
@@ -62,16 +68,16 @@ export class Rectangle {
 
   constructor(
     public color: Figure['color'],
-    public a: number,
-    public b: number,
+    public height: number,
+    public width: number,
   ) {
-    if (a <= 0 || b <= 0) {
+    if (height <= 0 || width <= 0) {
       throw new Error('A rectangle should have all sides > 0');
     }
   }
 
   getArea(): number {
-    return Math.round(this.a * this.b * 100) / 100;
+    return Math.round(this.height * this.width * 100) / 100;
   }
 }
 
