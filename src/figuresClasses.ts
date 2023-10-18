@@ -62,7 +62,7 @@ export class Rectangle implements Figure {
   shape: Shape = 'rectangle';
 
   constructor(
-    public color: 'red' | 'green' | 'blue',
+    public color: Color,
     public width: number,
     public height: number,
   ) {
