@@ -22,7 +22,7 @@ export class Triangle implements Figure {
         || a <= 0
         || b <= 0
         || c <= 0) {
-      throw new Error('your error message');
+      throw new Error('Cannot assemble the triangle with given parameters');
     }
   }
 
@@ -42,7 +42,7 @@ export class Circle implements Figure {
     public a: number,
   ) {
     if (a <= 0) {
-      throw new Error('your error message');
+      throw new Error('Cannot assemble the circle with given parameters');
     }
   }
 
@@ -60,7 +60,7 @@ export class Rectangle implements Figure {
     public b: number,
   ) {
     if (a <= 0 || b <= 0) {
-      throw new Error('your error message');
+      throw new Error('Cannot assemble the square with given parameters');
     }
   }
 
