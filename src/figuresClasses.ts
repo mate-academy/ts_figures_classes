@@ -1,7 +1,9 @@
+type FigureParametrType = string;
+
 export interface Figure {
-  shape: string;
-  color: string;
-  getArea(): void;
+  shape: FigureParametrType;
+  color: FigureParametrType;
+  getArea(): number;
 }
 
 export class Triangle implements Figure {
