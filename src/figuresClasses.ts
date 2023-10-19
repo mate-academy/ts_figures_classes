@@ -21,17 +21,27 @@ export class Triangle implements Figure {
     public b: number,
     public c: number,
   ) {
-    if (a <= 0 || b <= 0 || c <= 0 || a + b <= c || a + c <= b || b + c <= a) {
-      throw new Error('Input data is incorrect');
+    if (a <= 0 || b <= 0 || c <= 0) {
+      throw new Error('The side length can\'t be less than 0');
+    }
+
+    if (a + b <= c || a + c <= b || b + c <= a) {
+      throw new Error('The side length is incorrect');
     }
   }
 
   getArea(): number {
-    const p: number = (this.a + this.b + this.c) / 2;
-    const s: number = +Math.sqrt(p * (p - this.a) * (p - this.b) * (p - this.c))
-      .toFixed(2);
+    const perimeter: number = (this.a + this.b + this.c) / 2;
+    const square: number = Math.floor(
+      (Math.sqrt(
+        perimeter
+        * (perimeter - this.a)
+        * (perimeter - this.b)
+        * (perimeter - this.c),
+      )) * 100,
+    ) / 100;
 
-    return s;
+    return square;
   }
 }
 
@@ -40,17 +50,17 @@ export class Circle implements Figure {
 
   constructor(
     public color: Color,
-    public r: number,
+    public radius: number,
   ) {
-    if (r <= 0) {
+    if (radius <= 0) {
       throw new Error('Input data is incorrect');
     }
   }
 
   getArea(): number {
-    const s: number = ((this.r ** 2) * Math.PI);
+    const square: number = ((this.radius ** 2) * Math.PI);
 
-    return Math.floor(s * 100) / 100;
+    return Math.floor(square * 100) / 100;
   }
 }
 
@@ -68,9 +78,9 @@ export class Rectangle implements Figure {
   }
 
   getArea(): number {
-    const s: number = this.a * this.b;
+    const square: number = this.a * this.b;
 
-    return s;
+    return square;
   }
 }
 
