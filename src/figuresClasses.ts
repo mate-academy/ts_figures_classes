@@ -14,7 +14,10 @@ export class Triangle implements Figure {
     public b: number,
     public c: number,
   ) {
-    if (a <= 0 || b <= 0 || c <= 0 || a + b <= c || a + c <= b || b + c <= a) {
+    const positiveSide = a <= 0 || b <= 0 || c <= 0;
+    const sideIsImaller = a + b <= c || a + c <= b || b + c <= a;
+
+    if (positiveSide || sideIsImaller) {
       throw new Error('Invalid triangle sides');
     }
 
@@ -22,10 +25,11 @@ export class Triangle implements Figure {
   }
 
   getArea(): number {
-    const s = (this.a + this.b + this.c) / 2;
+    const { a, b, c } = this;
+    const s = (a + b + c) / 2;
 
     return Number(
-      Math.sqrt(s * (s - this.a) * (s - this.b) * (s - this.c)).toFixed(2),
+      Math.sqrt(s * (s - a) * (s - b) * (s - c)).toFixed(2),
     );
   }
 }
@@ -44,8 +48,11 @@ export class Circle implements Figure {
   }
 
   getArea(): number {
+    const { radius } = this;
+
     return Number(
-      (Math.floor(Math.PI * 10000) / 10000 * this.radius ** 2).toFixed(2),
+      (Math.floor((radius ** 2 * Math.PI) * 100) / 100)
+        .toFixed(2),
     );
   }
 }
@@ -64,7 +71,9 @@ export class Rectangle implements Figure {
   }
 
   getArea(): number {
-    return Number((this.width * this.height).toFixed(2));
+    const { width, height } = this;
+
+    return Number((width * height).toFixed(2));
   }
 }
 
