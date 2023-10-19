@@ -27,10 +27,16 @@ export class Triangle implements Figure {
   }
 
   getArea(): number {
-    const s: number = (this.a + this.b + this.c) / 2;
+    const {
+      a,
+      b,
+      c,
+    } = this;
 
-    const area: number = Math.sqrt(s * (s - this.a)
-    * (s - this.b) * (s - this.c));
+    const s: number = (a + b + c) / 2;
+
+    const area: number = Math.sqrt(s * (s - a)
+    * (s - b) * (s - c));
 
     return +(area.toFixed(2));
   }
@@ -51,7 +57,9 @@ export class Circle implements Figure {
   }
 
   getArea(): number {
-    return +Math.trunc((Math.PI * (this.radius * this.radius) * 100)) / 100;
+    const { radius } = this;
+
+    return +Math.trunc((Math.PI * (radius * radius) * 100)) / 100;
   }
 }
 
@@ -71,7 +79,12 @@ export class Rectangle implements Figure {
   }
 
   getArea(): number {
-    return +(this.width * this.heigth).toFixed(2);
+    const {
+      width,
+      heigth,
+    } = this;
+
+    return +(width * heigth).toFixed(2);
   }
 }
 
