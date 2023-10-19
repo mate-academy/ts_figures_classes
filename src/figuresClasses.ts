@@ -10,6 +10,10 @@ export interface Figure {
   getArea: () => number;
 }
 
+function getRoundedNumber(value: number): number {
+  return Math.floor(value * 100) / 100;
+}
+
 export class Triangle implements Figure {
   shape: Shape = 'triangle';
 
@@ -20,29 +24,26 @@ export class Triangle implements Figure {
     public c: number,
   ) {
     if (a <= 0 || b <= 0 || c <= 0) {
-      throw new Error('your error message');
+      throw new Error('Triangle should has side bigger than 0');
     }
 
     const arrayOfSides = [this.a, this.b, this.c];
-    /* eslint-disable */
-    const longest = arrayOfSides.reduce((prev, side) => (prev < side ? side : prev), 0);
+    const sortedArrayOfSides = arrayOfSides.sort(
+      (side1, side2) => side2 - side1,
+    );
+    const sumOfTwoSides = sortedArrayOfSides[1] + sortedArrayOfSides[2];
 
-    const index = arrayOfSides.indexOf(longest);
-
-    const sumOfTwoSides = arrayOfSides.filter((side) => (
-      side !== arrayOfSides[index]))
-      .reduce((prev, side) => prev + side, 0);
-
-    if (arrayOfSides[index] >= sumOfTwoSides) {
-      throw new Error('your error message');
+    if (sortedArrayOfSides[0] >= sumOfTwoSides) {
+      throw new Error('Longest side ghould be less than sum of another');
     }
   }
 
   getArea(): number {
-    const halfP = (this.a + this.b + this.c) / 2;
-    const beforeRoot2 = halfP * (halfP - this.a) * (halfP - this.b) * (halfP - this.c);
+    const halfOfPerimeter = (this.a + this.b + this.c) / 2;
+    /* eslint-disable */
+    const preparedNumber = halfOfPerimeter * (halfOfPerimeter - this.a) * (halfOfPerimeter - this.b) * (halfOfPerimeter - this.c);
 
-    return +(Math.sqrt(beforeRoot2)).toFixed(2);
+    return getRoundedNumber(Math.sqrt(preparedNumber));
   }
 }
 
@@ -51,13 +52,14 @@ export class Circle implements Figure {
 
   constructor(public color: Color, public radius: number) {
     if (radius <= 0) {
-      throw new Error('your error message');
+      throw new Error('Circle can\'t has radius less than 1');
     }
   }
 
   getArea(): number {
-    const squarCircle = Math.PI * this.radius **2;
-    return Math.floor(squarCircle * 100) / 100;
+    const squarCircle = Math.PI * this.radius ** 2;
+
+    return getRoundedNumber(squarCircle);
   }
 }
 
@@ -70,12 +72,14 @@ export class Rectangle {
     public height: number,
   ) {
     if (width <= 0 || height <= 0) {
-      throw new Error('your error message');
+      throw new Error('rectangle can\'t has side less than 1');
     }
   }
 
   getArea(): number {
-    return +(this.width * this.height).toFixed(2);
+    const areaOfRectangle = this.width * this.height;
+
+    return getRoundedNumber(areaOfRectangle);
   }
 }
 
