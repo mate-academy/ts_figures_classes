@@ -1,19 +1,87 @@
+enum Shape {
+  Triangle = 'triangle',
+  Circle = 'circle',
+  Rectangle = 'rectangle',
+}
+
+enum Color {
+  Red = 'red',
+  Green = 'green',
+  Blue = 'blue',
+}
+
 export interface Figure {
-
+  shape: Shape;
+  color: Color;
+  getArea(): number;
 }
 
-export class Triangle {
-
+function checkNegativeNumber(...args: number[]): void {
+  if (args.some((item: number) => item <= 0)) {
+    throw new Error('Numbers are negative. Enter positive numbers');
+  }
 }
 
-export class Circle {
+export class Triangle implements Figure {
+  public shape: Shape = Shape.Triangle;
 
+  constructor(
+    public color: Color,
+    public a: number,
+    public b: number,
+    public c: number,
+  ) {
+    checkNegativeNumber(a, b, c);
+
+    const isTriangle = a + b <= c || a + c <= b || c + b <= a;
+
+    if (isTriangle) {
+      throw new Error('This is not a triangle. Enter correct data');
+    }
+  }
+
+  getArea():number {
+    const semiPerimeter: number = (this.a + this.b + this.c) / 2;
+    const area: number = Math.sqrt(semiPerimeter * (semiPerimeter - this.a)
+      * (semiPerimeter - this.b) * (semiPerimeter - this.c));
+
+    return Math.floor(area * 100) / 100;
+  }
 }
 
-export class Rectangle {
+export class Circle implements Figure {
+  shape: Shape = Shape.Circle;
 
+  constructor(
+    public color: Color,
+    public radius: number,
+  ) {
+    checkNegativeNumber(radius);
+  }
+
+  getArea(): number {
+    const area: number = Math.PI * this.radius * this.radius;
+
+    return Math.floor(area * 100) / 100;
+  }
 }
 
-export function getInfo(figure) {
+export class Rectangle implements Figure {
+  public shape: Shape = Shape.Rectangle;
 
+  constructor(
+    public color: Color,
+    public width: number,
+    public height: number,
+  ) {
+    checkNegativeNumber(width, height);
+  }
+
+  getArea(): number {
+    return this.width * this.height;
+  }
+}
+
+export function getInfo(figure: Figure): string {
+  return `A ${figure.color} ${figure.shape} - ${figure.getArea()}`;
 }
