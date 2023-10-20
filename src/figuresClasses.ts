@@ -1,62 +1,68 @@
+type Color = 'blue' | 'green' | 'red';
+type Shape = 'triangle' | 'circle' | 'rectangle';
 export interface Figure {
-  shape: string;
-  color: string;
+  shape: Shape;
+  color: Color;
   getArea(): number;
 }
 
 export class Triangle implements Figure {
-  shape = 'triangle';
+  shape:Shape = 'triangle';
 
   constructor(
-    public color: string,
+    public color: Color,
     public a: number,
     public b: number,
     public c: number,
   ) {
-    if (this.a <= 0 || this.b <= 0 || this.c <= 0) {
+    this.a = a;
+    this.b = b;
+    this.c = c;
+
+    const conditionSize = a + b <= c || a + c <= b || c + b <= a;
+    const conditionLessZero = a <= 0 || b <= 0 || c <= 0;
+
+    if (conditionLessZero) {
       throw new Error('Parameters must be greater than 0');
     }
 
-    if (
-      this.a + this.b <= this.c
-      || this.a + this.c <= this.b
-      || this.c + this.b <= this.a
-
-    ) {
+    if (conditionSize) {
       throw new Error(`It is not possible
        to construct a triangle with these sides`);
     }
   }
 
   getArea(): number {
-    const p = (this.a + this.b + this.c) / 2;
-    const s = Math.sqrt(p * ((p - this.a) * (p - this.b) * (p - this.c)));
+    const perimeter = (this.a + this.b + this.c) / 2;
+    const area = Math.sqrt(perimeter * (
+      (perimeter - this.a) * (perimeter - this.b) * (perimeter - this.c)
+    ));
 
-    return +(s).toFixed(2);
+    return Math.floor(area * 100) / 100;
   }
 }
 
 export class Circle implements Figure {
-  shape = 'circle';
+  shape: Shape = 'circle';
 
-  constructor(public color: string, public radius: number) {
+  constructor(public color: Color, public radius: number) {
     if (this.radius <= 0) {
       throw new Error('Radius must be greater than 0');
     }
   }
 
   getArea(): number {
-    const s = Math.PI * this.radius ** 2;
+    const area = Math.PI * this.radius ** 2;
 
-    return Math.floor(s * 100) / 100;
+    return Math.floor(area * 100) / 100;
   }
 }
 
 export class Rectangle implements Figure {
-  shape = 'rectangle';
+  shape: Shape = 'rectangle';
 
   constructor(
-    public color: string,
+    public color: Color,
     public width: number,
     public height: number,
   ) {
@@ -66,9 +72,9 @@ export class Rectangle implements Figure {
   }
 
   getArea(): number {
-    const s = this.width * this.height;
+    const area = this.width * this.height;
 
-    return +Math.floor(s).toFixed(2);
+    return Math.floor(area * 100) / 100;
   }
 }
 
