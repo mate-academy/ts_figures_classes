@@ -7,30 +7,38 @@ export interface Figure {
   getArea(): number;
 }
 
+export function roundValue(value: number): number {
+  return Math.floor(value * 100) / 100;
+}
+
 export class Triangle implements Figure {
   public shape: Shape = 'triangle';
 
   constructor(
     public color: Color,
-    public x: number,
-    public y: number,
-    public z: number,
+    public sideA: number,
+    public sideB: number,
+    public sideC: number,
   ) {
-    const isLessthenOne = x <= 0 || y <= 0 || z <= 0;
-    const isUnvalidX = x >= y + z;
-    const isUnvalidY = y >= x + z;
-    const isUnvalidZ = z >= x + y;
+    const isLessthenOne = sideA <= 0 || sideB <= 0 || sideC <= 0;
+    const isUnvalidSideA = sideA >= sideB + sideC;
+    const isUnvalidSideB = sideB >= sideA + sideC;
+    const isUnvalidSideC = sideC >= sideA + sideB;
 
-    if (isLessthenOne || isUnvalidX || isUnvalidY || isUnvalidZ) {
+    if (isLessthenOne || isUnvalidSideA || isUnvalidSideB || isUnvalidSideC) {
       throw new Error('Some of the values is not valid');
     }
   }
 
   getArea(): number {
-    const s = (this.x + this.y + this.z) / 2;
-    const result = Math.sqrt(s * ((s - this.x) * (s - this.y) * (s - this.z)));
+    const square = (this.sideA + this.sideB + this.sideC) / 2;
+    const result = Math.sqrt(
+      square * (
+        (square - this.sideA) * (square - this.sideB) * (square - this.sideC)
+      ),
+    );
 
-    return Math.floor(result * 100) / 100;
+    return roundValue(result);
   }
 }
 
@@ -39,17 +47,19 @@ export class Circle implements Figure {
 
   constructor(
     public color: Color,
-    public x: number,
+    public raduis: number,
   ) {
-    const isLessthenOne = x <= 0;
+    const isRadiusInvalid = raduis <= 0;
 
-    if (isLessthenOne) {
-      throw new Error('Some of the values is not valid');
+    if (isRadiusInvalid) {
+      throw new Error('The value is not valid');
     }
   }
 
   getArea(): number {
-    return Math.floor((this.x * this.x * Math.PI) * 100) / 100;
+    const result = this.raduis * this.raduis * Math.PI;
+
+    return roundValue(result);
   }
 }
 
@@ -58,10 +68,10 @@ export class Rectangle implements Figure {
 
   constructor(
     public color: Color,
-    public x: number,
-    public y: number,
+    public sideA: number,
+    public sideB: number,
   ) {
-    const isLessthenOne = x <= 0 || y <= 0;
+    const isLessthenOne = sideA <= 0 || sideB <= 0;
 
     if (isLessthenOne) {
       throw new Error('Some of the values is not valid');
@@ -69,7 +79,9 @@ export class Rectangle implements Figure {
   }
 
   getArea(): number {
-    return (this.x * this.y);
+    const result = this.sideA * this.sideB;
+
+    return roundValue(result);
   }
 }
 
