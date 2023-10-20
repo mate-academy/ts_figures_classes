@@ -10,7 +10,7 @@ export class Triangle implements Figure {
     public color: string,
     public a:number,
     public b:number,
-    public c:number
+    public c:number,
   ) {
     if (a <= 0 || b <= 0 || c <= 0 || a + b <= c || a + c <= b || b + c <= a) {
       throw new Error(`Invalid triangle: sides ${a},`
@@ -31,7 +31,7 @@ export class Circle implements Figure {
   constructor(
     public color: string,
     public shape: string,
-    public radius: number
+    public radius: number,
   ) {
     if (radius <= 0) {
       throw new Error('Invalid circle: radius must be greater than 0');
@@ -50,7 +50,7 @@ export class Rectangle implements Figure {
     public color: string,
     public shape: string,
     public width: number,
-    public height: number
+    public height: number,
   ) {
     if (this.width <= 0 || this.height <= 0) {
       throw new Error('Invalid rectangle:'
