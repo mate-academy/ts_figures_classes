@@ -1,7 +1,8 @@
+export type Shape = 'triangle' | 'circle' | 'rectangle';
 export type FigureColor = 'red' | 'green' | 'blue';
 
 export interface Figure {
-  shape: 'triangle' | 'circle' | 'rectangle';
+  shape: Shape;
   color: FigureColor;
   getArea(): number;
 }
@@ -11,7 +12,7 @@ function roundToHundredths(value: number): number {
 }
 
 export class Triangle implements Figure {
-  shape: 'triangle' = 'triangle';
+  shape: Shape = 'triangle';
 
   constructor(
     public color: FigureColor,
@@ -24,7 +25,7 @@ export class Triangle implements Figure {
     }
 
     const sortedSides: number[] = [a, b, c].sort(
-      (first: number, second: number) => first - second,
+      (first, second) => first - second,
     );
 
     if (sortedSides[2] >= sortedSides[0] + sortedSides[1]) {
@@ -33,9 +34,12 @@ export class Triangle implements Figure {
   }
 
   getArea(): number {
-    const semiPer = (this.a + this.b + this.c) / 2;
+    const semiPerimeter = (this.a + this.b + this.c) / 2;
     const area = Math.sqrt(
-      semiPer * (semiPer - this.a) * (semiPer - this.b) * (semiPer - this.c),
+      semiPerimeter
+      * (semiPerimeter - this.a)
+      * (semiPerimeter - this.b)
+      * (semiPerimeter - this.c),
     );
 
     return roundToHundredths(area);
@@ -44,7 +48,7 @@ export class Triangle implements Figure {
 
 //
 export class Circle implements Figure {
-  shape: 'circle' = 'circle';
+  shape: Shape = 'circle';
 
   constructor(public color: FigureColor, private radius: number) {
     if (radius <= 0) {
@@ -61,7 +65,7 @@ export class Circle implements Figure {
 
 //
 export class Rectangle implements Figure {
-  shape: 'rectangle' = 'rectangle';
+  shape: Shape = 'rectangle';
 
   constructor(
     public color: FigureColor,
