@@ -34,10 +34,10 @@ export class Triangle implements Figure {
   getArea():number {
     const { a, b, c } = this;
 
-    const p = 0.5 * (a + b + c);
+    const semip = 0.5 * (a + b + c);
 
     const area = Math.floor(
-      Math.sqrt(p * (p - a) * (p - b) * (p - c)) * 100,
+      Math.sqrt(semip * (semip - a) * (semip - b) * (semip - c)) * 100,
     ) / 100;
 
     return area;
@@ -79,7 +79,7 @@ export class Rectangle implements Figure {
   getArea():number {
     const { height, width } = this;
 
-    return height * width;
+    return Math.floor(height * width * 100) / 100;
   }
 }
 
