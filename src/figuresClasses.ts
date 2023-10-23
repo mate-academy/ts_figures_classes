@@ -1,13 +1,17 @@
 export interface Figure {
-  shape: string;
-  color: string;
-  getArea(): number;
+  shape: 'triangle' | 'circle' | 'rectangle';
+  color: 'red' | 'green' | 'blue';
+  getArea: () => number;
+}
+
+function calcArea(area: number): number {
+  return Math.floor(area * 100) / 100;
 }
 
 export class Triangle implements Figure {
-  shape: string = 'triangle';
+  shape: 'triangle' = 'triangle';
 
-  color: string;
+  color: 'red' | 'green' | 'blue';
 
   a: number;
 
@@ -15,9 +19,18 @@ export class Triangle implements Figure {
 
   c: number;
 
-  constructor(color: string, a: number, b: number, c: number) {
-    if (a <= 0 || b <= 0 || c <= 0 || a + b <= c || a + c <= b || b + c <= a) {
+  constructor(
+    color: 'red' | 'green' | 'blue',
+    a: number,
+    b: number,
+    c: number,
+  ) {
+    if (a <= 0 || b <= 0 || c <= 0) {
       throw new Error('Invalid triangle');
+    }
+
+    if (a + b <= c || a + c <= b || b + c <= a) {
+      throw new Error('Invalid triangle proportions');
     }
 
     this.a = a;
@@ -29,20 +42,19 @@ export class Triangle implements Figure {
   getArea(): number {
     const s = (this.a + this.b + this.c) / 2;
     const area = Math.sqrt(s * (s - this.a) * (s - this.b) * (s - this.c));
-    const calc = Math.floor(area * 100) / 100;
 
-    return calc;
+    return calcArea(area);
   }
 }
 
 export class Circle implements Figure {
-  color: string;
+  color: 'red' | 'green' | 'blue';
 
   radius: number;
 
-  shape: string = 'circle';
+  shape: 'circle' = 'circle';
 
-  constructor(color: string, radius: number) {
+  constructor(color: 'red' | 'green' | 'blue', radius: number) {
     if (radius <= 0) {
       throw new Error('Invalid circle');
     }
@@ -53,9 +65,8 @@ export class Circle implements Figure {
 
   getArea(): number {
     const area = Math.PI * this.radius * this.radius;
-    const calc = Math.floor(area * 100) / 100;
 
-    return calc;
+    return calcArea(area);
   }
 }
 
@@ -64,11 +75,11 @@ export class Rectangle implements Figure {
 
   heigth: number;
 
-  color: string;
+  color: 'red' | 'green' | 'blue';
 
-  shape: string = 'rectangle';
+  shape: 'rectangle' = 'rectangle';
 
-  constructor(color: string, width: number, height: number) {
+  constructor(color: 'red' | 'green' | 'blue', width: number, height: number) {
     if (width <= 0 || height <= 0) {
       throw new Error('Invalid rectangle');
     }
@@ -80,9 +91,8 @@ export class Rectangle implements Figure {
 
   getArea(): number {
     const area = this.heigth * this.width;
-    const calc = Math.floor(area * 100) / 100;
 
-    return calc;
+    return calcArea(area);
   }
 }
 
