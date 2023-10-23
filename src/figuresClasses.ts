@@ -9,9 +9,9 @@ function calcArea(area: number): number {
 }
 
 export class Triangle implements Figure {
-  shape: 'triangle' = 'triangle';
+  shape: Figure['shape'] = 'triangle';
 
-  color: 'red' | 'green' | 'blue';
+  color: Figure['color'];
 
   a: number;
 
@@ -20,7 +20,7 @@ export class Triangle implements Figure {
   c: number;
 
   constructor(
-    color: 'red' | 'green' | 'blue',
+    color: Figure['color'],
     a: number,
     b: number,
     c: number,
@@ -48,13 +48,13 @@ export class Triangle implements Figure {
 }
 
 export class Circle implements Figure {
-  color: 'red' | 'green' | 'blue';
+  color: Figure['color'];
 
   radius: number;
 
-  shape: 'circle' = 'circle';
+  shape: Figure['shape'] = 'circle';
 
-  constructor(color: 'red' | 'green' | 'blue', radius: number) {
+  constructor(color: Figure['color'], radius: number) {
     if (radius <= 0) {
       throw new Error('Invalid circle');
     }
@@ -75,11 +75,11 @@ export class Rectangle implements Figure {
 
   heigth: number;
 
-  color: 'red' | 'green' | 'blue';
+  color: Figure['color'];
 
-  shape: 'rectangle' = 'rectangle';
+  shape: Figure['shape'] = 'rectangle';
 
-  constructor(color: 'red' | 'green' | 'blue', width: number, height: number) {
+  constructor(color: Figure['color'], width: number, height: number) {
     if (width <= 0 || height <= 0) {
       throw new Error('Invalid rectangle');
     }
