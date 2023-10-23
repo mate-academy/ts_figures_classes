@@ -7,6 +7,10 @@ export interface Figure {
   getArea(): number
 }
 
+function roundToDec(area: number): number {
+  return Math.floor(area * 100) / 100;
+}
+
 export class Triangle implements Figure {
   public shape: Shape = 'triangle';
 
@@ -29,15 +33,15 @@ export class Triangle implements Figure {
   }
 
   getArea(): number {
-    const semiSum: number = (this.a + this.b + this.c) / 2;
+    const perimeterHalf: number = (this.a + this.b + this.c) / 2;
     const area: number = Math.sqrt(
-      semiSum
-      * (semiSum - this.a)
-      * (semiSum - this.b)
-      * (semiSum - this.c),
+      perimeterHalf
+      * (perimeterHalf - this.a)
+      * (perimeterHalf - this.b)
+      * (perimeterHalf - this.c),
     );
 
-    return Math.floor(area * 100) / 100;
+    return roundToDec(area);
   }
 }
 
@@ -56,7 +60,7 @@ export class Circle {
   getArea(): number {
     const area: number = Math.PI * (this.radius ** 2);
 
-    return Math.floor(area * 100) / 100;
+    return roundToDec(area);
   }
 }
 
@@ -74,7 +78,7 @@ export class Rectangle {
   }
 
   getArea(): number {
-    return Math.floor(this.a * this.b * 100) / 100;
+    return roundToDec(this.a * this.b);
   }
 }
 
