@@ -12,7 +12,7 @@ function getValueTwoNumbersAfterDot(value: number): number {
 }
 
 export class Triangle implements Figure {
-  shape: Shape;
+  shape: Shape = 'triangle';
 
   constructor(
     public color: Color,
@@ -27,7 +27,6 @@ export class Triangle implements Figure {
     if (a + b <= c || a + c <= b || b + c <= a) {
       throw new Error('Sum of two sides cannot be less than third side');
     }
-    this.shape = 'triangle';
   }
 
   getArea(): number {
@@ -42,7 +41,7 @@ export class Triangle implements Figure {
 }
 
 export class Circle implements Figure {
-  shape: Shape;
+  shape: Shape = 'circle';
 
   constructor(
     public color: Color,
@@ -51,7 +50,6 @@ export class Circle implements Figure {
     if (radius <= 0) {
       throw new Error('Invalid radius');
     }
-    this.shape = 'circle';
   }
 
   getArea(): number {
@@ -60,7 +58,7 @@ export class Circle implements Figure {
 }
 
 export class Rectangle implements Figure {
-  shape: Shape;
+  shape: Shape = 'rectangle';
 
   constructor(
     public color: Color,
@@ -70,7 +68,6 @@ export class Rectangle implements Figure {
     if (width <= 0 || height <= 0) {
       throw new Error('Invalid sides');
     }
-    this.shape = 'rectangle';
   }
 
   getArea(): number {
