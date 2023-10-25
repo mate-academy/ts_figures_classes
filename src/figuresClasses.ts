@@ -1,43 +1,51 @@
+type Shape = 'triangle' | 'circle' | 'rectangle';
+type Color = 'red' | 'green' | 'blue';
+
 export interface Figure {
-  shape: string,
-  color: string,
+  shape: Shape,
+  color: Color,
   getArea(): number,
 }
 
+function getValueTwoNumbersAfterDot(value: number): number {
+  return Math.floor(value * 100) / 100;
+}
+
 export class Triangle implements Figure {
-  shape: string;
+  shape: Shape;
 
   constructor(
-    public color: string,
+    public color: Color,
     public a: number,
     public b: number,
     public c: number,
   ) {
-    if (a <= 0 || b <= 0 || c <= 0 || a + b <= c || a + c <= b || b + c <= a) {
-      throw new Error('Invalid sides');
+    if (a <= 0 || b <= 0 || c <= 0) {
+      throw new Error('Side cannot be less than 0');
+    }
+
+    if (a + b <= c || a + c <= b || b + c <= a) {
+      throw new Error('Sum of two sides cannot be less than third side');
     }
     this.shape = 'triangle';
   }
 
   getArea(): number {
-    const perimeter = (this.a + this.b + this.c) / 2;
+    const perimeterHalf = (this.a + this.b + this.c) / 2;
 
-    return Math.floor(
-      Math.sqrt(
-        perimeter
-        * (perimeter - this.a)
-        * (perimeter - this.b)
-        * (perimeter - this.c),
-      ) * 100,
-    ) / 100;
+    return getValueTwoNumbersAfterDot(Math
+      .sqrt(perimeterHalf
+        * (perimeterHalf - this.a)
+        * (perimeterHalf - this.b)
+        * (perimeterHalf - this.c)));
   }
 }
 
 export class Circle implements Figure {
-  shape: string;
+  shape: Shape;
 
   constructor(
-    public color: string,
+    public color: Color,
     public radius: number,
   ) {
     if (radius <= 0) {
@@ -47,15 +55,15 @@ export class Circle implements Figure {
   }
 
   getArea(): number {
-    return Math.floor(this.radius * this.radius * Math.PI * 100) / 100;
+    return getValueTwoNumbersAfterDot(this.radius * this.radius * Math.PI);
   }
 }
 
 export class Rectangle implements Figure {
-  shape: string;
+  shape: Shape;
 
   constructor(
-    public color: string,
+    public color: Color,
     public width: number,
     public height: number,
   ) {
