@@ -1,4 +1,9 @@
-type Shape = 'triangle' | 'circle' | 'rectangle';
+enum Shape {
+  Triangle = 'triangle',
+  Circle = 'circle',
+  Rectangle = 'rectangle'
+}
+
 type Color = 'red' | 'green' | 'blue';
 
 export interface Figure {
@@ -18,9 +23,10 @@ export class Triangle implements Figure {
   ) {
     if (a <= 0 || b <= 0 || c <= 0
         || a >= b + c || b >= a + c || c >= a + b) {
-      throw new Error('Incorrect length');
+      throw new Error('Each side length should be > 0 and'
+        + 'be grater than sum of two else');
     }
-    this.shape = 'triangle';
+    this.shape = Shape.Triangle;
   }
 
   getArea(): number {
@@ -39,9 +45,9 @@ export class Circle implements Figure {
     public radius: number,
   ) {
     if (radius <= 0) {
-      throw new Error('Incorrect radius');
+      throw new Error('Radius should be > 0');
     }
-    this.shape = 'circle';
+    this.shape = Shape.Circle;
   }
 
   getArea(): number {
@@ -58,9 +64,9 @@ export class Rectangle implements Figure {
     public height: number,
   ) {
     if (width <= 0 || height <= 0) {
-      throw new Error('Incorrect length');
+      throw new Error('Each side should be > 0');
     }
-    this.shape = 'rectangle';
+    this.shape = Shape.Rectangle;
   }
 
   getArea(): number {
