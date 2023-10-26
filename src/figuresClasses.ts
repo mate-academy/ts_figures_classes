@@ -72,14 +72,5 @@ export class Rectangle {
 }
 
 export function getInfo(figure:Figure):string {
-  switch (figure.shape) {
-    case 'triangle':
-      return `A ${figure.color} triangle - ${figure.getArea()}`;
-    case 'rectangle':
-      return `A ${figure.color} rectangle - ${figure.getArea()}`;
-    case 'circle':
-      return `A ${figure.color} circle - ${figure.getArea()}`;
-    default:
-      throw new Error(`Information about ${figure.shape} cannot be provided`);
-  }
+  return `A ${figure.color} ${figure.shape} - ${figure.getArea()}`;
 }
