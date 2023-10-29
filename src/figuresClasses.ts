@@ -24,11 +24,20 @@ export class Triangle {
 
   sides: [number, number, number];
 
-  constructor(color: Color, a: number, b: number, c: number) {
+  constructor(color: Color | string, a: number, b: number, c: number) {
+    if (typeof color === 'string') {
+      if (color !== Color.Red && color !== Color.Blue && color !== Color.Green) {
+        throw new Error('Invalid color');
+      }
+      this.color = color as Color;
+    } else {
+      this.color = color as Color;
+    }
+
     if (a <= 0 || b <= 0 || c <= 0 || this.isNotTriangle(a, b, c)) {
       throw new Error('Invalid triangle');
     }
-    this.color = color;
+
     this.sides = [a, b, c];
   }
 
@@ -47,14 +56,31 @@ export class Triangle {
 export class Circle {
   shape: Shape = Shape.Circle;
 
-  constructor(public color: Color, public radius: number) {
+  color: Color;
+
+  radius: number;
+
+  constructor(color: Color | string, radius: number) {
+    if (typeof color === 'string') {
+      if (color !== Color.Red && color !== Color.Blue && color !== Color.Green) {
+        throw new Error('Invalid color');
+      }
+      this.color = color as Color;
+    } else {
+      this.color = color as Color;
+    }
+
     if (radius <= 0) {
       throw new Error('Invalid circle');
     }
+
+    this.radius = radius;
   }
 
   getArea(): number {
-    return Math.floor(Math.PI * this.radius ** 2 * 100) / 100;
+    const area = Math.floor(Math.PI * this.radius * this.radius * 100) / 100;
+
+    return area;
   }
 }
 
@@ -67,11 +93,20 @@ export class Rectangle {
 
   height: number;
 
-  constructor(color: Color, width: number, height: number) {
+  constructor(color: Color | string, width: number, height: number) {
+    if (typeof color === 'string') {
+      if (color !== Color.Red && color !== Color.Blue && color !== Color.Green) {
+        Error('Invalid color');
+      }
+      this.color = color as Color;
+    } else {
+      this.color = color as Color;
+    }
+
     if (width <= 0 || height <= 0) {
       throw new Error('Invalid rectangle');
     }
-    this.color = color;
+
     this.width = width;
     this.height = height;
   }
