@@ -33,7 +33,7 @@ export class Triangle {
   };
 }
 
-export class Circle implements Figure {
+export class Circle {
   shape = 'circle';
 
   constructor(public color: string, public radius: number) {
@@ -47,7 +47,7 @@ export class Circle implements Figure {
   }
 }
 
-export class Rectangle implements Figure {
+export class Rectangle {
   shape = 'rectangle';
 
   color: string;
