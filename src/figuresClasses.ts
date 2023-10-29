@@ -20,23 +20,23 @@ export interface Figure {
 export class Triangle {
   shape: Shape = Shape.Triangle;
 
-  color: string;
+  color: Color;
 
   sides: [number, number, number];
 
-  constructor(color: string, side1: number, side2: number, side3: number) {
-    if (side1 <= 0 || side2 <= 0 || side3 <= 0 || this.isNotTriangle(side1, side2, side3)) {
+  constructor(color: Color, a: number, b: number, c: number) {
+    if (a <= 0 || b <= 0 || c <= 0 || this.isNotTriangle(a, b, c)) {
       throw new Error('Invalid triangle');
     }
     this.color = color;
-    this.sides = [side1, side2, side3];
+    this.sides = [a, b, c];
   }
 
   getArea(): number {
     const [a, b, c] = this.sides;
     const s = (a + b + c) / 2;
 
-    return Number((Math.sqrt(s * (s - a) * (s - b) * (s - c))).toFixed(2));
+    return Number(Math.sqrt(s * (s - a) * (s - b) * (s - c)).toFixed(2));
   }
 
   private isNotTriangle = (side1: number, side2: number, side3: number): boolean => {
@@ -47,7 +47,7 @@ export class Triangle {
 export class Circle {
   shape: Shape = Shape.Circle;
 
-  constructor(public color: string, public radius: number) {
+  constructor(public color: Color, public radius: number) {
     if (radius <= 0) {
       throw new Error('Invalid circle');
     }
@@ -61,13 +61,13 @@ export class Circle {
 export class Rectangle {
   shape: Shape = Shape.Rectangle;
 
-  color: string;
+  color: Color;
 
   width: number;
 
   height: number;
 
-  constructor(color: string, width: number, height: number) {
+  constructor(color: Color, width: number, height: number) {
     if (width <= 0 || height <= 0) {
       throw new Error('Invalid rectangle');
     }
