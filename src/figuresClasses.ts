@@ -1,15 +1,5 @@
-/* eslint-disable max-len */
-enum Shape {
-  Triangle = 'triangle',
-  Circle = 'circle',
-  Rectangle = 'rectangle',
-}
-
-enum Color {
-  Red = 'red',
-  Blue = 'blue',
-  Green = 'green',
-}
+type Shape = 'triangle' | 'circle' | 'rectangle';
+type Color = 'red' | 'green' | 'blue';
 
 export interface Figure {
   shape: Shape;
@@ -17,107 +7,73 @@ export interface Figure {
   getArea(): number;
 }
 
-export class Triangle {
-  shape: Shape = Shape.Triangle;
+export class Triangle implements Figure {
+  public shape: Shape;
 
-  color: Color;
+  constructor(
+    public color: Color,
+    public a: number,
+    public b: number,
+    public c: number,
+  ) {
+    this.shape = 'triangle';
 
-  sides: [number, number, number];
-
-  constructor(color: Color | string, a: number, b: number, c: number) {
-    if (typeof color === 'string') {
-      if (color !== Color.Red && color !== Color.Blue && color !== Color.Green) {
-        throw new Error('Invalid color');
-      }
-      this.color = color as Color;
-    } else {
-      this.color = color as Color;
+    if (a <= 0 || b <= 0 || c <= 0) {
+      throw new Error('The value cannot be equal to 0');
     }
 
-    if (a <= 0 || b <= 0 || c <= 0 || this.isNotTriangle(a, b, c)) {
-      throw new Error('Invalid triangle');
+    if ((a >= b + c) || (b >= a + c) || (c >= a + b)) {
+      throw new Error('This is not a triangle');
     }
-
-    this.sides = [a, b, c];
   }
 
   getArea(): number {
-    const [a, b, c] = this.sides;
-    const s = (a + b + c) / 2;
+    const half = (this.a + this.b + this.c) / 2;
+    const area = Math.sqrt(
+      half * (half - this.a) * (half - this.b) * (half - this.c),
+    );
 
-    return Number(Math.sqrt(s * (s - a) * (s - b) * (s - c)).toFixed(2));
+    return Math.floor(area * 100) / 100;
   }
-
-  private isNotTriangle = (side1: number, side2: number, side3: number): boolean => {
-    return side1 + side2 <= side3 || side1 + side3 <= side2 || side2 + side3 <= side1;
-  };
 }
 
-export class Circle {
-  shape: Shape = Shape.Circle;
+export class Circle implements Figure {
+  readonly shape = 'circle';
 
-  color: Color;
-
-  radius: number;
-
-  constructor(color: Color | string, radius: number) {
-    if (typeof color === 'string') {
-      if (color !== Color.Red && color !== Color.Blue && color !== Color.Green) {
-        throw new Error('Invalid color');
-      }
-      this.color = color as Color;
-    } else {
-      this.color = color as Color;
-    }
-
+  constructor(
+    public color: Color,
+    public radius: number,
+  ) {
     if (radius <= 0) {
-      throw new Error('Invalid circle');
+      throw new Error('The radius cannot be equal to or less than 0');
     }
-
-    this.radius = radius;
   }
 
   getArea(): number {
-    const area = Math.floor(Math.PI * this.radius * this.radius * 100) / 100;
+    const area = Math.PI * (this.radius ** 2);
 
-    return area;
+    return Math.floor(area * 100) / 100;
   }
 }
 
-export class Rectangle {
-  shape: Shape = Shape.Rectangle;
+export class Rectangle implements Figure {
+  readonly shape = 'rectangle';
 
-  color: Color;
-
-  width: number;
-
-  height: number;
-
-  constructor(color: Color | string, width: number, height: number) {
-    if (typeof color === 'string') {
-      if (color !== Color.Red && color !== Color.Blue && color !== Color.Green) {
-        Error('Invalid color');
-      }
-      this.color = color as Color;
-    } else {
-      this.color = color as Color;
-    }
-
+  constructor(
+    public color: Color,
+    public width: number,
+    public height: number,
+  ) {
     if (width <= 0 || height <= 0) {
-      throw new Error('Invalid rectangle');
+      throw new Error('The value cannot be equal to 0');
     }
-
-    this.width = width;
-    this.height = height;
   }
 
   getArea(): number {
-    return Number((this.width * this.height).toFixed(2));
+    return this.width * this.height;
   }
 }
 
 export function getInfo(figure: Figure): string {
-  const area = figure.getArea();
-
-  return `A ${figure.color} ${figure.shape} - ${area}`;
+  return `A ${figure.color} ${figure.shape} - ${figure.getArea()}`;
 }
