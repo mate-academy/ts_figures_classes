@@ -20,11 +20,11 @@ export interface Figure {
 export class Triangle {
   shape: Shape = Shape.Triangle;
 
-  color: Color;
+  color: string;
 
   sides: [number, number, number];
 
-  constructor(color: Color, side1: number, side2: number, side3: number) {
+  constructor(color: string, side1: number, side2: number, side3: number) {
     if (side1 <= 0 || side2 <= 0 || side3 <= 0 || this.isNotTriangle(side1, side2, side3)) {
       throw new Error('Invalid triangle');
     }
@@ -47,7 +47,7 @@ export class Triangle {
 export class Circle {
   shape: Shape = Shape.Circle;
 
-  constructor(public color: Color, public radius: number) {
+  constructor(public color: string, public radius: number) {
     if (radius <= 0) {
       throw new Error('Invalid circle');
     }
@@ -61,13 +61,13 @@ export class Circle {
 export class Rectangle {
   shape: Shape = Shape.Rectangle;
 
-  color: Color;
+  color: string;
 
   width: number;
 
   height: number;
 
-  constructor(color: Color, width: number, height: number) {
+  constructor(color: string, width: number, height: number) {
     if (width <= 0 || height <= 0) {
       throw new Error('Invalid rectangle');
     }
