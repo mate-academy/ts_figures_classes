@@ -4,7 +4,7 @@ export interface Figure {
   getArea(): number;
 }
 
-export class Triangle implements Figure {
+export class Triangle {
   shape = 'triangle';
 
   color: string;
