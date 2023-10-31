@@ -14,45 +14,27 @@ export class Triangle implements Figure {
   constructor(public color: Color, public a: number, public b: number,
     public c: number) {
     this.shape = 'triangle';
+    this.validator();
+  }
 
-    if (a <= 0 || b <= 0 || c <= 0) {
+  validator(): void {
+    if (this.a <= 0 || this.b <= 0 || this.c <= 0) {
       throw new Error(
-        `No side can be shorter than 0: a: ${a}, b: ${b}, c: ${c}`,
+        `No side can be shorter than 0:
+        a: ${this.a}, b: ${this.b}, c: ${this.c}`,
       );
     }
 
-    const sortedArray
-      = [this.a, this.b, this.c].sort((first, secound) => first - secound);
-    const max = sortedArray[sortedArray.length - 1];
+    const max = Math.max(this.a, this.b, this.c);
 
-    switch (max) {
-      case c:
-        if (a + b <= max) {
-          throw new Error(
-            `The longest side of a triangle cannot be
-             shorter than the sum of the other two:
-             a: ${a}, b: ${b}, c: ${c}`,
-          );
-        }
-        break;
-      case a:
-        if (c + b <= max) {
-          throw new Error(
-            `The longest side of a triangle cannot be
-             shorter than the sum of the other two:
-             a: ${a}, b: ${b}, c: ${c}`,
-          );
-        }
-        break;
-
-      default:
-        if (a + c <= max) {
-          throw new Error(
-            `The longest side of a triangle cannot be
-             shorter than the sum of the other two:
-             a: ${a}, b: ${b}, c: ${c}`,
-          );
-        }
+    if ((max === this.c && this.a + this.b <= max)
+      || (max === this.a && this.c + this.b <= max)
+      || (max === this.b && this.a + this.c <= max)) {
+      throw new Error(
+        `The longest side of a triangle cannot be
+         shorter than the sum of the other two:
+         a: ${this.a}, b: ${this.b}, c: ${this.c}`,
+      );
     }
   }
 
@@ -73,9 +55,10 @@ export class Circle {
     public radius: number) {
     this.shape = 'circle';
 
-    if (radius <= 0) {
+    if (this.radius <= 0) {
       throw new Error(
-        `The side of the radius cannot be shorter than 0: radius: ${radius}`,
+        `The side of the radius cannot be
+         shorter than 0: radius: ${this.radius}`,
       );
     }
   }
@@ -93,9 +76,10 @@ export class Rectangle {
     public height: number) {
     this.shape = 'rectangle';
 
-    if (width <= 0 || height <= 0) {
+    if (this.width <= 0 || this.height <= 0) {
       throw new Error(
-        `No side can be shorter than 0: width: ${width}, height: ${height}`,
+        `No side can be shorter than 0: width:
+         ${this.width}, height: ${this.height}`,
       );
     }
   }
