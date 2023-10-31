@@ -15,9 +15,17 @@ export class Triangle implements Figure {
     public b: number,
     public c: number,
   ) {
-    if (a <= 0 || b <= 0 || c <= 0 || a + b <= c || a + c <= b || b + c <= a) {
+    if (a <= 0 || b <= 0 || c <= 0) {
       throw new Error('Invalid triangle sides');
     }
+
+    const perimeter = a + b + c;
+    const biggestSide = Math.max(a, b, c);
+
+    if (perimeter - biggestSide <= biggestSide) {
+      throw new Error('Invalid triangle sides');
+    }
+
     this.color = color;
   }
 
