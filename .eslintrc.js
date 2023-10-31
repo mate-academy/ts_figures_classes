@@ -17,6 +17,7 @@ module.exports = {
     '@typescript-eslint', 'jest',
   ],
   rules: {
+    'linebreak-style': ['error', process.platform === 'win32' ? 'windows' : 'unix'],
     'arrow-body-style': 'off',
     'no-unused-vars': 'off',
     '@typescript-eslint/no-unused-vars': ['error'],
