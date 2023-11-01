@@ -15,6 +15,10 @@ export class Triangle implements Figure {
 
   c: number;
 
+  static p: number;
+
+  static longest: number;
+
   constructor(
     shape: string,
     color: string,
@@ -27,22 +31,24 @@ export class Triangle implements Figure {
     this.a = a;
     this.b = b;
     this.c = c;
+
+    Triangle.p = this.a + this.b + this.c;
+    Triangle.longest = Math.max(this.a, this.b, this.c);
+
+    if (this.a <= 0 || this.b <= 0 || this.c <= 0) {
+      throw new Error('can not form a triangle');
+    }
+
+    if (Triangle.longest >= Triangle.p - Triangle.longest) {
+      throw new Error('can not form a triangle');
+    }
   }
 
   getArea(): number | Error {
-    const sideA = this.a;
-    const sideB = this.b;
-    const sideC = this.c;
-    const p = sideA + sideB + sideC;
-    const semiP = p / 2;
-    const longestSide = Math.max(sideA, sideB, sideC);
-
-    if ((sideA * sideB * sideC <= 0) || (p - longestSide) <= 0) {
-      return new Error("can't form a triangle");
-    }
+    const semiP = Triangle.p / 2;
 
     const square = Math
-      .sqrt(semiP * (semiP - sideA) * (semiP - sideB) * (semiP - sideC));
+      .sqrt(semiP * (semiP - this.a) * (semiP - this.b) * (semiP - this.c));
 
     return Math.floor(square * 100) / 100;
   }
@@ -63,6 +69,10 @@ export class Circle implements Figure {
     this.shape = shape;
     this.color = color;
     this.radius = radius;
+
+    if (this.radius <= 0) {
+      throw new Error("can't form a circle");
+    }
   }
 
   getArea(): number {
@@ -89,6 +99,10 @@ export class Rectangle implements Figure {
     this.color = color;
     this.width = width;
     this.height = height;
+
+    if (height <= 0 || width <= 0) {
+      throw new Error("can't form a rectangle");
+    }
   }
 
   getArea(): number | Error {
