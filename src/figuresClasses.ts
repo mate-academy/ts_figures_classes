@@ -4,13 +4,16 @@ export interface Figure {
   getArea(): number;
 }
 
-export class Triangle implements Figure {
-  shape: 'triangle' = 'triangle';
+type ColorType = 'red' | 'green' | 'blue';
+type ShapeType = 'triangle' | 'circle' | 'rectangle';
 
-  color: 'red' | 'green' | 'blue';
+export class Triangle implements Figure {
+  shape: ShapeType = 'triangle';
+
+  color: ColorType;
 
   constructor(
-    color: 'red' | 'green' | 'blue',
+    color: ColorType,
     public a: number,
     public b: number,
     public c: number,
@@ -30,19 +33,23 @@ export class Triangle implements Figure {
   }
 
   getArea(): number {
-    const s = (this.a + this.b + this.c) / 2;
+    const halfPerimeter = (this.a + this.b + this.c) / 2;
 
     return parseFloat(Math
-      .sqrt(s * (s - this.a) * (s - this.b) * (s - this.c)).toFixed(2));
+      .sqrt(halfPerimeter
+        * (halfPerimeter - this.a)
+        * (halfPerimeter - this.b)
+        * (halfPerimeter - this.c))
+      .toFixed(2));
   }
 }
 
 export class Circle implements Figure {
-  shape: 'circle' = 'circle';
+  shape: ShapeType = 'circle';
 
-  color: 'red' | 'green' | 'blue';
+  color: ColorType;
 
-  constructor(color: 'red' | 'green' | 'blue', public radius: number) {
+  constructor(color: ColorType, public radius: number) {
     if (radius <= 0) {
       throw new Error('Invalid circle radius');
     }
@@ -57,12 +64,12 @@ export class Circle implements Figure {
 }
 
 export class Rectangle implements Figure {
-  shape: 'rectangle' = 'rectangle';
+  shape: ShapeType = 'rectangle';
 
-  color: 'red' | 'green' | 'blue';
+  color: ColorType;
 
   constructor(
-    color: 'red' | 'green' | 'blue',
+    color: ColorType,
     public width: number,
     public height: number,
   ) {
