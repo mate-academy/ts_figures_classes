@@ -1,19 +1,17 @@
-export interface Figure {
-  shape: 'triangle' | 'circle' | 'rectangle';
-  color: 'red' | 'green' | 'blue';
-  getArea(): number;
-}
-
 type ColorType = 'red' | 'green' | 'blue';
 type ShapeType = 'triangle' | 'circle' | 'rectangle';
+
+export interface Figure {
+  shape: ShapeType;
+  color: ColorType;
+  getArea(): number;
+}
 
 export class Triangle implements Figure {
   shape: ShapeType = 'triangle';
 
-  color: ColorType;
-
   constructor(
-    color: ColorType,
+    public color: ColorType,
     public a: number,
     public b: number,
     public c: number,
@@ -28,8 +26,6 @@ export class Triangle implements Figure {
     if (perimeter - biggestSide <= biggestSide) {
       throw new Error('Invalid triangle sides');
     }
-
-    this.color = color;
   }
 
   getArea(): number {
@@ -47,13 +43,13 @@ export class Triangle implements Figure {
 export class Circle implements Figure {
   shape: ShapeType = 'circle';
 
-  color: ColorType;
-
-  constructor(color: ColorType, public radius: number) {
+  constructor(
+    public color: ColorType,
+    public radius: number,
+  ) {
     if (radius <= 0) {
       throw new Error('Invalid circle radius');
     }
-    this.color = color;
   }
 
   getArea(): number {
@@ -66,17 +62,14 @@ export class Circle implements Figure {
 export class Rectangle implements Figure {
   shape: ShapeType = 'rectangle';
 
-  color: ColorType;
-
   constructor(
-    color: ColorType,
+    public color: ColorType,
     public width: number,
     public height: number,
   ) {
     if (width <= 0 || height <= 0) {
       throw new Error('Invalid rectangle dimensions');
     }
-    this.color = color;
   }
 
   getArea(): number {
@@ -89,3 +82,10 @@ export function getInfo(figure: Figure): string {
 
   return `A ${figure.color} ${figure.shape} - ${area}`;
 }
+
+// It comment mentor doesn't work
+// export function getInfo(figure: Figure): string {
+//   const { getArea, color, shape } = figure;
+
+//   return `A ${color} ${shape} - ${getArea}`;
+// }
