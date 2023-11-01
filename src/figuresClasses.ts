@@ -7,6 +7,10 @@ export interface Figure {
   getArea(): string | number,
 }
 
+export function roundTheArea(area: number): number {
+  return Math.floor(area * 100) / 100;
+}
+
 export class Triangle {
   shape: Shape = 'triangle';
 
@@ -25,7 +29,7 @@ export class Triangle {
     const p = (this.a + this.b + this.c) / 2;
     const area = Math.sqrt(p * (p - this.a) * (p - this.b) * (p - this.c));
 
-    return Math.floor(area * 100) / 100;
+    return roundTheArea(area);
   }
 }
 
@@ -44,7 +48,7 @@ export class Circle {
   getArea(): number {
     const area = Math.PI * this.radius ** 2;
 
-    return Math.floor(area * 100) / 100;
+    return roundTheArea(area);
   }
 }
 
@@ -64,7 +68,7 @@ export class Rectangle {
   getArea(): number {
     const area = this.width * this.height;
 
-    return Math.floor(area * 100) / 100;
+    return roundTheArea(area);
   }
 }
 
