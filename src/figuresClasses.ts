@@ -23,8 +23,8 @@ export class Triangle {
     public b: number,
     public c: number,
   ) {
-    const perimetr = this.a + this.b + this.c;
-    const longestSide = Math.max(this.a, this.b, this.c);
+    const perimetr = a + b + c;
+    const longestSide = Math.max(a, b, c);
 
     if (perimetr - longestSide <= longestSide) {
       throw new Error('Longest side has to be < then sum of other sides');
@@ -39,13 +39,13 @@ export class Circle {
     public color: Color,
     public radius: number,
   ) {
-    if (this.radius <= 0) {
+    if (radius <= 0) {
       throw new Error('Radius must be positive');
     }
   }
 
   getArea(): number {
-    return Math.floor(Math.PI * this.radius * this.radius * 100) / 100;
+    return Math.floor(Math.PI * (this.radius ** 2) * 100) / 100;
   }
 }
 
