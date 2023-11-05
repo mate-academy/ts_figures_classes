@@ -1,21 +1,21 @@
+export type Shape = 'triangle' | 'circle' | 'rectangle';
+export type Color = 'red' | 'green' | 'blue';
+
 export interface Figure {
-  shape: string;
-  color: string;
+  shape: Shape;
+  color: Color;
   getArea(): number;
 }
 
 export class Triangle {
-  shape: string;
+  public shape: Shape;
 
-  color: string;
-
-  a: number;
-
-  b:number;
-
-  c: number;
-
-  constructor(color: string, a: number, b: number, c: number) {
+  constructor(
+    public color: Color,
+    public a: number,
+    public b: number,
+    public c: number,
+  ) {
     const bigNum = Math.max(a, b, c);
 
     if (a <= 0 || b <= 0 || c <= 0 || (bigNum >= (a + b + c - bigNum))) {
@@ -23,10 +23,6 @@ export class Triangle {
     }
 
     this.shape = 'triangle';
-    this.color = color;
-    this.a = a;
-    this.b = b;
-    this.c = c;
   }
 
   getArea(): number {
@@ -39,20 +35,17 @@ export class Triangle {
 }
 
 export class Circle {
-  shape: string;
+  public shape: Shape;
 
-  color: string;
-
-  radius: number;
-
-  constructor(color: string, radius: number) {
+  constructor(
+    public color: Color,
+    public radius: number,
+  ) {
     if (radius <= 0) {
       throw new Error('your error message');
     }
 
     this.shape = 'circle';
-    this.color = color;
-    this.radius = radius;
   }
 
   getArea(): number {
@@ -63,23 +56,18 @@ export class Circle {
 }
 
 export class Rectangle {
-  shape: string;
+  public shape: Shape;
 
-  color: string;
-
-  width: number;
-
-  height: number;
-
-  constructor(color: string, width: number, height: number) {
+  constructor(
+    public color: Color,
+    public width: number,
+    public height: number,
+  ) {
     if (width <= 0 || height <= 0) {
       throw new Error('your error message');
     }
 
     this.shape = 'rectangle';
-    this.color = color;
-    this.width = width;
-    this.height = height;
   }
 
   getArea(): number {
