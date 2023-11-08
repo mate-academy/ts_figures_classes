@@ -1,29 +1,17 @@
 export interface Figure {
   shape: 'triangle' | 'circle' | 'rectangle';
   color: 'red' | 'green' | 'blue';
-  a?: number;
-  b?: number;
-  c?: number;
-  r?: number;
-  width?: number;
-  height?: number;
   getArea: () => number;
 }
 
 export class Triangle {
-  readonly shape: string;
-
-  a: number;
-
-  b: number;
-
-  c: number;
+  shape = 'triangle';
 
   constructor(
     public color: string,
-    a: number,
-    b: number,
-    c: number,
+    public a: number,
+    public b: number,
+    public c: number,
   ) {
     if (color.length === 0) {
       throw new Error('Please enter a color.');
@@ -37,12 +25,6 @@ export class Triangle {
     if (a <= 0 && b <= 0 && c <= 0) {
       throw new Error('Please enter a side.');
     }
-
-    this.color = color;
-    this.a = a;
-    this.b = b;
-    this.c = c;
-    this.shape = 'triangle';
   }
 
   getArea(): number {
@@ -55,7 +37,7 @@ export class Triangle {
 }
 
 export class Circle {
-  readonly shape: string;
+  shape = 'circle';
 
   constructor(
     public color: string,
@@ -68,10 +50,6 @@ export class Circle {
     if (r <= 0) {
       throw new Error('Please enter a radius');
     }
-
-    this.color = color;
-    this.r = r;
-    this.shape = 'circle';
   }
 
   getArea(): number {
@@ -82,18 +60,12 @@ export class Circle {
 }
 
 export class Rectangle {
-  readonly shape: string;
-
-  color: string;
-
-  height: number;
-
-  width: number;
+  shape = 'rectangle';
 
   constructor(
-    color: string,
-    width: number,
-    height: number,
+    public color: string,
+    public width: number,
+    public height: number,
   ) {
     if (color.length === 0) {
       throw new Error('Please enter a color.');
@@ -105,9 +77,6 @@ export class Rectangle {
     } else {
       throw new Error('Please enter a side');
     }
-
-    this.color = color;
-    this.shape = 'rectangle';
   }
 
   getArea(): number {
