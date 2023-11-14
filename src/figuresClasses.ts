@@ -66,6 +66,6 @@ export class Rectangle {
   }
 }
 
-export function getInfo(figure):string {
+export function getInfo(figure: Triangle | Rectangle | Circle):string {
   return `A ${figure.color} ${figure.shape} - ${figure.getArea()}`;
 }
