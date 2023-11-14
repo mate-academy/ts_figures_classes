@@ -4,8 +4,10 @@ export interface Figure {
   getArea(): number | Error;
 }
 
+type Shape = 'triangle' | 'circle' | 'rectangle';
+
 export class Triangle implements Figure {
-  shape: string;
+  shape: Shape = 'triangle';
 
   color: string;
 
@@ -20,13 +22,11 @@ export class Triangle implements Figure {
   static longest: number;
 
   constructor(
-    shape: string,
     color: string,
     a: number,
     b: number,
     c: number,
   ) {
-    this.shape = shape;
     this.color = color;
     this.a = a;
     this.b = b;
@@ -55,18 +55,16 @@ export class Triangle implements Figure {
 }
 
 export class Circle implements Figure {
-  shape: string;
+  shape: Shape = 'circle';
 
   color: string;
 
   radius: number;
 
   constructor(
-    shape: string,
     color: string,
     radius: number,
   ) {
-    this.shape = shape;
     this.color = color;
     this.radius = radius;
 
@@ -81,7 +79,7 @@ export class Circle implements Figure {
 }
 
 export class Rectangle implements Figure {
-  shape: string;
+  shape: Shape = 'rectangle';
 
   color: string;
 
@@ -90,12 +88,10 @@ export class Rectangle implements Figure {
   height: number;
 
   constructor(
-    shape: string,
     color: string,
     width: number,
     height: number,
   ) {
-    this.shape = shape;
     this.color = color;
     this.width = width;
     this.height = height;
