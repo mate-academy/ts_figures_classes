@@ -1,6 +1,9 @@
+type FigureType = 'circle' | 'rectangle' | 'triangle';
+type FigureColor = 'red' | 'green' | 'blue';
+
 export interface Figure {
-  shape: 'circle' | 'rectangle' | 'triangle';
-  color: 'red' | 'green' | 'blue';
+  shape: FigureType;
+  color: FigureColor;
   getArea(): number;
 }
 
@@ -25,8 +28,9 @@ export class Triangle implements Figure {
   }
 
   getArea(): number {
-    const p = (this.a + this.b + this.c) / 2;
-    const result = Math.sqrt(p * (p - this.a) * (p - this.b) * (p - this.c));
+    const { a, b, c } = this;
+    const p = (a + b + c) / 2;
+    const result = Math.sqrt(p * (p - a) * (p - b) * (p - c));
 
     return Math.floor(result * 100) / 100;
   }
@@ -82,15 +86,15 @@ export class Rectangle implements Figure {
 
 export function getInfo(figure: Figure): string {
   if (figure instanceof Triangle) {
-    return `A ${figure.color} triangle - ${figure.getArea()}`;
+    return `A ${figure.color} ${figure.shape} - ${figure.getArea()}`;
   }
 
   if (figure instanceof Circle) {
-    return `A ${figure.color} circle - ${figure.getArea()}`;
+    return `A ${figure.color} ${figure.shape} - ${figure.getArea()}`;
   }
 
   if (figure instanceof Rectangle) {
-    return `A ${figure.color} rectangle - ${figure.getArea()}`;
+    return `A ${figure.color} ${figure.shape} - ${figure.getArea()}`;
   }
 
   return '';
