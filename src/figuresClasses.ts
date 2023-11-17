@@ -82,17 +82,5 @@ export class Rectangle implements Figure {
 }
 
 export function getInfo(figure: Figure): string {
-  if (figure instanceof Triangle) {
-    return `A ${figure.color} ${figure.shape} - ${figure.getArea()}`;
-  }
-
-  if (figure instanceof Circle) {
-    return `A ${figure.color} ${figure.shape} - ${figure.getArea()}`;
-  }
-
-  if (figure instanceof Rectangle) {
-    return `A ${figure.color} ${figure.shape} - ${figure.getArea()}`;
-  }
-
-  return '';
+  return `A ${figure.color} ${figure.shape} - ${figure.getArea()}`;
 }
