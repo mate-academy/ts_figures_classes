@@ -8,15 +8,14 @@ export interface Figure {
 }
 
 export class Triangle implements Figure {
-  shape: 'triangle';
+  shape: FigureType = 'triangle';
 
   constructor(
-    public color: 'red' | 'green' | 'blue',
+    public color: FigureColor,
     public a: number,
     public b: number,
     public c: number,
   ) {
-    this.shape = 'triangle';
     this.color = color;
     this.a = a;
     this.b = b;
@@ -37,13 +36,12 @@ export class Triangle implements Figure {
 }
 
 export class Circle implements Figure {
-  shape: 'circle';
+  shape: FigureType = 'circle';
 
   constructor(
-    public color: 'red' | 'green' | 'blue',
+    public color: FigureColor,
     public radius: number,
   ) {
-    this.shape = 'circle';
     this.color = color;
     this.radius = radius;
 
@@ -60,14 +58,13 @@ export class Circle implements Figure {
 }
 
 export class Rectangle implements Figure {
-  shape: 'rectangle';
+  shape: FigureType = 'rectangle';
 
   constructor(
-    public color: 'red' | 'green' | 'blue',
+    public color: FigureColor,
     public a: number,
     public b: number,
   ) {
-    this.shape = 'rectangle';
     this.color = color;
     this.a = a;
     this.b = b;
