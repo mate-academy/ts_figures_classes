@@ -70,9 +70,7 @@ export class Rectangle implements Figure {
   }
 
   getArea(): number {
-    const area = Math.floor(((this.height * this.width) * 100) / 100);
-
-    return area;
+    return Math.floor(((this.height * this.width) * 100) / 100);
   }
 }
 
