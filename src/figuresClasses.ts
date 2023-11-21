@@ -40,9 +40,6 @@ export class Circle implements Figure {
     if (radius <= 0) {
       throw new Error('Invalid circle radius');
     }
-
-    this.color = color;
-    this.radius = radius;
   }
 
   getArea(): number {
@@ -61,10 +58,6 @@ export class Rectangle implements Figure {
     if (width <= 0 || height <= 0) {
       throw new Error('Invalid rectangle dimensions');
     }
-
-    this.color = color;
-    this.width = width;
-    this.height = height;
   }
 
   getArea(): number {
