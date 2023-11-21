@@ -1,3 +1,9 @@
+export enum Shape {
+  Triangle = 'triangle',
+  Circle = 'circle',
+  Rectangle = 'rectangle',
+}
+
 export interface Figure {
   shape: string;
   color: string;
@@ -5,9 +11,7 @@ export interface Figure {
 }
 
 export class Triangle implements Figure {
-  shape = 'triangle';
-
-  sides: number[];
+  shape = Shape.Triangle;
 
   constructor(
     public color: string,
@@ -18,22 +22,19 @@ export class Triangle implements Figure {
     if (a <= 0 || b <= 0 || c <= 0 || a + b <= c || b + c <= a || c + a <= b) {
       throw new Error('Invalid triangle sides');
     }
-
-    this.color = color;
-    this.sides = [a, b, c];
   }
 
   getArea(): number {
-    const s = (this.sides[0] + this.sides[1] + this.sides[2]) / 2;
+    const s = (this.a + this.b + this.c) / 2;
 
     return Math.sqrt(
-      s * (s - this.sides[0]) * (s - this.sides[1]) * (s - this.sides[2]),
+      s * (s - this.a) * (s - this.b) * (s - this.c),
     );
   }
 }
 
 export class Circle implements Figure {
-  shape = 'circle';
+  shape = Shape.Circle;
 
   constructor(public color: string, public radius: number) {
     if (radius <= 0) {
@@ -52,7 +53,7 @@ export class Circle implements Figure {
 }
 
 export class Rectangle implements Figure {
-  shape = 'rectangle';
+  shape = Shape.Rectangle;
 
   constructor(public color: string,
     public width: number,
