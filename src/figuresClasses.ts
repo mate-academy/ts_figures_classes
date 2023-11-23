@@ -1,11 +1,23 @@
+enum Color {
+  red = 'red',
+  green = 'green',
+  blue = 'blue'
+}
+
+enum Shape {
+  triangle = 'triangle',
+  circle = 'circle',
+  rectangle = 'rectangle'
+}
+
 export interface Figure {
-  shape: string,
-  color: string;
-  getArea(): object;
+  color: Color,
+  shape: Shape,
+  getArea(): number;
 }
 
 export class Triangle {
-  shape: string;
+  shape = 'triangle';
 
   constructor(
     public color: string,
@@ -13,8 +25,6 @@ export class Triangle {
     public b: number,
     public c: number,
   ) {
-    this.shape = 'triangle';
-
     const sides = [a, b, c];
     const sS = sides.sort((i, j) => j - i);
 
@@ -34,14 +44,12 @@ export class Triangle {
 }
 
 export class Circle {
-  shape: string;
+  shape = 'circle';
 
   constructor(
     public color: string,
     public radius: number,
   ) {
-    this.shape = 'circle';
-
     if (radius <= 0) {
       throw new Error();
     }
@@ -55,15 +63,13 @@ export class Circle {
 }
 
 export class Rectangle {
-  shape: string;
+  shape = 'rectangle';
 
   constructor(
     public color: string,
     public width: number,
     public height: number,
   ) {
-    this.shape = 'rectangle';
-
     if (width <= 0 || height <= 0) {
       throw new Error();
     }
