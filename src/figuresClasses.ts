@@ -76,5 +76,3 @@ export function getInfo(figure: Figure): string {
   return `A ${figure.color} ${figure.shape} - ${figure.getArea().toFixed(2)
     .replace(/\.?0+$/, '')}`;
 }
-
-// getInfo(greenCircle) === 'A green circle - 3.14';
