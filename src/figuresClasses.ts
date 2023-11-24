@@ -1,5 +1,5 @@
 function roundToHundreths(number: number): number {
-  return +(Math.floor(number * 100) / 100).toFixed(2);
+  return Math.floor(number * 100) / 100;
 }
 
 function checkLength(...args: Array<number>): void {
