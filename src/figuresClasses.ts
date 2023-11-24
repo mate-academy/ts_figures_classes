@@ -20,7 +20,7 @@ export interface Figure {
 }
 
 export class Triangle implements Figure {
-  shape: Shapes;
+  shape: Shapes = 'triangle';
 
   constructor(
     public color: Colors, public a: number, public b: number, public c: number,
@@ -32,7 +32,6 @@ export class Triangle implements Figure {
     if (longest >= a + b + c - longest) {
       throw new Error('Longest side cannot be bigger than the sum of others');
     }
-    this.shape = 'triangle';
   }
 
   getArea = (): number => {
@@ -44,24 +43,22 @@ export class Triangle implements Figure {
 }
 
 export class Circle implements Figure {
-  shape: Shapes;
+  shape: Shapes = 'circle';
 
   constructor(public color: Colors, public radius: number) {
     checkLength(radius);
-    this.shape = 'circle';
   }
 
   getArea = (): number => roundToHundreths(Math.PI * this.radius * this.radius);
 }
 
 export class Rectangle implements Figure {
-  shape: Shapes;
+  shape: Shapes = 'rectangle';
 
   constructor(
     public color: Colors, public width: number, public height: number,
   ) {
     checkLength(width, height);
-    this.shape = 'rectangle';
   }
 
   getArea = (): number => roundToHundreths(this.width * this.height);
