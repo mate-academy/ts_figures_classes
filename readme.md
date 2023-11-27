@@ -27,7 +27,7 @@ new Rectangle('blue', 2, 0) // throws an error
 new Triangle('red', 1, 2, 3) // throws an error: sides 1, 2 and 3 can't form a triangle
 ```
 
-Also create a function `getInfo`that takes a figure and returns a string in the
+Also create a function `getInfo` that takes a figure and returns a string in the
 next format:
 ```typescript
 const redRectangle = new Rectangle('red', 3, 5);
