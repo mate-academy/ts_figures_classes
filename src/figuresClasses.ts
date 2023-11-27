@@ -1,13 +1,13 @@
 enum Color {
-  red = 'red',
-  green = 'green',
-  blue = 'blue',
+  Red = 'RED',
+  Green = 'GREEN',
+  Blue = 'BLUE',
 }
 
 enum Shape {
-  triangle = 'triangle',
-  circle = 'circle',
-  rectangle = 'rectangle',
+  Triangle = 'TRIANGLE',
+  Circle = 'CIRCLE',
+  Rectangle = 'RECTANGLE',
 }
 
 export interface Figure {
@@ -35,14 +35,19 @@ export class Triangle implements Figure {
       throw new Error('One of the sides is too big');
     }
 
-    this.shape = Shape.triangle;
+    this.shape = Shape.Triangle;
   }
 
   getArea(): number {
-    const p = (this.a + this.b + this.c) / 2;
+    const halfOfPerimeter = (this.a + this.b + this.c) / 2;
 
     return Math.floor(
-      Math.sqrt(p * (p - this.a) * (p - this.b) * (p - this.c)) * 100,
+      Math.sqrt(
+        halfOfPerimeter
+        * (halfOfPerimeter - this.a)
+        * (halfOfPerimeter - this.b)
+        * (halfOfPerimeter - this.c),
+      ) * 100,
     ) / 100;
   }
 }
@@ -58,7 +63,7 @@ export class Circle implements Figure {
       throw new Error('Invalid radius');
     }
 
-    this.shape = Shape.circle;
+    this.shape = Shape.Circle;
   }
 
   getArea(): number {
@@ -78,7 +83,7 @@ export class Rectangle implements Figure {
       throw new Error('Invalid sides');
     }
 
-    this.shape = Shape.rectangle;
+    this.shape = Shape.Rectangle;
   }
 
   getArea(): number {
@@ -87,5 +92,6 @@ export class Rectangle implements Figure {
 }
 
 export function getInfo(figure: Figure): string {
-  return `A ${figure.color} ${figure.shape} - ${figure.getArea()}`;
+  return `A ${figure.color} ${figure
+    .shape.toLowerCase()} - ${figure.getArea()}`;
 }
