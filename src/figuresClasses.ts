@@ -1,16 +1,20 @@
 function round(num: number): number {
   return Math.floor(num * 100) / 100;
 }
+
+type Shape = 'triangle' | 'circle' | 'rectangle';
+type Color = 'red' | 'green' | 'blue';
+
 export interface Figure {
-  shape: string;
-  color: string;
+  shape: Shape;
+  color: Color;
   getArea(): number;
 }
 
 export class Triangle implements Figure {
-  shape: string;
+  shape: Shape;
 
-  constructor(public color: string, public a: number, public b: number,
+  constructor(public color: Color, public a: number, public b: number,
     public c: number) {
     if (Math.min(a, b, c) <= 0
     || Math.max(a, b, c) >= a + b + c - Math.max(a, b, c)) {
@@ -27,9 +31,9 @@ export class Triangle implements Figure {
 }
 
 export class Circle implements Figure {
-  shape: string;
+  shape: Shape;
 
-  constructor(public color: string, public radius: number) {
+  constructor(public color: Color, public radius: number) {
     if (Math.min(radius) <= 0) {
       throw new Error('Incorrect radius');
     }
@@ -42,18 +46,18 @@ export class Circle implements Figure {
 }
 
 export class Rectangle implements Figure {
-  shape: string;
+  shape: Shape;
 
-  constructor(public color: string, public width: number,
-    public heigth: number) {
-    if (Math.min(width, heigth) <= 0) {
+  constructor(public color: Color, public width: number,
+    public height: number) {
+    if (Math.min(width, height) <= 0) {
       throw new Error('Incorrect sides');
     }
     this.shape = 'rectangle';
   }
 
   getArea(): number {
-    return round(this.width * this.heigth);
+    return round(this.width * this.height);
   }
 }
 
