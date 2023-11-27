@@ -4,8 +4,10 @@ export interface Figure {
   getArea(): number;
 }
 
+type Shapes = 'triangle' | 'circle' | 'rectangle';
+
 export class Triangle implements Figure {
-  shape: string;
+  shape: Shapes;
 
   color: string;
 
@@ -40,7 +42,7 @@ export class Triangle implements Figure {
 }
 
 export class Circle implements Figure {
-  shape: string;
+  shape: Shapes;
 
   color: string;
 
@@ -56,14 +58,14 @@ export class Circle implements Figure {
   }
 
   getArea(): number {
-    const result = (this.radius * this.radius * Math.PI);
+    const result = (this.radius ** 2 * Math.PI);
 
     return Math.floor(result * 100) / 100;
   }
 }
 
 export class Rectangle implements Figure {
-  shape: string;
+  shape: Shapes;
 
   color: string;
 
