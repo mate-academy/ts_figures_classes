@@ -39,15 +39,12 @@ export class Triangle implements Figure {
 export class Circle implements Figure {
   shape: Shape = 'circle';
 
-  private radius: number;
-
-  constructor(public color: Color, radius: number) {
+  constructor(public color: Color, public radius: number) {
     if (radius <= 0) {
       throw new Error(
         'Radius length must be greater than 0.',
       );
     }
-    this.radius = radius;
   }
 
   getArea(): number {
@@ -58,19 +55,16 @@ export class Circle implements Figure {
 export class Rectangle implements Figure {
   shape: Shape = 'rectangle';
 
-  private width: number;
-
-  private height: number;
-
-  constructor(public color: Color, width: number, height: number) {
+  constructor(
+    public color: Color
+    , public width: number
+    , public height: number,
+  ) {
     if (Math.min(width, height) <= 0) {
       throw new Error(
         'Each side length of the rectangle must be greater than 0',
       );
     }
-
-    this.width = width;
-    this.height = height;
   }
 
   getArea(): number {
