@@ -21,11 +21,6 @@ export class Triangle implements Figure {
         'The longest side can not be longer than sum of other two',
       );
     }
-
-    this.color = color;
-    this.a = a;
-    this.b = b;
-    this.c = c;
   }
 
   getArea(): number {
@@ -44,8 +39,6 @@ export class Circle implements Figure {
     if (radius <= 0) {
       throw new Error('Radius can not be less 0');
     }
-    this.color = color;
-    this.radius = radius;
   }
 
   getArea(): number {
@@ -63,9 +56,6 @@ export class Rectangle implements Figure {
     if (width <= 0 || height <= 0) {
       throw new Error('Width or heigth can not be less 0');
     }
-    this.color = color;
-    this.width = width;
-    this.height = height;
   }
 
   getArea(): number {
