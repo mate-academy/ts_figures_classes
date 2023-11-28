@@ -16,9 +16,15 @@ export class Triangle implements Figure {
 
   constructor(public color: Color, public a: number, public b: number,
     public c: number) {
-    if (Math.min(a, b, c) <= 0
-    || Math.max(a, b, c) >= a + b + c - Math.max(a, b, c)) {
-      throw new Error('Incorrect sides');
+    if (Math.min(a, b, c) <= 0) {
+      throw new Error('Triangle dimension cannot be less then 0.');
+    }
+
+    const longestSide = Math.max(a, b, c);
+
+    if (longestSide >= a + b + c - longestSide) {
+      throw new Error('The sum of the lengths of any two sides'
+      + 'of a triangle must be greater than the third side.');
     }
     this.shape = 'triangle';
   }
@@ -35,7 +41,7 @@ export class Circle implements Figure {
 
   constructor(public color: Color, public radius: number) {
     if (Math.min(radius) <= 0) {
-      throw new Error('Incorrect radius');
+      throw new Error('Circle radius cannot be less then 0.');
     }
     this.shape = 'circle';
   }
@@ -51,7 +57,7 @@ export class Rectangle implements Figure {
   constructor(public color: Color, public width: number,
     public height: number) {
     if (Math.min(width, height) <= 0) {
-      throw new Error('Incorrect sides');
+      throw new Error('Rectangle dimension cannot be less then 0.');
     }
     this.shape = 'rectangle';
   }
