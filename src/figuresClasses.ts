@@ -13,11 +13,13 @@ export class Triangle implements Figure {
   constructor(public color: Color, public a: number,
     public b: number, public c: number) {
     if (c <= 0 || b <= 0 || c <= 0) {
-      throw new Error('your error message');
+      throw new Error('Sides can not be less 0');
     }
 
     if (!(a + b > c && a + c > b && b + c > a)) {
-      throw new Error('your error message');
+      throw new Error(
+        'The longest side can not be longer than sum of other two',
+      );
     }
 
     this.color = color;
@@ -40,7 +42,7 @@ export class Circle implements Figure {
 
   constructor(public color: Color, public radius: number) {
     if (radius <= 0) {
-      throw new Error('your error message');
+      throw new Error('Radius can not be less 0');
     }
     this.color = color;
     this.radius = radius;
@@ -59,7 +61,7 @@ export class Rectangle implements Figure {
   constructor(public color: Color,
     public width: number, public height: number) {
     if (width <= 0 || height <= 0) {
-      throw new Error('your error message');
+      throw new Error('Width or heigth can not be less 0');
     }
     this.color = color;
     this.width = width;
