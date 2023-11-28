@@ -42,9 +42,13 @@ export class Circle implements Figure {
   }
 
   getArea(): number {
-    const result = Math.PI * this.radius * this.radius;
+    let result = Math.PI * this.radius * this.radius;
 
-    return parseFloat(result.toFixed(2));
+    result *= 100;
+    result = Math.floor(result);
+    result /= 100;
+
+    return result;
   }
 }
 
