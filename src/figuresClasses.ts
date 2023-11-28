@@ -1,11 +1,13 @@
+export type Shape = 'triangle' | 'circle' | 'rectangle';
+
 export interface Figure {
-  shape: string;
+  shape: Shape;
   color: string;
   getArea(): number;
 }
 
 export class Triangle implements Figure {
-  shape: string = 'triangle';
+  shape: Shape = 'triangle';
 
   color: string;
 
@@ -31,12 +33,12 @@ export class Triangle implements Figure {
     const area = Math.sqrt(semiPerimeter * (semiPerimeter - this.a)
      * (semiPerimeter - this.b) * (semiPerimeter - this.c));
 
-    return parseFloat(area.toFixed(2));
+    return Math.floor(area * 100) / 100;
   }
 }
 
 export class Circle implements Figure {
-  shape: string = 'circle';
+  shape: Shape = 'circle';
 
   color: string;
 
@@ -58,7 +60,7 @@ export class Circle implements Figure {
 }
 
 export class Rectangle implements Figure {
-  shape: string = 'rectangle';
+  shape: Shape = 'rectangle';
 
   color: string;
 
@@ -78,7 +80,7 @@ export class Rectangle implements Figure {
   getArea(): number {
     const area = this.width * this.height;
 
-    return parseFloat(area.toFixed(2));
+    return Math.floor(area * 100) / 100;
   }
 }
 
