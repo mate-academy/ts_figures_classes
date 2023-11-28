@@ -28,8 +28,10 @@ export class Triangle implements Figure {
   getArea(): number {
     const semiPerimeter = (this.a + this.b + this.c) / 2;
 
-    return Math.sqrt(semiPerimeter * (semiPerimeter - this.a)
+    const area = Math.sqrt(semiPerimeter * (semiPerimeter - this.a)
      * (semiPerimeter - this.b) * (semiPerimeter - this.c));
+
+    return parseFloat(area.toFixed(2));
   }
 }
 
@@ -51,7 +53,7 @@ export class Circle implements Figure {
   getArea(): number {
     const area = Math.PI * (this.radius ** 2);
 
-    return parseFloat(area.toFixed(2));
+    return Math.floor(area * 100) / 100;
   }
 }
 
@@ -74,12 +76,12 @@ export class Rectangle implements Figure {
   }
 
   getArea(): number {
-    return this.width * this.height;
+    const area = this.width * this.height;
+
+    return parseFloat(area.toFixed(2));
   }
 }
 
 export function getInfo(figure: Figure): string {
-  const area = figure.getArea().toFixed(2);
-
-  return `A ${figure.color} ${figure.shape} - ${area}`;
+  return `A ${figure.color} ${figure.shape} - ${figure.getArea()}`;
 }
