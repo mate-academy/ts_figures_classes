@@ -1,15 +1,23 @@
-type Shape = 'triangle' | 'circle' | 'rectangle';
-type Color = 'red' | 'green' | 'blue';
+enum Color {
+  Red = 'RED',
+  Green = 'GREEN',
+  Blue = 'BLUE',
+}
+
+enum Shape {
+  Triangle = 'TRIANGLE',
+  Circle = 'CIRCLE',
+  Rectangle = 'RECTANGLE',
+}
 
 export interface Figure {
-  shape: Shape,
-  color: Color,
-
+  color: Color;
+  shape: Shape;
   getArea(): number;
 }
 
 export class Triangle implements Figure {
-  shape: Shape = 'triangle';
+  public shape: Shape;
 
   constructor(
     public color: Color,
@@ -17,37 +25,35 @@ export class Triangle implements Figure {
     public b: number,
     public c: number,
   ) {
-    const checkLength = (param: number): boolean => param <= 0;
-    const checkMaxSide = (side1: number,
-      side2: number,
-      side3: number): boolean => {
-      const maxSide = Math.max(side1, side2, side3);
-      const sumOfSides = (side1 + side2 + side3) - maxSide;
-
-      return maxSide >= sumOfSides;
-    };
-
-    if (checkLength(a) || checkLength(b) || checkLength(c)) {
-      throw new Error('Invalid side length');
+    if (a <= 0 || b <= 0 || c <= 0) {
+      throw new Error('Invalid sides');
     }
 
-    if (checkMaxSide(a, b, c)) {
-      throw new Error(
-        'Length of the longest side must be greater than the sum of two others',
-      );
+    const longestSide = Math.max(a, b, c);
+
+    if (longestSide >= a + b || longestSide >= b + c || longestSide >= a + c) {
+      throw new Error('One of the sides is too big');
     }
+
+    this.shape = Shape.Triangle;
   }
 
   getArea(): number {
-    const p = (this.a + this.b + this.c) / 2;
-    const square = Math.sqrt(p * (p - this.a) * (p - this.b) * (p - this.c));
+    const halfOfPerimeter = (this.a + this.b + this.c) / 2;
 
-    return Math.round((square) * 100) / 100;
+    return Math.floor(
+      Math.sqrt(
+        halfOfPerimeter
+        * (halfOfPerimeter - this.a)
+        * (halfOfPerimeter - this.b)
+        * (halfOfPerimeter - this.c),
+      ) * 100,
+    ) / 100;
   }
 }
 
 export class Circle implements Figure {
-  shape: Shape = 'circle';
+  public shape: Shape;
 
   constructor(
     public color: Color,
@@ -56,35 +62,36 @@ export class Circle implements Figure {
     if (radius <= 0) {
       throw new Error('Invalid radius');
     }
+
+    this.shape = Shape.Circle;
   }
 
   getArea(): number {
-    const PI = this.radius * Math.PI * this.radius;
-
-    return Math.floor((PI) * 100) / 100;
+    return Math.floor(Math.PI * this.radius ** 2 * 100) / 100;
   }
 }
 
 export class Rectangle implements Figure {
-  shape: Shape = 'rectangle';
+  public shape: Shape;
 
   constructor(
     public color: Color,
     public width: number,
     public height: number,
   ) {
-    if (height <= 0 || width <= 0) {
-      throw new Error('Side must be include date');
+    if (width <= 0 || height <= 0) {
+      throw new Error('Invalid sides');
     }
+
+    this.shape = Shape.Rectangle;
   }
 
   getArea(): number {
-    const full = this.width * this.height;
-
-    return Math.round((full) * 100) / 100;
+    return this.width * this.height;
   }
 }
 
 export function getInfo(figure: Figure): string {
-  return `A ${figure.color} ${figure.shape} - ${figure.getArea()}`;
+  return `A ${figure.color} ${figure
+    .shape.toLowerCase()} - ${figure.getArea()}`;
 }
