@@ -1,36 +1,50 @@
+type Color = 'red' | 'green' | 'blue';
+type Shape = 'triangle' | 'circle' | 'rectangle';
+type GetArea = () => number;
+
 export interface Figure {
-  shape: string;
-  color: string;
-  getArea: Function;
+  shape: Shape;
+  color: Color;
+  getArea: GetArea;
 }
 
 export class Triangle implements Figure {
-  shape = 'triangle';
+  shape: Shape = 'triangle';
 
   constructor(
-    public color: string,
+    public color: Color,
     public a: number,
     public b: number,
     public c: number,
   ) {
+    const firstSide = a + b <= c;
+    const secondSide = b + c <= a;
+    const thirdSide = c + a <= b;
+    const aCondition = a <= 0;
+    const bCondition = b <= 0;
+    const cCondition = c <= 0;
+    const colorCondition = color.length === 0;
+
     if (
-      color.length === 0
-      || a <= 0
-      || b <= 0
-      || c <= 0
-      || a + b <= c
-      || b + c <= a
-      || c + a <= b
+      colorCondition
+      || aCondition
+      || bCondition
+      || cCondition
+      || firstSide
+      || secondSide
+      || thirdSide
     ) {
       throw new Error('Expected color and valid sides for a triangle');
     }
   }
 
   getArea(): number {
-    const semiP = (this.a + this.b + this.c) / 2;
+    const { a, b, c } = this;
+
+    const semiP = (a + b + c) / 2;
 
     const area = Math.sqrt(
-      (semiP * (semiP - this.a) * (semiP - this.b) * (semiP - this.c)),
+      (semiP * (semiP - a) * (semiP - b) * (semiP - c)),
     );
 
     return Math.round(area * 100) / 100;
@@ -38,10 +52,10 @@ export class Triangle implements Figure {
 }
 
 export class Circle implements Figure {
-  shape = 'circle';
+  shape: Shape = 'circle';
 
   constructor(
-    public color: string,
+    public color: Color,
     public radius: number,
   ) {
     if (
@@ -60,10 +74,10 @@ export class Circle implements Figure {
 }
 
 export class Rectangle implements Figure {
-  shape = 'rectangle';
+  shape: Shape = 'rectangle';
 
   constructor(
-    public color: string,
+    public color: Color,
     public width : number,
     public height : number,
   ) {
