@@ -1,11 +1,12 @@
-export interface Figure {
-  shape: string;
-  color: string;
-  getArea(): number;
-}
 
 type Shape = 'triangle' | 'circle' | 'rectangle';
 type Color = 'red' | 'green' | 'blue';
+
+export interface Figure {
+  shape: Shape;
+  color: Color;
+  getArea(): number;
+}
 
 export class Triangle implements Figure {
   constructor(
@@ -15,19 +16,25 @@ export class Triangle implements Figure {
     public c: number,
     public shape: Shape = 'triangle',
   ) {
-    if (a <= 0 || b <= 0 || c <= 0) {
+    const isInvalidSide = a < 1 || b < 1 || c < 1;
+    const isTriangleValid = a >= b + c || b >= a + c || c >= a + b;
+
+    if (isInvalidSide) {
       throw new Error('All sides must be greater than 0');
     }
 
-    if (a >= b + c || b >= a + c || c >= a + b) {
+    if (isTriangleValid) {
       throw new Error('Invalid triangle sides');
     }
   }
 
   getArea(): number {
-    const p = (this.a + this.b + this.c) / 2;
+    const halfPerimeter = (this.a + this.b + this.c) / 2;
 
-    const square = Math.sqrt(p * (p - this.a) * (p - this.b) * (p - this.c));
+    const square = Math.sqrt(halfPerimeter
+      * (halfPerimeter - this.a)
+      * (halfPerimeter - this.b)
+      * (halfPerimeter - this.c));
 
     return Math.round(square * 100) / 100;
   }
