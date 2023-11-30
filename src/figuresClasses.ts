@@ -7,31 +7,29 @@ export interface Figure {
 export class Triangle implements Figure {
   shape = 'triangle';
 
-  color: string;
+  constructor(
+    public color: string,
+    public a: number,
+    public b: number,
+    public c: number,
+  ) {
+    const sortedSides = [a, b, c].sort((
+      firstSide, secondSide,
+    ) => secondSide - firstSide);
 
-  sides: number[];
-
-  constructor(color: string, a: number, b: number, c: number) {
-    if (
-      a <= 0
-      || b <= 0
-      || c <= 0
-      || a + b <= c
-      || a + c <= b
-      || b + c <= a
-    ) {
-      throw new Error('Invalid sides of triangle');
+    if (sortedSides[0] >= sortedSides[1] + sortedSides[2]) {
+      throw new Error(
+        'Invalid sides of triangle',
+      );
     }
-    this.color = color;
-    this.sides = [a, b, c];
   }
 
   getArea(): number {
-    const square = (this.sides[0] + this.sides[1] + this.sides[2]) / 2;
+    const square = (this.a + this.b + this.c) / 2;
 
     return Math.sqrt(
-      square * (square - this.sides[0])
-        * (square - this.sides[1]) * (square - this.sides[2]),
+      square * (square - this.a)
+        * (square - this.b) * (square - this.c),
     );
   }
 }
@@ -39,16 +37,13 @@ export class Triangle implements Figure {
 export class Circle implements Figure {
   shape = 'circle';
 
-  color: string;
-
-  radius: number;
-
-  constructor(color: string, radius: number) {
+  constructor(
+    public color: string,
+    public radius: number,
+  ) {
     if (radius <= 0) {
       throw new Error('Invalid radius of circle');
     }
-    this.color = color;
-    this.radius = radius;
   }
 
   getArea(): number {
@@ -61,19 +56,14 @@ export class Circle implements Figure {
 export class Rectangle implements Figure {
   shape = 'rectangle';
 
-  color: string;
-
-  width: number;
-
-  height: number;
-
-  constructor(color: string, width: number, height: number) {
+  constructor(
+    public color: string,
+    public width: number,
+    public height: number,
+  ) {
     if (width <= 0 || height <= 0) {
       throw new Error('Invalid sizes of sides of rectangle');
     }
-    this.color = color;
-    this.width = width;
-    this.height = height;
   }
 
   getArea(): number {
