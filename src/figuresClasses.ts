@@ -1,19 +1,33 @@
+enum Shape {
+  triangle = 'triangle',
+  circle = 'circle',
+  rectangle = 'rectangle',
+}
+
+enum Color {
+  red = 'red',
+  green = 'green',
+  blue = 'blue',
+}
+
 export interface Figure {
-  shape: string,
-  color: string,
-  getArea: Function,
+  shape: Shape,
+  color: Color,
+  getArea(): number,
 }
 
 export class Triangle implements Figure {
-  shape = 'triangle';
+  shape = Shape.triangle;
 
   constructor(
-    public color: string,
+    public color: Color,
     public a: number,
     public b: number,
     public c: number,
   ) {
-    if (a <= 0 || b <= 0 || c <= 0) {
+    const isInvalidSide = a <= 0 || b <= 0 || c <= 0;
+
+    if (isInvalidSide) {
       throw new Error('one of the sides is <= 0');
     }
 
@@ -29,8 +43,13 @@ export class Triangle implements Figure {
   }
 
   getArea(): number {
-    const p = 1 / 2 * (this.a + this.b + this.c);
-    const area = Math.sqrt(p * (p - this.a) * (p - this.b) * (p - this.c));
+    const halfPerimetr = 1 / 2 * (this.a + this.b + this.c);
+    const area = Math.sqrt(
+      halfPerimetr
+      * (halfPerimetr - this.a)
+      * (halfPerimetr - this.b)
+      * (halfPerimetr - this.c),
+    );
     const roundedArea = Math.floor(area * 100) / 100;
 
     return roundedArea;
@@ -38,10 +57,10 @@ export class Triangle implements Figure {
 }
 
 export class Circle implements Figure {
-  shape = 'circle';
+  shape = Shape.circle;
 
   constructor(
-    public color: string,
+    public color: Color,
     public radius: number,
   ) {
     if (radius <= 0) {
@@ -58,10 +77,10 @@ export class Circle implements Figure {
 }
 
 export class Rectangle implements Figure {
-  shape = 'rectangle';
+  shape = Shape.rectangle;
 
   constructor(
-    public color: string,
+    public color: Color,
     public width: number,
     public height: number,
   ) {
