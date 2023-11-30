@@ -19,12 +19,18 @@ export class Triangle implements Figure {
     const maxSide = Math.max(a, b, c);
     let sumSmallerSize: number;
 
-    if (maxSide === a) {
-      sumSmallerSize = b + c;
-    } else if (maxSide === b) {
-      sumSmallerSize = a + c;
-    } else {
-      sumSmallerSize = a + b;
+    switch (maxSide) {
+      case a:
+        sumSmallerSize = b + c;
+        break;
+      case b:
+        sumSmallerSize = a + c;
+        break;
+      case c:
+        sumSmallerSize = a + b;
+        break;
+      default:
+        return;
     }
 
     if (a <= 0 || b <= 0 || c <= 0) {
@@ -35,12 +41,12 @@ export class Triangle implements Figure {
   }
 
   getArea(): number {
-    const p: number = (this.a + this.b + this.c) / 2;
+    const { a, b, c } = this;
+    const p: number = (a + b + c) / 2;
     const area: number
-    = Math.sqrt(p * (p - this.a) * (p - this.b) * (p - this.c));
-    const roundedArea: number = Math.floor(area * 100) / 100;
+    = Math.sqrt(p * (p - a) * (p - b) * (p - c));
 
-    return roundedArea;
+    return Math.floor(area * 100) / 100;
   }
 }
 
@@ -57,10 +63,10 @@ export class Circle implements Figure {
   }
 
   getArea(): number {
-    const area: number = Math.PI * (this.radius ** 2);
-    const roundedArea: number = Math.floor(area * 100) / 100;
+    const { radius } = this;
+    const area: number = Math.PI * (radius ** 2);
 
-    return roundedArea;
+    return Math.floor(area * 100) / 100;
   }
 }
 
@@ -78,16 +84,17 @@ export class Rectangle implements Figure {
   }
 
   getArea(): number {
-    const area: number = this.width * this.height;
-    const roundedArea: number = Math.floor(area * 100) / 100;
+    const { width, height } = this;
+    const area: number = width * height;
 
-    return roundedArea;
+    return Math.floor(area * 100) / 100;
   }
 }
 
 export function getInfo(figure: Figure): string {
+  const { color, shape } = figure;
   const area: number = figure.getArea();
-  const message: string = `A ${figure.color} ${figure.shape} - ${area}`;
+  const message: string = `A ${color} ${shape} - ${area}`;
 
   return message;
 }
