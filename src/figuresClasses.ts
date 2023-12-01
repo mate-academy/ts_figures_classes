@@ -17,7 +17,7 @@ export class Triangle implements Figure {
   shape = Shape.triangle;
 
   constructor(
-    private color: Color,
+    public color: Color,
     private a: number,
     private b: number,
     private c: number,
@@ -40,7 +40,7 @@ export class Circle implements Figure {
   shape = Shape.circle;
 
   constructor(
-    private color: Color,
+    public color: Color,
     private radius: number,
   ) {
     if (radius <= 0) {
@@ -60,7 +60,7 @@ export class Rectangle implements Figure {
   shape = Shape.rectangle;
 
   constructor(
-    private color: Color,
+    public color: Color,
     private width: number,
     private height: number,
   ) {
