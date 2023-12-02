@@ -22,15 +22,21 @@ export class Triangle implements Figure {
     private b: number,
     private c: number,
   ) {
-    if (a <= 0 || b <= 0 || c <= 0 || a + b <= c || b + c <= a || c + a <= b) {
-      throw new Error('side is not correct');
+    const isLessZero = a <= 0 || b <= 0 || c <= 0;
+    const isCorrectSide = a + b <= c || b + c <= a || c + a <= b;
+
+    if (isLessZero || isCorrectSide) {
+      throw new Error('One of Triangle side is not correct.');
     }
   }
 
   getArea(): number {
     const { a, b, c } = this;
-    const p = (a + b + c) * (1 / 2);
-    const area = Math.sqrt(p * (p - a) * (p - b) * (p - c));
+    const perimetr = (a + b + c) * (1 / 2);
+    const area = Math.sqrt(perimetr
+      * (perimetr - a)
+      * (perimetr - b)
+      * (perimetr - c));
 
     return Math.floor(area * 100) / 100;
   }
@@ -64,13 +70,16 @@ export class Rectangle implements Figure {
     private width: number,
     private height: number,
   ) {
-    if (width <= 0 || height <= 0) {
-      throw new Error('side is not correct');
+    const isWrongSide = width <= 0 || height <= 0;
+
+    if (isWrongSide) {
+      throw new Error('One of Rectangle side is not correct.');
     }
   }
 
   getArea(): number {
-    const area = this.height * this.width;
+    const { height, width } = this;
+    const area = height * width;
 
     return Math.floor(area * 100) / 100;
   }
