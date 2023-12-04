@@ -22,7 +22,7 @@ export class Triangle implements Figure {
     public c: number,
   ) {
     if (!this.isTriangleValid()) {
-      throw new Error(`The ${this.shape} is not invalid`);
+      throw new Error(`The ${this.shape} is invalid`);
     }
   }
 
@@ -57,7 +57,7 @@ export class Circle implements Figure {
     public radius: number,
   ) {
     if (radius <= 0) {
-      throw new Error(`The ${this.shape} is not invalid`);
+      throw new Error(`The ${this.shape} is invalid`);
     }
   }
 
@@ -77,7 +77,7 @@ export class Rectangle implements Figure {
     public b: number,
   ) {
     if (a <= 0 || b <= 0) {
-      throw new Error(`The ${this.shape} is not invalid`);
+      throw new Error(`The ${this.shape} is invalid`);
     }
   }
 
