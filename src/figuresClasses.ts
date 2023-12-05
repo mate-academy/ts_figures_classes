@@ -16,12 +16,11 @@ export class Triangle implements Figure {
     public b: number,
     public c: number,
   ) {
-    if (a <= 0 || b <= 0 || c <= 0) {
-      throw new Error('Error!');
-    }
-
-    if (a + b <= c || a + c <= b || b + c <= a) {
-      throw new Error('Error!');
+    if (a <= 0 || b <= 0 || c <= 0 || a + b <= c || a + c <= b || b + c <= a) {
+      throw new Error('Error! Invalid triangle dimensions.'
+        + 'The sum of the lengths of any two sides'
+        + ' must be greater than the length of the remaining side,'
+        + 'and all sides must be greater than zero.');
     }
   }
 
@@ -41,7 +40,8 @@ export class Circle implements Figure {
     public radius: number,
   ) {
     if (radius <= 0) {
-      throw new Error('Error!');
+      throw new Error('Error! Invalid radius.'
+        + 'Radius must be greater than zero.');
     }
   }
 
@@ -61,7 +61,8 @@ export class Rectangle implements Figure {
     public height: number,
   ) {
     if (width <= 0 || height <= 0) {
-      throw new Error('Error!');
+      throw new Error('Error! Invalid rectangle dimensions.'
+        + 'Both sides must be greater than zero.');
     }
   }
 
