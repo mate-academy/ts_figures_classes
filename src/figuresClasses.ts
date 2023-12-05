@@ -26,7 +26,7 @@ export class Triangle implements Figure {
     public c: number,
   ) {
     if (a <= 0 || b <= 0 || c <= 0 || a + b <= c || a + c <= b || b + c <= a) {
-      throw new Error('Invalid figure information');
+      throw new Error('Triangles side length must be a positive number');
     }
   }
 
@@ -35,9 +35,7 @@ export class Triangle implements Figure {
 
     return +Math.sqrt(
       square * (square - this.a) * (square - this.b) * (square - this.c),
-    ).toFixed(
-      2,
-    );
+    ).toFixed(2);
   }
 }
 
@@ -49,12 +47,12 @@ export class Circle implements Figure {
     public radius: number,
   ) {
     if (radius <= 0) {
-      throw new Error('Invalid figure information');
+      throw new Error('Circles radius must be a positive number');
     }
   }
 
   getArea(): number {
-    return +((Math.PI * this.radius ** 2)).toFixed(2);
+    return Math.floor(Math.PI * (this.radius ** 2) * 100) / 100;
   }
 }
 
@@ -67,7 +65,7 @@ export class Rectangle implements Figure {
     public height: number,
   ) {
     if (width <= 0 || height <= 0) {
-      throw new Error('Invalid figure information');
+      throw new Error('Rectangles side length must be a positive number');
     }
   }
 
