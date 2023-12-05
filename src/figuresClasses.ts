@@ -22,7 +22,7 @@ export class Triangle implements Figure {
       || c <= 0
       || Math.max(a, b, c) >= a + b + c - Math.max(a, b, c)
     ) {
-      throw new Error('Wrong data');
+      throw new Error(`${this.shape}'s dimensions are less than 0`);
     }
   }
 
@@ -41,7 +41,7 @@ export class Circle implements Figure {
 
   constructor(public color: Color, private radius: number) {
     if (radius <= 0) {
-      throw new Error('Wrong data');
+      throw new Error(`${this.shape}'s dimensions are less than 0`);
     }
   }
 
@@ -55,7 +55,7 @@ export class Rectangle implements Figure {
 
   constructor(public color: Color, private a: number, private b: number) {
     if (a <= 0 || b <= 0) {
-      throw new Error('Each side should be bigger then 0');
+      throw new Error(`${this.shape}'s dimensions are less than 0`);
     }
   }
 
