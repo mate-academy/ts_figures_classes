@@ -21,14 +21,14 @@ export class Triangle implements Figure {
     const checkSide = (a + b + c - longSide) <= longSide;
 
     if (checkLessZero || checkSide) {
-      throw new Error('Error');
+      throw new Error('Bad data!');
     }
   }
 
   getArea(): number {
-    const { a, b, c } = this;
-    const p = (a + b + c) * (1 / 2);
-    const area = Math.sqrt(p * (p - a) * (p - b) * (p - c));
+    const perimetr = (this.a + this.b + this.c) * (1 / 2);
+    const area = Math.sqrt(perimetr * (perimetr - this.a)
+      * (perimetr - this.b) * (perimetr - this.c));
 
     return Math.floor(area * 100) / 100;
   }
@@ -42,7 +42,7 @@ export class Circle implements Figure {
     private radius: number,
   ) {
     if (radius <= 0) {
-      throw new Error('error');
+      throw new Error('Radius less or equally to zero!');
     }
   }
 
@@ -55,7 +55,7 @@ export class Circle implements Figure {
 }
 
 export class Rectangle implements Figure {
-  shape : Shape = 'rectangle';
+  shape: Shape = 'rectangle';
 
   constructor(
     public color: Color,
@@ -65,7 +65,7 @@ export class Rectangle implements Figure {
     const isWrongSide = width <= 0 || height <= 0;
 
     if (isWrongSide) {
-      throw new Error('eroor');
+      throw new Error('Is wrong side!');
     }
   }
 
