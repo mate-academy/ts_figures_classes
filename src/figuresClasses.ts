@@ -25,16 +25,23 @@ export class Triangle implements Figure {
     public b: number,
     public c: number,
   ) {
-    if (a <= 0 || b <= 0 || c <= 0 || a + b <= c || a + c <= b || b + c <= a) {
-      throw new Error('Triangles side length must be a positive number');
+    const isZeroSide = a <= 0 || b <= 0 || c <= 0;
+    const isSizePossible = a + b <= c || a + c <= b || b + c <= a;
+
+    if (isZeroSide) {
+      throw new Error('Sides length must be a positive number');
+    }
+
+    if (isSizePossible) {
+      throw new Error('One of the sides is too long');
     }
   }
 
   getArea(): number {
-    const square = (this.a + this.b + this.c) / 2;
+    const halfPer = (this.a + this.b + this.c) / 2;
 
     return +Math.sqrt(
-      square * (square - this.a) * (square - this.b) * (square - this.c),
+      halfPer * (halfPer - this.a) * (halfPer - this.b) * (halfPer - this.c),
     ).toFixed(2);
   }
 }
