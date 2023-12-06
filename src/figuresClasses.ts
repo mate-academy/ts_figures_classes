@@ -1,40 +1,48 @@
+export type Shape = 'triangle' | 'circle' | 'rectangle';
+export type Color = 'red' | 'green' | 'blue';
+
 export interface Figure {
-  shape: string;
-  color: string;
+  shape: Shape;
+  color: Color;
   getArea(): number;
 }
 
 export class Triangle implements Figure {
-  shape = 'triangle';
+  shape: Shape = 'triangle';
 
-  color: string;
+  color: Color;
 
   constructor(
-    color: string,
+    color: Color,
     public a: number,
     public b: number,
     public c: number,
   ) {
-    if (a <= 0 || b <= 0 || c <= 0 || a + b <= c || a + c <= b || b + c <= a) {
+    const isInvalidSideLength = a <= 0 || b <= 0 || c <= 0;
+    const isInvalidTriangleInequality = a + b <= c || a + c <= b || b + c <= a;
+
+    if (isInvalidSideLength || isInvalidTriangleInequality) {
       throw new Error('Invalid triangle sides');
     }
+
     this.color = color;
   }
 
   getArea(): number {
-    const s = (this.a + this.b + this.c) / 2;
+    const { a, b, c } = this;
+    const semiPerimeter = (a + b + c) / 2;
 
-    return +Math.sqrt(s * (s - this.a)
-      * (s - this.b) * (s - this.c)).toFixed(2);
+    return +Math.sqrt(semiPerimeter * (semiPerimeter - a)
+      * (semiPerimeter - b) * (semiPerimeter - c)).toFixed(2);
   }
 }
 
 export class Circle implements Figure {
-  shape = 'circle';
+  shape: Shape = 'circle';
 
-  color: string;
+  color: Color;
 
-  constructor(color: string, public radius: number) {
+  constructor(color: Color, public radius: number) {
     if (radius <= 0) {
       throw new Error('Invalid circle radius');
     }
@@ -47,11 +55,11 @@ export class Circle implements Figure {
 }
 
 export class Rectangle implements Figure {
-  shape = 'rectangle';
+  shape: Shape = 'rectangle';
 
-  color: string;
+  color: Color;
 
-  constructor(color: string, public width: number, public height: number) {
+  constructor(color: Color, public width: number, public height: number) {
     if (width <= 0 || height <= 0) {
       throw new Error('Invalid rectangle dimensions');
     }
