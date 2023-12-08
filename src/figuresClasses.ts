@@ -1,6 +1,18 @@
+export enum Shape {
+  Triangle = 'triangle',
+  Circle = 'circle',
+  Rectangle = 'rectangle',
+}
+
+export enum Color {
+  Red = 'red',
+  Green = 'green',
+  Blue = 'blue',
+}
+
 export interface Figure {
-  shape: 'triangle' | 'circle' | 'rectangle',
-  color: 'red' | 'green' | 'blue',
+  shape: Shape,
+  color: Color,
   getArea: () => number,
 }
 
@@ -13,10 +25,10 @@ export class Triangle implements Figure {
     public b: number,
     public c: number,
   ) {
-    this.shape = 'triangle';
+    this.shape = Shape.Triangle;
 
     if (a <= 0 || b <= 0 || c <= 0) {
-      throw new Error('throws an error');
+      throw new Error('Incorrect length of one or more sides');
     }
 
     if (a >= (b + c) || b >= (a + c) || c >= (a + b)) {
@@ -42,7 +54,7 @@ export class Circle implements Figure {
     public color: Figure['color'],
     public radius: number,
   ) {
-    this.shape = 'circle';
+    this.shape = Shape.Circle;
 
     if (radius <= 0) {
       throw new Error('throws an error');
@@ -64,7 +76,7 @@ export class Rectangle implements Figure {
     public width: number,
     public height: number,
   ) {
-    this.shape = 'rectangle';
+    this.shape = Shape.Rectangle;
 
     if (width <= 0 || height <= 0) {
       throw new Error('throws an error');
