@@ -2,7 +2,7 @@ type Color = 'red' | 'green' | 'blue';
 
 type Shape = 'triangle' | 'circle' | 'rectangle';
 
-export interface Figure {
+interface Figure {
   shape: Shape;
   color: Color;
   getArea(): number;
@@ -22,7 +22,7 @@ export class Triangle implements Figure {
     if (sizes.some((size: number) => size <= 0)
       || sizes[0] >= sizes[1] + sizes[2]
     ) {
-      throw new Error('Unexpected error');
+      throw new Error('Invalid triangle sizes');
     }
   }
 
@@ -43,7 +43,7 @@ export class Circle implements Figure {
     private radius: number,
   ) {
     if (radius <= 0) {
-      throw new Error('Unexpected error');
+      throw new Error('Invalid circle radius');
     }
   }
 
@@ -61,7 +61,7 @@ export class Rectangle implements Figure {
     private height: number,
   ) {
     if (width <= 0 || height <= 0) {
-      throw new Error('Unexpected error');
+      throw new Error('Invalid triangle width or height');
     }
   }
 
