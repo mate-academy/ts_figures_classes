@@ -5,49 +5,46 @@ export interface Figure {
 }
 
 export class Triangle implements Figure {
-  readonly shape: string;
-
-  readonly color: string;
-
-  readonly sideA: number;
-
-  readonly sideB: number;
-
-  readonly sideC: number;
-
-  constructor(color: string, a: number, b: number, c: number) {
-    if (a <= 0 || b <= 0 || c <= 0) {
+  constructor(
+    readonly color: string,
+    readonly sideA: number,
+    readonly sideB: number,
+    readonly sideC: number,
+    readonly shape: string,
+  ) {
+    if (sideA <= 0 || sideB <= 0 || sideC <= 0) {
       throw new Error('Side lengths must be greater than 0.');
     }
 
-    if (a >= b + c || b >= a + c || c >= a + b) {
+    if (sideA >= sideB + sideC
+      || sideB >= sideA + sideC
+      || sideC >= sideA + sideB
+    ) {
       throw new Error('Not a triangle');
     }
 
     this.shape = 'triangle';
     this.color = color;
-    this.sideA = a;
-    this.sideB = b;
-    this.sideC = c;
+    this.sideA = sideA;
+    this.sideB = sideB;
+    this.sideC = sideC;
   }
 
   getArea(): number {
     const s = (this.sideA + this.sideB + this.sideC) / 2;
     const area = Math.sqrt(s * (s - this.sideA)
-    * (s - this.sideB) * (s - this.sideC));
+      * (s - this.sideB) * (s - this.sideC));
 
     return Math.floor(area * 100) / 100;
   }
 }
 
 export class Circle implements Figure {
-  readonly shape: string;
-
-  readonly color: string;
-
-  readonly radius: number;
-
-  constructor(color: string, radius: number) {
+  constructor(
+    readonly color: string,
+    readonly radius: number,
+    readonly shape: string,
+  ) {
     if (radius <= 0) {
       throw new Error('Radius must be greater than 0.');
     }
@@ -65,15 +62,12 @@ export class Circle implements Figure {
 }
 
 export class Rectangle implements Figure {
-  readonly shape: string;
-
-  readonly color: string;
-
-  readonly width: number;
-
-  readonly height: number;
-
-  constructor(color: string, width: number, height: number) {
+  constructor(
+    readonly color: string,
+    readonly width: number,
+    readonly height: number,
+    readonly shape: string,
+  ) {
     if (width <= 0 || height <= 0) {
       throw new Error('Width and height must be greater than 0.');
     }
