@@ -53,15 +53,9 @@ export class Circle implements Figure {
   }
 
   getArea(): number {
-    const result: number = parseFloat(
-      (Math.PI * this.radius * this.radius).toFixed(2),
-    );
+    const result: number = (this.radius * this.radius * Math.PI);
 
-    if (result === 113.1) {
-      return 113.09;
-    }
-
-    return result;
+    return Math.floor(result * 100) / 100;
   }
 }
 
