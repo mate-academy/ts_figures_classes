@@ -4,13 +4,17 @@ export interface Figure {
   getArea(): number;
 }
 
+type Color = 'red' | 'green' | 'blue';
+type Shape = 'triangle' | 'circle' | 'rectangle';
+
 export class Triangle implements Figure {
+  shape: Shape = 'triangle';
+
   constructor(
-    readonly color: string,
-    readonly sideA: number,
-    readonly sideB: number,
-    readonly sideC: number,
-    readonly shape: string,
+    public color: Color,
+    private sideA: number,
+    private sideB: number,
+    private sideC: number,
   ) {
     if (sideA <= 0 || sideB <= 0 || sideC <= 0) {
       throw new Error('Side lengths must be greater than 0.');
@@ -22,12 +26,6 @@ export class Triangle implements Figure {
     ) {
       throw new Error('Not a triangle');
     }
-
-    this.shape = 'triangle';
-    this.color = color;
-    this.sideA = sideA;
-    this.sideB = sideB;
-    this.sideC = sideC;
   }
 
   getArea(): number {
@@ -40,18 +38,15 @@ export class Triangle implements Figure {
 }
 
 export class Circle implements Figure {
+  shape: Shape = 'circle';
+
   constructor(
-    readonly color: string,
-    readonly radius: number,
-    readonly shape: string,
+    public color: Color,
+    private radius: number,
   ) {
     if (radius <= 0) {
       throw new Error('Radius must be greater than 0.');
     }
-
-    this.shape = 'circle';
-    this.color = color;
-    this.radius = radius;
   }
 
   getArea(): number {
@@ -62,20 +57,16 @@ export class Circle implements Figure {
 }
 
 export class Rectangle implements Figure {
+  shape: Shape = 'rectangle';
+
   constructor(
-    readonly color: string,
-    readonly width: number,
-    readonly height: number,
-    readonly shape: string,
+    public color: Color,
+    private width: number,
+    private height: number,
   ) {
     if (width <= 0 || height <= 0) {
       throw new Error('Width and height must be greater than 0.');
     }
-
-    this.shape = 'rectangle';
-    this.color = color;
-    this.width = width;
-    this.height = height;
   }
 
   getArea(): number {
