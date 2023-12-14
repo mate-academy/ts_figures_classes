@@ -8,7 +8,7 @@ export interface Figure {
   getArea(): number,
 }
 
-const checkEachValuesMustBiggerThanZero = (
+const checkEachValueMustBiggerThanZero = (
   a: number,
   b = Infinity,
   c = Infinity,
@@ -23,7 +23,7 @@ const checkCorrectLengthsOfTriangleSides = (
   b: number,
   c: number,
 ): void => {
-  checkEachValuesMustBiggerThanZero(a, b, c);
+  checkEachValueMustBiggerThanZero(a, b, c);
 
   const max = Math.max(a, b, c);
 
@@ -70,7 +70,7 @@ export class Circle implements Figure {
     color: Color,
     public radius: number,
   ) {
-    checkEachValuesMustBiggerThanZero(radius);
+    checkEachValueMustBiggerThanZero(radius);
     this.color = color;
     this.shape = 'circle';
   }
@@ -90,7 +90,7 @@ export class Rectangle implements Figure {
     public width: number,
     public height: number,
   ) {
-    checkEachValuesMustBiggerThanZero(width, height);
+    checkEachValueMustBiggerThanZero(width, height);
     this.color = color;
     this.shape = 'rectangle';
   }
