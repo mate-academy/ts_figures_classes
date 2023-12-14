@@ -30,13 +30,15 @@ describe('Class "Triangle"', () => {
   test('should check whether all sides are positive numbers', () => {
     expect(() => {
       new Triangle('green', 0, 2, 2);
-    }).toThrow(Error);
+    })
+      .toThrow(Error);
   });
 
   test('should check whether it is a triangle', () => {
     expect(() => {
       new Triangle('green', 5, 10, 15);
-    }).toThrow(Error);
+    })
+      .toThrow(Error);
   });
 
   test('should have a method "getArea"', () => {
@@ -93,7 +95,8 @@ describe('Class "Circle"', () => {
   test('should check whether radius is a positive number', () => {
     expect(() => {
       new Circle('red', -3);
-    }).toThrow(Error);
+    })
+      .toThrow(Error);
   });
 
   test('should have a method "getArea"', () => {
@@ -150,7 +153,8 @@ describe('Class "Rectangle"', () => {
   test('should check whether all sides are positive numbers', () => {
     expect(() => {
       new Rectangle('blue', 5, -1);
-    }).toThrow(Error);
+    })
+      .toThrow(Error);
   });
 
   test('should have a method "getArea"', () => {
