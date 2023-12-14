@@ -32,6 +32,10 @@ const checkCorrectLengthsOfTriangleSides = (
   }
 };
 
+const round = (value: number): number => {
+  return Math.trunc(value * 100) / 100;
+};
+
 export class Triangle implements Figure {
   color: Color;
 
@@ -53,7 +57,7 @@ export class Triangle implements Figure {
     const s: number = (p * (p - this.a) * (p - this.b) * (p - this.c));
     const square: number = Math.sqrt(s);
 
-    return Math.trunc(square * 100) / 100;
+    return round(square);
   }
 }
 
@@ -72,7 +76,7 @@ export class Circle implements Figure {
   }
 
   getArea(): number {
-    return Math.trunc((this.radius ** 2) * Math.PI * 100) / 100;
+    return round((this.radius ** 2) * Math.PI);
   }
 }
 
@@ -92,7 +96,7 @@ export class Rectangle implements Figure {
   }
 
   getArea(): number {
-    return Math.trunc(this.width * this.height * 100) / 100;
+    return round(this.width * this.height);
   }
 }
 
