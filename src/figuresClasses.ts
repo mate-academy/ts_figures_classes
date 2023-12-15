@@ -6,6 +6,12 @@ function round(num: number): number {
   return Math.floor(num * 100) / 100;
 }
 
+function checkPositiveNumsError(...numbers: number[]): void {
+  if (numbers.some((num) => num <= 0)) {
+    throw new Error('Some value is <= 0');
+  }
+}
+
 enum Shape {
   TRIANGLE = 'triangle',
   CIRCLE = 'circle',
@@ -29,9 +35,7 @@ export class Triangle implements Figure {
   ) {
     const sides = [a, b, c];
 
-    if (sides.some((item) => item <= 0)) {
-      throw new Error('Some value is <= 0');
-    }
+    checkPositiveNumsError(...sides);
 
     const maxSide = Math.max(...sides);
     const maxSideIndex = sides.indexOf(maxSide);
@@ -64,9 +68,7 @@ export class Circle implements Figure {
     public color: Figure['color'],
     protected radius: number,
   ) {
-    if (radius <= 0) {
-      throw new Error('Radius value is <= 0');
-    }
+    checkPositiveNumsError(radius);
   }
 
   getArea(): number {
@@ -82,9 +84,7 @@ export class Rectangle implements Figure {
     protected width: number,
     protected height: number,
   ) {
-    if ([width, height].some((item) => item <= 0)) {
-      throw new Error('Some value is <= 0');
-    }
+    checkPositiveNumsError(width, height);
   }
 
   getArea(): number {
