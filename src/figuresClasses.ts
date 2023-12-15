@@ -37,18 +37,15 @@ const round = (value: number): number => {
 };
 
 export class Triangle implements Figure {
-  color: Color;
-
   shape: Shape;
 
   constructor(
-    color: Color,
+    public color: Color,
     public a: number,
     public b: number,
     public c: number,
   ) {
     checkCorrectLengthsOfTriangleSides(a, b, c);
-    this.color = color;
     this.shape = 'triangle';
   }
 
@@ -62,16 +59,13 @@ export class Triangle implements Figure {
 }
 
 export class Circle implements Figure {
-  color: Color;
-
   shape: Shape;
 
   constructor(
-    color: Color,
+    public color: Color,
     public radius: number,
   ) {
     checkEachValueMustBiggerThanZero(radius);
-    this.color = color;
     this.shape = 'circle';
   }
 
@@ -81,17 +75,14 @@ export class Circle implements Figure {
 }
 
 export class Rectangle implements Figure {
-  color: Color;
-
   shape: Shape;
 
   constructor(
-    color: Color,
+    public color: Color,
     public width: number,
     public height: number,
   ) {
     checkEachValueMustBiggerThanZero(width, height);
-    this.color = color;
     this.shape = 'rectangle';
   }
 
