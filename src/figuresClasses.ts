@@ -1,3 +1,12 @@
+
+enum Shape {
+  triangle = 'triangle',
+  circle = 'circle',
+  rectangle = 'rectangle',
+}
+
+type Color = 'red' | 'green' | 'blue';
+
 export interface Figure {
   shape: string,
   color: string,
@@ -5,18 +14,14 @@ export interface Figure {
 }
 
 export class Triangle implements Figure {
-  shape: string = 'triangle';
-
-  color: string;
+  shape: Shape = Shape.triangle;
 
   constructor(
-    color: string,
+    public color: Color,
     public a: number,
     public b: number,
     public c: number,
   ) {
-    this.color = color;
-
     if (a <= 0
       || b <= 0
       || c <= 0
@@ -38,16 +43,12 @@ export class Triangle implements Figure {
 }
 
 export class Circle implements Figure {
-  shape: string = 'circle';
-
-  color: string;
+  shape: Shape = Shape.circle;
 
   constructor(
-    color: string,
+    public color: Color,
     public radius: number,
   ) {
-    this.color = color;
-
     if (radius <= 0) {
       throw new Error('Invalid circle radius');
     }
@@ -59,17 +60,13 @@ export class Circle implements Figure {
 }
 
 export class Rectangle implements Figure {
-  shape: string = 'rectangle';
-
-  color: string;
+  shape: Shape = Shape.rectangle;
 
   constructor(
-    color: string,
+    public color: Color,
     public width: number,
     public height: number,
   ) {
-    this.color = color;
-
     if (width <= 0 || height <= 0) {
       throw new Error('Invalid rectangle dimensions');
     }
