@@ -69,10 +69,6 @@ export class Rectangle implements Figure {
   }
 }
 
-// export function getInfo(figure): string {
-//   return typeof figure;
-// }
-
 export function getInfo(figure: Figure): string {
   switch (figure.shape) {
     case 'triangle':
