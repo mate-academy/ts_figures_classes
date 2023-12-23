@@ -1,4 +1,3 @@
-/* eslint-disable prefer-rest-params */
 type Shape = 'triangle' | 'circle' | 'rectangle';
 type Color = 'red' | 'blue' | 'green';
 
@@ -54,7 +53,6 @@ export class Triangle implements Figure {
 export class Circle implements Figure {
   shape: Shape = 'circle';
 
-  // eslint-disable-next-line no-useless-constructor
   constructor(
     public color: Color,
     public radius: number,
