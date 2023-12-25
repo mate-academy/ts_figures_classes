@@ -15,10 +15,10 @@ export class Triangle implements Figure {
   shape: Shape = Shape.Triangle;
 
   constructor(
+    public color: Color,
     public a: number,
     public b: number,
     public c: number,
-    public color: Color,
   ) {
     if (a <= 0 || b <= 0 || c <= 0) {
       throw new Error('All sides of the triangle must be greater than 0');
@@ -41,7 +41,7 @@ export class Triangle implements Figure {
 export class Circle implements Figure {
   shape: Shape = Shape.Circle;
 
-  constructor(public radius: number, public color: Color) {
+  constructor(public color: Color, public radius: number) {
     if (radius <= 0) {
       throw new Error('Radius of the circle must be greater than 0');
     }
@@ -56,9 +56,9 @@ export class Rectangle implements Figure {
   shape: Shape = Shape.Rectangle;
 
   constructor(
+    public color: Color,
     public width: number,
     public height: number,
-    public color: Color,
   ) {
     if (width <= 0 || height <= 0) {
       throw new Error(
@@ -68,7 +68,7 @@ export class Rectangle implements Figure {
   }
 
   getArea(): number {
-    return +(this.height * this.width).toFixed(2);
+    return this.height * this.width;
   }
 }
 
