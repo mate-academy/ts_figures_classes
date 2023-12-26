@@ -13,8 +13,8 @@ export class Triangle implements Figure {
     public b: number,
     public c: number,
   ) {
-    if (a < 0 || b < 0 || c < 0) {
-      throw new Error('all sides a triangle must be greater  than zero');
+    if (a <= 0 || b <= 0 || c <= 0 || a + b <= c || a + c <= b || b + c <= a) {
+      throw new Error('Error');
     }
 
     this.shape = 'triangle';
@@ -26,8 +26,9 @@ export class Triangle implements Figure {
 
   getArea(): number {
     const s = (this.a + this.b + this.c) / 2;
+    const area = Math.sqrt(s * (s - this.a) * (s - this.b) * (s - this.c));
 
-    return Math.sqrt(s * (s - this.a) * (s - this.b) * (s - this.c));
+    return parseFloat(area.toFixed(2));
   }
 }
 
@@ -47,7 +48,9 @@ export class Circle implements Figure {
   }
 
   getArea(): number {
-    return Math.PI * (this.radius ** 2);
+    const area = Math.PI * (this.radius ** 2);
+
+    return Math.trunc(area * 100) / 100;
   }
 }
 
@@ -57,25 +60,25 @@ export class Rectangle implements Figure {
   constructor(
     public color: string,
     public width: number,
-    public heigth: number,
+    public height: number,
   ) {
-    if (width <= 0 || heigth <= 0) {
+    if (width <= 0 || height <= 0) {
       throw new Error('all sides a reactangle must be greater than zero');
     }
 
     this.shape = 'rectangle';
     this.color = color;
-    this.heigth = heigth;
+    this.height = height;
     this.width = width;
   }
 
   getArea(): number {
-    return this.width * this.heigth;
+    return parseFloat((this.width * this.height).toFixed(2));
   }
 }
 
 export function getInfo(figure: Figure): string {
-  const area = figure.getArea().toFixed(2);
+  const area = figure.getArea();
 
   return `A ${figure.color} ${figure.shape} - ${area}`;
 }
