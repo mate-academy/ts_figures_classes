@@ -36,19 +36,16 @@ export class Triangle implements Figure {
 export class Circle implements Figure {
   shape: string;
 
-  constructor(
-    public color: string,
-    public radius: number,
-  ) {
+  constructor(public color: string, public radius: number) {
     this.shape = 'circle';
 
     if (radius <= 0) {
-      throw new Error('Circle radius must be greater than 0.');
+      throw new Error('Radius must be a positive number');
     }
   }
 
   getArea(): number {
-    return Math.PI * this.radius * this.radius;
+    return Math.round(Math.PI * this.radius ** 2 * 100) / 100;
   }
 }
 
