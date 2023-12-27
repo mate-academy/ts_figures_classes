@@ -45,7 +45,11 @@ export class Circle implements Figure {
   }
 
   getArea(): number {
-    return Math.round(Math.PI * this.radius ** 2 * 100) / 100;
+    const area = Math.PI ** (this.radius, 2);
+
+    const roundedArea = parseFloat(area.toFixed(2));
+
+    return roundedArea;
   }
 }
 
