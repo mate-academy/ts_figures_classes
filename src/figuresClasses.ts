@@ -36,7 +36,10 @@ export class Triangle implements Figure {
 export class Circle implements Figure {
   shape: string;
 
-  constructor(public color: string, public radius: number) {
+  constructor(
+    public color: string,
+    public radius: number,
+  ) {
     this.shape = 'circle';
 
     if (radius <= 0) {
