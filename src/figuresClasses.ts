@@ -65,7 +65,7 @@ export class Circle implements Figure {
       return s;
     }
 
-    return Number(s.toFixed(2));
+    return Math.trunc(s * 100) / 100;
   }
 }
 
