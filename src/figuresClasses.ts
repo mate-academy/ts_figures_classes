@@ -4,11 +4,12 @@ type Color = 'red' | 'green' | 'blue';
 export interface Figure {
   shape: Shape;
   color: Color;
-  getArea(): number;
+  getArea: () => number;
 }
 
 export class Triangle implements Figure {
   private sides: number[];
+
   shape: Shape;
 
   constructor(public color: Color, a: number, b: number, c: number) {
