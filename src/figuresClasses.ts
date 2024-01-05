@@ -1,36 +1,37 @@
 export interface Figure {
-  shape: 'triangle' | 'circle' | 'rectangle',
-  color: 'red' | 'green' | 'blue',
   getArea: () => number
 }
 
+type Shape = 'triangle' | 'circle' | 'rectangle';
+type Color = 'red' | 'green' | 'blue';
+
 export class Triangle implements Figure {
-  shape: 'triangle' = 'triangle';
+  shape: Shape = 'triangle';
 
-  constructor(public color: 'red' | 'green' | 'blue',
-    public sides: { a: number; b: number; c: number }) {
-    if (this.sides.a <= 0 || this.sides.b <= 0 || this.sides.c <= 0
-        || this.getArea() <= 0) {
-      throw Error(`sides ${this.sides.a}, ${this.sides.b},
-      and ${this.sides.c} can't form a ${this.shape}`);
+  constructor(public color: Color,
+    public a: number, public b: number, public c: number) {
+    if (a <= 0 || b <= 0 || c <= 0
+        || a >= b + c || b >= a + c || c >= a + b) {
+      throw Error(`sides ${a}, ${b},
+      and ${c} can't form a ${this.shape}`);
     }
-
-    this.sides = sides;
   }
 
   getArea(): number {
-    const s = (this.sides.a + this.sides.b + this.sides.c) / 2;
-    const res = Math.sqrt(s * (s - this.sides.a)
-    * (s - this.sides.b) * (s - this.sides.c));
+    const s = (this.a + this.b + this.c) / 2;
+
+    const intermediateResult = s * (s - this.a) * (s - this.b) * (s - this.c);
+
+    const res = Math.sqrt(intermediateResult);
 
     return +res.toFixed(2);
   }
 }
 
 export class Circle implements Figure {
-  shape: 'circle' = 'circle';
+  shape: Shape = 'circle';
 
-  constructor(public color: 'red' | 'green' | 'blue',
+  constructor(public color: Color,
     public radius: number) {
     if (this.radius <= 0) {
       throw Error(`${this.radius} can't form a ${this.shape}`);
@@ -38,16 +39,16 @@ export class Circle implements Figure {
   }
 
   getArea(): number {
-    const res = Math.PI * this.radius ** 2;
+    const res = Math.PI * (this.radius ** 2);
 
-    return +res.toFixed(2);
+    return parseFloat(res.toFixed(2));
   }
 }
 
 export class Rectangle implements Figure {
-  shape: 'rectangle' = 'rectangle';
+  shape: Shape = 'rectangle';
 
-  constructor(public color: 'red' | 'green' | 'blue',
+  constructor(public color: Color,
     public width: number, public height: number) {
     if (this.width <= 0 || this.height <= 0) {
       throw Error(`${this.width} and ${this.height}
