@@ -1,6 +1,6 @@
 export interface Figure {
-  shape: string, // 'triangle' | 'circle' | 'rectangle'
-  color: string, // 'red' | 'green' | 'blue'
+  shape: string,
+  color: string,
   getArea(): number,
 }
 
@@ -13,11 +13,12 @@ export class Triangle implements Figure {
     public b: number,
     public c: number,
   ) {
-    if (
-      (this.a <= 0 || this.b <= 0 || this.c <= 0)
-      || (this.a + this.b <= this.c)
-    ) {
-      throw new Error('should have correct sides');
+    if (this.a <= 0 || this.b <= 0 || this.c <= 0) {
+      throw new Error('Resulting value should be bigger than 0');
+    }
+
+    if (this.a + this.b <= this.c) {
+      throw new Error('Hypotenuse should be bigger than sum of two sides');
     }
   }
 
@@ -39,7 +40,7 @@ export class Circle implements Figure {
     public radius: number,
   ) {
     if (this.radius <= 0) {
-      throw new Error('should have correct radius');
+      throw new Error('Resulting value should be bigger than 0');
     }
   }
 
@@ -59,7 +60,7 @@ export class Rectangle implements Figure {
     public height: number,
   ) {
     if (this.width <= 0 || this.height <= 0) {
-      throw new Error('should have correct width or height');
+      throw new Error('Resulting value should be bigger than 0');
     }
   }
 
