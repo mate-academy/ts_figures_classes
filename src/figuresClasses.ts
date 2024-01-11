@@ -1,21 +1,33 @@
+enum FigureType {
+  'triangle',
+  'circle',
+  'rectangle',
+}
+
+enum FigureColor {
+  'red',
+  'green',
+  'blue',
+}
+
 export interface Figure {
-  shape: string;
-  color: string;
+  shape: FigureType;
+  color: FigureColor;
   getArea(): number;
 }
 
 export class Triangle implements Figure {
-  shape: string = 'triangle';
+  shape: FigureType = FigureType.triangle;
 
   constructor(
-    public color: string,
+    public color: FigureColor,
     public a: number,
     public b: number,
     public c: number,
   ) {
     this.color = color;
 
-    if (a + b <= c) {
+    if (a + b <= c || b + c <= a || a + c <= b) {
       throw new Error();
     }
   }
@@ -23,16 +35,16 @@ export class Triangle implements Figure {
   getArea(): number {
     const p = (this.a + this.b + this.c) / 2;
 
-    return Math.round((Math.sqrt(p * (p - this.a) * (p - this.b)
+    return Math.floor((Math.sqrt(p * (p - this.a) * (p - this.b)
     * (p - this.c))) * 100) / 100;
   }
 }
 
 export class Circle implements Figure {
-  shape: string = 'circle';
+  shape: FigureType = FigureType.circle;
 
   constructor(
-    public color: string,
+    public color: FigureColor,
     public radius: number,
   ) {
     this.color = color;
@@ -48,10 +60,10 @@ export class Circle implements Figure {
 }
 
 export class Rectangle implements Figure {
-  shape: string = 'rectangle';
+  shape: FigureType = FigureType.rectangle;
 
   constructor(
-    public color: string,
+    public color: FigureColor,
     public width: number,
     public height: number,
   ) {
@@ -63,10 +75,10 @@ export class Rectangle implements Figure {
   }
 
   getArea(): number {
-    return Math.round((this.width * this.height) * 100) / 100;
+    return Math.floor((this.width * this.height) * 100) / 100;
   }
 }
 
-export function getInfo(figure): string {
-  return `A ${figure.color} ${figure.shape} - ${figure.getArea()}`;
+export function getInfo(figure: Figure): string {
+  return `A ${figure.color} ${FigureType[figure.shape]} - ${figure.getArea()}`;
 }
