@@ -13,11 +13,8 @@ export class Triangle implements Figure {
     public b: number,
     public c: number,
   ) {
-    const biggestSide = Math.max(a, b, c);
-    const isIncorrectSides = biggestSide >= a + b + c - biggestSide;
-
-    if (a <= 0 || b <= 0 || c <= 0 || isIncorrectSides) {
-      throw new Error('Width and height should be bigger than 0');
+    if (a + b <= c) {
+      throw new Error('Incorrect sides');
     }
   }
 
