@@ -19,10 +19,6 @@ export class Triangle implements Figure {
     if (a <= 0 || b <= 0 || c <= 0 || isIncorrectSides) {
       throw new Error('Width and height should be bigger than 0');
     }
-    this.color = color;
-    this.a = a;
-    this.b = b;
-    this.c = c;
   }
 
   getArea(): number {
@@ -46,8 +42,6 @@ export class Circle implements Figure {
     if (radius <= 0) {
       throw new Error('Radius should be bigger than 0');
     }
-    this.color = color;
-    this.radius = radius;
   }
 
   getArea(): number {
@@ -68,9 +62,6 @@ export class Rectangle implements Figure {
     if (width <= 0 || height <= 0) {
       throw new Error('Width and height should be bigger than 0');
     }
-    this.color = color;
-    this.width = width;
-    this.height = height;
   }
 
   getArea(): number {
