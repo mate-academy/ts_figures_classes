@@ -1,13 +1,14 @@
 type ColorOfFigure = 'red' | 'blue' | 'green';
+type ShapeOfFigure = 'triangle' | 'circle' | 'rectangle';
 
 export interface Figure {
-  shape: string;
+  shape: ShapeOfFigure;
   color: ColorOfFigure;
   getArea(): number;
 }
 
 export class Triangle implements Figure {
-  shape: string = 'triangle';
+  shape: ShapeOfFigure = 'triangle';
 
   constructor(
     public color: ColorOfFigure,
@@ -15,9 +16,15 @@ export class Triangle implements Figure {
     public b: number,
     public c: number,
   ) {
-    if (a <= 0 || b <= 0 || c <= 0 || a + b <= c || a + c <= b || b + c <= a) {
+    if (a <= 0 || b <= 0 || c <= 0) {
       throw new Error(
-        'Side of triangle is less than zero or longer than sum of other two',
+        'Side of triangle is less than zero',
+      );
+    }
+
+    if (a + b <= c || a + c <= b || b + c <= a) {
+      throw new Error(
+        'Hypotenuse is less than sum of two sides',
       );
     }
   }
@@ -33,7 +40,7 @@ export class Triangle implements Figure {
 }
 
 export class Circle implements Figure {
-  shape: string = 'circle';
+  shape: ShapeOfFigure = 'circle';
 
   constructor(public color: ColorOfFigure, public radius: number) {
     if (radius <= 0) {
@@ -49,7 +56,7 @@ export class Circle implements Figure {
 }
 
 export class Rectangle implements Figure {
-  shape: string = 'rectangle';
+  shape: ShapeOfFigure = 'rectangle';
 
   constructor(
     public color: ColorOfFigure,
