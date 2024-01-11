@@ -24,8 +24,7 @@ export function isAllGreaterThan0(...args: number[]): boolean {
 }
 
 export function isTriangleValid(a: number, b: number, c: number): boolean {
-  const maxSide: number
-    = [a, b, c].sort((n1: number, n2: number) => n1 - n2).pop() || 0;
+  const maxSide: number = Math.max(a, b, c);
 
   return a + b + c - 2 * maxSide > 0;
 }
