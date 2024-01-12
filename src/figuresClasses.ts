@@ -1,22 +1,59 @@
-export interface Figure {
-  shape: 'triangle' | 'circle' | 'rectangle';
-  color: 'red' | 'blue' | 'green';
-  getArea: () => number;
-}
 
-export class Triangle implements Figure {
-  shape: Figure['shape'] = 'triangle';
+type Shape = 'triangle' | 'circle' | 'rectangle';
+type Color = 'red' | 'blue' | 'green';
 
-  constructor(
-    public color: Figure['color'],
-    public a: number,
-    public b: number,
-    public c: number,
-  ) {
+function isInvalidFigure(shape: Shape, ...rest: number[]): boolean {
+  if (shape === 'triangle') {
+    const [a, b, c] = rest;
     const biggestSide = Math.max(a, b, c);
     const isIncorrectSides = biggestSide >= a + b + c - biggestSide;
 
     if (a <= 0 || b <= 0 || c <= 0 || isIncorrectSides) {
+      return true;
+    }
+
+    return false;
+  }
+
+  if (shape === 'circle') {
+    const [radius] = rest;
+
+    if (radius <= 0) {
+      return true;
+    }
+
+    return false;
+  }
+
+  if (shape === 'rectangle') {
+    const [width, height] = rest;
+
+    if (width <= 0 || height <= 0) {
+      return true;
+    }
+
+    return false;
+  }
+
+  return true;
+}
+
+export interface Figure {
+  shape: Shape;
+  color: Color;
+  getArea: () => number;
+}
+
+export class Triangle implements Figure {
+  shape: Shape = 'triangle';
+
+  constructor(
+    public color: Color,
+    public a: number,
+    public b: number,
+    public c: number,
+  ) {
+    if (isInvalidFigure('triangle', a, b, c)) {
       throw new Error('Incorrect sides');
     }
   }
@@ -39,7 +76,7 @@ export class Circle implements Figure {
     public color: Figure['color'],
     public radius: number,
   ) {
-    if (radius <= 0) {
+    if (isInvalidFigure('circle', radius)) {
       throw new Error('Radius should be bigger than 0');
     }
   }
@@ -59,7 +96,7 @@ export class Rectangle implements Figure {
     public width: number,
     public height: number,
   ) {
-    if (width <= 0 || height <= 0) {
+    if (isInvalidFigure('rectangle', width, height)) {
       throw new Error('Width and height should be bigger than 0');
     }
   }
