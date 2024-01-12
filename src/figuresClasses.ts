@@ -13,7 +13,7 @@ export class Triangle implements Figure {
     public b: number,
     public c: number,
   ) {
-    if ([this.a, this.b, this.c].every((side) => side > 0)) {
+    if ([this.a, this.b, this.c].every((side) => side <= 0)) {
       throw new Error('Resulting value should be bigger than 0');
     }
 
