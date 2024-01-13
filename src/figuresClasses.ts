@@ -1,7 +1,6 @@
 export interface Figure {
   shape: string;
   color: string;
-
   getArea(): number;
 }
 
@@ -16,11 +15,11 @@ export class Triangle implements Figure {
   ) {
     if (a <= 0 || b <= 0 || c <= 0) {
       throw new Error('side length should be more than zero');
-    }
+    };
 
     if (Math.max(a, b, c) >= (a + b + c - Math.max(a, b, c))) {
       throw new Error('You can`t build triangle with this sides');
-    }
+    };
   }
 
   getArea(): number {
@@ -38,29 +37,29 @@ export class Circle implements Figure {
     public color: string,
     public radius: number,
   ) {
-    if (radius <= 0 ) {
-      throw new Error('radius should be more than zero')
-    }
+    if (radius <= 0) {
+      throw new Error('radius should be more than zero');
+    };
   }
 
   getArea(): number {
-    const area = Math.PI * Math.pow(this.radius, 2);
-    
-    return Math.floor(area * 100) / 100;
+    const area = Math.PI * (this.radius ** 2);
+
+  return Math.floor(area * 100) / 100;
   }
 }
 
 export class Rectangle implements Figure {
   public shape = 'rectangle';
-  
+
   constructor(
     public color: string,
     public width: number,
     public height: number,
   ) {
-    if (width <= 0 || height<= 0) {
-      throw new Error('one of the sides is zero or less')
-    }
+    if (width <= 0 || height <= 0) {
+      throw new Error('one of the sides is zero or less');
+    };
   }
 
   getArea(): number {
