@@ -1,3 +1,9 @@
+enum Shapes {
+  Triangle = 'triangle',
+  Circle = 'circle',
+  Rectangle = 'rectangle',
+}
+
 export interface Figure {
   shape: string;
   color: string;
@@ -5,7 +11,7 @@ export interface Figure {
 }
 
 export class Triangle implements Figure {
-  shape = 'triangle';
+  shape = Shapes.Triangle;
 
   constructor(
     public color: string,
@@ -31,7 +37,7 @@ export class Triangle implements Figure {
 }
 
 export class Circle implements Figure {
-  public shape = 'circle';
+  public shape = Shapes.Circle;
 
   constructor(
     public color: string,
@@ -50,7 +56,7 @@ export class Circle implements Figure {
 }
 
 export class Rectangle implements Figure {
-  public shape = 'rectangle';
+  public shape = Shapes.Rectangle;
 
   constructor(
     public color: string,
