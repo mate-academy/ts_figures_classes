@@ -1,14 +1,17 @@
+type Shape = 'triangle' | 'circle' | 'rectangle';
+type Color = 'red' | 'green' | 'blue';
+
 export interface Figure {
-  shape: string;
-  color: string;
+  shape: Shape;
+  color: Color;
   getArea(): number;
 }
 
 export class Triangle implements Figure {
-  shape = 'triangle';
+  shape: 'triangle' = 'triangle';
 
   constructor(
-    public color: string,
+    public color: Color,
     protected a: number,
     protected b: number,
     protected c: number,
@@ -17,12 +20,10 @@ export class Triangle implements Figure {
       throw new Error('One or more sides of the triangle equals 0, try again');
     }
 
-    const triangleSides = [a, b, c];
+    [this.a, this.b, this.c] = [a, b, c].sort((sideA, sideB) => sideB - sideA);
 
-    triangleSides.sort((sideA, sideB) => sideB - sideA);
-
-    if (triangleSides[0] >= triangleSides[1] + triangleSides[2]) {
-      throw new Error('not possible to construct a triangle');
+    if (this.a >= this.b + this.c) {
+      throw new Error('Not possible to construct a triangle');
     }
   }
 
@@ -30,22 +31,24 @@ export class Triangle implements Figure {
     const { a, b, c } = this;
     const semiperimeter = (a + b + c) / 2;
 
-    const areaOfTriangle = Math.sqrt(semiperimeter * (semiperimeter - a)
-      * (semiperimeter - b) * (semiperimeter - c));
+    const areaOfTriangle = Math.sqrt(semiperimeter
+      * (semiperimeter - a)
+      * (semiperimeter - b)
+      * (semiperimeter - c));
 
     return Math.floor(areaOfTriangle * 100) / 100;
   }
 }
 
 export class Circle implements Figure {
-  shape = 'circle';
+  shape: 'circle' = 'circle';
 
   constructor(
-    public color: string,
+    public color: Color,
     protected radius: number,
   ) {
     if (radius <= 0) {
-      throw new Error('incorrect radius');
+      throw new Error('Incorrect radius');
     }
   }
 
@@ -57,15 +60,15 @@ export class Circle implements Figure {
 }
 
 export class Rectangle implements Figure {
-  shape = 'rectangle';
+  shape: 'rectangle' = 'rectangle';
 
   constructor(
-    public color: string,
+    public color: Color,
     protected width: number,
     protected height: number,
   ) {
     if (width <= 0 || height <= 0) {
-      throw new Error('incorrect parameters');
+      throw new Error('Incorrect parameters');
     }
   }
 
