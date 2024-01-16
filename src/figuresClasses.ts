@@ -1,12 +1,18 @@
+export enum Shape {
+  Triangle = 'triangle',
+  Circle = 'circle',
+  Rectangle = 'rectangle',
+}
+
 export interface Figure {
-  shape: string;
+  shape: Shape;
   color: string;
 
   getArea(): number;
 }
 
 export class Triangle implements Figure {
-  shape: string = 'triangle';
+  shape: Shape = Shape.Triangle;
 
   color: string;
 
@@ -34,7 +40,7 @@ export class Triangle implements Figure {
 }
 
 export class Circle implements Figure {
-  shape: string = 'circle';
+  shape: Shape = Shape.Circle;
 
   color: string;
 
@@ -55,7 +61,7 @@ export class Circle implements Figure {
 }
 
 export class Rectangle implements Figure {
-  shape: string = 'rectangle';
+  shape: Shape = Shape.Rectangle;
 
   color: string;
 
