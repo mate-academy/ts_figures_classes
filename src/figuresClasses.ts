@@ -1,3 +1,6 @@
+export type Shape = 'triangle' | 'circle' | 'rectangle';
+export type Color = 'red' | 'green' | 'blue';
+
 export interface Figure {
   a?: number,
   b?: number,
@@ -6,16 +9,17 @@ export interface Figure {
   width?: number,
   height?: number,
   getArea(): number,
-  color: 'red' | 'green' | 'blue',
+  shape: Shape,
+  color: Color,
 }
 
 export class Triangle implements Figure {
   constructor(
-    public color: 'red' | 'green' | 'blue',
+    public color: Color,
     public a: number,
     public b: number,
     public c: number,
-    public shape = 'triangle',
+    public shape: Shape = 'triangle',
   ) {
     if (!this.isValidTriangle()) {
       throw new Error('Invalid triangle parameters');
@@ -23,8 +27,7 @@ export class Triangle implements Figure {
   }
 
   isValidTriangle(): boolean {
-    if ((this.a > 0 && this.b > 0 && this.c > 0)
-      && this.a < (this.b + this.c)
+    if (this.a < (this.b + this.c)
       && this.b < (this.a + this.c)
       && this.c < (this.b + this.a)) {
       return true;
@@ -46,9 +49,9 @@ export class Triangle implements Figure {
 
 export class Circle implements Figure {
   constructor(
-    public color: 'red' | 'green' | 'blue',
+    public color: Color,
     public radius: number,
-    public shape = 'circle',
+    public shape: Shape = 'circle',
   ) {
     if (!this.isValidCircle()) {
       throw new Error('Invalid circle parameters');
@@ -70,10 +73,10 @@ export class Circle implements Figure {
 
 export class Rectangle implements Figure {
   constructor(
-    public color: 'red' | 'green' | 'blue',
+    public color: Color,
     public width: number,
     public height: number,
-    public shape = 'rectangle',
+    public shape: Shape = 'rectangle',
   ) {
     if (!this.isValidRectangle()) {
       throw new Error('Invalid rectangle parameters');
