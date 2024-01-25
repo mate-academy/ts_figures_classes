@@ -4,8 +4,14 @@ export interface Figure {
   getArea(): number;
 }
 
+enum Shape {
+  triangle = 'triangle',
+  circle = 'circle',
+  rectangle = 'rectangle'
+}
+
 export class Triangle implements Figure {
-  shape: string;
+  shape: Shape;
 
   color: string;
 
@@ -27,14 +33,16 @@ export class Triangle implements Figure {
       throw new Error('Invalid triangle sides');
     }
 
-    this.shape = 'triangle';
+    this.shape = Shape.triangle;
     this.color = color;
   }
 
   getArea(): number {
-    const s = (this.side1 + this.side2 + this.side3) / 2;
+    const semiPerimetr = (this.side1 + this.side2 + this.side3) / 2;
     const area = Math.sqrt(
-      s * (s - this.side1) * (s - this.side2) * (s - this.side3),
+      semiPerimetr
+      * (semiPerimetr - this.side1)
+      * (semiPerimetr - this.side2) * (semiPerimetr - this.side3),
     );
 
     return Math.round(area * 100) / 100;
@@ -42,7 +50,7 @@ export class Triangle implements Figure {
 }
 
 export class Circle implements Figure {
-  shape: string;
+  shape: Shape;
 
   color: string;
 
@@ -54,19 +62,19 @@ export class Circle implements Figure {
       throw new Error('Radius should be greater than 0 :)');
     }
 
-    this.shape = 'circle';
+    this.shape = Shape.circle;
     this.color = color;
   }
 
   getArea(): number {
-    const area = Math.PI * (this.radius * this.radius);
+    // const area = Math.PI * (this.radius * this.radius);
 
-    return parseFloat((Math.floor(area * 100) / 100).toFixed(2));
+    return Math.floor((Math.PI * (this.radius ** 2)) * 100) / 100;
   }
 }
 
 export class Rectangle implements Figure {
-  shape: string;
+  shape: Shape;
 
   color: string;
 
@@ -79,7 +87,7 @@ export class Rectangle implements Figure {
       throw new Error('Side should be greater than 0 :))');
     }
 
-    this.shape = 'rectangle';
+    this.shape = Shape.rectangle;
     this.color = color;
   }
 
