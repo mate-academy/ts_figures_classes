@@ -1,22 +1,16 @@
 export interface Figure {
-  shape: string;
-  color: string;
+  shape: 'triangle' | 'circle' | 'rectangle';
+  color: 'red' | 'green' | 'blue';
   getArea(): number;
 }
 
-enum Shape {
-  triangle = 'triangle',
-  circle = 'circle',
-  rectangle = 'rectangle'
-}
-
 export class Triangle implements Figure {
-  shape: Shape;
+  shape: Figure['shape'] = 'triangle';
 
-  color: string;
+  color: Figure['color'];
 
   constructor(
-    color: string,
+    color: 'red' | 'green' | 'blue',
     public side1: number,
     public side2: number,
     public side3: number,
@@ -33,7 +27,6 @@ export class Triangle implements Figure {
       throw new Error('Invalid triangle sides');
     }
 
-    this.shape = Shape.triangle;
     this.color = color;
   }
 
@@ -50,19 +43,18 @@ export class Triangle implements Figure {
 }
 
 export class Circle implements Figure {
-  shape: Shape;
+  shape: Figure['shape'] = 'circle';
 
-  color: string;
+  color: Figure['color'];
 
   constructor(
-    color: string,
+    color: 'red' | 'green' | 'blue',
     public radius: number,
   ) {
     if (radius <= 0) {
       throw new Error('Radius should be greater than 0 :)');
     }
 
-    this.shape = Shape.circle;
     this.color = color;
   }
 
@@ -74,12 +66,12 @@ export class Circle implements Figure {
 }
 
 export class Rectangle implements Figure {
-  shape: Shape;
+  shape: Figure['shape'] = 'rectangle';
 
-  color: string;
+  color: 'red' | 'green' | 'blue';
 
   constructor(
-    color: string,
+    color: 'red' | 'green' | 'blue',
     public sideA: number,
     public sideB: number,
   ) {
@@ -87,7 +79,6 @@ export class Rectangle implements Figure {
       throw new Error('Side should be greater than 0 :))');
     }
 
-    this.shape = Shape.rectangle;
     this.color = color;
   }
 
