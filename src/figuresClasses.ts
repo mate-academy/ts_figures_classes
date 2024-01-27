@@ -1,14 +1,20 @@
 export interface Figure {
-  shape: string;
-  color: string;
   getArea: () => number;
 }
 
+  type Color = 'red' | 'green' | 'blue';
+
+enum Shape {
+  triangle = 'triangle',
+  circle = 'circle',
+  rectangle = 'rectangle'
+}
+
 export class Triangle implements Figure {
-  public shape = 'triangle';
+  public shape = Shape.triangle;
 
   constructor(
-    public color: string,
+    public color: Color,
     private a: number,
     private b: number,
     private c: number,
@@ -32,9 +38,12 @@ export class Triangle implements Figure {
 }
 
 export class Circle implements Figure {
-  public shape = 'circle';
+  public shape = Shape.circle;
 
-  constructor(public color: string, private radius: number) {
+  constructor(
+    public color: Color,
+    private radius: number,
+  ) {
     if (radius <= 0) {
       throw new Error('Radius must be > 0');
     }
@@ -48,10 +57,10 @@ export class Circle implements Figure {
 }
 
 export class Rectangle implements Figure {
-  public shape = 'rectangle';
+  public shape = Shape.rectangle;
 
   constructor(
-    public color: string,
+    public color: Color,
     private width: number,
     private height: number,
   ) {
