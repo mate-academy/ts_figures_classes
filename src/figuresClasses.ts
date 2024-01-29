@@ -1,13 +1,21 @@
+enum Shape {
+  Triangle = 'triangle',
+  Circle = 'circle',
+  Rectangle = 'rectangle',
+}
+
+type Color = 'red' | 'green' | 'blue';
+
 export interface Figure {
-  shape: string;
+  shape: Shape;
   color: string;
   getArea(): number;
 }
 
 export class Triangle implements Figure {
-  shape: string = 'triangle';
+  shape: Shape = Shape.Triangle;
 
-  color: string;
+  color: Color;
 
   sideA: number;
 
@@ -15,7 +23,7 @@ export class Triangle implements Figure {
 
   sideC: number;
 
-  constructor(color: string, sideA: number, sideB: number, sideC: number) {
+  constructor(color: Color, sideA: number, sideB: number, sideC: number) {
     if (sideA <= 0 || sideB <= 0 || sideC <= 0) {
       throw Error('All sides must be greater then 0');
     }
@@ -37,19 +45,19 @@ export class Triangle implements Figure {
 
     return Math.round(
       Math.sqrt(s * (s - this.sideA) * (s - this.sideB)
-      * (s - this.sideC)) * 100,
+        * (s - this.sideC)) * 100,
     ) / 100;
   }
 }
 
 export class Circle implements Figure {
-  shape: string = 'circle';
+  shape: Shape = Shape.Circle;
 
-  color: string;
+  color: Color;
 
   radius: number;
 
-  constructor(color: string, radius: number) {
+  constructor(color: Color, radius: number) {
     if (radius <= 0) {
       throw Error('Radius must be greater then 0');
     }
@@ -66,15 +74,15 @@ export class Circle implements Figure {
 }
 
 export class Rectangle implements Figure {
-  shape: string = 'rectangle';
+  shape: Shape = Shape.Rectangle;
 
-  color: string;
+  color: Color;
 
   width: number;
 
   height: number;
 
-  constructor(color: string, width: number, height: number) {
+  constructor(color: Color, width: number, height: number) {
     if (width <= 0 || height <= 0) {
       throw Error('Width and height must be greater than 0');
     }
