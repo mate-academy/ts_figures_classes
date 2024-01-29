@@ -5,9 +5,9 @@ enum Shape {
 }
 
 enum Color {
-  triangle = 'triangle',
-  circle = 'circle',
-  rectangle = 'rectangle',
+  red = 'red',
+  green = 'green',
+  blue = 'blue',
 }
 
 export interface Figure {
