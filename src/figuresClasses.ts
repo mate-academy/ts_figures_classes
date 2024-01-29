@@ -8,7 +8,7 @@ type Color = 'red' | 'green' | 'blue';
 
 export interface Figure {
   shape: Shape;
-  color: string;
+  color: Color;
   getArea(): number;
 }
 
@@ -23,7 +23,8 @@ export class Triangle implements Figure {
 
   sideC: number;
 
-  constructor(color: Color, sideA: number, sideB: number, sideC: number) {
+  constructor(public color: string, public sideA: number,
+    public sideB: number, public sideC: number) {
     if (sideA <= 0 || sideB <= 0 || sideC <= 0) {
       throw Error('All sides must be greater then 0');
     }
@@ -35,8 +36,11 @@ export class Triangle implements Figure {
     }
 
     this.color = color;
+
     this.sideA = sideA;
+
     this.sideB = sideB;
+
     this.sideC = sideC;
   }
 
@@ -57,12 +61,13 @@ export class Circle implements Figure {
 
   radius: number;
 
-  constructor(color: Color, radius: number) {
+  constructor(public color: Color, public radius: number) {
     if (radius <= 0) {
       throw Error('Radius must be greater then 0');
     }
 
     this.color = color;
+
     this.radius = radius;
   }
 
@@ -88,7 +93,9 @@ export class Rectangle implements Figure {
     }
 
     this.color = color;
+
     this.height = height;
+
     this.width = width;
   }
 
