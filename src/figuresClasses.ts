@@ -8,7 +8,7 @@ export interface Figure {
   c?: Side,
   height?: Side,
   width?: Side,
-  shape?: Shape,
+  shape: Shape,
   color: Color,
   getArea(): Side,
 }
