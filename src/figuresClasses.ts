@@ -19,12 +19,6 @@ export class Triangle implements Figure {
     public b: number,
     public c: number,
     public shape: Shape,
-    public getArea = (): number => {
-      const semiP = (a + b + c) / 2;
-      const area = Math.sqrt(semiP * (semiP - a) * (semiP - b) * (semiP - c));
-
-      return Math.floor(area * 100) / 100;
-    },
   ) {
     this.shape = Shape.triangle;
 
@@ -39,6 +33,15 @@ export class Triangle implements Figure {
       throw new Error('error');
     }
   }
+
+  public getArea = (): number => {
+    const { a, b, c } = this;
+
+    const semiP = (a + b + c) / 2;
+    const area = Math.sqrt(semiP * (semiP - a) * (semiP - b) * (semiP - c));
+
+    return Math.floor(area * 100) / 100;
+  };
 }
 
 export class Circle implements Figure {
@@ -46,9 +49,6 @@ export class Circle implements Figure {
     public color: Color,
     public radius: number,
     public shape: Shape,
-    public getArea = (): number => Math.floor(
-      Math.PI * this.radius ** 2 * 100,
-    ) / 100,
   ) {
     this.shape = Shape.circle;
 
@@ -56,6 +56,10 @@ export class Circle implements Figure {
       throw new Error('error');
     }
   }
+
+  public getArea = (): number => Math.floor(
+    Math.PI * this.radius ** 2 * 100,
+  ) / 100;
 }
 
 export class Rectangle implements Figure {
@@ -64,7 +68,6 @@ export class Rectangle implements Figure {
     public height: number,
     public width: number,
     public shape: Shape,
-    public getArea = (): number => this.width * this.height,
   ) {
     this.shape = Shape.rectangle;
 
@@ -72,6 +75,8 @@ export class Rectangle implements Figure {
       throw new Error('error');
     }
   }
+
+  public getArea = (): number => this.width * this.height;
 }
 
 export function getInfo(figure: Figure): string {
