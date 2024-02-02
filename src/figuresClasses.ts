@@ -14,14 +14,14 @@ export class Triangle implements Figure {
     public color: Color,
     public a: number,
     public b: number,
-    public c: number
-  ){
+    public c: number,
+  ) {
     if (a <= 0 || b <= 0 || c <= 0) {
-      throw new Error('Sides cannot be <= 0')
+      throw new Error('Sides cannot be <= 0');
     }
 
     if ((a >= b + c) || (b >= a + c) || (c >= b + a)) {
-      throw new Error('The longest side should be less than sum of others')
+      throw new Error('The longest side should be less than sum of others');
     }
   }
 
@@ -34,14 +34,14 @@ export class Triangle implements Figure {
 }
 
 export class Circle implements Figure {
-  shape: Shape = 'cirlce';
+  shape: Shape = 'circle';
 
   constructor(
     public color: Color,
-    public radius: number
+    public radius: number,
   ) {
     if (radius <= 0) {
-      throw new Error('Radius cannot be <= 0')
+      throw new Error('Radius cannot be <= 0');
     }
   }
 
@@ -58,8 +58,8 @@ export class Rectangle implements Figure {
   constructor(
     public color: Color,
     public width: number,
-    public height: number
-  ){
+    public height: number,
+  ) {
     if (width <= 0 || height <= 0) {
       throw new Error('Width or height cannot be <= 0');
     }
@@ -67,7 +67,7 @@ export class Rectangle implements Figure {
 
   getArea(): number {
     const a = this.width * this.height;
-  
+
     return Math.floor(a * 100) / 100;
   }
 }
