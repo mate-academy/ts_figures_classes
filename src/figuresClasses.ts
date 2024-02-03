@@ -4,7 +4,11 @@ type Color = 'red' | 'green' | 'blue';
 export interface Figure {
   shape: Shape;
   color: Color;
-  getArea(): number;
+  getArea: () => number;
+}
+
+export function downToHundredths(area: number): number {
+  return Math.floor(area * 100) / 100;
 }
 
 export class Triangle implements Figure {
@@ -27,9 +31,9 @@ export class Triangle implements Figure {
 
   getArea(): number {
     const p = (this.a + this.b + this.c) / 2;
-    const a = Math.sqrt(p * (p - this.a) * (p - this.b) * (p - this.c));
+    const area = Math.sqrt(p * (p - this.a) * (p - this.b) * (p - this.c));
 
-    return Math.floor(a * 100) / 100;
+    return downToHundredths(area);
   }
 }
 
@@ -46,9 +50,9 @@ export class Circle implements Figure {
   }
 
   getArea(): number {
-    const a = Math.PI * (this.radius * this.radius);
+    const area = Math.PI * (this.radius * this.radius);
 
-    return Math.floor(a * 100) / 100;
+    return downToHundredths(area);
   }
 }
 
@@ -66,9 +70,9 @@ export class Rectangle implements Figure {
   }
 
   getArea(): number {
-    const a = this.width * this.height;
+    const area = this.width * this.height;
 
-    return Math.floor(a * 100) / 100;
+    return downToHundredths(area);
   }
 }
 
