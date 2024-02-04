@@ -14,8 +14,13 @@ export class Triangle implements Figure {
     public b: number,
     public c: number,
   ) {
-    if (this.a <= 0 || this.b <= 0 || this.c <= 0
-        || a >= b + c || b >= a + c || c >= a + b) {
+    const sides = [a, b, c];
+    const perimeter = sides.reduce((sum, side) => sum + side);
+    const longestSide = Math.max(...sides);
+    const hasTooShortSide = sides.some((side) => side <= 0);
+    const hasTooLongSide = perimeter - longestSide <= longestSide;
+
+    if (hasTooShortSide || hasTooLongSide) {
       throw new Error('error with data');
     }
   }
