@@ -14,12 +14,13 @@ export interface Figure {
 }
 
 export class Triangle implements Figure {
+  shape: Shape = 'triangle';
+
   constructor(
     public color: Color,
     public a: number,
     public b: number,
     public c: number,
-    public shape: Shape = 'triangle',
   ) {
     if (!this.isValidTriangle()) {
       throw new Error('Invalid triangle parameters');
@@ -48,10 +49,11 @@ export class Triangle implements Figure {
 }
 
 export class Circle implements Figure {
+  shape: Shape = 'circle';
+
   constructor(
     public color: Color,
     public radius: number,
-    public shape: Shape = 'circle',
   ) {
     if (!this.isValidCircle()) {
       throw new Error('Invalid circle parameters');
@@ -72,11 +74,12 @@ export class Circle implements Figure {
 }
 
 export class Rectangle implements Figure {
+  shape: Shape = 'rectangle';
+
   constructor(
     public color: Color,
     public width: number,
     public height: number,
-    public shape: Shape = 'rectangle',
   ) {
     if (!this.isValidRectangle()) {
       throw new Error('Invalid rectangle parameters');
