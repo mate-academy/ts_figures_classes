@@ -8,6 +8,10 @@ export interface Figure {
   getArea(): number;
 }
 
+export function roundNumber(number: number): number {
+  return Math.floor(number * 100) / 100;
+}
+
 export class Triangle implements Figure {
   shape: Shape = 'triangle';
 
@@ -38,9 +42,8 @@ export class Triangle implements Figure {
 
   getArea(): number {
     const p: number = (this.a + this.b + this.c) / 2;
-    const area: number = Math.floor(
-      Math.sqrt(p * (p - this.a) * (p - this.b) * (p - this.c)) * 100,
-    ) / 100;
+    const area: number
+      = roundNumber(Math.sqrt(p * (p - this.a) * (p - this.b) * (p - this.c)));
 
     return area;
   }
@@ -62,8 +65,7 @@ export class Circle implements Figure {
   }
 
   getArea(): number {
-    const area: number
-      = Math.floor((Math.PI * this.radius * this.radius) * 100) / 100;
+    const area: number = roundNumber(Math.PI * this.radius * this.radius);
 
     return area;
   }
@@ -87,8 +89,7 @@ export class Rectangle implements Figure {
   }
 
   getArea(): number {
-    const area: number
-      = (Math.floor(this.width * this.height) * 100) / 100;
+    const area: number = roundNumber(this.width * this.height);
 
     return area;
   }
