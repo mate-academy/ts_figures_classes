@@ -10,13 +10,11 @@ export interface Figure {
 export class Triangle implements Figure {
   shape: Shapes = 'triangle';
 
-  color: Colors;
-
   constructor(
-    color: Colors,
-    public sideA: number,
-    public sideB: number,
-    public sideC: number,
+    public color: Colors,
+    private sideA: number,
+    private sideB: number,
+    private sideC: number,
   ) {
     if (sideA <= 0 || sideB <= 0 || sideC <= 0) {
       throw new Error('Length of sides must be greater than 0');
@@ -30,8 +28,6 @@ export class Triangle implements Figure {
         'The longest side of a triangle is >= than a sum of two others',
       );
     }
-
-    this.color = color;
   }
 
   getArea(): number {
@@ -47,17 +43,10 @@ export class Triangle implements Figure {
 export class Circle implements Figure {
   shape: Shapes = 'circle';
 
-  color: Colors;
-
-  radius: number;
-
-  constructor(color: Colors, radius: number) {
+  constructor(public color: Colors, private radius: number) {
     if (radius <= 0) {
       throw new Error('Radius must be greater than 0');
     }
-
-    this.color = color;
-    this.radius = radius;
   }
 
   getArea(): number {
@@ -68,20 +57,14 @@ export class Circle implements Figure {
 export class Rectangle implements Figure {
   shape: Shapes = 'rectangle';
 
-  color: Colors;
-
-  width: number;
-
-  height: number;
-
-  constructor(color: Colors, width: number, height: number) {
+  constructor(
+    public color: Colors,
+    private width: number,
+    private height: number,
+  ) {
     if (width <= 0 || height <= 0) {
       throw new Error('Width and height must be greater than 0');
     }
-
-    this.color = color;
-    this.width = width;
-    this.height = height;
   }
 
   getArea(): number {
