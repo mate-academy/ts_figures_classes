@@ -37,7 +37,8 @@ export class Triangle implements Figure {
 export class Circle implements Figure {
   shape: Shape = 'circle';
 
-  constructor(public color: Color, private radius: number) {
+  constructor(public color: Color,
+    private radius: number) {
     if (radius <= 0) {
       throw new Error('Radius can not be less or equal 0');
     }
