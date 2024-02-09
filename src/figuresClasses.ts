@@ -13,7 +13,7 @@ export class Triangle implements Figure {
   shape: Shape = 'triangle';
 
   constructor(public color : Color, public a : number, public b : number, public c : number) {
-    if (a || b || c <= 0) {
+    if (a <= 0 || b <= 0 || c <= 0) {
       throw new Error('No side can equal 0 or less than 0');
     }
 
