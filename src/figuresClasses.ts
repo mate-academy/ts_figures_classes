@@ -14,7 +14,7 @@ export class Triangle implements Figure {
 
   constructor(public color : Color, public a : number, public b : number, public c : number) {
     if (a || b || c <= 0) {
-      throw new Error('One side cannot be equal or longer than sum of both sides');
+      throw new Error('No side can equal 0 or less than 0');
     }
 
     if (a >= b + c || b >= a + c || c >= a + b) {
