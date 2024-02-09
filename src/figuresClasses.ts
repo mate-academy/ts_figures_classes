@@ -12,21 +12,12 @@ export interface Figure {
 export class Triangle implements Figure {
   shape: Shape = 'triangle';
 
-  constructor(public color : Color, public a : number,
-    public b : number, public c : number) {
-    if (a <= 0 || b <= 0 || c <= 0) {
+  constructor(public color : Color, public a : number, public b : number, public c : number) {
+    if (a || b || c <= 0) {
       throw new Error('One side cannot be equal or longer than sum of both sides');
     }
 
-    if (a >= b + c) {
-      throw new Error('One side cannot be equal or longer than sum of both sides');
-    }
-
-    if (b >= a + c) {
-      throw new Error('One side cannot be equal or longer than sum of both sides');
-    }
-
-    if (c >= a + b) {
+    if (a >= b + c || b >= a + c || c >= a + b) {
       throw new Error('One side cannot be equal or longer than sum of both sides');
     }
   }
