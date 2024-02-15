@@ -19,33 +19,27 @@ function roundDown(num: number): number {
 export class Triangle implements Figure {
   color: Color;
 
-  shape: Shape = 'triangle';
-
-  a: number;
-
-  b: number;
-
-  c: number;
+  shape: Shape = Shape.Triangle;
 
   constructor(
-    public figureColor: Color,
-    public sideA: number,
-    public sideB: number,
-    public sideC: number,
+    public color: Color,
+    public a: number,
+    public b: number,
+    public c: number,
   ) {
-    if (sideA <= 0 || sideB <= 0 || sideC <= 0) {
+    if (a <= 0 || b <= 0 || c <= 0) {
       throw new Error('Sides must be greater than zero');
     }
 
-    if (sideA >= sideB + sideC
-      || sideB >= sideA + sideC || sideC >= sideA + sideB) {
+    if (a >= b + c
+      || a >= a + c || c >= a + b) {
       throw new Error('Invalid triangle sides');
     }
 
-    this.color = figureColor;
-    this.a = sideA;
-    this.b = sideB;
-    this.c = sideC;
+    this.color = color;
+    this.a = a;
+    this.b = b;
+    this.c = c;
   }
 
   getArea(): number {
