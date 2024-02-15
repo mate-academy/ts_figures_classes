@@ -17,8 +17,6 @@ function roundDown(num: number): number {
 }
 
 export class Triangle implements Figure {
-  color: Color;
-
   shape: Shape = Shape.Triangle;
 
   constructor(
@@ -31,15 +29,9 @@ export class Triangle implements Figure {
       throw new Error('Sides must be greater than zero');
     }
 
-    if (a >= b + c
-      || a >= a + c || c >= a + b) {
+    if (a >= b + c || a >= a + c || c >= a + b) {
       throw new Error('Invalid triangle sides');
     }
-
-    this.color = color;
-    this.a = a;
-    this.b = b;
-    this.c = c;
   }
 
   getArea(): number {
@@ -54,16 +46,13 @@ export class Triangle implements Figure {
 export class Circle implements Figure {
   shape: Shape = Shape.Circle;
 
-  color: Color;
-
-  radius: number;
-
-  constructor(color: Color, radius: number) {
+  constructor(
+    public color: Color,
+    public radius: number,
+  ) {
     if (radius <= 0) {
       throw new Error('Radius must be greater than zero');
     }
-    this.color = color;
-    this.radius = radius;
   }
 
   getArea(): number {
@@ -77,19 +66,14 @@ export class Circle implements Figure {
 export class Rectangle implements Figure {
   shape: Shape = Shape.Rectangle;
 
-  color: Color;
-
-  width: number;
-
-  height: number;
-
-  constructor(color: Color, width: number, height: number) {
+  constructor(
+    public color: Color,
+    public width: number,
+    public height: number,
+  ) {
     if (width <= 0 || height <= 0) {
       throw new Error('Width and height must be greater than zero');
     }
-    this.color = color;
-    this.width = width;
-    this.height = height;
   }
 
   getArea(): number {
