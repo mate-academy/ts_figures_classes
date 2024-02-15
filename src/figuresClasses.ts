@@ -1,6 +1,14 @@
+export enum Shape {
+  Triangle = 'triangle',
+  Circle = 'circle',
+  Rectangle = 'rectangle',
+}
+
+export type Color = 'red' | 'green' | 'blue';
+
 export interface Figure {
-  shape: string;
-  color: string;
+  shape: Shape;
+  color: Color;
   getArea(): number;
 }
 
@@ -9,9 +17,9 @@ function roundDown(num: number): number {
 }
 
 export class Triangle implements Figure {
-  shape: string = 'triangle';
+  color: Color;
 
-  color: string;
+  shape: Shape = 'triangle';
 
   a: number;
 
@@ -19,18 +27,25 @@ export class Triangle implements Figure {
 
   c: number;
 
-  constructor(color: string, a: number, b: number, c: number) {
-    if (a <= 0 || b <= 0 || c <= 0) {
+  constructor(
+    public figureColor: Color,
+    public sideA: number,
+    public sideB: number,
+    public sideC: number,
+  ) {
+    if (sideA <= 0 || sideB <= 0 || sideC <= 0) {
       throw new Error('Sides must be greater than zero');
     }
 
-    if (a >= b + c || b >= a + c || c >= a + b) {
+    if (sideA >= sideB + sideC
+      || sideB >= sideA + sideC || sideC >= sideA + sideB) {
       throw new Error('Invalid triangle sides');
     }
-    this.color = color;
-    this.a = a;
-    this.b = b;
-    this.c = c;
+
+    this.color = figureColor;
+    this.a = sideA;
+    this.b = sideB;
+    this.c = sideC;
   }
 
   getArea(): number {
@@ -43,13 +58,13 @@ export class Triangle implements Figure {
 }
 
 export class Circle implements Figure {
-  shape: string = 'circle';
+  shape: Shape = Shape.Circle;
 
-  color: string;
+  color: Color;
 
   radius: number;
 
-  constructor(color: string, radius: number) {
+  constructor(color: Color, radius: number) {
     if (radius <= 0) {
       throw new Error('Radius must be greater than zero');
     }
@@ -66,15 +81,15 @@ export class Circle implements Figure {
 }
 
 export class Rectangle implements Figure {
-  shape: string = 'rectangle';
+  shape: Shape = Shape.Rectangle;
 
-  color: string;
+  color: Color;
 
   width: number;
 
   height: number;
 
-  constructor(color: string, width: number, height: number) {
+  constructor(color: Color, width: number, height: number) {
     if (width <= 0 || height <= 0) {
       throw new Error('Width and height must be greater than zero');
     }
