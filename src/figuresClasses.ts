@@ -37,8 +37,7 @@ export class Triangle implements Figure {
       return result;
     }
 
-    return Number((result.toString()
-      .slice(0, result.toString().indexOf('.') + 3)));
+    return Math.floor(result * 100) / 100;
   }
 }
 
@@ -63,8 +62,7 @@ export class Circle implements Figure {
       return result;
     }
 
-    return Number((result.toString()
-      .slice(0, result.toString().indexOf('.') + 3)));
+    return Math.floor(result * 100) / 100;
   }
 }
 
@@ -90,8 +88,7 @@ export class Rectangle implements Figure {
       return result;
     }
 
-    return Number((result.toString()
-      .slice(0, result.toString().indexOf('.') + 3)));
+    return Math.floor(result * 100) / 100;
   }
 }
 
