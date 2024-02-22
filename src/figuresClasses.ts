@@ -1,10 +1,10 @@
 export enum Shape {
-  Triangle = "triangle",
-  Circle = "circle",
-  Rectangle = "rectangle",
+  Triangle = 'triangle',
+  Circle = 'circle',
+  Rectangle = 'rectangle',
 }
 
-export type Color = "red" | "green" | "blue";
+export type Color = 'red' | 'green' | 'blue';
 
 export interface Figure {
   shape: Shape;
@@ -23,14 +23,14 @@ export class Triangle implements Figure {
     public color: Color,
     public a: number,
     public b: number,
-    public c: number
+    public c: number,
   ) {
     if (a <= 0 || b <= 0 || c <= 0) {
-      throw new Error("Number must be positive");
+      throw new Error('Number must be positive');
     }
 
     if (a >= b + c || a >= a + c || c >= a + b) {
-      throw new Error("Invalid triangle sides");
+      throw new Error('Invalid triangle sides');
     }
   }
 
@@ -48,7 +48,7 @@ export class Circle implements Figure {
 
   constructor(public color: Color, public radius: number) {
     if (radius <= 0) {
-      throw new Error("Radius must be positive");
+      throw new Error('Radius must be positive');
     }
   }
 
@@ -66,10 +66,10 @@ export class Rectangle implements Figure {
   constructor(
     public color: Color,
     public width: number,
-    public height: number
+    public height: number,
   ) {
     if (width <= 0 || height <= 0) {
-      throw new Error("Width and height must be positive");
+      throw new Error('Width and height must be positive');
     }
   }
 
