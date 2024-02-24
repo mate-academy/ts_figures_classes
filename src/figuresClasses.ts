@@ -1,3 +1,5 @@
+export type Color = 'red' | 'green' | 'blue';
+
 export enum Shape {
   Triangle = 'triangle',
   Rectangle = 'rectangle',
@@ -6,7 +8,7 @@ export enum Shape {
 
 export interface Figure {
   shape: Shape;
-  color: string;
+  color: Color;
   getArea(): number;
 }
 
@@ -18,7 +20,7 @@ export class Triangle implements Figure {
   shape: Shape = Shape.Triangle;
 
   constructor(
-    public color: string,
+    public color: Color,
     public sideA: number,
     public sideB: number,
     public sideC: number,
@@ -55,7 +57,7 @@ export class Circle implements Figure {
   shape: Shape = Shape.Circle;
 
   constructor(
-    public color: string,
+    public color: Color,
     public radius: number,
   ) {
     if (this.radius <= 0) {
@@ -74,7 +76,7 @@ export class Rectangle implements Figure {
   shape: Shape = Shape.Rectangle;
 
   constructor(
-    public color: string,
+    public color: Color,
     public width: number,
     public height: number,
   ) {
