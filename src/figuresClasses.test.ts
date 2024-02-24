@@ -1,3 +1,4 @@
+/* eslint-disable linebreak-style */
 import { Triangle, Rectangle, Circle, getInfo } from './figuresClasses';
 
 describe('Class "Triangle"', () => {
