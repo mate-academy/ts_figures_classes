@@ -17,7 +17,7 @@ export class Triangle implements Figure {
     public c: number,
   ) {
     if (this.a <= 0 || this.b <= 0 || this.c <= 0) {
-      throw new Error('Length of side must be greater than 0!');
+      throw new Error('Length of sides must be greater than 0!');
     }
 
     const longestSide: number = Math.max(this.a, this.b, this.c);
@@ -48,7 +48,7 @@ export class Circle implements Figure {
     public radius: number,
   ) {
     if (this.radius <= 0) {
-      throw new Error('Radius must be greater then 0!');
+      throw new Error('Radius must be greater than 0!');
     }
   }
 
@@ -68,7 +68,7 @@ export class Rectangle implements Figure {
     public height: number,
   ) {
     if (this.width <= 0 || this.height <= 0) {
-      throw new Error('Length of side must be greater then 0!');
+      throw new Error('Length of sides must be greater than 0!');
     }
   }
 
