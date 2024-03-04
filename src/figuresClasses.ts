@@ -25,12 +25,16 @@ export class Triangle implements Figure {
   getArea(): number {
     const semiPerimeter = (this.a + this.b + this.c) / 2;
 
-    return +Math.sqrt(
-      semiPerimeter *
-        ((semiPerimeter - this.a) *
-          (semiPerimeter - this.b) *
-          (semiPerimeter - this.c)),
-    ).toFixed(2);
+    return (
+      Math.floor(
+        Math.sqrt(
+          semiPerimeter *
+            ((semiPerimeter - this.a) *
+              (semiPerimeter - this.b) *
+              (semiPerimeter - this.c)),
+        ) * 100,
+      ) / 100
+    );
   }
 }
 
