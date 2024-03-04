@@ -11,15 +11,17 @@ export class Triangle implements Figure {
 
   constructor(
     color: string,
-    public a: number,
-    public b: number,
-    public c: number,
+    public sideA: number,
+    public sideB: number,
+    public sideC: number,
   ) {
-    if (a <= 0 || b <= 0 || c <= 0) {
+    if (sideA <= 0 || sideB <= 0 || sideC <= 0) {
       throw new Error('Properties length must be greater than ');
     }
 
-    if (a + b <= c || a + c <= b || b + c <= a) {
+    if (sideA + sideB <= sideC
+      || sideA + sideC <= sideB
+      || sideB + sideC <= sideA) {
       throw new Error('Triangel cannot consists of these sides');
     }
 
@@ -27,8 +29,10 @@ export class Triangle implements Figure {
   }
 
   getArea(): number {
-    const s = (this.a + this.b + this.c) / 2;
-    const area = Math.sqrt(s * (s - this.a) * (s - this.b) * (s - this.c));
+    const s = (this.sideA + this.sideB + this.sideC) / 2;
+    const area = Math.sqrt(
+      s * (s - this.sideA) * (s - this.sideB) * (s - this.sideC),
+    );
 
     return Math.floor(area * 100) / 100;
   }
@@ -39,16 +43,16 @@ export class Circle implements Figure {
 
   color: string;
 
-  constructor(color: string, public r: number) {
+  constructor(color: string, public radious: number) {
     this.color = color;
 
-    if (this.r <= 0) {
+    if (this.radious <= 0) {
       throw new Error('radious is incorrect value');
     }
   }
 
   getArea(): number {
-    const area = Math.PI * (this.r ** 2);
+    const area = Math.PI * (this.radious ** 2);
 
     return Math.floor(area * 100) / 100;
   }
@@ -59,16 +63,16 @@ export class Rectangle implements Figure {
 
   color: string;
 
-  constructor(color: string, public a: number, public b: number) {
+  constructor(color: string, public sideA: number, public sideB: number) {
     this.color = color;
 
-    if (a <= 0 || b <= 0) {
+    if (sideA <= 0 || sideB <= 0) {
       throw new Error('Properties length must be greater than ');
     }
   }
 
   getArea(): number {
-    const area = this.a * this.b;
+    const area = this.sideA * this.sideB;
 
     return Math.floor(area * 100) / 100;
   }
