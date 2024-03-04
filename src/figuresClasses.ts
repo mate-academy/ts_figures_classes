@@ -1,8 +1,9 @@
 type Shape = 'triangle' | 'circle' | 'rectangle';
+type Color = 'green' | 'red' | 'blue';
 
 export interface Figure {
   shape: Shape;
-  color: string;
+  color: Color;
   getArea(): number;
 }
 
@@ -10,10 +11,10 @@ export class Triangle implements Figure {
   shape: Shape = 'triangle';
 
   constructor(
+    public color: Color,
     public a: number,
     public b: number,
     public c: number,
-    public color: string,
   ) {
     if (a <= 0 || b <= 0 || c <= 0) {
       throw new Error('Length of each side must be greater than zero');
@@ -37,8 +38,8 @@ export class Circle implements Figure {
   shape: Shape = 'circle';
 
   constructor(
+    public color: Color,
     public radius: number,
-    public color: string,
   ) {
     if (radius <= 0) {
       throw new Error('Radius must be a positive number');
@@ -46,7 +47,7 @@ export class Circle implements Figure {
   }
 
   getArea(): number {
-    return Math.floor((Math.PI * this.radius ** 2 * 100) / 100);
+    return Math.floor((Math.PI * this.radius ** 2 * 100)) / 100;
   }
 }
 
@@ -54,9 +55,9 @@ export class Rectangle implements Figure {
   shape: Shape = 'rectangle';
 
   constructor(
+    public color: Color,
     public width: number,
     public height: number,
-    public color: string,
   ) {
     if (width <= 0 || height <= 0) {
       throw new Error('Length of each side must be greater than zero');
