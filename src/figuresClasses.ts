@@ -8,33 +8,38 @@ export interface Figure {
   getArea(): number;
 }
 
+const floorArea = (area: number): number => {
+  return Math.floor(area * 100) / 100;
+};
+
 export class Triangle implements Figure {
   public shape: Shape = 'triangle';
 
   constructor(
     public color: Color,
-    private a: number,
-    private b: number,
-    private c: number,
+    public a: number,
+    public b: number,
+    public c: number,
   ) {
-    if (a <= 0 || b <= 0 || c <= 0 || a >= b + c || b >= a + c || c >= a + b) {
-      throw new Error('your error message');
+    if (a >= b + c || b >= a + c || c >= a + b) {
+      throw new Error('Couldn`t build a triangle with invalid params');
+    }
+
+    if (a <= 0 || b <= 0 || c <= 0) {
+      throw new Error('Couldn`t build a triangle with invalid params');
     }
   }
 
   getArea(): number {
     const semiPerimeter = (this.a + this.b + this.c) / 2;
-
-    return (
-      Math.floor(
-        Math.sqrt(
-          semiPerimeter *
-            ((semiPerimeter - this.a) *
-              (semiPerimeter - this.b) *
-              (semiPerimeter - this.c)),
-        ) * 100,
-      ) / 100
+    const area = Math.sqrt(
+      semiPerimeter *
+        (semiPerimeter - this.a) *
+        (semiPerimeter - this.b) *
+        (semiPerimeter - this.c),
     );
+
+    return floorArea(area);
   }
 }
 
@@ -43,15 +48,17 @@ export class Circle implements Figure {
 
   constructor(
     public color: Color,
-    private radius: number,
+    public radius: number,
   ) {
     if (radius <= 0) {
-      throw new Error('your error message');
+      throw new Error('Couldn`t build a circle with invalid params');
     }
   }
 
   getArea(): number {
-    return Math.floor(Math.PI * this.radius * this.radius * 100) / 100;
+    const area = Math.PI * this.radius * this.radius;
+
+    return floorArea(area);
   }
 }
 
@@ -60,16 +67,18 @@ export class Rectangle implements Figure {
 
   constructor(
     public color: Color,
-    private width: number,
-    private height: number,
+    public width: number,
+    public height: number,
   ) {
     if (width <= 0 || height <= 0) {
-      throw new Error('your error message');
+      throw new Error('Couldn`t build a rectangle with invalid params');
     }
   }
 
   getArea(): number {
-    return Math.floor(this.width * this.height * 100) / 100;
+    const area = this.width * this.height;
+
+    return floorArea(area);
   }
 }
 
