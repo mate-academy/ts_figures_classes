@@ -7,6 +7,10 @@ export interface Figure {
   color: ColorType;
 }
 
+function roundingNumber(number: number): number {
+  return Math.floor(number * 100) / 100;
+}
+
 export class Triangle implements Figure {
   shape: ShapeType = 'triangle';
 
@@ -26,9 +30,16 @@ export class Triangle implements Figure {
   }
 
   getArea(): number {
-    const p = (this.a + this.b + this.c) / 2;
+    let triangleSquare = (this.a + this.b + this.c) / 2;
 
-    return Math.sqrt(p * (p - this.a) * (p - this.b) * (p - this.c));
+    triangleSquare = Math.sqrt(
+      triangleSquare *
+        (triangleSquare - this.a) *
+        (triangleSquare - this.b) *
+        (triangleSquare - this.c),
+    );
+
+    return roundingNumber(triangleSquare);
   }
 }
 
@@ -47,7 +58,7 @@ export class Circle implements Figure {
   getArea(): number {
     const area = Math.PI * this.radius * this.radius;
 
-    return Math.floor(area * 100) / 100;
+    return roundingNumber(area);
   }
 }
 
@@ -65,18 +76,12 @@ export class Rectangle implements Figure {
   }
 
   getArea(): number {
-    return this.height * this.width;
+    const rectangleSquare = this.height * this.width;
+
+    return roundingNumber(rectangleSquare);
   }
 }
 
 export function getInfo(figure: Figure): string {
-  let area;
-
-  if (Number.isInteger(figure.getArea())) {
-    area = figure.getArea();
-  } else {
-    area = figure.getArea().toFixed(2);
-  }
-
-  return `A ${figure.color} ${figure.shape} - ${area}`;
+  return `A ${figure.color} ${figure.shape} - ${figure.getArea()}`;
 }
