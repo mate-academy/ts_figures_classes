@@ -15,16 +15,20 @@ export class Triangle implements Figure {
     public b: number,
     public c: number,
   ) {
-    if (!a || !b || !c || a + b <= c) {
-      throw new Error();
+    if (a <= 0 || b <= 0 || c <= 0) {
+      throw new Error('Only positive numbers are allowed');
+    }
+
+    if (a + b <= c || b + c <= a || a + c <= b) {
+      throw new Error('Not a correct triangle');
     }
   }
 
   getArea(): number {
     const s = (this.a + this.b + this.c) / 2;
-    const S = Math.sqrt(s * (s - this.a) * (s - this.b) * (s - this.c));
+    const area = Math.sqrt(s * (s - this.a) * (s - this.b) * (s - this.c));
 
-    return +S.toFixed(2);
+    return +area.toFixed(2);
   }
 }
 
@@ -36,7 +40,7 @@ export class Circle implements Figure {
     public radius: number,
   ) {
     if (radius <= 0) {
-      throw new Error();
+      throw new Error('Radius must be greater than zero');
     }
   }
 
@@ -54,7 +58,7 @@ export class Rectangle implements Figure {
     public height: number,
   ) {
     if (width <= 0 || height <= 0) {
-      throw new Error();
+      throw new Error('Only positive numbers are allowed');
     }
   }
 
