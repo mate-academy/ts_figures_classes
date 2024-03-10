@@ -1,10 +1,14 @@
 type Shape = 'triangle' | 'circle' | 'rectangle';
 type Color = 'red' | 'green' | 'blue';
 
+function makeFloorArea(area: number): number {
+  return Math.floor(area * 100) / 100;
+}
+
 export interface Figure {
   shape: string;
   color: string;
-  getArea(): number;
+  getArea: () => number;
 }
 
 export class Triangle implements Figure {
@@ -23,7 +27,7 @@ export class Triangle implements Figure {
     }
   }
 
-  getArea(): number {
+  getArea: () => number = () => {
     const semiPerimeter = (this.a + this.b + this.c) / 2;
 
     const area = Math.sqrt(
@@ -33,8 +37,8 @@ export class Triangle implements Figure {
         (semiPerimeter - this.c),
     );
 
-    return Math.floor(area * 100) / 100;
-  }
+    return makeFloorArea(area);
+  };
 }
 
 export class Circle implements Figure {
@@ -49,11 +53,11 @@ export class Circle implements Figure {
     }
   }
 
-  getArea(): number {
+  getArea: () => number = () => {
     const area = this.radius * this.radius * Math.PI;
 
-    return Math.floor(area * 100) / 100;
-  }
+    return makeFloorArea(area);
+  };
 }
 
 export class Rectangle implements Figure {
@@ -69,11 +73,11 @@ export class Rectangle implements Figure {
     }
   }
 
-  getArea(): number {
+  getArea: () => number = () => {
     const area = this.a * this.b;
 
-    return Math.floor(area * 100) / 100;
-  }
+    return makeFloorArea(area);
+  };
 }
 
 export function getInfo(figure: Figure): string {
