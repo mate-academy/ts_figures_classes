@@ -45,10 +45,6 @@ export class Circle implements Figure {
 
   public a: number;
 
-  public b: undefined;
-
-  public c: undefined;
-
   constructor(color: Colors, a: number) {
     this.shape = 'circle';
     this.color = color;
@@ -72,8 +68,6 @@ export class Rectangle implements Figure {
   public a: number;
 
   public b: number;
-
-  public c: undefined;
 
   constructor(color: Colors, a: number, b: number) {
     this.shape = 'rectangle';
