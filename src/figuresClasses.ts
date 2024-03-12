@@ -39,11 +39,9 @@ export class Triangle implements Figure {
 export class Circle implements Figure {
   shape: Shape;
 
-  private radius: number;
-
   constructor(
     public color: Color,
-    radius: number,
+    private radius: number,
   ) {
     if (radius <= 0) {
       throw new Error('Invalid circle radius');
@@ -64,14 +62,10 @@ export class Circle implements Figure {
 export class Rectangle implements Figure {
   shape: Shape;
 
-  private width: number;
-
-  private height: number;
-
   constructor(
     public color: Color,
-    width: number,
-    height: number,
+    private width: number,
+    private height: number,
   ) {
     if (width <= 0 || height <= 0) {
       throw new Error('Invalid rectangle dimensions');
