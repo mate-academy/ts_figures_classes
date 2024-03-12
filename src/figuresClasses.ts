@@ -4,10 +4,7 @@ type Shapes = `triangle` | `circle` | `rectangle`;
 export interface Figure {
   shape: Shapes;
   color: Colors;
-  getArea: (a: number, b: number, c: number) => number;
-  a: number;
-  b?: number | undefined;
-  c?: number | undefined;
+  getArea: () => number;
 }
 
 export class Triangle implements Figure {
@@ -95,5 +92,5 @@ export class Rectangle implements Figure {
 }
 
 export function getInfo(figure: Figure): string {
-  return `A ${figure.color} ${figure.shape} - ${figure.getArea(figure.a, figure.b, figure.c)}`;
+  return `A ${figure.color} ${figure.shape} - ${figure.getArea()}`;
 }
