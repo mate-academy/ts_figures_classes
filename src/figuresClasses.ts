@@ -37,7 +37,7 @@ export class Circle implements Figure {
     public radius: number,
   ) {
     if (radius <= 0) {
-      throw new Error();
+      throw new Error(`Radius ${radius} cannot form a circle.`);
     }
   }
 
@@ -57,7 +57,7 @@ export class Rectangle implements Figure {
     public height: number,
   ) {
     if (width <= 0 || height <= 0) {
-      throw new Error();
+      throw new Error(`Sides ${width} and ${height} cannot form a rectangle.`);
     }
   }
 
