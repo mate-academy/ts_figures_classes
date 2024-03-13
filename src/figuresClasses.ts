@@ -8,48 +8,38 @@ export interface Figure {
 }
 
 export class Triangle implements Figure {
-  shape: Shape;
-
-  private sides: number[];
+  public shape: Shape = 'triangle';
 
   constructor(
     public color: Color,
-    a: number,
-    b: number,
-    c: number,
+    public a: number,
+    public b: number,
+    public c: number,
   ) {
     if (a <= 0 || b <= 0 || c <= 0 || a + b <= c || a + c <= b || b + c <= a) {
       throw new Error('Invalid triangle sides');
     }
-
-    this.shape = 'triangle';
-    this.color = color;
-    this.sides = [a, b, c];
   }
 
   getArea(): number {
-    const s = (this.sides[0] + this.sides[1] + this.sides[2]) / 2;
+    const average = (this.a + this.b + this.c) / 2;
 
     return +Math.sqrt(
-      s * (s - this.sides[0]) * (s - this.sides[1]) * (s - this.sides[2]),
+      average * (average - this.a) * (average - this.b) * (average - this.c),
     ).toFixed(2);
   }
 }
 
 export class Circle implements Figure {
-  shape: Shape;
+  public shape: Shape = 'circle';
 
   constructor(
     public color: Color,
-    private radius: number,
+    public radius: number,
   ) {
     if (radius <= 0) {
       throw new Error('Invalid circle radius');
     }
-
-    this.shape = 'circle';
-    this.color = color;
-    this.radius = radius;
   }
 
   getArea(): number {
@@ -60,21 +50,16 @@ export class Circle implements Figure {
 }
 
 export class Rectangle implements Figure {
-  shape: Shape;
+  public shape: Shape = 'rectangle';
 
   constructor(
     public color: Color,
-    private width: number,
-    private height: number,
+    public width: number,
+    public height: number,
   ) {
     if (width <= 0 || height <= 0) {
       throw new Error('Invalid rectangle dimensions');
     }
-
-    this.shape = 'rectangle';
-    this.color = color;
-    this.width = width;
-    this.height = height;
   }
 
   getArea(): number {
