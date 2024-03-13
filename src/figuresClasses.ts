@@ -6,7 +6,9 @@ const areStrictlyPositive = (...numbers: number[]): boolean => {
   return numbers.every((number) => number > 0);
 };
 
-const isTriangleValid = (...sides: number[]): boolean => {
+type TriangleSides = [number, number, number];
+
+const isTriangleValid = (...sides: TriangleSides): boolean => {
   const sortedSides: number[] = [...sides].sort((n, m) => n - m);
 
   return sortedSides[2] - sortedSides[1] - sortedSides[0] < 0;
