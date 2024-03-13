@@ -17,21 +17,29 @@ export class Triangle implements Figure {
     public c: number,
   ) {
     if (this.a <= 0 || this.b <= 0 || this.c <= 0) {
-      throw new Error('your error message');
+      throw new Error('Value was not received or less than 0');
     }
 
     const sortedTypes = [a, b, c].sort((arg1, arg2) => arg1 - arg2);
+    const sumSmallerSides = sortedTypes[0] + sortedTypes[1];
+    const biggestSide = sortedTypes[2];
+    const isTriangle = sumSmallerSides > biggestSide;
 
-    if (!(sortedTypes[0] + sortedTypes[1] > sortedTypes[2])) {
-      throw new Error('your error message');
+    if (!isTriangle) {
+      throw new Error('Incorrect value sides for triangle');
     }
   }
 
   getArea(): number {
-    const s = (this.a + this.b + this.c) / 2;
+    const semiperimeter = (this.a + this.b + this.c) / 2;
 
     return parseFloat(
-      Math.sqrt(s * (s - this.a) * (s - this.b) * (s - this.c)).toFixed(2),
+      Math.sqrt(
+        semiperimeter *
+          (semiperimeter - this.a) *
+          (semiperimeter - this.b) *
+          (semiperimeter - this.c),
+      ).toFixed(2),
     );
   }
 }
@@ -44,14 +52,14 @@ export class Circle implements Figure {
     public radius: number,
   ) {
     if (this.radius <= 0) {
-      throw new Error('your error message');
+      throw new Error('Value was not received or less than 0');
     }
   }
 
   getArea(): number {
-    const sqr = Math.PI * this.radius ** 2;
+    const calculateAreaCircle = Math.PI * this.radius ** 2;
 
-    return Math.floor(sqr * 100) / 100;
+    return Math.floor(calculateAreaCircle * 100) / 100;
   }
 }
 
@@ -64,7 +72,7 @@ export class Rectangle implements Figure {
     public height: number,
   ) {
     if (this.width <= 0 || this.height <= 0) {
-      throw new Error('your error message');
+      throw new Error('Value was not received or less than 0');
     }
   }
 
