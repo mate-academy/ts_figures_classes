@@ -1,34 +1,32 @@
 export interface Figure {
-  shape: `triangle` | `circle` | `rectangle`;
-  color: `red` | `green` | `blue`;
+  shape: 'triangle' | 'circle' | 'rectangle';
+  color: 'red' | 'green' | 'blue';
   getArea: () => number;
 }
 
+export enum Shape {
+  Triangle = 'triangle',
+  Circle = 'circle',
+  Rectangle = 'rectangle',
+}
+
+export enum Color {
+  Red = 'red',
+  Green = 'green',
+  Blue = 'blue',
+}
 export class Triangle implements Figure {
-  shape: 'triangle';
-
-  color: 'red' | 'green' | 'blue';
-
-  private a: number;
-
-  private b: number;
-
-  private c: number;
+  shape: Shape = Shape.Triangle;
 
   constructor(
-    color: 'red' | 'green' | 'blue',
-    a: number,
-    b: number,
-    c: number,
+    public color: Color,
+    private a: number,
+    private b: number,
+    private c: number,
   ) {
     if (a <= 0 || b <= 0 || c <= 0 || a + b <= c || a + c <= b || b + c <= a) {
       throw new Error('Invalid triangle sides');
     }
-    this.shape = 'triangle';
-    this.color = color;
-    this.a = a;
-    this.b = b;
-    this.c = c;
   }
 
   getArea(): number {
@@ -40,20 +38,15 @@ export class Triangle implements Figure {
 }
 
 export class Circle implements Figure {
-  shape: 'circle';
+  shape: Shape = Shape.Circle;
 
-  color: 'red' | 'green' | 'blue';
-
-  private radius: number;
-
-  constructor(color: 'red' | 'green' | 'blue', radius: number) {
+  constructor(
+    public color: Color,
+    private radius: number,
+  ) {
     if (radius <= 0) {
       throw new Error('Radius must be positive');
     }
-
-    this.shape = 'circle';
-    this.color = color;
-    this.radius = radius;
   }
 
   getArea(): number {
@@ -62,27 +55,24 @@ export class Circle implements Figure {
     return Math.floor(area * 100) / 100;
   }
 }
+
 export class Rectangle implements Figure {
-  shape: 'rectangle';
+  shape: Shape = Shape.Rectangle;
 
-  color: 'red' | 'green' | 'blue';
-
-  private width: number;
-
-  private height: number;
-
-  constructor(color: 'red' | 'green' | 'blue', width: number, height: number) {
+  constructor(
+    public color: Color,
+    private width: number,
+    private height: number,
+  ) {
     if (width <= 0 || height <= 0) {
       throw new Error('Width and height must be positive');
     }
-    this.shape = 'rectangle';
-    this.color = color;
-    this.width = width;
-    this.height = height;
   }
 
   getArea(): number {
-    return parseFloat((this.width * this.height).toFixed(2));
+    const area = this.width * this.height;
+
+    return parseFloat(area.toFixed(2));
   }
 }
 
