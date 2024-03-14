@@ -7,9 +7,9 @@ enum Shape {
 type Color = 'red' | 'green' | 'blue';
 
 export interface Figure {
-  shape: string;
-  color: string;
-  getArea(): number | string;
+  shape: Shape;
+  color: Color;
+  getArea(): number;
 }
 
 export class Triangle implements Figure {
