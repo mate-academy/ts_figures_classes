@@ -17,14 +17,14 @@ export class Triangle implements Figure {
     public c: number,
   ) {
     if (a <= 0 || b <= 0 || c <= 0) {
-      throw new Error('your error message');
+      throw new Error('One or more sides less or equal to 0');
     }
 
     const maxSide: number = Math.max(a, b, c);
     const twoOthersSide: number = a + b + c - maxSide;
 
     if (maxSide >= twoOthersSide) {
-      throw new Error('your error message');
+      throw new Error('Sum of two sides must be greater than third side');
     }
   }
 
@@ -46,7 +46,7 @@ export class Circle implements Figure {
     public radius: number,
   ) {
     if (radius <= 0) {
-      throw new Error('your error message');
+      throw new Error('Radius must be greater than 0');
     }
   }
 
@@ -64,12 +64,12 @@ export class Rectangle implements Figure {
     public height: number,
   ) {
     if (width <= 0 || height <= 0) {
-      throw new Error('your error message');
+      throw new Error('Width and height must be greater than 0');
     }
   }
 
   getArea(): number {
-    return this.width * this.height;
+    return Math.floor(this.width * this.height * 100) / 100;
   }
 }
 
