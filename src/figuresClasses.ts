@@ -1,15 +1,17 @@
+type Color = 'red' | 'green' | 'blue';
+
 export interface Figure {
-  shape: string;
-  color: string;
+  shape: 'triangle' | 'circle' | 'rectangle';
+  color: Color;
 
   getArea: () => number;
 }
 
 export class Triangle implements Figure {
-  shape: string;
+  shape: 'triangle' = 'triangle';
 
   constructor(
-    public color: string,
+    public color: Color,
     public a: number,
     public b: number,
     public c: number,
@@ -21,8 +23,6 @@ export class Triangle implements Figure {
     if (a + b <= c || a + c <= b || c + b <= a) {
       throw new Error('Invalid side of a triangle');
     }
-
-    this.shape = 'triangle';
   }
 
   getArea(): number {
@@ -39,17 +39,15 @@ export class Triangle implements Figure {
 }
 
 export class Circle implements Figure {
-  shape: string;
+  shape: 'circle' = 'circle';
 
   constructor(
-    public color: string,
+    public color: Color,
     public radius: number,
   ) {
     if (radius <= 0) {
       throw new Error('Invalid values');
     }
-
-    this.shape = 'circle';
   }
 
   getArea(): number {
@@ -60,10 +58,10 @@ export class Circle implements Figure {
 }
 
 export class Rectangle implements Figure {
-  shape: string;
+  shape: 'rectangle' = 'rectangle';
 
   constructor(
-    public color: string,
+    public color: Color,
     public width: number,
     public length: number,
   ) {
