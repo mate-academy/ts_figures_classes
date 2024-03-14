@@ -1,49 +1,51 @@
+type Shape = 'triangle' | 'circle' | 'rectangle';
+type Color = 'red' | 'green' | 'blue';
+
 export interface Figure {
-  shape: string;
-  color: string;
+  shape: Shape;
+  color: Color;
   getArea(): number;
 }
 
 export class Triangle implements Figure {
-  shape: string;
+  shape: Shape = 'triangle';
 
   constructor(
-    public color: string,
+    public color: Color,
     public a: number,
     public b: number,
     public c: number,
   ) {
-    this.shape = 'triangle';
-
     if (a <= 0 || b <= 0 || c <= 0) {
-      throw new Error('Invalid input');
+      throw new Error('Sides of triangle can`t be less than or equal to 0');
     }
 
     if (a + b <= c || a + c <= b || b + c <= a) {
-      throw new Error('Invalid input');
+      throw new Error(`Sides ${a}, ${b} and ${c} can't form a triangle`);
     }
   }
 
   getArea(): number {
-    const p = (this.a + this.b + this.c) / 2;
+    const perimeter = (this.a + this.b + this.c) / 2;
 
-    return +Math.sqrt(p * (p - this.a) * (p - this.b) * (p - this.c)).toFixed(
-      2,
-    );
+    return +Math.sqrt(
+      perimeter *
+        (perimeter - this.a) *
+        (perimeter - this.b) *
+        (perimeter - this.c),
+    ).toFixed(2);
   }
 }
 
 export class Circle implements Figure {
-  shape: string;
+  shape: Shape = 'circle';
 
   constructor(
-    public color: string,
+    public color: Color,
     public radius: number,
   ) {
-    this.shape = 'circle';
-
     if (radius <= 0) {
-      throw new Error('Invalid input');
+      throw new Error('Radius of circle can`t be less than or equal to 0');
     }
   }
 
@@ -53,17 +55,15 @@ export class Circle implements Figure {
 }
 
 export class Rectangle implements Figure {
-  shape: string;
+  shape: Shape = 'rectangle';
 
   constructor(
-    public color: string,
+    public color: Color,
     public width: number,
     public height: number,
   ) {
-    this.shape = 'rectangle';
-
     if (width <= 0 || height <= 0) {
-      throw new Error('Invalid input');
+      throw new Error('Sides of rectangle can`t be less than or equal to 0');
     }
   }
 
