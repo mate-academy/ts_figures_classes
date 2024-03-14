@@ -1,9 +1,3 @@
-export interface Figure {
-  shape: 'triangle' | 'circle' | 'rectangle';
-  color: 'red' | 'green' | 'blue';
-  getArea: () => number;
-}
-
 export enum Shape {
   Triangle = 'triangle',
   Circle = 'circle',
@@ -14,6 +8,11 @@ export enum Color {
   Red = 'red',
   Green = 'green',
   Blue = 'blue',
+}
+export interface Figure {
+  shape: Shape;
+  color: Color;
+  getArea: () => number;
 }
 export class Triangle implements Figure {
   shape: Shape = Shape.Triangle;
@@ -30,8 +29,9 @@ export class Triangle implements Figure {
   }
 
   getArea(): number {
-    const s = (this.a + this.b + this.c) / 2;
-    const area = Math.sqrt(s * (s - this.a) * (s - this.b) * (s - this.c));
+    const perimiter = (this.a + this.b + this.c) / 2;
+    const area = Math.sqrt(perimiter * (perimiter - this.a)
+      * (perimiter - this.b) * (perimiter - this.c));
 
     return Math.floor(area * 100) / 100;
   }
