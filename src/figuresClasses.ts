@@ -1,21 +1,22 @@
+type Shape = 'triangle' | 'circle' | 'rectangle';
+type Color = 'red' | 'green' | 'blue';
+
 export interface Figure {
-  shape: 'triangle' | 'circle' | 'rectangle';
-  color: 'red' | 'green' | 'blue';
+  shape: Shape;
+  color: Color;
 
   getArea(): number;
 }
 
 export class Triangle implements Figure {
-  shape: 'triangle' | 'circle' | 'rectangle';
+  shape: Shape = 'triangle';
 
   constructor(
-    public color: 'red' | 'green' | 'blue',
+    public color: Color,
     public a: number,
     public b: number,
     public c: number,
   ) {
-    this.shape = 'triangle';
-
     if (a + b <= c || a + c <= b || b + c <= a) {
       throw new Error(
         'The longest side of a triangle is not >= than a sum of two others',
@@ -32,14 +33,12 @@ export class Triangle implements Figure {
 }
 
 export class Circle implements Figure {
-  shape: 'triangle' | 'circle' | 'rectangle';
+  shape: Shape = 'circle';
 
   constructor(
-    public color: 'red' | 'green' | 'blue',
+    public color: Color,
     public radius: number,
   ) {
-    this.shape = 'circle';
-
     if (radius <= 0) {
       throw new Error('Radius of circle is invalid value');
     }
@@ -51,15 +50,13 @@ export class Circle implements Figure {
 }
 
 export class Rectangle implements Figure {
-  shape: 'triangle' | 'circle' | 'rectangle';
+  shape: Shape = 'rectangle';
 
   constructor(
-    public color: 'red' | 'green' | 'blue',
+    public color: Color,
     public width: number,
     public height: number,
   ) {
-    this.shape = 'rectangle';
-
     if (width <= 0 || height <= 0) {
       throw new Error('One of the sides of rectangle is invalid value');
     }
