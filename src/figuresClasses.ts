@@ -95,15 +95,7 @@ export class Rectangle implements Figure {
 }
 
 export function getInfo(figure: Figure): string {
-  const area = figure.getArea();
-  const areaIntegered = Number.isInteger(area);
-  let areaString: string;
+  const area = figure.getArea().toFixed(2).replace(/\.0+$/, '');
 
-  if (areaIntegered) {
-    areaString = area.toString();
-  } else {
-    areaString = area.toFixed(2);
-  }
-
-  return `A ${figure.color} ${figure.shape} - ${areaString}`;
+  return `A ${figure.color} ${figure.shape} - ${area}`;
 }
