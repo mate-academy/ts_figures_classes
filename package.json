@@ -18,10 +18,9 @@
   "devDependencies": {
     "@babel/preset-env": "^7.24.0",
     "@babel/preset-typescript": "^7.23.3",
-    "@mate-academy/students-ts-config": "latest",
-    "typescript": "^5.4.2",
     "@mate-academy/eslint-config": "latest",
-    "@mate-academy/scripts": "^1.7.3",
+    "@mate-academy/scripts": "^1.7.7",
+    "@mate-academy/students-ts-config": "latest",
     "@types/jest": "^29.5.12",
     "@types/node": "^20.11.26",
     "@typescript-eslint/eslint-plugin": "^5.62.0",
@@ -33,7 +32,8 @@
     "husky": "^9.0.11",
     "jest": "^29.6.1",
     "lint-staged": "^15.2.2",
-    "prettier": "^3.2.5"
+    "prettier": "^3.2.5",
+    "typescript": "^5.4.2"
   },
   "mateAcademy": {
     "projectType": "typescript"
