@@ -28,6 +28,7 @@
   "devDependencies": {
     "@mate-academy/eslint-config": "latest",
     "@mate-academy/scripts": "^1.7.3",
+    "@types/mocha": "^10.0.6",
     "@typescript-eslint/eslint-plugin": "^4.29.1",
     "@typescript-eslint/parser": "^4.29.0",
     "eslint": "^7.32.0",
