@@ -17,7 +17,14 @@ export class Triangle implements Figure {
     public b: number,
     public c: number,
   ) {
-    if (a + b <= c || a + c <= b || b + c <= a) {
+    if (
+      a === 0 ||
+      b === 0 ||
+      c === 0 ||
+      a + b <= c ||
+      a + c <= b ||
+      b + c <= a
+    ) {
       throw new Error(
         'The longest side of a triangle is not >= than a sum of two others',
       );
