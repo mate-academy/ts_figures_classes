@@ -11,7 +11,7 @@ export class Triangle implements Figure {
   public shape: Shape = 'triangle';
 
   constructor(
-    public color: string,
+    public color: Color,
     public a: number,
     public b: number,
     public c: number,
@@ -42,7 +42,7 @@ export class Circle implements Figure {
   public shape: Shape = 'circle';
 
   constructor(
-    public color: string,
+    public color: Color,
     public radius: number,
   ) {
     if (radius <= 0) {
@@ -61,7 +61,7 @@ export class Rectangle implements Figure {
   public shape: Shape = 'rectangle';
 
   constructor(
-    public color: string,
+    public color: Color,
     public width: number,
     public height: number,
   ) {
