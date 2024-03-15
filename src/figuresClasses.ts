@@ -1,21 +1,25 @@
+/* eslint-disable @typescript-eslint/lines-between-class-members */
+type Shape = 'triangle' | 'circle' | 'rectangle';
+type Color = 'red' | 'green' | 'blue';
+
 export interface Figure {
-  shape: string;
-  color: string;
+  shape: Shape;
+  color: Color;
   getArea(): number;
 }
 
 export class Triangle implements Figure {
-  shape: string;
-
-  color: string;
-
+  shape: Shape = 'triangle';
   private sideA: number;
-
   private sideB: number;
-
   private sideC: number;
 
-  constructor(color: string, sideA: number, sideB: number, sideC: number) {
+  constructor(
+    public color: Color,
+    sideA: number,
+    sideB: number,
+    sideC: number,
+  ) {
     if (sideA <= 0 || sideB <= 0 || sideC <= 0) {
       throw new Error('your error message');
     }
@@ -28,7 +32,6 @@ export class Triangle implements Figure {
       throw new Error('your error message');
     }
 
-    this.shape = 'triangle';
     this.color = color;
     this.sideA = sideA;
     this.sideB = sideB;
@@ -37,7 +40,6 @@ export class Triangle implements Figure {
 
   getArea(): number {
     const halfMeter = (this.sideA + this.sideB + this.sideC) / 2;
-
     const area = Math.sqrt(
       halfMeter *
         (halfMeter - this.sideA) *
@@ -50,13 +52,14 @@ export class Triangle implements Figure {
 }
 
 export class Circle implements Figure {
-  shape: string;
-
-  color: string;
+  shape: Shape = 'circle';
 
   private radius: number;
 
-  constructor(color: string, radius: number) {
+  constructor(
+    public color: Color,
+    radius: number,
+  ) {
     if (radius <= 0) {
       throw new Error('your error message');
     }
@@ -74,19 +77,18 @@ export class Circle implements Figure {
 }
 
 export class Rectangle implements Figure {
-  shape: string;
+  shape: Shape = 'rectangle';
 
-  color: string;
+  public color: Color;
 
   private width: number;
-
   private height: number;
 
-  constructor(color: string, width: number, height: number) {
+  constructor(color: Color, width: number, height: number) {
     if (width <= 0 || height <= 0) {
       throw new Error('Method not implemented.');
     }
-    this.shape = 'rectangle';
+
     this.color = color;
     this.width = width;
     this.height = height;
