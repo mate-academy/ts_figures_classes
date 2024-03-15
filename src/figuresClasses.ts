@@ -20,11 +20,7 @@ export class Triangle implements Figure {
       throw new Error(`It's not a triangle`);
     }
 
-    if (
-      this.a >= this.b + this.c ||
-      this.b >= this.a + this.c ||
-      this.c >= this.a + this.b
-    ) {
+    if (a >= b + c || b >= a + c || c >= a + b) {
       throw new Error(`Sides ${a}, ${b} and ${c} are wrong`);
     }
   }
