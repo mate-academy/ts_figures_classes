@@ -17,14 +17,7 @@ export class Triangle implements Figure {
     public b: number,
     public c: number,
   ) {
-    if (
-      a === 0 ||
-      b === 0 ||
-      c === 0 ||
-      a + b <= c ||
-      a + c <= b ||
-      b + c <= a
-    ) {
+    if (a <= 0 || b <= 0 || c <= 0 || a + b <= c || a + c <= b || b + c <= a) {
       throw new Error(
         'The longest side of a triangle is not >= than a sum of two others',
       );
@@ -33,9 +26,15 @@ export class Triangle implements Figure {
 
   public getArea(): number {
     const { a, b, c } = this;
-    const s = (a + b + c) / 2;
+    const semiperim = (a + b + c) / 2;
 
-    return Math.floor(Math.sqrt(s * (s - a) * (s - b) * (s - c)) * 100) / 100;
+    return (
+      Math.floor(
+        Math.sqrt(
+          semiperim * (semiperim - a) * (semiperim - b) * (semiperim - c),
+        ) * 100,
+      ) / 100
+    );
   }
 }
 
