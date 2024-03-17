@@ -20,9 +20,8 @@ export class Triangle implements Figure {
     const isNotTriangle = a + b <= c || a + c <= b || b + c <= a;
 
     if (NotPositive || isNotTriangle) {
-      throw new Error('incorrect value');
+      throw new Error('incorrect value, impossible to create triangle');
     }
-    this.color = color;
   }
 
   getArea(): number {
@@ -46,7 +45,7 @@ export class Circle implements Figure {
     public radius: number,
   ) {
     if (radius <= 0) {
-      throw new Error('incorrect value');
+      throw new Error('incorrect value, impossible to create circle');
     }
   }
 
@@ -66,9 +65,8 @@ export class Rectangle implements Figure {
     public height: number,
   ) {
     if (width <= 0 || height <= 0) {
-      throw new Error('incorrect value');
+      throw new Error('incorrect value, impossible to create rectangle');
     }
-    this.color = color;
   }
 
   getArea(): number {
