@@ -10,18 +10,17 @@ export interface Figure {
 
 export class Triangle implements Figure {
   shape: Shape = 'triangle';
-  private sideA: number;
-  private sideB: number;
-  private sideC: number;
 
   constructor(
     public color: Color,
-    sideA: number,
-    sideB: number,
-    sideC: number,
+    private sideA: number,
+    private sideB: number,
+    private sideC: number,
   ) {
     if (sideA <= 0 || sideB <= 0 || sideC <= 0) {
-      throw new Error('your error message');
+      throw new Error(
+        'Incorrect input data. Negative numbers or zero are not allowed',
+      );
     }
 
     if (
@@ -29,13 +28,8 @@ export class Triangle implements Figure {
       sideA + sideC <= sideB ||
       sideC + sideB <= sideA
     ) {
-      throw new Error('your error message');
+      throw new Error('Incorrect input data. Unable to create a triangle');
     }
-
-    this.color = color;
-    this.sideA = sideA;
-    this.sideB = sideB;
-    this.sideC = sideC;
   }
 
   getArea(): number {
@@ -54,19 +48,15 @@ export class Triangle implements Figure {
 export class Circle implements Figure {
   shape: Shape = 'circle';
 
-  private radius: number;
-
   constructor(
     public color: Color,
-    radius: number,
+    private radius: number,
   ) {
     if (radius <= 0) {
-      throw new Error('your error message');
+      throw new Error(
+        'Incorrect input data. Negative numbers or zero are not allowed',
+      );
     }
-
-    this.shape = 'circle';
-    this.color = color;
-    this.radius = radius;
   }
 
   getArea(): number {
@@ -79,19 +69,16 @@ export class Circle implements Figure {
 export class Rectangle implements Figure {
   shape: Shape = 'rectangle';
 
-  public color: Color;
-
-  private width: number;
-  private height: number;
-
-  constructor(color: Color, width: number, height: number) {
+  constructor(
+    public color: Color,
+    private width: number,
+    private height: number,
+  ) {
     if (width <= 0 || height <= 0) {
-      throw new Error('Method not implemented.');
+      throw new Error(
+        'Incorrect input data. Negative numbers or zero are not allowed',
+      );
     }
-
-    this.color = color;
-    this.width = width;
-    this.height = height;
   }
 
   getArea(): number {
