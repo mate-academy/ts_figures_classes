@@ -1,6 +1,10 @@
+export type Color = 'red' | 'blue' | 'green';
+
+export type Shape = 'triangle' | 'circle' | 'rectangle';
+
 export interface Figure {
-  shape: 'triangle' | 'circle' | 'rectangle';
-  color: 'red' | 'blue' | 'green';
+  shape: Shape;
+  color: Color;
   getArea(): number;
 }
 
@@ -12,7 +16,7 @@ export class Triangle implements Figure {
   readonly shape = 'triangle';
 
   constructor(
-    readonly color: 'red' | 'blue' | 'green',
+    readonly color: Color,
     readonly a: number,
     readonly b: number,
     readonly c: number,
@@ -48,7 +52,7 @@ export class Circle implements Figure {
   readonly shape = 'circle';
 
   constructor(
-    readonly color: 'red' | 'blue' | 'green',
+    readonly color: Color,
     readonly radius: number,
   ) {
     if (radius <= 0) {
@@ -67,7 +71,7 @@ export class Rectangle implements Figure {
   readonly shape = 'rectangle';
 
   constructor(
-    readonly color: 'red' | 'blue' | 'green',
+    readonly color: Color,
     readonly width: number,
     readonly height: number,
   ) {
