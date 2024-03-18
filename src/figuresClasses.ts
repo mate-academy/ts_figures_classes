@@ -1,16 +1,21 @@
 export interface Figure {
-  shape: string;
-  color: string;
+  shape: 'triangle' | 'circle' | 'rectangle';
+  color: 'red' | 'blue' | 'green';
   getArea(): number;
 }
 
+export function roundArea(area: number): number {
+  return Math.floor(area * 100) / 100;
+}
+
 export class Triangle implements Figure {
+  readonly shape = 'triangle';
+
   constructor(
-    readonly color: string,
+    readonly color: 'red' | 'blue' | 'green',
     readonly a: number,
     readonly b: number,
     readonly c: number,
-    readonly shape: string = 'triangle',
   ) {
     if (a <= 0 || b <= 0 || c <= 0) {
       throw new Error('All values must be greater than 0.');
@@ -35,15 +40,16 @@ export class Triangle implements Figure {
         (semiperimeter - this.c),
     );
 
-    return Math.floor(area * 100) / 100;
+    return roundArea(area);
   }
 }
 
 export class Circle implements Figure {
+  readonly shape = 'circle';
+
   constructor(
-    readonly color: string,
+    readonly color: 'red' | 'blue' | 'green',
     readonly radius: number,
-    readonly shape: string = 'circle',
   ) {
     if (radius <= 0) {
       throw new Error('Radius value must be greater than 0.');
@@ -53,16 +59,17 @@ export class Circle implements Figure {
   getArea(): number {
     const area = Math.PI * Math.pow(this.radius, 2);
 
-    return Math.floor(area * 100) / 100;
+    return roundArea(area);
   }
 }
 
 export class Rectangle implements Figure {
+  readonly shape = 'rectangle';
+
   constructor(
-    readonly color: string,
+    readonly color: 'red' | 'blue' | 'green',
     readonly width: number,
     readonly height: number,
-    readonly shape: string = 'rectangle',
   ) {
     if (width <= 0 || height <= 0) {
       throw new Error('All values must be greater than 0.');
@@ -72,10 +79,13 @@ export class Rectangle implements Figure {
   getArea(): number {
     const area = this.width * this.height;
 
-    return Math.floor(area * 100) / 100;
+    return roundArea(area);
   }
 }
 
 export function getInfo(figure: Figure): string {
-  return `A ${figure.color} ${figure.shape} - ${figure.getArea()}`;
+  const { shape, color } = figure;
+  const area = figure.getArea();
+
+  return `A ${color} ${shape} - ${area}`;
 }
