@@ -22,7 +22,6 @@ export class Triangle implements Figure {
     if (a >= b + c || b >= a + c || c >= a + b) {
       throw new Error('Invalid triangle sides: cannot form a triangle');
     }
-    this.color = color;
     this.sides = [a, b, c];
   }
 
@@ -39,14 +38,11 @@ export class Circle implements Figure {
 
   constructor(
     public color: `red` | `green` | `blue`,
-    public radius: number,
+    private radius: number,
   ) {
     if (radius <= 0) {
       throw new Error('Radius must be greater than 0');
     }
-
-    this.color = color;
-    this.radius = radius;
   }
 
   getArea(): number {
@@ -67,8 +63,6 @@ export class Rectangle implements Figure {
     if (width <= 0 || height <= 0) {
       throw new Error('All sides must be greater than 0');
     }
-
-    this.color = color;
     this.sides = [width, height];
   }
 
