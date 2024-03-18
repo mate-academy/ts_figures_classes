@@ -10,32 +10,26 @@ export interface Figure {
 export class Triangle implements Figure {
   shape: 'triangle' = 'triangle';
 
-  color: Color;
-
-  private a: number;
-
-  private b: number;
-
-  private c: number;
-
-  constructor(color: Color, a: number, b: number, c: number) {
+  constructor(
+    public color: Color,
+    private a: number,
+    private b: number,
+    private c: number,
+  ) {
     if (a <= 0 || b <= 0 || c <= 0) {
-      throw new Error('your error message');
+      throw new Error('your value should be bigger than 0');
     }
 
     if (a >= b + c || b >= a + c || c >= a + b) {
-      throw new Error('your error message');
+      throw new Error('your value should not be bigger than sum of other two');
     }
-    this.color = color;
-    this.a = a;
-    this.b = b;
-    this.c = c;
   }
 
   getArea(): number {
-    const s: number = (this.a + this.b + this.c) / 2;
+    const { a, b, c } = this;
+    const s: number = (a + b + c) / 2;
     const forTriangle: string = Math.sqrt(
-      s * (s - this.a) * (s - this.b) * (s - this.c),
+      s * (s - a) * (s - b) * (s - c),
     ).toFixed(2);
 
     return +forTriangle;
@@ -45,17 +39,13 @@ export class Triangle implements Figure {
 export class Circle implements Figure {
   shape: 'circle' = 'circle';
 
-  color: Color;
-
-  private radius: number;
-
-  constructor(color: Color, radius: number) {
+  constructor(
+    public color: Color,
+    private radius: number,
+  ) {
     if (radius <= 0) {
-      throw new Error('your error message');
+      throw new Error('your value should be bigger than 0');
     }
-
-    this.color = color;
-    this.radius = radius;
   }
 
   getArea(): number {
@@ -66,19 +56,14 @@ export class Circle implements Figure {
 export class Rectangle implements Figure {
   shape: 'rectangle' = 'rectangle';
 
-  color: Color;
-
-  private height: number;
-
-  private width: number;
-
-  constructor(color: Color, height: number, width: number) {
+  constructor(
+    public color: Color,
+    private height: number,
+    private width: number,
+  ) {
     if (height <= 0 || width <= 0) {
-      throw new Error('your error message');
+      throw new Error('your value should be bigger than 0');
     }
-    this.color = color;
-    this.height = height;
-    this.width = width;
   }
 
   getArea(): number {
