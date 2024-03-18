@@ -8,17 +8,14 @@ export interface Figure {
 }
 
 export class Triangle implements Figure {
-  shape: Shape;
+  shape: Shape = 'triangle';
 
-  color: Color;
-
-  a: number;
-
-  b: number;
-
-  c: number;
-
-  constructor(color: Color, a: number, b: number, c: number) {
+  constructor(
+    public color: Color,
+    public a: number,
+    public b: number,
+    public c: number,
+  ) {
     if (a <= 0 || b <= 0 || c <= 0) {
       throw new Error('Length is <= 0');
     }
@@ -29,70 +26,57 @@ export class Triangle implements Figure {
     if (allSides - maxSide <= maxSide) {
       throw new Error('Wrong sides');
     }
-
-    this.shape = 'triangle';
-    this.color = color;
-    this.a = a;
-    this.b = b;
-    this.c = c;
   }
 
   getArea(): number {
-    const p = (this.a + this.b + this.c) * 0.5;
-    const s = Math.sqrt(p * (p - this.a) * (p - this.b) * (p - this.c));
+    const semiperimeter = (this.a + this.b + this.c) * 0.5;
+    const square = Math.sqrt(
+      semiperimeter *
+        (semiperimeter - this.a) *
+        (semiperimeter - this.b) *
+        (semiperimeter - this.c),
+    );
 
-    return Math.round(100 * s) / 100;
+    return Math.round(100 * square) / 100;
   }
 }
 
 export class Circle implements Figure {
-  shape: Shape;
+  shape: Shape = 'circle';
 
-  radius: number;
-
-  color: Color;
-
-  constructor(color: Color, radius: number) {
+  constructor(
+    public color: Color,
+    public radius: number,
+  ) {
     if (radius <= 0) {
       throw new Error('Length is <= 0');
     }
-
-    this.radius = radius;
-    this.color = color;
-    this.shape = 'circle';
   }
 
   getArea(): number {
-    const s = Math.PI * this.radius * this.radius;
+    const square = Math.PI * this.radius * this.radius;
 
-    return Math.floor(s * 100) / 100;
+    return Math.floor(square * 100) / 100;
   }
 }
 
 export class Rectangle implements Figure {
-  shape: Shape;
+  shape: Shape = 'rectangle';
 
-  color: Color;
-
-  width: number;
-
-  height: number;
-
-  constructor(color: Color, width: number, height: number) {
+  constructor(
+    public color: Color,
+    public width: number,
+    public height: number,
+  ) {
     if (width <= 0 || height <= 0) {
       throw new Error('Length is <= 0');
     }
-
-    this.shape = 'rectangle';
-    this.color = color;
-    this.width = width;
-    this.height = height;
   }
 
   getArea(): number {
-    const s = this.width * this.height;
+    const square = this.width * this.height;
 
-    return s;
+    return square;
   }
 }
 
