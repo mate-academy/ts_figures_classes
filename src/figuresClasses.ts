@@ -8,7 +8,7 @@ export interface Figure {
 }
 
 export class Triangle implements Figure {
-  shape: 'triangle' = 'triangle';
+  shape: Shape = 'triangle';
 
   constructor(
     public color: Color,
@@ -27,17 +27,17 @@ export class Triangle implements Figure {
 
   getArea(): number {
     const { a, b, c } = this;
-    const s: number = (a + b + c) / 2;
-    const forTriangle: string = Math.sqrt(
-      s * (s - a) * (s - b) * (s - c),
+    const square: number = (a + b + c) / 2;
+    const triangleArea: string = Math.sqrt(
+      square * (square - a) * (square - b) * (square - c),
     ).toFixed(2);
 
-    return +forTriangle;
+    return +triangleArea;
   }
 }
 
 export class Circle implements Figure {
-  shape: 'circle' = 'circle';
+  shape: Shape = 'circle';
 
   constructor(
     public color: Color,
@@ -54,7 +54,7 @@ export class Circle implements Figure {
 }
 
 export class Rectangle implements Figure {
-  shape: 'rectangle' = 'rectangle';
+  shape: Shape = 'rectangle';
 
   constructor(
     public color: Color,
@@ -67,14 +67,15 @@ export class Rectangle implements Figure {
   }
 
   getArea(): number {
-    const forRectangle: string = (this.height * this.width).toFixed(2);
+    const rectangleArea: string = (this.height * this.width).toFixed(2);
 
-    return parseInt(forRectangle);
+    return parseInt(rectangleArea);
   }
 }
 
 export function getInfo(figure: Figure): string {
   const area = figure.getArea();
+  const { color, shape } = figure;
 
-  return `A ${figure.color} ${figure.shape} - ${area}`;
+  return `A ${color} ${shape} - ${area}`;
 }
