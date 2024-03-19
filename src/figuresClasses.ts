@@ -14,24 +14,33 @@ export interface Figure {
 export class Triangle implements Figure {
   constructor(
     public color: Colors,
-    public a: number,
-    public b: number,
-    public c: number,
+    public sideA: number,
+    public sideB: number,
+    public sideC: number,
     public shape: Shapes = 'triangle',
   ) {
-    if (a <= 0 || b <= 0 || c <= 0) {
+    if (sideA <= 0 || sideB <= 0 || sideC <= 0) {
       throw new Error('All sides must be greater than 0');
     }
 
-    if (a >= b + c || b >= a + c || c >= a + b) {
+    if (
+      sideA >= sideB + sideC ||
+      sideB >= sideA + sideC ||
+      sideC >= sideA + sideB
+    ) {
       throw new Error('Invalid side lengths');
     }
   }
 
   getArea(): number {
-    const s = (this.a + this.b + this.c) / 2;
+    const semiperimeter = (this.sideA + this.sideB + this.sideC) / 2;
 
-    return Math.sqrt(s * (s - this.a) * (s - this.b) * (s - this.c));
+    return Math.sqrt(
+      semiperimeter *
+        (semiperimeter - this.sideA) *
+        (semiperimeter - this.sideB) *
+        (semiperimeter - this.sideC),
+    );
   }
 }
 
