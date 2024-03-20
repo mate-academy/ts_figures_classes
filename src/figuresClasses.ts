@@ -34,13 +34,14 @@ export class Triangle implements Figure {
 
   getArea(): number {
     const perimetr = (this.sideA + this.sideB + this.sideC) / 2;
-
-    return Math.sqrt(
+    const resultTriangle = Math.sqrt(
       perimetr *
         (perimetr - this.sideA) *
         (perimetr - this.sideB) *
         (perimetr - this.sideC),
     );
+
+    return Math.round(resultTriangle * 100) / 100;
   }
 }
 
@@ -54,13 +55,15 @@ export class Circle implements Figure {
     public radius: number,
   ) {
     if (radius <= 0) {
-      throw new Error(`radius ${radius} can't form a triangle`);
+      throw new Error(`radius ${radius} can't form a circle`);
     }
     this.color = color;
   }
 
   getArea(): number {
-    return Math.PI * this.radius * this.radius;
+    const resultCircle = Math.PI * this.radius * this.radius;
+
+    return Math.floor(resultCircle * 100) / 100;
   }
 }
 
@@ -75,13 +78,15 @@ export class Rectangle implements Figure {
     public height: number,
   ) {
     if (width <= 0 || height <= 0) {
-      throw new Error(`radius ${width} and ${height} can't form a triangle`);
+      throw new Error(`radius ${width} and ${height} can't form a rectangle`);
     }
     this.color = color;
   }
 
   getArea(): number {
-    return this.width * this.height;
+    const resultRectangle = this.width * this.height;
+
+    return Math.round(resultRectangle * 100) / 100;
   }
 }
 
@@ -91,7 +96,7 @@ export function getInfo(figure: Figure): string {
   // if (area % 1 !== 0) {
   //   area = area.toFixed(2);
   // }
-  const area = Math.round(figure.getArea() * 100) / 100;
+  const area = figure.getArea();
 
   return `A ${figure.color} ${figure.shape} - ${+area}`;
 }
