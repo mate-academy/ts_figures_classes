@@ -11,8 +11,6 @@ interface Figure {
 export class Triangle implements Figure {
   shape: Shape = 'triangle';
 
-  sides: number[];
-
   constructor(
     public color: Color,
     public a: number,
@@ -26,14 +24,14 @@ export class Triangle implements Figure {
     if (a >= b + c || b >= a + c || c >= a + b) {
       throw new Error('Invalid triangle sides: cannot form a triangle');
     }
-    this.sides = [this.a, this.b, this.c];
   }
 
   getArea(): number {
-    const [a, b, c] = this.sides;
-    const area = (a + b + c) / 2;
+    const area = (this.a + this.b + this.c) / 2;
 
-    return +Math.sqrt(area * (area - a) * (area - b) * (area - c)).toFixed(2);
+    return +Math.sqrt(
+      area * (area - this.a) * (area - this.b) * (area - this.c),
+    ).toFixed(2);
   }
 }
 
@@ -59,8 +57,6 @@ export class Circle implements Figure {
 export class Rectangle implements Figure {
   shape: Shape = 'rectangle';
 
-  sides: number[];
-
   constructor(
     public color: Color,
     public width: number,
@@ -69,12 +65,10 @@ export class Rectangle implements Figure {
     if (width <= 0 || height <= 0) {
       throw new Error('All sides must be greater than 0');
     }
-    this.sides = [this.width, this.height];
   }
 
   getArea(): number {
-    const [width, height] = this.sides;
-    const area = width * height;
+    const area = this.width * this.height;
 
     return area;
   }
