@@ -1,5 +1,3 @@
-// import { sign } from 'crypto';
-
 export interface Figure {
   shape: string;
   color: string;
@@ -33,12 +31,12 @@ export class Triangle implements Figure {
   }
 
   getArea(): number {
-    const perimetr = (this.sideA + this.sideB + this.sideC) / 2;
+    const perimeter = (this.sideA + this.sideB + this.sideC) / 2;
     const resultTriangle = Math.sqrt(
-      perimetr *
-        (perimetr - this.sideA) *
-        (perimetr - this.sideB) *
-        (perimetr - this.sideC),
+      perimeter *
+        (perimeter - this.sideA) *
+        (perimeter - this.sideB) *
+        (perimeter - this.sideC),
     );
 
     return Math.round(resultTriangle * 100) / 100;
@@ -91,12 +89,7 @@ export class Rectangle implements Figure {
 }
 
 export function getInfo(figure: Figure): string {
-  // let area = figure.getArea();
-
-  // if (area % 1 !== 0) {
-  //   area = area.toFixed(2);
-  // }
   const area = figure.getArea();
 
-  return `A ${figure.color} ${figure.shape} - ${+area}`;
+  return `A ${figure.color} ${figure.shape} - ${area}`;
 }
