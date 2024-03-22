@@ -1,6 +1,5 @@
-/* eslint-disable @typescript-eslint/lines-between-class-members */
-type Shape = 'triangle' | 'circle' | 'rectangle';
-type Color = 'red' | 'green' | 'blue';
+export type Color = 'red' | 'green' | 'blue';
+export type Shape = 'triangle' | 'circle' | 'rectangle';
 
 export interface Figure {
   shape: Shape;
@@ -8,14 +7,18 @@ export interface Figure {
   getArea(): number;
 }
 
+function getRounded(num: number): number {
+  return Math.floor(num * 100) / 100;
+}
+
 export class Triangle implements Figure {
   shape: Shape = 'triangle';
 
   constructor(
     public color: Color,
-    private sideA: number,
-    private sideB: number,
-    private sideC: number,
+    public sideA: number,
+    public sideB: number,
+    public sideC: number,
   ) {
     if (sideA <= 0 || sideB <= 0 || sideC <= 0) {
       throw new Error(
@@ -34,14 +37,15 @@ export class Triangle implements Figure {
 
   getArea(): number {
     const halfMeter = (this.sideA + this.sideB + this.sideC) / 2;
-    const area = Math.sqrt(
-      halfMeter *
-        (halfMeter - this.sideA) *
-        (halfMeter - this.sideB) *
-        (halfMeter - this.sideC),
-    );
 
-    return Math.floor(area * 100) / 100;
+    return getRounded(
+      Math.sqrt(
+        halfMeter *
+          (halfMeter - this.sideA) *
+          (halfMeter - this.sideB) *
+          (halfMeter - this.sideC),
+      ),
+    );
   }
 }
 
@@ -50,7 +54,7 @@ export class Circle implements Figure {
 
   constructor(
     public color: Color,
-    private radius: number,
+    public radius: number,
   ) {
     if (radius <= 0) {
       throw new Error(
@@ -60,9 +64,9 @@ export class Circle implements Figure {
   }
 
   getArea(): number {
-    const area = Math.PI * this.radius * this.radius;
+    const area = Math.PI * Math.pow(this.radius, 2);
 
-    return Math.floor(area * 100) / 100;
+    return getRounded(area);
   }
 }
 
@@ -71,8 +75,8 @@ export class Rectangle implements Figure {
 
   constructor(
     public color: Color,
-    private width: number,
-    private height: number,
+    public width: number,
+    public height: number,
   ) {
     if (width <= 0 || height <= 0) {
       throw new Error(
@@ -84,10 +88,13 @@ export class Rectangle implements Figure {
   getArea(): number {
     const area = this.width * this.height;
 
-    return Math.floor(area * 100) / 100;
+    return getRounded(area);
   }
 }
 
 export function getInfo(figure: Figure): string {
-  return `A ${figure.color} ${figure.shape} - ${figure.getArea()}`;
+  const { color, shape } = figure;
+  const area = figure.getArea();
+
+  return `A ${color} ${shape} - ${area}`;
 }
