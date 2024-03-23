@@ -1,11 +1,104 @@
-export interface Figure {}
+enum Shape {
+  Triangle = 'triangle',
+  Circle = 'circle',
+  Rectangle = 'rectangle',
+}
 
-export class Triangle implements Figure {}
+type Color = 'red' | 'green' | 'blue';
 
-export class Circle implements Figure {}
+export interface Figure {
+  shape: Shape;
+  color: Color;
+  getArea(): number;
+}
 
-export class Rectangle implements Figure {}
+export class Triangle implements Figure {
+  shape: Shape = Shape.Triangle;
 
-export function getInfo(figure): string {
-  return typeof figure;
+  color: Color;
+
+  a: number;
+
+  b: number;
+
+  c: number;
+
+  constructor(color: Color, a: number, b: number, c: number) {
+    if (a <= 0 || b <= 0 || c <= 0) {
+      throw new Error();
+    }
+
+    if (!Triangle.checkLengths(a, b, c)) {
+      throw new Error(`sides ${a}, ${b} and ${c} can't form a triangle`);
+    }
+    this.a = a;
+    this.b = b;
+    this.c = c;
+    this.color = color;
+  }
+
+  getArea(): number {
+    const p = (this.a + this.b + this.c) / 2;
+
+    return (
+      Math.floor(
+        Math.sqrt(p * (p - this.a) * (p - this.b) * (p - this.c)) * 100,
+      ) / 100
+    );
+  }
+
+  private static checkLengths(a: number, b: number, c: number): boolean {
+    const max = Math.max(a, b, c);
+
+    return max < a + b + c - max;
+  }
+}
+
+export class Circle implements Figure {
+  shape: Shape = Shape.Circle;
+
+  color: Color;
+
+  r: number;
+
+  constructor(color: Color, r: number) {
+    if (r <= 0) {
+      throw new Error();
+    }
+    this.color = color;
+    this.r = r;
+  }
+
+  getArea(): number {
+    return Math.floor(Math.PI * this.r * this.r * 100) / 100;
+  }
+}
+
+export class Rectangle implements Figure {
+  shape: Shape = Shape.Rectangle;
+
+  color: Color;
+
+  a: number;
+
+  b: number;
+
+  constructor(color: Color, a: number, b: number) {
+    if (a <= 0 || b <= 0) {
+      throw new Error();
+    }
+    this.a = a;
+    this.b = b;
+    this.color = color;
+  }
+
+  getArea(): number {
+    return Math.floor(this.a * this.b * 100) / 100;
+  }
+}
+
+export function getInfo(figure: Figure): string {
+  const area: number = figure.getArea();
+
+  return `A ${figure.color} ${figure.shape} - ${area}`;
 }
