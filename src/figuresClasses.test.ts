@@ -1,4 +1,4 @@
-import { Triangle, Rectangle, Circle, getInfo } from './figuresClasses';
+import { Circle, Rectangle, Triangle, getInfo } from './figuresClasses';
 
 describe('Class "Triangle"', () => {
   test('should be declared', () => {
