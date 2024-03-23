@@ -48,9 +48,7 @@ export class Triangle implements Figure {
   }
 
   private static checkLengths(a: number, b: number, c: number): boolean {
-    let max = b > a ? b : a;
-
-    max = c > max ? c : max;
+    const max = Math.max(a, b, c);
 
     return max < a + b + c - max;
   }
