@@ -17,17 +17,16 @@ export class Triangle implements Figure {
     private a: number,
     private b: number,
     private c: number,
-  ) {}
+  ) {
+    const maxSide: number = Math.max(a, b, c);
+
+    if (maxSide >= a + b + c - maxSide) {
+      throw new Error('Sizes are not correct');
+    }
+  }
 
   getArea(): number {
     const { a, b, c } = this;
-
-    const errorChecking: boolean = a !== 0 && b !== 0 && c !== 0;
-    const maxSide: number = Math.max(a, b, c);
-
-    if (!errorChecking && maxSide >= a + b + c - maxSide) {
-      throw new Error('Sizes are not correct');
-    }
 
     const s = (a + b + c) / 2;
 
@@ -41,14 +40,14 @@ export class Circle implements Figure {
   constructor(
     public color: Color,
     private radius: number,
-  ) {}
-
-  getArea(): number {
-    const { radius } = this;
-
+  ) {
     if (radius <= 0) {
       throw new Error('Radius is not correct');
     }
+  }
+
+  getArea(): number {
+    const { radius } = this;
 
     return roundArea(Math.PI * Math.pow(radius, 2));
   }
@@ -61,14 +60,14 @@ export class Rectangle implements Figure {
     public color: Color,
     private width: number,
     private height: number,
-  ) {}
-
-  getArea(): number {
-    const { width, height } = this;
-
+  ) {
     if (width <= 0 || height <= 0) {
       throw new Error('Sizes are not correct');
     }
+  }
+
+  getArea(): number {
+    const { width, height } = this;
 
     return roundArea(width * height);
   }
