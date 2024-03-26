@@ -15,13 +15,10 @@ export interface Figure {
   shape: Shape;
   color: Color;
   getArea: () => Dimension;
-  figureArea: Dimension;
 }
 
 export class Triangle implements Figure {
   public shape = Shape.triangle;
-
-  public figureArea: Dimension;
 
   constructor(
     public color: Color,
@@ -36,8 +33,6 @@ export class Triangle implements Figure {
     if (shortSide <= 0 || longSide >= sum - longSide) {
       throw new Error(`sides ${a}, ${b} and ${c} can't form a triangle`);
     }
-
-    this.figureArea = this.getArea();
   }
 
   getArea(): Dimension {
@@ -52,8 +47,6 @@ export class Triangle implements Figure {
 export class Circle implements Figure {
   public shape = Shape.circle;
 
-  public figureArea: Dimension;
-
   constructor(
     public color: Color,
     public radius: Dimension,
@@ -61,8 +54,6 @@ export class Circle implements Figure {
     if (radius <= 0) {
       throw new Error(`radius ${radius} can't form a circle`);
     }
-
-    this.figureArea = this.getArea();
   }
 
   getArea(): Dimension {
@@ -75,8 +66,6 @@ export class Circle implements Figure {
 export class Rectangle implements Figure {
   public shape = Shape.rectangle;
 
-  public figureArea: Dimension;
-
   constructor(
     public color: Color,
     public width: Dimension,
@@ -87,8 +76,6 @@ export class Rectangle implements Figure {
         `width ${width} and height ${height} can't form a rectangle`,
       );
     }
-
-    this.figureArea = this.getArea();
   }
 
   getArea(): Dimension {
@@ -100,21 +87,5 @@ export class Rectangle implements Figure {
 }
 
 export function getInfo(figure: Figure): string {
-  let figureName: string = '';
-
-  switch (true) {
-    case figure instanceof Triangle:
-      figureName = 'triangle';
-      break;
-
-    case figure instanceof Circle:
-      figureName = 'circle';
-      break;
-
-    case figure instanceof Rectangle:
-      figureName = 'rectangle';
-      break;
-  }
-
-  return `A ${figure.color} ${figureName} - ${figure.figureArea}`;
+  return `A ${figure.color} ${figure.shape} - ${figure.getArea()}`;
 }
