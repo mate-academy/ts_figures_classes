@@ -15,19 +15,21 @@ export class Triangle implements Figure {
 
   constructor(
     public color: Color,
-    public a: number,
-    public b: number,
-    public c: number,
+    public sideA: number,
+    public sideB: number,
+    public sideC: number,
   ) {
-    if (a + b <= c) {
+    if (sideA + sideB <= sideC) {
       throw new Error();
     }
   }
 
   getArea(): number {
-    const s: number = (1 / 2) * (this.a + this.b + this.c);
+    const { sideA, sideB, sideC } = this;
 
-    return roundArea(Math.sqrt(s * (s - this.a) * (s - this.b) * (s - this.c)));
+    const s: number = (1 / 2) * (sideA + sideB + sideC);
+
+    return roundArea(Math.sqrt(s * (s - sideA) * (s - sideB) * (s - sideC)));
   }
 }
 
@@ -66,6 +68,6 @@ export class Rectangle implements Figure {
   }
 }
 
-export function getInfo(figure): string {
+export function getInfo(figure: Figure): string {
   return `A ${figure.color} ${figure.shape} - ${figure.getArea()}`;
 }
