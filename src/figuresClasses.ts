@@ -1,7 +1,3 @@
-/* eslint-disable @typescript-eslint/no-empty-function */
-/* eslint-disable @typescript-eslint/no-useless-constructor */
-/* eslint-disable no-useless-constructor */
-
 type Shapes = 'circle' | 'triangle' | 'rectangle';
 type Colors = 'red' | 'green' | 'blue';
 
