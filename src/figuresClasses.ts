@@ -1,5 +1,5 @@
 export interface Figure {
-  shape: string;
+  shape: 'triangle' | 'circle' | 'rectangle';
   color: string;
 
   getArea(): number;
@@ -42,7 +42,7 @@ export class Circle implements Figure {
     public radius: number,
   ) {
     if (radius <= 0) {
-      throw new Error('Method not implemented.');
+      throw new Error('Radius must be greater than 0.');
     }
   }
 
@@ -62,7 +62,7 @@ export class Rectangle implements Figure {
     public height: number,
   ) {
     if (width <= 0 || height <= 0) {
-      throw new Error('Method not implemented.');
+      throw new Error('Width and height must be greater than 0.');
     }
   }
 
