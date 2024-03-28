@@ -1,14 +1,18 @@
 export interface Figure {
-  shape: string;
-  color: string;
+  shape: 'triangle' | 'circle' | 'rectangle';
+  color: 'red' | 'green' | 'blue';
   getArea(): number;
 }
 
+function getNumFloor(num: number): number {
+  return Math.floor(num * 100) / 100;
+}
+
 export class Triangle implements Figure {
-  shape = 'triangle';
+  shape:'triangle' = 'triangle';
 
   constructor(
-    public color: string,
+    public color: 'red' | 'green' | 'blue',
     public a: number,
     public b: number,
     public c: number,
@@ -33,15 +37,15 @@ export class Triangle implements Figure {
     const p = (this.a + this.b + this.c) / 2;
     const area = Math.sqrt(p * (p - this.a) * (p - this.b) * (p - this.c));
 
-    return Math.round(area * 100) / 100;
+    return getNumFloor(area);
   }
 }
 
 export class Circle implements Figure {
-  shape = 'circle';
+  shape:'circle' = 'circle';
 
   constructor(
-    public color: string,
+    public color: 'red' | 'green' | 'blue',
     public radius: number,
   ) {
     if (this.radius <= 0) {
@@ -52,15 +56,15 @@ export class Circle implements Figure {
   getArea(): number {
     const area: number = Math.PI * this.radius * this.radius;
 
-    return Math.floor(area * 100) / 100;
+    return getNumFloor(area);
   }
 }
 
 export class Rectangle implements Figure {
-  shape = 'rectangle';
+  shape:'rectangle' = 'rectangle';
 
   constructor(
-    public color: string,
+    public color: 'red' | 'green' | 'blue',
     public width: number,
     public height: number,
   ) {
