@@ -1,5 +1,7 @@
+type Shape = 'triangle' | 'circle' | 'rectangle';
+
 export interface Figure {
-  shape: 'triangle' | 'circle' | 'rectangle';
+  shape: Shape;
   color: 'red' | 'green' | 'blue';
   getArea(): number;
 }
@@ -9,7 +11,7 @@ function getNumFloor(num: number): number {
 }
 
 export class Triangle implements Figure {
-  shape:'triangle' = 'triangle';
+  shape:Shape = 'triangle';
 
   constructor(
     public color: 'red' | 'green' | 'blue',
@@ -42,7 +44,7 @@ export class Triangle implements Figure {
 }
 
 export class Circle implements Figure {
-  shape:'circle' = 'circle';
+  shape:Shape = 'circle';
 
   constructor(
     public color: 'red' | 'green' | 'blue',
@@ -61,7 +63,7 @@ export class Circle implements Figure {
 }
 
 export class Rectangle implements Figure {
-  shape:'rectangle' = 'rectangle';
+  shape:Shape = 'rectangle';
 
   constructor(
     public color: 'red' | 'green' | 'blue',
