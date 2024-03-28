@@ -32,7 +32,7 @@ export class Triangle implements Figure {
 
     console.log(sides);
 
-    if (sides[0] >= sides[1] + sides[2]) {
+    if (a >= b + c || b >= a + c || c >= a + b) {
       throw new Error("One side can't be greater than sum of two other");
     }
   }
