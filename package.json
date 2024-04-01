@@ -47,5 +47,8 @@
     "hooks": {
       "pre-commit": "lint-staged"
     }
+  },
+  "dependencies": {
+    "sass": "^1.72.0"
   }
 }
