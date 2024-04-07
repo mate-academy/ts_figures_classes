@@ -1,87 +1,80 @@
+export type Color = 'red' | 'green' | 'blue';
+export enum Shape {
+  Triangle = 'triangle',
+  Rectangle = 'rectangle',
+  Circle = 'circle',
+}
+
 export interface Figure {
-  shape: 'triangle' | 'circle' | 'rectangle';
-  color: 'red' | 'green' | 'blue';
+  shape: Shape;
+  color: Color;
   getArea(): number;
 }
 
 export class Triangle implements Figure {
-  shape: 'triangle' = 'triangle';
-
-  sides: number[];
+  shape: Shape = Shape.Triangle;
 
   constructor(
-    public color: 'red' | 'green' | 'blue',
+    public color: Color,
     public a: number,
     public b: number,
     public c: number,
   ) {
     if (a <= 0 || b <= 0 || c <= 0) {
-      throw new Error('All sides must be greater than 0');
+      throw new Error('Side lengths must be greater than 0');
     }
 
-    if (a >= b + c || b >= a + c || c >= a + b) {
-      throw new Error('Invalid triangle sides: cannot form a triangle');
+    if (a + b <= c || a + c <= b || b + c <= a) {
+      throw new Error('These side lengths cannot form a triangle');
     }
-    this.color = color;
-    this.sides = [a, b, c];
   }
 
   getArea(): number {
-    const [a, b, c] = this.sides;
-    const s = (a + b + c) / 2;
+    const p: number = (this.a + this.b + this.c) / 2;
+    const area: number =
+      Math.floor(
+        Math.sqrt(p * (p - this.a) * (p - this.b) * (p - this.c)) * 100,
+      ) / 100;
 
-    return +Math.sqrt(s * (s - a) * (s - b) * (s - c)).toFixed(2);
+    return area;
   }
 }
 
 export class Circle implements Figure {
-  shape: 'circle' = 'circle';
+  shape: Shape = Shape.Circle;
 
   constructor(
-    public color: 'red' | 'green' | 'blue',
+    public color: Color,
     public radius: number,
   ) {
-    if (radius <= 0) {
-      throw new Error('Radius must be greater than 0');
+    if (this.radius <= 0) {
+      throw new Error('Circle radius must be a positive number');
     }
-
-    this.color = color;
-    this.radius = radius;
   }
 
   getArea(): number {
-    return Math.floor(Math.PI * this.radius ** 2 * 100) / 100;
+    return Math.floor(Math.PI * Math.pow(this.radius, 2) * 100) / 100;
   }
 }
 
 export class Rectangle implements Figure {
-  shape: 'rectangle' = 'rectangle';
-
-  sides: number[];
+  shape: Shape = Shape.Rectangle;
 
   constructor(
-    public color: 'red' | 'green' | 'blue',
+    public color: Color,
     public width: number,
     public height: number,
   ) {
-    if (width <= 0 || height <= 0) {
-      throw new Error('All sides must be greater than 0');
+    if (this.width <= 0 || this.height <= 0) {
+      throw new Error('Rectangle sides must be positive numbers');
     }
-
-    this.color = color;
-    this.sides = [width, height];
   }
 
   getArea(): number {
-    const [width, height] = this.sides;
-    const s = width * height;
-
-    return s;
+    return Math.floor(this.width * this.height * 100) / 100;
   }
 }
 
 export function getInfo(figure: Figure): string {
-  const area = figure.getArea().toFixed(2);
-
-  return `A ${figure.color} ${figure.shape} - ${area}`;
+  return `A ${figure.color} ${figure.shape} - ${figure.getArea()}`;
 }
