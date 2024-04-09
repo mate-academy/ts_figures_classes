@@ -1,24 +1,27 @@
 // Interface
+export enum Shape {
+  triangle = 'triangle',
+  circle = 'circle',
+  rectangle = 'rectangle',
+}
+
+export type Color = 'red' | 'green' | 'blue';
+
 export interface Figure {
-  shape: string;
-  color: string;
+  shape: Shape;
+  color: Color;
   getArea: () => number;
 }
 
 export class Triangle implements Figure {
-  public shape: string = 'triangle';
+  public shape: Shape = Shape.triangle;
 
   constructor(
-    public color: string,
+    public color: Color,
     public a: number,
     public b: number,
     public c: number,
   ) {
-    this.color = color;
-    this.a = a;
-    this.b = b;
-    this.c = c;
-
     if (this.a <= 0 || this.b <= 0 || this.c <= 0) {
       throw new Error('Error message');
     }
@@ -46,15 +49,12 @@ export class Triangle implements Figure {
 }
 
 export class Circle implements Figure {
-  public shape: string = 'circle';
+  public shape: Shape = Shape.circle;
 
   constructor(
-    public color: string,
+    public color: Color,
     public radius: number,
   ) {
-    this.color = color;
-    this.radius = radius;
-
     if (this.radius <= 0) {
       throw new Error('Error message');
     }
@@ -68,17 +68,13 @@ export class Circle implements Figure {
 }
 
 export class Rectangle implements Figure {
-  public shape: string = 'rectangle';
+  public shape: Shape = Shape.rectangle;
 
   constructor(
-    public color: string,
+    public color: Color,
     public width: number,
     public height: number,
   ) {
-    this.color = color;
-    this.width = width;
-    this.height = height;
-
     if (this.width <= 0 || this.height <= 0) {
       throw new Error('Error message');
     }
