@@ -25,27 +25,27 @@ export class Triangle implements Figure {
 
   constructor(
     public color: Color,
-    private a: number,
-    private b: number,
-    private c: number,
+    private sideA: number,
+    private sideB: number,
+    private sideC: number,
   ) {
-    if (a <= 0) {
+    if (sideA <= 0) {
       throw new Error('Side a should be positive!');
     }
 
-    if (b <= 0) {
+    if (sideB <= 0) {
       throw new Error('Side b should be positive!');
     }
 
-    if (c <= 0) {
+    if (sideC <= 0) {
       throw new Error('Side c should be positive!');
     }
 
-    let longestSide = a >= b ? a : b;
+    let longestSide = sideA >= sideB ? sideA : sideB;
 
-    longestSide = c >= longestSide ? c : longestSide;
+    longestSide = sideC >= longestSide ? sideC : longestSide;
 
-    if (longestSide >= a + b + c - longestSide) {
+    if (longestSide >= sideA + sideB + sideC - longestSide) {
       throw new Error('The longest side is longer than a sum of two others!');
     }
 
@@ -53,14 +53,14 @@ export class Triangle implements Figure {
   }
 
   getArea(): number {
-    const semiperimeter = (this.a + this.b + this.c) / 2;
+    const semiperimeter = (this.sideA + this.sideB + this.sideC) / 2;
 
     return roundToHundreths(
       Math.sqrt(
         semiperimeter *
-          (semiperimeter - this.a) *
-          (semiperimeter - this.b) *
-          (semiperimeter - this.c),
+          (semiperimeter - this.sideA) *
+          (semiperimeter - this.sideB) *
+          (semiperimeter - this.sideC),
       ),
     );
   }
