@@ -1,11 +1,19 @@
+enum Shape {
+  Triangle = 'triangle',
+  Circle = 'circle',
+  Rectangle = 'rectangle',
+}
+
+type Color = 'red' | 'green' | 'blue';
+
 export interface Figure {
-  shape: string;
-  color: string;
+  shape: Shape;
+  color: Color;
   getArea(): number;
 }
 
 export class Triangle implements Figure {
-  public shape = 'triangle';
+  public shape: Shape = Shape.Triangle;
 
   private longest: number;
 
@@ -14,7 +22,7 @@ export class Triangle implements Figure {
   private s: number;
 
   constructor(
-    public color: string,
+    public color: Color,
     public a: number,
     public b: number,
     public c: number,
@@ -30,11 +38,6 @@ export class Triangle implements Figure {
     if (this.longest >= this.sum - this.longest) {
       throw new Error("sides 1, 2 and 3 can't form a triangle");
     }
-
-    this.color = color;
-    this.a = a;
-    this.b = b;
-    this.c = c;
   }
 
   getArea(): number {
@@ -45,15 +48,12 @@ export class Triangle implements Figure {
 }
 
 export class Circle implements Figure {
-  public shape = 'circle';
+  public shape: Shape = Shape.Circle;
 
   constructor(
-    public color: string,
+    public color: Color,
     public radius: number,
   ) {
-    this.color = color;
-    this.radius = radius;
-
     if (this.radius <= 0) {
       throw new Error('radius is not a positive number.');
     }
@@ -65,17 +65,13 @@ export class Circle implements Figure {
 }
 
 export class Rectangle implements Figure {
-  public shape: string = 'rectangle';
+  public shape: Shape = Shape.Rectangle;
 
   constructor(
-    public color: string,
+    public color: Color,
     public width: number,
     public height: number,
   ) {
-    this.color = color;
-    this.width = width;
-    this.height = height;
-
     if (this.width < 0 || this.height < 0) {
       throw new Error("sides 1, 2 can't form a rectangle");
     }
