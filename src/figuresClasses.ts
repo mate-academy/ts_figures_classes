@@ -1,11 +1,108 @@
-export interface Figure {}
+type Color = 'red' | 'green' | 'blue';
+type Shape = 'triangle' | 'circle' | 'rectangle';
 
-export class Triangle implements Figure {}
+export interface Figure {
+  shape: Shape;
+  color: Color;
+  getArea(): number;
+}
 
-export class Circle implements Figure {}
+export class Triangle implements Figure {
+  public shape: Shape = 'triangle';
 
-export class Rectangle implements Figure {}
+  public color: Color;
 
-export function getInfo(figure): string {
-  return typeof figure;
+  public a: number;
+
+  public b: number;
+
+  public c: number;
+
+  constructor(color: Color, a: number, b: number, c: number) {
+    if (a <= 0 || b <= 0 || c <= 0) {
+      throw new Error('Side lengths must be greater than zero.');
+    }
+
+    if (a >= b + c || b >= a + c || c >= a + b) {
+      throw new Error(
+        `The longest side cannot be
+        greater than the sum of the other two sides.`,
+      );
+    }
+    this.color = color;
+    this.a = a;
+    this.b = b;
+    this.c = c;
+  }
+
+  getArea(): number {
+    const s = (this.a + this.b + this.c) / 2;
+
+    return (
+      Math.round(
+        Math.sqrt(s * (s - this.a) * (s - this.b) * (s - this.c)) * 100,
+      ) / 100
+    );
+  }
+}
+
+export class Circle implements Figure {
+  public shape: Shape = 'circle';
+
+  public color: Color;
+
+  public radius: number;
+
+  constructor(color: Color, radius: number) {
+    if (radius <= 0) {
+      throw new Error('Radius must be greater than zero.');
+    }
+
+    this.color = color;
+    this.radius = radius;
+  }
+
+  getArea(): number {
+    return Math.round(Math.PI * this.radius ** 2 * 100) / 100;
+  }
+}
+
+export class Rectangle implements Figure {
+  public shape: Shape = 'rectangle';
+
+  public color: Color;
+
+  public width: number;
+
+  public height: number;
+
+  constructor(color: Color, width: number, height: number) {
+    if (width <= 0 || height <= 0) {
+      throw new Error('Width and height must be greater than zero.');
+    }
+
+    this.color = color;
+    this.width = width;
+    this.height = height;
+  }
+
+  getArea(): number {
+    return Math.round(this.width * this.height * 100) / 100;
+  }
+}
+
+export function getInfo(figure: Figure): string {
+  const { shape, color } = figure;
+  const area = figure.getArea();
+
+  switch (shape) {
+    case 'triangle':
+      return `A ${color} triangle - ${area}`;
+    case 'circle':
+      return `A ${color} circle - ${area}`;
+    case 'rectangle':
+      return `A ${color} rectangle - ${area}`;
+    default:
+      throw new Error('Invalid shape.');
+  }
 }
