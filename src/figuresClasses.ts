@@ -24,11 +24,12 @@ export class Triangle implements Figure {
 
     const sidesValue = [a, b, c];
     const biggestNum = Math.max(...sidesValue);
-    const otherNumsSum = sidesValue
-      .filter((el) => el !== biggestNum)
-      .reduce((acc, current) => acc + current);
+    const otherNumsSum = sidesValue.reduce(
+      (acc, current) => acc + current,
+      -biggestNum,
+    );
 
-    if (otherNumsSum === biggestNum) {
+    if (biggestNum >= otherNumsSum) {
       throw new Error(`sides ${a}, ${b} and ${c} can not form a triangle`);
     }
   }
