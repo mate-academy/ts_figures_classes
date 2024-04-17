@@ -1,12 +1,15 @@
+type Shape = 'triangle' | 'circle' | 'rectangle';
+type Color = 'red' | 'green' | 'blue';
+
 export interface Figure {
-  shape: 'triangle' | 'circle' | 'rectangle';
-  color: 'red' | 'green' | 'blue';
+  shape: Shape;
+  color: Color;
   getArea: () => number;
 }
 
 export class Triangle implements Figure {
   constructor(
-    public color: 'red' | 'green' | 'blue',
+    public color: Color,
     public a: number,
     public b: number,
     public c: number,
@@ -20,13 +23,15 @@ export class Triangle implements Figure {
   getArea(): number {
     const halfPerimeter: number = (this.a + this.b + this.c) / 2;
 
-    return parseFloat(
-      Math.sqrt(
-        halfPerimeter *
-          (halfPerimeter - this.a) *
-          (halfPerimeter - this.b) *
-          (halfPerimeter - this.c),
-      ).toFixed(2),
+    return (
+      Math.floor(
+        Math.sqrt(
+          halfPerimeter *
+            (halfPerimeter - this.a) *
+            (halfPerimeter - this.b) *
+            (halfPerimeter - this.c),
+        ) * 100,
+      ) / 100
     );
   }
 
@@ -44,7 +49,7 @@ export class Triangle implements Figure {
 
 export class Circle implements Figure {
   constructor(
-    public color: 'red' | 'green' | 'blue',
+    public color: Color,
     public radius: number,
     public shape: 'circle' = 'circle',
   ) {
@@ -64,7 +69,7 @@ export class Circle implements Figure {
 
 export class Rectangle implements Figure {
   constructor(
-    public color: 'red' | 'green' | 'blue',
+    public color: Color,
     public a: number,
     public b: number,
     public shape: 'rectangle' = 'rectangle',
