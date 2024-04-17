@@ -59,7 +59,7 @@ export class Circle implements Figure {
   }
 
   getArea(): number {
-    return parseFloat((Math.PI * this.radius * this.radius).toFixed(2));
+    return Math.floor(Math.PI * this.radius * this.radius * 100) / 100;
   }
 
   private isVAlidCircle(): boolean {
