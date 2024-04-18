@@ -1,7 +1,7 @@
 type Color = 'red' | 'green' | 'blue';
 type Shape = 'triangle' | 'circle' | 'rectangle';
 
-export interface Figure {
+interface Figure {
   shape: Shape;
   color: Color;
   getArea(): number;
@@ -26,6 +26,7 @@ export class Triangle implements Figure {
         greater than the sum of the other two sides.`,
       );
     }
+
     this.color = color;
     this.a = a;
     this.b = b;
@@ -46,11 +47,10 @@ export class Triangle implements Figure {
 export class Circle implements Figure {
   public shape: Shape = 'circle';
 
-  public color: Color;
-
-  public radius: number;
-
-  constructor(color: Color, radius: number) {
+  constructor(
+    public color: Color,
+    public radius: number,
+  ) {
     if (radius <= 0) {
       throw new Error('Radius must be greater than zero.');
     }
@@ -67,13 +67,11 @@ export class Circle implements Figure {
 export class Rectangle implements Figure {
   public shape: Shape = 'rectangle';
 
-  public color: Color;
-
-  public width: number;
-
-  public height: number;
-
-  constructor(color: Color, width: number, height: number) {
+  constructor(
+    public color: Color,
+    public width: number,
+    public height: number,
+  ) {
     if (width <= 0 || height <= 0) {
       throw new Error('Width and height must be greater than zero.');
     }
@@ -84,7 +82,7 @@ export class Rectangle implements Figure {
   }
 
   getArea(): number {
-    return Math.floor(this.width * this.height * 100) / 100; // fixed
+    return Math.floor(this.width * this.height * 100) / 100;
   }
 }
 
