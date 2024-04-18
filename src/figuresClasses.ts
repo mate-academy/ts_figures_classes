@@ -49,7 +49,7 @@ export class Circle implements Figure {
 
   constructor(
     public color: Color,
-    public radius: number,
+    private radius: number,
   ) {
     if (radius <= 0) {
       throw new Error('Radius must be greater than zero.');
