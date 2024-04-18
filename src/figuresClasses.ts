@@ -10,15 +10,12 @@ export interface Figure {
 export class Triangle implements Figure {
   public shape: Shape = 'triangle';
 
-  public color: Color;
-
-  public a: number;
-
-  public b: number;
-
-  public c: number;
-
-  constructor(color: Color, a: number, b: number, c: number) {
+  constructor(
+    public color: Color,
+    public a: number,
+    public b: number,
+    public c: number,
+  ) {
     if (a <= 0 || b <= 0 || c <= 0) {
       throw new Error('Side lengths must be greater than zero.');
     }
