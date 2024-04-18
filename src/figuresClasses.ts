@@ -95,14 +95,5 @@ export function getInfo(figure: Figure): string {
   const { shape, color } = figure;
   const area = figure.getArea();
 
-  switch (shape) {
-    case 'triangle':
-      return `A ${color} triangle - ${area}`;
-    case 'circle':
-      return `A ${color} circle - ${area}`;
-    case 'rectangle':
-      return `A ${color} rectangle - ${area}`;
-    default:
-      throw new Error('Invalid shape.');
-  }
+  return `A ${color} ${shape} - ${area}`;
 }
