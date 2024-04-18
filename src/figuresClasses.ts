@@ -26,11 +26,6 @@ export class Triangle implements Figure {
         greater than the sum of the other two sides.`,
       );
     }
-
-    this.color = color;
-    this.a = a;
-    this.b = b;
-    this.c = c;
   }
 
   getArea(): number {
@@ -54,9 +49,6 @@ export class Circle implements Figure {
     if (radius <= 0) {
       throw new Error('Radius must be greater than zero.');
     }
-
-    this.color = color;
-    this.radius = radius;
   }
 
   getArea(): number {
@@ -75,10 +67,6 @@ export class Rectangle implements Figure {
     if (width <= 0 || height <= 0) {
       throw new Error('Width and height must be greater than zero.');
     }
-
-    this.color = color;
-    this.width = width;
-    this.height = height;
   }
 
   getArea(): number {
