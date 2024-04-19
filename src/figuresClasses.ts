@@ -84,9 +84,5 @@ export class Rectangle extends Shape {
 export function getInfo(figure: Figure): string {
   const area: number = figure.getArea();
 
-  if (Number.isInteger(area)) {
-    return `A ${figure.color} ${figure.shape} - ${area}`;
-  } else {
-    return `A ${figure.color} ${figure.shape} - ${area.toFixed(2)}`;
-  }
+  return `A ${figure.color} ${figure.shape} - ${Number.isInteger(area) ? area : area.toFixed(2)}`;
 }
