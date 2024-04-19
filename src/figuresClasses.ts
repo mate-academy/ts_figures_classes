@@ -4,13 +4,23 @@ export interface Figure {
   getArea(): number;
 }
 
-export class Triangle implements Figure {
+export abstract class Shape implements Figure {
+  // eslint-disable-next-line no-useless-constructor
+  constructor(public color: string) {}
+
+  abstract shape: string;
+  abstract getArea(): number;
+}
+
+export class Triangle extends Shape {
   constructor(
-    public color: string,
+    color: string,
     public a: number,
     public b: number,
     public c: number,
   ) {
+    super(color);
+
     if (a <= 0 || b <= 0 || c <= 0 || a + b <= c || a + b <= c || b + c <= a) {
       throw new Error('Sides should be positive and form a valid triangle.');
     }
@@ -26,11 +36,13 @@ export class Triangle implements Figure {
   }
 }
 
-export class Circle implements Figure {
+export class Circle extends Shape {
   constructor(
-    public color: string,
+    color: string,
     public radius: number,
   ) {
+    super(color);
+
     if (radius <= 0) {
       throw new Error('Radius should be a positive number');
     }
@@ -46,12 +58,14 @@ export class Circle implements Figure {
   }
 }
 
-export class Rectangle implements Figure {
+export class Rectangle extends Shape {
   constructor(
-    public color: string,
+    color: string,
     public width: number,
     public height: number,
   ) {
+    super(color);
+
     if (width <= 0 || height <= 0) {
       throw new Error('Width and Height should be positive!');
     }
