@@ -5,9 +5,7 @@ export interface Figure {
 }
 
 export class Triangle implements Figure {
-  shape: string;
-
-  parts: number[];
+  shape: string = 'triangle';
 
   constructor(
     public color: string,
@@ -22,27 +20,21 @@ export class Triangle implements Figure {
     if (a + b <= c || a + c <= b || b + c <= a) {
       throw new Error('sides mistakes');
     }
-
-    this.shape = 'triangle';
-    this.color = color;
-    this.parts = [a, b, c];
   }
 
   getArea(): number {
-    const s = (this.parts[0] + this.parts[1] + this.parts[2]) / 2;
+    const s = (this.a + this.b + this.c) / 2;
 
     return (
       Math.floor(
-        Math.sqrt(
-          s * (s - this.parts[0]) * (s - this.parts[1]) * (s - this.parts[2]),
-        ) * 100,
+        Math.sqrt(s * (s - this.a) * (s - this.b) * (s - this.c)) * 100,
       ) / 100
     );
   }
 }
 
 export class Circle implements Figure {
-  shape: string;
+  shape: string = 'circle';
 
   constructor(
     public color: string,
@@ -51,10 +43,6 @@ export class Circle implements Figure {
     if (radius <= 0) {
       throw new Error('Radius have to be greater than 0');
     }
-
-    this.shape = 'circle';
-    this.color = color;
-    this.radius = radius;
   }
 
   getArea(): number {
@@ -63,7 +51,7 @@ export class Circle implements Figure {
 }
 
 export class Rectangle implements Figure {
-  shape: string;
+  shape: string = 'rectangle';
 
   constructor(
     public color: string,
@@ -73,11 +61,6 @@ export class Rectangle implements Figure {
     if (width <= 0 || height <= 0) {
       throw new Error('Width and height have to be greater than 0');
     }
-
-    this.shape = 'rectangle';
-    this.color = color;
-    this.width = width;
-    this.height = height;
   }
 
   getArea(): number {
