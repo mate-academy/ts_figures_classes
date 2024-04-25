@@ -6,9 +6,9 @@ export interface Figure {
 }
 
 export class Triangle implements Figure {
-  shape: 'triangle';
+  readonly shape: 'triangle';
 
-  color: 'red' | 'green' | 'blue';
+  readonly color: 'red' | 'green' | 'blue';
 
   a: number;
 
@@ -53,9 +53,9 @@ export class Triangle implements Figure {
 }
 
 export class Circle implements Figure {
-  shape: 'circle';
+  readonly shape: 'circle';
 
-  color: 'red' | 'green' | 'blue';
+  readonly color: 'red' | 'green' | 'blue';
 
   radius: number;
 
@@ -76,9 +76,9 @@ export class Circle implements Figure {
 }
 
 export class Rectangle implements Figure {
-  shape: 'rectangle';
+  readonly shape: 'rectangle';
 
-  color: 'red' | 'green' | 'blue';
+  readonly color: 'red' | 'green' | 'blue';
 
   width: number;
 
