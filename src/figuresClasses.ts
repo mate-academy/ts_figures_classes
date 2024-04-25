@@ -20,7 +20,7 @@ export class Triangle implements Figure {
       throw new Error('Incorrect value of side length');
     }
 
-    if (a <= b + c || b <= c + a || c <= a + b) {
+    if (a >= b + c || b >= c + a || c >= a + b) {
       throw new Error('Sides 1, 2 and 3 cannot form a triangle');
     }
   }
@@ -45,7 +45,9 @@ export class Circle implements Figure {
   }
 
   getArea(): number {
-    return (Math.PI * this.radius ** 2) / 2;
+    const area = Math.PI * this.radius ** 2;
+
+    return Math.floor(area * 100) / 100;
   }
 }
 
@@ -68,7 +70,7 @@ export class Rectangle implements Figure {
 }
 
 export function getInfo(figure: Figure): string {
-  const area = parseInt(figure.getArea().toFixed(2));
+  const area = parseFloat(figure.getArea().toFixed(2));
 
   return `A ${figure.color} ${figure.shape} - ${area}`;
 }
