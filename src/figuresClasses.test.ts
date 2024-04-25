@@ -211,3 +211,4 @@ describe('Function "getInfo"', () => {
       .toBe('A blue rectangle - 153');
   });
 });
+
