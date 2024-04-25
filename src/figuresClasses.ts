@@ -25,12 +25,7 @@ export class Triangle extends Shape {
 
   c: number;
 
-  constructor(
-    color: 'red' | 'green' | 'blue',
-    a: number,
-    b: number,
-    c: number,
-  ) {
+  constructor(color: Figure['color'], a: number, b: number, c: number) {
     super('triangle', color);
 
     if (a <= 0 || b <= 0 || c <= 0) {
@@ -63,7 +58,7 @@ export class Triangle extends Shape {
 export class Circle extends Shape {
   radius: number;
 
-  constructor(color: 'red' | 'green' | 'blue', radius: number) {
+  constructor(color: Figure['color'], radius: number) {
     super('circle', color);
 
     if (radius <= 0) {
@@ -84,7 +79,7 @@ export class Rectangle extends Shape {
 
   height: number;
 
-  constructor(color: 'red' | 'green' | 'blue', width: number, height: number) {
+  constructor(color: Figure['color'], width: number, height: number) {
     super('rectangle', color);
 
     if (width <= 0 || height <= 0) {
