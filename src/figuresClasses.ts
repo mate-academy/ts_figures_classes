@@ -5,11 +5,20 @@ export interface Figure {
   getArea(): number;
 }
 
-export class Triangle implements Figure {
-  readonly shape: 'triangle';
+export abstract class Shape implements Figure {
+  readonly shape: Figure['shape'];
 
-  readonly color: 'red' | 'green' | 'blue';
+  readonly color: Figure['color'];
 
+  constructor(shape: Figure['shape'], color: Figure['color']) {
+    this.shape = shape;
+    this.color = color;
+  }
+
+  abstract getArea(): number;
+}
+
+export class Triangle extends Shape {
   a: number;
 
   b: number;
@@ -22,6 +31,8 @@ export class Triangle implements Figure {
     b: number,
     c: number,
   ) {
+    super('triangle', color);
+
     if (a <= 0 || b <= 0 || c <= 0) {
       throw new Error('All sides must be greater than 0!');
     }
@@ -31,8 +42,6 @@ export class Triangle implements Figure {
         'The longest side must be less than the sum of the other two sides!',
       );
     }
-    this.shape = 'triangle';
-    this.color = color;
     this.a = a;
     this.b = b;
     this.c = c;
@@ -40,7 +49,6 @@ export class Triangle implements Figure {
 
   getArea(): number {
     const semiPerimeter = (this.a + this.b + this.c) / 2;
-
     const area = Math.sqrt(
       semiPerimeter *
         (semiPerimeter - this.a) *
@@ -52,19 +60,15 @@ export class Triangle implements Figure {
   }
 }
 
-export class Circle implements Figure {
-  readonly shape: 'circle';
-
-  readonly color: 'red' | 'green' | 'blue';
-
+export class Circle extends Shape {
   radius: number;
 
   constructor(color: 'red' | 'green' | 'blue', radius: number) {
+    super('circle', color);
+
     if (radius <= 0) {
-      throw new Error('Radius must be greater than 0'!);
+      throw new Error('Radius must be greater than 0!');
     }
-    this.shape = 'circle';
-    this.color = color;
     this.radius = radius;
   }
 
@@ -75,21 +79,17 @@ export class Circle implements Figure {
   }
 }
 
-export class Rectangle implements Figure {
-  readonly shape: 'rectangle';
-
-  readonly color: 'red' | 'green' | 'blue';
-
+export class Rectangle extends Shape {
   width: number;
 
   height: number;
 
   constructor(color: 'red' | 'green' | 'blue', width: number, height: number) {
+    super('rectangle', color);
+
     if (width <= 0 || height <= 0) {
       throw new Error('Width and height must be greater than 0!');
     }
-    this.shape = 'rectangle';
-    this.color = color;
     this.width = width;
     this.height = height;
   }
@@ -97,7 +97,7 @@ export class Rectangle implements Figure {
   getArea(): number {
     const area = this.width * this.height;
 
-    return Math.floor(area * 100) / 100; // Round down to hundredths
+    return Math.floor(area * 100) / 100;
   }
 }
 
