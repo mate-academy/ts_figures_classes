@@ -23,12 +23,12 @@ export class Triangle implements Figure {
     c: number,
   ) {
     if (a <= 0 || b <= 0 || c <= 0) {
-      throw new Error('All sides must be greater than 0');
+      throw new Error('All sides must be greater than 0!');
     }
 
     if (a >= b + c || b >= a + c || c >= a + b) {
       throw new Error(
-        'The longest side must be less than the sum of the other two sides',
+        'The longest side must be less than the sum of the other two sides!',
       );
     }
     this.shape = 'triangle';
@@ -86,7 +86,7 @@ export class Rectangle implements Figure {
 
   constructor(color: 'red' | 'green' | 'blue', width: number, height: number) {
     if (width <= 0 || height <= 0) {
-      throw new Error('Width and height must be greater than 0');
+      throw new Error('Width and height must be greater than 0!');
     }
     this.shape = 'rectangle';
     this.color = color;
