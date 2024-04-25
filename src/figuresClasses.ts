@@ -4,9 +4,17 @@ export interface Figure {
   getArea(): number;
 }
 
+export type Colors = 'red' | 'green' | 'blue';
+
+export enum Shapes {
+  triangle = 'triangle',
+  circle = 'circle',
+  rectangle = 'rectangle',
+}
+
 export class Triangle implements Figure {
   constructor(
-    public color: 'red' | 'green' | 'blue',
+    public color: Colors,
     public a: number,
     public b: number,
     public c: number,
@@ -20,7 +28,7 @@ export class Triangle implements Figure {
     }
   }
 
-  shape: 'triangle' = 'triangle';
+  shape: Shapes = Shapes.triangle;
 
   getArea(): number {
     const s = (this.a + this.b + this.c) / 2;
@@ -32,7 +40,7 @@ export class Triangle implements Figure {
 
 export class Circle implements Figure {
   constructor(
-    public color: 'red' | 'green' | 'blue',
+    public color: Colors,
     public radius: number,
   ) {
     if (radius <= 0) {
@@ -40,7 +48,7 @@ export class Circle implements Figure {
     }
   }
 
-  shape: 'circle' = 'circle';
+  shape: Shapes = Shapes.circle;
 
   getArea(): number {
     const area = Math.PI * Math.pow(this.radius, 2);
@@ -51,7 +59,7 @@ export class Circle implements Figure {
 
 export class Rectangle implements Figure {
   constructor(
-    public color: 'red' | 'green' | 'blue',
+    public color: Colors,
     public width: number,
     public height: number,
   ) {
@@ -60,7 +68,7 @@ export class Rectangle implements Figure {
     }
   }
 
-  shape: 'rectangle' = 'rectangle';
+  shape: Shapes = Shapes.rectangle;
 
   getArea(): number {
     const area = this.width * this.height;
