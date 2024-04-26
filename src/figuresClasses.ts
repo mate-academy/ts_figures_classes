@@ -1,11 +1,13 @@
+type Shape = 'triangle' | 'rectangle' | 'circle';
+
 export interface Figure {
-  shape: string;
+  shape: Shape;
   color: string;
   getArea(): number;
 }
 
 export class Triangle implements Figure {
-  shape = 'triangle';
+  shape: Shape = 'triangle';
 
   sides: number[];
 
@@ -36,7 +38,7 @@ export class Triangle implements Figure {
 }
 
 export class Circle implements Figure {
-  shape = 'circle';
+  shape: Shape = 'circle';
 
   constructor(
     public color: string,
@@ -48,16 +50,14 @@ export class Circle implements Figure {
   }
 
   getArea(): number {
-    if (this.radius === 6) {
-      return 113.09;
-    }
+    const area = Math.PI * Math.pow(this.radius, 2);
 
-    return Number((Math.PI * Math.pow(this.radius, 2)).toFixed(2));
+    return Math.floor(area * 100) / 100;
   }
 }
 
 export class Rectangle implements Figure {
-  shape = 'rectangle';
+  shape: Shape = 'rectangle';
 
   constructor(
     public color: string,
