@@ -1,3 +1,13 @@
+export enum Color {
+  Red = 'red',
+  Blue = 'blue',
+  Green = 'green',
+}
+export enum Shape {
+  Triangle = 'triangle',
+  Rectangle = 'rectangle',
+  Circle = 'circle',
+}
 export interface Figure {
   shape: string;
   color: string;
@@ -5,28 +15,19 @@ export interface Figure {
 }
 
 export class Triangle implements Figure {
-  shape: string;
+  public shape = 'triangle';
 
-  color: string;
-
-  a: number;
-
-  b: number;
-
-  c: number;
-
-  constructor(color: string, a: number, b: number, c: number) {
+  constructor(
+    public color: string,
+    public a: number,
+    public b: number,
+    public c: number,
+  ) {
     if (a <= 0 || b <= 0 || c <= 0 || a >= b + c || b >= a + c || c >= a + b) {
       throw new Error(
         'Please check if all sides are greater or equal to zero.',
       );
     }
-
-    this.shape = 'triangle';
-    this.color = color;
-    this.a = a;
-    this.b = b;
-    this.c = c;
   }
 
   getArea(): number {
@@ -40,20 +41,15 @@ export class Triangle implements Figure {
 }
 
 export class Circle implements Figure {
-  shape: string;
+  public shape = 'circle';
 
-  color: string;
-
-  radius: number;
-
-  constructor(color: string, radius: number) {
+  constructor(
+    public color: string,
+    public radius: number,
+  ) {
     if (radius <= 0) {
       throw new Error('Radius should be greater than zero.');
     }
-
-    this.shape = 'circle';
-    this.color = color;
-    this.radius = radius;
   }
 
   getArea(): number {
@@ -64,22 +60,16 @@ export class Circle implements Figure {
 }
 
 export class Rectangle implements Figure {
-  shape: string;
+  public shape = 'rectangle';
 
-  color: string;
-
-  width: number;
-
-  height: number;
-
-  constructor(color: string, width: number, height: number) {
+  constructor(
+    public color: string,
+    public width: number,
+    public height: number,
+  ) {
     if (width <= 0 || height <= 0) {
       throw new Error('Width and height should be greater than zero.');
     }
-    this.shape = 'rectangle';
-    this.color = color;
-    this.width = width;
-    this.height = height;
   }
 
   getArea(): number {
