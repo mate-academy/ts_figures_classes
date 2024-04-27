@@ -9,8 +9,8 @@ export enum Shape {
   Circle = 'circle',
 }
 export interface Figure {
-  shape: string;
-  color: string;
+  shape: Shape;
+  color: Color;
   getArea(): number;
 }
 
