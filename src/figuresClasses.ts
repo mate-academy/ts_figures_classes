@@ -1,5 +1,14 @@
-type Shape = 'triangle' | 'circle' | 'rectangle';
-type Color = 'red' | 'green' | 'blue';
+enum Shape {
+  triangle = 'triangle',
+  circle = 'circle',
+  rectangle = 'rectangle',
+}
+
+enum Color {
+  red = 'red',
+  green = 'green',
+  blue = 'blue',
+}
 
 export interface Figure {
   shape: Shape;
@@ -8,22 +17,14 @@ export interface Figure {
 }
 
 export class Triangle implements Figure {
-  shape: Shape = 'triangle';
+  shape: Shape = Shape.triangle;
 
-  color: Color;
-
-  a: number;
-
-  b: number;
-
-  c: number;
-
-  constructor(color: Color, a: number, b: number, c: number) {
-    this.color = color;
-    this.a = a;
-    this.b = b;
-    this.c = c;
-
+  constructor(
+    private color: Color,
+    private a: number,
+    private b: number,
+    private c: number,
+  ) {
     if (a <= 0 || b <= 0 || c <= 0 || a + b <= c || a + c <= b || b + c <= a) {
       throw new Error('Invalid triangle sides');
     }
@@ -37,16 +38,12 @@ export class Triangle implements Figure {
 }
 
 export class Circle implements Figure {
-  shape: Shape = 'circle';
+  shape: Shape = Shape.circle;
 
-  color: Color;
-
-  radius: number;
-
-  constructor(color: Color, radius: number) {
-    this.color = color;
-    this.radius = radius;
-
+  constructor(
+    private color: Color,
+    private radius: number,
+  ) {
     if (radius <= 0) {
       throw new Error('Invalid circle radius');
     }
@@ -60,19 +57,13 @@ export class Circle implements Figure {
 }
 
 export class Rectangle implements Figure {
-  shape: Shape = 'rectangle';
+  shape: Shape = Shape.rectangle;
 
-  color: Color;
-
-  width: number;
-
-  height: number;
-
-  constructor(color: Color, width: number, height: number) {
-    this.color = color;
-    this.width = width;
-    this.height = height;
-
+  constructor(
+    private color: Color,
+    private width: number,
+    private height: number,
+  ) {
     if (width <= 0 || height <= 0) {
       throw new Error('Invalid rectangle dimensions');
     }
