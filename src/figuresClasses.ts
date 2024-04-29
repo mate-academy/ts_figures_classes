@@ -6,8 +6,14 @@ export interface Figure {
   getArea(): number;
 }
 
+enum FigureType {
+  triangle = 'triangle',
+  circle = 'circle',
+  rectangle = 'rectangle',
+}
+
 export class Triangle implements Figure {
-  public shape = 'triangle';
+  public shape = FigureType.triangle;
 
   constructor(
     public color: Color,
@@ -35,7 +41,7 @@ export class Triangle implements Figure {
 }
 
 export class Circle implements Figure {
-  public shape = 'circle';
+  public shape = FigureType.circle;
 
   constructor(
     public color: Color,
@@ -52,7 +58,7 @@ export class Circle implements Figure {
 }
 
 export class Rectangle implements Figure {
-  public shape = 'rectangle';
+  public shape = FigureType.rectangle;
 
   constructor(
     public color: Color,
