@@ -16,13 +16,6 @@ export interface Figure {
   getArea(): number;
 }
 
-function isValidTriangle(side1: number, side2: number, side3: number): boolean {
-  const maxSide = Math.max(side1, side2, side3);
-  const sumOfOtherSides = side1 + side2 + side3 - maxSide;
-
-  return maxSide < sumOfOtherSides;
-}
-
 export class Triangle implements Figure {
   shape: Shape = Shape.Triangle;
 
@@ -33,14 +26,21 @@ export class Triangle implements Figure {
     public c: number,
   ) {
     if (a <= 0 || b <= 0 || c <= 0) {
-      throw new Error('All sides must be a positive numbers');
+      throw new Error('All sides must be positive numbers');
     }
 
-    if (!isValidTriangle(a, b, c)) {
-      throw new Error("This sides can't create a triangle");
+    if (!Triangle.isValidTriangle(a, b, c)) {
+      throw new Error("These sides can't create a triangle");
     }
 
     this.color = color;
+  }
+
+  static isValidTriangle(side1: number, side2: number, side3: number): boolean {
+    const maxSide = Math.max(side1, side2, side3);
+    const sumOfOtherSides = side1 + side2 + side3 - maxSide;
+
+    return maxSide < sumOfOtherSides;
   }
 
   getArea(): number {
