@@ -16,16 +16,6 @@ export interface Figure {
   getArea(): number;
 }
 
-function isValidTriangle(
-  firstSide: number,
-  secondSide: number,
-  thirdSide: number,
-): boolean {
-  const maxSide = Math.max(firstSide, secondSide, thirdSide);
-
-  return maxSide < firstSide + secondSide + thirdSide - maxSide;
-}
-
 export class Triangle implements Figure {
   shape = Shape.Triangle;
 
@@ -35,29 +25,25 @@ export class Triangle implements Figure {
     public b: number,
     public c: number,
   ) {
-    if (a <= 0) {
-      throw new Error(
-        'Invalid side length for triangle: a must be greater than 0.',
-      );
+    if (a <= 0 || b <= 0 || c <= 0) {
+      throw new Error('Negative sides are not allowed');
     }
 
-    if (b <= 0) {
-      throw new Error(
-        'Invalid side length for triangle: b must be greater than 0.',
-      );
-    }
-
-    if (c <= 0) {
-      throw new Error(
-        'Invalid side length for triangle: c must be greater than 0.',
-      );
-    }
-
-    if (!isValidTriangle(a, b, c)) {
+    if (!Triangle.isValidTriangle(a, b, c)) {
       throw new Error(
         'Invalid triangle: Sum of two sides must exceed the third side.',
       );
     }
+  }
+
+  static isValidTriangle(
+    firstSide: number,
+    secondSide: number,
+    thirdSide: number,
+  ): boolean {
+    const maxSide = Math.max(firstSide, secondSide, thirdSide);
+
+    return maxSide < firstSide + secondSide + thirdSide - maxSide;
   }
 
   getArea(): number {
