@@ -1,13 +1,25 @@
+export enum Color {
+  Red = 'red',
+  Blue = 'blue',
+  Green = 'green',
+}
+
+export enum Shape {
+  Triangle = 'triangle',
+  Circle = 'circle',
+  Rectangle = 'rectangle',
+}
+
 export interface Figure {
-  shape: string;
-  color: string;
+  shape: Shape;
+  color: Color;
   getArea(): number;
 }
 
 export class Triangle implements Figure {
-  color: string;
+  color: Color;
 
-  shape: string;
+  shape: Shape = Shape.Triangle;
 
   a: number;
 
@@ -15,7 +27,7 @@ export class Triangle implements Figure {
 
   c: number;
 
-  constructor(color: string, a: number, b: number, c: number) {
+  constructor(color: Color, a: number, b: number, c: number) {
     if (a <= 0 || b <= 0 || c <= 0) {
       throw new Error('you must set valid sides');
     }
@@ -24,7 +36,6 @@ export class Triangle implements Figure {
       throw new Error('you must set valid sides');
     }
 
-    this.shape = 'triangle';
     this.color = color;
     this.a = a;
     this.b = b;
@@ -40,18 +51,17 @@ export class Triangle implements Figure {
 }
 
 export class Circle implements Figure {
-  color: string;
+  color: Color;
 
-  shape: string;
+  shape: Shape = Shape.Circle;
 
   radius: number;
 
-  constructor(color: string, radius: number) {
+  constructor(color: Color, radius: number) {
     if (radius <= 0) {
       throw new Error('you must set valid radius');
     }
 
-    this.shape = 'circle';
     this.color = color;
     this.radius = radius;
   }
@@ -64,19 +74,18 @@ export class Circle implements Figure {
 }
 
 export class Rectangle implements Figure {
-  color: string;
+  color: Color;
 
-  shape: string;
+  shape: Shape = Shape.Rectangle;
 
   width: number;
 
   heigth: number;
 
-  constructor(color: string, width: number, heigth: number) {
+  constructor(color: Color, width: number, heigth: number) {
     if (width <= 0 || heigth <= 0) {
       throw new Error('you must set valid sides');
     }
-    this.shape = 'rectangle';
     this.color = color;
     this.width = width;
     this.heigth = heigth;
