@@ -1,14 +1,14 @@
 export interface Figure {
-  shape: string;
-  color: string;
+  shape: 'triangle' | 'circle' | 'rectangle';
+  color: 'red' | 'green' | 'blue';
   getArea(): number;
 }
 
 export class Triangle implements Figure {
-  readonly shape: string = 'triangle';
+  readonly shape = 'triangle';
 
   constructor(
-    public color: string,
+    public color: 'red' | 'green' | 'blue',
     public a: number,
     public b: number,
     public c: number,
@@ -26,16 +26,20 @@ export class Triangle implements Figure {
     const p: number = (this.a + this.b + this.c) / 2;
 
     return Number(
-      Math.pow(p * (p - this.a) * (p - this.b) * (p - this.c), 0.5).toFixed(2),
+      (
+        Math.floor(
+          Math.sqrt(p * (p - this.a) * (p - this.b) * (p - this.c)) * 100,
+        ) / 100
+      ).toFixed(2),
     );
   }
 }
 
 export class Circle implements Figure {
-  public shape: string = 'circle';
+  readonly shape = 'circle';
 
   constructor(
-    public color: string,
+    public color: 'red' | 'green' | 'blue',
     public radius: number,
   ) {
     if (radius <= 0) {
@@ -44,14 +48,14 @@ export class Circle implements Figure {
   }
 
   getArea(): number {
-    return Number((Math.PI * this.radius ** 2).toFixed(2));
+    return Math.floor(Math.PI * this.radius ** 2 * 100) / 100;
   }
 }
 export class Rectangle implements Figure {
-  readonly shape: string = 'rectangle';
+  readonly shape = 'rectangle';
 
   constructor(
-    public color: string,
+    public color: 'red' | 'green' | 'blue',
     public width: number,
     public height: number,
   ) {
@@ -61,7 +65,7 @@ export class Rectangle implements Figure {
   }
 
   getArea(): number {
-    return Number((this.width * this.height).toFixed(2));
+    return Math.floor(this.width * this.height * 100) / 100;
   }
 }
 
