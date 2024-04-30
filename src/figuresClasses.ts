@@ -1,16 +1,16 @@
-export interface Figure {
-  shape: 'triangle' | 'circle' | 'rectangle';
-  color: 'red' | 'blue' | 'green';
-
-  getArea(): number;
-}
-
 type Color = 'red' | 'blue' | 'green';
 
 enum Shape {
   triangle = 'triangle',
   circle = 'circle',
   rectangle = 'rectangle',
+}
+
+export interface Figure {
+  shape: Shape;
+  color: Color;
+
+  getArea(): number;
 }
 
 export class Triangle implements Figure {
