@@ -5,13 +5,22 @@ export interface Figure {
   getArea(): number;
 }
 
+type Color = 'red' | 'blue' | 'green';
+
+enum Shape {
+  triangle = 'triangle',
+  circle = 'circle',
+  rectangle = 'rectangle',
+}
+
 export class Triangle implements Figure {
+  public shape = Shape.triangle;
+
   constructor(
-    public color: 'red' | 'green' | 'blue',
+    public color: Color,
     public a = 0,
     public b = 0,
     public c = 0,
-    public shape: 'triangle' = 'triangle',
   ) {
     if (a <= 0 || b <= 0 || c <= 0) {
       throw new Error('Side of triangle must be greater than 0');
@@ -34,10 +43,11 @@ export class Triangle implements Figure {
 }
 
 export class Circle implements Figure {
+  public shape = Shape.circle;
+
   constructor(
-    public color: 'red' | 'green' | 'blue',
+    public color: Color,
     public radius: number,
-    public shape: 'circle' = 'circle',
   ) {
     if (this.radius <= 0) {
       throw new Error('Radius of circle must be greater then 0');
@@ -52,11 +62,12 @@ export class Circle implements Figure {
 }
 
 export class Rectangle implements Figure {
+  public shape = Shape.rectangle;
+
   constructor(
-    public color: 'red' | 'green' | 'blue',
+    public color: Color,
     public width: number,
     public height: number,
-    public shape: 'rectangle' = 'rectangle',
   ) {
     if (width <= 0 || height <= 0) {
       throw new Error('Every value of rectangle must be greater than 0');
