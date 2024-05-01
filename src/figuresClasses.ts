@@ -37,7 +37,7 @@ export class Circle implements Figure {
   shape: Shape = 'circle';
 
   constructor(
-    public color: string,
+    public color: Color,
     public radius: number,
   ) {
     if (radius <= 0) {
@@ -56,7 +56,7 @@ export class Rectangle implements Figure {
   shape: Shape = 'rectangle';
 
   constructor(
-    public color: string,
+    public color: Color,
     public width: number,
     public height: number,
   ) {
