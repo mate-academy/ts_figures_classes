@@ -1,12 +1,5 @@
 type Shape = `triangle` | `circle` | `rectangle`;
 type Color = `red` | `green` | `blue`;
-// enum Parameters {
-//   a: number,
-//   b: number,
-//   c: number,
-//   radius: number,
-//   color: color,
-// }
 
 export interface Figure {
   shape: Shape;
@@ -14,18 +7,18 @@ export interface Figure {
   getArea: () => number;
 }
 
-function longestSide(a: number, b: number, c: number): boolean {
-  const arrOfSides: number[] = [a, b, c];
-  const maxSide: number = Math.max(...arrOfSides);
-  const sum = arrOfSides
-    .filter((num: number) => num !== maxSide)
-    .reduce((acc: number, elem: number) => acc + elem, 0);
-
-  return maxSide >= sum;
-}
-
 export class Triangle implements Figure {
   shape: Shape = 'triangle';
+
+  static isValidTriangle(a: number, b: number, c: number): boolean {
+    const arrOfSides: number[] = [a, b, c];
+    const maxSide: number = Math.max(...arrOfSides);
+    const sum = arrOfSides
+      .filter((num: number) => num !== maxSide)
+      .reduce((acc: number, elem: number) => acc + elem, 0);
+
+    return maxSide < sum;
+  }
 
   constructor(
     public color: Color,
@@ -33,20 +26,21 @@ export class Triangle implements Figure {
     public b: number,
     public c: number,
   ) {
-    if (longestSide(a, b, c) || a <= 0 || b <= 0 || c <= 0) {
-      throw new Error('your error message');
+    if (!Triangle.isValidTriangle(a, b, c) || a <= 0 || b <= 0 || c <= 0) {
+      throw new Error('Is not a valid triangle');
     }
   }
 
   getArea(): number {
-    const halfSize = (this.a + this.b + this.c) * 0.5;
-    const sqrtV =
-      halfSize *
-      (halfSize - this.a) *
-      (halfSize - this.b) *
-      (halfSize - this.c);
+    const halfPerimeter = (this.a + this.b + this.c) * 0.5;
+    const area = Math.sqrt(
+      halfPerimeter *
+        (halfPerimeter - this.a) *
+        (halfPerimeter - this.b) *
+        (halfPerimeter - this.c),
+    );
 
-    return Math.round(Math.sqrt(sqrtV) * 100) / 100;
+    return Math.round(area * 100) / 100;
   }
 }
 
@@ -58,16 +52,12 @@ export class Circle implements Figure {
     public radius: number,
   ) {
     if (this.radius <= 0) {
-      throw new Error('your error message');
+      throw new Error('Radius must be greater than zero');
     }
   }
 
   getArea(): number {
-    if (this.radius === 6) {
-      return 113.09;
-    }
-
-    return Math.round(this.radius * this.radius * Math.PI * 100) / 100;
+    return Math.floor(this.radius * this.radius * Math.PI * 100) / 100;
   }
 }
 
@@ -80,7 +70,7 @@ export class Rectangle implements Figure {
     public b: number,
   ) {
     if (a <= 0 || b <= 0) {
-      throw new Error('your error message');
+      throw new Error('Sides of rectangle must be greater than zero');
     }
   }
 
