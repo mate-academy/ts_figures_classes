@@ -1,3 +1,6 @@
+export type Shape = 'triangle' | 'circle' | 'rectangle';
+export type Color = 'red' | 'green' | 'blue';
+
 export interface Figure {
   shape: string;
   color: string;
@@ -12,6 +15,8 @@ export class Triangle implements Figure {
   sides: number[];
 
   constructor(color: string, ...sides: number[]) {
+    this.color = color;
+
     if (sides.some((side) => side <= 0)) {
       throw new Error('All sides must be greater than 0');
     }
@@ -22,8 +27,8 @@ export class Triangle implements Figure {
       throw new Error('Sides cannot form a triangle');
     }
 
-    this.color = color;
     this.sides = sides;
+    this.shape = 'triangle';
   }
 
   getArea(): number {
@@ -42,12 +47,14 @@ export class Circle implements Figure {
   radius: number;
 
   constructor(color: string, radius: number) {
+    this.color = color;
+
     if (radius <= 0) {
       throw new Error('Radius must be greater than 0');
     }
 
-    this.color = color;
     this.radius = radius;
+    this.shape = 'circle';
   }
 
   getArea(): number {
@@ -67,13 +74,15 @@ export class Rectangle implements Figure {
   height: number;
 
   constructor(color: string, width: number, height: number) {
+    this.color = color;
+
     if (width <= 0 || height <= 0) {
       throw new Error('Width and height must be greater than 0');
     }
 
-    this.color = color;
     this.width = width;
     this.height = height;
+    this.shape = 'rectangle';
   }
 
   getArea(): number {
