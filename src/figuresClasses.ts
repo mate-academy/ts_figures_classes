@@ -20,13 +20,18 @@ export class Triangle implements Figure {
       Math.min(a, b, c) <= 0 ||
       a + b + c - Math.max(a, b, c) <= Math.max(a, b, c)
     ) {
-      throw new Error('your error message');
+      throw new Error('Check your values! A triangle cannot be constructed');
     }
   }
 
   getArea(): number {
-    const p = (this.a + this.b + this.c) / 2; // semiperimetr
-    const area = Math.sqrt(p * (p - this.a) * (p - this.b) * (p - this.c));
+    const semiperimetr = (this.a + this.b + this.c) / 2;
+    const area = Math.sqrt(
+      semiperimetr *
+        (semiperimetr - this.a) *
+        (semiperimetr - this.b) *
+        (semiperimetr - this.c),
+    );
 
     return Math.floor(area * 100) / 100;
   }
@@ -40,7 +45,7 @@ export class Circle implements Figure {
     public a: number,
   ) {
     if (this.a <= 0) {
-      throw new Error('My error message');
+      throw new Error('Check the radius value');
     }
   }
 
@@ -60,7 +65,7 @@ export class Rectangle implements Figure {
     public b: number,
   ) {
     if (this.a <= 0 || this.b <= 0) {
-      throw new Error('My error message');
+      throw new Error('Check your rectangle parameters!');
     }
   }
 
