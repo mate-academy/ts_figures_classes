@@ -1,9 +1,4 @@
-enum Shape {
-  Triangle = 'triangle',
-  Circle = 'circle',
-  Rectangle = 'rectangle',
-}
-
+type Shape = 'triangle' | 'circle' | 'rectangle';
 type Color = 'red' | 'green' | 'blue';
 
 export interface Figure {
@@ -13,7 +8,7 @@ export interface Figure {
 }
 
 export class Triangle implements Figure {
-  shape = Shape.Triangle;
+  shape: Shape = 'triangle';
 
   constructor(
     public color: Color,
@@ -31,8 +26,14 @@ export class Triangle implements Figure {
       this.a + this.c > this.b &&
       this.b + this.c > this.a;
 
-    if (!isPositive || !isTriangle) {
-      throw new Error('Invalid triangle');
+    if (!isPositive) {
+      throw new Error('Invalid triangle. Triangle sides less than 0');
+    }
+
+    if (!isTriangle) {
+      throw new Error(
+        'Invalid triangle. One of sides bigger than sum other sides',
+      );
     }
   }
 
@@ -45,7 +46,7 @@ export class Triangle implements Figure {
 }
 
 export class Circle implements Figure {
-  shape = Shape.Circle;
+  shape: Shape = 'circle';
 
   constructor(
     public color: Color,
@@ -54,7 +55,7 @@ export class Circle implements Figure {
     this.radius = radius;
 
     if (this.radius <= 0) {
-      throw new Error('Invalid circle');
+      throw new Error('Invalid circle. Radius less or equal 0');
     }
   }
 
@@ -64,7 +65,7 @@ export class Circle implements Figure {
 }
 
 export class Rectangle implements Figure {
-  shape = Shape.Rectangle;
+  shape: Shape = 'rectangle';
 
   constructor(
     public color: Color,
@@ -74,8 +75,12 @@ export class Rectangle implements Figure {
     this.width = width;
     this.height = height;
 
-    if (this.width <= 0 || this.height <= 0) {
-      throw new Error('invalid rectangle');
+    if (this.width <= 0) {
+      throw new Error('Invalid rectangle. Width less or equal 0');
+    }
+
+    if (this.height <= 0) {
+      throw new Error('Invalid rectangle. Height less or equal 0');
     }
   }
 
