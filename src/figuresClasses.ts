@@ -16,7 +16,7 @@ export class Triangle implements Figure {
     public c: number,
   ) {
     if (a <= 0 || b <= 0 || c <= 0) {
-      throw new Error('input the sides of the triangle are less than 0');
+      throw new Error('input the sides of the triangle are less than 0 or 0');
     }
 
     if (!(a + b > c && b + c > a && a + c > b)) {
@@ -41,7 +41,7 @@ export class Circle implements Figure {
     public radius: number,
   ) {
     if (radius <= 0) {
-      throw new Error('Error');
+      throw new Error('input radius are less than 0 or 0');
     }
   }
 
@@ -61,7 +61,7 @@ export class Rectangle implements Figure {
     public height: number,
   ) {
     if (width <= 0 || height <= 0) {
-      throw new Error('Error');
+      throw new Error('input rectangle sides are less than 0 or 0');
     }
   }
 
