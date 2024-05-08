@@ -1,98 +1,98 @@
-export type Shape = 'triangle' | 'circle' | 'rectangle';
-export type Color = 'red' | 'green' | 'blue';
+export enum Color {
+  Red = 'red',
+  Blue = 'blue',
+  Green = 'green',
+}
+
+export enum Shape {
+  Triangle = 'triangle',
+  Rectangle = 'rectangle',
+  Circle = 'circle',
+}
 
 export interface Figure {
-  shape: string;
-  color: string;
+  shape: Shape;
+  color: Color;
   getArea(): number;
 }
 
 export class Triangle implements Figure {
-  shape: string = 'triangle';
+  shape: Shape = Shape.Triangle;
 
-  color: string;
+  constructor(
+    public color: Color,
+    public a: number,
+    public b: number,
+    public c: number,
+  ) {
+    if (a <= 0 || b <= 0 || c <= 0) {
+      throw new Error('All sides must be positive numbers');
+    }
 
-  sides: number[];
+    if (!Triangle.isValidTriangle(a, b, c)) {
+      throw new Error("These sides can't create a triangle");
+    }
 
-  constructor(color: string, ...sides: number[]) {
     this.color = color;
+  }
 
-    if (sides.some((side) => side <= 0)) {
-      throw new Error('All sides must be greater than 0');
-    }
+  static isValidTriangle(side1: number, side2: number, side3: number): boolean {
+    const maxSide = Math.max(side1, side2, side3);
+    const sumOfOtherSides = side1 + side2 + side3 - maxSide;
 
-    const [a, b, c] = sides.sort((x, y) => x - y);
-
-    if (a + b <= c) {
-      throw new Error('Sides cannot form a triangle');
-    }
-
-    this.sides = sides;
-    this.shape = 'triangle';
+    return maxSide < sumOfOtherSides;
   }
 
   getArea(): number {
-    const [a, b, c] = this.sides;
-    const s = (a + b + c) / 2;
+    const halfPerimeter = (this.a + this.b + this.c) / 2;
+    const area = Math.sqrt(
+      halfPerimeter *
+        (halfPerimeter - this.a) *
+        (halfPerimeter - this.b) *
+        (halfPerimeter - this.c),
+    );
 
-    return Math.sqrt(s * (s - a) * (s - b) * (s - c));
+    return Math.floor(area * 100) / 100;
   }
 }
 
 export class Circle implements Figure {
-  shape: string = 'circle';
+  shape: Shape = Shape.Circle;
 
-  color: string;
-
-  radius: number;
-
-  constructor(color: string, radius: number) {
-    this.color = color;
-
+  constructor(
+    public color: Color,
+    public radius: number,
+  ) {
     if (radius <= 0) {
-      throw new Error('Radius must be greater than 0');
+      throw new Error('Radius must be a positive numbers');
     }
-
-    this.radius = radius;
-    this.shape = 'circle';
   }
 
   getArea(): number {
-    const area = Math.PI * this.radius * this.radius;
+    const area = Math.PI * this.radius ** 2;
 
     return Math.floor(area * 100) / 100;
   }
 }
 
 export class Rectangle implements Figure {
-  shape: string = 'rectangle';
+  shape: Shape = Shape.Rectangle;
 
-  color: string;
-
-  width: number;
-
-  height: number;
-
-  constructor(color: string, width: number, height: number) {
-    this.color = color;
-
+  constructor(
+    public color: Color,
+    public width: number,
+    public height: number,
+  ) {
     if (width <= 0 || height <= 0) {
-      throw new Error('Width and height must be greater than 0');
+      throw new Error('All sides must be a positive numbers');
     }
-
-    this.width = width;
-    this.height = height;
-    this.shape = 'rectangle';
   }
 
   getArea(): number {
-    return this.width * this.height;
+    return Math.floor(this.width * this.height);
   }
 }
 
 export function getInfo(figure: Figure): string {
-  const area = figure.getArea();
-  const formattedArea = area % 1 === 0 ? area.toFixed(0) : area.toFixed(2);
-
-  return `A ${figure.color} ${figure.shape} - ${formattedArea}`;
+  return `A ${figure.color} ${figure.shape} - ${figure.getArea()}`;
 }
