@@ -7,7 +7,7 @@ export interface Figure {
   getArea: () => number;
 }
 export class Triangle implements Figure {
-  shape: Shape = 'triangle';
+  shape = 'triangle';
 
   constructor(
     public color: Color,
