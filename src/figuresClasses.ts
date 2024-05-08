@@ -7,7 +7,7 @@ export interface Figure {
   getArea: () => number;
 }
 export class Triangle implements Figure {
-  shape = 'triangle';
+  shape: Shape = 'triangle';
 
   constructor(
     public color: Color,
@@ -61,7 +61,7 @@ export class Rectangle implements Figure {
     public height: number,
   ) {
     if (width <= 0 || height <= 0) {
-      throw new Error('input rectangle sides are less than 0 or 0');
+      throw new Error('input rectangle are less than 0 or 0');
     }
   }
 
