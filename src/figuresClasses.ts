@@ -7,7 +7,7 @@ export interface Figure {
 export class Shape implements Figure {
   shape: string;
 
-  color: 'red' | 'green' | 'blue';
+  color: 'green' | 'red' | 'blue';
 
   constructor(shape: string, color: 'red' | 'green' | 'blue') {
     this.shape = shape;
