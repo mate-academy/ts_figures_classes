@@ -1,18 +1,34 @@
 export interface Figure {
   shape: string;
-  color: string;
+  color: 'red' | 'green' | 'blue';
   getArea(): number;
 }
 
-export class Triangle implements Figure {
-  shape = 'triangle';
+export class Shape implements Figure {
+  shape: string;
 
-  color: string;
+  color: 'red' | 'green' | 'blue';
 
+  constructor(shape: string, color: 'red' | 'green' | 'blue') {
+    this.shape = shape;
+    this.color = color;
+  }
+
+  getArea(): number {
+    throw new Error('Method not implemented');
+  }
+}
+
+export class Triangle extends Shape {
   sides: number[];
 
-  constructor(color: string, a: number, b: number, c: number) {
-    this.color = color;
+  constructor(
+    color: 'red' | 'green' | 'blue',
+    a: number,
+    b: number,
+    c: number,
+  ) {
+    super('triangle', color);
     this.sides = [a, b, c];
 
     if (a <= 0 || b <= 0 || c <= 0 || a + b <= c || a + c <= b || b + c <= a) {
@@ -28,15 +44,11 @@ export class Triangle implements Figure {
   }
 }
 
-export class Circle implements Figure {
-  shape = 'circle';
-
-  color: string;
-
+export class Circle extends Shape {
   radius: number;
 
-  constructor(color: string, radius: number) {
-    this.color = color;
+  constructor(color: 'red' | 'green' | 'blue', radius: number) {
+    super('circle', color);
     this.radius = radius;
 
     if (radius <= 0) {
@@ -53,17 +65,13 @@ export class Circle implements Figure {
   }
 }
 
-export class Rectangle implements Figure {
-  shape = 'rectangle';
-
-  color: string;
-
+export class Rectangle extends Shape {
   width: number;
 
   height: number;
 
-  constructor(color: string, width: number, height: number) {
-    this.color = color;
+  constructor(color: 'red' | 'green' | 'blue', width: number, height: number) {
+    super('rectangle', color);
     this.width = width;
     this.height = height;
 
