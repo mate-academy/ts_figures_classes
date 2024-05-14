@@ -1,24 +1,21 @@
-enum Color {
-  red,
-  green,
-  blue,
+export enum Shape {
+  triangle = 'triangle',
+  circle = 'circle',
+  rectangle = 'rectangle',
 }
 
-enum Shapes {
-  triangle,
-  circle,
-  rectangle,
-}
+export type Color = 'red' | 'green' | 'blue';
 
 export interface Figure {
-  shape: Shapes;
+  shape: Shape;
   color: Color;
-  getArea(): number;
+  getArea: () => number;
 }
 
 export class Triangle implements Figure {
+  public shape = Shape.triangle;
+
   constructor(
-    public shape: Shapes,
     public color: Color,
     public a: number,
     public b: number,
@@ -27,11 +24,11 @@ export class Triangle implements Figure {
     const errorMessage = 'your error message';
 
     const isAllPositive = this.a >= 0 || this.b >= 0 || this.c >= 0;
-    const isABmoreThanC = this.a + this.b >= this.c;
-    const isACmoreThanB = this.a + this.c >= this.b;
-    const isBCmoreThanA = this.b + this.c >= this.a;
+    const isCmoreThanAB = this.a + this.b <= this.c;
+    const isBmoreThanAC = this.a + this.c <= this.b;
+    const isAmoreThanCB = this.b + this.c <= this.a;
 
-    if (!isAllPositive || !isABmoreThanC || !isACmoreThanB || !isBCmoreThanA) {
+    if (!isAllPositive || isAmoreThanCB || isBmoreThanAC || isCmoreThanAB) {
       throw new Error(errorMessage);
     }
   }
@@ -53,8 +50,9 @@ export class Triangle implements Figure {
 }
 
 export class Circle implements Figure {
+  public shape = Shape.circle;
+
   constructor(
-    public shape: Shapes,
     public color: Color,
     public radius: number,
   ) {
@@ -64,13 +62,16 @@ export class Circle implements Figure {
   }
 
   getArea(): number {
-    return Math.PI * this.radius ** 2;
+    const p2 = this.radius ** 2;
+
+    return Math.floor(Math.PI * p2 * 100) / 100;
   }
 }
 
 export class Rectangle implements Figure {
+  public shape = Shape.rectangle;
+
   constructor(
-    public shape: Shapes,
     public color: Color,
     public a: number,
     public b: number,
