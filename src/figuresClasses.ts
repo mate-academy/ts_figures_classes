@@ -44,9 +44,7 @@ export class Circle implements Figure {
   }
 
   public getArea(): number {
-    const areaCircle = Math.PI * this.radius ** 2;
-
-    return Math.trunc(areaCircle * 100) / 100;
+    return Math.trunc(Math.PI * this.radius ** 2 * 100) / 100;
   }
 }
 
