@@ -53,8 +53,10 @@ export class Circle implements Figure {
 
   getArea(): number {
     const { radius } = this;
+    const value: string = (Math.PI * Math.pow(radius, 2)).toFixed(3);
+    // toFixed() was returning a rounded result.
 
-    return parseFloat((Math.PI * Math.pow(radius, 2)).toFixed(2));
+    return parseFloat(value.substring(0, value.length - 1));
   }
 }
 
