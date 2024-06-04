@@ -42,11 +42,6 @@ export class Triangle implements Figure {
     if (!isRequiredSides(this.a, this.b, this.c)) {
       throw new Error('not valid sides');
     }
-
-    this.a = a;
-    this.b = b;
-    this.c = c;
-    this.shape = 'triangle';
   }
 
   getArea(): number {
@@ -63,13 +58,9 @@ export class Circle implements Figure {
     public radius: number,
     public shape: Shape = 'circle',
   ) {
-    this.shape = 'circle';
-    this.color = color;
-
     if (radius <= 0) {
       throw new Error('not valid radius');
     }
-    this.radius = radius;
   }
 
   getArea(): number {
@@ -84,14 +75,9 @@ export class Rectangle implements Figure {
     public height: number,
     public shape: Shape = 'rectangle',
   ) {
-    this.color = color;
-
     if (width <= 0 || height <= 0) {
       throw new Error('not valid sides');
     }
-    this.width = width;
-    this.height = height;
-    this.shape = 'rectangle';
   }
 
   getArea(): number {
