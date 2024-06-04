@@ -9,15 +9,14 @@ export interface Figure {
 }
 
 export class Triangle implements Figure {
+  public shape: Shape = 'triangle';
+
   constructor(
     public color: Color,
     public a: number,
     public b: number,
     public c: number,
-    public shape: Shape = 'triangle',
   ) {
-    this.color = color;
-
     function isRequiredSides(
       side1: number,
       side2: number,
@@ -53,10 +52,11 @@ export class Triangle implements Figure {
 }
 
 export class Circle implements Figure {
+  public shape: Shape = 'circle';
+
   constructor(
     public color: Color,
     public radius: number,
-    public shape: Shape = 'circle',
   ) {
     if (radius <= 0) {
       throw new Error('not valid radius');
@@ -69,11 +69,12 @@ export class Circle implements Figure {
 }
 
 export class Rectangle implements Figure {
+  public shape: Shape = 'rectangle';
+
   constructor(
     public color: Color,
     public width: number,
     public height: number,
-    public shape: Shape = 'rectangle',
   ) {
     if (width <= 0 || height <= 0) {
       throw new Error('not valid sides');
