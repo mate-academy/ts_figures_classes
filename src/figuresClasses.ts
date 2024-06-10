@@ -1,29 +1,43 @@
+type Color = 'red' | 'green' | 'blue';
+type Shape = 'triangle' | 'circle' | 'rectangle';
+
 export interface Figure {
   shape: Shape;
   color: Color;
   getArea(): number;
 }
 
-type Color = 'red' | 'green' | 'blue';
-type Shape = 'triangle' | 'circle' | 'rectangle';
-
 export class Triangle implements Figure {
+  public shape: Shape = 'triangle';
+
   constructor(
     public color: Color,
     public a: number,
     public b: number,
     public c: number,
-    public shape: 'triangle',
-  ) {}
-  getArea(): number {
-    if (this.a < 0 || this.b < 0 || this.c < 0) {
+  ) {
+    if (
+      this.a <= 0 ||
+      this.b <= 0 ||
+      this.c <= 0 ||
+      this.a + this.b <= this.c ||
+      this.a + this.c <= this.b ||
+      this.b + this.c <= this.a
+    ) {
       throw new Error('your error message');
     }
+  }
+
+  getArea(): number {
     const maxValue: number = Math.max(this.a, this.b, this.c);
     const isValid: boolean = maxValue >= this.a + this.b + this.c - maxValue;
+
     if (isValid) {
-      throw new Error('your error message');
+      throw new Error(
+        "throws an error: sides 1, 2 and 3 can't form a triangle",
+      );
     }
+
     const p: number = (1 / 2) * (this.a + this.b + this.c);
     const s: number = p * (p - this.a) * (p - this.b) * (p - this.c);
 
@@ -32,30 +46,36 @@ export class Triangle implements Figure {
 }
 
 export class Circle implements Figure {
+  public shape: Shape = 'circle';
+
   constructor(
     public color: Color,
     public radius: number,
-    public shape: 'circle',
-  ) {}
-  getArea(): number {
+  ) {
     if (this.radius <= 0) {
-      throw new Error('your error message');
+      throw new Error('throws an error');
     }
-    return (Math.round(this.radius * Math.PI) * 100) / 100;
+  }
+
+  getArea(): number {
+    return Math.floor(Math.PI * this.radius * this.radius * 100) / 100;
   }
 }
 
 export class Rectangle implements Figure {
+  public shape: Shape = 'rectangle';
+
   constructor(
     public color: Color,
     public width: number,
     public height: number,
-    readonly shape: 'rectangle',
-  ) {}
-  getArea(): number {
+  ) {
     if (this.width <= 0 || this.height <= 0) {
       throw new Error('your error message');
     }
+  }
+
+  getArea(): number {
     return (Math.round(this.width * this.height) * 100) / 100;
   }
 }
