@@ -9,19 +9,14 @@ export interface Figure {
 }
 
 export class Triangle implements Figure {
+  shape: Shape = 'triangle';
+
   constructor(
     public color: Color,
     public a: number,
     public b: number,
     public c: number,
-    public shape: Shape = 'triangle',
   ) {
-    this.a = a;
-    this.b = b;
-    this.c = c;
-    this.color = color;
-    this.shape = 'triangle';
-
     if (
       this.a === 0 ||
       this.b === 0 ||
@@ -30,7 +25,7 @@ export class Triangle implements Figure {
       this.b >= this.a + this.c ||
       this.c >= this.a + this.b
     ) {
-      throw new Error('your error message');
+      throw new Error('Triangle sides do not form a valid triangle');
     }
   }
 
@@ -48,17 +43,14 @@ export class Triangle implements Figure {
 }
 
 export class Circle implements Figure {
+  shape: Shape = 'circle';
+
   constructor(
     public color: Color,
     public radius: number,
-    public shape: Shape = 'circle',
   ) {
-    this.radius = radius;
-    this.color = color;
-    this.shape = 'circle';
-
     if (this.radius <= 0) {
-      throw new Error('your error message');
+      throw new Error('Circle radius must be greater than zero');
     }
   }
 
@@ -70,19 +62,15 @@ export class Circle implements Figure {
 }
 
 export class Rectangle implements Figure {
+  shape: Shape = 'rectangle';
+
   constructor(
     public color: Color,
     public height: number,
     public width: number,
-    public shape: Shape = 'rectangle',
   ) {
-    this.height = height;
-    this.width = width;
-    this.color = color;
-    this.shape = 'rectangle';
-
     if (this.height <= 0 || this.width <= 0) {
-      throw new Error('your error message');
+      throw new Error('Rectangle dimensions must be greater than zero');
     }
   }
 
