@@ -7,19 +7,16 @@ export interface Figure {
 }
 
 export class Triangle implements Figure {
-  shape: 'triangle';
+  shape: string = 'triangle';
 
-  color: Color;
-
-  sideA: number;
-
-  sideB: number;
-
-  sideC: number;
-
-  constructor(color: Color, sideA: number, sideB: number, sideC: number) {
+  constructor(
+    public color: string,
+    public sideA: number,
+    public sideB: number,
+    public sideC: number,
+  ) {
     if (sideA <= 0 || sideB <= 0 || sideC <= 0) {
-      throw new Error('any length is <= 0');
+      throw new Error('All sides must be greater than 0.');
     }
 
     if (
@@ -28,14 +25,10 @@ export class Triangle implements Figure {
       sideC >= sideA + sideB
     ) {
       throw new Error(
-        'the longest side of a triangle is >= than a sum of two others',
+        'The sum of the lengths of any two sides ' +
+          'must be greater than the length of the remaining side.',
       );
     }
-    this.shape = 'triangle';
-    this.color = color;
-    this.sideA = sideA;
-    this.sideB = sideB;
-    this.sideC = sideC;
   }
 
   getArea(): number {
@@ -51,17 +44,14 @@ export class Triangle implements Figure {
 export class Circle implements Figure {
   shape: 'circle';
 
-  color: Color;
-
-  radius: number;
-
-  constructor(color: Color, radius: number) {
+  constructor(
+    public color: Color,
+    public radius: number,
+  ) {
     if (radius <= 0) {
-      throw new Error('radius must be > 0');
+      throw new Error('Radius must be greater than 0.');
     }
     this.shape = 'circle';
-    this.color = color;
-    this.radius = radius;
   }
 
   getArea(): number {
@@ -72,22 +62,16 @@ export class Circle implements Figure {
 }
 
 export class Rectangle implements Figure {
-  shape: 'rectangle';
+  shape: 'rectangle' = 'rectangle';
 
-  color: Color;
-
-  width: number;
-
-  height: number;
-
-  constructor(color: Color, width: number, height: number) {
+  constructor(
+    public color: Color,
+    public width: number,
+    public height: number,
+  ) {
     if (width <= 0 || height <= 0) {
-      throw new Error('width and height must be > 0');
+      throw new Error('Width and height must be > 0');
     }
-    this.shape = 'rectangle';
-    this.color = color;
-    this.width = width;
-    this.height = height;
   }
 
   getArea(): number {
