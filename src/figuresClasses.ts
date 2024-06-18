@@ -11,10 +11,10 @@ export class Triangle implements Figure {
   shape: Shape = 'triangle';
 
   constructor(
-    public color: Color,
-    public sideA: number,
-    public sideB: number,
-    public sideC: number,
+    readonly color: Color,
+    readonly sideA: number,
+    readonly sideB: number,
+    readonly sideC: number,
   ) {
     if (
       sideA >= sideB + sideC ||
@@ -22,8 +22,13 @@ export class Triangle implements Figure {
       sideC >= sideA + sideB
     ) {
       throw new Error(
-        'The sum of the lengths of any two sides is greater than a third.',
+        `The sum of the lengths of any two
+        sides is must be greater than a third.`,
       );
+    }
+
+    if (sideA * sideB * sideC <= 0) {
+      throw new Error('All sides must be greater than 0.');
     }
   }
 
@@ -41,8 +46,8 @@ export class Circle implements Figure {
   shape: Shape = 'circle';
 
   constructor(
-    public color: Color,
-    public radius: number,
+    readonly color: Color,
+    readonly radius: number,
   ) {
     if (radius <= 0) {
       throw new Error('Radius must be greater than 0.');
@@ -60,9 +65,9 @@ export class Rectangle implements Figure {
   shape: Shape = 'rectangle';
 
   constructor(
-    public color: Color,
-    public sideA: number,
-    public sideB: number,
+    readonly color: Color,
+    readonly sideA: number,
+    readonly sideB: number,
   ) {
     if (sideA * sideB <= 0) {
       throw new Error('All sides must be greater than 0.');
