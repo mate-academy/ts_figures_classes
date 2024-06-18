@@ -2,7 +2,7 @@ type Color = 'red' | 'green' | 'blue';
 type Shape = 'triangle' | 'circle' | 'rectangle';
 
 export interface Figure {
-  shape: string;
+  shape: Shape;
   color: Color;
   getArea(): number;
 }
