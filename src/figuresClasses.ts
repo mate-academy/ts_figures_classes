@@ -22,11 +22,11 @@ export class Triangle implements Figure {
     c: number,
   ) {
     if (a <= 0 || b <= 0 || c <= 0) {
-      throw new Error('error');
+      throw new Error('Triangle side lengths must be positive');
     }
 
     if (a >= b + c || b >= a + c || c >= a + b) {
-      throw new Error('Error');
+      throw new Error('Triangle inequality violated sum must be greater sum');
     }
 
     this.shape = 'triangle';
@@ -53,7 +53,7 @@ export class Circle implements Figure {
 
   constructor(color: 'red' | 'green' | 'blue', radius: number) {
     if (radius <= 0) {
-      throw new Error('error');
+      throw new Error('Circle radius must be positive');
     }
     this.shape = 'circle';
     this.color = color;
@@ -78,7 +78,7 @@ export class Rectangle implements Figure {
 
   constructor(color: 'red' | 'green' | 'blue', width: number, height: number) {
     if (width <= 0 || height <= 0) {
-      throw new Error('error');
+      throw new Error('Rectangle width and height must be positive');
     }
 
     this.shape = 'rectangle';
