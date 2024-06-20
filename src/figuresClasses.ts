@@ -9,25 +9,21 @@ export class Triangle implements Figure {
 
   color: string;
 
-  private a: number;
-
-  private b: number;
-
-  private c: number;
-
-  constructor(color: string, a: number, b: number, c: number) {
+  constructor(
+    color: string,
+    private a: number,
+    private b: number,
+    private c: number,
+  ) {
     if (a <= 0 || b <= 0 || c <= 0) {
-      throw new Error('error');
+      throw new Error('Sides of triangle should be greater than 0');
     }
 
     if (a >= b + c || b >= a + c || c >= a + b) {
-      throw new Error('error');
+      throw new Error('Incorrect dimensions of the sides of the triangle');
     }
     this.shape = 'triangle';
     this.color = color;
-    this.a = a;
-    this.b = b;
-    this.c = c;
   }
 
   getArea(): number {
@@ -47,7 +43,7 @@ export class Circle implements Figure {
 
   constructor(color: string, radius: number) {
     if (radius <= 0) {
-      throw new Error('error');
+      throw new Error('Radius should be greater than 0');
     }
     this.shape = 'circle';
     this.color = color;
@@ -55,7 +51,7 @@ export class Circle implements Figure {
   }
 
   getArea(): number {
-    const area = Math.PI * this.radius * this.radius;
+    const area = Math.PI * (this.radius * this.radius);
 
     return Math.floor(area * 100) / 100;
   }
@@ -72,7 +68,7 @@ export class Rectangle implements Figure {
 
   constructor(color: string, width: number, height: number) {
     if (width <= 0 || height <= 0) {
-      throw new Error('error');
+      throw new Error('Sides of rectangle should be greater than 0');
     }
     this.shape = 'rectangle';
     this.color = color;
