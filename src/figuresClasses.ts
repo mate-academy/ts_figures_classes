@@ -14,14 +14,19 @@ export class Triangle implements Figure {
     public c: number,
   ) {
     const sizes: number[] = [a, b, c];
-    const maxSize: number | undefined = sizes
+    const biggestSide: number | undefined = sizes
       .sort((aSide: number, bSide: number) => {
         return aSide - bSide;
       })
       .pop();
     const lowerSidesSum = sizes.reduce((acc, side) => acc + side, 0);
 
-    if (a <= 0 || b <= 0 || c <= 0 || (maxSize && lowerSidesSum <= maxSize)) {
+    if (
+      a <= 0 ||
+      b <= 0 ||
+      c <= 0 ||
+      (biggestSide && lowerSidesSum <= biggestSide)
+    ) {
       throw new Error('Triangle side cannot be <= 0');
     }
   }
