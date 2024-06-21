@@ -7,6 +7,12 @@ export interface Figure {
   getArea: () => number;
 }
 
+function checkOnError(errorMessage: string, ...args: number[]): void {
+  if (args.some((arg: number) => arg <= 0)) {
+    throw new Error(errorMessage);
+  }
+}
+
 export class Triangle implements Figure {
   constructor(
     public color: Color,
@@ -29,9 +35,12 @@ export class Triangle implements Figure {
   }
 
   public getArea = (): number => {
-    const s: number = (this.a + this.b + this.c) / 2;
+    const semiPerimeter: number = (this.a + this.b + this.c) / 2;
     const triangleArea: number = Math.sqrt(
-      s * (s - this.a) * (s - this.b) * (s - this.c),
+      semiPerimeter *
+        (semiPerimeter - this.a) *
+        (semiPerimeter - this.b) *
+        (semiPerimeter - this.c),
     );
 
     return Math.round(triangleArea * 100) / 100;
@@ -39,10 +48,11 @@ export class Triangle implements Figure {
 }
 
 export class Circle implements Figure {
+  shape: Shape = 'circle';
+
   constructor(
     public color: Color,
     public radius: number,
-    public shape: Shape = 'circle',
   ) {
     if (radius <= 0) {
       throw new Error(`Circle radius must be greater than zero`);
@@ -63,9 +73,11 @@ export class Rectangle implements Figure {
     public height: number,
     public shape: Shape = 'rectangle',
   ) {
-    if (width <= 0 || height <= 0) {
-      throw new Error(`Rectangle width and height must be greater than zero`);
-    }
+    checkOnError(
+      `Rectangle width and height must be greater than zero`,
+      width,
+      height,
+    );
   }
 
   public getArea = (): number => {
