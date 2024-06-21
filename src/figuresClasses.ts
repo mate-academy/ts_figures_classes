@@ -1,21 +1,26 @@
-export interface Figure {
-  shape: 'triangle' | 'circle' | 'rectangle';
-  color: 'red' | 'green' | 'blue';
+type Color = 'red' | 'green' | 'blue';
 
+enum Shape {
+  Triangle = 'triangle',
+  Circle = 'circle',
+  Rectangle = 'rectangle',
+}
+
+export interface Figure {
+  shape: Shape;
+  color: Color;
   getArea(): number;
 }
 
 export class Triangle implements Figure {
-  public shape: 'triangle';
+  public shape: Shape = Shape.Triangle;
 
   constructor(
-    public color: 'red' | 'green' | 'blue',
+    public color: Color,
     public a: number,
     public b: number,
     public c: number,
   ) {
-    this.shape = 'triangle';
-
     if (a < 1 || b < 1 || c < 1) {
       throw new Error('ectangle side lengths must be greater than zero.');
     }
@@ -33,14 +38,12 @@ export class Triangle implements Figure {
 }
 
 export class Circle implements Figure {
-  public shape: 'circle';
+  public shape: Shape = Shape.Circle;
 
   constructor(
-    public color: 'red' | 'green' | 'blue',
+    public color: Color,
     public a: number,
   ) {
-    this.shape = 'circle';
-
     if (a < 1) {
       throw new Error('your error message');
     }
@@ -53,15 +56,13 @@ export class Circle implements Figure {
 }
 
 export class Rectangle implements Figure {
-  public shape: 'rectangle';
+  public shape: Shape = Shape.Rectangle;
 
   constructor(
-    public color: 'red' | 'green' | 'blue',
+    public color: Color,
     public a: number,
     public b: number,
   ) {
-    this.shape = 'rectangle';
-
     if (a < 1 || b < 1) {
       throw new Error('Circle radius must be greater than zero');
     }
@@ -73,6 +74,5 @@ export class Rectangle implements Figure {
 }
 
 export function getInfo(figure): string {
-  console.log(`A ${figure.color} ${figure.shape} - ${figure.getArea()}`);
   return `A ${figure.color} ${figure.shape} - ${figure.getArea()}`;
 }
