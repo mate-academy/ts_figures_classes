@@ -1,53 +1,55 @@
+type Shape = 'triangle' | 'circle' | 'rectangle';
+type Color = 'red' | 'green' | 'blue';
+
 export interface Figure {
-  shape: string;
-  color: string;
+  shape: Shape;
+  color: Color;
   getArea(): number;
 }
 
-export class Triangle implements Figure {
-  shape: string;
+function checkOnError(...args: number[]): void {
+  if (args.some((arg: number) => arg <= 0)) {
+    throw new Error('Dimensions should be greater than 0');
+  }
+}
 
-  color: string;
+export class Triangle implements Figure {
+  shape: Shape = 'triangle';
 
   constructor(
-    color: string,
+    public color: Color,
     private a: number,
     private b: number,
     private c: number,
   ) {
-    if (a <= 0 || b <= 0 || c <= 0) {
-      throw new Error('Sides of triangle should be greater than 0');
-    }
+    checkOnError(a, b, c);
 
     if (a >= b + c || b >= a + c || c >= a + b) {
       throw new Error('Incorrect dimensions of the sides of the triangle');
     }
-    this.shape = 'triangle';
-    this.color = color;
   }
 
   getArea(): number {
-    const s = (this.a + this.b + this.c) / 2;
-    const area = Math.sqrt(s * (s - this.a) * (s - this.b) * (s - this.c));
+    const semiPerimeter = (this.a + this.b + this.c) / 2;
+    const area = Math.sqrt(
+      semiPerimeter *
+        (semiPerimeter - this.a) *
+        (semiPerimeter - this.b) *
+        (semiPerimeter - this.c),
+    );
 
     return Math.floor(area * 100) / 100;
   }
 }
 
 export class Circle implements Figure {
-  shape: string;
+  shape: Shape = 'circle';
 
-  color: string;
-
-  private radius: number;
-
-  constructor(color: string, radius: number) {
-    if (radius <= 0) {
-      throw new Error('Radius should be greater than 0');
-    }
-    this.shape = 'circle';
-    this.color = color;
-    this.radius = radius;
+  constructor(
+    public color: Color,
+    private radius: number,
+  ) {
+    checkOnError(radius);
   }
 
   getArea(): number {
@@ -58,22 +60,14 @@ export class Circle implements Figure {
 }
 
 export class Rectangle implements Figure {
-  shape: string;
+  shape: Shape = 'rectangle';
 
-  color: string;
-
-  private height: number;
-
-  private width: number;
-
-  constructor(color: string, width: number, height: number) {
-    if (width <= 0 || height <= 0) {
-      throw new Error('Sides of rectangle should be greater than 0');
-    }
-    this.shape = 'rectangle';
-    this.color = color;
-    this.width = width;
-    this.height = height;
+  constructor(
+    public color: Color,
+    private width: number,
+    private height: number,
+  ) {
+    checkOnError(width, height);
   }
 
   getArea(): number {
