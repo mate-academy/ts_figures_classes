@@ -16,11 +16,15 @@ export class Triangle implements Figure {
     public shape: Shape = 'triangle',
   ) {
     if (a <= 0 || b <= 0 || c <= 0) {
-      throw new Error(`sides ${a}, ${b} and ${c} must be greater than zero`);
+      throw new Error(
+        `Triangle sides ${a}, ${b} and ${c} must be greater than zero`,
+      );
     }
 
     if (a + b <= c || a + c <= b || b + c <= a) {
-      throw new Error(`sides ${a}, ${b} and ${c} can't form a triangle`);
+      throw new Error(
+        `The provided dimensions ${a}, ${b} and ${c} can't form a triangle`,
+      );
     }
   }
 
@@ -41,7 +45,7 @@ export class Circle implements Figure {
     public shape: Shape = 'circle',
   ) {
     if (radius <= 0) {
-      throw new Error(`radius must be greater than zero`);
+      throw new Error(`Circle radius must be greater than zero`);
     }
   }
 
@@ -60,7 +64,7 @@ export class Rectangle implements Figure {
     public shape: Shape = 'rectangle',
   ) {
     if (width <= 0 || height <= 0) {
-      throw new Error(`width and height must be greater than zero`);
+      throw new Error(`Rectangle width and height must be greater than zero`);
     }
   }
 
