@@ -1,44 +1,41 @@
+type Color = 'red' | 'green' | 'blue';
 export interface Figure {
   shape: 'triangle' | 'circle' | 'rectangle';
-  color: 'red' | 'green' | 'blue';
+  color: Color;
   getArea: () => number;
 }
 
+function checkOnError(...args: number[]): void {
+  if (args.some((arg: number) => arg <= 0)) {
+    throw new Error('Some side is less than or equal to 0');
+  }
+}
 export class Triangle implements Figure {
   shape: 'triangle';
 
-  color: 'red' | 'green' | 'blue';
-
-  a: number;
-
-  b: number;
-
-  c: number;
-
   constructor(
-    color: 'red' | 'green' | 'blue',
-    a: number,
-    b: number,
-    c: number,
+    public color: Color,
+    public a: number,
+    public b: number,
+    public c: number,
   ) {
-    if (a <= 0 || b <= 0 || c <= 0) {
-      throw new Error('Triangle side lengths must be positive');
-    }
+    checkOnError(a, b, c);
 
     if (a >= b + c || b >= a + c || c >= a + b) {
-      throw new Error('Triangle inequality violated sum must be greater sum');
+      throw new Error('Triangle inequality violated sum must be greater sum®');
     }
 
     this.shape = 'triangle';
-    this.color = color;
-    this.a = a;
-    this.b = b;
-    this.c = c;
   }
 
   getArea(): number {
-    const s = (this.a + this.b + this.c) / 2;
-    const area = Math.sqrt(s * (s - this.a) * (s - this.b) * (s - this.c));
+    const semiPerimeter = (this.a + this.b + this.c) / 2;
+    const area = Math.sqrt(
+      semiPerimeter *
+        (semiPerimeter - this.a) *
+        (semiPerimeter - this.b) *
+        (semiPerimeter - this.c),
+    );
 
     return Math.floor(area * 100) / 100;
   }
@@ -47,17 +44,13 @@ export class Triangle implements Figure {
 export class Circle implements Figure {
   shape: 'circle';
 
-  color: 'red' | 'green' | 'blue';
+  constructor(
+    public color: Color,
+    public radius: number,
+  ) {
+    checkOnError(radius);
 
-  radius: number;
-
-  constructor(color: 'red' | 'green' | 'blue', radius: number) {
-    if (radius <= 0) {
-      throw new Error('Circle radius must be positive');
-    }
     this.shape = 'circle';
-    this.color = color;
-    this.radius = radius;
   }
 
   getArea(): number {
@@ -70,21 +63,14 @@ export class Circle implements Figure {
 export class Rectangle implements Figure {
   shape: 'rectangle';
 
-  color: 'red' | 'green' | 'blue';
-
-  width: number;
-
-  height: number;
-
-  constructor(color: 'red' | 'green' | 'blue', width: number, height: number) {
-    if (width <= 0 || height <= 0) {
-      throw new Error('Rectangle width and height must be positive');
-    }
+  constructor(
+    public color: Color,
+    public width: number,
+    public height: number,
+  ) {
+    checkOnError(width, height);
 
     this.shape = 'rectangle';
-    this.color = color;
-    this.width = width;
-    this.height = height;
   }
 
   getArea(): number {
