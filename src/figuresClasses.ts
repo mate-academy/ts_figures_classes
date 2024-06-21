@@ -1,45 +1,58 @@
+type Shape = 'triangle' | 'circle' | 'rectangle';
+type Color = 'red' | 'green' | 'blue';
 export interface Figure {
-  shape: 'triangle' | 'circle' | 'rectangle';
-  color: 'red' | 'green' | 'blue';
+  shape: Shape;
+  color: Color;
   getArea(): number;
 }
 
+function checkOnError(condition: boolean, errorMessage: string): void {
+  if (condition) {
+    throw new Error(errorMessage);
+  }
+}
+
 export class Triangle implements Figure {
-  shape: 'triangle' = 'triangle';
+  shape: Shape = 'triangle';
 
   constructor(
-    public color: 'red' | 'green' | 'blue',
+    public color: Color,
     private a: number,
     private b: number,
     private c: number,
   ) {
-    if (a <= 0 || b <= 0 || c <= 0) {
-      throw new Error('Sides of triangle should be greater than 0');
-    }
+    checkOnError(
+      a <= 0 || b <= 0 || c <= 0,
+      'Sides of triangle should be greater than 0',
+    );
 
-    if (a >= b + c || b >= a + c || c >= a + b) {
-      throw new Error('One of three sides is bigger than sum of two others');
-    }
+    checkOnError(
+      a >= b + c || b >= a + c || c >= a + b,
+      'One of three sides is bigger than sum of two others',
+    );
   }
 
   getArea(): number {
-    const s = (this.a + this.b + this.c) / 2;
-    const area = Math.sqrt(s * (s - this.a) * (s - this.b) * (s - this.c));
+    const semiPerimeter = (this.a + this.b + this.c) / 2;
+    const area = Math.sqrt(
+      semiPerimeter *
+        (semiPerimeter - this.a) *
+        (semiPerimeter - this.b) *
+        (semiPerimeter - this.c),
+    );
 
     return Math.floor(area * 100) / 100;
   }
 }
 
 export class Circle implements Figure {
-  shape: 'circle' = 'circle';
+  shape: Shape = 'circle';
 
   constructor(
-    public color: 'red' | 'green' | 'blue',
+    public color: Color,
     private radius: number,
   ) {
-    if (radius <= 0) {
-      throw new Error('Radius should be greater than 0');
-    }
+    checkOnError(radius <= 0, 'Radius should be greater than 0');
   }
 
   getArea(): number {
@@ -50,16 +63,17 @@ export class Circle implements Figure {
 }
 
 export class Rectangle implements Figure {
-  shape: 'rectangle' = 'rectangle';
+  shape: Shape = 'rectangle';
 
   constructor(
-    public color: 'red' | 'green' | 'blue',
+    public color: Color,
     private width: number,
     private height: number,
   ) {
-    if (width <= 0 || height <= 0) {
-      throw new Error('Sides of rectangle should be greater than 0');
-    }
+    checkOnError(
+      width <= 0 || height <= 0,
+      'Sides of rectangle should be greater than 0',
+    );
   }
 
   getArea(): number {
