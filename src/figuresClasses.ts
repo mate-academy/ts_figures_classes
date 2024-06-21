@@ -1,21 +1,28 @@
+export type Shape = 'triangle' | 'circle' | 'rectangle';
+export type Color = 'red' | 'green' | 'blue';
+
 export interface Figure {
-  shape: string;
-  color: string;
+  shape: Shape;
+  color: Color;
   getArea(): number;
 }
 
+function checkOnError(errorMessage: string, ...args: number[]): void {
+  if (args.some((arg: number) => arg <= 0)) {
+    throw new Error(errorMessage);
+  }
+}
+
 export class Triangle implements Figure {
-  shape = 'triangle';
+  shape: Shape = 'triangle';
 
   constructor(
-    public color: string,
+    public color: Color,
     public a: number,
     public b: number,
     public c: number,
   ) {
-    if (a <= 0 || b <= 0 || c <= 0) {
-      throw new Error('Triangle sides should be greater than 0');
-    }
+    checkOnError('This is not a triangle', a, b, c);
 
     if (a + b <= c || a + c <= b || b + c <= a) {
       throw new Error(`Sides ${a}, ${b}, and ${c} is not a triangle`);
@@ -23,44 +30,45 @@ export class Triangle implements Figure {
   }
 
   getArea(): number {
-    const s = (this.a + this.b + this.c) / 2;
+    const semiPerimeter = (this.a + this.b + this.c) / 2;
 
     return (
       Math.floor(
-        Math.sqrt(s * (s - this.a) * (s - this.b) * (s - this.c)) * 100,
+        Math.sqrt(
+          semiPerimeter *
+            (semiPerimeter - this.a) *
+            (semiPerimeter - this.b) *
+            (semiPerimeter - this.c),
+        ) * 100,
       ) / 100
     );
   }
 }
 
 export class Circle implements Figure {
-  shape = 'circle';
+  shape: Shape = 'circle';
 
   constructor(
-    public color: string,
+    public color: Color,
     public radius: number,
   ) {
-    if (radius <= 0) {
-      throw new Error('Radius must be greater than 0');
-    }
+    checkOnError('this is not a circle', radius);
   }
 
   getArea(): number {
-    return Math.floor(Math.PI * this.radius * this.radius * 100) / 100;
+    return Math.floor(Math.PI * this.radius ** 2 * 100) / 100;
   }
 }
 
 export class Rectangle implements Figure {
-  shape = 'rectangle';
+  shape: Shape = 'rectangle';
 
   constructor(
-    public color: string,
+    public color: Color,
     public width: number,
     public height: number,
   ) {
-    if (width <= 0 || height <= 0) {
-      throw new Error('Rectangle sides must be greater than 0');
-    }
+    checkOnError('Sides must be greater than 0', width, height);
   }
 
   getArea(): number {
