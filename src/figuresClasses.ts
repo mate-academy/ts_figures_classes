@@ -17,7 +17,7 @@ export class Triangle implements Figure {
     this.shape = 'triangle';
 
     if (a < 1 || b < 1 || c < 1) {
-      throw new Error('your error message');
+      throw new Error('ectangle side lengths must be greater than zero.');
     }
 
     if (a + b <= c || a + c <= b || b + c <= a) {
@@ -63,7 +63,7 @@ export class Rectangle implements Figure {
     this.shape = 'rectangle';
 
     if (a < 1 || b < 1) {
-      throw new Error('your error message');
+      throw new Error('Circle radius must be greater than zero');
     }
   }
 
