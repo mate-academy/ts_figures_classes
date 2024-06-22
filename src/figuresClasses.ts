@@ -13,12 +13,12 @@ export class Triangle implements Figure {
 
   constructor(
     color: string,
-    public a: number = 0,
-    public b: number = 0,
-    public c: number = 0,
+    public a: number,
+    public b: number,
+    public c: number,
   ) {
     if (a + b <= c || c + b <= a || a + c <= b) {
-      throw new Error('its not triangle');
+      throw new Error('Triangle inequality violated: the sum of the lengths of any two sides must be greater than the length of the remaining side.');
     }
     this.color = color;
     this.shape = 'triangle';
@@ -45,7 +45,7 @@ export class Circle implements Figure {
 
   constructor(color: string, radius: number) {
     if (radius <= 0) {
-      throw new Error('its not Circle');
+      throw new Error('Circle radius must be greater than zero.');
     }
     this.shape = `circle`;
     this.color = color;
@@ -68,7 +68,7 @@ export class Rectangle implements Figure {
 
   constructor(color: string, width: number, height: number) {
     if (height <= 0 || width <= 0) {
-      throw new Error('its not Rectangle');
+      throw new Error('Rectangle dimensions must be greater than zero.');
     }
     this.shape = `rectangle`;
     this.width = width;
