@@ -18,7 +18,9 @@ export class Triangle implements Figure {
     public c: number,
   ) {
     if (a + b <= c || c + b <= a || a + c <= b) {
-      throw new Error('Triangle inequality violated: the sum of the lengths of any two sides must be greater than the length of the remaining side.');
+      throw new Error(
+        'The sum of any two sides must be greater than the remaining side.',
+      );
     }
     this.color = color;
     this.shape = 'triangle';
