@@ -1,21 +1,30 @@
+export type Shape = 'triangle' | 'circle' | 'rectangle';
+export type Color = 'red' | 'green' | 'blue';
+
 export interface Figure {
-  shape: string;
-  color: string;
+  shape: Shape;
+  color: Color;
   getArea(): number;
 }
 
+function checkOnError(errorMessage: string, ...args: number[]): void {
+  if (args.some((arg: number) => arg <= 0)) {
+    throw new Error(errorMessage);
+  }
+}
+
 export class Triangle implements Figure {
-  shape = 'triangle';
+  shape: Shape = 'triangle';
 
   constructor(
-    public color: string,
+    public color: Color,
     public a: number,
     public b: number,
     public c: number,
   ) {
-    if (a <= 0 || b <= 0 || c <= 0) {
-      throw new Error('throws an error');
-    } else if (a + b <= c || c + b <= a || c + a <= b) {
+    checkOnError('Triangle side length must be greater than zero', a, b, c);
+
+    if (a + b <= c || c + b <= a || c + a <= b) {
       throw new Error(`
         throws an error: sides ${a}, ${b} and ${c} can’t form a triangle
       `);
@@ -31,15 +40,13 @@ export class Triangle implements Figure {
 }
 
 export class Circle implements Figure {
-  shape = 'circle';
+  shape: Shape = 'circle';
 
   constructor(
-    public color: string,
+    public color: Color,
     public radius: number,
   ) {
-    if (radius <= 0) {
-      throw new Error('throws an error');
-    }
+    checkOnError('Circle radius must be greater than zero', radius);
   }
 
   getArea(): number {
@@ -50,16 +57,18 @@ export class Circle implements Figure {
 }
 
 export class Rectangle implements Figure {
-  shape = 'rectangle';
+  shape: Shape = 'rectangle';
 
   constructor(
-    public color: string,
+    public color: Color,
     public width: number,
     public height: number,
   ) {
-    if (width <= 0 || height <= 0) {
-      throw new Error('throws an error');
-    }
+    checkOnError(
+      'Rectangle width and height must be greater than zero',
+      width,
+      height,
+    );
   }
 
   getArea(): number {
