@@ -12,6 +12,12 @@ export interface Figure {
   getArea(): number;
 }
 
+function checkSides(errorMessage: string, ...sides: number[]): void {
+  if (sides.some((side) => side <= 0)) {
+    throw new Error(errorMessage);
+  }
+}
+
 export class Triangle implements Figure {
   shape = Shape.Triangle;
 
@@ -21,10 +27,10 @@ export class Triangle implements Figure {
     public b: number,
     public c: number,
   ) {
+    checkSides('Triangle sides must be greater than 0', a, b, c);
+
     if (a >= c + b || b >= a + c || c >= b + a) {
-      throw new Error(
-        'the longest side is more than the sum of two other sides',
-      );
+      throw new Error('Triangle sides must be greater than 0');
     }
   }
 
@@ -43,9 +49,7 @@ export class Circle implements Figure {
     public color: Color,
     public radius: number,
   ) {
-    if (radius <= 0) {
-      throw new Error('radius is less than 0');
-    }
+    checkSides('Radius must be greater than 0', radius);
   }
 
   getArea(): number {
@@ -63,9 +67,7 @@ export class Rectangle implements Figure {
     public width: number,
     public height: number,
   ) {
-    if (width <= 0 || height <= 0) {
-      throw new Error('width or height are less than 0');
-    }
+    checkSides('Width and height must be greater than 0', width, height);
   }
 
   getArea(): number {
