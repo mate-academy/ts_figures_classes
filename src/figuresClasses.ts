@@ -1,32 +1,46 @@
-export interface Figure {
-  shape: string;
+export type Shape = 'triangle' | 'circle' | 'rectangle';
+export type Color = 'red' | 'green' | 'blue';
 
-  color: string;
+export interface Figure {
+  shape: Shape;
+
+  color: Color;
 
   getArea(): number;
 }
 
-export class Triangle implements Figure {
-  shape: string;
+function checkSides(errorMessage: string, ...sides: number[]): void {
+  if (sides.some((side) => side <= 0)) {
+    throw new Error(errorMessage);
+  }
+}
 
-  color: string;
+export class Triangle implements Figure {
+  shape: Shape;
+
+  color: Color;
 
   constructor(
-    color: string,
+    color: Color,
     public a: number,
     public b: number,
     public c: number,
   ) {
-    if (a + b <= c || c + b <= a || a + c <= b) {
+    checkSides(
+      `The sum of any two sides must be greater than the remaining side.`,
+      a,
+      b,
+      c,
+    );
+
+    if (a + b <= c || a + c <= b || b + c <= a) {
       throw new Error(
-        'The sum of any two sides must be greater than the remaining side.',
+        `The sum of any two sides must be greater than the remaining side.`,
       );
     }
+
     this.color = color;
     this.shape = 'triangle';
-    this.a = a;
-    this.b = b;
-    this.c = c;
   }
 
   getArea(): number {
@@ -39,16 +53,15 @@ export class Triangle implements Figure {
 }
 
 export class Circle implements Figure {
-  shape: string;
+  shape: Shape;
 
-  color: string;
+  color: Color;
 
   radius: number;
 
-  constructor(color: string, radius: number) {
-    if (radius <= 0) {
-      throw new Error('Circle radius must be greater than zero.');
-    }
+  constructor(color: Color, radius: number) {
+    checkSides(`Circle radius must be greater than zero.`, radius);
+
     this.shape = `circle`;
     this.color = color;
     this.radius = radius;
@@ -60,18 +73,21 @@ export class Circle implements Figure {
 }
 
 export class Rectangle implements Figure {
-  shape: string;
+  shape: Shape;
 
-  color: string;
+  color: Color;
 
   width: number;
 
   height: number;
 
-  constructor(color: string, width: number, height: number) {
-    if (height <= 0 || width <= 0) {
-      throw new Error('Rectangle dimensions must be greater than zero.');
-    }
+  constructor(color: Color, width: number, height: number) {
+    checkSides(
+      `Rectangle dimensions must be greater than zero.`,
+      width,
+      height,
+    );
+
     this.shape = `rectangle`;
     this.width = width;
     this.height = height;
