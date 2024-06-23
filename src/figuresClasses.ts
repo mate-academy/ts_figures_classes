@@ -25,7 +25,7 @@ export class Triangle implements Figure {
     checkOnError('This is not a triangle', a, b, c);
 
     if (a + b <= c || a + c <= b || b + c <= a) {
-      throw new Error(`Sides ${a}, ${b}, and ${c} is not a triangle`);
+      throw new Error(`Sides ${a}, ${b}, and ${c} cannot form a triangle`);
     }
   }
 
@@ -52,7 +52,7 @@ export class Circle implements Figure {
     public color: Color,
     public radius: number,
   ) {
-    checkOnError('this is not a circle', radius);
+    checkOnError('Circle radius must be greater than 0', radius);
   }
 
   getArea(): number {
@@ -68,7 +68,7 @@ export class Rectangle implements Figure {
     public width: number,
     public height: number,
   ) {
-    checkOnError('Sides must be greater than 0', width, height);
+    checkOnError('Rectangle sides must be greater than 0', width, height);
   }
 
   getArea(): number {
