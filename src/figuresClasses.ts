@@ -6,6 +6,12 @@ export interface Figure {
   color: Color;
   getArea(): number;
 }
+
+function checkSides(errorMessage: string, ...sides: number[]): void {
+  if (sides.some((side) => side <= 0)) {
+    throw new Error(errorMessage);
+  }
+}
 export class Triangle implements Figure {
   constructor(
     public color: Color,
@@ -14,9 +20,7 @@ export class Triangle implements Figure {
     public c: number,
     public shape: Shape = 'triangle',
   ) {
-    if (a <= 0 || b <= 0 || c <= 0) {
-      throw new Error('Side lengths must be greater than zero');
-    }
+    checkSides('Side lengths must be greater than zero', a, b, c);
 
     const maxSide = Math.max(a, b, c);
 
@@ -28,8 +32,13 @@ export class Triangle implements Figure {
   }
 
   getArea(): number {
-    const s = (this.a + this.b + this.c) / 2;
-    const area = Math.sqrt(s * (s - this.a) * (s - this.b) * (s - this.c));
+    const semiPerimeter = (this.a + this.b + this.c) / 2;
+    const area = Math.sqrt(
+      semiPerimeter *
+        (semiPerimeter - this.a) *
+        (semiPerimeter - this.b) *
+        (semiPerimeter - this.c),
+    );
 
     return Math.floor(area * 100) / 100;
   }
@@ -41,9 +50,7 @@ export class Circle implements Figure {
     public radius: number,
     public shape: Shape = 'circle',
   ) {
-    if (radius <= 0) {
-      throw new Error('Radius must be greater than zero');
-    }
+    checkSides('Radius must be greater than zero', radius);
   }
 
   getArea(): number {
@@ -59,9 +66,7 @@ export class Rectangle implements Figure {
     public height: number,
     public shape: Shape = 'rectangle',
   ) {
-    if (width <= 0 || height <= 0) {
-      throw new Error('Width and height must be greater than zero');
-    }
+    checkSides('Width and height must be greater than zero', width, height);
   }
 
   getArea(): number {
