@@ -5,13 +5,13 @@ export interface Figure {
 }
 
 export class Triangle implements Figure {
-  shape: 'triangle' = 'triangle';
+  readonly shape: 'triangle' = 'triangle';
 
   constructor(
     public color: 'red' | 'green' | 'blue',
-    public a: number,
-    public b: number,
-    public c: number,
+    public readonly a: number,
+    public readonly b: number,
+    public readonly c: number,
   ) {
     if (a <= 0 || b <= 0 || c <= 0) {
       throw new Error('error length');
@@ -36,14 +36,14 @@ export class Triangle implements Figure {
 }
 
 export class Circle implements Figure {
-  shape: 'circle' = 'circle';
+  readonly shape: 'circle' = 'circle';
 
   constructor(
     public color: 'red' | 'green' | 'blue',
-    public radius: number,
+    public readonly radius: number,
   ) {
     if (radius <= 0) {
-      throw new Error('Wrong radius');
+      throw new Error('Radius must be greater than 0');
     }
   }
 
@@ -55,15 +55,15 @@ export class Circle implements Figure {
 }
 
 export class Rectangle implements Figure {
-  shape: 'rectangle' = 'rectangle';
+  readonly shape: 'rectangle' = 'rectangle';
 
   constructor(
     public color: 'red' | 'green' | 'blue',
-    public width: number,
-    public height: number,
+    public readonly width: number,
+    public readonly height: number,
   ) {
     if (width <= 0 || height <= 0) {
-      throw new Error('Wrong parametr');
+      throw new Error('Width and height must be greater than 0');
     }
   }
 
@@ -74,6 +74,6 @@ export class Rectangle implements Figure {
   }
 }
 
-export function getInfo(figure): string {
+export function getInfo(figure: Figure): string {
   return `A ${figure.color} ${figure.shape} - ${figure.getArea()}`;
 }
