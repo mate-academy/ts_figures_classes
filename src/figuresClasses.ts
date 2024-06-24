@@ -28,7 +28,7 @@ export class Triangle implements Figure {
     }
   }
 
-  getArea(): number {
+  public getArea(): number {
     const semiperimeter = 0.5 * (this.a + this.b + this.c);
 
     return (
@@ -48,7 +48,7 @@ export class Circle implements Figure {
   public shape: Shape = 'circle';
 
   constructor(
-    public color: string,
+    public color: Color,
     public radius: number,
   ) {
     if (radius <= 0) {
@@ -56,7 +56,7 @@ export class Circle implements Figure {
     }
   }
 
-  getArea(): number {
+  public getArea(): number {
     return Math.floor(Math.PI * this.radius * this.radius * 100) / 100;
   }
 }
@@ -65,7 +65,7 @@ export class Rectangle implements Figure {
   public shape: Shape = 'rectangle';
 
   constructor(
-    public color: string,
+    public color: Color,
     public width: number,
     public height: number,
   ) {
@@ -74,7 +74,7 @@ export class Rectangle implements Figure {
     }
   }
 
-  getArea(): number {
+  public getArea(): number {
     return Math.floor(this.width * this.height * 100) / 100;
   }
 }
