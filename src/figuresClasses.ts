@@ -22,7 +22,10 @@ export class Triangle implements Figure {
     private b: number,
     private c: number,
   ) {
-    checkError(a <= 0 || b <= 0 || c <= 0, 'One or more length <= 0');
+    checkError(
+      a <= 0 || b <= 0 || c <= 0,
+      'One or more sides are less than or equal to zero',
+    );
 
     checkError(
       a + b <= c || a + c <= b || b + c <= a,
@@ -50,7 +53,7 @@ export class Circle implements Figure {
     public color: Colors,
     private radius: number,
   ) {
-    checkError(radius <= 0, 'Not corect redius');
+    checkError(radius <= 0, 'Radius must be greater than zero');
   }
 
   getArea(): number {
@@ -68,7 +71,10 @@ export class Rectangle implements Figure {
     private width: number,
     private height: number,
   ) {
-    checkError(width <= 0 || height <= 0, 'One or more length <= 0');
+    checkError(
+      width <= 0 || height <= 0,
+      'Width or height is less than or equal to zero',
+    );
   }
 
   getArea(): number {
