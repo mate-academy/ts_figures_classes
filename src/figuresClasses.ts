@@ -58,7 +58,7 @@ export class Circle implements Figure {
     public color: Color,
     public radius: number,
   ) {
-    checkLengths('Radius must be greater than zero', radius);
+    checkLengths('Radius of a circle must be greater than zero', radius);
   }
 
   getArea(): number {
