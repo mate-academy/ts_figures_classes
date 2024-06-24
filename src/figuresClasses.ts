@@ -7,6 +7,12 @@ export interface Figure {
   getArea(): number;
 }
 
+function checkOnError(errorMessage: string, ...sides: number[]): void {
+  if (sides.some((side) => side <= 0)) {
+    throw new Error(errorMessage);
+  }
+}
+
 export class Triangle implements Figure {
   public shape: Shape = 'triangle';
 
@@ -16,14 +22,17 @@ export class Triangle implements Figure {
     public b: number,
     public c: number,
   ) {
+    const triangleErrorMessage =
+      'Invalid triangle sides: ensure all sides are positive.';
+
+    checkOnError(triangleErrorMessage, a, b, c);
+
     const sideOfTriangle = [a, b, c].sort((a1, b1) => b1 - a1);
     const condition =
       sideOfTriangle[0] >= sideOfTriangle[1] + sideOfTriangle[2];
 
-    if (a <= 0 || b <= 0 || c <= 0 || condition) {
-      throw new Error(
-        'Invalid triangle sides: ensure all sides are possitive.',
-      );
+    if (condition) {
+      throw new Error(triangleErrorMessage);
     }
   }
 
@@ -42,9 +51,10 @@ export class Circle implements Figure {
     public color: Color,
     public radius: number,
   ) {
-    if (radius <= 0) {
-      throw new Error('Invalid radius: radius must be a positive number.');
-    }
+    const circleErrorMessage =
+      'Invalid radius: radius must be a positive number.';
+
+    checkOnError(circleErrorMessage, radius);
   }
 
   getArea(): number {
@@ -60,11 +70,9 @@ export class Rectangle implements Figure {
     public width: number,
     public height: number,
   ) {
-    if (width <= 0 || height <= 0) {
-      throw new Error(
-        'Invalid dimensions: width and height must be positive numbers.',
-      );
-    }
+    const rectangleErrorMessage = 'Width and height must be greater than zero.';
+
+    checkOnError(rectangleErrorMessage, width, height);
   }
 
   getArea(): number {
