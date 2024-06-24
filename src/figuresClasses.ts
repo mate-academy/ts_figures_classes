@@ -34,7 +34,9 @@ export class Triangle implements Figure {
     public c: number,
   ) {
     if (a >= b + c || b >= a + c || c >= a + b) {
-      throw new Error('The longest side >= than a sum of two others');
+      throw new Error(
+        'Invalid triangle sides: the longest side >= than a sum of two others',
+      );
     }
   }
 
@@ -54,7 +56,7 @@ export class Circle implements Figure {
     public radius: number,
   ) {
     if (radius <= 0) {
-      throw new Error('Radius <= 0');
+      throw new Error('Invalid radius: radius must be a positive number');
     }
   }
 
@@ -74,7 +76,7 @@ export class Rectangle implements Figure {
     public height: number,
   ) {
     if (height <= 0 || width <= 0) {
-      throw new Error('Height or width <= 0');
+      throw new Error('Invalid: width and height must be greater than zero');
     }
   }
 
