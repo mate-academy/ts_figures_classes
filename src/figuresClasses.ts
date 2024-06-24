@@ -1,21 +1,28 @@
+export type Shape = 'triangle' | 'circle' | 'rectangle';
+export type Color = 'red' | 'green' | 'blue';
+
 export interface Figure {
-  shape: 'triangle' | 'circle' | 'rectangle';
-  color: 'red' | 'green' | 'blue';
+  shape: Shape;
+  color: Color;
   getArea(): number;
 }
 
+function checkSides(errorMessage: string, ...sides: number[]): void {
+  if (sides.some((side) => side <= 0)) {
+    throw new Error(errorMessage);
+  }
+}
+
 export class Triangle implements Figure {
-  readonly shape: 'triangle' = 'triangle';
+  readonly shape: Shape = 'triangle';
 
   constructor(
-    public color: 'red' | 'green' | 'blue',
+    public color: Color,
     public readonly a: number,
     public readonly b: number,
     public readonly c: number,
   ) {
-    if (a <= 0 || b <= 0 || c <= 0) {
-      throw new Error('error length');
-    }
+    checkSides('All sides must be greater than 0', a, b, c);
 
     const longestSide = Math.max(a, b, c);
     const sumOfOtherTwo = a + b + c - longestSide;
@@ -36,10 +43,10 @@ export class Triangle implements Figure {
 }
 
 export class Circle implements Figure {
-  readonly shape: 'circle' = 'circle';
+  readonly shape: Shape = 'circle';
 
   constructor(
-    public color: 'red' | 'green' | 'blue',
+    public color: Color,
     public readonly radius: number,
   ) {
     if (radius <= 0) {
@@ -55,16 +62,14 @@ export class Circle implements Figure {
 }
 
 export class Rectangle implements Figure {
-  readonly shape: 'rectangle' = 'rectangle';
+  readonly shape: Shape = 'rectangle';
 
   constructor(
-    public color: 'red' | 'green' | 'blue',
+    public color: Color,
     public readonly width: number,
     public readonly height: number,
   ) {
-    if (width <= 0 || height <= 0) {
-      throw new Error('Width and height must be greater than 0');
-    }
+    checkSides('Width and height must be greater than 0', width, height);
   }
 
   getArea(): number {
