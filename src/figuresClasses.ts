@@ -14,13 +14,15 @@ export class Triangle implements Figure {
     public a: number,
     public b: number,
     public c: number,
-    public shape: string = `triangle`,
+    public shape: string = 'triangle',
   ) {
     const sides = [a, b, c].sort((side1, side2) => side1 - side2);
     const isValidSides = sides[2] < sides[0] + sides[1];
 
     if (a <= 0 || b <= 0 || c <= 0 || !isValidSides) {
-      throw new Error('any side must be greater than 0');
+      throw new Error(
+        'Triangle sides must be positive and satisfy the triangle inequality',
+      );
     }
   }
 
@@ -37,15 +39,15 @@ export class Circle implements Figure {
   constructor(
     public color: string,
     public radius: number,
-    public shape: string = `circle`,
+    public shape: string = 'circle',
   ) {
     if (radius <= 0) {
-      throw new Error('radius must be greater than 0');
+      throw new Error('Circle radius must be a positive number');
     }
   }
 
   getArea(): number {
-    const area = (Math.PI * this.radius ** 2 * 100) / 100;
+    const area = Math.PI * this.radius ** 2;
 
     return areaRound(area);
   }
@@ -56,10 +58,10 @@ export class Rectangle implements Figure {
     public color: string,
     public width: number,
     public height: number,
-    public shape: string = `rectangle`,
+    public shape: string = 'rectangle',
   ) {
     if (width <= 0 || height <= 0) {
-      throw new Error('width and height must be greater than 0');
+      throw new Error('Rectangle width and height must be positive numbers');
     }
   }
 
