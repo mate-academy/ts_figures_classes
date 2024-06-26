@@ -1,5 +1,5 @@
 export interface Figure {
-  shape: 'triangle' | `circle` | `rectangle`;
+  shape: 'triangle' | 'circle' | 'rectangle';
   color: 'red' | 'green' | 'blue';
   getArea(): number;
 }
@@ -13,22 +13,17 @@ export class Triangle implements Figure {
     public b: number,
     public c: number,
   ) {
-    if (this.a <= 0 || this.b <= 0 || this.c <= 0) {
-      throw new Error('all sides should be positive number');
+    if (a <= 0 || b <= 0 || c <= 0) {
+      throw new Error('All sides of a triangle must be positive numbers.');
     }
 
     const sorted: number[] = [a, b, c].sort((el1, el2) => el2 - el1);
 
     if (sorted[0] >= sorted[1] + sorted[2]) {
-      throw new Error(
-        'the longest side of a triangle must be  >= than a sum of two others',
-      );
+      throw new Error('The longest side of a triangle must be less than the sum of the other two sides.');
     }
 
-    this.color = color;
-    this.a = a;
-    this.b = b;
-    this.c = c;
+    // Автоматично призначаємо значення властивостям класу через модифікатори доступу в конструкторі
   }
 
   getArea(): number {
@@ -48,11 +43,10 @@ export class Circle implements Figure {
     public color: Figure['color'],
     public radius: number,
   ) {
-    if (this.radius <= 0) {
-      throw new Error('your error message');
+    if (radius <= 0) {
+      throw new Error('Radius must be a positive number to form a valid circle.');
     }
-    this.color = color;
-    this.radius = radius;
+    // Автоматично призначаємо значення властивостям класу через модифікатори доступу в конструкторі
   }
 
   getArea(): number {
@@ -70,12 +64,10 @@ export class Rectangle implements Figure {
     public a: number,
     public b: number,
   ) {
-    if (this.a <= 0 || this.b <= 0) {
-      throw new Error('all sides should be positive number');
+    if (a <= 0 || b <= 0) {
+      throw new Error('All sides of a rectangle must be positive numbers.');
     }
-    this.color = color;
-    this.a = a;
-    this.b = b;
+    // Автоматично призначаємо значення властивостям класу через модифікатори доступу в конструкторі
   }
 
   getArea(): number {
