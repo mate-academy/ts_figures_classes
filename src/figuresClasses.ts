@@ -22,8 +22,6 @@ export class Triangle implements Figure {
     if (sorted[0] >= sorted[1] + sorted[2]) {
       throw new Error('The longest side of a triangle must be less than the sum of the other two sides.');
     }
-
-    // Автоматично призначаємо значення властивостям класу через модифікатори доступу в конструкторі
   }
 
   getArea(): number {
@@ -46,7 +44,6 @@ export class Circle implements Figure {
     if (radius <= 0) {
       throw new Error('Radius must be a positive number to form a valid circle.');
     }
-    // Автоматично призначаємо значення властивостям класу через модифікатори доступу в конструкторі
   }
 
   getArea(): number {
@@ -67,7 +64,6 @@ export class Rectangle implements Figure {
     if (a <= 0 || b <= 0) {
       throw new Error('All sides of a rectangle must be positive numbers.');
     }
-    // Автоматично призначаємо значення властивостям класу через модифікатори доступу в конструкторі
   }
 
   getArea(): number {
