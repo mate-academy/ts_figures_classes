@@ -8,7 +8,7 @@ export class Triangle implements Figure {
   shape: 'triangle';
 
   constructor(
-    public color: Figure.color,
+    public color: 'red' | 'green' | 'blue',
     public a: number,
     public b: number,
     public c: number,
