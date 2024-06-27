@@ -22,7 +22,7 @@ export class Triangle implements Figure {
     public b: number,
     public c: number,
   ) {
-    checkError('Not a triangl');
+    checkError('Triangle sides must be positive numbers.');
 
     if (a + b <= c || c + b <= a || a + c <= b) {
       throw new Error(`${a}, ${b}, ${c} cant form a triangle`);
@@ -47,13 +47,13 @@ export class Circle implements Figure {
 
   constructor(
     public color: Color,
-    private redius: number,
+    private radius: number,
   ) {
-    checkError('Circle radius must be > 0', redius);
+    checkError('Circle radius must be a positive number.', radius);
   }
 
   getArea(): number {
-    const area = Math.PI * Math.pow(this.redius, 2);
+    const area = Math.PI * Math.pow(this.radius, 2);
 
     return Math.floor(area * 100) / 100;
   }
@@ -67,7 +67,7 @@ export class Rectangle implements Figure {
     public width: number,
     public height: number,
   ) {
-    checkError('Width and height must be > 0', width, height);
+    checkError('Width and height must be > 0', this.width, this.height);
   }
 
   getArea(): number {
