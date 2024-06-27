@@ -4,11 +4,13 @@ export interface Figure {
   getArea(): number;
 }
 
+type Color = 'red' | 'green' | 'blue';
+
 export class Triangle implements Figure {
   shape: 'triangle';
 
   constructor(
-    public color: 'red' | 'green' | 'blue',
+    public color: Color,
     public a: number,
     public b: number,
     public c: number,
@@ -16,11 +18,11 @@ export class Triangle implements Figure {
     this.shape = 'triangle';
 
     if (this.a <= 0 || this.b <= 0 || this.c <= 0) {
-      throw new Error('error message');
+      throw new Error('Triangle side lengths must be greater than zero.');
     }
 
     if (a >= b + c || b >= a + c || c >= a + b) {
-      throw new Error('error message');
+      throw new Error('Triangle side lengths must adhere to the triangle inequality theorem.');
     }
   }
 
@@ -42,7 +44,7 @@ export class Circle implements Figure {
     this.shape = 'circle';
 
     if (this.radius <= 0) {
-      throw new Error('error message');
+      throw new Error('Circle radius must be greater than zero.');
     }
   }
 
@@ -64,7 +66,7 @@ export class Rectangle implements Figure {
     this.shape = 'rectangle';
 
     if (this.width <= 0 || this.height <= 0) {
-      throw new Error('error message');
+      throw new Error('Rectangle width and height must be greater than zero.');
     }
   }
 
