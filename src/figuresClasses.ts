@@ -8,7 +8,7 @@ export class Triangle implements Figure {
   shape: 'triangle';
 
   constructor(
-    public color: 'red' | 'green' | 'blue',
+    public color: Figure.color,
     public a: number,
     public b: number,
     public c: number,
@@ -74,15 +74,5 @@ export class Rectangle implements Figure {
 }
 
 export function getInfo(figure: Figure): string {
-  let description: string;
-
-  if (figure instanceof Triangle) {
-    description = `A ${figure.color} ${figure.shape} - ${figure.getArea()}`;
-  } else if (figure instanceof Circle) {
-    description = `A ${figure.color} ${figure.shape} - ${figure.getArea()}`;
-  } else if (figure instanceof Rectangle) {
-    description = `A ${figure.color} ${figure.shape} - ${figure.getArea()}`;
-  }
-
-  return description;
+  return `A ${figure.color} ${figure.shape} - ${figure.getArea()}`;
 }
