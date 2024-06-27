@@ -1,10 +1,10 @@
+type Color = 'red' | 'green' | 'blue';
+
 export interface Figure {
   shape: 'triangle' | 'circle' | 'rectangle';
   color: 'red' | 'green' | 'blue';
   getArea(): number;
 }
-
-type Color = 'red' | 'green' | 'blue';
 
 export class Triangle implements Figure {
   shape: 'triangle';
