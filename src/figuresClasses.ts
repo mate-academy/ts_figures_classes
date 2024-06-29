@@ -1,92 +1,79 @@
+type Shape = 'triangle' | 'circle' | 'rectangle';
+type Color = 'red' | 'green' | 'blue';
+
 export interface Figure {
-  shape: string;
-  color: string;
+  shape: Shape;
+  color: Color;
   getArea(): number;
 }
 
+function checkOnError(...args: number[]): void {
+  if (args.some((arg: number) => arg <= 0)) {
+    throw new Error('Incorrect value');
+  }
+}
+
 export class Triangle implements Figure {
-  shape: string;
+  shape: Shape = 'triangle';
 
-  color: string;
+  constructor(
+    public color: Color,
+    private a: number,
+    private b: number,
+    private c: number,
+  ) {
+    checkOnError(a, b, c);
 
-  private a: number;
-
-  private b: number;
-
-  private c: number;
-
-  constructor(color: string, a: number, b: number, c: number) {
-    this.shape = 'triangle';
-    this.color = color;
-    this.a = a;
-    this.b = b;
-    this.c = c;
-
-    if (a <= 0 || b <= 0 || c <= 0) {
-      throw new Error('Sides must be greater than 0');
-    }
-
-    if (a + b <= c || a + c <= b || b + c <= a) {
-      throw new Error('Sides a, b, and c cannot form a triangle');
+    if (a >= b + c || b >= a + c || c >= a + b) {
+      throw new Error('Incorrect value');
     }
   }
 
   getArea(): number {
-    const s = (this.a + this.b + this.c) / 2;
-    const area = Math.sqrt(s * (s - this.a) * (s - this.b) * (s - this.c));
+    const semiPerimeter = (this.a + this.b + this.c) / 2;
+    const area = Math.sqrt(
+      semiPerimeter *
+        (semiPerimeter - this.a) *
+        (semiPerimeter - this.b) *
+        (semiPerimeter - this.c),
+    );
 
-    return Math.round(area * 100) / 100;
+    return Math.floor(area * 100) / 100;
   }
 }
 
 export class Circle implements Figure {
-  shape: string;
+  shape: Shape = 'circle';
 
-  color: string;
-
-  private radius: number;
-
-  constructor(color: string, radius: number) {
-    this.shape = 'circle';
-    this.color = color;
-    this.radius = radius;
-
-    if (radius <= 0) {
-      throw new Error('Radius must be greater than 0');
-    }
+  constructor(
+    public color: Color,
+    private radius: number,
+  ) {
+    checkOnError(radius);
   }
 
   getArea(): number {
-    const area = Math.PI * Math.pow(this.radius, 2);
+    const area = Math.PI * (this.radius * this.radius);
 
-    return Math.round((area + Number.EPSILON) * 100) / 100;
+    return Math.floor(area * 100) / 100;
   }
 }
 
 export class Rectangle implements Figure {
-  shape: string;
+  shape: Shape = 'rectangle';
 
-  color: string;
-
-  private width: number;
-
-  private height: number;
-
-  constructor(color: string, width: number, height: number) {
-    this.shape = 'rectangle';
-    this.color = color;
-    this.width = width;
-    this.height = height;
-
-    if (width <= 0 || height <= 0) {
-      throw new Error('Width and height must be greater than 0');
-    }
+  constructor(
+    public color: Color,
+    private width: number,
+    private height: number,
+  ) {
+    checkOnError(width, height);
   }
 
   getArea(): number {
-    const area = this.width * this.height;
+    const area = this.height * this.width;
 
-    return Math.round(area * 100) / 100;
+    return Math.floor(area * 100) / 100;
   }
 }
 
