@@ -9,7 +9,7 @@ export interface Figure {
 
 function checkOnError(...args: number[]): void {
   if (args.some((arg: number) => arg <= 0)) {
-    throw new Error('Incorrect value');
+    throw new Error('Sides must be greater than 0');
   }
 }
 
@@ -25,7 +25,7 @@ export class Triangle implements Figure {
     checkOnError(a, b, c);
 
     if (a >= b + c || b >= a + c || c >= a + b) {
-      throw new Error('Incorrect value');
+      throw new Error('Sides a, b, and c cannot form a triangle');
     }
   }
 
