@@ -39,13 +39,10 @@ export class Triangle implements Figure {
     }
 
     if (!isCorrectTriangle) {
-      throw Error('Failed to create a triangle with current sides');
+      throw Error(
+        'The sum of sides of a triangle must be greater than the third side.',
+      );
     }
-
-    this.color = color;
-    this.a = a;
-    this.b = b;
-    this.c = c;
   }
 
   getArea(): number {
@@ -69,13 +66,9 @@ export class Circle implements Figure {
     public readonly color: Color,
     public readonly radius: number,
   ) {
-    this.color = color;
-
     if (this.radius <= 0) {
-      throw Error('Should have positive radius');
+      throw Error('Circle radius must be a positive number.');
     }
-
-    this.radius = radius;
   }
 
   getArea(): number {
@@ -91,14 +84,9 @@ export class Rectangle implements Figure {
     public readonly width: number,
     public readonly height: number,
   ) {
-    this.color = color;
-
     if (this.width <= 0 || this.height <= 0) {
-      throw Error('Should have only positive sides');
+      throw Error('Rectangle width and height must be positive numbers.');
     }
-
-    this.width = width;
-    this.height = height;
   }
 
   getArea(): number {
