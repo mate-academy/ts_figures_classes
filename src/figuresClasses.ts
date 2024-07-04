@@ -1,13 +1,13 @@
 enum Color {
-  red = 'red',
-  green = 'green',
-  blue = 'blue',
+  Red = 'red',
+  Green = 'green',
+  Blue = 'blue',
 }
 
 enum Shape {
-  triangle = 'triangle',
-  circle = 'circle',
-  rectangle = 'rectangle',
+  Triangle = 'triangle',
+  Circle = 'circle',
+  Rectangle = 'rectangle',
 }
 
 export interface Figure {
@@ -21,7 +21,7 @@ function getRoundedNumber(number: number): number {
 }
 
 export class Triangle implements Figure {
-  public shape = Shape.triangle;
+  public shape = Shape.Triangle;
 
   constructor(
     public color: Color,
@@ -37,8 +37,7 @@ export class Triangle implements Figure {
       this.b >= this.a + this.c ||
       this.c >= this.a + this.b
     ) {
-      throw new Error('Sides must be positive and not equal to zero');
-    } else {
+      throw new Error('Sides must be positive and not equal to zero and the sum of the lengths of any two sides must be greater than or equal to the length of the remaining side');
     }
   }
 
@@ -51,16 +50,14 @@ export class Triangle implements Figure {
 }
 
 export class Circle implements Figure {
-  public shape = Shape.circle;
+  public shape = Shape.Circle;
 
   constructor(
     public color: Color,
     public r: number,
   ) {
     if (this.r <= 0) {
-      throw new Error('Radius must be positive and not equal to zero');
-    } else {
-      this.r = r;
+      throw new Error('Radius must be a positive number greater than zero');
     }
   }
 
@@ -72,7 +69,7 @@ export class Circle implements Figure {
 }
 
 export class Rectangle implements Figure {
-  public shape = Shape.rectangle;
+  public shape = Shape.Rectangle;
 
   constructor(
     public color: Color,
@@ -80,8 +77,7 @@ export class Rectangle implements Figure {
     public height: number,
   ) {
     if (this.width <= 0 || this.height <= 0) {
-      throw new Error('Sides must be positive and not equal to zero');
-    } else {
+      throw new Error('width and height must be positive numbers greater than zero');
     }
   }
 
