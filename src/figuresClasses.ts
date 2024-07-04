@@ -10,15 +10,12 @@ export interface Figure {
 export class Triangle implements Figure {
   shape: Shape;
 
-  color: Color;
-
-  a: number;
-
-  b: number;
-
-  c: number;
-
-  constructor(color: Color, a: number, b: number, c: number) {
+  constructor(
+    public color: Color,
+    public a: number,
+    public b: number,
+    public c: number,
+  ) {
     const triangleSmallerSides = [a, b, c]
       .filter((num) => num !== Math.max(a, b, c))
       .reduce((cur, next) => cur + next, 0);
@@ -28,10 +25,10 @@ export class Triangle implements Figure {
 
     if (Math.max(a, b, c) >= triangleSmallerSides) {
       throw new Error(
-        'Longer side cannot be longer or equal of summury of smallest sides',
+        'Longest side of a triangle must be less than sum of other two sides',
       );
     } else if (a <= 0 || b <= 0 || c <= 0) {
-      throw new Error('Side cannot be 0');
+      throw new Error('Triangle sides must be greater than zero');
     } else {
       this.a = a;
       this.b = b;
@@ -52,16 +49,15 @@ export class Triangle implements Figure {
 export class Circle implements Figure {
   shape: Shape;
 
-  color: Color;
-
-  radius: number;
-
-  constructor(color: Color, radius: number) {
+  constructor(
+    public color: Color,
+    public radius: number,
+  ) {
     this.shape = 'circle';
     this.color = color;
 
     if (radius <= 0) {
-      throw new Error('Radiuis cannot be 0');
+      throw new Error('Circle radius must be greater than zero.');
     } else {
       this.radius = radius;
     }
@@ -77,18 +73,16 @@ export class Circle implements Figure {
 export class Rectangle implements Figure {
   shape: Shape;
 
-  color: Color;
-
-  width: number;
-
-  height: number;
-
-  constructor(color: Color, width: number, height: number) {
+  constructor(
+    public color: Color,
+    public width: number,
+    public height: number,
+  ) {
     this.shape = 'rectangle';
     this.color = color;
 
     if (width <= 0 || height <= 0) {
-      throw new Error('Height or width cannot be 0');
+      throw new Error('Rectangle width and height must be greater than zero');
     } else {
       this.width = width;
       this.height = height;
