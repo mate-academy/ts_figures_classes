@@ -37,7 +37,11 @@ export class Triangle implements Figure {
       this.b >= this.a + this.c ||
       this.c >= this.a + this.b
     ) {
-      throw new Error('Sides must be positive and not equal to zero and the sum of the lengths of any two sides must be greater than or equal to the length of the remaining side');
+      throw new Error(
+        'Sides must be positive and not equal to zero' +
+          'and the sum of the lengths of any two sides must be greater than' +
+          'or equal to the length of the remaining side',
+      );
     }
   }
 
@@ -77,7 +81,9 @@ export class Rectangle implements Figure {
     public height: number,
   ) {
     if (this.width <= 0 || this.height <= 0) {
-      throw new Error('width and height must be positive numbers greater than zero');
+      throw new Error(
+        'width and height must be positive numbers greater than zero',
+      );
     }
   }
 
