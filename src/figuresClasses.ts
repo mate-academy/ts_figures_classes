@@ -1,4 +1,9 @@
-type Shape = 'triangle' | 'circle' | 'rectangle';
+enum Shape {
+  Triangle = 'triangle',
+  Circle = 'circle',
+  Rectangle = 'rectangle',
+}
+
 type Color = 'red' | 'green' | 'blue';
 
 export interface Figure {
@@ -7,8 +12,18 @@ export interface Figure {
   getArea(): number;
 }
 
+function roundToTwoDecimals(value: number): number {
+  return Math.floor(value * 100) / 100;
+}
+
+function isNegative(numbers: number[], errorMessage: string): void {
+  if (numbers.some((el) => el <= 0)) {
+    throw new Error(errorMessage);
+  }
+}
+
 export class Triangle implements Figure {
-  shape: Shape;
+  shape: Shape = Shape.Triangle;
 
   constructor(
     public color: Color,
@@ -20,20 +35,13 @@ export class Triangle implements Figure {
       .filter((num) => num !== Math.max(a, b, c))
       .reduce((cur, next) => cur + next, 0);
 
-    this.shape = 'triangle';
-    this.color = color;
-
     if (Math.max(a, b, c) >= triangleSmallerSides) {
       throw new Error(
         'Longest side of a triangle must be less than sum of other two sides',
       );
-    } else if (a <= 0 || b <= 0 || c <= 0) {
-      throw new Error('Triangle sides must be greater than zero');
-    } else {
-      this.a = a;
-      this.b = b;
-      this.c = c;
     }
+
+    isNegative([a, b, c], 'Triangle sides must be greater than zero');
   }
 
   getArea(): number {
@@ -42,57 +50,42 @@ export class Triangle implements Figure {
       p * (p - this.a) * (p - this.b) * (p - this.c),
     );
 
-    return Math.floor(area * 100) / 100;
+    return roundToTwoDecimals(area);
   }
 }
 
 export class Circle implements Figure {
-  shape: Shape;
+  shape: Shape = Shape.Circle;
 
   constructor(
     public color: Color,
     public radius: number,
   ) {
-    this.shape = 'circle';
-    this.color = color;
-
-    if (radius <= 0) {
-      throw new Error('Circle radius must be greater than zero.');
-    } else {
-      this.radius = radius;
-    }
+    isNegative([radius], 'Triangle sides must be greater than zero');
   }
 
   getArea(): number {
     const area: number = this.radius ** 2 * Math.PI;
 
-    return Math.floor(area * 100) / 100;
+    return roundToTwoDecimals(area);
   }
 }
 
 export class Rectangle implements Figure {
-  shape: Shape;
+  shape: Shape = Shape.Rectangle;
 
   constructor(
     public color: Color,
     public width: number,
     public height: number,
   ) {
-    this.shape = 'rectangle';
-    this.color = color;
-
-    if (width <= 0 || height <= 0) {
-      throw new Error('Rectangle width and height must be greater than zero');
-    } else {
-      this.width = width;
-      this.height = height;
-    }
+    isNegative([width, height], 'Triangle sides must be greater than zero');
   }
 
   getArea(): number {
     const area: number = this.width * this.height;
 
-    return Math.floor(area * 100) / 100;
+    return roundToTwoDecimals(area);
   }
 }
 
