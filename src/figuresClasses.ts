@@ -19,9 +19,11 @@ export class Triangle implements Figure {
     if (a <= 0) {
       throw new Error(`Side 'a' must be greater than 0, but got ${a}`);
     }
+
     if (b <= 0) {
       throw new Error(`Side 'b' must be greater than 0, but got ${b}`);
     }
+
     if (c <= 0) {
       throw new Error(`Side 'c' must be greater than 0, but got ${c}`);
     }
@@ -71,6 +73,7 @@ export class Rectangle implements Figure {
     if (width <= 0) {
       throw new Error(`Width must be greater than 0, but got ${width}`);
     }
+
     if (height <= 0) {
       throw new Error(`Height must be greater than 0, but got ${height}`);
     }
