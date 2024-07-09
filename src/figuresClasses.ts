@@ -8,15 +8,7 @@ export interface Figure {
 }
 
 export class Triangle implements Figure {
-  shape: ShapeType;
-
-  color: string;
-
-  a: number;
-
-  b: number;
-
-  c: number;
+  shape: ShapeType = 'triangle';
 
   getArea(): number {
     const p = (this.a + this.b + this.c) / 2;
@@ -25,65 +17,59 @@ export class Triangle implements Figure {
     return Math.round(s * 100) / 100;
   }
 
-  constructor(color: string, a: number, b: number, c: number) {
+  constructor(
+    public color: string,
+    public a: number,
+    public b: number,
+    public c: number,
+  ) {
     if (a <= 0 || b <= 0 || c <= 0) {
-      throw new Error('One of the sides has size 0');
+      throw new Error(
+        `Side a = ${this.a}, side b = ${this.b}, side c = ${this.c} but no side can be equal to zero`,
+      );
     }
 
     if (a + b <= c || a + c <= b || b + c <= a) {
-      throw new Error('The sides do not form a triangle');
+      throw new Error(
+        `The length of any side of a triangle is always less than the sum of the lengths of its other two sides.`,
+      );
     }
-    this.shape = 'triangle';
-    this.color = color;
-    this.a = a;
-    this.b = b;
-    this.c = c;
   }
 }
 
 export class Circle implements Figure {
-  shape: ShapeType;
-
-  color: string;
-
-  radius: number;
+  shape: ShapeType = 'circle';
 
   getArea(): number {
     return Math.floor(Math.PI * Math.pow(this.radius, 2) * 100) / 100;
   }
 
-  constructor(color: string, radius: number) {
+  constructor(
+    public color: string,
+    public radius: number,
+  ) {
     if (radius <= 0) {
       throw new Error('The radius must be a positive number');
-    } else {
-      this.shape = 'circle';
-      this.color = color;
-      this.radius = radius;
     }
   }
 }
 
 export class Rectangle implements Figure {
-  shape: ShapeType;
-
-  color: string;
-
-  height: number;
-
-  width: number;
+  shape: ShapeType = 'rectangle';
 
   getArea(): number {
     return Math.round(this.height * this.width * 100) / 100;
   }
 
-  constructor(color: string, height: number, width: number) {
+  constructor(
+    public color: string,
+    public height: number,
+    public width: number,
+  ) {
     if (height <= 0 || width <= 0) {
-      throw new Error('One of the sides has size 0');
-    } else {
-      this.shape = 'rectangle';
-      this.color = color;
-      this.height = height;
-      this.width = width;
+      throw new Error(
+        `Width = ${this.width}, height = ${this.height}, but no side can be equal to zero`,
+      );
     }
   }
 }
