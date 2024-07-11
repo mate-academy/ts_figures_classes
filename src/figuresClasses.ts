@@ -28,13 +28,17 @@ export class Triangle implements Figure {
       throw new Error(`Side 'c' must be greater than 0, but got ${c}`);
     }
 
-    if (!this.isValidTriangle(a, b, c)) {
+    if (!this.isValidTriangle()) {
       throw new Error("This triangle can't exist.");
     }
   }
 
-  private isValidTriangle(a: number, b: number, c: number): boolean {
-    return a + b > c && a + c > b && b + c > a;
+  private isValidTriangle(): boolean {
+    return (
+      this.a + this.b > this.c &&
+      this.a + this.c > this.b &&
+      this.b + this.c > this.a
+    );
   }
 
   public getArea(): number {
