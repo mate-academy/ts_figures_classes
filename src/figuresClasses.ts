@@ -1,7 +1,7 @@
 export interface Figure {
   shape: 'triangle' | 'circle' | 'rectangle';
   color: 'red' | 'green' | 'blue';
-  getArea: () => number;
+  getArea(): number;
 }
 
 function area(areaRound: number): number {
@@ -18,11 +18,13 @@ export class Triangle implements Figure {
     public c: number,
   ) {
     if (a <= 0 || b <= 0 || c <= 0) {
-      throw new Error('Enter correct values');
+      throw new Error('Triangle side lengths must be greater than 0');
     }
 
     if (a + b <= c || b + c <= a || a + c <= b) {
-      throw new Error('Enter correct values');
+      throw new Error(
+        'Triangle side lengths must adhere to the triangle inequality theorem',
+      );
     }
   }
 
@@ -42,7 +44,7 @@ export class Circle implements Figure {
     public radius: number,
   ) {
     if (radius <= 0) {
-      throw new Error('Enter correct values');
+      throw new Error('Circle radius must be greater than 0.');
     }
   }
 
@@ -62,7 +64,7 @@ export class Rectangle implements Figure {
     public height: number,
   ) {
     if (width <= 0 || height <= 0) {
-      throw new Error('Enter correct values');
+      throw new Error('Rectangle width and height must be greater than 0');
     }
   }
 
