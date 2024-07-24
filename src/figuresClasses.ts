@@ -1,4 +1,6 @@
-interface Figure {
+// figuresClasses.ts
+
+export interface Figure {
   shape: 'triangle' | 'circle' | 'rectangle';
   color: 'red' | 'green' | 'blue';
   getArea(): number;
@@ -9,30 +11,18 @@ function roundToHundredths(num: number): number {
 }
 
 export class Triangle implements Figure {
-  shape: 'triangle';
-
-  color: 'red' | 'green' | 'blue';
-
-  a: number;
-
-  b: number;
-
-  c: number;
+  shape = 'triangle';
 
   constructor(
-    color: 'red' | 'green' | 'blue',
-    a: number,
-    b: number,
-    c: number,
+    public color: 'red' | 'green' | 'blue',
+    public a: number,
+    public b: number,
+    public c: number,
   ) {
-    this.shape = 'triangle';
-    this.color = color;
-    this.a = a;
-    this.b = b;
-    this.c = c;
-
     if (a <= 0 || b <= 0 || c <= 0) {
-      throw new Error('Side lengths must be greater than zero');
+      throw new Error(
+        `Side lengths must be greater than zero, received: a=${a}, b=${b}, c=${c}`,
+      );
     }
 
     if (a + b <= c || a + c <= b || b + c <= a) {
@@ -49,46 +39,38 @@ export class Triangle implements Figure {
 }
 
 export class Circle implements Figure {
-  shape: 'circle';
+  shape = 'circle';
 
-  color: 'red' | 'green' | 'blue';
-
-  radius: number;
-
-  constructor(color: 'red' | 'green' | 'blue', radius: number) {
-    this.shape = 'circle';
-    this.color = color;
-    this.radius = radius;
-
+  constructor(
+    public color: 'red' | 'green' | 'blue',
+    public radius: number,
+  ) {
     if (radius <= 0) {
-      throw new Error('Radius must be greater than zero');
+      throw new Error(
+        `Radius must be greater than zero, received: radius=${radius}`,
+      );
     }
   }
 
   getArea(): number {
-    const area = Math.PI * this.radius * this.radius;
+    const area = Math.PI * Math.pow(this.radius, 2);
 
     return roundToHundredths(area);
   }
 }
 
 export class Rectangle implements Figure {
-  shape: 'rectangle';
+  shape = 'rectangle';
 
-  color: 'red' | 'green' | 'blue';
-
-  width: number;
-
-  height: number;
-
-  constructor(color: 'red' | 'green' | 'blue', width: number, height: number) {
-    this.shape = 'rectangle';
-    this.color = color;
-    this.width = width;
-    this.height = height;
-
+  constructor(
+    public color: 'red' | 'green' | 'blue',
+    public width: number,
+    public height: number,
+  ) {
     if (width <= 0 || height <= 0) {
-      throw new Error('Width and height must be greater than zero');
+      throw new Error(
+        `Width and height must be greater than zero, received: width=${width}, height=${height}`,
+      );
     }
   }
 
