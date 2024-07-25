@@ -1,7 +1,7 @@
 enum Color {
-  red = 'red',
-  green = 'green',
-  blue = 'blue',
+  Red = 'red',
+  Green = 'green',
+  Blue = 'blue',
 }
 
 enum Shape {
@@ -33,7 +33,9 @@ export class Triangle implements Figure {
       c <= 0 ||
       sortSide[2] >= sortSide[0] + sortSide[1]
     ) {
-      throw new Error('incorrect sides');
+      throw new Error(
+        'Triangle sides must be positive and satisfy the triangle inequality.',
+      );
     }
   }
 
@@ -55,7 +57,7 @@ export class Circle implements Figure {
     public radius: number,
   ) {
     if (this.radius <= 0) {
-      throw new Error('incorrect radius');
+      throw new Error('Circle radius must be a positive number.');
     }
   }
 
@@ -75,7 +77,7 @@ export class Rectangle implements Figure {
     public height: number,
   ) {
     if (width <= 0 || height <= 0) {
-      throw new Error('incorrect sides');
+      throw new Error('Rectangle width and height must be positive numbers.');
     }
   }
 
