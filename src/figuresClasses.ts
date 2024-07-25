@@ -5,37 +5,23 @@ export interface Figure {
 }
 
 export class Triangle implements Figure {
-  shape: 'triangle';
-
-  color: 'red' | 'green' | 'blue';
-
-  a: number;
-
-  b: number;
-
-  c: number;
+  shape: 'triangle' = 'triangle';
 
   constructor(
-    color: 'red' | 'green' | 'blue',
-    a: number,
-    b: number,
-    c: number,
+    public color: 'red' | 'green' | 'blue',
+    public a: number,
+    public b: number,
+    public c: number,
   ) {
-    if (this.a <= 0 || this.b <= 0 || this.c <= 0) {
-      throw new Error('Invalid value. It should be a positive number.');
+    if (a <= 0 || b <= 0 || c <= 0) {
+      throw new Error('Side lengths must be positive numbers.');
     }
 
     if (a >= b + c || b >= a + c || c >= a + b) {
       throw new Error(
-        'The longest side of triangle should be bigger than sum of others',
+        'Sum of two sides of a triangle must be greater than the third side.',
       );
     }
-
-    this.shape = 'triangle';
-    this.color = color;
-    this.a = a;
-    this.b = b;
-    this.c = c;
   }
 
   getArea(): number {
@@ -47,19 +33,14 @@ export class Triangle implements Figure {
 }
 
 export class Circle implements Figure {
-  shape: 'circle';
+  shape: 'circle' = 'circle';
 
-  color: 'red' | 'green' | 'blue';
-
-  radius: number;
-
-  constructor(color: 'red' | 'green' | 'blue', radius: number) {
-    this.shape = 'circle';
-    this.color = color;
-    this.radius = radius;
-
-    if (this.radius <= 0) {
-      throw new Error('Invalid value. It should be a positive number.');
+  constructor(
+    public color: 'red' | 'green' | 'blue',
+    public radius: number,
+  ) {
+    if (radius <= 0) {
+      throw new Error('Radius must be a positive number.');
     }
   }
 
@@ -71,22 +52,15 @@ export class Circle implements Figure {
 }
 
 export class Rectangle implements Figure {
-  shape: 'rectangle';
+  shape: 'rectangle' = 'rectangle';
 
-  color: 'red' | 'green' | 'blue';
-
-  width: number;
-
-  height: number;
-
-  constructor(color: 'red' | 'green' | 'blue', width: number, height: number) {
-    this.shape = 'rectangle';
-    this.color = color;
-    this.width = width;
-    this.height = height;
-
-    if (this.width <= 0 || this.height <= 0) {
-      throw new Error('Invalid value. It should be a positive number.');
+  constructor(
+    public color: 'red' | 'green' | 'blue',
+    public width: number,
+    public height: number,
+  ) {
+    if (width <= 0 || height <= 0) {
+      throw new Error('Width and height must be positive numbers.');
     }
   }
 
@@ -95,6 +69,6 @@ export class Rectangle implements Figure {
   }
 }
 
-export function getInfo(figure): string {
+export function getInfo(figure: Figure): string {
   return `A ${figure.color} ${figure.shape} - ${figure.getArea()}`;
 }
