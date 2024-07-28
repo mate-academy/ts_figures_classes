@@ -15,7 +15,7 @@ export class Triangle implements Figure {
     public c: number,
   ) {
     if (!['red', 'blue', 'green'].includes(color)) {
-      throw new Error('wrong color');
+      throw new Error('wrong color, acceptable colors: blue, red, green');
     }
 
     if (a <= 0 || b <= 0 || c <= 0) {
@@ -23,7 +23,7 @@ export class Triangle implements Figure {
     }
 
     if (a >= b + c || b >= a + c || c >= a + b) {
-      throw new Error('the side of the triangle is less than or equal to zero');
+      throw new Error('the sides do not form a valid triangle');
     }
   }
 
@@ -42,11 +42,11 @@ export class Circle implements Figure {
     public radius: number,
   ) {
     if (!['red', 'blue', 'green'].includes(color)) {
-      throw new Error('wrong color');
+      throw new Error('wrong color, acceptable colors: blue, red, green');
     }
 
     if (radius < 0) {
-      throw new Error('radius must be > than zero');
+      throw new Error('radius must be greater than zero');
     }
   }
 
@@ -63,13 +63,11 @@ export class Rectangle implements Figure {
     public height: number,
   ) {
     if (!['red', 'blue', 'green'].includes(color)) {
-      throw new Error('wrong color');
+      throw new Error('wrong color, acceptable colors: blue, red, green');
     }
 
     if (width <= 0 || height <= 0) {
-      throw new Error(
-        'the side of the rectangle is less than or equal to zero',
-      );
+      throw new Error('the side of the rectangle is less than zero');
     }
   }
 
