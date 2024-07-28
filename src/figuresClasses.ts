@@ -1,21 +1,17 @@
 export interface Figure {
   shape: 'triangle' | 'circle' | 'rectangle';
-  color: string;
+  color: 'red' | 'blue' | 'green';
   getArea(): number;
 }
 
 export class Triangle implements Figure {
   constructor(
     public shape: 'triangle',
-    public color: string,
+    public color: 'red' | 'blue' | 'green',
     public a: number,
     public b: number,
     public c: number,
   ) {
-    if (!['red', 'blue', 'green'].includes(color)) {
-      throw new Error('wrong color, acceptable colors: blue, red, green');
-    }
-
     if (a <= 0 || b <= 0 || c <= 0) {
       throw new Error('the side of the triangle is less than or equal to zero');
     }
@@ -36,13 +32,9 @@ export class Triangle implements Figure {
 export class Circle implements Figure {
   constructor(
     public shape: 'circle',
-    public color: string,
+    public color: 'red' | 'blue' | 'green',
     public radius: number,
   ) {
-    if (!['red', 'blue', 'green'].includes(color)) {
-      throw new Error('wrong color, acceptable colors: blue, red, green');
-    }
-
     if (radius < 0) {
       throw new Error('radius must be greater than zero');
     }
@@ -56,14 +48,10 @@ export class Circle implements Figure {
 export class Rectangle implements Figure {
   constructor(
     public shape: 'rectangle',
-    public color: string,
+    public color: 'red' | 'blue' | 'green',
     public width: number,
     public height: number,
   ) {
-    if (!['red', 'blue', 'green'].includes(color)) {
-      throw new Error('wrong color, acceptable colors: blue, red, green');
-    }
-
     if (width <= 0 || height <= 0) {
       throw new Error('the side of the rectangle is less than zero');
     }
