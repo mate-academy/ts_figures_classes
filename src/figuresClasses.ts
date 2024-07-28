@@ -6,7 +6,7 @@ export interface Figure {
 
 export class Triangle implements Figure {
   constructor(
-    public shape: 'triangle',
+    public shape: 'triangle' | 'circle' | 'rectangle',
     public color: 'red' | 'blue' | 'green',
     public a: number,
     public b: number,
@@ -31,7 +31,7 @@ export class Triangle implements Figure {
 
 export class Circle implements Figure {
   constructor(
-    public shape: 'circle',
+    public shape: 'triangle' | 'circle' | 'rectangle',
     public color: 'red' | 'blue' | 'green',
     public radius: number,
   ) {
@@ -47,7 +47,7 @@ export class Circle implements Figure {
 
 export class Rectangle implements Figure {
   constructor(
-    public shape: 'rectangle',
+    public shape: 'triangle' | 'circle' | 'rectangle',
     public color: 'red' | 'blue' | 'green',
     public width: number,
     public height: number,
