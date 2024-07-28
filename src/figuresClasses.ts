@@ -1,5 +1,3 @@
-import { error } from 'console';
-
 export interface Figure {
   shape: 'triangle' | 'circle' | 'rectangle';
   color: string;
