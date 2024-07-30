@@ -22,6 +22,7 @@ export class Triangle implements Figure {
     if (a <= 0 || b <= 0 || c <= 0) {
       throw new Error('Each side should be greater than zero');
     }
+
     if (a + b <= c || a + c <= b || b + c <= a) {
       throw new Error('Sides cannot form a triangle');
     }
@@ -31,6 +32,7 @@ export class Triangle implements Figure {
 
   getArea(): number {
     const s = (this.a + this.b + this.c) / 2;
+
     return (
       Math.floor(
         Math.sqrt(s * (s - this.a) * (s - this.b) * (s - this.c)) * 100,
@@ -43,8 +45,8 @@ export class Circle implements Figure {
   shape: string;
 
   constructor(
-    public radius: number,
     public color: Color,
+    public radius: number,
   ) {
     if (radius <= 0) {
       throw new Error('Radius must be greater than zero');
