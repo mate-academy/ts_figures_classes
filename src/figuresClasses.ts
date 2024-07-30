@@ -48,11 +48,12 @@ export class Triangle implements Figure {
   }
 
   getArea(): number {
-    const { a, b, c } = this;
-    const s = (a + b + c) / 2;
+    const s = (this.a + this.b + this.c) / 2;
 
     return +(
-      Math.floor(Math.sqrt(s * (s - a) * (s - b) * (s - c)) * 100) / 100
+      Math.floor(
+        Math.sqrt(s * (s - this.a) * (s - this.b) * (s - this.c)) * 100,
+      ) / 100
     );
   }
 }
@@ -76,9 +77,7 @@ export class Circle implements Figure {
   }
 
   getArea(): number {
-    const { radius } = this;
-
-    return +(Math.floor(3.1415926535 * radius ** 2 * 100) / 100);
+    return +(Math.floor(3.1415926535 * this.radius ** 2 * 100) / 100);
   }
 }
 
@@ -102,9 +101,7 @@ export class Rectangle implements Figure {
   }
 
   getArea(): number {
-    const { width, height } = this;
-
-    return +(Math.floor(width * height * 100) / 100);
+    return +(Math.floor(this.width * this.height * 100) / 100);
   }
 }
 

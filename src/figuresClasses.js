@@ -26,9 +26,8 @@ var Triangle = /** @class */ (function () {
         }
     }
     Triangle.prototype.getArea = function () {
-        var _a = this, a = _a.a, b = _a.b, c = _a.c;
-        var s = (a + b + c) / 2;
-        return +(Math.floor(Math.sqrt(s * (s - a) * (s - b) * (s - c)) * 100) / 100);
+        var s = (this.a + this.b + this.c) / 2;
+        return +(Math.floor(Math.sqrt(s * (s - this.a) * (s - this.b) * (s - this.c)) * 100) / 100);
     };
     return Triangle;
 }());
@@ -47,8 +46,7 @@ var Circle = /** @class */ (function () {
         }
     }
     Circle.prototype.getArea = function () {
-        var radius = this.radius;
-        return +(Math.floor(3.1415926535 * Math.pow(radius, 2) * 100) / 100);
+        return +(Math.floor(3.1415926535 * Math.pow(this.radius, 2) * 100) / 100);
     };
     return Circle;
 }());
@@ -68,8 +66,7 @@ var Rectangle = /** @class */ (function () {
         }
     }
     Rectangle.prototype.getArea = function () {
-        var _a = this, width = _a.width, height = _a.height;
-        return +(Math.floor(width * height * 100) / 100);
+        return +(Math.floor(this.width * this.height * 100) / 100);
     };
     return Rectangle;
 }());
