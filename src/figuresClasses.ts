@@ -1,26 +1,24 @@
+export type Color = 'red' | 'green' | 'blue';
+export type Shape = 'triangle' | 'circle' | 'rectangle';
+
 export interface Figure {
-  color: string;
-  a?: number;
-  b?: number;
-  c?: number;
-  radius?: number;
-  width?: number;
-  height?: number;
+  color: Color;
+  shape: Shape;
 }
 
 export type FiguresData = {
-  shape: string;
-  color: string;
+  shape: Shape;
+  color: Color;
   area: number;
 };
 
 export class Triangle implements Figure {
-  public shape = 'triangle';
+  public shape: Shape = 'triangle';
 
   public area = this.getArea();
 
   constructor(
-    public color: string,
+    public color: Color,
     public a: number,
     public b: number,
     public c: number,
@@ -59,12 +57,12 @@ export class Triangle implements Figure {
 }
 
 export class Circle implements Figure {
-  public shape = 'circle';
+  public shape: Shape = 'circle';
 
   public area = this.getArea();
 
   constructor(
-    public color: string,
+    public color: Color,
     public radius: number,
   ) {
     if (color === undefined || radius === undefined) {
@@ -82,12 +80,12 @@ export class Circle implements Figure {
 }
 
 export class Rectangle implements Figure {
-  public shape = 'rectangle';
+  public shape: Shape = 'rectangle';
 
   public area = this.getArea();
 
   constructor(
-    public color: string,
+    public color: Color,
     public width: number,
     public height: number,
   ) {
