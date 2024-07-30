@@ -6,7 +6,7 @@ type Color = 'red' | 'green' | 'blue';
 export interface Figure {
   shape: Shape;
   color: Color;
-  getArea: () => {};
+  getArea: () => number;
 }
 
 export class Triangle implements Figure {
@@ -19,7 +19,7 @@ export class Triangle implements Figure {
     public c: number,
   ) {
     if (a <= 0 || b <= 0 || c <= 0) {
-      throw new Error("sides can't have zero length");
+      throw new Error('Side lengths must be positive numbers.');
     }
 
     const longestSide = Math.max(a, b, c);
@@ -48,7 +48,7 @@ export class Circle implements Figure {
     public radius: number,
   ) {
     if (radius <= 0) {
-      throw new Error("radius can't have zero length");
+      throw new Error('Radius length must be positive numbers.');
     }
   }
 
@@ -68,7 +68,7 @@ export class Rectangle implements Figure {
     public b: number,
   ) {
     if (a <= 0 || b <= 0) {
-      throw new Error("sides can't have zero length");
+      throw new Error('Sides lengths must be positive numbers.');
     }
   }
 
