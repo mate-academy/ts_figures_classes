@@ -1,4 +1,4 @@
-type Shape = 'triangle' | 'circle' | 'rectangle';
+type Shape = 'Triangle' | 'Circle' | 'Rectangle';
 type Color = 'red' | 'green' | 'blue';
 
 export interface Figure {
@@ -6,13 +6,15 @@ export interface Figure {
   color: Color;
   getArea(): number;
 }
+
 export class Triangle implements Figure {
+  public shape: Shape = 'Triangle';
+
   constructor(
     public color: Color,
     public a: number,
     public b: number,
     public c: number,
-    public shape = 'triangle',
   ) {
     if (a <= 0 || b <= 0 || c <= 0) {
       throw new Error('The side cannot be less or equal to 0');
@@ -20,7 +22,7 @@ export class Triangle implements Figure {
 
     if (Math.max(a, b, c) >= a + b + c - Math.max(a, b, c)) {
       throw new Error(
-        'The longest side cannot be more or equal to sum of the rest sides',
+        'The longest side cannot be more or equal to the sum of the rest sides',
       );
     }
   }
@@ -40,10 +42,11 @@ export class Triangle implements Figure {
 }
 
 export class Circle implements Figure {
+  public shape: Shape = 'Circle';
+
   constructor(
     public color: Color,
     public radius: number,
-    public shape = 'circle',
   ) {
     if (radius <= 0) {
       throw new Error('The radius cannot be less or equal to 0');
@@ -56,11 +59,12 @@ export class Circle implements Figure {
 }
 
 export class Rectangle implements Figure {
+  public shape: Shape = 'Rectangle';
+
   constructor(
     public color: Color,
     public width: number,
     public height: number,
-    public shape = 'rectangle',
   ) {
     if (width <= 0 || height <= 0) {
       throw new Error('The width and height cannot be less or equal to 0');
@@ -73,5 +77,5 @@ export class Rectangle implements Figure {
 }
 
 export function getInfo(figure: Figure): string {
-  return `A ${figure.color} ${figure.shape} - ${figure.getArea()}`;
+  return `A ${figure.color} ${figure.shape.toLowerCase()} - ${figure.getArea()}`;
 }
