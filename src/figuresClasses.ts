@@ -12,12 +12,12 @@ export class Triangle implements Figure {
 
   constructor(
     public color: Color,
-    public a: number,
-    public b: number,
-    public c: number,
+    public aSide: number,
+    public bSide: number,
+    public cSide: number,
   ) {
-    const biggestSide = Math.max(a, b, c);
-    const arr = [a, b, c];
+    const biggestSide = Math.max(aSide, bSide, cSide);
+    const arr = [aSide, bSide, cSide];
     let count = 0;
 
     for (const item of arr) {
@@ -26,17 +26,22 @@ export class Triangle implements Figure {
       }
     }
 
-    if (a <= 0 || b <= 0 || c <= 0 || biggestSide >= count) {
-      throw new Error('your error message');
+    if (aSide <= 0 || bSide <= 0 || cSide <= 0 || biggestSide >= count) {
+      throw new Error('You have problem with riangle side size');
     }
   }
 
   getArea(): number {
-    const s = (this.a + this.b + this.c) / 2;
+    const formulaGerona = (this.aSide + this.bSide + this.cSide) / 2;
 
     return (
       Math.floor(
-        Math.sqrt(s * (s - this.a) * (s - this.b) * (s - this.c)) * 100,
+        Math.sqrt(
+          formulaGerona *
+            (formulaGerona - this.aSide) *
+            (formulaGerona - this.bSide) *
+            (formulaGerona - this.cSide),
+        ) * 100,
       ) / 100
     );
   }
@@ -50,7 +55,7 @@ export class Circle implements Figure {
     public radius: number,
   ) {
     if (radius <= 0) {
-      throw new Error('your error message');
+      throw new Error('You have probem with circle radius size');
     }
   }
 
@@ -68,7 +73,7 @@ export class Rectangle implements Figure {
     public height: number,
   ) {
     if (width <= 0 || height <= 0) {
-      throw new Error('your error message');
+      throw new Error('You have problem with rectangle width or height size');
     }
   }
 
