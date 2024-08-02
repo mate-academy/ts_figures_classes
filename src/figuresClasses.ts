@@ -1,13 +1,13 @@
 enum Shapes {
-  circle = 'circle',
-  triangle = 'triangle',
-  rectangle = 'rectangle',
+  CIRCLE = 'circle',
+  TRIANGLE = 'triangle',
+  RECTANGLE = 'rectangle',
 }
 
 enum Colors {
-  red = 'red',
-  blue = 'blue',
-  green = 'green',
+  RED = 'red',
+  BLUE = 'blue',
+  GREEN = 'green',
 }
 
 export interface Figure {
@@ -17,7 +17,7 @@ export interface Figure {
 }
 
 export class Triangle implements Figure {
-  shape = Shapes.triangle;
+  shape = Shapes.TRIANGLE;
 
   constructor(
     public color: Colors,
@@ -26,9 +26,7 @@ export class Triangle implements Figure {
     public c: number,
   ) {
     if (this.a <= 0 || this.b <= 0 || this.c <= 0) {
-      throw new Error(
-        'Invalid data, the value of the side of the triangle cannot be negative',
-      );
+      throw new Error('Invalid data, the value cannot be negative');
     }
 
     if (
@@ -40,7 +38,7 @@ export class Triangle implements Figure {
     }
   }
 
-  getArea() {
+  getArea(): number {
     const halfPerimeter = (this.a + this.b + this.c) / 2;
     const triangleArea = Math.sqrt(
       halfPerimeter *
@@ -54,26 +52,24 @@ export class Triangle implements Figure {
 }
 
 export class Circle implements Figure {
-  shape = Shapes.circle;
+  shape = Shapes.CIRCLE;
 
   constructor(
     public color: Colors,
     public radius: number,
   ) {
     if (this.radius <= 0) {
-      throw new Error(
-        'Invalid data, the radius of the circle cannot be negative',
-      );
+      throw new Error('Invalid data, the radius cannot be negative');
     }
   }
 
-  getArea() {
+  getArea(): number {
     return Math.floor(Math.PI * this.radius ** 2 * 100) / 100;
   }
 }
 
 export class Rectangle implements Figure {
-  shape = Shapes.rectangle;
+  shape = Shapes.RECTANGLE;
 
   constructor(
     public color: Colors,
@@ -81,13 +77,11 @@ export class Rectangle implements Figure {
     public height: number,
   ) {
     if (this.height <= 0 || this.width <= 0) {
-      throw new Error(
-        'Invalid data, the value of the side of the rectangle cannot be negative',
-      );
+      throw new Error('Invalid data, the value cannot be negative');
     }
   }
 
-  getArea() {
+  getArea(): number {
     return Math.floor(this.height * this.width * 100) / 100;
   }
 }
