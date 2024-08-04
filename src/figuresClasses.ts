@@ -9,33 +9,24 @@ export class Triangle implements Figure {
 
   color: 'red' | 'green' | 'blue';
 
-  a: number;
-
-  b: number;
-
-  c: number;
-
   constructor(
     color: 'red' | 'green' | 'blue',
-    a: number,
-    b: number,
-    c: number,
+    public a: number,
+    public b: number,
+    public c: number,
   ) {
     if (a === 0 || b === 0 || c === 0) {
-      throw new Error('Sides can not be equal to zero');
+      throw new Error('Triangle sides must be greater than zero.');
     }
 
     if (a + b <= c || c + b <= a || a + c <= b) {
       throw new Error(
-        'the longest side of a triangle is >= than a sum of two others',
+        'The sum of any two sides of a triangle must be greater than 3rd side.',
       );
     }
 
     this.shape = 'triangle';
     this.color = color;
-    this.a = a;
-    this.b = b;
-    this.c = c;
   }
 
   getArea(): number {
@@ -51,15 +42,15 @@ export class Circle implements Figure {
 
   color: 'red' | 'green' | 'blue';
 
-  radius: number;
-
-  constructor(color: 'red' | 'green' | 'blue', radius: number) {
+  constructor(
+    color: 'red' | 'green' | 'blue',
+    public radius: number,
+  ) {
     if (radius <= 0) {
-      throw new Error('radius can not be equal to zero');
+      throw new Error('Circle radius must be greater than zero.');
     }
     this.shape = 'circle';
     this.color = color;
-    this.radius = radius;
   }
 
   getArea(): number {
@@ -72,18 +63,16 @@ export class Rectangle implements Figure {
 
   color: 'red' | 'green' | 'blue';
 
-  width: number;
-
-  height: number;
-
-  constructor(color: 'red' | 'green' | 'blue', width: number, height: number) {
+  constructor(
+    color: 'red' | 'green' | 'blue',
+    public width: number,
+    public height: number,
+  ) {
     if (width <= 0 || height <= 0) {
-      throw new Error('any side can not be equal to zero or less');
+      throw new Error('Rectangle sides must be greater than zero.');
     }
     this.shape = 'rectangle';
     this.color = color;
-    this.width = width;
-    this.height = height;
   }
 
   getArea(): number {
