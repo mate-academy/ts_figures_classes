@@ -1,7 +1,7 @@
 export interface Figure {
   shape: 'triangle' | 'circle' | 'rectangle';
   color: 'red' | 'green' | 'blue';
-  getArea: Function;
+  getArea: () => number;
 }
 
 export class Triangle implements Figure {
@@ -14,13 +14,16 @@ export class Triangle implements Figure {
     public c: number,
   ) {
     if (Math.min(a, b, c) < 0) {
-      throw new Error('your error message');
+      throw new Error('Triangle side lengths must be positive numbers.');
     }
 
     const [min, mid, max] = [a, b, c].sort((x, y) => x - y);
 
     if (max >= mid + min) {
-      throw new Error('your error message');
+      throw new Error(
+        'The sum of any two sides of a triangle ' +
+          'must be greater than the third side.',
+      );
     }
   }
 
@@ -46,7 +49,7 @@ export class Circle implements Figure {
     public radius: number,
   ) {
     if (radius < 0) {
-      throw new Error('your error message');
+      throw new Error('Circle radius must be a positive number.');
     }
   }
 
@@ -64,7 +67,7 @@ export class Rectangle implements Figure {
     public height: number,
   ) {
     if (Math.min(width, height) < 0) {
-      throw new Error('your error message');
+      throw new Error('Rectangle width and height must be positive numbers.');
     }
   }
 
