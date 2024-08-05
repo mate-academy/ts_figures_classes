@@ -23,13 +23,9 @@ export class Triangle implements Figure {
     if (a + b <= c || a + c <= b || c + b <= a) {
       throw new Error(`Sides ${a}, ${b}, and ${c} can't form a triangle`);
     }
-    this.color = color;
-    this.a = a;
-    this.b = b;
-    this.c = c;
   }
 
-  getArea(): number {
+  getArea() {
     const s = (this.a + this.b + this.c) / 2;
     const area = Math.sqrt(s * (s - this.a) * (s - this.b) * (s - this.c));
 
@@ -47,11 +43,9 @@ export class Circle implements Figure {
     if (radius <= 0) {
       throw new Error('Radius must be greater than 0');
     }
-    this.color = color;
-    this.radius = radius;
   }
 
-  getArea(): number {
+  getArea() {
     const area = Math.PI * this.radius * this.radius;
 
     return Math.floor(area * 100) / 100;
@@ -69,12 +63,9 @@ export class Rectangle implements Figure {
     if (width <= 0 || height <= 0) {
       throw new Error('Width and height must be greater than 0');
     }
-    this.color = color;
-    this.width = width;
-    this.height = height;
   }
 
-  getArea(): number {
+  getArea() {
     const area = this.width * this.height;
 
     return Math.floor(area * 100) / 100;
