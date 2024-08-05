@@ -21,7 +21,7 @@ export class Triangle implements Figure {
     public cSide: number,
   ) {
     if (aSide <= 0 || bSide <= 0 || cSide <= 0) {
-      throw new Error('One of entered sides is less or equal 0');
+      throw new Error('One of the triangle sides is less than or equal to 0');
     }
 
     if (
@@ -29,7 +29,7 @@ export class Triangle implements Figure {
       aSide + cSide <= bSide ||
       bSide + cSide <= aSide
     ) {
-      throw new Error('Entered sides cannot create triangle');
+      throw new Error('The provided sides do not form a valid triangle');
     }
   }
 
@@ -54,7 +54,7 @@ export class Circle implements Figure {
     public radius: number,
   ) {
     if (radius <= 0) {
-      throw new Error('Entered circle radius is less or equal 0');
+      throw new Error('The radius of the circle must be greater than 0');
     }
   }
 
@@ -74,7 +74,9 @@ export class Rectangle implements Figure {
     public height: number,
   ) {
     if (width <= 0 || height <= 0) {
-      throw new Error('Еntered width or height is less or equal 0');
+      throw new Error(
+        'The width and height of the rectangle must be greater than 0',
+      );
     }
   }
 
