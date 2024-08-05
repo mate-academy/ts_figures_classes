@@ -11,26 +11,20 @@ export interface Figure {
 export class Triangle implements Figure {
   public shape: Shape = 'triangle';
 
-  public color: Color;
-
-  private a: number;
-
-  private b: number;
-
-  private c: number;
-
-  constructor(color: Color, a: number, b: number, c: number) {
-    this.color = color;
-    this.a = a;
-    this.b = b;
-    this.c = c;
-
+  constructor(
+    public color: Color,
+    private a: number,
+    private b: number,
+    private c: number,
+  ) {
     if (a <= 0 || b <= 0 || c <= 0) {
-      throw new Error('invalid parameters');
+      throw new Error('Triangle side lengths must be greater than zero.');
     }
 
     if (Math.max(a, b, c) >= a + b + c - Math.max(a, b, c)) {
-      throw new Error('invalid parameters');
+      throw new Error(
+        'Triangle inequality theorem violated: one side is too long.',
+      );
     }
   }
 
@@ -50,16 +44,12 @@ export class Triangle implements Figure {
 export class Circle implements Figure {
   public shape: Shape = 'circle';
 
-  public color: Color;
-
-  private radius: number;
-
-  constructor(color: Color, radius: number) {
-    this.color = color;
-    this.radius = radius;
-
+  constructor(
+    public color: Color,
+    private radius: number,
+  ) {
     if (radius <= 0) {
-      throw new Error('invalid parameters');
+      throw new Error('Circle radius must be greater then zero');
     }
   }
 
@@ -71,19 +61,13 @@ export class Circle implements Figure {
 export class Rectangle implements Figure {
   public shape: Shape = 'rectangle';
 
-  public color: Color;
-
-  private width: number;
-
-  private height: number;
-
-  constructor(color: Color, width: number, height: number) {
-    this.color = color;
-    this.width = width;
-    this.height = height;
-
+  constructor(
+    public color: Color,
+    private width: number,
+    private height: number,
+  ) {
     if (width <= 0 || height <= 0) {
-      throw new Error('invalid parameters');
+      throw new Error('Rectangle parameters must be greater then zero');
     }
   }
 
