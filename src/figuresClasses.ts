@@ -1,13 +1,17 @@
+type Color = 'red' | 'green' | 'blue';
+type Shape = 'triangle' | 'circle' | 'rectangle';
+
 export interface Figure {
-  color: 'red' | 'green' | 'blue';
-  shape: 'triangle' | 'circle' | 'rectangle';
+  color: Color;
+  shape: Shape;
   getArea(): number;
 }
+
 // Triangle Class
 export class Triangle implements Figure {
-  color: 'red' | 'green' | 'blue';
+  color: Color;
 
-  shape: 'triangle' = 'triangle';
+  shape: Shape = 'triangle';
 
   private a: number;
 
@@ -15,12 +19,7 @@ export class Triangle implements Figure {
 
   private c: number;
 
-  constructor(
-    color: 'red' | 'green' | 'blue',
-    a: number,
-    b: number,
-    c: number,
-  ) {
+  constructor(color: Color, a: number, b: number, c: number) {
     if (a <= 0 || b <= 0 || c <= 0) {
       throw new Error('All sides must be greater than 0');
     }
@@ -36,8 +35,13 @@ export class Triangle implements Figure {
   }
 
   getArea(): number {
-    const s = (this.a + this.b + this.c) / 2;
-    const area = Math.sqrt(s * (s - this.a) * (s - this.b) * (s - this.c));
+    const semiPerimeter = (this.a + this.b + this.c) / 2;
+    const area = Math.sqrt(
+      semiPerimeter *
+        (semiPerimeter - this.a) *
+        (semiPerimeter - this.b) *
+        (semiPerimeter - this.c),
+    );
 
     return Math.floor(area * 100) / 100;
   }
@@ -45,13 +49,13 @@ export class Triangle implements Figure {
 
 // Circle Class
 export class Circle implements Figure {
-  color: 'red' | 'green' | 'blue';
+  color: Color;
 
-  shape: 'circle' = 'circle';
+  shape: Shape = 'circle';
 
   private radius: number;
 
-  constructor(color: 'red' | 'green' | 'blue', radius: number) {
+  constructor(color: Color, radius: number) {
     if (radius <= 0) {
       throw new Error('Radius must be greater than 0');
     }
@@ -69,15 +73,15 @@ export class Circle implements Figure {
 
 // Rectangle Class
 export class Rectangle implements Figure {
-  color: 'red' | 'green' | 'blue';
+  color: Color;
 
-  shape: 'rectangle' = 'rectangle';
+  shape: Shape = 'rectangle';
 
   private width: number;
 
   private height: number;
 
-  constructor(color: 'red' | 'green' | 'blue', width: number, height: number) {
+  constructor(color: Color, width: number, height: number) {
     if (width <= 0 || height <= 0) {
       throw new Error('Width and height must be greater than 0');
     }
