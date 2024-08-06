@@ -1,5 +1,20 @@
-type Colors = 'red' | 'green' | 'blue';
-type Shapes = `triangle` | `circle` | `rectangle`;
+enum Colors {
+  blue = 'blue',
+  green = 'green',
+  red = 'red',
+}
+
+enum Shapes {
+  triangle = `triangle`,
+  circle = `circle`,
+  rectangle = `rectangle`,
+}
+
+function checkOnError(condition: boolean, errorMessage: string): void {
+  if (condition) {
+    throw new Error(errorMessage);
+  }
+}
 
 export interface Figure {
   readonly shape: Shapes;
@@ -8,7 +23,7 @@ export interface Figure {
 }
 
 export class Triangle implements Figure {
-  readonly shape: Shapes = `triangle`;
+  readonly shape: Shapes = Shapes.triangle;
 
   constructor(
     public color: Colors,
@@ -16,13 +31,12 @@ export class Triangle implements Figure {
     public b: number,
     public c: number,
   ) {
-    if (a <= 0 || b <= 0 || c <= 0) {
-      throw new Error('Invalid triangle dimensions');
-    }
+    checkOnError(a <= 0 || b <= 0 || c <= 0, 'Invalid triangle dimensions');
 
-    if (a + b <= c || a + c <= b || b + c <= a) {
-      throw new Error('Invalid triangle dimensions');
-    }
+    checkOnError(
+      a + b <= c || a + c <= b || b + c <= a,
+      'Invalid triangle dimensions',
+    );
   }
 
   getArea = (): number => {
@@ -30,20 +44,20 @@ export class Triangle implements Figure {
 
     const area = (a + b + c) / 2;
 
-    return +Math.sqrt(area * (area - a) * (area - b) * (area - c)).toFixed(2);
+    return Number(
+      Math.sqrt(area * (area - a) * (area - b) * (area - c)).toFixed(2),
+    );
   };
 }
 
 export class Circle implements Figure {
-  readonly shape: Shapes = `circle`;
+  readonly shape: Shapes = Shapes.circle;
 
   constructor(
     public color: Colors,
     public radius: number,
   ) {
-    if (radius <= 0) {
-      throw new Error('Radius must be greater than 0');
-    }
+    checkOnError(radius <= 0, 'Radius must be greater than 0');
   }
 
   getArea = (): number => {
@@ -55,22 +69,23 @@ export class Circle implements Figure {
 }
 
 export class Rectangle implements Figure {
-  readonly shape: Shapes = `rectangle`;
+  readonly shape: Shapes = Shapes.rectangle;
 
   constructor(
     public color: Colors,
     public width: number,
     public height: number,
   ) {
-    if (width <= 0 || height <= 0) {
-      throw new Error('Width and height must be greater than 0');
-    }
+    checkOnError(
+      width <= 0 || height <= 0,
+      'Width and height must be greater than 0',
+    );
   }
 
   getArea = (): number => {
     const { width, height } = this;
 
-    return +(width * height).toFixed(2);
+    return Number((width * height).toFixed(2));
   };
 }
 
