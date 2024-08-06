@@ -17,6 +17,8 @@ export interface Figure {
 }
 
 export class Triangle implements Figure {
+  readonly shape: Shape = Shape.Triangle;
+
   protected sidesArray: number[] = [this.a, this.b, this.c];
 
   protected longestSide: number = this.sidesArray.splice(
@@ -37,7 +39,6 @@ export class Triangle implements Figure {
     public a: number,
     public b: number,
     public c: number,
-    readonly shape: Shape = Shape.Triangle,
   ) {
     if (this.sidesArray.some((side) => side <= 0)) {
       throw new Error('length of some side is <= 0');
@@ -62,10 +63,11 @@ export class Triangle implements Figure {
 }
 
 export class Circle implements Figure {
+  readonly shape: Shape = Shape.Circle;
+
   constructor(
     public color: Color,
     public radius: number,
-    readonly shape: Shape = Shape.Circle,
   ) {
     if (radius <= 0) {
       throw new Error('Radius is wrong (radius is <= 0)');
@@ -80,11 +82,12 @@ export class Circle implements Figure {
 }
 
 export class Rectangle implements Figure {
+  readonly shape: Shape = Shape.Rectangle;
+
   constructor(
     public color: Color,
     public width: number,
     public height: number,
-    readonly shape: Shape = Shape.Rectangle,
   ) {
     if (width <= 0 || height <= 0) {
       throw new Error(
