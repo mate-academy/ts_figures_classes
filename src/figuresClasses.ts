@@ -21,7 +21,7 @@ export class Triangle implements Figure {
 
   protected sidesArray: number[] = [this.a, this.b, this.c];
 
-  protected longestSide: number = this.sidesArray.splice(
+  protected longestSide: number = [...this.sidesArray].splice(
     this.sidesArray.indexOf(Math.max(...this.sidesArray)),
   )[0];
 
