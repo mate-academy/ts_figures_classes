@@ -16,7 +16,26 @@ export interface Figure {
   getArea: () => number;
 }
 
-export class Triangle implements Figure {
+abstract class FigureBase {
+  static checkWrongSidesOfFigure(figureSidesArray: number[] | number): void {
+    if (typeof figureSidesArray === 'number') {
+      if (figureSidesArray <= 0) {
+        throw new Error('Radius is wrong (radius is <= 0)');
+      }
+    }
+
+    // we have to do Array.isArray(figureSidesArray),
+    // otherwise figureSidesArray.some((side: number) => side <= 0) does't work
+    if (
+      Array.isArray(figureSidesArray) &&
+      figureSidesArray.some((side: number) => side <= 0)
+    ) {
+      throw new Error('Length of some side is <= 0');
+    }
+  }
+}
+
+export class Triangle extends FigureBase implements Figure {
   readonly shape: Shape = Shape.Triangle;
 
   protected sidesArray: number[] = [this.a, this.b, this.c];
@@ -30,7 +49,7 @@ export class Triangle implements Figure {
     0,
   );
 
-  protected semiperimeter: number = (this.longestSide + this.otherSidesSum) / 2;
+  protected semiPerimeter: number = (this.longestSide + this.otherSidesSum) / 2;
 
   protected isSidesWrong: boolean = this.longestSide >= this.otherSidesSum;
 
@@ -40,9 +59,8 @@ export class Triangle implements Figure {
     public b: number,
     public c: number,
   ) {
-    if (this.sidesArray.some((side) => side <= 0)) {
-      throw new Error('length of some side is <= 0');
-    }
+    super();
+    Triangle.checkWrongSidesOfFigure(this.sidesArray);
 
     if (this.isSidesWrong) {
       throw new Error(
@@ -54,24 +72,23 @@ export class Triangle implements Figure {
 
   getArea(): number {
     return +Math.sqrt(
-      this.semiperimeter *
-        (this.semiperimeter - this.a) *
-        (this.semiperimeter - this.b) *
-        (this.semiperimeter - this.c),
+      this.semiPerimeter *
+        (this.semiPerimeter - this.a) *
+        (this.semiPerimeter - this.b) *
+        (this.semiPerimeter - this.c),
     ).toFixed(2);
   }
 }
 
-export class Circle implements Figure {
+export class Circle extends FigureBase implements Figure {
   readonly shape: Shape = Shape.Circle;
 
   constructor(
     public color: Color,
     public radius: number,
   ) {
-    if (radius <= 0) {
-      throw new Error('Radius is wrong (radius is <= 0)');
-    }
+    super();
+    Circle.checkWrongSidesOfFigure(this.radius);
   }
 
   getArea(): number {
@@ -81,7 +98,7 @@ export class Circle implements Figure {
   }
 }
 
-export class Rectangle implements Figure {
+export class Rectangle extends FigureBase implements Figure {
   readonly shape: Shape = Shape.Rectangle;
 
   constructor(
@@ -89,11 +106,8 @@ export class Rectangle implements Figure {
     public width: number,
     public height: number,
   ) {
-    if (width <= 0 || height <= 0) {
-      throw new Error(
-        'Sides`s values are wrong (one of side`s values is <= 0)',
-      );
-    }
+    super();
+    Rectangle.checkWrongSidesOfFigure([this.width, this.height]);
   }
 
   getArea(): number {
