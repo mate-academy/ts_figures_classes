@@ -1,13 +1,13 @@
 enum Shape {
-  triangle = 'triangle',
-  circle = 'circle',
-  rectangle = 'rectangle',
+  Triangle = 'TRIANGLE',
+  Circle = 'CIRCLE',
+  Rectangle = 'RECTANGLE',
 }
 
 enum Color {
-  red = 'red',
-  green = 'green',
-  blue = 'blue',
+  Red = 'RED',
+  Green = 'GREEN',
+  lue = 'BLUE',
 }
 
 export interface Figure {
@@ -37,7 +37,7 @@ export class Triangle implements Figure {
     public a: number,
     public b: number,
     public c: number,
-    readonly shape: Shape = Shape.triangle,
+    readonly shape: Shape = Shape.Triangle,
   ) {
     if (this.sidesArray.some((side) => side <= 0)) {
       throw new Error('length of some side is <= 0');
@@ -65,7 +65,7 @@ export class Circle implements Figure {
   constructor(
     public color: Color,
     public radius: number,
-    readonly shape: Shape = Shape.circle,
+    readonly shape: Shape = Shape.Circle,
   ) {
     if (radius <= 0) {
       throw new Error('Radius is wrong (radius is <= 0)');
@@ -84,7 +84,7 @@ export class Rectangle implements Figure {
     public color: Color,
     public width: number,
     public height: number,
-    readonly shape: Shape = Shape.rectangle,
+    readonly shape: Shape = Shape.Rectangle,
   ) {
     if (width <= 0 || height <= 0) {
       throw new Error(
