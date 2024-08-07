@@ -17,19 +17,12 @@ export interface Figure {
 }
 
 abstract class FigureBase {
-  static checkWrongSidesOfFigure(figureSidesArray: number[] | number): void {
-    if (typeof figureSidesArray === 'number') {
-      if (figureSidesArray <= 0) {
-        throw new Error('Radius is wrong (radius is <= 0)');
-      }
+  static checkWrongSideOfFigure(sides: number[]): void {
+    if (sides[0] <= 0 && sides.length === 1) {
+      throw new Error('Radius is wrong (radius is <= 0)');
     }
 
-    // we have to do Array.isArray(figureSidesArray),
-    // otherwise figureSidesArray.some((side: number) => side <= 0) does't work
-    if (
-      Array.isArray(figureSidesArray) &&
-      figureSidesArray.some((side: number) => side <= 0)
-    ) {
+    if (sides.some((side: number) => side <= 0)) {
       throw new Error('Length of some side is <= 0');
     }
   }
@@ -60,12 +53,12 @@ export class Triangle extends FigureBase implements Figure {
     public c: number,
   ) {
     super();
-    Triangle.checkWrongSidesOfFigure(this.sidesArray);
+    Triangle.checkWrongSideOfFigure(this.sidesArray);
 
     if (this.isSidesWrong) {
       throw new Error(
-        // eslint-disable-next-line max-len
-        'Sides`s values are wrong (the longest side of a triangle is >= than a sum of two others)',
+        'Sides`s values are wrong' +
+          '(the longest side of a triangle is >= than a sum of two others)',
       );
     }
   }
@@ -88,7 +81,7 @@ export class Circle extends FigureBase implements Figure {
     public radius: number,
   ) {
     super();
-    Circle.checkWrongSidesOfFigure(this.radius);
+    Circle.checkWrongSideOfFigure([this.radius]);
   }
 
   getArea(): number {
@@ -107,7 +100,7 @@ export class Rectangle extends FigureBase implements Figure {
     public height: number,
   ) {
     super();
-    Rectangle.checkWrongSidesOfFigure([this.width, this.height]);
+    Rectangle.checkWrongSideOfFigure([this.width, this.height]);
   }
 
   getArea(): number {
