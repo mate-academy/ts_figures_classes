@@ -1,3 +1,6 @@
+/* eslint-disable @typescript-eslint/indent */
+// I turned it off 'cause typescript-eslint makes a lot of conflicts
+// with prettier
 enum Shape {
   Triangle = 'triangle',
   Circle = 'circle',
@@ -33,14 +36,12 @@ export class Triangle extends FigureBase implements Figure {
 
   protected sidesArray: number[] = [this.a, this.b, this.c];
 
-  protected longestSide: number = [...this.sidesArray].splice(
-    this.sidesArray.indexOf(Math.max(...this.sidesArray)),
-  )[0];
+  protected longestSide: number = Math.max(...this.sidesArray);
 
-  protected otherSidesSum: number = this.sidesArray.reduce(
-    (acc: number, sideLength: number) => acc + sideLength,
-    0,
-  );
+  protected otherSidesSum: number =
+    this.sidesArray.reduce((acc: number, sideLen: number) => {
+      return acc + sideLen;
+    }, 0) - this.longestSide;
 
   protected semiPerimeter: number = (this.longestSide + this.otherSidesSum) / 2;
 
