@@ -5,26 +5,25 @@ export interface Figure {
 }
 
 export class Triangle implements Figure {
-  shape: string;
+  shape: string = 'triangle';
 
   color: string;
 
-  a: number;
+  public a: number;
 
-  b: number;
+  public b: number;
 
-  c: number;
+  public c: number;
 
   constructor(color: string, a: number, b: number, c: number) {
     if (a <= 0 || b <= 0 || c <= 0) {
-      throw new Error('Not valid data');
+      throw new Error('Triangle side lengths must be greater than zero.');
     }
 
     if (a + b <= c || a + c <= b || b + c <= a) {
-      throw new Error('Not valid data');
+      throw new Error('The sum of the lengths of any two sides must be greater than the length of the remaining side.');
     }
 
-    this.shape = 'triangle';
     this.color = color;
     this.a = a;
     this.b = b;
@@ -45,18 +44,17 @@ export class Triangle implements Figure {
 }
 
 export class Circle implements Figure {
-  shape: string;
+  shape: string = 'circle';
 
   color: string;
 
-  radius: number;
+  public radius: number;
 
   constructor(color: string, radius: number) {
     if (radius <= 0) {
-      throw new Error('Not valid data');
+      throw new Error('Circle radius must be greater than zero.');
     }
 
-    this.shape = 'circle';
     this.color = color;
     this.radius = radius;
   }
@@ -69,20 +67,19 @@ export class Circle implements Figure {
 }
 
 export class Rectangle implements Figure {
-  shape: string;
+  shape: string = 'rectangle';
 
   color: string;
 
-  width: number;
+  public width: number;
 
-  height: number;
+  public height: number;
 
   constructor(color: string, width: number, height: number) {
     if (width <= 0 || height <= 0) {
-      throw new Error('Not valid data');
+      throw new Error('Rectangle width and height must be greater than zero.');
     }
 
-    this.shape = 'rectangle';
     this.color = color;
     this.width = width;
     this.height = height;
