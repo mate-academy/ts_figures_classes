@@ -10,10 +10,8 @@ export interface Figure {
 export class Triangle implements Figure {
   shape: Shape = 'triangle';
 
-  color: Color;
-
   constructor(
-    color: Color,
+    public color: Color,
     private a: number,
     private b: number,
     private c: number,
@@ -25,8 +23,6 @@ export class Triangle implements Figure {
     if (a + b <= c || a + c <= b || b + c <= a) {
       throw new Error('Sides do not form a valid triangle');
     }
-
-    this.color = color;
   }
 
   getArea(): number {
@@ -40,45 +36,39 @@ export class Triangle implements Figure {
 export class Circle implements Figure {
   shape: Shape = 'circle';
 
-  color: Color;
-
-  private radius: number;
-
-  constructor(color: Color, radius: number) {
+  constructor(
+    public color: Color,
+    private radius: number,
+  ) {
     if (radius <= 0) {
       throw new Error('Radius must be greater than zero');
     }
-
-    this.color = color;
-    this.radius = radius;
   }
 
   getArea(): number {
-    return Math.floor(Math.PI * this.radius ** 2 * 100) / 100;
+    const area = Math.PI * this.radius ** 2;
+
+    return Math.floor(area * 100) / 100;
   }
 }
 
 export class Rectangle implements Figure {
   shape: Shape = 'rectangle';
 
-  color: Color;
-
-  height: number;
-
-  width: number;
-
-  constructor(color: Color, height: number, width: number) {
+  constructor(
+    public color: Color,
+    private height: number,
+    private width: number,
+  ) {
     if (width <= 0 || height <= 0) {
       throw new Error('Width and height must be greater than zero');
     }
-
-    this.color = color;
-    this.height = height;
-    this.width = width;
   }
 
   getArea(): number {
-    return Math.floor(this.height * this.width * 100) / 100;
+    const area = this.height * this.width;
+
+    return Math.floor(area * 100) / 100;
   }
 }
 
