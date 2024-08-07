@@ -1,5 +1,10 @@
-type Shape = 'triangle' | 'circle' | 'rectangle';
-type Color = 'red' | 'green' | 'blue';
+enum Shape {
+  Triangle = 'triangle',
+  Circle = 'circle',
+  Rectangle = 'rectangle',
+}
+
+type Color = 'red' | 'blue' | 'green';
 
 export interface Figure {
   shape: Shape;
@@ -7,40 +12,53 @@ export interface Figure {
   getArea(): number;
 }
 
+function checkOnError(...args: number[]): void {
+  if (args.some((arg: number) => arg <= 0)) {
+    throw new Error('Some side less 0');
+  }
+}
+
 export class Triangle implements Figure {
+  public shape = Shape.Triangle;
+
   constructor(
     public color: Color,
     public a: number,
     public b: number,
     public c: number,
-    public shape: Shape = 'triangle',
   ) {
+    checkOnError(a, b, c);
+
     const sideOfTriangle = [a, b, c].sort((a1, b1) => b1 - a1);
     const condition =
       sideOfTriangle[0] >= sideOfTriangle[1] + sideOfTriangle[2];
 
-    if (a <= 0 || b <= 0 || c <= 0 || condition) {
-      throw new Error('your error message');
+    if (condition) {
+      throw new Error('Some side less 0');
     }
   }
 
   getArea(): number {
-    const s = (1 / 2) * (this.a + this.b + this.c);
-    const area = Math.sqrt(s * (s - this.a) * (s - this.b) * (s - this.c));
+    const semiPerimeter = (1 / 2) * (this.a + this.b + this.c);
+    const area = Math.sqrt(
+      semiPerimeter *
+        (semiPerimeter - this.a) *
+        (semiPerimeter - this.b) *
+        (semiPerimeter - this.c),
+    );
 
     return Math.round(area * 100) / 100;
   }
 }
 
 export class Circle implements Figure {
+  public shape = Shape.Circle;
+
   constructor(
     public color: Color,
     public radius: number,
-    public shape: Shape = 'circle',
   ) {
-    if (radius <= 0) {
-      throw new Error('your error message');
-    }
+    checkOnError(radius);
   }
 
   getArea(): number {
@@ -49,15 +67,14 @@ export class Circle implements Figure {
 }
 
 export class Rectangle implements Figure {
+  public shape = Shape.Rectangle;
+
   constructor(
     public color: Color,
     public width: number,
     public height: number,
-    public shape: Shape = 'rectangle',
   ) {
-    if (width <= 0 || height <= 0) {
-      throw new Error('your error message');
-    }
+    checkOnError(width, height);
   }
 
   getArea(): number {
