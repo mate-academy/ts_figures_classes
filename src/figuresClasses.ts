@@ -1,15 +1,29 @@
-type ShapeType = 'Triangle' | 'Circle' | 'Rectangle';
-type ColorType = 'red' | 'green' | 'blue';
+enum ShapeType {
+  Triangle = 'triangle',
+  Circle = 'circle',
+  Rectangle = 'rectangle',
+}
+
+enum ColorType {
+  Red = 'red',
+  Green = 'green',
+  Blue = 'blue',
+}
 
 export interface Figure {
   shape: ShapeType;
   color: ColorType;
-
   getArea(): number;
 }
 
+function checkOnError(condition: boolean, errorMessage: string): void {
+  if (condition) {
+    throw new Error(errorMessage);
+  }
+}
+
 export class Triangle implements Figure {
-  public shape: ShapeType = 'Triangle';
+  public shape: ShapeType = ShapeType.Triangle;
 
   constructor(
     public color: ColorType,
@@ -17,28 +31,29 @@ export class Triangle implements Figure {
     public sideB: number,
     public sideC: number,
   ) {
-    if (sideA <= 0 || sideB <= 0 || sideC <= 0) {
-      throw new Error('All sides must be greater than zero');
-    }
+    checkOnError(
+      sideA <= 0 || sideB <= 0 || sideC <= 0,
+      'All sides must be greater than zero',
+    );
 
-    if (
+    const isInvalidTriangle =
       Math.max(sideA, sideB, sideC) >=
-      sideA + sideB + sideC - Math.max(sideA, sideB, sideC)
-    ) {
-      throw new Error(
-        'The longest side must be less than the sum of the other sides',
-      );
-    }
+      sideA + sideB + sideC - Math.max(sideA, sideB, sideC);
+
+    checkOnError(
+      isInvalidTriangle,
+      'The longest side must be less than the sum of the other sides',
+    );
   }
 
   getArea(): number {
     const { sideA, sideB, sideC } = this;
-    const semiperimeter: number = (sideA + sideB + sideC) / 2;
+    const semiPerimeter: number = (sideA + sideB + sideC) / 2;
     const area: number = Math.sqrt(
-      semiperimeter *
-        (semiperimeter - sideA) *
-        (semiperimeter - sideB) *
-        (semiperimeter - sideC),
+      semiPerimeter *
+        (semiPerimeter - sideA) *
+        (semiPerimeter - sideB) *
+        (semiPerimeter - sideC),
     );
 
     return Math.floor(area * 100) / 100;
@@ -46,15 +61,13 @@ export class Triangle implements Figure {
 }
 
 export class Circle implements Figure {
-  public shape: ShapeType = 'Circle';
+  public shape: ShapeType = ShapeType.Circle;
 
   constructor(
     public color: ColorType,
     public radius: number,
   ) {
-    if (radius <= 0) {
-      throw new Error('Radius must be greater than zero');
-    }
+    checkOnError(radius <= 0, 'Radius must be greater than zero');
   }
 
   getArea(): number {
@@ -65,16 +78,17 @@ export class Circle implements Figure {
 }
 
 export class Rectangle implements Figure {
-  public shape: ShapeType = 'Rectangle';
+  public shape: ShapeType = ShapeType.Rectangle;
 
   constructor(
     public color: ColorType,
     public width: number,
     public height: number,
   ) {
-    if (width <= 0 || height <= 0) {
-      throw new Error('Width and height must be greater than zero');
-    }
+    checkOnError(
+      width <= 0 || height <= 0,
+      'Width and height must be greater than zero',
+    );
   }
 
   getArea(): number {
@@ -85,5 +99,5 @@ export class Rectangle implements Figure {
 }
 
 export function getInfo(figure: Figure): string {
-  return `A ${figure.color} ${figure.shape.toLowerCase()} - ${figure.getArea()}`;
+  return `A ${figure.color} ${figure.shape} - ${figure.getArea()}`;
 }
