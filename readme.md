@@ -36,3 +36,5 @@ getInfo(redRectangle) === 'A red rectangle - 15';
 const greenCircle = new Circle('green', 1);
 getInfo(greenCircle) === 'A green circle - 3.14';
 ```
+
+
