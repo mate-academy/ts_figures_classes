@@ -21,7 +21,7 @@ export class Triangle implements Figure {
     }
 
     if (a + b <= c || a + c <= b || b + c <= a) {
-      throw new Error('The sum of the lengths of any two sides must be greater than the length of the remaining side.');
+      throw new Error('The sum of two sides can not be greater than third one');
     }
 
     this.color = color;
