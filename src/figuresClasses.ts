@@ -16,8 +16,8 @@ export class Triangle implements Figure {
     private b: number,
     private c: number,
   ) {
-    if (a <= 0 || b <= 0 || c <= 0) {
-      throw new Error('All sides must be greater than 0');
+    if (this.a <= 0 || this.b <= 0 || this.c <= 0) {
+      throw new Error('Triangle side lengths must be greater than 0');
     }
 
     const sides = [a, b, c].sort((x, y) => x - y);
@@ -45,7 +45,7 @@ export class Circle implements Figure {
     private radius: number,
   ) {
     if (radius <= 0) {
-      throw new Error('Radius must be greater than 0');
+      throw new Error('Circle radius must be greater than 0');
     }
   }
 
@@ -65,7 +65,7 @@ export class Rectangle implements Figure {
     private height: number,
   ) {
     if (width <= 0 || height <= 0) {
-      throw new Error('Width and height must be greater than 0');
+      throw new Error('Rectangle width and height must be greater than 0');
     }
   }
 
