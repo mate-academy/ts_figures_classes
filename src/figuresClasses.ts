@@ -102,7 +102,3 @@ export function getInfo(figure: Figure): string {
     return 'Unknown figure type';
   }
 }
-
-new Rectangle('blue', 2, 2);
-new Triangle('red', 1, 2, 3);
-new Circle('green', 1);
