@@ -1,6 +1,9 @@
-interface Figure {
-  shape: string;
-  color: 'red' | 'green' | 'blue';
+type Shape = string | 'triangle' | 'circle' | 'rectangle';
+type Color = 'red' | 'green' | 'blue';
+
+export interface Figure {
+  shape: Shape;
+  color: Color;
   getArea(): number;
 }
 
@@ -92,13 +95,5 @@ export class Triangle implements Figure {
 }
 
 export function getInfo(figure: Figure): string {
-  if (figure.shape === 'rectangle') {
-    return `A ${figure.color} rectangle - ${figure.getArea()}`;
-  } else if (figure.shape === 'circle') {
-    return `A ${figure.color} circle - ${figure.getArea()}`;
-  } else if (figure.shape === 'triangle') {
-    return `A ${figure.color} triangle - ${figure.getArea()}`;
-  } else {
-    return 'Unknown figure type';
-  }
+  return `A ${figure.color} ${figure.shape} - ${figure.getArea()}`;
 }
