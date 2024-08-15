@@ -83,7 +83,3 @@ export function getInfo(figure: Figure): string {
 
   return `A ${color} ${shape} - ${area}`;
 }
-
-// const triangle = new Triangle('green', 3, 4, 5);
-
-// console.log(triangle)
