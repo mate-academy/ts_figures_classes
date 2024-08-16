@@ -8,7 +8,7 @@ type Color = 'red' | 'green' | 'blue';
 
 export interface Figure {
   shape: Shape;
-  color: string;
+  color: Color;
   getArea(): number;
 }
 
@@ -30,7 +30,6 @@ export class Triangle implements Figure {
         'The sum of any two sides must be greater than the third side',
       );
     }
-    this.color = color;
   }
 
   getArea(): number {
@@ -51,8 +50,6 @@ export class Circle implements Figure {
     if (radius <= 0) {
       throw new Error('Radius must be greater than zero');
     }
-    this.color = color;
-    this.radius = radius;
   }
 
   getArea(): number {
@@ -77,9 +74,6 @@ export class Rectangle implements Figure {
     if (width <= 0 || height <= 0) {
       throw new Error('Width and height must be greater than zero');
     }
-    this.color = color;
-    this.width = width;
-    this.height = height;
   }
 
   getArea(): number {
