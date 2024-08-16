@@ -17,11 +17,13 @@ export class Triangle implements Figure {
     public c: number,
   ) {
     if (a <= 0 || b <= 0 || c <= 0) {
-      throw new Error('a or b or c does not have valid value');
+      throw new Error(`values ${a}, ${b}, ${c} must be greater than 0`);
     }
 
     if (a + b <= c || a + c <= b || b + c <= a) {
-      throw new Error('a or b or c does not have valid value');
+      throw new Error(
+        `${a}, ${b}, ${c} one of the longest side of a triangle are >= than a sum of two others`,
+      );
     }
   }
 
@@ -46,7 +48,7 @@ export class Circle implements Figure {
     public radius: number,
   ) {
     if (radius <= 0) {
-      throw new Error('radius does not have valid value');
+      throw new Error(`value of the ${radius} must be greater than 0`);
     }
   }
 
@@ -66,7 +68,7 @@ export class Rectangle implements Figure {
     public height: number,
   ) {
     if (width <= 0 || height <= 0) {
-      throw new Error('width or height does not have valid value');
+      throw new Error(`value of ${width} and ${height} must be greater than 0`);
     }
   }
 
@@ -79,6 +81,7 @@ export class Rectangle implements Figure {
 
 export function getInfo(figure: Figure): string {
   const { color, shape } = figure;
+
   const area = figure.getArea();
 
   return `A ${color} ${shape} - ${area}`;
