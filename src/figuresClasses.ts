@@ -5,7 +5,7 @@ export interface Figure {
 }
 
 export class Triangle implements Figure {
-  public shape: 'triangle' | 'circle' | 'rectangle';
+  shape: 'triangle' | 'circle' | 'rectangle';
 
   constructor(
     public color: 'red' | 'green' | 'blue',
@@ -20,11 +20,11 @@ export class Triangle implements Figure {
     const sumBC: number = this.b + this.c;
 
     if (this.a <= 0 || this.b <= 0 || this.c <= 0) {
-      throw new Error('Error');
+      throw new Error('Triangle sides must be positive numbers.');
     }
 
     if (this.a >= sumAC || this.b >= sumBC || this.c >= sumAB) {
-      throw new Error('Error1');
+      throw new Error('Triangle inequality violated: one side is too long.');
     }
   }
 
@@ -38,7 +38,7 @@ export class Triangle implements Figure {
 }
 
 export class Circle implements Figure {
-  public shape: 'triangle' | 'circle' | 'rectangle';
+  shape: 'triangle' | 'circle' | 'rectangle';
 
   constructor(
     public color: 'red' | 'green' | 'blue',
@@ -47,7 +47,7 @@ export class Circle implements Figure {
     this.shape = 'circle';
 
     if (this.radius <= 0) {
-      throw new Error('Error');
+      throw new Error('Circle radius must be a positive number.');
     }
   }
 
@@ -57,7 +57,7 @@ export class Circle implements Figure {
 }
 
 export class Rectangle implements Figure {
-  public shape: 'triangle' | 'circle' | 'rectangle';
+  shape: 'triangle' | 'circle' | 'rectangle';
 
   constructor(
     public color: 'red' | 'green' | 'blue',
@@ -67,7 +67,7 @@ export class Rectangle implements Figure {
     this.shape = 'rectangle';
 
     if (this.width <= 0 || this.height <= 0) {
-      throw new Error('Error');
+      throw new Error('Rectangle dimensions must be positive numbers.');
     }
   }
 
