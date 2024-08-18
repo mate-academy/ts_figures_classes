@@ -19,7 +19,7 @@
     "@babel/preset-env": "^7.24.0",
     "@babel/preset-typescript": "^7.23.3",
     "@mate-academy/eslint-config": "latest",
-    "@mate-academy/scripts": "^1.8.1",
+    "@mate-academy/scripts": "^1.9.3",
     "@mate-academy/students-ts-config": "latest",
     "@types/jest": "^29.5.12",
     "@types/node": "^20.11.26",
