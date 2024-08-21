@@ -1,11 +1,11 @@
-export interface Figure {
-  shape: string;
-  color: string;
-  getArea(): number;
-}
-
 type Color = 'red' | 'green' | 'blue';
 type Shape = 'triangle' | 'circle' | 'rectangle';
+
+export interface Figure {
+  shape: Shape;
+  color: Color;
+  getArea(): number;
+}
 
 export class Triangle implements Figure {
   shape: Shape = 'triangle';
