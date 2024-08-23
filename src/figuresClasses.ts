@@ -1,14 +1,22 @@
+export type Color = 'red' | 'green' | 'blue';
+
+export enum Shape {
+  Triangle = 'triangle',
+  Circle = 'circle',
+  Rectangle = 'rectangle',
+}
+
 export interface Figure {
-  shape: 'triangle' | 'circle' | 'rectangle';
-  color: 'red' | 'green' | 'blue';
+  shape: Shape;
+  color: Color;
   getArea(): number;
 }
 
 export class Triangle implements Figure {
-  public shape: 'triangle';
+  public shape: Shape.Triangle;
 
   constructor(
-    public color: 'red' | 'green' | 'blue',
+    public color: Color,
     public a: number,
     public b: number,
     public c: number,
@@ -27,7 +35,7 @@ export class Triangle implements Figure {
       );
     }
 
-    this.shape = 'triangle';
+    this.shape = Shape.Triangle;
   }
 
   public getArea(): number {
@@ -39,17 +47,17 @@ export class Triangle implements Figure {
 }
 
 export class Circle implements Figure {
-  public shape: 'circle';
+  public shape: Shape.Circle;
 
   constructor(
-    public color: 'red' | 'green' | 'blue',
+    public color: Color,
     public radius: number,
   ) {
     if (radius <= 0) {
       throw new Error('Invalid circle: The circle with zero radius');
     }
 
-    this.shape = 'circle';
+    this.shape = Shape.Circle;
   }
 
   public getArea(): number {
@@ -58,10 +66,10 @@ export class Circle implements Figure {
 }
 
 export class Rectangle implements Figure {
-  public shape: 'rectangle';
+  public shape: Shape.Rectangle;
 
   constructor(
-    public color: 'red' | 'green' | 'blue',
+    public color: Color,
     public width: number,
     public height: number,
   ) {
@@ -69,7 +77,7 @@ export class Rectangle implements Figure {
       throw new Error('Invalid rectangle: All sides must have non-zero length');
     }
 
-    this.shape = 'rectangle';
+    this.shape = Shape.Rectangle;
   }
 
   public getArea(): number {
