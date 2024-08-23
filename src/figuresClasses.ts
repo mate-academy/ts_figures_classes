@@ -17,11 +17,11 @@ export class Triangle implements Figure {
     public shape: string = 'triangle',
   ) {
     if (a <= 0 || b <= 0 || c <= 0) {
-      throw new Error('Сторони трикутника повинні бути додатніми числами.');
+      throw new Error('The sides of the triangle must be positive numbers.');
     }
 
     if (a + c <= b || a + b <= c || b + c <= a) {
-      throw new Error('Такого трикутника не існує.');
+      throw new Error('it is impossible to create such a triangle');
     }
   }
 
@@ -39,7 +39,7 @@ export class Circle implements Figure {
     public shape: string = 'circle',
   ) {
     if (a <= 0) {
-      throw new Error('Радіус не є додатнім');
+      throw new Error(`this radius value ${this.a} is not valid`);
     }
   }
 
@@ -56,7 +56,7 @@ export class Rectangle implements Figure {
     public shape: string = 'rectangle',
   ) {
     if (width <= 0 || height <= 0) {
-      throw new Error('Не валідне значення прямокутника.');
+      throw new Error(`the height or width of the rectangle cannot be <= 0`);
     }
   }
 
