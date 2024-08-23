@@ -5,7 +5,7 @@ export interface Figure {
 }
 
 export class Triangle implements Figure {
-  public shape: string;
+  public shape = 'triangle';
 
   constructor(
     public color: string,
@@ -13,14 +13,15 @@ export class Triangle implements Figure {
     public b: number,
     public c: number,
   ) {
-    this.shape = 'triangle';
-
     if (a <= 0 || b <= 0 || c <= 0) {
-      throw new Error('your error message');
+      throw new Error('Triangle side lengths must be positive numbers.');
     }
 
     if (a + b <= c || a + c <= b || b + c <= a) {
-      throw new Error('your error message');
+      throw new Error(
+        'The sum of the lengths of any two sides of a triangle ' +
+          'must be greater than the length of the third side.',
+      );
     }
   }
 
@@ -28,50 +29,46 @@ export class Triangle implements Figure {
     const s = (this.a + this.b + this.c) / 2;
     const area = Math.sqrt(s * (s - this.a) * (s - this.b) * (s - this.c));
 
-    return Math.round(area * 100) / 100;
+    return Math.floor(area * 100) / 100;
   }
 }
 
 export class Circle implements Figure {
-  public shape: string;
+  public shape = 'circle';
 
   constructor(
     public color: string,
     public radius: number,
   ) {
-    this.shape = 'circle';
-
     if (radius <= 0) {
-      throw new Error('your error message');
+      throw new Error('Circle radius must be a positive number.');
     }
   }
 
   getArea(): number {
     const area = Math.PI * Math.pow(this.radius, 2);
 
-    return Math.round(area * 100) / 100;
+    return Math.floor(area * 100) / 100;
   }
 }
 
 export class Rectangle implements Figure {
-  public shape: string;
+  public shape = 'rectangle';
 
   constructor(
     public color: string,
     public width: number,
     public height: number,
   ) {
-    this.shape = 'rectangle';
-
     if (width <= 0 || height <= 0) {
-      throw new Error('your error message');
+      throw new Error('Rectangle width and height must be positive numbers.');
     }
   }
 
   getArea(): number {
     const area = this.width * this.height;
 
-    return Math.round(area * 100) / 100;
+    return Math.floor(area * 100) / 100;
   }
 }
 
