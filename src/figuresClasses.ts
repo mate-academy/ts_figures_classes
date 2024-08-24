@@ -1,21 +1,23 @@
+type Color = 'red' | 'green' | 'blue';
+type Shape = 'triangle' | 'circle' | 'rectangle';
 export interface Figure {
-  shape: 'triangle' | 'circle' | 'rectangle';
-  color: 'red' | 'green' | 'blue';
+  shape: Shape;
+  color: Color;
   getArea(): number;
 }
 
 export class Triangle implements Figure {
-  shape: 'triangle' | 'circle' | 'rectangle';
-
-  color: 'red' | 'green' | 'blue';
+  shape: Shape;
 
   constructor(
-    color: 'red' | 'green' | 'blue',
+    public color: Color,
     public a: number,
     public b: number,
     public c: number,
   ) {
-    this.color = color;
+    this.a = a;
+    this.b = b;
+    this.c = c;
     this.shape = 'triangle';
 
     const sides: number[] = [a, b, c].sort(
@@ -23,9 +25,12 @@ export class Triangle implements Figure {
     );
 
     if (sides[0] <= 0) {
-      throw new Error('Side size <= 0');
+      throw new Error('Triangle side length must be greater than 0');
     } else if (sides[2] >= sides[0] + sides[1]) {
-      throw new Error('Wrong side size');
+      throw new Error(
+        // eslint-disable-next-line max-len
+        'The sum of any two sides of a triangle must be greater than the third side',
+      );
     }
   }
 
