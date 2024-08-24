@@ -80,7 +80,7 @@ export class Rectangle implements Figure {
     this.color = color;
 
     if (width <= 0 || height <= 0) {
-      throw new Error('Invalid width or heigh');
+      throw new Error('Rectangle width and height must be greater than 0');
     }
   }
 
