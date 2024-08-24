@@ -12,8 +12,16 @@ export class Triangle implements Figure {
     public c: number,
     public shape: string = 'triangle',
   ) {
-    if (a <= 0 || b <= 0 || c <= 0) {
-      throw new Error('Sides must be greater than 0');
+    if (a <= 0) {
+      throw new Error('Side "a" must be greater than 0');
+    }
+
+    if (b <= 0) {
+      throw new Error('Side "b" must be greater than 0');
+    }
+
+    if (c <= 0) {
+      throw new Error('Side "c" must be greater than 0');
     }
 
     if (a + b <= c || a + c <= b || b + c <= a) {
@@ -57,8 +65,12 @@ export class Rectangle implements Figure {
     public height: number,
     public shape: string = 'rectangle',
   ) {
-    if (width <= 0 || height <= 0) {
-      throw new Error('Width and height must be greater than 0');
+    if (width <= 0) {
+      throw new Error('"Width" must be greater than 0');
+    }
+
+    if (height <= 0) {
+      throw new Error('"Height" must be greater than 0');
     }
   }
 
