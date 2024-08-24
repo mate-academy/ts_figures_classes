@@ -55,7 +55,7 @@ export class Circle implements Figure {
     this.color = color;
 
     if (radius <= 0) {
-      throw new Error('radius must be greater than 0');
+      throw new Error('Circle radius must be greater than 0');
     }
   }
 
