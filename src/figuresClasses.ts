@@ -4,9 +4,6 @@ type Color = 'red' | 'green' | 'blue';
 export interface Figure {
   shape: Shape;
   color: Color;
-  a?: number;
-  b?: number;
-  c?: number;
   getArea(): number;
 }
 
