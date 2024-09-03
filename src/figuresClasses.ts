@@ -19,15 +19,12 @@ interface Figure {
 export class Triangle implements Figure {
   shape: Shape;
 
-  color: Color;
-
-  a: number;
-
-  b: number;
-
-  c: number;
-
-  constructor(color: Color, a: number, b: number, c: number) {
+  constructor(
+    public color: Color,
+    public a: number,
+    public b: number,
+    public c: number,
+  ) {
     if (a <= 0 || b <= 0 || c <= 0) {
       throw new Error('Side lengths must be greater than 0');
     }
@@ -35,11 +32,8 @@ export class Triangle implements Figure {
     if (a + b <= c || a + c <= b || b + c <= a) {
       throw new Error("Sides can't form a triangle");
     }
+
     this.shape = Shape.Triangle;
-    this.color = color;
-    this.a = a;
-    this.b = b;
-    this.c = c;
   }
 
   getArea(): number {
@@ -52,17 +46,14 @@ export class Triangle implements Figure {
 export class Circle implements Figure {
   shape: Shape;
 
-  color: Color;
-
-  radius: number;
-
-  constructor(color: Color, radius: number) {
+  constructor(
+    public color: Color,
+    public radius: number,
+  ) {
     if (radius <= 0) {
       throw new Error('Radius must be greater than 0');
     }
     this.shape = Shape.Circle;
-    this.color = color;
-    this.radius = radius;
   }
 
   getArea(): number {
@@ -73,30 +64,27 @@ export class Circle implements Figure {
 export class Rectangle implements Figure {
   shape: Shape;
 
-  color: Color;
-
-  width: number;
-
-  height: number;
-
-  constructor(color: Color, width: number, height: number) {
+  constructor(
+    public color: Color,
+    public width: number,
+    public height: number,
+  ) {
     if (width <= 0 || height <= 0) {
       throw new Error('Side lengths must be greater than 0');
     }
     this.shape = Shape.Rectangle;
-    this.color = color;
-    this.width = width;
-    this.height = height;
   }
 
   getArea(): number {
-    return this.width * this.height;
+    return Math.floor(this.width * this.height * 100) / 100;
   }
 }
 
 export function getInfo(figure: Figure): string {
   const area = figure.getArea();
-  const formattedArea = area % 1 === 0 ? area.toString() : area.toFixed(2);
+  const formattedArea = Number.isInteger(area)
+    ? area.toString()
+    : area.toFixed(2);
 
-  return `A ${figure.color} ${figure.shape} - ${formattedArea}`;
+  return `A ${figure.color} ${figure.shape} with an area of ${formattedArea}`;
 }
