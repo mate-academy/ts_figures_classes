@@ -30,9 +30,13 @@ export class Triangle implements Figure {
       );
     }
   }
+
   getArea(): number {
+
     const s = (this.a + this.b + this.c) / 2;
+
     const area = Math.sqrt(s * (s - this.a) * (s - this.b) * (s - this.c));
+
     return Math.round(area * 100) / 100;
   }
 }
@@ -48,6 +52,7 @@ export class Circle implements Figure {
   ) {
 
     if (radius <= 0) {
+
       throw new Error('Radius must be greater than 0');
     }
   }
@@ -70,8 +75,9 @@ export class Rectangle implements Figure {
     width: number,
     height: number,
   ) {
-  
+
     if (width <= 0 || height <= 0) {
+      
       throw new Error('Width and height must be greater than 0');
     }
   }
