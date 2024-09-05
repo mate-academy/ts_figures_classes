@@ -25,9 +25,10 @@ export class Triangle implements Figure {
     }
   }
 
-  getArea() {
+  getArea(): number {
     const s = (this.a + this.b + this.c) / 2;
     const area = Math.sqrt(s * (s - this.a) * (s - this.b) * (s - this.c));
+
     return Math.floor(area * 100) / 100;
   }
 }
@@ -44,8 +45,9 @@ export class Circle implements Figure {
     }
   }
 
-  getArea() {
+  getArea(): number {
     const area = Math.PI * this.radius * this.radius;
+
     return Math.floor(area * 100) / 100;
   }
 }
@@ -63,8 +65,9 @@ export class Rectangle implements Figure {
     }
   }
 
-  getArea() {
+  getArea(): number {
     const area = this.width * this.height;
+
     return Math.floor(area * 100) / 100;
   }
 }
