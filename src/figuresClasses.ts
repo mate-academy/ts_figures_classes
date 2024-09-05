@@ -7,17 +7,11 @@ export interface Figure {
 export class Triangle implements Figure {
   shape = 'triangle';
 
-  a: number;
-
-  b: number;
-
-  c: number;
-
   constructor(
     public color: 'red' | 'green' | 'blue',
-    a: number,
-    b: number,
-    c: number,
+    public a: number,
+    public b: number,
+    public c: number,
   ) {
     if (a <= 0 || b <= 0 || c <= 0) {
       throw new Error('Sides of the triangle must be greater than 0');
@@ -42,11 +36,9 @@ export class Triangle implements Figure {
 export class Circle implements Figure {
   shape = 'circle';
 
-  radius: number;
-
   constructor(
     public color: 'red' | 'green' | 'blue',
-    radius: number,
+    public radius: number,
   ) {
     if (radius <= 0) {
       throw new Error('Radius must be greater than 0');
@@ -62,14 +54,10 @@ export class Circle implements Figure {
 export class Rectangle implements Figure {
   shape = 'rectangle';
 
-  width: number;
-
-  height: number;
-
   constructor(
     public color: 'red' | 'green' | 'blue',
-    width: number,
-    height: number,
+    public width: number,
+    public height: number,
   ) {
     if (width <= 0 || height <= 0) {
       throw new Error('Width and height must be greater than 0');
