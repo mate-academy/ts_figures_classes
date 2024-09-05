@@ -52,9 +52,10 @@ export class Circle implements Figure {
   ) {
 
     if (radius <= 0) {
-
-      throw new Error('Radius must be greater than 0');
+      throw new Error(
+        'Radius must be greater than 0');
     }
+
   }
 
   getArea(): number {
@@ -77,8 +78,9 @@ export class Rectangle implements Figure {
   ) {
 
     if (width <= 0 || height <= 0) {
-      
-      throw new Error('Width and height must be greater than 0');
+
+      throw new Error(
+        'Width and height must be greater than 0');
     }
   }
 
