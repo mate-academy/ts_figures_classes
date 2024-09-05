@@ -46,8 +46,8 @@ export class Circle implements Figure {
   }
 
   getArea(): number {
-    const area = Math.PI * Math.pow(this.radius, 2);
-    
+    const area = Math.PI * this.radius * this.radius;
+
     return Math.round(area * 100) / 100;
   }
 }
