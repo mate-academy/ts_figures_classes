@@ -47,6 +47,7 @@ export class Circle implements Figure {
 
   getArea(): number {
     const area = Math.PI * Math.pow(this.radius, 2);
+    
     return Math.round(area * 100) / 100;
   }
 }
@@ -66,6 +67,7 @@ export class Rectangle implements Figure {
 
   getArea(): number {
     const area = this.width * this.height;
+
     return Math.round(area * 100) / 100;
   }
 }
