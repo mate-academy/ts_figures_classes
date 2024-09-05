@@ -11,7 +11,7 @@ export interface Figure {
 }
 
 export class Triangle implements Figure {
-  shape: Shape.Triangle;
+  shape = Shape.Triangle;
 
   constructor(
     public color: 'red' | 'green' | 'blue',
@@ -40,7 +40,7 @@ export class Triangle implements Figure {
 }
 
 export class Circle implements Figure {
-  shape: Shape.Circle;
+  shape = Shape.Circle;
 
   constructor(
     public color: 'red' | 'green' | 'blue',
@@ -59,7 +59,7 @@ export class Circle implements Figure {
 }
 
 export class Rectangle implements Figure {
-  shape: Shape.Rectangle;
+  shape = Shape.Rectangle;
 
   constructor(
     public color: 'red' | 'green' | 'blue',
