@@ -1,7 +1,7 @@
 enum Shape {
-  Triangle = 'triangle',
-  Circle = 'circle',
-  Rectangle = 'rectangle',
+  TRIANGLE = 'triangle',
+  CIRCLE = 'circle',
+  RECTANGLE = 'rectangle',
 }
 
 type Color = 'red' | 'green' | 'blue';
@@ -12,7 +12,7 @@ export interface Figure {
   getArea(): number;
 }
 export class Triangle implements Figure {
-  shape = Shape.Triangle;
+  shape = Shape.TRIANGLE;
 
   constructor(
     public color: Color,
@@ -25,6 +25,10 @@ export class Triangle implements Figure {
         'sides' + a + ',' + b + 'and' + c + 'cannot form a triangle',
       );
     }
+
+    if (a === b + c || b === a + c || c === a + b) {
+      throw new Error('this is a line');
+    }
   }
 
   getArea(): number {
@@ -36,14 +40,14 @@ export class Triangle implements Figure {
 }
 
 export class Circle implements Figure {
-  shape = Shape.Circle;
+  shape = Shape.CIRCLE;
 
   constructor(
     public color: Color,
     public radius: number,
   ) {
     if (radius <= 0) {
-      throw new Error('Radius must be > 0');
+      throw new Error('Radius must be more then zero');
     }
   }
 
@@ -55,7 +59,7 @@ export class Circle implements Figure {
 }
 
 export class Rectangle implements Figure {
-  shape = Shape.Rectangle;
+  shape = Shape.RECTANGLE;
 
   constructor(
     public color: Color,
@@ -63,7 +67,7 @@ export class Rectangle implements Figure {
     public height: number,
   ) {
     if (height <= 0 || width <= 0) {
-      throw new Error('Height and width must be > 0');
+      throw new Error('Height and width must be more then zero');
     }
   }
 
