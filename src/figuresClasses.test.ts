@@ -35,7 +35,7 @@ describe('Class "Triangle"', () => {
 
   test('should check whether it is a triangle', () => {
     expect(() => {
-      new Triangle('green', 5, 10, 15);
+      new Triangle('green', 15, 10, 5);
     }).toThrow(Error);
   });
 
