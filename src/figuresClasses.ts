@@ -1,15 +1,21 @@
 interface Figure {
   getArea(): number;
   getInfo(): string;
+  shape: string;
+  color: string;
 }
 
-class Triangle implements Figure {
+export class Triangle implements Figure {
+  public shape = 'triangle';
+  public color: string;
+
   constructor(
-    private color: string,
+    color: string,
     private a: number,
     private b: number,
     private c: number,
   ) {
+    this.color = color;
     if (a <= 0 || b <= 0 || c <= 0) {
       throw new Error(
         'Each side of the triangle must be a positive number greater than 0',
@@ -25,7 +31,6 @@ class Triangle implements Figure {
 
   getArea(): number {
     const s = (this.a + this.b + this.c) / 2;
-
     return (
       Math.round(
         Math.sqrt(s * (s - this.a) * (s - this.b) * (s - this.c)) * 100,
@@ -34,15 +39,21 @@ class Triangle implements Figure {
   }
 
   getInfo(): string {
-    return `${this.color} triangle with sides ${this.a}, ${this.b}, and ${this.c} - Area: ${this.getArea()}`;
+    return `This is a ${this.color} ${this.shape} with an area of ${this.getArea()}`;
   }
 }
 
-class Circle implements Figure {
+export class Circle implements Figure {
+  public shape = 'circle';
+
+  public color: string;
+
   constructor(
-    private color: string,
+    color: string,
     private radius: number,
   ) {
+    this.color = color;
+
     if (radius <= 0) {
       throw new Error(
         'The radius of a circle must be a positive number greater than zero.',
@@ -51,23 +62,28 @@ class Circle implements Figure {
   }
 
   getArea(): number {
-    return Math.round(Math.PI * this.radius * this.radius * 100) / 100;
+    return Math.round(Math.PI * Math.pow(this.radius, 2) * 100) / 100;
   }
 
   getInfo(): string {
-    return `${this.color} circle with radius ${this.radius} - Area: ${this.getArea()}`;
+    return `This is a ${this.color} ${this.shape} with an area of ${this.getArea()}`;
   }
 }
 
-class Rectangle implements Figure {
+export class Rectangle implements Figure {
+  public shape = 'rectangle';
+  public color: string;
+
   constructor(
-    private color: string,
+    color: string,
     private width: number,
     private height: number,
   ) {
+    this.color = color;
+
     if (width <= 0 || height <= 0) {
       throw new Error(
-        'Width,height of a rectangle must be positive numbers greater than 0',
+        'Width and height of a rectangle must be positive numbers greater than 0',
       );
     }
   }
@@ -77,14 +93,6 @@ class Rectangle implements Figure {
   }
 
   getInfo(): string {
-    return `${this.color} rectangle with dimensions ${this.width}x${this.height} - Area: ${this.getArea()}`;
+    return `This is a ${this.color} ${this.shape} with an area of ${this.getArea()}`;
   }
 }
-
-const triangle = new Triangle('red', 3, 4, 5);
-const circle = new Circle('blue', 10);
-const rectangle = new Rectangle('green', 5, 10);
-
-console.log(triangle.getInfo());
-console.log(circle.getInfo());
-console.log(rectangle.getInfo());
