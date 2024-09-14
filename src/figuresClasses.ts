@@ -1,5 +1,3 @@
-import { get } from 'http';
-
 interface Figure {
   getArea(): number;
   getInfo(): string;
@@ -13,11 +11,15 @@ class Triangle implements Figure {
     private c: number,
   ) {
     if (a <= 0 || b <= 0 || c <= 0) {
-      throw new Error('Side length cannot be zero or negative');
+      throw new Error(
+        'Each side of the triangle must be a positive number greater than 0',
+      );
     }
 
     if (a + b <= c || a + c <= b || b + c <= a) {
-      throw new Error(`Sides ${a}, ${b}, and ${c} can't form a triangle`);
+      throw new Error(
+        `The provided dimensions ${a}, ${b}, and ${c} do not meet the triangle inequality theorem and can't form a triangle.`,
+      );
     }
   }
 
@@ -32,7 +34,7 @@ class Triangle implements Figure {
   }
 
   getInfo(): string {
-    return `${this.color} triangle - ${this.getArea()}`;
+    return `${this.color} triangle with sides ${this.a}, ${this.b}, and ${this.c} - Area: ${this.getArea()}`;
   }
 }
 
@@ -42,7 +44,9 @@ class Circle implements Figure {
     private radius: number,
   ) {
     if (radius <= 0) {
-      throw new Error('Radius cannot be zero or negative');
+      throw new Error(
+        'The radius of a circle must be a positive number greater than zero.',
+      );
     }
   }
 
@@ -51,7 +55,7 @@ class Circle implements Figure {
   }
 
   getInfo(): string {
-    return `${this.color} circle - ${this.getArea()}`;
+    return `${this.color} circle with radius ${this.radius} - Area: ${this.getArea()}`;
   }
 }
 
@@ -62,7 +66,9 @@ class Rectangle implements Figure {
     private height: number,
   ) {
     if (width <= 0 || height <= 0) {
-      throw new Error('Width and height must be positive numbers');
+      throw new Error(
+        'Width,height of a rectangle must be positive numbers greater than 0',
+      );
     }
   }
 
@@ -71,10 +77,14 @@ class Rectangle implements Figure {
   }
 
   getInfo(): string {
-    return `${this.color} rectangle - ${this.getArea()}`;
+    return `${this.color} rectangle with dimensions ${this.width}x${this.height} - Area: ${this.getArea()}`;
   }
 }
 
-function getInfo(figure: Figure): string {
-  return figure.getInfo();
-}
+const triangle = new Triangle('red', 3, 4, 5);
+const circle = new Circle('blue', 10);
+const rectangle = new Rectangle('green', 5, 10);
+
+console.log(triangle.getInfo());
+console.log(circle.getInfo());
+console.log(rectangle.getInfo());
