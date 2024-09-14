@@ -1,5 +1,14 @@
-type Shape = string | 'triangle' | 'circle' | 'rectangle';
-type Color = 'red' | 'green' | 'blue';
+enum Shape {
+  Triangle = 'TRIANGLE',
+  Circle = 'CIRCLE',
+  Rectangle = 'RECTANGLE',
+}
+
+enum Color {
+  Red = 'RED',
+  Green = 'GREEN',
+  Blue = 'BLUE',
+}
 
 export interface Figure {
   shape: Shape;
@@ -8,21 +17,16 @@ export interface Figure {
 }
 
 export class Rectangle implements Figure {
-  shape: string = 'rectangle';
+  shape: Shape = Shape.Rectangle;
 
-  color: 'red' | 'green' | 'blue';
-
-  private width: number;
-
-  private height: number;
-
-  constructor(color: 'red' | 'green' | 'blue', width: number, height: number) {
+  constructor(
+    public color: Color,
+    private width: number,
+    private height: number,
+  ) {
     if (width <= 0 || height <= 0) {
       throw new Error('Width and height must be greater than zero!');
     }
-    this.color = color;
-    this.width = width;
-    this.height = height;
   }
 
   getArea(): number {
@@ -33,18 +37,15 @@ export class Rectangle implements Figure {
 }
 
 export class Circle implements Figure {
-  shape: string = 'circle';
+  shape: Shape = Shape.Circle;
 
-  color: 'red' | 'green' | 'blue';
-
-  private radius: number;
-
-  constructor(color: 'red' | 'green' | 'blue', radius: number) {
+  constructor(
+    public color: Color,
+    private radius: number,
+  ) {
     if (radius <= 0) {
       throw new Error('Radius must be greater than zero!');
     }
-    this.color = color;
-    this.radius = radius;
   }
 
   getArea(): number {
@@ -55,21 +56,13 @@ export class Circle implements Figure {
 }
 
 export class Triangle implements Figure {
-  shape: string = 'triangle';
-
-  color: 'red' | 'green' | 'blue';
-
-  private a: number;
-
-  private b: number;
-
-  private c: number;
+  shape: Shape = Shape.Triangle;
 
   constructor(
-    color: 'red' | 'green' | 'blue',
-    a: number,
-    b: number,
-    c: number,
+    public color: Color,
+    private a: number,
+    private b: number,
+    private c: number,
   ) {
     if (a <= 0 || b <= 0 || c <= 0) {
       throw new Error('The side cannot be less or equal to 0!');
@@ -80,10 +73,6 @@ export class Triangle implements Figure {
         "The longest side can't be more or equal to the sum of the rest sides!",
       );
     }
-    this.color = color;
-    this.a = a;
-    this.b = b;
-    this.c = c;
   }
 
   getArea(): number {
@@ -95,5 +84,5 @@ export class Triangle implements Figure {
 }
 
 export function getInfo(figure: Figure): string {
-  return `A ${figure.color} ${figure.shape} - ${figure.getArea()}`;
+  return `A ${figure.color.toLowerCase()} ${figure.shape.toLowerCase()} - ${figure.getArea()}`;
 }
