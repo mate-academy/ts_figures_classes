@@ -1,5 +1,11 @@
+enum Shape {
+  triangle = 'triangle',
+  circle = 'circle',
+  rectangle = 'rectangle',
+}
+
 export interface Figure {
-  shape: string;
+  shape: Shape;
   color: string;
   getArea(): number;
 }
@@ -14,7 +20,7 @@ export class Triangle implements Figure {
     public a: number,
     public b: number,
     public c: number,
-    public shape: string = 'triangle',
+    public shape: Shape = Shape.triangle,
   ) {
     if (a <= 0 || b <= 0 || c <= 0) {
       throw new Error('The sides of the triangle must be positive numbers.');
@@ -36,7 +42,7 @@ export class Circle implements Figure {
   constructor(
     public color: string,
     public a: number,
-    public shape: string = 'circle',
+    public shape: Shape = Shape.circle,
   ) {
     if (a <= 0) {
       throw new Error(`this radius value ${this.a} is not valid`);
@@ -53,7 +59,7 @@ export class Rectangle implements Figure {
     public color: string,
     public width: number,
     public height: number,
-    public shape: string = 'rectangle',
+    public shape: Shape = Shape.rectangle,
   ) {
     if (width <= 0 || height <= 0) {
       throw new Error(`the height or width of the rectangle cannot be <= 0`);
