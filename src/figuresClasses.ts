@@ -6,16 +6,15 @@ export interface Figure {
 }
 
 export class Triangle implements Figure {
-  readonly shape: 'triangle' = 'triangle';
-
   constructor(
     public color: 'red' | 'green' | 'blue',
     public a: number,
     public b: number,
     public c: number,
+    readonly shape: 'triangle' = 'triangle',
   ) {
     if (a <= 0 || b <= 0 || c <= 0 || c + b <= a || c + a <= b || a + b <= c) {
-      throw new Error('Please put positive value of radius');
+      throw new Error('Please put positive value of triangle sides');
     }
   }
 
@@ -29,11 +28,10 @@ export class Triangle implements Figure {
 }
 
 export class Circle implements Figure {
-  readonly shape: 'circle' = 'circle';
-
   constructor(
     public color: 'red' | 'green' | 'blue',
     public radius: number,
+    readonly shape: 'circle' = 'circle',
   ) {
     if (radius <= 0) {
       throw new Error('Please put positive value of radius');
@@ -48,12 +46,11 @@ export class Circle implements Figure {
 }
 
 export class Rectangle implements Figure {
-  readonly shape: 'rectangle' = 'rectangle';
-
   constructor(
     public color: 'red' | 'green' | 'blue',
     public width: number,
     public height: number,
+    readonly shape: 'rectangle' = 'rectangle',
   ) {
     if (width <= 0 || height <= 0) {
       throw new Error('Please put positive value of width and height');
