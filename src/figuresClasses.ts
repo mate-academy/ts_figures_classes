@@ -17,7 +17,7 @@ export class Triangle implements Figure {
     private readonly c: number,
   ) {
     if (a <= 0 || b <= 0 || c <= 0) {
-      throw new Error('Sides must be greater than zero');
+      throw new Error('Triangle sides must be greater than zero');
     }
 
     if (a + b <= c || a + c <= b || b + c <= a) {
