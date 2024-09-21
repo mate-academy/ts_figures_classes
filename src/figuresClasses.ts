@@ -17,7 +17,7 @@ export class Triangle implements Figure {
     public c: number,
   ) {
     if (this.a < 1 || this.b < 1 || this.c < 1) {
-      throw new Error('Sides can`t be less than 1');
+      throw new Error('Triangle side lengths must be greater than 0.');
     }
 
     const p = this.a + this.b + this.c;
@@ -25,7 +25,9 @@ export class Triangle implements Figure {
     const maxValue = Math.max(this.a, this.b, this.c);
 
     if (maxValue >= p - maxValue) {
-      throw new Error('It is not a triangle');
+      throw new Error(
+        'The provided side lengths do not form a valid triangle according to the triangle inequality theorem.',
+      );
     }
   }
 
