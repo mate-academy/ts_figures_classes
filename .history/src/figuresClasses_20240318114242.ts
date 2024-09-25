@@ -1,22 +1,14 @@
-export type Color = 'red' | 'green' | 'blue';
-
-export type Shape = 'triangle' | 'circle' | 'rectangle';
-
 export interface Figure {
-  shape: Shape;
-  color: Color;
+  shape: string;
+  color: string;
   getArea(): number;
 }
 
-function roundToTwoDecimalPlaces(num: number): number {
-  return Math.floor(num * 100) / 100;
-}
-
 export class Triangle implements Figure {
-  shape: Shape = 'triangle';
+  shape: string = 'triangle';
 
   constructor(
-    public color: Color,
+    public color: string,
     public a: number,
     public b: number,
     public c: number,
@@ -26,28 +18,25 @@ export class Triangle implements Figure {
     }
 
     if (a + b <= c || a + c <= b || b + c <= a) {
-      throw new Error(`Sides ${a}, ${b}, and ${c} can't form a triangle`);
+      throw new Error(
+        'Sides ' + a + ', ' + b + ', and ' + c + " can't form a triangle",
+      );
     }
   }
 
   getArea(): number {
-    const semiPerimeter = (this.a + this.b + this.c) / 2;
-    const area = Math.sqrt(
-      semiPerimeter *
-        (semiPerimeter - this.a) *
-        (semiPerimeter - this.b) *
-        (semiPerimeter - this.c),
-    );
+    const s = (this.a + this.b + this.c) / 2;
+    const area = Math.sqrt(s * (s - this.a) * (s - this.b) * (s - this.c));
 
     return Math.floor(area * 100) / 100;
   }
 }
 
 export class Circle implements Figure {
-  shape: Shape = 'circle';
+  shape: string = 'circle';
 
   constructor(
-    public color: Color,
+    public color: string,
     public radius: number,
   ) {
     if (radius <= 0) {
@@ -58,15 +47,15 @@ export class Circle implements Figure {
   getArea(): number {
     const area = Math.PI * this.radius * this.radius;
 
-    return roundToTwoDecimalPlaces(area);
+    return Math.floor(area * 100) / 100;
   }
 }
 
 export class Rectangle implements Figure {
-  shape: Shape = 'rectangle';
+  shape: string = 'rectangle';
 
   constructor(
-    public color: Color,
+    public color: string,
     public width: number,
     public height: number,
   ) {
@@ -78,7 +67,7 @@ export class Rectangle implements Figure {
   getArea(): number {
     const area = this.width * this.height;
 
-    return roundToTwoDecimalPlaces(area);
+    return Math.floor(area * 100) / 100;
   }
 }
 
