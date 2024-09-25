@@ -1,0 +1,162 @@
+{
+    "sourceFile": "src/figuresClasses.ts",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 36,
+            "patches": [
+                {
+                    "date": 1710334472746,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1710334484909,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,6 +1,6 @@\n export interface Figure {\n-  type Shape \n+  type Shape = 'triange' | \n }\n \n export class Triangle implements Figure {}\n \n"
+                },
+                {
+                    "date": 1710334492664,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,6 +1,6 @@\n export interface Figure {\n-  type Shape = 'triange' | \n+  type Shape = 'triange' | 'circle' | 'rec'\n }\n \n export class Triangle implements Figure {}\n \n"
+                },
+                {
+                    "date": 1710334550604,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,6 +1,6 @@\n+type Shape = 'triange' | 'circle' | 'rectangle'\n export interface Figure {\n-  type Shape = 'triange' | 'circle' | 'rec'\n }\n \n export class Triangle implements Figure {}\n \n"
+                },
+                {
+                    "date": 1710334558922,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,5 +1,5 @@\n-type Shape = 'triange' | 'circle' | 'rectangle'\n+type Shape = 'triange' | 'circle' | 'rectangle';\n export interface Figure {\n }\n \n export class Triangle implements Figure {}\n"
+                },
+                {
+                    "date": 1710334573510,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,5 +1,6 @@\n type Shape = 'triange' | 'circle' | 'rectangle';\n+type Color = \n export interface Figure {\n }\n \n export class Triangle implements Figure {}\n"
+                },
+                {
+                    "date": 1710334582583,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,6 +1,6 @@\n type Shape = 'triange' | 'circle' | 'rectangle';\n-type Color = \n+type Color = 'red' | 'green' | 'blue'\n export interface Figure {\n }\n \n export class Triangle implements Figure {}\n"
+                },
+                {
+                    "date": 1710334596968,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,8 @@\n type Shape = 'triange' | 'circle' | 'rectangle';\n type Color = 'red' | 'green' | 'blue'\n export interface Figure {\n+  \n }\n \n export class Triangle implements Figure {}\n \n"
+                },
+                {
+                    "date": 1710334602410,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,8 +1,8 @@\n type Shape = 'triange' | 'circle' | 'rectangle';\n type Color = 'red' | 'green' | 'blue'\n export interface Figure {\n-  \n+  shape: \n }\n \n export class Triangle implements Figure {}\n \n"
+                },
+                {
+                    "date": 1710334609204,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -0,0 +1,17 @@\n+type Shape = 'triange' | 'circle' | 'rectangle';\n+type Color = 'red' | 'green' | 'blue'\n+export interface Figure {\n+  shape: Shape;\n+  color: Color;\n+  \n+}\n+\n+export class Triangle implements Figure {}\n+\n+export class Circle implements Figure {}\n+\n+export class Rectangle implements Figure {}\n+\n+export function getInfo(figure): string {\n+  return typeof figure;\n+}\n"
+                },
+                {
+                    "date": 1710334616934,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,9 +2,9 @@\n type Color = 'red' | 'green' | 'blue'\n export interface Figure {\n   shape: Shape;\n   color: Color;\n-  \n+  getArea: number;\n }\n \n export class Triangle implements Figure {}\n \n@@ -14,19 +14,4 @@\n \n export function getInfo(figure): string {\n   return typeof figure;\n }\n-type Shape = 'triange' | 'circle' | 'rectangle';\n-type Color = 'red' | 'green' | 'blue'\n-export interface Figure {\n-  shape: \n-}\n-\n-export class Triangle implements Figure {}\n-\n-export class Circle implements Figure {}\n-\n-export class Rectangle implements Figure {}\n-\n-export function getInfo(figure): string {\n-  return typeof figure;\n-}\n"
+                },
+                {
+                    "date": 1710334708440,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -5,9 +5,11 @@\n   color: Color;\n   getArea: number;\n }\n \n-export class Triangle implements Figure {}\n+export class Triangle implements Figure {\n+  \n+}\n \n export class Circle implements Figure {}\n \n export class Rectangle implements Figure {}\n"
+                },
+                {
+                    "date": 1710334714357,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -6,9 +6,11 @@\n   getArea: number;\n }\n \n export class Triangle implements Figure {\n-  \n+  shape: Shape;\n+  color: Color;\n+  getArea: number;\n }\n \n export class Circle implements Figure {}\n \n"
+                },
+                {
+                    "date": 1710334728419,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -9,8 +9,11 @@\n export class Triangle implements Figure {\n   shape: Shape;\n   color: Color;\n   getArea: number;\n+  constructor(  shape: Shape;\n+    color: Color;\n+    getArea: number;)\n }\n \n export class Circle implements Figure {}\n \n"
+                },
+                {
+                    "date": 1710334734234,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -9,10 +9,9 @@\n export class Triangle implements Figure {\n   shape: Shape;\n   color: Color;\n   getArea: number;\n-  constructor(  shape: Shape;\n-    color: Color;\n+  constructor(  shape: Shape, color: Color;\n     getArea: number;)\n }\n \n export class Circle implements Figure {}\n"
+                },
+                {
+                    "date": 1710334743024,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -0,0 +1,22 @@\n+type Shape = 'triange' | 'circle' | 'rectangle';\n+type Color = 'red' | 'green' | 'blue'\n+export interface Figure {\n+  shape: Shape;\n+  color: Color;\n+  getArea: number;\n+}\n+\n+export class Triangle implements Figure {\n+  shape: Shape;\n+  color: Color;\n+  getArea: number;\n+  constructor(shape: Shape, color: Color, getArea: number;)\n+}\n+\n+export class Circle implements Figure {}\n+\n+export class Rectangle implements Figure {}\n+\n+export function getInfo(figure): string {\n+  return typeof figure;\n+}\n"
+                },
+                {
+                    "date": 1710334753241,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -9,9 +9,11 @@\n export class Triangle implements Figure {\n   shape: Shape;\n   color: Color;\n   getArea: number;\n-  constructor(shape: Shape, color: Color, getArea: number;)\n+  constructor(shape: Shape, color: Color, getArea: number) {\n+    this.shape\n+  }\n }\n \n export class Circle implements Figure {}\n \n@@ -19,27 +21,4 @@\n \n export function getInfo(figure): string {\n   return typeof figure;\n }\n-type Shape = 'triange' | 'circle' | 'rectangle';\n-type Color = 'red' | 'green' | 'blue'\n-export interface Figure {\n-  shape: Shape;\n-  color: Color;\n-  getArea: number;\n-}\n-\n-export class Triangle implements Figure {\n-  shape: Shape;\n-  color: Color;\n-  getArea: number;\n-  constructor(  shape: Shape, color: Color;\n-    getArea: number;)\n-}\n-\n-export class Circle implements Figure {}\n-\n-export class Rectangle implements Figure {}\n-\n-export function getInfo(figure): string {\n-  return typeof figure;\n-}\n"
+                },
+                {
+                    "date": 1710334764943,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -10,9 +10,11 @@\n   shape: Shape;\n   color: Color;\n   getArea: number;\n   constructor(shape: Shape, color: Color, getArea: number) {\n-    this.shape\n+    this.shape = shape;\n+    this.color = color;\n+    this\n   }\n }\n \n export class Circle implements Figure {}\n"
+                },
+                {
+                    "date": 1710334771033,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -12,9 +12,9 @@\n   getArea: number;\n   constructor(shape: Shape, color: Color, getArea: number) {\n     this.shape = shape;\n     this.color = color;\n-    this\n+    this.area = getArea;\n   }\n }\n \n export class Circle implements Figure {}\n"
+                },
+                {
+                    "date": 1710334781827,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -8,9 +8,9 @@\n \n export class Triangle implements Figure {\n   shape: Shape;\n   color: Color;\n-  getArea: number;\n+  area: number;\n   constructor(shape: Shape, color: Color, getArea: number) {\n     this.shape = shape;\n     this.color = color;\n     this.area = getArea;\n"
+                },
+                {
+                    "date": 1710334871708,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,6 +1,7 @@\n type Shape = 'triange' | 'circle' | 'rectangle';\n-type Color = 'red' | 'green' | 'blue'\n+type Color = 'red' | 'green' | 'blue';\n+\n export interface Figure {\n   shape: Shape;\n   color: Color;\n   getArea: number;\n"
+                },
+                {
+                    "date": 1710334922232,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -7,11 +7,8 @@\n   getArea: number;\n }\n \n export class Triangle implements Figure {\n-  shape: Shape;\n-  color: Color;\n-  area: number;\n   constructor(shape: Shape, color: Color, getArea: number) {\n     this.shape = shape;\n     this.color = color;\n     this.area = getArea;\n"
+                },
+                {
+                    "date": 1710336484963,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -7,8 +7,10 @@\n   getArea: number;\n }\n \n export class Triangle implements Figure {\n+\n+\n   constructor(shape: Shape, color: Color, getArea: number) {\n     this.shape = shape;\n     this.color = color;\n     this.area = getArea;\n"
+                },
+                {
+                    "date": 1710336495461,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -7,10 +7,10 @@\n   getArea: number;\n }\n \n export class Triangle implements Figure {\n+  public shape: Shape = 'triangle'\n \n-\n   constructor(shape: Shape, color: Color, getArea: number) {\n     this.shape = shape;\n     this.color = color;\n     this.area = getArea;\n"
+                },
+                {
+                    "date": 1710336515731,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,9 +3,9 @@\n \n export interface Figure {\n   shape: Shape;\n   color: Color;\n-  getArea: number;\n+  getArea(): number;\n }\n \n export class Triangle implements Figure {\n   public shape: Shape = 'triangle'\n"
+                },
+                {
+                    "date": 1710336553385,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -6,18 +6,12 @@\n   color: Color;\n   getArea(): number;\n }\n \n-export class Triangle implements Figure {\n-  public shape: Shape = 'triangle'\n+shape: Shape;\n+color: Color;\n+getArea: number;\n \n-  constructor(shape: Shape, color: Color, getArea: number) {\n-    this.shape = shape;\n-    this.color = color;\n-    this.area = getArea;\n-  }\n-}\n-\n export class Circle implements Figure {}\n \n export class Rectangle implements Figure {}\n \n"
+                },
+                {
+                    "date": 1710336572180,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -6,12 +6,39 @@\n   color: Color;\n   getArea(): number;\n }\n \n-shape: Shape;\n-color: Color;\n-getArea: number;\n+export class Triangle implements Figure {\n+  public shape: Shape = 'triangle';\n \n+  constructor(\n+    public color: Color,\n+    public a: number,\n+    public b: number,\n+    public c: number,\n+  ) {\n+    if (this.a <= 0 || this.b <= 0 || this.c <= 0) {\n+      throw new Error(`It's not a triangle`);\n+    }\n+\n+    if (\n+      this.a >= this.b + this.c ||\n+      this.b >= this.a + this.c ||\n+      this.c >= this.a + this.b\n+    ) {\n+      throw new Error(`Sides ${a}, ${b} and ${c} are wrong`);\n+    }\n+  }\n+\n+  getArea(): number {\n+    const { a, b, c } = this;\n+    const s: number = (a + b + c) / 2;\n+    const area: number = Math.sqrt(s * (s - a) * (s - b) * (s - c));\n+\n+    return Math.floor(area * 100) / 100;\n+  }\n+}\n+\n export class Circle implements Figure {}\n \n export class Rectangle implements Figure {}\n \n"
+                },
+                {
+                    "date": 1710336614193,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -7,9 +7,9 @@\n   getArea(): number;\n }\n \n export class Triangle implements Figure {\n-  public shape: Shape = 'triangle';\n+  public shape: Shape = triangle;\n \n   constructor(\n     public color: Color,\n     public a: number,\n"
+                },
+                {
+                    "date": 1710336620574,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -7,9 +7,9 @@\n   getArea(): number;\n }\n \n export class Triangle implements Figure {\n-  public shape: Shape = triangle;\n+  public shape: Shape = Triangle;\n \n   constructor(\n     public color: Color,\n     public a: number,\n"
+                },
+                {
+                    "date": 1710336626385,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -7,9 +7,9 @@\n   getArea(): number;\n }\n \n export class Triangle implements Figure {\n-  public shape: Shape = Triangle;\n+  public shape: Shape = 'triangle;\n \n   constructor(\n     public color: Color,\n     public a: number,\n"
+                },
+                {
+                    "date": 1710336633306,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -7,9 +7,9 @@\n   getArea(): number;\n }\n \n export class Triangle implements Figure {\n-  public shape: Shape = 'triangle;\n+  public shape: Shape = 'triangle';\n \n   constructor(\n     public color: Color,\n     public a: number,\n"
+                },
+                {
+                    "date": 1710336648540,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,5 +1,5 @@\n-type Shape = 'triange' | 'circle' | 'rectangle';\n+type Shape = 'triangle' | 'circle' | 'rectangle';\n type Color = 'red' | 'green' | 'blue';\n \n export interface Figure {\n   shape: Shape;\n"
+                },
+                {
+                    "date": 1710336720777,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -37,9 +37,11 @@\n     return Math.floor(area * 100) / 100;\n   }\n }\n \n-export class Circle implements Figure {}\n+export class Circle implements Figure {\n+  \n+}\n \n export class Rectangle implements Figure {}\n \n export function getInfo(figure): string {\n"
+                },
+                {
+                    "date": 1710336729730,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -38,9 +38,9 @@\n   }\n }\n \n export class Circle implements Figure {\n-  \n+  public shape: Shape = 'circle'\n }\n \n export class Rectangle implements Figure {}\n \n"
+                },
+                {
+                    "date": 1710336744995,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -39,8 +39,12 @@\n }\n \n export class Circle implements Figure {\n   public shape: Shape = 'circle'\n+\n+  constructor(\n+    public color: Color\n+  )\n }\n \n export class Rectangle implements Figure {}\n \n"
+                },
+                {
+                    "date": 1710336752386,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -42,9 +42,9 @@\n   public shape: Shape = 'circle'\n \n   constructor(\n     public color: Color,\n-    public radius: \n+    public radius: number\n   )\n }\n \n export class Rectangle implements Figure {}\n"
+                },
+                {
+                    "date": 1710336816405,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -48,8 +48,11 @@\n     if (radius <= 0) {\n       throw new Error('Circle radius cannot be equal or smaller than 0')\n     }\n   }\n+  getArea(): number {\n+    \n+  }\n }\n \n export class Rectangle implements Figure {}\n \n"
+                }
+            ],
+            "date": 1710334472746,
+            "name": "Commit-0",
+            "content": "export interface Figure {\n  type Shape \n}\n\nexport class Triangle implements Figure {}\n\nexport class Circle implements Figure {}\n\nexport class Rectangle implements Figure {}\n\nexport function getInfo(figure): string {\n  return typeof figure;\n}\n"
+        }
+    ]
+}
