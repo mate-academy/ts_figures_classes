@@ -22,7 +22,7 @@ export class Triangle implements Figure {
     public c: number,
   ) {
     if (a <= 0 || b <= 0 || c <= 0) {
-      throw new Error('Side cannot be 0 and less');
+      throw new Error('The sides of a triangle must be more than 0.');
     }
 
     const longestSide = Math.max(a, b, c);
@@ -32,7 +32,8 @@ export class Triangle implements Figure {
 
     if (longestSide >= sumOfOtherSides) {
       throw new Error(
-        'The longest side of a triangle should be less than a sum of others',
+        // eslint-disable-next-line max-len
+        'The longest side of a triangle must be shorter than the sum of the other two sides.',
       );
     }
   }
@@ -53,7 +54,7 @@ export class Circle implements Figure {
     public radius: number,
   ) {
     if (radius <= 0) {
-      throw new Error('Radius cannot be 0 and less');
+      throw new Error('The radius of a circle must be more than 0.');
     }
   }
 
@@ -73,7 +74,7 @@ export class Rectangle implements Figure {
     public height: number,
   ) {
     if (width <= 0 || height <= 0) {
-      throw new Error('Side cannot be 0 and less');
+      throw new Error('The sides of a rectangle must be more than 0.');
     }
   }
 
