@@ -5,7 +5,7 @@ export interface Figure {
 }
 
 export class Triangle implements Figure {
-  public shape: string;
+  public shape: string = 'triangle';
 
   constructor(
     public color: string,
@@ -13,10 +13,8 @@ export class Triangle implements Figure {
     public b: number,
     public c: number,
   ) {
-    this.shape = 'triangle';
-
-    if (a <= 0 || b <= 0 || c < +0) {
-      throw new Error('Length of sides must be greater than 0');
+    if (a <= 0 || b <= 0 || c < 0) {
+      throw new Error('All sides must have a length greater than 0');
     }
 
     if (a + b <= c || a + c <= b || b + c <= a) {
@@ -40,14 +38,12 @@ export class Triangle implements Figure {
 }
 
 export class Circle implements Figure {
-  public shape: string;
+  public shape: string = 'circle';
 
   constructor(
     public color: string,
     public radius: number,
   ) {
-    this.shape = 'circle';
-
     if (radius <= 0) {
       throw new Error('Radius must be greater than 0');
     }
@@ -61,15 +57,13 @@ export class Circle implements Figure {
 }
 
 export class Rectangle implements Figure {
-  public shape: string;
+  public shape: string = 'rectangle';
 
   constructor(
     public color: string,
     public width: number,
     public height: number,
   ) {
-    this.shape = 'rectangle';
-
     if (width <= 0 || height <= 0) {
       throw new Error('Width and Height must be greater than 0');
     }
