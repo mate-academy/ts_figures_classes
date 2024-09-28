@@ -5,7 +5,7 @@ export interface Figure {
 }
 
 export class Triangle implements Figure {
-  shape: string;
+  shape: 'triangle';
 
   color: string;
 
@@ -41,7 +41,7 @@ export class Triangle implements Figure {
 }
 
 export class Circle implements Figure {
-  shape: string;
+  shape: 'circle';
 
   color: string;
 
@@ -66,7 +66,7 @@ export class Circle implements Figure {
 }
 
 export class Rectangle implements Figure {
-  shape: string;
+  shape: 'rectangle';
 
   color: string;
 
