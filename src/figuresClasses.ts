@@ -18,11 +18,13 @@ export class Triangle implements Figure {
     const sorted = [a, b, c].sort((num1, num2) => num2 - num1);
 
     if (this.a <= 0 || b <= 0 || c <= 0) {
-      throw new Error('your error message');
+      throw new Error('All sides must be greater than zero');
     }
 
     if (sorted[0] >= sorted[1] + sorted[2]) {
-      throw new Error('your error message');
+      throw new Error(
+        'The sum of any two sides must be greater than the remaining side',
+      );
     }
   }
 
@@ -46,7 +48,7 @@ export class Circle implements Figure {
     public shape: Shape = `circle`,
   ) {
     if (radius <= 0) {
-      throw new Error('your error message');
+      throw new Error('Radius must be greater than zero');
     }
   }
 
@@ -65,7 +67,7 @@ export class Rectangle implements Figure {
     public shape: Shape = `rectangle`,
   ) {
     if (width <= 0 || height <= 0) {
-      throw new Error('your error message');
+      throw new Error('Width and height must be greater than zero');
     }
   }
 
