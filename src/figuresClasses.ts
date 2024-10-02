@@ -1,36 +1,34 @@
 /* eslint-disable @typescript-eslint/lines-between-class-members */
+export type Color = 'red' | 'green' | 'blue';
 
 export interface Figure {
   shape: string;
-  color: 'red' | 'green' | 'blue';
+  color: Color;
 
   getArea(): number;
 }
 
 export class Triangle implements Figure {
   shape = 'triangle';
-  color: 'red' | 'green' | 'blue';
+  color: Color;
   private a: number;
   private b: number;
   private c: number;
 
-  constructor(
-    color: 'red' | 'green' | 'blue',
-    a: number,
-    b: number,
-    c: number,
-  ) {
+  constructor(color: Color, a: number, b: number, c: number) {
     this.color = color;
 
     if (a <= 0 || b <= 0 || c <= 0) {
       throw new Error('Side lengths must be greater than 0');
     }
 
-    const sides = [a, b, c].sort((x, z) => z - x);
+    const maxSide = Math.max(a, b, c);
+    const sumOfSides = a + b + c;
 
-    if (sides[0] >= sides[1] + sides[2]) {
+    if (maxSide >= sumOfSides - maxSide) {
       throw new Error('This triangle cannot exist');
     }
+
     this.a = a;
     this.b = b;
     this.c = c;
@@ -46,10 +44,10 @@ export class Triangle implements Figure {
 
 export class Circle implements Figure {
   shape = 'circle';
-  color: 'red' | 'green' | 'blue';
+  color: Color;
   private radius: number;
 
-  constructor(color: 'red' | 'green' | 'blue', radius: number) {
+  constructor(color: Color, radius: number) {
     this.color = color;
 
     if (radius <= 0) {
@@ -66,11 +64,11 @@ export class Circle implements Figure {
 
 export class Rectangle implements Figure {
   shape = 'rectangle';
-  color: 'red' | 'green' | 'blue';
+  color: Color;
   private width: number;
   private height: number;
 
-  constructor(color: 'red' | 'green' | 'blue', width: number, height: number) {
+  constructor(color: Color, width: number, height: number) {
     this.color = color;
 
     if (width <= 0 || height <= 0) {
