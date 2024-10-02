@@ -1,5 +1,3 @@
-// import { error } from 'console';
-
 type Shape = 'triangle' | 'circle' | 'rectangle';
 type Color = 'red' | 'green' | 'blue';
 
