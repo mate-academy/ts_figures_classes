@@ -10,14 +10,13 @@ export interface Figure {
 
 export class Triangle implements Figure {
   shape = 'triangle';
-  color: Color;
-  private a: number;
-  private b: number;
-  private c: number;
 
-  constructor(color: Color, a: number, b: number, c: number) {
-    this.color = color;
-
+  constructor(
+    public color: Color,
+    public a: number,
+    public b: number,
+    public c: number,
+  ) {
     if (a <= 0 || b <= 0 || c <= 0) {
       throw new Error('Side lengths must be greater than 0');
     }
@@ -28,10 +27,6 @@ export class Triangle implements Figure {
     if (maxSide >= sumOfSides - maxSide) {
       throw new Error('This triangle cannot exist');
     }
-
-    this.a = a;
-    this.b = b;
-    this.c = c;
   }
 
   getArea(): number {
@@ -44,16 +39,14 @@ export class Triangle implements Figure {
 
 export class Circle implements Figure {
   shape = 'circle';
-  color: Color;
-  private radius: number;
 
-  constructor(color: Color, radius: number) {
-    this.color = color;
-
+  constructor(
+    public color: Color,
+    public radius: number,
+  ) {
     if (radius <= 0) {
       throw new Error('Radius must be greater than 0');
     }
-    this.radius = radius;
   }
   getArea(): number {
     const area = Math.PI * this.radius * this.radius;
@@ -64,18 +57,15 @@ export class Circle implements Figure {
 
 export class Rectangle implements Figure {
   shape = 'rectangle';
-  color: Color;
-  private width: number;
-  private height: number;
 
-  constructor(color: Color, width: number, height: number) {
-    this.color = color;
-
+  constructor(
+    public color: Color,
+    public width: number,
+    public height: number,
+  ) {
     if (width <= 0 || height <= 0) {
       throw new Error('Width and hegiht must be greater than 0');
     }
-    this.width = width;
-    this.height = height;
   }
   getArea(): number {
     const area = this.width * this.height;
