@@ -9,9 +9,13 @@ export interface Figure {
 }
 export class Triangle implements Figure {
   shape: Shape;
+
   color: Color;
+
   private a: number;
+
   private b: number;
+
   private c: number;
 
   constructor(color: Color, a: number, b: number, c: number) {
