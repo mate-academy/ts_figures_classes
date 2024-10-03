@@ -1,33 +1,28 @@
+export type Shape = 'triangle' | 'circle' | 'rectangle';
+export type Color = 'red' | 'green' | 'blue';
+
 export interface Figure {
-  shape: 'triangle' | 'circle' | 'rectangle';
-  color: `red` | `green` | `blue`;
+  shape: Shape;
+  color: Color;
 
   getArea(): number;
 }
 export class Triangle implements Figure {
-  shape: 'triangle';
-
-  color: 'red' | 'green' | 'blue';
-
+  shape: Shape;
+  color: Color;
   private a: number;
-
   private b: number;
-
   private c: number;
 
-  constructor(
-    color: 'red' | 'green' | 'blue',
-    a: number,
-    b: number,
-    c: number,
-  ) {
+  constructor(color: Color, a: number, b: number, c: number) {
     if (a <= 0 || b <= 0 || c <= 0) {
       throw new Error('All sides must be greater than 0');
     }
 
-    const sides = [a, b, c].sort((x, y) => y - x);
+    const maxSide = Math.max(a, b, c);
+    const sumOfOtherSides = a + b + c - maxSide;
 
-    if (sides[0] >= sides[1] + sides[2]) {
+    if (maxSide >= sumOfOtherSides) {
       throw new Error(
         'The longest side must be less than the sum of the other two',
       );
@@ -40,21 +35,26 @@ export class Triangle implements Figure {
   }
 
   getArea(): number {
-    const s = (this.a + this.b + this.c) / 2;
-    const area = Math.sqrt(s * (s - this.a) * (s - this.b) * (s - this.c));
+    const semiPerimeter = (this.a + this.b + this.c) / 2;
+    const area = Math.sqrt(
+      semiPerimeter *
+        (semiPerimeter - this.a) *
+        (semiPerimeter - this.b) *
+        (semiPerimeter - this.c),
+    );
 
     return Math.floor(area * 100) / 100;
   }
 }
 
 export class Circle implements Figure {
-  shape: 'circle';
+  shape: Shape;
 
-  color: 'red' | 'green' | 'blue';
+  color: Color;
 
   private radius: number;
 
-  constructor(color: 'red' | 'green' | 'blue', radius: number) {
+  constructor(color: Color, radius: number) {
     if (radius <= 0) {
       throw new Error('Radius must be greater than 0');
     }
@@ -71,15 +71,15 @@ export class Circle implements Figure {
 }
 
 export class Rectangle implements Figure {
-  shape: 'rectangle';
+  shape: Shape;
 
-  color: 'red' | 'green' | 'blue';
+  color: Color;
 
   private width: number;
 
   private height: number;
 
-  constructor(color: 'red' | 'green' | 'blue', width: number, height: number) {
+  constructor(color: Color, width: number, height: number) {
     if (width <= 0 || height <= 0) {
       throw new Error('Width and height must be greater than 0');
     }
