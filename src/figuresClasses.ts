@@ -22,11 +22,13 @@ export class Triangle implements Figure {
     this.shape = 'triangle';
 
     if (this.a <= 0 || this.b <= 0 || this.c <= 0) {
-      throw new Error('errMessage');
+      throw new Error('Side cannot be <= 0');
     }
 
     if (isTriangle(this.a, this.b, this.c)) {
-      throw new Error('errMessage');
+      throw new Error(
+        'The longest side of a triangle cannot be <= than a sum of two others',
+      );
     }
   }
 
@@ -47,7 +49,7 @@ export class Circle implements Figure {
     this.shape = 'circle';
 
     if (this.radius <= 0) {
-      throw new Error('errMessage');
+      throw new Error('Radius cannot be <= 0');
     }
   }
 
@@ -68,7 +70,7 @@ export class Rectangle implements Figure {
     this.shape = 'rectangle';
 
     if (this.width <= 0 || this.height <= 0) {
-      throw new Error('errMessage');
+      throw new Error('Side cannot be <= 0');
     }
   }
 
