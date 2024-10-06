@@ -1,7 +1,7 @@
 type Shape = 'triangle' | 'circle' | 'rectangle';
 type Color = 'red' | 'green' | 'blue';
 
-function deleteRedundantNumber(numberWithRedundantNumber: number): number {
+function roundNumber(numberWithRedundantNumber: number): number {
   return Math.floor(numberWithRedundantNumber * 100) / 100;
 }
 
@@ -21,21 +21,23 @@ export class Triangle implements Figure {
     public b: number,
     public c: number,
   ) {
-    const maxSide = Math.max(this.a, this.b, this.c);
+    const maxSide = Math.max(a, b, c);
 
-    if (
-      [this.a, this.b, this.c].some((item) => item <= 0) ||
-      maxSide >= this.a + this.b + this.c - maxSide
-    ) {
-      throw new Error('your error message');
+    if ([a, b, c].some((item) => item <= 0) || maxSide >= a + b + c - maxSide) {
+      throw new Error('Such a triangle cannot exist');
     }
   }
 
   getArea(): number {
-    const s = (this.a + this.b + this.c) / 2;
-    const area = Math.sqrt(s * (s - this.a) * (s - this.b) * (s - this.c));
+    const areaFigure = (this.a + this.b + this.c) / 2;
+    const area = Math.sqrt(
+      areaFigure *
+        (areaFigure - this.a) *
+        (areaFigure - this.b) *
+        (areaFigure - this.c),
+    );
 
-    return deleteRedundantNumber(area);
+    return roundNumber(area);
   }
 }
 
@@ -47,14 +49,14 @@ export class Circle implements Figure {
     public radius: number,
   ) {
     if (radius <= 0) {
-      throw new Error('your error message');
+      throw new Error('Such a circle cannot exist');
     }
   }
 
   getArea(): number {
     const area = Math.PI * Math.pow(this.radius, 2);
 
-    return deleteRedundantNumber(area);
+    return roundNumber(area);
   }
 }
 
@@ -67,14 +69,14 @@ export class Rectangle implements Figure {
     public height: number,
   ) {
     if (width <= 0 || height <= 0) {
-      throw new Error('your error message');
+      throw new Error('Such a rectangle cannot exist');
     }
   }
 
   getArea(): number {
     const area = this.width * this.height;
 
-    return deleteRedundantNumber(area);
+    return roundNumber(area);
   }
 }
 
