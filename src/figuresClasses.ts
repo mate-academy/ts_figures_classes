@@ -4,20 +4,17 @@ export interface Figure {
 }
 
 function isTriangle(a: number, b: number, c: number): boolean {
-  if (a + b <= c || a + c <= b || b + c <= a) {
-    return true;
-  }
-
-  return false;
+  return a + b > c && a + c > b && b + c > a;
 }
 
 export class Triangle implements Figure {
+  shape: 'triangle';
+
   constructor(
-    public color: Figure,
+    public color: Figure['color'],
     public a: number,
     public b: number,
     public c: number,
-    public shape,
   ) {
     this.shape = 'triangle';
 
@@ -25,7 +22,7 @@ export class Triangle implements Figure {
       throw new Error('Side cannot be <= 0');
     }
 
-    if (isTriangle(this.a, this.b, this.c)) {
+    if (!isTriangle(this.a, this.b, this.c)) {
       throw new Error(
         'The longest side of a triangle cannot be <= than a sum of two others',
       );
@@ -41,10 +38,11 @@ export class Triangle implements Figure {
 }
 
 export class Circle implements Figure {
+  shape: 'circle';
+
   constructor(
-    public color: Figure,
+    public color: Figure['color'],
     public radius: number,
-    public shape,
   ) {
     this.shape = 'circle';
 
@@ -61,11 +59,12 @@ export class Circle implements Figure {
 }
 
 export class Rectangle implements Figure {
+  shape: 'rectangle';
+
   constructor(
-    public color: Figure,
+    public color: Figure['color'],
     public width: number,
     public height: number,
-    public shape,
   ) {
     this.shape = 'rectangle';
 
