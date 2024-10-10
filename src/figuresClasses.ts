@@ -13,14 +13,13 @@ export class Triangle implements Figure {
     public b: number,
     public c: number,
   ) {
-    this.color = color;
-
     if (a <= 0 || b <= 0 || c <= 0) {
-      throw new Error('Side lengths must be greater than 0.');
+      throw new Error('All sides of a triangle must be greater than 0.');
     }
 
     if (a + b <= c || a + c <= b || b + c <= a) {
-      throw new Error(`Sides ${a}, ${b}, and ${c} can't form a triangle.`);
+      throw new Error(`The sides ${a},
+         ${b}, and ${c} do not meet the triangle inequality theorem.`);
     }
   }
 
@@ -44,11 +43,8 @@ export class Circle implements Figure {
     public color: 'red' | 'green' | 'blue',
     public radius: number,
   ) {
-    this.color = color;
-
-    // Validate radius
     if (radius <= 0) {
-      throw new Error('Radius must be greater than 0.');
+      throw new Error('The radius of a circle must be greater than 0');
     }
   }
 
@@ -67,10 +63,10 @@ export class Rectangle implements Figure {
     public width: number,
     public height: number,
   ) {
-    this.color = color;
-
     if (width <= 0 || height <= 0) {
-      throw new Error('Width and height must be greater than 0.');
+      throw new Error(
+        'The width and height of a rectangle must be greater than 0',
+      );
     }
   }
 
