@@ -14,11 +14,11 @@ export class Triangle implements Figure {
     public c: number,
   ) {
     if (a <= 0 || b <= 0 || c <= 0) {
-      throw new Error('A sides must be greater than zero.');
+      throw new Error('All sides of a triangle must be greater than zero.');
     }
 
     if (a + b <= c || a + c <= b || b + c <= a) {
-      throw new Error('The provided sides do not form a triangle.');
+      throw new Error('The provided sides do not form a valid triangle.');
     }
   }
 
@@ -38,7 +38,7 @@ export class Circle implements Figure {
     public radius: number,
   ) {
     if (radius <= 0) {
-      throw new Error('Radius must be greater than zero.');
+      throw new Error('The radius of a circle must be greater than zero.');
     }
   }
 
@@ -58,7 +58,9 @@ export class Rectangle implements Figure {
     public width: number,
   ) {
     if (height <= 0 || width <= 0) {
-      throw new Error('Width and height must be greater than zero.');
+      throw new Error(
+        'The width and height of a rectangle must be greater than zero.',
+      );
     }
   }
 
