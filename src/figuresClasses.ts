@@ -57,7 +57,6 @@ export class Circle implements Figure {
     return Math.floor(circleArea * 100) / 100;
   }
 }
-
 export class Rectangle implements Figure {
   shape: Shape = 'rectangle';
 
