@@ -15,7 +15,7 @@ describe('Class "Triangle"', () => {
 
   test('should have a public property "shape"', () => {
     const triangle = new Triangle('green', 3, 4, 5);
-
+  
     expect(triangle)
       .toHaveProperty('shape');
   });
