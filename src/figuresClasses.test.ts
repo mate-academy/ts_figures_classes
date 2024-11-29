@@ -63,6 +63,8 @@ describe('Method "getArea" of class "Triangle"', () => {
   });
 });
 
+
+
 describe('Class "Circle"', () => {
   test('should be declared', () => {
     expect(Circle)
