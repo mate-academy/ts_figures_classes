@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<coverage generated="1733907112546" clover="3.2.0">
+  <project timestamp="1733907112546" name="All files">
+    <metrics statements="18" coveredstatements="4" conditionals="4" coveredconditionals="0" methods="7" coveredmethods="1" elements="29" coveredelements="5" complexity="0" loc="18" ncloc="18" packages="1" files="1" classes="1"/>
+    <file name="figuresClasses.ts" path="/Users/vv_misha_vv/Documents/Project/TypeScript_Academy/ts_figures_classes/src/figuresClasses.ts">
+      <metrics statements="18" coveredstatements="4" conditionals="4" coveredconditionals="0" methods="7" coveredmethods="1"/>
+      <line num="25" count="1" type="stmt"/>
+      <line num="26" count="1" type="stmt"/>
+      <line num="27" count="1" type="stmt"/>
+      <line num="28" count="1" type="stmt"/>
+      <line num="32" count="0" type="stmt"/>
+      <line num="34" count="0" type="stmt"/>
+      <line num="46" count="0" type="stmt"/>
+      <line num="47" count="0" type="stmt"/>
+      <line num="51" count="0" type="stmt"/>
+      <line num="65" count="0" type="stmt"/>
+      <line num="66" count="0" type="stmt"/>
+      <line num="68" count="0" type="stmt"/>
+      <line num="72" count="0" type="stmt"/>
+      <line num="77" count="0" type="cond" truecount="0" falsecount="4"/>
+      <line num="79" count="0" type="stmt"/>
+      <line num="81" count="0" type="stmt"/>
+      <line num="83" count="0" type="stmt"/>
+      <line num="85" count="0" type="stmt"/>
+    </file>
+  </project>
+</coverage>
