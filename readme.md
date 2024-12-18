@@ -13,9 +13,13 @@ In addition to a `color` constructors should accept required data:
 - a `radius` for a circle;
 - a `width` and a `height` for a rectangle.
 
-The constructors should throw errors if:
-- `0` or a negative number is passed to a constructor;
-- if passed lengths don't form a triangle (for the `Triangle` constructor);
+The constructors should `throw new Error('your error message')` if:
+- any length is <= 0
+- the longest side of a triangle is >= than a sum of two others
+
+Hints:
+- use `Math.PI` for calculating a circle square
+- use [Heron's formula](https://en.wikipedia.org/wiki/Heron%27s_formula) for triangles
 
 Example:
 ```typescript

@@ -1,19 +1,11 @@
-export interface Figure {
+export interface Figure {}
 
-}
+export class Triangle implements Figure {}
 
-export class Triangle {
+export class Circle implements Figure {}
 
-}
+export class Rectangle implements Figure {}
 
-export class Circle {
-
-}
-
-export class Rectangle {
-
-}
-
-export function getInfo(figure) {
-
+export function getInfo(figure): string {
+  return typeof figure;
 }
