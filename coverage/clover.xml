@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<coverage generated="1735208268081" clover="3.2.0">
+  <project timestamp="1735208268081" name="All files">
+    <metrics statements="14" coveredstatements="5" conditionals="16" coveredconditionals="8" methods="7" coveredmethods="2" elements="37" coveredelements="15" complexity="0" loc="14" ncloc="14" packages="1" files="1" classes="1"/>
+    <file name="figuresClasses.ts" path="C:\Mate\TS\ts_figures_classes\src\figuresClasses.ts">
+      <metrics statements="14" coveredstatements="5" conditionals="16" coveredconditionals="8" methods="7" coveredmethods="2"/>
+      <line num="15" count="1" type="cond" truecount="4" falsecount="1"/>
+      <line num="16" count="0" type="stmt"/>
+      <line num="19" count="1" type="cond" truecount="4" falsecount="1"/>
+      <line num="20" count="0" type="stmt"/>
+      <line num="25" count="1" type="stmt"/>
+      <line num="26" count="1" type="stmt"/>
+      <line num="28" count="1" type="stmt"/>
+      <line num="38" count="0" type="cond" truecount="0" falsecount="2"/>
+      <line num="39" count="0" type="stmt"/>
+      <line num="44" count="0" type="stmt"/>
+      <line num="55" count="0" type="cond" truecount="0" falsecount="4"/>
+      <line num="56" count="0" type="stmt"/>
+      <line num="61" count="0" type="stmt"/>
+      <line num="66" count="0" type="stmt"/>
+    </file>
+  </project>
+</coverage>
