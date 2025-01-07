@@ -8,7 +8,7 @@ export interface Figure {
   getArea: () => number;
 }
 
-function chechSide(side: number, sideName: string): void {
+function checkSide(side: number, sideName: string): void {
   if (side <= 0) {
     throw new Error(`${sideName} must be greater than 0.`);
   }
@@ -38,9 +38,9 @@ export class Triangle implements Figure {
     public b: number,
     public c: number,
   ) {
-    chechSide(a, 'a');
-    chechSide(b, 'b');
-    chechSide(c, 'c');
+    checkSide(a, 'a');
+    checkSide(b, 'b');
+    checkSide(c, 'c');
 
     isValidTriangle(a, b, c);
   }
@@ -60,7 +60,7 @@ export class Circle implements Figure {
     public color: Color,
     public radius: number,
   ) {
-    chechSide(radius, 'Radius');
+    checkSide(radius, 'Radius');
   }
 
   getArea(): number {
@@ -77,8 +77,8 @@ export class Rectangle implements Figure {
     public a: number,
     public b: number,
   ) {
-    chechSide(a, 'a');
-    chechSide(b, 'b');
+    checkSide(a, 'a');
+    checkSide(b, 'b');
   }
 
   getArea(): number {
