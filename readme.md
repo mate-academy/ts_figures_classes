@@ -1,38 +1,31 @@
-# Figures
-We have 3 types of figures: triangles, circles and rectangles. 
+# Figure Classes
 
-Write an interface `Figure` and 3 classes implementing it so that every figure 
-has:
-- a `shape` (`triangle`, `circle` or `rectangle`);
-- a `color` (`red`, `green` or `blue`);
-- a method `getArea` that returns the area of the figure rounded down to 
-hundredths.
+## 🎮 About the Project
+A **TypeScript-based** implementation of geometric figures using **OOP principles**.  
+The project defines an **interface `Figure`** and three implementing classes:  
+- **Triangle**  
+- **Circle**  
+- **Rectangle**  
 
-In addition to a `color` constructors should accept required data:
-- sides `a`, `b` and `c` for a triangle;
-- a `radius` for a circle;
-- a `width` and a `height` for a rectangle.
+Each figure has:  
+✅ A `shape` property (`triangle`, `circle`, or `rectangle`)  
+✅ A `color` property (`red`, `green`, or `blue`)  
+✅ A method `getArea()` that **calculates the area**, rounded down to hundredths  
 
-The constructors should `throw new Error('your error message')` if:
-- any length is <= 0
-- the longest side of a triangle is >= than a sum of two others
+## 🚀 Tech Stack
+- **TypeScript** (Strongly typed OOP approach)  
 
-Hints:
-- use `Math.PI` for calculating a circle square
-- use [Heron's formula](https://en.wikipedia.org/wiki/Heron%27s_formula) for triangles
+## 🛠️ Tools & Dependencies
+- **Jest** – Unit testing framework  
+- **ESLint** – Code quality and linting  
+- **Husky** – Git hooks automation  
+- **Prettier** – Code formatting  
+- **Babel** – JavaScript compiler  
 
-Example:
-```typescript
-new Rectangle('blue', 2, 0) // throws an error
-new Triangle('red', 1, 2, 3) // throws an error: sides 1, 2 and 3 can't form a triangle
-```
+## 📌 Features
+✅ Implements **OOP principles**  
+✅ Ensures **accurate area calculations**  
+✅ Uses **TypeScript for better maintainability**  
 
-Also create a function `getInfo` that takes a figure and returns a string in the
-next format:
-```typescript
-const redRectangle = new Rectangle('red', 3, 5);
-getInfo(redRectangle) === 'A red rectangle - 15';
-
-const greenCircle = new Circle('green', 1);
-getInfo(greenCircle) === 'A green circle - 3.14';
-```
+## 📜 License
+This project is forked from 💻 [Mate Academy](https://github.com/mate-academy/ts_figures_classes)
