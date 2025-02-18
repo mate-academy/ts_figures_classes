@@ -36,9 +36,9 @@ export class Triangle extends BaseFigure {
   ) {
     super(color);
 
-    this.validatePositive(a, 'A side ofthe triangle');
-    this.validatePositive(b, 'B side ofthe triangle');
-    this.validatePositive(c, 'C side ofthe triangle');
+    this.validatePositive(a, 'A side of the triangle');
+    this.validatePositive(b, 'B side of the triangle');
+    this.validatePositive(c, 'C side of the triangle');
 
     const maxSide = Math.max(a, b, c);
     const sumOfSides = a + b + c;
