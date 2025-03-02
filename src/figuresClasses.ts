@@ -56,7 +56,7 @@ export class Circle implements Figure {
   }
 
   public getArea(): number {
-    return Math.round(Math.PI * this.radius ** 2);
+    return Math.PI * this.radius ** 2;
   }
 }
 
@@ -86,5 +86,13 @@ export class Rectangle implements Figure {
 }
 
 export function getInfo(figure): string {
+  if (figure instanceof Triangle) {
+    return `Triangle: a = ${figure.a}, b = ${figure.b}, c = ${figure.c}, color = ${figure.color}`;
+  } else if (figure instanceof Circle) {
+    return `Circle: radius = ${figure.radius}, color = ${figure.color}`;
+  } else if (figure instanceof Rectangle) {
+    return `Rectangle: width = ${figure.width}, height = ${figure.height}, color = ${figure.color}`;
+  }
+
   return typeof figure;
 }
