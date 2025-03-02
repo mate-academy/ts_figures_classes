@@ -5,7 +5,9 @@ export interface Figure {
 }
 
 export class Triangle implements Figure {
-  public shape: 'triangle' = 'triangle';
+  public shape: 'triangle';
+
+  public color: 'red' | 'green' | 'blue';
 
   public a: number;
 
@@ -19,6 +21,12 @@ export class Triangle implements Figure {
     b: number,
     c: number,
   ) {
+    this.shape = 'triangle';
+    this.color = color;
+    this.a = a;
+    this.b = b;
+    this.c = c;
+
     if (a <= 0 || b <= 0 || c <= 0) {
       throw new Error('All sides must be positive numbers');
     }
@@ -26,16 +34,14 @@ export class Triangle implements Figure {
     if (a >= b + c || b >= a + c || c >= a + b) {
       throw new Error('Sides must form a triangle');
     }
-
-    this.a = a;
-    this.b = b;
-    this.c = c;
   }
 
   public getArea(): number {
     const p = (this.a + this.b + this.c) / 2;
 
-    return Math.sqrt(p * (p - this.a) * (p - this.b) * (p - this.c));
+    const area = Math.sqrt(p * (p - this.a) * (p - this.b) * (p - this.c));
+
+    return Math.round(area * 100) / 100;
   }
 }
 
@@ -44,19 +50,22 @@ export class Circle implements Figure {
 
   public radius: number;
 
-  constructor(
-    public color: 'red' | 'green' | 'blue',
-    radius: number,
-  ) {
+  public color: 'red' | 'green' | 'blue';
+
+  constructor(color: 'red' | 'green' | 'blue', radius: number) {
+    this.color = color;
+    this.shape = 'circle';
+    this.radius = radius;
+
     if (radius <= 0) {
       throw new Error('Radius must be positive number');
     }
-
-    this.radius = radius;
   }
 
   public getArea(): number {
-    return Math.PI * this.radius ** 2;
+    const area = Math.PI * this.radius ** 2;
+
+    return Math.round(area * 100) / 100;
   }
 }
 
@@ -72,27 +81,23 @@ export class Rectangle implements Figure {
     width: number,
     height: number,
   ) {
+    this.color = color;
+    this.shape = 'rectangle';
+    this.width = width;
+    this.height = height;
+
     if (width <= 0 || height <= 0) {
       throw new Error('Width and height must be positive numbers');
     }
-
-    this.width = width;
-    this.height = height;
   }
 
   public getArea(): number {
-    return this.width * this.height;
+    const area = this.width * this.height;
+
+    return Math.round(area * 100) / 100;
   }
 }
 
 export function getInfo(figure: Figure): string {
-  if (figure instanceof Triangle) {
-    return `A ${figure.color} triangle - ${figure.getArea()}`;
-  } else if (figure instanceof Circle) {
-    return `A ${figure.color} circle - ${figure.getArea()}`;
-  } else if (figure instanceof Rectangle) {
-    return `A ${figure.color} rectangle - ${figure.getArea()}`;
-  }
-
-  return typeof figure;
+  return `A ${figure.color} ${figure.shape} - ${figure.getArea()}`;
 }
