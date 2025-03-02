@@ -85,7 +85,7 @@ export class Rectangle implements Figure {
   }
 }
 
-export function getInfo(figure): string {
+export function getInfo(figure: Triangle | Circle | Rectangle): string {
   if (figure instanceof Triangle) {
     return `Triangle: a = ${figure.a}, b = ${figure.b}, c = ${figure.c}, color = ${figure.color}`;
   } else if (figure instanceof Circle) {
