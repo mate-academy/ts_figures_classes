@@ -1,11 +1,91 @@
-export interface Figure {}
+type Shape = 'triangle' | 'circle' | 'rectangle';
+type Color = 'red' | 'green' | 'blue';
 
-export class Triangle implements Figure {}
+export interface Figure {
+  shape: Shape;
+  color: Color;
+  getArea(): number;
+}
 
-export class Circle implements Figure {}
+export class Triangle implements Figure {
+  shape: Shape = 'triangle';
 
-export class Rectangle implements Figure {}
+  color: Color;
 
-export function getInfo(figure): string {
-  return typeof figure;
+  constructor(
+    color: Color,
+    private a: number,
+    private b: number,
+    private c: number,
+  ) {
+    if (a <= 0 || b <= 0 || c <= 0) {
+      throw new Error('All sides must be greater than 0');
+    }
+
+    const sides = [a, b, c].sort((x, y) => x - y);
+
+    if (sides[2] >= sides[0] + sides[1]) {
+      throw new Error(`Sides ${a}, ${b} and ${c} can't form a triangle`);
+    }
+
+    this.color = color;
+  }
+
+  getArea(): number {
+    const s = (this.a + this.b + this.c) / 2;
+    const area = Math.sqrt(s * (s - this.a) * (s - this.b) * (s - this.c));
+
+    return Number(area.toFixed(2));
+  }
+}
+
+export class Circle implements Figure {
+  shape: Shape = 'circle';
+
+  color: Color;
+
+  constructor(
+    color: Color,
+    private radius: number,
+  ) {
+    if (radius <= 0) {
+      throw new Error('Radius must be greater than 0');
+    }
+
+    this.color = color;
+  }
+
+  getArea(): number {
+    const area = Math.PI * this.radius * this.radius;
+
+    return Math.floor(area * 100) / 100;
+  }
+}
+
+export class Rectangle implements Figure {
+  shape: Shape = 'rectangle';
+
+  color: Color;
+
+  constructor(
+    color: Color,
+    private width: number,
+    private height: number,
+  ) {
+    if (width <= 0 || height <= 0) {
+      throw new Error('Width and height must be greater than 0');
+    }
+
+    this.color = color;
+  }
+
+  getArea(): number {
+    const area = this.width * this.height;
+
+    return Number(area.toFixed(2));
+  }
+}
+
+export function getInfo(figure: Figure): string {
+  return `A ${figure.color} ${figure.shape} - ${figure.getArea()}`;
 }
