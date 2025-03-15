@@ -14,11 +14,27 @@ export class Triangle implements Figure {
     public c: number,
   ) {
     if (a <= 0 || b <= 0 || c <= 0) {
-      throw new Error('Side lengths must be greater than zero.');
+      throw new Error(
+        `Invalid side length(s): a=${a}, b=${b}, c=${c}. All sides must be greater than zero.`,
+      );
     }
 
-    if (a + b <= c || a + c <= b || b + c <= a) {
-      throw new Error(`Sides ${a}, ${b}, and ${c} can't form a triangle.`);
+    if (a + b <= c) {
+      throw new Error(
+        `Invalid triangle: ${a} + ${b} <= ${c}. The sum of two sides must be greater than the third.`,
+      );
+    }
+
+    if (a + c <= b) {
+      throw new Error(
+        `Invalid triangle: ${a} + ${c} <= ${b}. The sum of two sides must be greater than the third.`,
+      );
+    }
+
+    if (b + c <= a) {
+      throw new Error(
+        `Invalid triangle: ${b} + ${c} <= ${a}. The sum of two sides must be greater than the third.`,
+      );
     }
   }
 
@@ -38,7 +54,9 @@ export class Circle implements Figure {
     public radius: number,
   ) {
     if (radius <= 0) {
-      throw new Error('Radius must be greater than zero');
+      throw new Error(
+        `Invalid radius: ${radius}. Radius must be greater than zero.`,
+      );
     }
   }
 
@@ -57,8 +75,16 @@ export class Rectangle implements Figure {
     public width: number,
     public height: number,
   ) {
-    if (width <= 0 || height <= 0) {
-      throw new Error('Width and height must be greater than zero');
+    if (width <= 0) {
+      throw new Error(
+        `Invalid width: ${width}. Width must be greater than zero.`,
+      );
+    }
+
+    if (height <= 0) {
+      throw new Error(
+        `Invalid height: ${height}. Height must be greater than zero.`,
+      );
     }
   }
 
