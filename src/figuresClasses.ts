@@ -8,13 +8,12 @@ export interface Figure {
 }
 
 export class Triangle implements Figure {
-  shape: Shape = 'triangle';
-
   constructor(
     public color: Color,
     public a: number,
     public b: number,
     public c: number,
+    public shape: Shape = 'triangle',
   ) {
     if (a <= 0 || b <= 0 || c <= 0) {
       throw new Error('Your sides should be positive numbers.');
@@ -34,11 +33,10 @@ export class Triangle implements Figure {
 }
 
 export class Circle implements Figure {
-  shape: Shape = 'circle';
-
   constructor(
     public color: Color,
     public radius: number,
+    public shape: Shape = 'circle',
   ) {
     if (radius <= 0) {
       throw new Error('Radius must be a positive number.');
@@ -48,17 +46,16 @@ export class Circle implements Figure {
   getArea(): number {
     const area = Math.PI * Math.pow(this.radius, 2);
 
-    return Math.trunc(area * 100) / 100;
+    return Math.round(area * 100) / 100;
   }
 }
 
 export class Rectangle implements Figure {
-  public shape: Shape = 'rectangle';
-
   constructor(
     public color: Color,
     public width: number,
     public height: number,
+    public shape: Shape = 'rectangle',
   ) {
     if (width <= 0 || height <= 0) {
       throw new Error('Width and height must be positive numbers.');
