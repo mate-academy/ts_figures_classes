@@ -17,6 +17,12 @@ module.exports = {
     '@typescript-eslint', 'jest',
   ],
   rules: {
+    'prettier/prettier': [
+      'error',
+      {
+        endOfLine: 'auto',
+      },
+    ],
     'arrow-body-style': 'off',
     'no-unused-vars': 'off',
     '@typescript-eslint/no-unused-vars': ['error'],
