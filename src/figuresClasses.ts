@@ -7,10 +7,8 @@ export interface Figure {
 export class Triangle implements Figure {
   readonly shape = 'triangle';
 
-  readonly color: string;
-
   constructor(
-    color: string,
+    readonly color: string,
     readonly a: number,
     readonly b: number,
     readonly c: number,
@@ -19,13 +17,23 @@ export class Triangle implements Figure {
       throw new Error('Sides must be greater than 0.');
     }
 
-    if (a + b <= c || b + c <= a || c + a <= b) {
+    if (a + b <= c) {
       throw new Error(
-        'The longest side must be less than the sum of the other two sides.',
+        `Invalid triangle: the sum of sides a (${a}) and b (${b}) must be greater than side c (${c}).`,
       );
     }
 
-    this.color = color;
+    if (b + c <= a) {
+      throw new Error(
+        `Invalid triangle: the sum of sides b (${b}) and c (${c}) must be greater than side a (${a}).`,
+      );
+    }
+
+    if (c + a <= b) {
+      throw new Error(
+        `Invalid triangle: the sum of sides c (${c}) and a (${a}) must be greater than side b (${b}).`,
+      );
+    }
   }
 
   getArea(): number {
@@ -39,17 +47,13 @@ export class Triangle implements Figure {
 export class Circle implements Figure {
   readonly shape = 'circle';
 
-  readonly color: string;
-
   constructor(
-    color: string,
+    readonly color: string,
     readonly radius: number,
   ) {
     if (radius <= 0) {
       throw new Error('Radius must be greater than 0.');
     }
-
-    this.color = color;
   }
 
   getArea(): number {
@@ -62,18 +66,14 @@ export class Circle implements Figure {
 export class Rectangle implements Figure {
   readonly shape = 'rectangle';
 
-  readonly color: string;
-
   constructor(
-    color: string,
+    readonly color: string,
     readonly width: number,
     readonly height: number,
   ) {
     if (width <= 0 || height <= 0) {
       throw new Error('Width and height must be greater than 0.');
     }
-
-    this.color = color;
   }
 
   getArea(): number {
