@@ -1,3 +1,4 @@
+// Enum keys was already capiltalized
 enum Shape {
   Triangle = 'triangle',
   Circle = 'circle',
