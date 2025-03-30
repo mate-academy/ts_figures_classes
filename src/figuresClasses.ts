@@ -1,11 +1,91 @@
-export interface Figure {}
+// Enum keys was already capiltalized
+enum Shape {
+  Triangle = 'triangle',
+  Circle = 'circle',
+  Rectangle = 'rectangle',
+}
 
-export class Triangle implements Figure {}
+enum Color {
+  Red = 'red',
+  Green = 'green',
+  Blue = 'blue',
+}
 
-export class Circle implements Figure {}
+export interface Figure {
+  shape: Shape;
+  color: Color;
+  getArea(): number;
+}
 
-export class Rectangle implements Figure {}
+export class Triangle implements Figure {
+  shape = Shape.Triangle;
 
-export function getInfo(figure): string {
-  return typeof figure;
+  constructor(
+    public color: Color,
+    public a: number,
+    public b: number,
+    public c: number,
+  ) {
+    if (a <= 0 || b <= 0 || c <= 0) {
+      throw new Error('Triangle side cannot be zero!');
+    }
+
+    const longestSide = Math.max(this.a, this.b, this.c);
+    const sumOfOthers = this.a + this.b + this.c - longestSide;
+
+    if (longestSide >= sumOfOthers) {
+      throw new Error('This is not a triangle!');
+    }
+  }
+
+  getArea(): number {
+    const s = (this.a + this.b + this.c) / 2;
+
+    const area = Math.sqrt(s * (s - this.a) * (s - this.b) * (s - this.c));
+
+    return Math.floor(area * 100) / 100;
+  }
+}
+
+export class Circle implements Figure {
+  shape = Shape.Circle;
+
+  constructor(
+    public color: Color,
+    public radius: number,
+  ) {
+    if (this.radius <= 0) {
+      throw new Error('Radius of a circle cannot be zero!');
+    }
+  }
+
+  getArea(): number {
+    const area = Math.PI * this.radius ** 2;
+
+    return Math.floor(area * 100) / 100;
+  }
+}
+
+export class Rectangle implements Figure {
+  shape = Shape.Rectangle;
+
+  constructor(
+    public color: Color,
+    public width: number,
+    public height: number,
+  ) {
+    if (width <= 0 || height <= 0) {
+      throw new Error('Width or height of a rectangle cannot be zero!');
+    }
+  }
+
+  getArea(): number {
+    const area = this.width * this.height;
+
+    return Math.floor(area * 100) / 100;
+  }
+}
+
+export function getInfo(figure: Triangle | Rectangle | Circle): string {
+  return `A ${figure.color} ${figure.shape} - ${figure.getArea()}`;
 }
