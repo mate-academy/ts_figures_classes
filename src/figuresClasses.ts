@@ -41,9 +41,9 @@ export class Triangle implements Figure {
   getArea(): number {
     const s = (this.a + this.b + this.c) / 2;
 
-    return Number(
-      Math.sqrt(s * (s - this.a) * (s - this.b) * (s - this.c)).toFixed(2),
-    );
+    const area = Math.sqrt(s * (s - this.a) * (s - this.b) * (s - this.c));
+
+    return Math.floor(area * 100) / 100;
   }
 }
 
@@ -60,8 +60,9 @@ export class Circle implements Figure {
   }
 
   getArea(): number {
-    // eslint-disable-next-line prettier/prettier
-    return Number((Math.PI * this.radius ** 2).toFixed(2));
+    const area = Math.PI * this.radius ** 2;
+
+    return Math.floor(area * 100) / 100;
   }
 }
 
@@ -79,8 +80,9 @@ export class Rectangle implements Figure {
   }
 
   getArea(): number {
-    // eslint-disable-next-line prettier/prettier
-    return Number((this.width * this.height).toFixed(2));
+    const area = this.width * this.height;
+
+    return Math.floor(area * 100) / 100;
   }
 }
 
