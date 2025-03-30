@@ -19,12 +19,26 @@ export class Triangle implements Figure {
   ) {
     this.shape = 'triangle';
 
-    if (a <= 0 || b <= 0 || c <= 0) {
-      throw new Error('one side is <= 0');
+    if (a <= 0) {
+      throw new Error(`side "a = ${a}" <= 0`);
+    } else if (b <= 0) {
+      throw new Error(`side "b = ${b}" <= 0`);
+    } else if (c <= 0) {
+      throw new Error(`side "c = ${c}" <= 0`);
     }
 
-    if (a >= b + c || b >= a + c || c >= a + b) {
-      throw new Error('one side is >= sum of other two');
+    if (a >= b + c) {
+      throw new Error(
+        `side "a = ${a}" is >= sum: ${b + c} of "b" and "c" side`,
+      );
+    } else if (b >= a + c) {
+      throw new Error(
+        `side "b = ${b}" is >= sum: ${a + c} of "a" and "c" side`,
+      );
+    } else if (c >= a + b) {
+      throw new Error(
+        `side "c = ${c}" is >= sum: ${b + a} of "b" and "a" side`,
+      );
     }
   }
 
@@ -32,6 +46,8 @@ export class Triangle implements Figure {
     const p = (this.a + this.b + this.c) / 2;
 
     return parseFloat(
+      // eslint-disable-next-line max-len
+      // subtraction of 0.005 is necessary for correct rounding of area to hundredths using the toFixed() method
       (
         Math.sqrt(p * (p - this.a) * (p - this.b) * (p - this.c)) - 0.005
       ).toFixed(2),
@@ -50,12 +66,16 @@ export class Circle implements Figure {
     this.shape = 'circle';
 
     if (radius <= 0) {
-      throw new Error('radius <= 0');
+      throw new Error(`radius: ${radius} <= 0`);
     }
   }
 
   getArea(): number {
-    return parseFloat((Math.PI * Math.pow(this.radius, 2) - 0.005).toFixed(2));
+    return parseFloat(
+      // eslint-disable-next-line max-len
+      // subtraction of 0.005 is necessary for correct rounding of area to hundredths using the toFixed() method
+      (Math.PI * Math.pow(this.radius, 2) - 0.005).toFixed(2),
+    );
   }
 }
 
@@ -71,12 +91,18 @@ export class Rectangle implements Figure {
     this.shape = 'rectangle';
 
     if (width <= 0 || height <= 0) {
-      throw new Error('one side <= 0');
+      throw new Error(`width: ${width} <= 0`);
+    } else if (height <= 0) {
+      throw new Error(`height: ${height} <= 0`);
     }
   }
 
   getArea(): number {
-    return parseFloat((this.width * this.height - 0.005).toFixed(2));
+    return parseFloat(
+      // eslint-disable-next-line max-len
+      // subtraction of 0.005 is necessary for correct rounding of area to hundredths using the toFixed() method
+      (this.width * this.height - 0.005).toFixed(2),
+    );
   }
 }
 
