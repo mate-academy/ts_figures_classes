@@ -7,35 +7,24 @@ export interface Figure {
 export class Triangle implements Figure {
   shape: 'triangle' = 'triangle';
 
-  a: number;
-
-  b: number;
-
-  c: number;
-
-  color: 'red' | 'green' | 'blue';
-
   constructor(
-    color: 'red' | 'green' | 'blue',
-    a: number,
-    b: number,
-    c: number,
+    public color: 'red' | 'green' | 'blue',
+    public a: number,
+    public b: number,
+    public c: number,
   ) {
     if (a <= 0 || b <= 0 || c <= 0) {
-      throw new Error('your error message');
+      throw new Error('each side must be greater than 0');
     }
 
     const maxSide = Math.max(a, b, c);
     const sumOtherSides = a + b + c - maxSide;
 
     if (maxSide >= sumOtherSides) {
-      throw new Error('your error message');
+      throw new Error(
+        'the longest side of a triangle is < than a sum of two others',
+      );
     }
-
-    this.color = color;
-    this.a = a;
-    this.b = b;
-    this.c = c;
   }
 
   getArea(): number {
@@ -49,17 +38,13 @@ export class Triangle implements Figure {
 export class Circle implements Figure {
   shape: 'circle' = 'circle';
 
-  color: 'red' | 'green' | 'blue';
-
-  radius: number;
-
-  constructor(color: 'red' | 'green' | 'blue', radius: number) {
+  constructor(
+    public color: 'red' | 'green' | 'blue',
+    public radius: number,
+  ) {
     if (radius <= 0) {
-      throw new Error('your error message');
+      throw new Error('the radius must be greater than 0');
     }
-
-    this.color = color;
-    this.radius = radius;
   }
 
   getArea(): number {
@@ -68,22 +53,16 @@ export class Circle implements Figure {
 }
 
 export class Rectangle implements Figure {
-  color: 'red' | 'green' | 'blue';
-
   shape: 'rectangle' = 'rectangle';
 
-  length: number;
-
-  width: number;
-
-  constructor(color: 'red' | 'green' | 'blue', length: number, width: number) {
+  constructor(
+    public color: 'red' | 'green' | 'blue',
+    public length: number,
+    public width: number,
+  ) {
     if (width < 0 || length < 0) {
-      throw new Error('your error message');
+      throw new Error('width and length must be greater than 0 ');
     }
-
-    this.color = color;
-    this.length = length;
-    this.width = width;
   }
 
   getArea(): number {
