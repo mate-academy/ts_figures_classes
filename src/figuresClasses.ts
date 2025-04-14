@@ -14,13 +14,18 @@ export class Triangle implements Figure {
     public b: number,
     public c: number,
   ) {
+    if ([this.a, this.b, this.c].some((side) => side <= 0)) {
+      throw new Error('Wrong size measures, can not be negative value or 0');
+    }
+
     if (
-      [this.a, this.b, this.c].some((side) => side <= 0) ||
       this.a >= this.b + this.c ||
       this.b >= this.a + this.c ||
       this.c >= this.b + this.a
     ) {
-      throw new Error('Wrong size measures');
+      throw new Error(
+        `Sides ${this.a}, ${this.b} and ${this.c} can not form a triangle`,
+      );
     }
   }
 
@@ -43,7 +48,7 @@ export class Circle implements Figure {
     public r: number,
   ) {
     if (this.r <= 0) {
-      throw new Error('Wrong size measures');
+      throw new Error('Radius can not be negative or 0');
     }
   }
 
@@ -61,7 +66,7 @@ export class Rectangle implements Figure {
     public b: number,
   ) {
     if (this.a <= 0 || this.b <= 0) {
-      throw new Error('Wrong size measures');
+      throw new Error('Sides can not be negative or 0');
     }
   }
 
