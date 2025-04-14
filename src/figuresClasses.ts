@@ -15,7 +15,7 @@ export class Triangle implements Figure {
     public c: number,
   ) {
     if ([this.a, this.b, this.c].some((side) => side <= 0)) {
-      throw new Error('Wrong size measures, can not be negative value or 0');
+      throw new Error('Size a, b and c can not be negative value or zero');
     }
 
     if (
@@ -48,7 +48,7 @@ export class Circle implements Figure {
     public r: number,
   ) {
     if (this.r <= 0) {
-      throw new Error('Radius can not be negative or 0');
+      throw new Error('Radius can not be negative or zero');
     }
   }
 
@@ -66,7 +66,7 @@ export class Rectangle implements Figure {
     public b: number,
   ) {
     if (this.a <= 0 || this.b <= 0) {
-      throw new Error('Sides can not be negative or 0');
+      throw new Error('Side a, b can not be negative or zero');
     }
   }
 
