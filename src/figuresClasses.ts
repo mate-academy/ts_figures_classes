@@ -10,15 +10,12 @@ export interface Figure {
 export class Triangle implements Figure {
   shape: Shape = 'triangle';
 
-  color: Color;
-
-  sideA: number;
-
-  sideB: number;
-
-  sideC: number;
-
-  constructor(color: Color, sideA: number, sideB: number, sideC: number) {
+  constructor(
+    public color: Color,
+    public sideA: number,
+    public sideB: number,
+    public sideC: number,
+  ) {
     const sides = [sideA, sideB, sideC].sort((x, y) => y - x);
     const [longest, side2, side3] = sides;
 
@@ -29,10 +26,6 @@ export class Triangle implements Figure {
     if (sideA <= 0 || sideB <= 0 || sideC <= 0) {
       throw new Error('The side must be greater than 0');
     }
-    this.color = color;
-    this.sideA = sideA;
-    this.sideB = sideB;
-    this.sideC = sideC;
   }
 
   getArea(): number {
@@ -49,16 +42,13 @@ export class Triangle implements Figure {
 export class Circle implements Figure {
   shape: Shape = 'circle';
 
-  color: Color;
-
-  radius: number;
-
-  constructor(color: Color, radius: number) {
+  constructor(
+    public color: Color,
+    public radius: number,
+  ) {
     if (radius <= 0) {
       throw new Error('Radius must be greater than 0');
     }
-    this.color = color;
-    this.radius = radius;
   }
 
   getArea(): number {
@@ -69,19 +59,15 @@ export class Circle implements Figure {
 export class Rectangle implements Figure {
   shape: Shape = 'rectangle';
 
-  color: Color;
-
-  width: number;
-
-  height: number;
-
-  constructor(color: Color, width: number, height: number) {
+  constructor(
+    public color: Color,
+    public width: number,
+    public height: number,
+  ) {
     if (height <= 0 || width <= 0) {
       throw new Error('Invalid rectangle sides');
     }
     this.color = color;
-    this.height = height;
-    this.width = width;
   }
 
   getArea(): number {
