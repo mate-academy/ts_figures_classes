@@ -67,7 +67,6 @@ export class Rectangle implements Figure {
     if (height <= 0 || width <= 0) {
       throw new Error('Invalid rectangle sides');
     }
-    this.color = color;
   }
 
   getArea(): number {
