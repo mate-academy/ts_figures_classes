@@ -11,7 +11,7 @@
     "postinstall": "npm run update",
     "format": "prettier --ignore-path .prettierignore --write './src/**/*.{html,css,scss,ts}'",
     "lint": "npm run format && eslint src/*.ts",
-    "test": "npm run lint && npm run test:only"
+    "test": "npm run lint && npm run test:only",
   },
   "author": "Mate academy",
   "license": "GPL-3.0",
@@ -19,7 +19,7 @@
     "@babel/preset-env": "^7.24.8",
     "@babel/preset-typescript": "^7.24.7",
     "@mate-academy/eslint-config": "latest",
-    "@mate-academy/scripts": "^1.9.5",
+    "@mate-academy/scripts": "^2.1.1",
     "@mate-academy/students-ts-config": "latest",
     "@types/jest": "^29.5.12",
     "@types/node": "^20.14.10",
