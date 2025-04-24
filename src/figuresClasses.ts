@@ -1,11 +1,86 @@
-export interface Figure {}
+type Shape = `triangle` | `circle` | `rectangle`;
+type Color = `red` | `green` | `blue`;
 
-export class Triangle implements Figure {}
+export interface Figure {
+  shape: Shape;
+  color: Color;
+  getArea: () => number;
+}
 
-export class Circle implements Figure {}
+const round = (n: number): number => {
+  return Math.floor(n * 100) / 100;
+};
 
-export class Rectangle implements Figure {}
+export class Triangle implements Figure {
+  constructor(
+    public color: Color,
+    public a: number,
+    public b: number,
+    public c: number,
+    public shape: Shape = 'triangle',
+  ) {
+    if (a <= 0 || b <= 0 || c <= 0) {
+      throw new Error('Length of a side cannot be <= 0');
+    }
 
-export function getInfo(figure): string {
-  return typeof figure;
+    const sides = [a, b, c].sort(
+      (side1: number, side2: number) => side1 - side2,
+    );
+
+    if (sides[0] + sides[1] <= sides[2]) {
+      throw new Error(
+        'The longest side of a triangle cannot be >= than a sum of two others',
+      );
+    }
+  }
+
+  getArea = (): number => {
+    const semiPerimeter = (this.a + this.b + this.c) / 2;
+
+    return round(
+      Math.sqrt(
+        semiPerimeter *
+          (semiPerimeter - this.a) *
+          (semiPerimeter - this.b) *
+          (semiPerimeter - this.c),
+      ),
+    );
+  };
+}
+
+export class Circle implements Figure {
+  constructor(
+    public color: Color,
+    public radius: number,
+    public shape: Shape = 'circle',
+  ) {
+    if (radius <= 0) {
+      throw new Error('Radius of a circle cannot be <= 0');
+    }
+  }
+
+  getArea = (): number => {
+    return round(Math.PI * this.radius ** 2);
+  };
+}
+
+export class Rectangle implements Figure {
+  constructor(
+    public color: Color,
+    public a: number,
+    public b: number,
+    public shape: Shape = 'rectangle',
+  ) {
+    if (a <= 0 || b <= 0) {
+      throw new Error('Length of a side cannot be <= 0');
+    }
+  }
+
+  getArea = (): number => {
+    return round(this.a * this.b);
+  };
+}
+
+export function getInfo(figure: Figure): string {
+  return `A ${figure.color} ${figure.shape} - ${figure.getArea()}`;
 }
