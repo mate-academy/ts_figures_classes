@@ -1,11 +1,74 @@
-export interface Figure {}
+type Shape = 'triangle' | 'circle' | 'rectangle';
+type Color = 'red' | 'green' | 'blue';
+export interface Figure {
+  shape: Shape;
+  color: Color;
+  getArea(): number;
+}
+export class Triangle implements Figure {
+  readonly shape = 'triangle';
 
-export class Triangle implements Figure {}
+  constructor(
+    readonly color: Color,
+    readonly a: number,
+    readonly b: number,
+    readonly c: number,
+  ) {
+    if (a < 1 || b < 1 || c < 1) {
+      throw new Error('Bad input data!');
+    }
 
-export class Circle implements Figure {}
+    if (a + b <= c || a + c <= b || b + c <= a) {
+      throw new Error('It cannot be a triangle!');
+    }
+  }
 
-export class Rectangle implements Figure {}
+  getArea = (): number => {
+    const halfPerimeter: number = (this.a + this.b + this.c) / 2;
+    const areaOfTriangle = Math.sqrt(
+      halfPerimeter *
+        (halfPerimeter - this.a) *
+        (halfPerimeter - this.b) *
+        (halfPerimeter - this.c),
+    );
 
-export function getInfo(figure): string {
-  return typeof figure;
+    return Math.floor(areaOfTriangle * 100) / 100;
+  };
+}
+export class Circle implements Figure {
+  readonly shape = 'circle';
+
+  constructor(
+    readonly color: Color,
+    readonly radius: number,
+  ) {
+    if (radius < 1) {
+      throw new Error('Bad input data!');
+    }
+  }
+
+  getArea = (): number => {
+    return Math.floor(this.radius ** 2 * Math.PI * 100) / 100;
+  };
+}
+export class Rectangle implements Figure {
+  readonly shape = 'rectangle';
+
+  constructor(
+    readonly color: Color,
+    readonly a: number,
+    readonly b: number,
+  ) {
+    if (a < 1 || b < 1) {
+      throw new Error('Bad input data!');
+    }
+  }
+
+  getArea = (): number => {
+    return Math.floor(this.a * this.b * 100) / 100;
+  };
+}
+
+export function getInfo(figure: Figure): string {
+  return `A ${figure.color} ${figure.shape} - ${figure.getArea()}`;
 }
