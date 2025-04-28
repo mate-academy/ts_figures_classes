@@ -1,93 +1,74 @@
+type Shape = 'triangle' | 'circle' | 'rectangle';
+type Color = 'red' | 'green' | 'blue';
 export interface Figure {
-  color: string;
+  shape: Shape;
+  color: Color;
   getArea(): number;
 }
-
 export class Triangle implements Figure {
-  sides: number[];
+  readonly shape = 'triangle';
 
-  public color: string;
+  constructor(
+    readonly color: Color,
+    readonly a: number,
+    readonly b: number,
+    readonly c: number,
+  ) {
+    if (a < 1 || b < 1 || c < 1) {
+      throw new Error('Bad input data!');
+    }
 
-  public shape: string = 'triangle';
-
-  constructor(sides: number[], color: string) {
-    this.sides = sides;
-    this.color = color;
-
-    if (
-      sides.length !== 3 ||
-      this.sides[0] <= 0 ||
-      this.sides[1] <= 0 ||
-      this.sides[2] <= 0 ||
-      this.sides[0] + this.sides[1] <= this.sides[2] ||
-      this.sides[0] + this.sides[2] <= this.sides[1] ||
-      this.sides[1] + this.sides[2] <= this.sides[0]
-    ) {
-      throw new Error('Triangle must have 3 sides');
+    if (a + b <= c || a + c <= b || b + c <= a) {
+      throw new Error('It cannot be a triangle!');
     }
   }
 
-  getArea(): number {
-    const s = this.sides.reduce((a, b) => a + b) / 2;
-
-    // eslint-disable-next-line max-len
-    const area = Math.sqrt(
-      s * (s - this.sides[0]) * (s - this.sides[1]) * (s - this.sides[2]),
+  getArea = (): number => {
+    const halfPerimeter: number = (this.a + this.b + this.c) / 2;
+    const areaOfTriangle = Math.sqrt(
+      halfPerimeter *
+        (halfPerimeter - this.a) *
+        (halfPerimeter - this.b) *
+        (halfPerimeter - this.c),
     );
 
-    return parseFloat(area.toFixed(2));
-  }
+    return Math.floor(areaOfTriangle * 100) / 100;
+  };
 }
-
 export class Circle implements Figure {
-  radius: number;
+  readonly shape = 'circle';
 
-  color: string;
-
-  shape: string = 'circle';
-
-  constructor(radius: number, color: string) {
-    this.radius = radius;
-    this.color = color;
-
-    if (radius <= 0) {
-      throw new Error('Circle must have a positive radius');
+  constructor(
+    readonly color: Color,
+    readonly radius: number,
+  ) {
+    if (radius < 0) {
+      throw new Error('Bad input data!');
     }
   }
 
-  getArea(): number {
-    const area = Math.PI * Math.pow(this.radius, 2);
-
-    return parseFloat(area.toFixed(2));
-  }
+  getArea = (): number => {
+    return Math.floor(this.radius ** 2 * Math.PI * 100) / 100;
+  };
 }
-
 export class Rectangle implements Figure {
-  width: number;
+  readonly shape = 'rectangle';
 
-  height: number;
-
-  color: string;
-
-  shape: string = 'rectangle';
-
-  constructor(width: number, height: number, color: string) {
-    this.width = width;
-    this.height = height;
-    this.color = color;
-
-    if (width <= 0 || height <= 0) {
-      throw new Error('Rectangle must have positive width and height');
+  constructor(
+    readonly color: Color,
+    readonly a: number,
+    readonly b: number,
+  ) {
+    if (a < 1 || b < 1) {
+      throw new Error('Bad input data!');
     }
   }
 
-  getArea(): number {
-    const area = this.width * this.height;
-
-    return parseFloat(area.toFixed(2));
-  }
+  getArea = (): number => {
+    return Math.floor(this.a * this.b * 100) / 100;
+  };
 }
 
 export function getInfo(figure: Figure): string {
-  return `A ${figure.color} ${figure.shape} - ${figure.getArea().toFixed(2)}`;
+  return `A ${figure.color} ${figure.shape} - ${figure.getArea()}`;
 }
