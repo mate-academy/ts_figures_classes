@@ -26,14 +26,17 @@ export class Triangle implements Figure {
     public c: number,
   ) {
     if (a <= 0 || b <= 0 || c <= 0) {
-      throw new Error('Side value must be biggest than 0');
+      throw new Error('Side value must be greater than 0');
     }
 
     const maxSideValue = Math.max(a, b, c);
     const anotherSides = a + b + c - maxSideValue;
 
     if (maxSideValue >= anotherSides) {
-      throw new Error('Max side value can`t be bigger than sum another sides');
+      throw new Error(
+        'The longest side cannot be greater than or equal to ' +
+          'the sum of the other two sides',
+      );
     }
   }
 
@@ -59,7 +62,7 @@ export class Circle implements Figure {
     public radius: number,
   ) {
     if (radius <= 0) {
-      throw new Error('Radius must be bigger than 0');
+      throw new Error('Radius must be greater than 0');
     }
   }
 
@@ -79,7 +82,7 @@ export class Rectangle implements Figure {
     public height: number,
   ) {
     if (width <= 0 || height <= 0) {
-      throw new Error('Side value must be biggest than 0');
+      throw new Error('Side value must be greater than 0');
     }
   }
 
