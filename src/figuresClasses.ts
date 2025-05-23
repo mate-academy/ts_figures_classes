@@ -1,69 +1,74 @@
-type Figures = 'triangle' | 'circle' | 'rectangle';
-type Colors = 'red' | 'green' | 'blue';
-
 export interface Figure {
-  shape: Figures;
-  color: Colors;
-  getArea(): number;
+  shape: string;
+  color: 'red' | 'green' | 'blue';
+  getArea: () => number;
 }
 
 export class Triangle implements Figure {
-  shape: Figures = 'triangle';
+  shape = 'triangle';
 
   constructor(
-    public color: Colors,
-    private a: number,
-    private b: number,
-    private c: number,
+    public color: 'red' | 'green' | 'blue',
+    public a: number,
+    public b: number,
+    public c: number,
   ) {
-    if (a + b <= c || a + c <= b || b + c <= a) {
-      throw new Error('Not valid triangle');
+    if (a <= 0 || b <= 0 || c <= 0) {
+      throw new Error('Side lengths must be greater than 0');
+    }
+
+    const longest = Math.max(a, b, c);
+    const sunOfOthers = a + b + c - longest;
+
+    if (longest >= sunOfOthers) {
+      throw new Error(`Sides ${a}, ${b} and ${c} can't form a triangle`);
     }
   }
 
-  getArea(): number {
-    const s = (this.a + this.b + this.c) * 0.5;
+  // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
+  getArea() {
+    const s = (this.a + this.b + this.c) / 2;
 
-    return +Math.sqrt(s * (s - this.a) * (s - this.b) * (s - this.c)).toFixed(
-      2,
+    return Number(
+      Math.sqrt(s * (s - this.a) * (s - this.b) * (s - this.c)).toFixed(2),
     );
   }
 }
 
 export class Circle implements Figure {
-  shape: Figures = 'circle';
+  shape = 'circle';
 
   constructor(
-    public color: Colors,
-    private radius: number,
+    public color: 'red' | 'green' | 'blue',
+    public radius: number,
   ) {
     if (radius <= 0) {
-      throw new Error('Not valid radius');
+      throw new Error('Radius must be greater than 0');
     }
   }
 
-  getArea(): number {
-    const area = Math.PI * this.radius * this.radius;
-
-    return Math.floor(area * 100) / 100;
+  // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
+  getArea() {
+    return Math.floor(Math.PI * this.radius ** 2 * 100) / 100;
   }
 }
 
 export class Rectangle implements Figure {
-  shape: Figures = 'rectangle';
+  shape = 'rectangle';
 
   constructor(
-    public color: Colors,
-    private width: number,
-    private height: number,
+    public color: 'red' | 'green' | 'blue',
+    public width: number,
+    public height: number,
   ) {
     if (width <= 0 || height <= 0) {
-      throw new Error('Not valid rectangle');
+      throw new Error('Width and height must be greater than 0');
     }
   }
 
-  getArea(): number {
-    return +(this.width * this.height).toFixed(2);
+  // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
+  getArea() {
+    return this.width * this.height;
   }
 }
 
