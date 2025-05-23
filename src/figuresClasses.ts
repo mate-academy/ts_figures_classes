@@ -24,7 +24,7 @@ export class Triangle implements Figure {
     const sides: number[] = [a, b, c];
 
     if (sides.some((side) => side <= 0)) {
-      throw new Error('your error message');
+      throw new Error('Sides must be positive numbers');
     }
 
     const newSides: number[] = sides.sort((side1, side2) => side1 - side2);
@@ -32,7 +32,7 @@ export class Triangle implements Figure {
     const sumSmalestSide: number = newSides[0] + newSides[1];
 
     if (newSides[2] >= sumSmalestSide) {
-      throw new Error('your error message');
+      throw new Error('Sides must be correct numbers');
     }
 
     this.shape = 'triangle';
@@ -59,7 +59,7 @@ export class Circle implements Figure {
 
   constructor(color: 'red' | 'green' | 'blue', a: number) {
     if (a <= 0) {
-      throw new Error('your error message');
+      throw new Error('Side must be positive number');
     }
 
     this.shape = 'circle';
@@ -85,7 +85,7 @@ export class Rectangle implements Figure {
 
   constructor(color: 'red' | 'green' | 'blue', width: number, height: number) {
     if (width <= 0 || height <= 0) {
-      throw new Error('your error message');
+      throw new Error('Side must be positive number');
     }
 
     this.shape = 'rectangle';
