@@ -9,16 +9,25 @@ export class Triangle implements Figure {
 
   public color: 'red' | 'green' | 'blue';
 
+  public a: number;
+
+  public b: number;
+
+  public c: number;
+
   constructor(
     color: 'red' | 'green' | 'blue',
-    public a: number,
-    public b: number,
-    public c: number,
+    a: number,
+    b: number,
+    c: number,
   ) {
     if (a <= 0 || b <= 0 || c <= 0 || a + b <= c || a + c <= b || b + c <= a) {
       throw new Error('Wrong params!');
     }
 
+    this.a = a;
+    this.b = b;
+    this.c = c;
     this.shape = 'triangle';
     this.color = color;
   }
@@ -36,14 +45,14 @@ export class Circle implements Figure {
 
   public color: 'red' | 'green' | 'blue';
 
-  constructor(
-    color: 'red' | 'green' | 'blue',
-    public radius: number,
-  ) {
+  public radius: number;
+
+  constructor(color: 'red' | 'green' | 'blue', radius: number) {
     if (radius <= 0) {
       throw new Error('Wrong params!');
     }
 
+    this.radius = radius;
     this.shape = 'circle';
     this.color = color;
   }
@@ -60,14 +69,22 @@ export class Rectangle implements Figure {
 
   public color: 'red' | 'green' | 'blue';
 
+  public width: number;
+
+  public height: number;
+
   constructor(
     color: 'red' | 'green' | 'blue',
-    public width: number,
-    public height: number,
+
+    width: number,
+    height: number,
   ) {
     if (width <= 0 || height <= 0) {
       throw new Error('Wrong params!');
     }
+
+    this.width = width;
+    this.height = height;
     this.shape = 'rectangle';
     this.color = color;
   }
