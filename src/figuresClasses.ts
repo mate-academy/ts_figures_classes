@@ -65,7 +65,7 @@ export class Rectangle implements Figure {
   }
 
   getArea(): number {
-    return parseFloat(Math.round(this.height * this.width).toFixed(2));
+    return parseFloat(Math.floor(this.height * this.width).toFixed(2));
   }
 }
 
