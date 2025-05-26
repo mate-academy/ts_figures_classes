@@ -7,18 +7,30 @@ export interface Figure {
 export class Triangle implements Figure {
   readonly shape = 'triangle';
 
+  public color: 'red' | 'green' | 'blue';
+
+  public a: number;
+
+  public b: number;
+
+  public c: number;
+
   constructor(
-    public color: 'red' | 'green' | 'blue',
-    public a: number,
-    public b: number,
-    public c: number,
+    color: 'red' | 'green' | 'blue',
+    a: number,
+    b: number,
+    c: number,
   ) {
     if (a + b <= c || a + c <= b || b + c <= a) {
       throw new Error(`Sides ${a}, ${b}, and ${c} can't form a triangle.`);
     }
+
+    this.color = color;
+    this.a = a;
+    this.b = b;
+    this.c = c;
   }
 
-  // I hate this. Took me 5 minutes to figure out.
   getArea(): number {
     const s = (this.a + this.b + this.c) / 2;
 
@@ -31,18 +43,20 @@ export class Triangle implements Figure {
 export class Circle implements Figure {
   readonly shape = 'circle';
 
-  constructor(
-    public color: 'red' | 'green' | 'blue',
-    public radius: number,
-  ) {
+  public color: 'red' | 'green' | 'blue';
+
+  public radius: number;
+
+  constructor(color: 'red' | 'green' | 'blue', radius: number) {
     if (radius <= 0) {
       throw new Error('Radius is not positive number!');
     }
+
+    this.color = color;
+    this.radius = radius;
   }
 
   getArea(): number {
-    // I HATE THIS. WHY. WHY!!!
-    // return parseFloat((Math.PI * this.radius * this.radius).toFixed(2));
     return Math.floor(Math.PI * this.radius * this.radius * 100) / 100;
   }
 }
@@ -50,14 +64,20 @@ export class Circle implements Figure {
 export class Rectangle implements Figure {
   readonly shape = 'rectangle';
 
-  constructor(
-    public color: 'red' | 'green' | 'blue',
-    public width: number,
-    public length: number,
-  ) {
+  public color: 'red' | 'green' | 'blue';
+
+  public width: number;
+
+  public length: number;
+
+  constructor(color: 'red' | 'green' | 'blue', width: number, length: number) {
     if (width <= 0 || length <= 0) {
       throw new Error("Error, can't be a rectangle");
     }
+
+    this.color = color;
+    this.width = width;
+    this.length = length;
   }
 
   getArea(): number {
