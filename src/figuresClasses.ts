@@ -74,5 +74,5 @@ export class Rectangle implements Figure {
 }
 
 export function getInfo(figure: Figure): string {
-  return typeof figure;
+  return `A ${figure.color} ${figure.shape} - ${figure.getArea()}`;
 }
