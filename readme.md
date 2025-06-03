@@ -18,7 +18,7 @@ The constructors should `throw new Error('your error message')` if:
 - the longest side of a triangle is >= than a sum of two others
 
 Hints:
-- use `Math.PI` for calculating a circle square
+- use `.PI` for calculating a circle square
 - use [Heron's formula](https://en.wikipedia.org/wiki/Heron%27s_formula) for triangles
 
 Example:
@@ -36,3 +36,4 @@ getInfo(redRectangle) === 'A red rectangle - 15';
 const greenCircle = new Circle('green', 1);
 getInfo(greenCircle) === 'A green circle - 3.14';
 ```
+Math
