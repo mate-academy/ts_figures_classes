@@ -44,7 +44,7 @@ export class Circle implements Figure {
     public radius: number,
     public shape: string = 'circle',
   ) {
-    if (Math.PI * this.radius <= 0) {
+    if (this.radius <= 0) {
       throw new Error('Length must be positive');
     }
 
