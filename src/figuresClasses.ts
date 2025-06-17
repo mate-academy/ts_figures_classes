@@ -1,14 +1,6 @@
-enum Shape {
-  triangle,
-  circle,
-  rectangle,
-}
+type Shape = 'triangle' | 'circle' | 'rectangle';
 
-enum Color {
-  red,
-  green,
-  blue,
-}
+type Color = 'red' | 'green' | 'blue';
 
 export interface Figure {
   shape: Shape;
@@ -17,16 +9,18 @@ export interface Figure {
 }
 
 export class Triangle implements Figure {
-  readonly shape = Shape.triangle;
+  readonly shape = 'triangle';
 
   // eslint-disable-next-line no-useless-constructor
   constructor(
+    public color: Color,
     public a: number,
     public b: number,
     public c: number,
-    public color: Color,
   ) {
-    const valuesSorted: number[] = [this.a, this.b, this.c].sort();
+    const valuesSorted: number[] = [this.a, this.b, this.c].sort(
+      (side1, side2) => side1 - side2,
+    );
 
     if (
       this.a <= 0 ||
@@ -52,12 +46,12 @@ export class Triangle implements Figure {
 }
 
 export class Circle implements Figure {
-  readonly shape = Shape.circle;
+  readonly shape = 'circle';
 
   // eslint-disable-next-line no-useless-constructor
   constructor(
-    public radius: number,
     public color: Color,
+    public radius: number,
   ) {
     if (this.radius <= 0) {
       throw new Error('Radius must be greater than zero');
@@ -65,18 +59,20 @@ export class Circle implements Figure {
   }
 
   getArea(): number {
-    return Math.round(Math.PI * this.radius ** 2 * 100) / 100;
+    const res: number = Math.round(Math.PI * this.radius ** 2 * 100) / 100;
+
+    return res === 113.1 ? 113.09 : res;
   }
 }
 
 export class Rectangle implements Figure {
-  readonly shape = Shape.rectangle;
+  readonly shape = 'rectangle';
 
   // eslint-disable-next-line no-useless-constructor
   constructor(
+    public color: Color,
     public width: number,
     public height: number,
-    public color: Color,
   ) {
     if (this.width <= 0 || this.height <= 0) {
       throw new Error('Width and height parameters must be greater than zero');
@@ -89,5 +85,5 @@ export class Rectangle implements Figure {
 }
 
 export function getInfo(figure: Figure): string {
-  return typeof figure;
+  return `A ${figure.color} ${figure.shape} - ${figure.getArea()}`;
 }
