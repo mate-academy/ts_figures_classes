@@ -7,10 +7,9 @@ describe('Class "Triangle"', () => {
   });
 
   test('should create an instance of class Triangle', () => {
-    const triangle = new Triangle('green', 3, 4, 5);
+    const triangle = new Triangle('green', 3, 4, 5 );
 
-    expect(triangle)
-      .toBeInstanceOf(Triangle);
+    expect(triangle).toBeInstanceOf(Triangle);
   });
 
   test('should have a public property "shape"', () => {
