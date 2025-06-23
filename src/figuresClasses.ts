@@ -1,11 +1,78 @@
-export interface Figure {}
+enum Shape {
+  triangle = 'triangle',
+  circle = 'circle',
+  rectangle = 'rectangle',
+}
 
-export class Triangle implements Figure {}
+type Color = 'red' | 'green' | 'blue';
 
-export class Circle implements Figure {}
+export interface Figure {
+  shape: Shape;
+  color: Color;
+  getArea(): number;
+}
 
-export class Rectangle implements Figure {}
+export class Triangle implements Figure {
+  shape: Shape = Shape.triangle;
 
-export function getInfo(figure): string {
-  return typeof figure;
+  constructor(
+    public color: Color,
+    public a: number,
+    public b: number,
+    public c: number,
+  ) {
+    if (a <= 0 || b <= 0 || c <= 0) {
+      throw new Error('Enter a valid value!');
+    }
+
+    if (a + b <= c || a + c <= b || b + c <= a) {
+      throw new Error('Enter a valid value!');
+    }
+  }
+
+  getArea(): number {
+    const s = (this.a + this.b + this.c) / 2;
+    const area = Math.sqrt(s * (s - this.a) * (s - this.b) * (s - this.c));
+
+    return Math.floor(area * 100) / 100;
+  }
+}
+
+export class Circle implements Figure {
+  shape: Shape = Shape.circle;
+
+  constructor(
+    public color: Color,
+    public radius: number,
+  ) {
+    if (radius <= 0) {
+      throw new Error('Enter a valid value!');
+    }
+  }
+
+  getArea(): number {
+    return Math.floor(Math.PI * this.radius ** 2 * 100) / 100;
+  }
+}
+
+export class Rectangle implements Figure {
+  shape: Shape = Shape.rectangle;
+
+  constructor(
+    public color: Color,
+    public width: number,
+    public height: number,
+  ) {
+    if (width <= 0 || height <= 0) {
+      throw new Error('Enter a valid value!');
+    }
+  }
+
+  getArea(): number {
+    return this.height * this.width;
+  }
+}
+
+export function getInfo(figure: Figure): string {
+  return `A ${figure.color} ${figure.shape} - ${figure.getArea()}`;
 }
