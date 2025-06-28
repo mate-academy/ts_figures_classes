@@ -43,14 +43,14 @@ export class Circle implements Figure {
     private radius: number,
   ) {
     if (this.radius <= 0) {
-      throw new Error('Triangle sides must be greater than 0');
+      throw new Error('Circle radius must be greater than 0');
     }
   }
 
   getArea(): number {
     const area = Math.PI * Math.pow(this.radius, 2);
 
-    return Math.floor(area * 100) / 100;
+    return +area.toFixed(2);
   }
 }
 
@@ -63,7 +63,7 @@ export class Rectangle implements Figure {
     private height: number,
   ) {
     if (width <= 0 || height <= 0) {
-      throw new Error('Triangle sides must be greater than 0');
+      throw new Error('Rectangle width and height must be greater than 0');
     }
   }
 
