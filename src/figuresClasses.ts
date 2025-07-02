@@ -32,7 +32,7 @@ export class Triangle implements Figure {
     const sumOfOther = this.a + this.b + this.c - longestSide;
 
     if (greateZero || longestSide >= sumOfOther) {
-      throw new Error('your error message');
+      throw new Error('Do not follow the conditions');
     }
   }
 }
@@ -57,7 +57,7 @@ export class Circle implements Figure {
     this.radius = radius;
 
     if (this.radius <= 0) {
-      throw new Error('your error message');
+      throw new Error('Radius is lower than 0');
     }
   }
 }
@@ -82,8 +82,8 @@ export class Rectangle implements Figure {
     this.width = width;
     this.height = height;
 
-    if (width < 0 || height < 0) {
-      throw new Error('your error message');
+    if (width <= 0 || height <= 0) {
+      throw new Error('One of the side is negative');
     }
   }
 }
