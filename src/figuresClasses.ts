@@ -20,7 +20,7 @@ export class Triangle implements Figure {
   c: number;
 
   constructor(color: Color, a: number, b: number, c: number) {
-    if (this.a <= 0 || this.b <= 0 || this.c <= 0) {
+    if (a <= 0 || b <= 0 || c <= 0) {
       throw new Error(`sides ${a}, ${b} and ${c} can't form a triangle`);
     }
 
