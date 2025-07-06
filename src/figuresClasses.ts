@@ -39,7 +39,7 @@ export class Triangle implements Figure {
     const otherSides = this.a + this.b + this.c - maxSide;
 
     if (maxSide >= otherSides) {
-      throw new Error('Side is not a positive number');
+      throw new Error('Figure is not a triangle');
     }
   }
 
