@@ -1,7 +1,8 @@
-1. [CODE STYLE] - ```getArea``` function doesn't need to accept any parameters. All necessary values are already available as object fields
+1. [CODE STYLE] - `getArea` function doesn't need to accept any parameters. All necessary values are already available as object fields
 2. [CODE STYLE] - Enum constant names usually start with capital letter. Values can have any case that's necessary.
 
 BAD EXAMPLE:
+
 ```
 export enum Directions {
   up = 'UP',
@@ -12,6 +13,7 @@ export enum Directions {
 ```
 
 GOOD EXAMPLE:
+
 ```
 export enum Directions {
   Up = 'UP',
@@ -24,6 +26,7 @@ export enum Directions {
 3. [CODE STYLE] - If you throw an error try to provide its detailed description in error message.
 
 BAD EXAMPLE:
+
 ```
 if (x % 2 !== 0) {
   throw new Error('Something went wrong')
@@ -31,6 +34,7 @@ if (x % 2 !== 0) {
 ```
 
 GOOD EXAMPLE:
+
 ```
 if (x % 2 !== 0) {
   throw new Error('Resulting value should be even number')
@@ -39,7 +43,8 @@ if (x % 2 !== 0) {
 
 4. [CODE KNOWLEDGE] - When you declare a constructor parameter with an access modifier TypeScript implicitly creates a property on the class with the same name as the parameter and assigns the parameter value to that property. You don't need to do it manually.
 
-BAD EXAMPLE: 
+BAD EXAMPLE:
+
 ```
 constructor(a: number, b: number, c: number) {
     this.a = a;
@@ -48,7 +53,8 @@ constructor(a: number, b: number, c: number) {
 }
 ```
 
-GOOD EXAMPLE: 
+GOOD EXAMPLE:
+
 ```
 constructor(a: number, b: number, c: number) {
 
