@@ -58,7 +58,7 @@ export class Circle implements Figure {
 }
 
 export class Rectangle implements Figure {
-  readonly shape: Shape = 'triangle';
+  readonly shape: Shape = 'rectangle';
 
   constructor(
     public color: Color,
@@ -80,17 +80,5 @@ export class Rectangle implements Figure {
 }
 
 export function getInfo(figure: Triangle | Circle | Rectangle): string {
-  const { color } = figure;
-  const S = figure.getArea();
-
-  switch (true) {
-    case figure instanceof Triangle:
-      return `A ${color} triangle - ${S}`;
-    case figure instanceof Circle:
-      return `A ${color} circle - ${S}`;
-    case figure instanceof Rectangle:
-      return `A ${color} rectangle - ${S}`;
-    default:
-      return 'Not found';
-  }
+  return `A ${figure.color} ${figure.shape} - ${figure.getArea()}`;
 }
