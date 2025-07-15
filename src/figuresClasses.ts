@@ -22,7 +22,7 @@ export class Triangle implements Figure {
   }
 
   constructor(
-    public color: string,
+    public color: 'red' | 'green' | 'blue',
     public a: number,
     public b: number,
     public c: number,
@@ -39,7 +39,7 @@ export class Triangle implements Figure {
         (semiperimeter - this.c),
     );
 
-    return Math.floor((area * 100) / 100);
+    return Math.floor(area * 100) / 100;
   }
 }
 
@@ -47,7 +47,7 @@ export class Circle implements Figure {
   shape: 'circle' = 'circle';
 
   constructor(
-    public color: string,
+    public color: 'red' | 'green' | 'blue',
     public radius: number,
   ) {
     if (this.radius <= 0) {
@@ -66,7 +66,7 @@ export class Rectangle implements Figure {
   shape: 'rectangle' = 'rectangle';
 
   constructor(
-    public color: string,
+    public color: 'red' | 'green' | 'blue',
     public height: number,
     public width: number,
   ) {
@@ -82,7 +82,7 @@ export class Rectangle implements Figure {
   }
 }
 
-export function getInfo(figure): string | undefined {
+export function getInfo(figure: Figure): string {
   switch (figure.shape) {
     case 'triangle': {
       return `A ${figure.color} ${figure.shape} - ${figure.getArea()}`;
