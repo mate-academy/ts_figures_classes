@@ -65,7 +65,7 @@ export class Rectangle implements Figure {
     public height: number,
   ) {
     if (width <= 0 || height <= 0) {
-      throw new Error('Any length can not be less or equal 0');
+      throw new Error('Width and height must be greater than 0');
     }
   }
 
