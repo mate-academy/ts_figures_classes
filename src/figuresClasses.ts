@@ -19,11 +19,13 @@ export class Triangle implements Figure {
     const longest = [a, b, c].sort((f: number, s: number) => s - f)[0];
 
     if (a <= 0 || b <= 0 || c <= 0) {
-      throw new Error('Error message');
+      throw new Error('Triangle sides must be positive numbers');
     }
 
     if (longest >= a + b + c - longest) {
-      throw new Error('Error message');
+      throw new Error(
+        'Sum of two sides of a triangle must be greater than the third side',
+      );
     }
   }
 
@@ -43,7 +45,7 @@ export class Circle implements Figure {
     public radius: number,
   ) {
     if (radius <= 0) {
-      throw new Error('Error message');
+      throw new Error('Circle radius must be a positive number');
     }
   }
 
@@ -63,7 +65,7 @@ export class Rectangle implements Figure {
     public height: number,
   ) {
     if (width <= 0 || height <= 0) {
-      throw new Error('Error message');
+      throw new Error('Rectangle width and height must be positive numbers');
     }
   }
 
