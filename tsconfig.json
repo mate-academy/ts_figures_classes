@@ -1,6 +1,6 @@
 {
-  "extends": "@mate-academy/students-ts-config",
-  "include": [
-    "src"
-  ]
+  "compilerOptions": {
+    // suas opções aqui
+  }
+  // provavelmente não tem "include" ou está incompleto
 }

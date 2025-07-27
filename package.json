@@ -1,39 +1,21 @@
 {
-  "name": "ts_figures_classes",
+  "name": "ts-figures-classes",
   "version": "1.0.0",
-  "description": "TS figures classes task",
-  "main": "src/figuresClasses.ts",
+  "type": "module",
   "scripts": {
-    "init": "mate-scripts init",
-    "start": "mate-scripts start",
-    "test:only": "mate-scripts test",
-    "update": "mate-scripts update",
-    "postinstall": "npm run update",
-    "format": "prettier --ignore-path .prettierignore --write './src/**/*.{html,css,scss,ts}'",
-    "lint": "npm run format && eslint src/*.ts",
-    "test": "npm run lint && npm run test:only"
+    "test": "jest",
+    "build": "tsc"
   },
-  "author": "Mate academy",
-  "license": "GPL-3.0",
   "devDependencies": {
-    "@babel/preset-env": "^7.24.8",
-    "@babel/preset-typescript": "^7.24.7",
-    "@mate-academy/eslint-config": "latest",
-    "@mate-academy/scripts": "^1.9.5",
-    "@mate-academy/students-ts-config": "latest",
-    "@types/jest": "^29.5.12",
-    "@types/node": "^20.14.10",
-    "@typescript-eslint/eslint-plugin": "^7.16.1",
-    "@typescript-eslint/parser": "^7.16.0",
-    "eslint": "^8.57.0",
-    "eslint-config-airbnb-typescript": "^18.0.0",
-    "eslint-plugin-jest": "^28.6.0",
-    "eslint-plugin-node": "^11.1.0",
-    "jest": "^29.7.0",
-    "prettier": "^3.3.2",
-    "typescript": "^5.4.2"
-  },
-  "mateAcademy": {
-    "projectType": "typescript"
+    "@types/jest": "^30.0.0",
+    "@typescript-eslint/eslint-plugin": "^8.38.0",
+    "@typescript-eslint/parser": "^8.38.0",
+    "eslint": "^8.57.1",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-prettier": "^5.5.3",
+    "jest": "^30.0.5",
+    "prettier": "^3.6.2",
+    "ts-jest": "^29.4.0",
+    "typescript": "^5.8.3"
   }
 }

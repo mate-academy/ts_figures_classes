@@ -1,0 +1,10 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.Rectangle = exports.Circle = exports.Triangle = void 0;
+const Triangle_1 = require("./Triangle");
+Object.defineProperty(exports, "Triangle", { enumerable: true, get: function () { return Triangle_1.Triangle; } });
+const Circle_1 = require("./Circle");
+Object.defineProperty(exports, "Circle", { enumerable: true, get: function () { return Circle_1.Circle; } });
+const Rectangle_1 = require("./Rectangle");
+Object.defineProperty(exports, "Rectangle", { enumerable: true, get: function () { return Rectangle_1.Rectangle; } });
+console.log('Projeto TypeScript pronto 🎉');
