@@ -147,7 +147,7 @@ describe('Class "Rectangle"', () => {
       .toHaveProperty('color');
   });
 
-  test('should check whether radius is a positive number', () => {
+  test('should check whether all sides are positive numbers', () => {
     expect(() => {
       new Rectangle('blue', 5, -1);
     }).toThrow(Error);

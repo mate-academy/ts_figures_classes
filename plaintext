@@ -1,0 +1,6 @@
+[15:27, 26/07/2025] Ivan: }
+[15:28, 26/07/2025] Ivan: 13 |         this.sides = sides;
+  14 |     }
+
+  at new Triangle (dist/figuresClasses.js:11:19)
+  at Object.<anonymous> (dist/figuresClasses.test.js:10:26)

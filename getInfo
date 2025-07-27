@@ -1,0 +1,5 @@
+export function getInfo(figure: Figure): string {
+  const area = figure.getArea();
+  const areaStr = area % 1 === 0 ? area.toString() : area.toFixed(2);
+  return `A ${figure.color} ${figure.shape} - ${areaStr}`;
+}
