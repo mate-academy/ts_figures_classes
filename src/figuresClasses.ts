@@ -25,12 +25,40 @@ export class Triangle implements Figure {
     public b: number,
     public c: number,
   ) {
-    if (a <= 0 || b <= 0 || c <= 0) {
-      throw new Error('Triangle sides must be greater than zero');
+    if (a <= 0) {
+      throw new Error(
+        `Triangle side a must be greater than zero, but got ${a}`,
+      );
     }
 
-    if (a + b <= c || a + c <= b || b + c <= a) {
-      throw new Error('Invalid triangle sides');
+    if (b <= 0) {
+      throw new Error(
+        `Triangle side b must be greater than zero, but got ${b}`,
+      );
+    }
+
+    if (c <= 0) {
+      throw new Error(
+        `Triangle side c must be greater than zero, but got ${c}`,
+      );
+    }
+
+    if (a + b <= c) {
+      throw new Error(
+        `Triangle inequality violated: side c (${c}) is not less than the sum of sides a (${a}) and b (${b})`,
+      );
+    }
+
+    if (a + c <= b) {
+      throw new Error(
+        `Triangle inequality violated: side b (${b}) is not less than the sum of sides a (${a}) and c (${c})`,
+      );
+    }
+
+    if (b + c <= a) {
+      throw new Error(
+        `Triangle inequality violated: side a (${a}) is not less than the sum of sides b (${b}) and c (${c})`,
+      );
     }
   }
 
@@ -50,7 +78,9 @@ export class Circle implements Figure {
     public radius: number,
   ) {
     if (radius <= 0) {
-      throw new Error('Circle radius must be greater than zero');
+      throw new Error(
+        `Circle radius must be greater than zero, but got ${radius}`,
+      );
     }
   }
 
@@ -69,8 +99,16 @@ export class Rectangle implements Figure {
     public width: number,
     public height: number,
   ) {
-    if (width <= 0 || height <= 0) {
-      throw new Error('Rectangle dimensions must be greater than zero');
+    if (width <= 0) {
+      throw new Error(
+        `Rectangle width must be greater than zero, but got ${width}`,
+      );
+    }
+
+    if (height <= 0) {
+      throw new Error(
+        `Rectangle height must be greater than zero, but got ${height}`,
+      );
     }
   }
 
