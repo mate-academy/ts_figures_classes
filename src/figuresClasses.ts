@@ -16,17 +16,41 @@ export class Triangle implements Figure {
     public b: number,
     public c: number,
   ) {
-    if (a <= 0 || b <= 0 || c <= 0) {
+    if (a <= 0) {
+      throw new Error('Triangle side a must be greater than 0');
+    }
+
+    if (b <= 0) {
+      throw new Error('Triangle side b must be greater than 0');
+    }
+
+    if (c <= 0) {
+      throw new Error('Triangle side c must be greater than 0');
+    }
+
+    if (b + c <= a) {
       throw new Error(
-        'Input data error!' +
-          'Each side of the triangle must be greater than 0.',
+        'Side a must be less than the sum of the other two sides.',
       );
     }
 
-    if (a + b <= c || a + c <= b || b + c <= a) {
+    if (a + c <= b) {
       throw new Error(
-        'Triangle side lengths are invalid:' +
-          'each side must be less than the sum of the other two.',
+        'Side b must be less than the sum of the other two sides.',
+      );
+    }
+
+    if (a + b <= c) {
+      throw new Error(
+        'Side c must be less than the sum of the other two sides.',
+      );
+    }
+
+    const validColors: Color[] = ['red', 'green', 'blue'];
+
+    if (!validColors.includes(color)) {
+      throw new Error(
+        `Invalid color. Only ${validColors.join(', ')} are valid.`,
       );
     }
   }
@@ -49,7 +73,15 @@ export class Circle implements Figure {
     public radius: number,
   ) {
     if (radius <= 0) {
-      throw new Error('Input data error! Radius must be > 0.');
+      throw new Error('Radius must be > 0.');
+    }
+
+    const validColors: Color[] = ['red', 'green', 'blue'];
+
+    if (!validColors.includes(color)) {
+      throw new Error(
+        `Invalid color. Only ${validColors.join(', ')} are valid.`,
+      );
     }
   }
 
@@ -68,8 +100,20 @@ export class Rectangle implements Figure {
     public width: number,
     public height: number,
   ) {
-    if (width <= 0 || height <= 0) {
-      throw new Error('Input data error! Width and height must be > 0.');
+    if (width <= 0) {
+      throw new Error('Width must be > 0.');
+    }
+
+    if (height <= 0) {
+      throw new Error('Height must be > 0.');
+    }
+
+    const validColors: Color[] = ['red', 'green', 'blue'];
+
+    if (!validColors.includes(color)) {
+      throw new Error(
+        `Invalid color. Only ${validColors.join(', ')} are valid.`,
+      );
     }
   }
 
@@ -80,12 +124,6 @@ export class Rectangle implements Figure {
   }
 }
 
-export function getInfo(figure: Triangle | Circle | Rectangle): string {
-  if (figure instanceof Triangle) {
-    return `A ${figure.color} ${figure.shape} - ${figure.getArea()}`;
-  } else if (figure instanceof Circle) {
-    return `A ${figure.color} ${figure.shape} - ${figure.getArea()}`;
-  } else {
-    return `A ${figure.color} ${figure.shape} - ${figure.getArea()}`;
-  }
+export function getInfo(figure: Figure): string {
+  return `A ${figure.color} ${figure.shape} - ${figure.getArea()}`;
 }
