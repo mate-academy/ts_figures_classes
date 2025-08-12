@@ -22,14 +22,16 @@ export class Triangle implements Figure {
     c: number,
   ) {
     if (a <= 0 || b <= 0 || c <= 0) {
-      throw new Error('sizes must be > 0');
+      throw new Error(`Triangle side a must be greater than 0, got ${a}`);
     }
 
     const max = Math.max(a, b, c);
     const sum = a + b + c;
 
     if (max >= sum - max) {
-      throw new Error('it;s not triangle');
+      throw new Error(
+        `Triangle sides do not satisfy triangle inequality: a=${a}, b=${b}, c=${c}`,
+      );
     }
 
     this.color = color;
@@ -57,7 +59,7 @@ export class Circle implements Figure {
 
   constructor(color: 'red' | 'green' | 'blue', radius: number) {
     if (radius <= 0) {
-      throw new Error('radius must be > 0');
+      throw new Error(`Circle radius must be greater than 0, got ${radius}`);
     }
 
     this.color = color;
@@ -82,7 +84,7 @@ export class Rectangle implements Figure {
 
   constructor(color: 'red' | 'green' | 'blue', width: number, height: number) {
     if (width <= 0 || height <= 0) {
-      throw new Error('your parameters are incorect');
+      throw new Error(`Rectangle width must be greater than 0, got ${width}`);
     }
     this.color = color;
 
