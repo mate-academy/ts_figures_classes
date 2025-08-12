@@ -1,22 +1,33 @@
 export interface Figure {
   shape: string;
   color: string;
-  a: number;
-  b?: number;
-  c?: number;
+  getArea(): number;
 }
 
+type Shape = 'triangle' | 'circle' | 'rectangle';
+type Color = 'red' | 'green' | 'blue';
+
 export class Triangle implements Figure {
-  public shape = 'triangle';
+  public shape: Shape = 'triangle';
 
   constructor(
-    public color: string,
+    public color: Color,
     public a: number,
     public b: number,
     public c: number,
   ) {
-    if (a <= 0 || b <= 0 || c <= 0 || Math.max(a, b, c) >= (a + b + c) / 2) {
-      throw new Error('Input data error!');
+    if (a <= 0 || b <= 0 || c <= 0) {
+      throw new Error(
+        'Input data error!' +
+          'Each side of the triangle must be greater than 0.',
+      );
+    }
+
+    if (a + b <= c || a + c <= b || b + c <= a) {
+      throw new Error(
+        'Triangle side lengths are invalid:' +
+          'each side must be less than the sum of the other two.',
+      );
     }
   }
 
@@ -26,46 +37,46 @@ export class Triangle implements Figure {
       semiP * (semiP - this.a) * (semiP - this.b) * (semiP - this.c),
     );
 
-    return Number(triangleSquare.toFixed(2));
+    return Math.floor(triangleSquare * 100) / 100;
   }
 }
 
 export class Circle implements Figure {
-  public shape = 'circle';
+  public shape: Shape = 'circle';
 
   constructor(
-    public color: string,
-    public a: number,
+    public color: Color,
+    public radius: number,
   ) {
-    if (a <= 0) {
-      throw new Error('Input data error!');
+    if (radius <= 0) {
+      throw new Error('Input data error! Radius must be > 0.');
     }
   }
 
   getArea(): number {
-    const circleSq = Math.PI * this.a ** 2;
+    const circleSq = Math.PI * this.radius ** 2;
 
     return Math.floor(circleSq * 100) / 100;
   }
 }
 
 export class Rectangle implements Figure {
-  public shape = 'rectangle';
+  public shape: Shape = 'rectangle';
 
   constructor(
-    public color: string,
-    public a: number,
-    public b: number,
+    public color: Color,
+    public width: number,
+    public height: number,
   ) {
-    if (a <= 0 || b <= 0) {
-      throw new Error('Input data error!');
+    if (width <= 0 || height <= 0) {
+      throw new Error('Input data error! Width and height must be > 0.');
     }
   }
 
   getArea(): number {
-    const rectangleSq = this.a * this.b;
+    const rectangleSq = this.width * this.height;
 
-    return Number(rectangleSq.toFixed(2));
+    return Math.floor(rectangleSq * 100) / 100;
   }
 }
 
