@@ -6,15 +6,25 @@ export interface Figure {
 
 export class Triangle implements Figure {
   shape: 'triangle' = 'triangle';
+
   color: 'red' | 'green' | 'blue';
+
   a: number;
+
   b: number;
+
   c: number;
 
-  constructor(color: 'red' | 'green' | 'blue', a: number, b: number, c: number) {
+  constructor(
+    color: 'red' | 'green' | 'blue',
+    a: number,
+    b: number,
+    c: number,
+  ) {
     if (a <= 0 || b <= 0 || c <= 0) {
       throw new Error('Triangle sides must be greater than 0');
     }
+
     if (a + b <= c || a + c <= b || b + c <= a) {
       throw new Error(`sides ${a}, ${b} and ${c} can't form a triangle`);
     }
@@ -27,13 +37,16 @@ export class Triangle implements Figure {
   getArea(): number {
     const s = (this.a + this.b + this.c) / 2;
     const area = Math.sqrt(s * (s - this.a) * (s - this.b) * (s - this.c));
-    return Math.round(area * 100) / 100;
+
+    return Number(area.toFixed(2));
   }
 }
 
 export class Circle implements Figure {
   shape: 'circle' = 'circle';
+
   color: 'red' | 'green' | 'blue';
+
   radius: number;
 
   constructor(color: 'red' | 'green' | 'blue', radius: number) {
@@ -46,14 +59,18 @@ export class Circle implements Figure {
 
   getArea(): number {
     const area = Math.PI * this.radius ** 2;
-    return Math.round(area * 100) / 100;
+
+    return Math.floor(area * 100) / 100;
   }
 }
 
 export class Rectangle implements Figure {
   shape: 'rectangle' = 'rectangle';
+
   color: 'red' | 'green' | 'blue';
+
   width: number;
+
   height: number;
 
   constructor(color: 'red' | 'green' | 'blue', width: number, height: number) {
@@ -67,7 +84,8 @@ export class Rectangle implements Figure {
 
   getArea(): number {
     const area = this.width * this.height;
-    return Math.round(area * 100) / 100;
+
+    return Number(area.toFixed(2));
   }
 }
 
