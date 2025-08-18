@@ -7,22 +7,22 @@ export interface Figure {
 export class Triangle implements Figure {
   shape = 'triangle';
 
-  color: 'red' | 'green' | 'blue';
-
-  a: number;
-
-  b: number;
-
-  c: number;
-
   constructor(
-    color: 'red' | 'green' | 'blue',
-    a: number,
-    b: number,
-    c: number,
+    public color: 'red' | 'green' | 'blue',
+    public a: number,
+    public b: number,
+    public c: number,
   ) {
-    if (a <= 0 || b <= 0 || c <= 0) {
-      throw new Error('All sides must be greater than 0');
+    if (a <= 0) {
+      throw new Error('Side a must be greater than 0');
+    }
+
+    if (b <= 0) {
+      throw new Error('Side b must be greater than 0');
+    }
+
+    if (c <= 0) {
+      throw new Error('Side c must be greater than 0');
     }
 
     const sides = [a, b, c].sort((x, y) => x - y);
@@ -30,19 +30,10 @@ export class Triangle implements Figure {
     if (sides[2] >= sides[0] + sides[1]) {
       throw new Error(`Sides ${a}, ${b}, ${c} can't form a triangle`);
     }
-
-    this.color = color;
-
-    this.a = a;
-
-    this.b = b;
-
-    this.c = c;
   }
 
   getArea(): number {
     const s = (this.a + this.b + this.c) / 2;
-
     const area = Math.sqrt(s * (s - this.a) * (s - this.b) * (s - this.c));
 
     return Math.floor(area * 100) / 100;
@@ -52,18 +43,13 @@ export class Triangle implements Figure {
 export class Circle implements Figure {
   shape = 'circle';
 
-  color: 'red' | 'green' | 'blue';
-
-  radius: number;
-
-  constructor(color: 'red' | 'green' | 'blue', radius: number) {
+  constructor(
+    public color: 'red' | 'green' | 'blue',
+    public radius: number,
+  ) {
     if (radius <= 0) {
       throw new Error('Radius must be greater than 0');
     }
-
-    this.color = color;
-
-    this.radius = radius;
   }
 
   getArea(): number {
@@ -76,22 +62,18 @@ export class Circle implements Figure {
 export class Rectangle implements Figure {
   shape = 'rectangle';
 
-  color: 'red' | 'green' | 'blue';
-
-  width: number;
-
-  height: number;
-
-  constructor(color: 'red' | 'green' | 'blue', width: number, height: number) {
-    if (width <= 0 || height <= 0) {
-      throw new Error('Width and height must be greater than 0');
+  constructor(
+    public color: 'red' | 'green' | 'blue',
+    public width: number,
+    public height: number,
+  ) {
+    if (width <= 0) {
+      throw new Error('Width must be greater than 0');
     }
 
-    this.color = color;
-
-    this.width = width;
-
-    this.height = height;
+    if (height <= 0) {
+      throw new Error('Height must be greater than 0');
+    }
   }
 
   getArea(): number {
