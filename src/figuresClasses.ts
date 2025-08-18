@@ -6,6 +6,7 @@ export interface Figure {
   color: Colors;
   getArea(): number;
 }
+
 export class Triangle implements Figure {
   shape: Shapes = 'triangle';
 
@@ -17,12 +18,15 @@ export class Triangle implements Figure {
   ) {
     if (a <= 0 || b <= 0 || c <= 0) {
       throw new Error(
-        'Side lengths must be positive numbers, greater than zero!',
+        'Side lengths must be positive numbers, greater than zero.',
       );
     }
 
     if (a + b <= c || a + c <= b || b + c <= a) {
-      throw new Error('The provided sides do not form a valid triangle');
+      throw new Error(
+        'The provided sides do not satisfy the triangle inequality:' +
+          'the sum of any two sides must be greater than the third.',
+      );
     }
   }
 
@@ -42,7 +46,7 @@ export class Circle implements Figure {
     public radius: number,
   ) {
     if (radius <= 0) {
-      throw new Error('Radius must be positive number, greater than zero');
+      throw new Error('Radius must be a positive number, greater than zero.');
     }
   }
 
@@ -63,7 +67,7 @@ export class Rectangle implements Figure {
   ) {
     if (height <= 0 || width <= 0) {
       throw new Error(
-        'Width and height must be positive numbers, greater than zero',
+        'Width and height must be positive numbers, greater than zero.',
       );
     }
   }
