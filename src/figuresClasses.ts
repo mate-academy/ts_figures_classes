@@ -2,7 +2,7 @@ type Shape = 'triangle' | 'circle' | 'rectangle';
 type Color = 'red' | 'green' | 'blue';
 
 export interface Figure {
-  color: Color[];
+  color: Color;
   shape: Shape;
   getArea(): number;
 }
@@ -10,7 +10,7 @@ export interface Figure {
 export class Triangle implements Figure {
   shape: 'triangle' = 'triangle';
 
-  color: Color[];
+  color: Color;
 
   a: number;
 
@@ -18,7 +18,7 @@ export class Triangle implements Figure {
 
   c: number;
 
-  constructor(color: Color[], a: number, b: number, c: number) {
+  constructor(color: Color, a: number, b: number, c: number) {
     if (a <= 0 || b <= 0 || c <= 0) {
       throw new Error('All sides must be greater than 0');
     }
@@ -41,22 +41,20 @@ export class Triangle implements Figure {
   getArea(): number {
     const s = (this.a + this.b + this.c) / 2;
 
-    let area = Math.sqrt(s * (s - this.a) * (s - this.b) * (s - this.c));
+    const area = Math.sqrt(s * (s - this.a) * (s - this.b) * (s - this.c));
 
-    area = Math.floor(area * 100) / 100;
-
-    return +area.toFixed(2);
+    return Math.floor(area * 100) / 100;
   }
 }
 
 export class Circle implements Figure {
   shape: 'circle' = 'circle';
 
-  color: Color[];
+  color: Color;
 
   radius: number;
 
-  constructor(color: Color[], radius: number) {
+  constructor(color: Color, radius: number) {
     if (radius <= 0) {
       throw new Error('Radius must be greater than 0');
     }
@@ -77,13 +75,13 @@ export class Circle implements Figure {
 export class Rectangle implements Figure {
   shape: 'rectangle' = 'rectangle';
 
-  color: Color[];
+  color: Color;
 
   width: number;
 
   height: number;
 
-  constructor(color: Color[], width: number, height: number) {
+  constructor(color: Color, width: number, height: number) {
     if (width <= 0 || height <= 0) {
       throw new Error('Width and height must be greater than 0');
     }
@@ -94,13 +92,12 @@ export class Rectangle implements Figure {
   }
 
   getArea(): number {
-    return this.width * this.height;
+    return Math.floor(this.width * this.height * 100) / 100;
   }
 }
 
 export function getInfo(figure: Figure): string {
-  const color = figure.color;
   const area = figure.getArea();
 
-  return `A ${color} ${figure.shape} - ${area}`;
+  return `A ${figure.color} ${figure.shape} - ${area}`;
 }
