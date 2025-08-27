@@ -14,18 +14,16 @@ export class Triangle implements Figure {
     public c: number,
     public shape: Shape = 'triangle',
   ) {
-    const longestSide = Math.max(a, b, c);
-    const twoOthers = [a, b, c]
-      .filter((n) => n !== longestSide)
-      .reduce((acc, n) => acc + n, 0);
-
-    if ([a, b, c].some((l) => l <= 0) || longestSide >= twoOthers) {
+    if ([a, b, c].some((l) => l <= 0) || a > b + c || b > a + c || c > a + b) {
       throw new Error('your error message');
     }
   }
 
   getArea(): number {
-    return (this.a + this.b + this.c) / 2;
+    const s = (this.a + this.b + this.c) / 2;
+    const area = Math.sqrt(s * (s - this.a) * (s - this.b) * (s - this.c));
+
+    return Math.round(area * 100) / 100;
   }
 }
 
@@ -41,7 +39,9 @@ export class Circle implements Figure {
   }
 
   getArea(): number {
-    return Math.PI * this.radius ** 2;
+    const area = Math.PI * this.radius ** 2;
+
+    return Math.floor(area * 100) / 100;
   }
 }
 
@@ -53,12 +53,12 @@ export class Rectangle implements Figure {
     public shape: Shape = 'rectangle',
   ) {
     if (width <= 0 || height <= 0) {
-      throw new Error('yor error message');
+      throw new Error('your error message');
     }
   }
 
   getArea(): number {
-    return this.width * this.height;
+    return Math.round(this.width * this.height * 100) / 100;
   }
 }
 
