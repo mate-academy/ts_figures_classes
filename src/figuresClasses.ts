@@ -14,8 +14,19 @@ export class Triangle implements Figure {
     public c: number,
     public shape: Shape = 'triangle',
   ) {
-    if ([a, b, c].some((l) => l <= 0) || a > b + c || b > a + c || c > a + b) {
-      throw new Error('your error message');
+    if ([a, b, c].some((l) => l <= 0)) {
+      throw new Error("Triangle side 'a' must be > 0, got " + a);
+    }
+
+    if (a >= b + c || b >= a + c || c >= a + b) {
+      throw new Error(
+        'Invalid triangle: violates triangle inequality for sides a=' +
+          a +
+          ', b=' +
+          b +
+          ', c=' +
+          c,
+      );
     }
   }
 
@@ -23,7 +34,7 @@ export class Triangle implements Figure {
     const s = (this.a + this.b + this.c) / 2;
     const area = Math.sqrt(s * (s - this.a) * (s - this.b) * (s - this.c));
 
-    return Math.round(area * 100) / 100;
+    return Math.floor(area * 100) / 100;
   }
 }
 
@@ -34,7 +45,7 @@ export class Circle implements Figure {
     public shape: Shape = 'circle',
   ) {
     if (radius <= 0) {
-      throw new Error('your error message');
+      throw new Error('Circle radius must be > 0, got ' + radius);
     }
   }
 
@@ -53,7 +64,7 @@ export class Rectangle implements Figure {
     public shape: Shape = 'rectangle',
   ) {
     if (width <= 0 || height <= 0) {
-      throw new Error('your error message');
+      throw new Error('Rectangle width must be > 0, got ' + width);
     }
   }
 
