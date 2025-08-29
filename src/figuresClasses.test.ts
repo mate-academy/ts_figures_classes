@@ -43,7 +43,7 @@ describe('Class "Triangle"', () => {
     const triangle = new Triangle('green', 3, 4, 5);
 
     expect(triangle.getArea)
-      .toBeInstanceOf(Function);
+      .toBeInstanceOf(Function);    
   });
 });
 
@@ -54,6 +54,7 @@ describe('Method "getArea" of class "Triangle"', () => {
     expect(typeof triangle.getArea())
       .toBe('number');
   });
+
 
   test('should return a correct square of a triangle', () => {
     const triangle = new Triangle('green', 3, 4, 5);
@@ -66,8 +67,10 @@ describe('Method "getArea" of class "Triangle"', () => {
 describe('Class "Circle"', () => {
   test('should be declared', () => {
     expect(Circle)
+      
       .toBeInstanceOf(Function);
   });
+  
 
   test('should create an instance of class Circle', () => {
     const circle = new Circle('red', 6);
