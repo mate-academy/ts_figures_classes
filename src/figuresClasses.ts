@@ -15,8 +15,20 @@ export class Triangle implements Figure {
   ) {
     const maxSide = Math.max(a, b, c);
 
-    if (maxSide >= a + b + c - maxSide || a <= 0 || b <= 0 || c <= 0) {
-      throw new Error('your error message');
+    if (maxSide >= a + b + c - maxSide) {
+      throw new Error('Triangle inequality violated');
+    }
+
+    if (a <= 0) {
+      throw new Error('Side a must be greater than 0');
+    }
+
+    if (b <= 0) {
+      throw new Error('Side b must be greater than 0');
+    }
+
+    if (c <= 0) {
+      throw new Error('Side c must be greater than 0');
     }
   }
 
@@ -44,7 +56,7 @@ export class Circle implements Figure {
     public radius: number,
   ) {
     if (radius <= 0) {
-      throw new Error('your error message');
+      throw new Error('Radius must be greater than 0');
     }
   }
 
@@ -61,8 +73,12 @@ export class Rectangle implements Figure {
     public width: number,
     public height: number,
   ) {
-    if (width <= 0 || height <= 0) {
-      throw new Error('your error message');
+    if (width <= 0) {
+      throw new Error('Width must be greater than 0');
+    }
+
+    if (height <= 0) {
+      throw new Error('Height must be greater than 0');
     }
   }
 
