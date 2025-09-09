@@ -16,7 +16,9 @@ export class Triangle implements Figure {
     public c: number,
   ) {
     if (this.a <= 0 || this.b <= 0 || this.c <= 0) {
-      throw new Error('wrong side');
+      throw new Error(
+        `Triangle sides must be > 0, got a=${this.a}, b=${this.b}, c=${this.c}`,
+      );
     }
 
     const maxSide = Math.max(this.a, this.b, this.c);
@@ -28,7 +30,9 @@ export class Triangle implements Figure {
           : this.a + this.b;
 
     if (maxSide >= restSum) {
-      throw new Error('triangle impossible');
+      throw new Error(
+        `Triangle with sides ${this.a}, ${this.b}, ${this.c} can't form a triangle`,
+      );
     }
   }
 
@@ -48,7 +52,7 @@ export class Circle implements Figure {
     public radius: number,
   ) {
     if (this.radius <= 0) {
-      throw new Error('circle is impossible');
+      throw new Error(`Radius must be > 0, got ${this.radius}`);
     }
   }
 
@@ -68,7 +72,9 @@ export class Rectangle implements Figure {
     public height: number,
   ) {
     if (this.height <= 0 || this.width <= 0) {
-      throw new Error('rectangle is impossible');
+      throw new Error(
+        `Width and height must be > 0, got width=${this.width}, height=${this.height}`,
+      );
     }
   }
 
