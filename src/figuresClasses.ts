@@ -1,10 +1,10 @@
-enum Color {
+export enum Color {
   Red = 'red',
   Green = 'green',
   Blue = 'blue',
 }
 
-enum Shape {
+export enum Shape {
   Triangle = 'triangle',
   Circle = 'circle',
   Rectangle = 'rectangle',
@@ -29,12 +29,24 @@ export class Triangle implements Figure {
     public b: number,
     public c: number,
   ) {
+    if (this.a <= 0) {
+      throw new Error('Side a must be a positive number');
+    }
+
+    if (this.b <= 0) {
+      throw new Error('Side b must be a positive number');
+    }
+
+    if (this.c <= 0) {
+      throw new Error('Side c must be a positive number');
+    }
+
     if (
       this.a + this.b <= this.c ||
       this.a + this.c <= this.b ||
       this.b + this.c <= this.a
     ) {
-      throw new Error('Трикутник з такими сторонами не існує');
+      throw new Error('A triangle with such sides does not exist');
     }
   }
 
@@ -53,7 +65,7 @@ export class Circle implements Figure {
     public radius: number,
   ) {
     if (radius <= 0) {
-      throw new Error('Радіус має бути додатним числом');
+      throw new Error('Radius must be a positive number');
     }
   }
 
@@ -71,7 +83,7 @@ export class Rectangle implements Figure {
     public height: number,
   ) {
     if (width <= 0 || height <= 0) {
-      throw new Error('Ширина та висота мають бути додатними числами');
+      throw new Error('Width and height must be positive numbers');
     }
   }
 
