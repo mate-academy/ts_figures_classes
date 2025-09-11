@@ -17,19 +17,21 @@ export class Triangle implements Figure {
     public shape: Shape = 'triangle',
   ) {
     if (a <= 0) {
-      throw new Error(`a cannot be ${a}`);
+      throw new Error(`Parameter 'a' must be > 0, got ${a}`);
     }
 
     if (b <= 0) {
-      throw new Error(`b cannot be ${b}`);
+      throw new Error(`Parameter 'b' must be > 0, got ${b}`);
     }
 
     if (c <= 0) {
-      throw new Error(`c cannot be ${c}`);
+      throw new Error(`Parameter 'c' must be > 0, got ${c}`);
     }
 
     if (a + b <= c || a + c <= b || b + c <= a) {
-      throw new Error(`invalid length`);
+      throw new Error(
+        `Sides ${a}, ${b}, and ${c} can't form a triangle: triangle inequality violated`,
+      );
     }
   }
 
@@ -48,7 +50,7 @@ export class Circle implements Figure {
     public shape: Shape = 'circle',
   ) {
     if (radius <= 0) {
-      throw new Error(`radius cannot be ${radius}`);
+      throw new Error(`Parameter 'radius' must be > 0, got ${radius}`);
     }
   }
 
@@ -67,11 +69,11 @@ export class Rectangle implements Figure {
     public shape: Shape = 'rectangle',
   ) {
     if (width <= 0) {
-      throw new Error(`width cannot be ${width}`);
+      throw new Error(`Parameter 'width' must be > 0, got ${width}`);
     }
 
     if (height <= 0) {
-      throw new Error(`height cannot be ${height}`);
+      throw new Error(`Parameter 'height' must be > 0, got ${height}`);
     }
   }
 
