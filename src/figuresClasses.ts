@@ -17,7 +17,9 @@ class Triangle implements Figure {
 
   constructor(color: string, a: number, b: number, c: number) {
     if (a <= 0 || b <= 0 || c <= 0) {
-      throw new Error('Sides must be positive numbers');
+      throw new Error(
+        `Triangle sides must be positive numbers, got a=${a}, b=${b}, c=${c}`,
+      );
     }
 
     if (a + b <= c || a + c <= b || b + c <= a) {
@@ -53,7 +55,7 @@ class Circle implements Figure {
 
   constructor(color: string, radius: number) {
     if (radius <= 0) {
-      throw new Error('Radius must be positive');
+      throw new Error(`Circle radius must be > 0, got radius=${radius}`);
     }
 
     this.color = color;
@@ -77,7 +79,9 @@ class Rectangle implements Figure {
 
   constructor(color: string, width: number, height: number) {
     if (width <= 0 || height <= 0) {
-      throw new Error('Width and height must be positive');
+      throw new Error(
+        `Rectangle width and height must be > 0, got width=${width}, height=${height}`,
+      );
     }
 
     this.color = color;
