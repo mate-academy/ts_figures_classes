@@ -15,8 +15,14 @@ export class Triangle implements Figure {
   ) {
     const longest = Math.max(a, b, c);
 
+    if (a <= 0 || b <= 0 || c <= 0) {
+      throw new Error('All sides must be a positive number');
+    }
+
     if (longest >= a + b + c - longest) {
-      throw new Error('your error message');
+      throw new Error(
+        'Longest side must be longer then sum of two other sides',
+      );
     }
   }
 
@@ -39,7 +45,7 @@ export class Circle implements Figure {
     private radius: number,
   ) {
     if (radius <= 0) {
-      throw new Error('your error message');
+      throw new Error('radius must be positive number');
     }
   }
 
@@ -57,7 +63,7 @@ export class Rectangle implements Figure {
     private height: number,
   ) {
     if (this.width <= 0 || this.height <= 0) {
-      throw new Error('your error message');
+      throw new Error('Width and height must be positive numbers');
     }
   }
 
@@ -66,6 +72,6 @@ export class Rectangle implements Figure {
   }
 }
 
-export function getInfo(figure): string {
+export function getInfo(figure: Figure): string {
   return `A ${figure.color} ${figure.shape} - ${figure.getArea()}`;
 }
