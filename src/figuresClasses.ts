@@ -17,14 +17,14 @@ export class Triangle implements Figure {
     public c: number,
   ) {
     if (a <= 0 || b <= 0 || c <= 0) {
-      throw new Error('Sides must be positive');
+      throw new Error('Sides must be greater than 0');
     }
 
     const maxSide = Math.max(a, b, c);
     const sumOther = a + b + c - maxSide;
 
     if (maxSide >= sumOther) {
-      throw new Error('Those sides cannot form a triangle');
+      throw new Error(`Sides ${a}, ${b} and ${c} can't form a triangle`);
     }
   }
 
@@ -44,7 +44,7 @@ export class Circle implements Figure {
     public radius: number,
   ) {
     if (radius <= 0) {
-      throw new Error('Radius must be positive');
+      throw new Error('Radius must be greater than 0');
     }
   }
 
@@ -64,7 +64,7 @@ export class Rectangle implements Figure {
     public height: number,
   ) {
     if (width <= 0 || height <= 0) {
-      throw new Error('Width and height must be positive');
+      throw new Error('Width and height must be greater than 0');
     }
   }
 
