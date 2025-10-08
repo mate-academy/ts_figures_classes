@@ -13,8 +13,22 @@ export class Triangle implements Figure {
     public b: number,
     public c: number,
   ) {
-    if (a <= 0 || b <= 0 || c <= 0) {
-      throw new Error(`sides ${a}, ${b} and ${c} must hit more than 0`);
+    let messageEr: string = '';
+
+    if (a <= 0) {
+      messageEr += `side 'a' must be > 0, got ${a};`;
+    }
+
+    if (b <= 0) {
+      messageEr += `side 'b' must be > 0, got ${b};`;
+    }
+
+    if (c <= 0) {
+      messageEr += `side 'c' must be > 0, got ${c};`;
+    }
+
+    if (messageEr.length > 0) {
+      throw new Error(messageEr);
     }
 
     const maxNumber = Math.max(a, b, c);
@@ -41,7 +55,7 @@ export class Circle implements Figure {
     public radius: number,
   ) {
     if (radius <= 0) {
-      throw new Error(`the ${radius} of the circle is less than 0`);
+      throw new Error(`radius must be > 0, got ${radius}`);
     }
   }
 
@@ -60,10 +74,12 @@ export class Rectangle implements Figure {
     public width: number,
     public height: number,
   ) {
-    if (width <= 0 || height <= 0) {
-      throw new Error(
-        `the width: ${width} and height: ${height} of the rectangle is less than 0`,
-      );
+    if (width <= 0) {
+      throw new Error(`width must be > 0, got ${width}`);
+    }
+
+    if (height <= 0) {
+      throw new Error(`height must be > 0, got ${height}`);
     }
   }
 
