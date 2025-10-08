@@ -13,15 +13,15 @@ export class Triangle implements Figure {
     public b: number,
     public c: number,
   ) {
-    if (a < 0 || b < 0 || c < 0) {
-      throw new Error('one side is less than zero');
+    if (a <= 0 || b <= 0 || c <= 0) {
+      throw new Error(`sides ${a}, ${b} and ${c} must hit more than 0`);
     }
 
     const maxNumber = Math.max(a, b, c);
     const sumNumber = [a, b, c].reduce((sum, n) => sum + n, 0);
 
     if (maxNumber >= sumNumber - maxNumber) {
-      throw new Error('one of the sides is not valid');
+      throw new Error(`sides ${a}, ${b} and ${c} can't form a triangle`);
     }
   }
 
@@ -40,8 +40,8 @@ export class Circle implements Figure {
     public color: 'red' | 'blue' | 'green',
     public radius: number,
   ) {
-    if (radius < 0) {
-      throw new Error('the radius of the circle is less than 0');
+    if (radius <= 0) {
+      throw new Error(`the ${radius} of the circle is less than 0`);
     }
   }
 
@@ -60,8 +60,10 @@ export class Rectangle implements Figure {
     public width: number,
     public height: number,
   ) {
-    if (width < 0 || height < 0) {
-      throw new Error('the width or height of the rectangle is less than 0');
+    if (width <= 0 || height <= 0) {
+      throw new Error(
+        `the width: ${width} and height: ${height} of the rectangle is less than 0`,
+      );
     }
   }
 
