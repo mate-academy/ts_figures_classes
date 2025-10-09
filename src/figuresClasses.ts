@@ -17,11 +17,18 @@ export class Triangle implements Figure {
     public c: number,
   ) {
     if (a <= 0 || b <= 0 || c <= 0) {
-      throw new Error('Sides must be positive numbers');
+      throw new Error(
+        `Triangle sides must be greater than 0. Got a=${a}, b=${b}, c=${c}`,
+      );
     }
 
+    const setMaxSide = Math.max(a, b, c);
+    const sumSides = a + b + c - setMaxSide;
+
     if (a + b <= c || a + c <= b || b + c <= a) {
-      throw new Error('Invalid triangle sides');
+      throw new Error(
+        `Triangle inequality violated: longest side (${setMaxSide}) >= sum of the other two (${sumSides}). Got a=${a}, b=${b}, c=${c}`,
+      );
     }
   }
 
@@ -41,7 +48,7 @@ export class Circle implements Figure {
     public radius: number,
   ) {
     if (radius <= 0) {
-      throw new Error('Radius must be a positive number');
+      throw new Error(`Radius must be greater than 0. Got radius=${radius}`);
     }
   }
 
@@ -60,7 +67,9 @@ export class Rectangle implements Figure {
     public height: number,
   ) {
     if (width <= 0 || height <= 0) {
-      throw new Error('Width and height must be positive numbers');
+      throw new Error(
+        `Width and height must be greater than 0. Got width=${width}, height=${height}`,
+      );
     }
   }
 
