@@ -23,13 +23,14 @@ export class Triangle implements Figure {
     const sumOfOtherSides = sideA + sideB + sideC - maxSide;
 
     if (maxSide >= sumOfOtherSides) {
-      throw new Error(`Sides 1, 2 and 3 can't form a triangle`);
+      throw new Error(
+        `Sides ${sideA}, ${sideB} and ${sideC} can't form a triangle`,
+      );
     }
   }
 
   getArea(): number {
-    const s =
-      Math.floor(((this.sideA + this.sideB + this.sideC) / 2) * 100) / 100;
+    const s = (this.sideA + this.sideB + this.sideC) / 2;
 
     return (
       Math.floor(
