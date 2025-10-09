@@ -1,27 +1,29 @@
 export interface Figure {
-  shape: string;
-  color: string;
+  shape: 'triangle' | 'circle' | 'rectangle';
+  color: 'red' | 'green' | 'blue';
   getArea(): number;
 }
 
 export class Triangle implements Figure {
-  public shape = 'triangle';
+  public shape: 'triangle' = 'triangle';
 
   constructor(
-    public color,
+    public color: 'red' | 'green' | 'blue',
     public sideA: number,
     public sideB: number,
     public sideC: number,
   ) {
     if (sideA <= 0 || sideB <= 0 || sideC <= 0) {
-      throw new Error('Incorrect length');
+      throw new Error(
+        `Side lengths must be > 0; received a=${sideA}, b=${sideB}, c=${sideC}`,
+      );
     }
 
     const maxSide = Math.max(sideA, sideB, sideC);
     const sumOfOtherSides = sideA + sideB + sideC - maxSide;
 
     if (maxSide >= sumOfOtherSides) {
-      throw new Error('Such a triangle cannot exist');
+      throw new Error(`Sides 1, 2 and 3 can't form a triangle`);
     }
   }
 
@@ -39,14 +41,14 @@ export class Triangle implements Figure {
 }
 
 export class Circle implements Figure {
-  public shape = 'circle';
+  public shape: 'circle' = 'circle';
 
   constructor(
-    public color,
+    public color: 'red' | 'green' | 'blue',
     public radius: number,
   ) {
     if (radius <= 0) {
-      throw new Error('Incorrect length');
+      throw new Error(`Radius length must be > 0; received radius=${radius}`);
     }
   }
 
@@ -56,23 +58,25 @@ export class Circle implements Figure {
 }
 
 export class Rectangle implements Figure {
-  shape = 'rectangle';
+  public shape: 'rectangle' = 'rectangle';
 
   constructor(
-    public color: string,
+    public color: 'red' | 'green' | 'blue',
     public sideA: number,
     public sideB: number,
   ) {
     if (sideA <= 0 || sideB <= 0) {
-      throw new Error('Incorrect length');
+      throw new Error(
+        `Side lengths must be > 0; received a=${sideA}, b=${sideB}`,
+      );
     }
   }
 
   getArea(): number {
-    return this.sideA * this.sideB;
+    return Math.floor(this.sideA * this.sideB * 100) / 100;
   }
 }
 
-export function getInfo(figure): string {
+export function getInfo(figure: Figure): string {
   return `A ${figure.color} ${figure.shape} - ${figure.getArea()}`;
 }
