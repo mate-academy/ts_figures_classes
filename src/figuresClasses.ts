@@ -22,7 +22,7 @@ export class Triangle implements Figure {
     const sumOthers = a + b + c - longest;
 
     if (longest >= sumOthers) {
-      throw new Error('invalid triangle sizes');
+      throw new Error(`sides ${a}, ${b} and ${c} can't form a triangle`);
     }
   }
 
@@ -41,7 +41,7 @@ export class Circle implements Figure {
     public radius: number,
   ) {
     if (radius <= 0) {
-      throw new Error('radius must be positive number');
+      throw new Error(`radius must be a positive number, got ${radius}`);
     }
   }
 
@@ -61,7 +61,7 @@ export class Rectangle implements Figure {
     public height: number,
   ) {
     if (width <= 0 || height <= 0) {
-      throw new Error('Width and height must be positive');
+      throw new Error(`width and height must be positive numbers, got width=${width}, height=${height}`);
     }
   }
 
@@ -72,6 +72,6 @@ export class Rectangle implements Figure {
   }
 }
 
-export function getInfo(figure): string {
+export function getInfo(figure: Figure): string {
   return `A ${figure.color} ${figure.shape} - ${figure.getArea()}`;
 }
