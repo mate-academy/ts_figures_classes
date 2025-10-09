@@ -16,11 +16,13 @@ export class Triangle implements Figure {
     public c: number,
   ) {
     if (a + b <= c || a + c <= b || b + c <= a) {
-      throw new Error('Invalid triangle sides');
+      throw new Error(`Sides must be > 0: a=${a}, b=${b}, c=${c}`);
     }
 
     if (a <= 0 || b <= 0 || c <= 0) {
-      throw new Error('Sides must be positive');
+      throw new Error(
+        `Triangle sides ${a}, ${b}, ${c} do not satisfy the triangle inequality`,
+      );
     }
   }
 
@@ -40,7 +42,7 @@ export class Circle implements Figure {
     public radius: number,
   ) {
     if (radius <= 0) {
-      throw new Error('Radius must be positive');
+      throw new Error(`Radius must be > 0, got ${radius}`);
     }
   }
 
@@ -60,7 +62,9 @@ export class Rectangle implements Figure {
     public height: number,
   ) {
     if (width <= 0 || height <= 0) {
-      throw new Error('Width and height must be positive');
+      throw new Error(
+        `Width and height must be > 0, got width=${width}, height=${height}`,
+      );
     }
   }
 
@@ -71,6 +75,6 @@ export class Rectangle implements Figure {
   }
 }
 
-export function getInfo(figure): string {
+export function getInfo(figure: Figure): string {
   return `A ${figure.color} ${figure.shape} - ${figure.getArea()}`;
 }
