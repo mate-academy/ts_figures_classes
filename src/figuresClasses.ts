@@ -15,7 +15,7 @@ export class Triangle implements Figure {
     public c: number,
   ) {
     if (a <= 0 || b <= 0 || c <= 0) {
-      throw new Error('Triangle sides must be positive numbers');
+      throw new Error(`sides ${a}, ${b} and ${c} must be positive numbers`);
     }
 
     const longest = Math.max(a, b, c);
