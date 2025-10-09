@@ -21,7 +21,7 @@ export class Triangle implements Figure {
     }
 
     if (a + b <= c || a + c <= b || b + c <= a) {
-      throw new Error('2 sides of triangle can`t be longer then third side');
+      throw new Error(`Sides ${a}, ${b} and ${c} can't form a triangle`);
     }
   }
 
