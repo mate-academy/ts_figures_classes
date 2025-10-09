@@ -1,7 +1,7 @@
 type Shapes = 'triangle' | 'circle' | 'rectangle';
 type Colors = 'red' | 'green' | 'blue';
 export interface Figure {
-  shape: Shapes;
+  readonly shape: Shapes;
   color: Colors;
   getArea(): number;
 }
@@ -18,7 +18,9 @@ export class Triangle implements Figure {
     this.shape = 'triangle';
 
     if (a <= 0 || b <= 0 || c <= 0) {
-      throw new Error('provide valid sides');
+      throw new Error(
+        `Triangle sides must be > 0 and satisfy triangle inequality. Received a=${a}, b=${b}, c=${c}`,
+      );
     }
 
     const sides = [a, b, c].sort((x, y) => x - y);
@@ -47,7 +49,7 @@ export class Circle implements Figure {
     this.shape = 'circle';
 
     if (radius <= 0) {
-      throw new Error('provide valid radius');
+      throw new Error(`Radius must be > 0. Received radius=${radius}`);
     }
   }
 
@@ -69,7 +71,9 @@ export class Rectangle implements Figure {
     this.shape = 'rectangle';
 
     if (width <= 0 || height <= 0) {
-      throw new Error('provide valid height or width');
+      throw new Error(
+        `Width and height must be > 0. Received width=${width}, height=${height}`,
+      );
     }
   }
 
