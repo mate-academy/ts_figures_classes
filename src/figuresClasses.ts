@@ -35,9 +35,7 @@ export class Triangle implements Figure {
       this.a + this.c <= this.b ||
       this.b + this.c <= this.a
     ) {
-      throw new Error(
-        'The sum of any two sides must be greater than the third side.',
-      );
+      throw new Error(`Triangle sides must be > 0: a=${a}, b=${b}, c=${c}`);
     }
   }
 
@@ -50,7 +48,7 @@ export class Triangle implements Figure {
         (semiperimetr - this.c),
     );
 
-    return +triangleArea.toFixed(2);
+    return Math.floor(triangleArea * 100) / 100;
   }
 }
 
@@ -66,16 +64,14 @@ export class Circle implements Figure {
     this.radius = radius;
 
     if (this.radius <= 0) {
-      throw new Error('The radius is invalid');
+      throw new Error(`The radius must be > 0: radius=${this.radius}`);
     }
   }
 
   public getArea(): number {
     const circleArea: number = Math.PI * (this.radius * this.radius);
-    const circleToPrecise = circleArea * 100;
-    const truncatedValue = Math.floor(circleToPrecise);
 
-    return truncatedValue / 100;
+    return Math.floor(circleArea * 100) / 100;
   }
 }
 
@@ -86,22 +82,24 @@ export class Rectangle implements Figure {
 
   public width: number;
 
-  public heigh: number;
+  public height: number;
 
-  constructor(color: 'red' | 'green' | 'blue', width: number, heigh: number) {
+  constructor(color: 'red' | 'green' | 'blue', width: number, height: number) {
     this.color = color;
     this.width = width;
-    this.heigh = heigh;
+    this.height = height;
 
-    if (this.width <= 0 || this.heigh <= 0) {
-      throw new Error('Some of parameters are incorrect');
+    if (this.width <= 0 || this.height <= 0) {
+      throw new Error(
+        `Width and height must be > 0: width=${width}, height=${height}`,
+      );
     }
   }
 
   public getArea(): number {
-    const rectangleArea: number = this.width * this.heigh;
+    const rectangleArea: number = this.width * this.height;
 
-    return +rectangleArea.toFixed(2);
+    return Math.floor(rectangleArea * 100) / 100;
   }
 }
 
