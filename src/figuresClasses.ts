@@ -27,7 +27,7 @@ export class Triangle implements Figure {
     this.c = c;
 
     if (this.a <= 0 || this.b <= 0 || this.c <= 0) {
-      throw new Error('Length of one or few side or sides are equal 0');
+      throw new Error(`Triangle sides must be > 0: a=${a}, b=${b}, c=${c}`);
     }
 
     if (
@@ -35,7 +35,9 @@ export class Triangle implements Figure {
       this.a + this.c <= this.b ||
       this.b + this.c <= this.a
     ) {
-      throw new Error(`Triangle sides must be > 0: a=${a}, b=${b}, c=${c}`);
+      throw new Error(
+        `Triangle sides ${a}, ${b} and ${c} can't form a triangle`,
+      );
     }
   }
 
