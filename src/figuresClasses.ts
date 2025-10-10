@@ -26,7 +26,7 @@ export class Triangle implements Figure {
     }
 
     if (a + b <= c || a + c <= b || b + c <= a) {
-      throw new Error('Sides do not form a triangle');
+      throw new Error(`Sides ${a}, ${b}, and ${c} do not form a triangle`);
     }
 
     this.shape = 'triangle';
@@ -62,7 +62,6 @@ export class Circle implements Figure {
 
     this.color = color;
 
-    this.radius = radius;
   }
 
   getArea(): number {
@@ -87,16 +86,11 @@ export class Rectangle implements Figure {
     this.shape = 'rectangle';
 
     this.color = color;
-
-    this.width = width;
-
-    this.height = height;
   }
 
   getArea(): number {
-    const rectangleFormula = Math.floor(this.width * this.height);
-
-    return Math.floor(rectangleFormula * 100) / 100;
+    const area = this.width * this.height;
+    return Math.floor(area * 100) / 100;
   }
 }
 
