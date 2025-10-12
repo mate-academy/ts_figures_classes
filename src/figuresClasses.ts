@@ -16,6 +16,11 @@ export class Triangle implements Figure {
   private c: number;
 
   constructor(color: string, a: number, b: number, c: number) {
+    // Validar que el color sea válido
+    if (!['red', 'green', 'blue'].includes(color)) {
+      throw new Error('Color must be one of: red, green, blue');
+    }
+
     // Validar que todos los lados sean positivos
     if (a <= 0 || b <= 0 || c <= 0) {
       throw new Error('All sides must be positive numbers');
@@ -52,6 +57,11 @@ export class Circle implements Figure {
   private radius: number;
 
   constructor(color: string, radius: number) {
+    // Validar que el color sea válido
+    if (!['red', 'green', 'blue'].includes(color)) {
+      throw new Error('Color must be one of: red, green, blue');
+    }
+
     // Validar que el radio sea positivo
     if (radius <= 0) {
       throw new Error('Radius must be a positive number');
@@ -78,6 +88,11 @@ export class Rectangle implements Figure {
   private height: number;
 
   constructor(color: string, width: number, height: number) {
+    // Validar que el color sea válido
+    if (!['red', 'green', 'blue'].includes(color)) {
+      throw new Error('Color must be one of: red, green, blue');
+    }
+
     // Validar que ancho y alto sean positivos
     if (width <= 0 || height <= 0) {
       throw new Error('Width and height must be positive numbers');
