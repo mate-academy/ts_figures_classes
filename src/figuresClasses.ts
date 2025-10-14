@@ -34,7 +34,7 @@ export class Triangle implements Figure {
 
     if (sides[2] >= sides[0] + sides[1]) {
       throw new Error(
-        'Biggest side can`t' + 'be bigger then the sum of other`s two',
+        `Triangle inequality violated: largest side ${sides[2]} >= ${sides[0]} + ${sides[1]}`,
       );
     }
   }
@@ -90,7 +90,7 @@ export class Rectangle implements Figure {
   }
 
   getArea(): number {
-    return Math.floor((this.height * this.width * 100) / 100);
+    return Math.floor(this.height * this.width * 100) / 100;
   }
 }
 
