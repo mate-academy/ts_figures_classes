@@ -25,15 +25,17 @@ export class Triangle implements Figure {
     this.color = color;
 
     if (this.a <= 0 || this.b <= 0 || this.c <= 0) {
-      throw new Error('incorrect data entered');
+      throw new Error('Side must be bigger then 0');
     }
 
     const sides = [this.a, this.b, this.c];
-    const biggestSide = Math.max(...sides);
-    const otherSides = sides.filter((side) => side !== biggestSide);
 
-    if (biggestSide >= otherSides[0] + otherSides[1]) {
-      throw new Error('incorrect data entered');
+    sides.sort((sideA, sideB) => sideA - sideB);
+
+    if (sides[2] >= sides[0] + sides[1]) {
+      throw new Error(
+        'Biggest side can`t' + 'be bigger then the sum of other`s two',
+      );
     }
   }
 
@@ -41,7 +43,7 @@ export class Triangle implements Figure {
     const s = (this.a + this.b + this.c) / 2;
     const area = Math.sqrt(s * (s - this.a) * (s - this.b) * (s - this.c));
 
-    return Number(area.toFixed(2));
+    return Math.floor(area * 100) / 100;
   }
 }
 
@@ -57,7 +59,7 @@ export class Circle implements Figure {
     this.radius = radius;
 
     if (this.radius <= 0) {
-      throw new Error('incorrect data entered');
+      throw new Error('Radius must be greater than 0');
     }
   }
 
@@ -83,12 +85,12 @@ export class Rectangle implements Figure {
     this.height = height;
 
     if (this.width <= 0 || this.height <= 0) {
-      throw new Error('incorrect data entered');
+      throw new Error('Width/Height must be greater than 0');
     }
   }
 
   getArea(): number {
-    return Number((this.height * this.width).toFixed(2));
+    return Math.floor((this.height * this.width * 100) / 100);
   }
 }
 
