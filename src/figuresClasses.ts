@@ -15,20 +15,18 @@ export interface Figure {
 
 export class Rectangle implements Figure {
   readonly shape: Shape = 'rectangle';
-  color: Color;
-  private width: number;
-  private height: number;
-
-  constructor(color: Color, width: number, height: number) {
-
-    if (width <= 0 || height <= 0) {
+  
+  constructor(
+        public readonly color: Color, // Public readonly property declared via shorthand
+        private readonly width: number, // Private readonly property declared via shorthand
+        private readonly height: number // Private readonly property declared via shorthand
+    ) {
+        if (width <= 0 || height <= 0) {
             throw new Error('Width and height must be positive values.');
         }
-
-    this.color = color;
-    this.width = width;
-    this.height = height;
-  }
+        // Properties are automatically initialized by the shorthand, no 'this.width = width;' needed.
+    }
+ 
 
   getArea(): number {
     return roundDownToHundredths(this.width * this.height);
@@ -37,18 +35,16 @@ export class Rectangle implements Figure {
 
 export class Circle implements Figure {
   readonly shape: Shape = 'circle';
-  color: Color;
-  private radius: number;
+  
 
-  constructor(color: Color, radius: number) {
-
-    if (radius <= 0) {
+  constructor(
+        public readonly color: Color, // Public readonly property declared via shorthand
+        private readonly radius: number // Private readonly property declared via shorthand
+    ) {
+        if (radius <= 0) {
             throw new Error('Radius must be a positive value.');
         }
-
-    this.color = color;
-    this.radius = radius;
-  }
+    }
 
   getArea(): number {
     return roundDownToHundredths(Math.PI * this.radius * this.radius);
@@ -57,26 +53,26 @@ export class Circle implements Figure {
 
 export class Triangle implements Figure {
   readonly shape: Shape = 'triangle';
-  color: Color;
-  private a: number;
-  private b: number;
-  private c: number;
 
-  constructor(color: Color, a: number, b: number, c: number) {
-
-    if (a <= 0 || b <= 0 || c <= 0) {
-            throw new Error('Sides must be positive values.');
+  constructor(
+        public readonly color: Color, // Public readonly property declared via shorthand
+        private readonly a: number, // Private readonly property declared via shorthand
+        private readonly b: number, // Private readonly property declared via shorthand
+        private readonly c: number // Private readonly property declared via shorthand
+    ) {
+        // Validation: all lengths must be positive
+        if (a <= 0 || b <= 0 || c <= 0) {
+            throw new Error('All triangle sides must be positive.');
         }
+
+        // Validation: Triangle Inequality Theorem (longest side must be < sum of the other two)
         const sides = [a, b, c].sort((x, y) => x - y);
         const [side1, side2, longest] = sides;
+
         if (longest >= side1 + side2) {
-          throw new Error(`Sides ${a}, ${b}, and ${c} can't form a triangle.`);
+            throw new Error(`Sides ${a}, ${b}, and ${c} can't form a triangle.`);
         }
-    this.color = color;
-    this.a = a;
-    this.b = b;
-    this.c = c;
-  }
+    }
 
   getArea(): number {
     const s = (this.a + this.b + this.c) / 2;
@@ -85,8 +81,8 @@ export class Triangle implements Figure {
 }
   
  
-export function getInfo(figure): string {
+export function getInfo(figure: Figure): string {
   const area = figure.getArea();
-  return `This is a ${figure.color} ${figure.shape} with area ${area} cm squared.`;
+  return `A ${figure.color} ${figure.shape} - ${area}`;
 }
  
