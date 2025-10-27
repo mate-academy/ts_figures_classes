@@ -29,7 +29,7 @@ export class Triangle implements Figure {
     const s = (this.a + this.b + this.c) / 2;
     const area = Math.sqrt(s * (s - this.a) * (s - this.b) * (s - this.c));
 
-    return Number(area.toFixed(2));
+    return Math.floor(area * 100) / 100;
   }
 }
 
@@ -70,7 +70,7 @@ export class Rectangle implements Figure {
   getArea(): number {
     const area2 = this.width * this.height;
 
-    return Number(area2.toFixed(2));
+    return Math.floor(area2 * 100) / 100;
   }
 }
 
