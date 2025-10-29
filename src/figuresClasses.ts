@@ -18,16 +18,17 @@ export class Triangle implements Figure {
     }
 
     if (a >= b + c || b >= a + c || c >= a + b) {
-      throw new Error('Incorrect triangle');
+      throw new Error(
+        'Incorrect triangle - it violates the triangle inequality theorem',
+      );
     }
   }
 
   getArea(): number {
     const p = (this.a + this.b + this.c) / 2;
+    const num = Math.sqrt(p * (p - this.a) * (p - this.b) * (p - this.c));
 
-    return Number(
-      Math.sqrt(p * (p - this.a) * (p - this.b) * (p - this.c)).toFixed(2),
-    );
+    return Math.floor(num * 100) / 100;
   }
 }
 
@@ -64,7 +65,9 @@ export class Rectangle implements Figure {
   }
 
   getArea(): number {
-    return this.width * this.height;
+    const num = this.width * this.height;
+
+    return Math.floor(num * 100) / 100;
   }
 }
 
