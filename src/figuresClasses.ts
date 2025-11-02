@@ -18,18 +18,19 @@ export class Triangle implements Figure {
     public c: number,
   ) {
     if (a <= 0 || b <= 0 || c <= 0) {
-      throw new Error('your error message');
+      throw new Error('Triangle sides must be positive numbers.');
     }
 
     if (a + b <= c || a + c <= b || b + c <= a) {
-      throw new Error('your error message');
+      throw new Error('Triangle sides do not form a valid triangle.');
     }
   }
 
   getArea(): number {
     const s = (this.a + this.b + this.c) / 2;
+    const area = Math.sqrt(s * (s - this.a) * (s - this.b) * (s - this.c));
 
-    return Math.sqrt(s * (s - this.a) * (s - this.b) * (s - this.c));
+    return Math.floor(area * 100) / 100;
   }
 }
 
@@ -41,7 +42,7 @@ export class Circle implements Figure {
     public radius: number,
   ) {
     if (radius <= 0) {
-      throw new Error('your error message');
+      throw new Error('Circle radius must be a positive number.');
     }
   }
 
@@ -61,12 +62,14 @@ export class Rectangle implements Figure {
     public height: number,
   ) {
     if (width <= 0 || height <= 0) {
-      throw new Error('your error message');
+      throw new Error('Rectangle sides must be positive numbers.');
     }
   }
 
   getArea(): number {
-    return this.width * this.height;
+    const area = this.width * this.height;
+
+    return Math.floor(area * 100) / 100;
   }
 }
 
