@@ -13,16 +13,14 @@ export class Triangle implements Figure {
     public shape: 'triangle' = 'triangle',
   ) {
     if (a <= 0 || b <= 0 || c <= 0 || a >= b + c || b >= a + c || c >= b + a) {
-      throw new Error('your error message');
+      throw new Error('Invalid side lengths: they cannot form a triangle');
     }
   }
 
   getArea(): number {
     const s = (this.a + this.b + this.c) / 2;
 
-    return parseFloat(
-      Math.sqrt(s * (s - this.a) * (s - this.b) * (s - this.c)).toFixed(2),
-    );
+    return Math.floor(Math.sqrt(s * (s - this.a) * (s - this.b) * (s - this.c)) * 100) / 100;
   }
 }
 
@@ -33,7 +31,7 @@ export class Circle implements Figure {
     public shape: 'circle' = 'circle',
   ) {
     if (radius <= 0) {
-      throw new Error('your error message');
+      throw new Error('Invalid side lengths: they cannot form a circle');
     }
   }
 
@@ -50,12 +48,12 @@ export class Rectangle implements Figure {
     public shape: 'rectangle' = 'rectangle',
   ) {
     if (width <= 0 || height <= 0) {
-      throw new Error('your error message');
+      throw new Error('Invalid side lengths: they cannot form a rectangle');
     }
   }
 
   getArea(): number {
-    return this.height * this.width;
+    return Math.floor((this.height * this.width) * 100) / 100;
   }
 }
 
