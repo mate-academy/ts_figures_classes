@@ -9,11 +9,8 @@ export interface Figure {
 
 export class Triangle implements Figure {
   shape: Shape = 'triangle';
-  color: Color;
-  a: number;
-  b: number;
-  c: number;
-  constructor (color: Color, a: number, b: number, c: number) {
+
+  constructor (public color: Color, public a: number, public b: number, public c: number) {
     if (a <= 0 || b <= 0 || c <= 0) {
       throw new Error('Triangle sides must be greater than 0');
     }
@@ -38,10 +35,9 @@ export class Triangle implements Figure {
 
 export class Circle implements Figure {
   shape: Shape = 'circle';
-  color: Color;
-  radius: number;
 
-  constructor (color: Color, radius: number) {
+
+  constructor (public color: Color, public radius: number) {
     if (radius <= 0) {
       throw new Error('Radius must be greater than 0');
     }
@@ -58,11 +54,8 @@ export class Circle implements Figure {
 
 export class Rectangle implements Figure {
   shape: Shape = 'rectangle';
-  color: Color;
-  width: number;
-  height: number;
 
-  constructor (color: Color, width: number, height: number) {
+  constructor (public color: Color, public width: number, public height: number) {
     if (width <= 0 || height <= 0) {
       throw new Error('Width and height must be greater than 0');
     }
@@ -79,6 +72,6 @@ export class Rectangle implements Figure {
   }
 }
 
-export function getInfo(figure): string {
+export function getInfo(figure: Figure): string {
   return `A ${figure.color} ${figure.shape} - ${figure.getArea()}`;
 }
