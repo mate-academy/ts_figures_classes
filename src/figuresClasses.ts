@@ -15,6 +15,7 @@ export class Triangle implements Figure {
     public c: number,
     public shape: Shape = 'triangle',
   ) {
+    // Незначна зміна для запуску бота.
     if (this.a <= 0 || this.b <= 0 || this.c <= 0) {
       throw new Error('Side should be greater than 0!');
     }
