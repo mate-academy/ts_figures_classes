@@ -4,24 +4,18 @@ export interface Figure {
   getArea(): number;
 }
 export class Triangle implements Figure {
-  shape: 'triangle';
-
-  color: 'red' | 'green' | 'blue';
-
-  a: number;
-
-  b: number;
-
-  c: number;
+  public shape: 'triangle';
 
   constructor(
-    color: 'red' | 'green' | 'blue',
-    a: number,
-    b: number,
-    c: number,
+    public color: 'red' | 'green' | 'blue',
+    public a: number,
+    public b: number,
+    public c: number,
   ) {
+    this.shape = 'triangle';
+
     if (a <= 0 || b <= 0 || c <= 0) {
-      throw new Error('all parameters must be > 0');
+      throw new Error('All triangle sides (a, b, c) must be greater than 0');
     }
 
     const maxSide = Math.max(a, b, c);
@@ -30,11 +24,6 @@ export class Triangle implements Figure {
     if (maxSide >= sumOthers) {
       throw new Error(`Sides ${a}, ${b}, and ${c} cannot form a triangle`);
     }
-    this.shape = 'triangle';
-    this.color = color;
-    this.a = a;
-    this.b = b;
-    this.c = c;
   }
 
   getArea(): number {
@@ -47,17 +36,14 @@ export class Triangle implements Figure {
 export class Circle implements Figure {
   shape: 'circle';
 
-  color: 'red' | 'green' | 'blue';
-
-  radius: number;
-
-  constructor(color: 'red' | 'green' | 'blue', radius: number) {
+  constructor(
+    public color: 'red' | 'green' | 'blue',
+    public radius: number,
+  ) {
     if (radius <= 0) {
       throw new Error('Radius must be greater than 0');
     }
     this.shape = 'circle';
-    this.color = color;
-    this.radius = radius;
   }
 
   getArea(): number {
@@ -70,20 +56,15 @@ export class Circle implements Figure {
 export class Rectangle implements Figure {
   shape: 'rectangle';
 
-  color: 'red' | 'green' | 'blue';
-
-  width: number;
-
-  height: number;
-
-  constructor(color: 'red' | 'green' | 'blue', width: number, height: number) {
+  constructor(
+    public color: 'red' | 'green' | 'blue',
+    public width: number,
+    public height: number,
+  ) {
     if (width <= 0 || height <= 0) {
       throw new Error('all parameters must be > 0');
     }
     this.shape = 'rectangle';
-    this.color = color;
-    this.width = width;
-    this.height = height;
   }
 
   getArea(): number {
