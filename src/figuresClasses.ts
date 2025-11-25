@@ -8,35 +8,26 @@ export interface Figure {
 }
 
 export class Triangle implements Figure {
-  a: number;
-
-  b: number;
-
-  c: number;
-
   shape: Shape;
 
   constructor(
     public color: Color,
-    a: number,
-    b: number,
-    c: number,
+    public a: number,
+    public b: number,
+    public c: number,
   ) {
     if (a <= 0 || b <= 0 || c <= 0) {
+      throw new Error('Triangle sides must be positive numbers');
+    }
+
+    if (a + b <= c || a + c <= b || b + c <= a) {
       throw new Error(
         'The longest side of a triangle cannot' +
           'be greater than a sum of two other',
       );
     }
 
-    if (a + b <= c || a + c <= b || b + c <= a) {
-      throw new Error('Triangle sides must be positive numbers');
-    }
-
     this.shape = 'triangle';
-    this.a = a;
-    this.b = b;
-    this.c = c;
   }
 
   getArea(): number {
@@ -53,20 +44,17 @@ export class Triangle implements Figure {
 }
 
 export class Circle implements Figure {
-  radius: number;
-
   shape: Shape;
 
   constructor(
     public color: Color,
-    radius: number,
+    public radius: number,
   ) {
     if (radius <= 0) {
       throw new Error('Circle radius must be positive numbers');
     }
 
     this.shape = 'circle';
-    this.radius = radius;
   }
 
   getArea(): number {
@@ -77,24 +65,18 @@ export class Circle implements Figure {
 }
 
 export class Rectangle implements Figure {
-  width: number;
-
-  height: number;
-
   shape: Shape;
 
   constructor(
     public color: Color,
-    width: number,
-    height: number,
+    public width: number,
+    public height: number,
   ) {
     if (width <= 0 || height <= 0) {
       throw new Error('Rectangle width and heigth must be positive numbers');
     }
 
     this.shape = 'rectangle';
-    this.width = width;
-    this.height = height;
   }
 
   getArea(): number {
