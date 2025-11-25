@@ -22,12 +22,18 @@ export class Triangle implements Figure {
     b: number,
     c: number,
   ) {
-    if (a <= 0 || b <= 0 || c <= 0 || a + b <= c || a + c <= b || b + c <= a) {
+    if (a <= 0 || b <= 0 || c <= 0) {
+      throw new Error(
+        'The longest side of a triangle cannot' +
+          'be greater than a sum of two other',
+      );
+    }
+
+    if (a + b <= c || a + c <= b || b + c <= a) {
       throw new Error('Triangle sides must be positive numbers');
     }
 
     this.shape = 'triangle';
-    this.color = color;
     this.a = a;
     this.b = b;
     this.c = c;
@@ -60,7 +66,6 @@ export class Circle implements Figure {
     }
 
     this.shape = 'circle';
-    this.color = color;
     this.radius = radius;
   }
 
@@ -88,7 +93,6 @@ export class Rectangle implements Figure {
     }
 
     this.shape = 'rectangle';
-    this.color = color;
     this.width = width;
     this.height = height;
   }
