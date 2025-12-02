@@ -22,7 +22,7 @@ export class Triangle implements Figure {
     public c: number,
   ) {
     if (this.a <= 0 || this.b <= 0 || this.c <= 0) {
-      throw new Error('all lengths should be >= 0');
+      throw new Error('All sides of a triangle must be positive numbers.');
     }
 
     const sides = [this.a, this.b, this.c].sort(
@@ -53,7 +53,7 @@ export class Circle implements Figure {
     public radius: number,
   ) {
     if (this.radius <= 0) {
-      throw new Error('all lengths should be >= 0');
+      throw new Error('The radius of a circle must be a positive number');
     }
   }
 
@@ -71,7 +71,9 @@ export class Rectangle implements Figure {
     public height: number,
   ) {
     if (this.width <= 0 || this.height <= 0) {
-      throw new Error('all lengths should be >= 0');
+      throw new Error(
+        'The width and height of a rectangle must be positive numbers.',
+      );
     }
   }
 
