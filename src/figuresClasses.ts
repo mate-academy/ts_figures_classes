@@ -13,7 +13,7 @@ export class Triangle implements Figure {
     public readonly shape: 'triangle' = 'triangle',
   ) {
     if (a <= 0 || b <= 0 || c <= 0) {
-      throw new Error('sides cannot be less than zero');
+      throw new Error('The sides of a triangle must be greater than zero');
     }
 
     if (a + b + c - Math.max(a, b, c) <= Math.max(a, b, c)) {
@@ -39,7 +39,7 @@ export class Circle implements Figure {
     public readonly shape: 'circle' = 'circle',
   ) {
     if (radius <= 0) {
-      throw new Error('radius cannot be less than zero');
+      throw new Error('The radius must be a positive number');
     }
   }
 
@@ -56,7 +56,9 @@ export class Rectangle implements Figure {
     public readonly shape: 'rectangle' = 'rectangle',
   ) {
     if (width <= 0 || height <= 0) {
-      throw new Error('sides cannot be less than zero');
+      throw new Error(
+        'The width and height of a rectangle must be positive numbers',
+      );
     }
   }
 
