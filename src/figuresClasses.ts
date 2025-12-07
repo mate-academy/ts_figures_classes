@@ -14,7 +14,7 @@ export class Triangle implements Figure {
     public c: number,
   ) {
     if (a + b <= c || a + c <= b || b + c <= a) {
-      throw new Error('it is impossible to create a triangle');
+      throw new Error('sides a, b and c can`t form a triangle');
     }
   }
 
@@ -23,7 +23,7 @@ export class Triangle implements Figure {
     const s = (a + b + c) / 2;
     const areaSquared = s * (s - a) * (s - b) * (s - c);
     const area = Math.sqrt(areaSquared);
-    const roundedArea = parseFloat(area.toFixed(2));
+    const roundedArea = Math.floor(area * 100) / 100;
 
     return roundedArea;
   }
@@ -55,13 +55,13 @@ export class Rectangle implements Figure {
     public height: number,
   ) {
     if (width <= 0 || height <= 0) {
-      throw new Error('width or height cannot be less than 0');
+      throw new Error('All lengths must be greater than 0');
     }
   }
 
   getArea(): number {
     const area = this.width * this.height;
-    const roundedArea = parseFloat(area.toFixed(2));
+    const roundedArea = Math.floor(area * 100) / 100;
 
     return roundedArea;
   }
