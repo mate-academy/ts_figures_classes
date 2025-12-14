@@ -16,6 +16,10 @@ export class Triangle implements Figure {
     if (a + b <= c || a + c <= b || b + c <= a) {
       throw new Error('sides a, b and c can`t form a triangle');
     }
+
+    if (a <= 0 || b <= 0 || c <= 0) {
+      throw new Error('sides a, b, and c must be greater than 0');
+    }
   }
 
   getArea(): number {
@@ -36,7 +40,7 @@ export class Circle implements Figure {
     public radius: number,
   ) {
     if (radius <= 0) {
-      throw new Error('radius cannot be less than 0');
+      throw new Error('radius must be greater than 0');
     }
   }
 
