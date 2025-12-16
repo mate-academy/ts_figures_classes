@@ -22,8 +22,18 @@ export class Triangle implements Figure {
     const minNum = Math.min(a, b, c);
     const sum = a + b + c - maxNum;
 
-    if (maxNum >= sum || minNum <= 0) {
-      throw new Error('Invalid triangle sides');
+    if (maxNum >= sum) {
+      throw new Error(
+        `the length of the longest side must not exceed the sum of the lengths of the other two`,
+      );
+    }
+
+    if (minNum <= 0) {
+      throw new Error(
+        `One or more sides of the triangle have zero or negative length.
+        This value is not allowed.
+        The value must be a positive number.`,
+      );
     }
   }
 
@@ -36,7 +46,7 @@ export class Triangle implements Figure {
         (semiPerimeter - this.c),
     );
 
-    return Math.round(s * 100) / 100;
+    return Math.trunc(s * 100) / 100;
   }
 }
 
@@ -47,7 +57,9 @@ export class Circle implements Figure {
     public shape: 'circle' = 'circle',
   ) {
     if (radius <= 0) {
-      throw new Error('invalid circle radius');
+      throw new Error(`The radius of the circuit has zero or negative length.
+        This value is not allowed.
+        The value must be a positive number.`);
     }
   }
 
@@ -64,12 +76,15 @@ export class Rectangle implements Figure {
     public shape: 'rectangle' = 'rectangle',
   ) {
     if (width <= 0 || height <= 0) {
-      throw new Error('Invalid triangle sides');
+      throw new Error(
+        `The width / height has zero or negative value. This value is not allowed.
+        The value must be a positive number.`,
+      );
     }
   }
 
   getArea(): number {
-    return Math.round(this.width * this.height * 100) / 100;
+    return Math.trunc(this.width * this.height * 100) / 100;
   }
 }
 
