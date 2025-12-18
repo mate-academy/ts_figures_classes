@@ -4,7 +4,6 @@ type Color = 'red' | 'green' | 'blue';
 export interface Figure {
   shape: Shape;
   color: Color;
-  figure: Figure;
   getArea(): number;
 }
 
@@ -61,15 +60,15 @@ export class Rectangle implements Figure {
   constructor(
     public color: Color,
     private width: number,
-    private length: number,
+    private heigth: number,
   ) {
-    if (width <= 0 || length <= 0) {
+    if (width <= 0 || heigth <= 0) {
       throw new Error('Sides must be greater than 0');
     }
   }
 
   getArea(): number {
-    const area = this.width * this.length;
+    const area = this.width * this.heigth;
 
     return Math.floor(area * 100) / 100;
   }
