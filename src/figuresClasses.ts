@@ -60,15 +60,15 @@ export class Rectangle implements Figure {
   constructor(
     public color: Color,
     private width: number,
-    private heigth: number,
+    private height: number,
   ) {
-    if (width <= 0 || heigth <= 0) {
+    if (width <= 0 || height <= 0) {
       throw new Error('Sides must be greater than 0');
     }
   }
 
   getArea(): number {
-    const area = this.width * this.heigth;
+    const area = this.width * this.height;
 
     return Math.floor(area * 100) / 100;
   }
