@@ -13,13 +13,8 @@ export class Triangle implements Figure {
     public b: number,
     public c: number,
   ) {
-    this.color = color;
-    this.a = a;
-    this.b = b;
-    this.c = c;
-
-    if (this.a < 0 || this.b < 0 || this.c < 0) {
-      throw new Error('Sides cannot be negative');
+    if (this.a <= 0 || this.b <= 0 || this.c <= 0) {
+      throw new Error('Sides cannot be negative or zero');
     }
 
     if (
@@ -27,14 +22,21 @@ export class Triangle implements Figure {
       this.a + this.c <= this.b ||
       this.b + this.c <= this.a
     ) {
-      throw new Error('Invalid triangle');
+      throw new Error(
+        'The provided sides cannot form a valid triangle because' +
+          ' the sum of any two sides must be greater than the third.',
+      );
     }
   }
 
   getArea(): number {
     const p = (this.a + this.b + this.c) / 2;
 
-    return Math.sqrt(p * (p - this.a) * (p - this.b) * (p - this.c));
+    return (
+      Math.round(
+        Math.sqrt(p * (p - this.a) * (p - this.b) * (p - this.c)) * 100,
+      ) / 100
+    );
   }
 }
 
@@ -45,11 +47,8 @@ export class Circle implements Figure {
     public color: string,
     public radius: number,
   ) {
-    this.color = color;
-    this.radius = radius;
-
-    if (this.radius < 0) {
-      throw new Error('Radius cannot be negative');
+    if (this.radius <= 0) {
+      throw new Error('Radius cannot be negative or zero');
     }
   }
 
@@ -66,20 +65,16 @@ export class Rectangle implements Figure {
     public width: number,
     public height: number,
   ) {
-    this.color = color;
-    this.width = width;
-    this.height = height;
-
-    if (this.width < 0 || this.height < 0) {
-      throw new Error('Sides cannot be negative');
+    if (this.width <= 0 || this.height <= 0) {
+      throw new Error('Sides cannot be negative or zero');
     }
   }
 
   getArea(): number {
-    return this.width * this.height;
+    return Math.round(this.width * this.height * 100) / 100;
   }
 }
 
 export function getInfo(figure: Figure): string {
-  return `A ${figure.color} ${figure.shape.toLowerCase()} - ${Math.round(figure.getArea() * 100) / 100}`;
+  return `A ${figure.color} ${figure.shape.toLowerCase()} - ${figure.getArea()}`;
 }
