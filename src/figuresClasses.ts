@@ -1,9 +1,9 @@
 export type Color = 'red' | 'green' | 'blue';
 export type Shape = 'triangle' | 'circle' | 'rectangle';
+
 export interface Figure {
   shape: Shape;
   color: Color;
-
   getArea(): number;
 }
 
@@ -16,8 +16,16 @@ export class Triangle implements Figure {
     public b: number,
     public c: number,
   ) {
-    if (a <= 0 || b <= 0 || c <= 0) {
-      throw new Error('All sides must be positive');
+    if (a <= 0) {
+      throw new Error(`Side a must be positive (a = ${a})`);
+    }
+
+    if (b <= 0) {
+      throw new Error(`Side b must be positive (b = ${b})`);
+    }
+
+    if (c <= 0) {
+      throw new Error(`Side c must be positive (c = ${c})`);
     }
 
     if (a + b <= c || a + c <= b || b + c <= a) {
