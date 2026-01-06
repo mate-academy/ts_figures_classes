@@ -16,12 +16,13 @@ export class Triangle implements Figure {
     public c: number,
   ) {
     if (a <= 0 || b <= 0 || c <= 0) {
-      throw new Error('All sides must be greater than 0');
+      throw new Error('All triangle sides must be greater than 0');
     }
 
     if (a >= b + c || b >= a + c || c >= a + b) {
       throw new Error(
-        'The longest side must be less than the sum of the other two sides',
+        // eslint-disable-next-line max-len
+        'The longest side of a triangle must be less than the sum of the other two sides',
       );
     }
   }
@@ -42,7 +43,7 @@ export class Circle implements Figure {
     public radius: number,
   ) {
     if (radius <= 0) {
-      throw new Error('Radius must be greater than 0');
+      throw new Error('Circle radius must be greater than 0');
     }
   }
 
@@ -62,7 +63,7 @@ export class Rectangle implements Figure {
     public height: number,
   ) {
     if (width <= 0 || height <= 0) {
-      throw new Error('Width and height must be greater than 0');
+      throw new Error('Rectangle width and height must be greater than 0');
     }
   }
 
