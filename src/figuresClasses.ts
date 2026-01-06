@@ -13,8 +13,12 @@ export class Triangle implements Figure {
     public b: number,
     public c: number,
   ) {
-    if (a <= 0 || b <= 0 || c <= 0 || c >= a + b || b >= a + c || a >= b + c) {
+    if (a <= 0 || b <= 0 || c <= 0 ) {
       throw new Error('All sides must be greater than 0');
+    }
+
+    if (c >= a + b || b >= a + c || a >= b + c) {
+      throw new Error('The longest side must be less than the sum of the other two sides');
     }
   }
 
@@ -59,7 +63,9 @@ export class Rectangle implements Figure {
   }
 
   getArea(): number {
-    return this.width * this.height;
+    const area = this.width * this.height;
+
+    return Math.floor(area * 100) / 100;
   }
 }
 
