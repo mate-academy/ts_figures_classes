@@ -15,8 +15,14 @@ export class Triangle implements Figure {
     public b: number,
     public c: number,
   ) {
-    if (a < 1 || b < 1 || c < 1 || a >= b + c || b >= a + c || c >= a + b) {
-      throw new Error('your error message');
+    if (a <= 0 || b <= 0 || c <= 0) {
+      throw new Error('All sides must be greater than 0');
+    }
+
+    if (a >= b + c || b >= a + c || c >= a + b) {
+      throw new Error(
+        'The longest side must be less than the sum of the other two sides',
+      );
     }
   }
 
@@ -24,7 +30,7 @@ export class Triangle implements Figure {
     const s = (this.a + this.b + this.c) / 2;
     const area = Math.sqrt(s * (s - this.a) * (s - this.b) * (s - this.c));
 
-    return Number(area.toFixed(2));
+    return Math.floor(area * 100) / 100;
   }
 }
 
@@ -35,8 +41,8 @@ export class Circle implements Figure {
     public color: Color,
     public radius: number,
   ) {
-    if (radius < 1) {
-      throw new Error('your error message');
+    if (radius <= 0) {
+      throw new Error('Radius must be greater than 0');
     }
   }
 
@@ -55,13 +61,15 @@ export class Rectangle implements Figure {
     public width: number,
     public height: number,
   ) {
-    if (height < 1 || width < 1) {
-      throw new Error('your error message');
+    if (width <= 0 || height <= 0) {
+      throw new Error('Width and height must be greater than 0');
     }
   }
 
   getArea(): number {
-    return Number((this.width * this.height).toFixed(2));
+    const area = this.width * this.height;
+
+    return Math.floor(area * 100) / 100;
   }
 }
 
