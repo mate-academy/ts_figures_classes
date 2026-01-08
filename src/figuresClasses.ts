@@ -6,7 +6,7 @@ export interface Figure {
 }
 
 export class Triangle implements Figure {
-  public shape: 'triangle';
+  public shape: 'triangle' = 'triangle';
 
   constructor(
     public color: 'red' | 'green' | 'blue',
@@ -14,57 +14,64 @@ export class Triangle implements Figure {
     public b: number,
     public c: number,
   ) {
-    if (color.length <= 0 || a > 0 || b > 0 || c > 0) {
-      throw new Error('invalid instance');
+    const longestSide: number = Math.max(a, b, c);
+
+    if (color.length <= 0 || a <= 0 || b <= 0 || c <= 0) {
+      throw new Error('Side lengths must be positive numbers');
+    }
+
+    if (longestSide >= a + b + c - longestSide) {
+      throw new Error(`sides ${a}, ${b}, ${c} cant form a triangle`);
     }
   }
 
   getArea(): number {
-    const area = (1 / 2) * (this.a + this.b + this.c);
+    const s = (this.a + this.b + this.c) / 2;
+    const area = Math.sqrt(s * (s - this.a) * (s - this.b) * (s - this.c));
 
-    return area;
+    return Math.floor(area * 100) / 100;
   }
 }
 
 export class Circle implements Figure {
-  public shape: 'circle';
+  public shape: 'circle' = 'circle';
 
   constructor(
     public color: 'red' | 'green' | 'blue',
     private radius: number,
   ) {
-    if (color.length <= 0) {
-      throw new Error('invalid instance');
+    if (color.length <= 0 || radius <= 0) {
+      throw new Error('Radius must be positive');
     }
   }
 
   getArea(): number {
     const area = Math.PI * this.radius * this.radius;
 
-    return Number(area.toFixed(2));
+    return Math.floor(area * 100) / 100;
   }
 }
 
 export class Rectangle implements Figure {
-  public shape: 'rectangle';
+  public shape: 'rectangle' = 'rectangle';
 
   constructor(
     public color: 'red' | 'green' | 'blue',
     public width: number,
     public height: number,
   ) {
-    if (color.length <= 0 || width > 0 || height > 0) {
-      throw new Error('invalid instance');
+    if (color.length <= 0 || width <= 0 || height <= 0) {
+      throw new Error('Side lengths must be positive numbers');
     }
   }
 
   getArea(): number {
     const area = this.width * this.height;
 
-    return area;
+    return Math.floor(area * 100) / 100;
   }
 }
 
 export function getInfo(figure): string {
-  return `A ${figure.color} ${figure.shape} - ${figure.area}`;
+  return `A ${figure.color} ${figure.shape} - ${figure.getArea()}`;
 }
