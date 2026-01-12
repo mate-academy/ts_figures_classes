@@ -17,11 +17,14 @@ export class Triangle implements Figure {
     private c: number,
   ) {
     if (a <= 0 || b <= 0 || c <= 0) {
-      throw new Error('Sides must be positive numbers');
+      throw new Error('Triangle sides must be positive numbers');
     }
 
     if (a + b <= c || a + c <= b || b + c <= a) {
-      throw new Error("sides can't form a triangle");
+      throw new Error(
+        'The longest side of a triangle must be less than' +
+          'the sum of the other two sides(Triangle Inequality Theorem)',
+      );
     }
   }
 
@@ -41,7 +44,7 @@ export class Circle implements Figure {
     private radius: number,
   ) {
     if (radius <= 0) {
-      throw new Error('Radius must be a positive number');
+      throw new Error('Circle radius must be a positive number');
     }
   }
 
@@ -61,7 +64,7 @@ export class Rectangle implements Figure {
     private height: number,
   ) {
     if (width <= 0 || height <= 0) {
-      throw new Error('Sides must be positive numbers');
+      throw new Error('Width and height must be positive numbers');
     }
   }
 
