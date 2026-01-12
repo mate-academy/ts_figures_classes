@@ -10,12 +10,6 @@ export interface Figure {
 export class Triangle implements Figure {
   shape: Shape = 'triangle';
 
-  a: number;
-
-  b: number;
-
-  c: number;
-
   getArea(): number {
     const s: number = (this.a + this.b + this.c) / 2;
 
@@ -26,24 +20,25 @@ export class Triangle implements Figure {
 
   constructor(
     public color: Color,
-    ...sides: number[]
+    public a: number,
+    public b: number,
+    public c: number,
   ) {
-    [this.a, this.b, this.c] = [...sides].sort((x, y) => x - y);
-
-    if (
-      sides.length < 3 ||
-      sides.some((s) => s <= 0) ||
-      this.c >= this.a + this.b
-    ) {
-      throw new Error('wrong args');
+    if (a <= 0 || b <= 0 || c <= 0) {
+      throw new Error('Sides must be positive numbers');
     }
-    [this.a, this.b, this.c] = sides;
+
+    const maxSide = Math.max(this.a, this.b, this.c);
+
+    if (maxSide >= this.a + this.b + this.c - maxSide) {
+      throw new Error(
+        "Longest side of a triangle can't be larger than a sum of two others",
+      );
+    }
   }
 }
 export class Circle implements Figure {
   shape: Shape = 'circle';
-
-  r: number;
 
   getArea(): number {
     const area = Math.PI * this.r * this.r;
@@ -53,34 +48,29 @@ export class Circle implements Figure {
 
   constructor(
     public color: Color,
-    radius: number,
+    public r: number,
   ) {
-    if (radius <= 0) {
-      throw new Error('wrong args');
+    if (r <= 0) {
+      throw new Error('Radius must be positive number');
     }
-    this.r = radius;
   }
 }
 
 export class Rectangle implements Figure {
   shape: Shape = 'rectangle';
 
-  a: number;
-
-  b: number;
-
   getArea(): number {
-    return Math.floor(this.a * this.b * 100) / 100;
+    return Math.floor(this.width * this.height * 100) / 100;
   }
 
   constructor(
     public color: Color,
-    ...sides: number[]
+    public width: number,
+    public height: number,
   ) {
-    if (sides.length < 2 || sides.some((n) => n <= 0)) {
-      throw new Error('wrong args');
+    if (this.width <= 0 || this.height <= 0) {
+      throw new Error('Sides must be positive numbers');
     }
-    [this.a, this.b] = sides;
   }
 }
 
