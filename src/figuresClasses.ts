@@ -23,12 +23,16 @@ export class Triangle implements Figure {
   }
 
   checkIfTriangleValid(): void {
+    if (this.a <= 0 || this.b <= 0 || this.c <= 0) {
+      throw new Error('Triangle sides must be greater than 0');
+    }
+
     if (
       this.a + this.b <= this.c ||
       this.a + this.c <= this.b ||
       this.b + this.c <= this.a
     ) {
-      throw new Error('Triangle is invalid');
+      throw new Error('The sides 1, 2 and 3 cannot form a valid triangle');
     }
   }
 
@@ -36,7 +40,7 @@ export class Triangle implements Figure {
     const p: number = (this.a + this.b + this.c) / 2;
 
     return (
-      Math.round(
+      Math.floor(
         Math.sqrt(p * (p - this.a) * (p - this.b) * (p - this.c)) * 100,
       ) / 100
     );
@@ -54,7 +58,7 @@ export class Circle implements Figure {
 
   checkIfValid(): void {
     if (this.radius <= 0) {
-      throw new Error('Error. Radius must be > 0');
+      throw new Error('Radius must be a positive number');
     }
   }
 
@@ -75,12 +79,12 @@ export class Rectangle implements Figure {
 
   getPositive(): void {
     if (this.width <= 0 || this.height <= 0) {
-      throw new Error('Error. Width and height must be > 0');
+      throw new Error('Width and height must be positive numbers');
     }
   }
 
   public getArea(): number {
-    return Math.round(this.width * this.height * 100) / 100;
+    return Math.floor(this.width * this.height * 100) / 100;
   }
 }
 
