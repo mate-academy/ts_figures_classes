@@ -32,7 +32,9 @@ export class Triangle implements Figure {
       this.a + this.c <= this.b ||
       this.b + this.c <= this.a
     ) {
-      throw new Error('The sides 1, 2 and 3 cannot form a valid triangle');
+      throw new Error(
+        `The sides ${this.a}, ${this.b} and ${this.c} cannot form a valid triangle`,
+      );
     }
   }
 
