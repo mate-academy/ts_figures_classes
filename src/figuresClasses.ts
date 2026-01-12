@@ -19,6 +19,7 @@ export class Triangle implements Figure {
     if (a >= b + c || b >= a + c || c >= a + b) {
       throw new Error('Sides a, b and c can`t form a triangle');
     }
+
     if (a <= 0 || b <= 0 || c <= 0) {
       throw new Error('Triangle sides a, b and c must be greater than 0');
     }
@@ -74,4 +75,3 @@ export class Rectangle implements Figure {
 export function getInfo(figure: Figure): string {
   return `A ${figure.color} ${figure.shape} - ${figure.getArea()}`;
 }
-
