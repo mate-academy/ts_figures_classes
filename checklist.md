@@ -39,8 +39,6 @@ if (x % 2 !== 0) {
 
 4. [CODE KNOWLEDGE] - When you declare a constructor parameter with an access modifier TypeScript implicitly creates a property on the class with the same name as the parameter and assigns the parameter value to that property. You don't need to do it manually.
 
-BAD EXAMPLE: 
-```
 constructor(a: number, b: number, c: number) {
     this.a = a;
     this.b = b;
@@ -48,9 +46,8 @@ constructor(a: number, b: number, c: number) {
 }
 ```
 
-GOOD EXAMPLE: 
+GOOD EXAMPLE:
 ```
 constructor(a: number, b: number, c: number) {
 
 }
-```
