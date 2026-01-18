@@ -9,23 +9,14 @@ export interface Figure {
 }
 
 export class Triangle implements Figure {
-  shape: 'triangle';
+  shape: 'triangle' = 'triangle';
 
-  color: Color;
-
-  a = 0;
-
-  b = 0;
-
-  c = 0;
-
-  constructor(color: Color, a: number, b: number, c: number) {
-    this.shape = 'triangle';
-    this.color = color;
-    this.a = a;
-    this.b = b;
-    this.c = c;
-
+  constructor(
+    public color: Color,
+    public a: number,
+    public b: number,
+    public c: number,
+  ) {
     if (a <= 0 || b <= 0 || c <= 0) {
       throw new Error('All sides need to be bigger than 0');
     }
@@ -49,17 +40,12 @@ export class Triangle implements Figure {
 }
 
 export class Circle implements Figure {
-  shape: 'circle';
+  shape: 'circle' = 'circle';
 
-  color: Color;
-
-  radius = 0;
-
-  constructor(color: Color, radius: number) {
-    this.shape = 'circle';
-    this.color = color;
-    this.radius = radius;
-
+  constructor(
+    public color: Color,
+    public radius: number,
+  ) {
     if (radius <= 0) {
       throw new Error('The radius needs to be bigger than 0');
     }
@@ -73,20 +59,13 @@ export class Circle implements Figure {
 }
 
 export class Rectangle implements Figure {
-  shape: 'rectangle';
+  shape: 'rectangle' = 'rectangle';
 
-  color: Color;
-
-  width = 0;
-
-  height = 0;
-
-  constructor(color: Color, width: number, height: number) {
-    this.shape = 'rectangle';
-    this.color = color;
-    this.width = width;
-    this.height = height;
-
+  constructor(
+    public color: Color,
+    public width: number,
+    public height: number,
+  ) {
     if (width <= 0 || height <= 0) {
       throw new Error('Width and height need to be bigger than 0');
     }
