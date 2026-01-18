@@ -26,7 +26,7 @@ export class Triangle implements Figure {
     this.b = b;
     this.c = c;
 
-    if (a < 0 || b < 0 || c < 0) {
+    if (a <= 0 || b <= 0 || c <= 0) {
       throw new Error('All sides need to be bigger than 0');
     }
 
@@ -60,7 +60,7 @@ export class Circle implements Figure {
     this.color = color;
     this.radius = radius;
 
-    if (radius < 0) {
+    if (radius <= 0) {
       throw new Error('The radius needs to be bigger than 0');
     }
   }
@@ -87,7 +87,7 @@ export class Rectangle implements Figure {
     this.width = width;
     this.height = height;
 
-    if (width < 0 || height < 0) {
+    if (width <= 0 || height <= 0) {
       throw new Error('Width and height need to be bigger than 0');
     }
   }
