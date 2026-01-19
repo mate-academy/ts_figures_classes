@@ -12,25 +12,25 @@ export class Triangle implements Figure {
 
   constructor(
     public color: Color,
-    public x: number,
-    public y: number,
-    public z: number,
+    public a: number,
+    public b: number,
+    public c: number,
   ) {
-    if (x <= 0 || y <= 0 || z <= 0) {
+    if (a <= 0 || b <= 0 || c <= 0) {
       throw new Error('Dimension must be > 0');
     }
 
-    const max = Math.max(x, y, z);
-    const sumOther = x + y + z - max;
+    const max = Math.max(a, b, c);
+    const sumOther = a + b + c - max;
 
     if (max >= sumOther) {
-      throw new Error(`Sides ${x}, ${y} and ${z} can't form a triangle`);
+      throw new Error(`Sides ${a}, ${b} and ${c} can't form a triangle`);
     }
   }
 
   public getArea(): number {
-    const s = (this.x + this.y + this.z) / 2;
-    const area = Math.sqrt(s * (s - this.x) * (s - this.y) * (s - this.z));
+    const s = (this.a + this.b + this.c) / 2;
+    const area = Math.sqrt(s * (s - this.a) * (s - this.b) * (s - this.c));
 
     return Math.floor(area * 100) / 100;
   }
