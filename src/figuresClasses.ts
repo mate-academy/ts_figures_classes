@@ -10,26 +10,19 @@ export interface Figure {
 export class Triangle implements Figure {
   shape: Shape = 'triangle';
 
-  color: Color;
-
-  a: number;
-
-  b: number;
-
-  c: number;
-
-  constructor(color: Color, a: number, b: number, c: number) {
+  constructor(
+    public color: Color,
+    private a: number,
+    private b: number,
+    private c: number,
+  ) {
     if (a <= 0 || b <= 0 || c <= 0) {
-      throw new Error('Side size 0 or less');
+      throw new Error('Side size must be a positive number');
     }
 
     if (a + b <= c || a + c <= b || b + c <= a) {
       throw new Error('Triangle cannot exist with these sides');
     }
-    this.color = color;
-    this.a = a;
-    this.b = b;
-    this.c = c;
   }
 
   getArea(): number {
@@ -43,13 +36,12 @@ export class Triangle implements Figure {
 export class Circle implements Figure {
   shape: Shape = 'circle';
 
-  color: Color;
-
-  radius: number;
-
-  constructor(color: Color, radius: number) {
+  constructor(
+    public color: Color,
+    private radius: number,
+  ) {
     if (radius <= 0) {
-      throw new Error('Radius 0 or less');
+      throw new Error("The circle's radius must be a positive number");
     }
     this.color = color;
     this.radius = radius;
@@ -65,19 +57,14 @@ export class Circle implements Figure {
 export class Rectangle implements Figure {
   shape: Shape = 'rectangle';
 
-  color: Color;
-
-  width: number;
-
-  height: number;
-
-  constructor(color: Color, width: number, height: number) {
+  constructor(
+    public color: Color,
+    private width: number,
+    private height: number,
+  ) {
     if (width <= 0 || height <= 0) {
-      throw new Error('Side size 0 or less');
+      throw new Error('Side size must be a positive number');
     }
-    this.color = color;
-    this.width = width;
-    this.height = height;
   }
 
   getArea(): number {
