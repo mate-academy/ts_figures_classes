@@ -17,7 +17,7 @@ export class Triangle implements Figure {
     public c: number,
   ) {
     if (a <= 0 || b <= 0 || c <= 0) {
-      throw new Error('Dimension must be > 0');
+      throw new Error('All triangle sides must be greater than 0');
     }
 
     const max = Math.max(a, b, c);
