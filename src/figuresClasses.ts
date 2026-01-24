@@ -1,4 +1,3 @@
-import { publicDecrypt } from "crypto";
 
 export interface Figure {
   shape: 'triangle' | 'circle' | 'rectangle';
@@ -20,7 +19,7 @@ export class Triangle implements Figure {
 
 
     if (a <= 0 || b <= 0 || c <= 0) {
-      throw new Error('Всі сторони мають бути більші 0');
+      throw new Error('All triangle sides must be positive numbers');
     }
 
     const maxSide = Math.max(a, b, c);
@@ -66,7 +65,7 @@ export class Rectangle implements Figure {
    public height: number,
   ) {
      if (width <= 0 ||  height <= 0) {
-      throw new Error('Всі сторони мають бути більші 0');
+      throw new Error('All rectangle sides must be positive numbers');
     }
 
   }
