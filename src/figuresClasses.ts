@@ -25,7 +25,7 @@ export class Triangle implements Figure {
 
     const maxSide = Math.max(a, b, c);
     if (maxSide >= (a + b + c - maxSide)) {
-      throw new Error('Неправильно зазначені сторони');
+      throw new Error('The provided sides cannot form a valid triangle.');
     }
     }
 
@@ -47,7 +47,7 @@ export class Circle implements Figure {
     public radius: number) {
 
       if (radius <= 0) {
-         throw new Error('Неправильно зазначений радіус');
+         throw new Error('The radius must be a positive number.');
       }
   }
 
