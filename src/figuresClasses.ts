@@ -10,20 +10,17 @@ export interface Figure {
 export class Triangle implements Figure {
   public shape: Shape = 'triangle';
 
-  public color: Color;
-
-  public a: number;
-
-  public b: number;
-
-  public c: number;
-
-  constructor(color: Color, a: number, b: number, c: number) {
+  constructor(
+    public readonly color: Color,
+    public readonly a: number,
+    public readonly b: number,
+    public readonly c: number,
+  ) {
     this.color = color;
     this.shape = 'triangle';
 
     if (a <= 0 || b <= 0 || c <= 0) {
-      throw new Error('A or B or C <= 0');
+      throw new Error('All triangle sides must be positive numbers.');
     }
 
     if (a + b <= c || a + c <= b || b + c <= a) {
@@ -45,18 +42,17 @@ export class Triangle implements Figure {
 }
 
 export class Circle implements Figure {
-  public color: Color;
-
   public shape: Shape = 'circle';
 
-  public r: number;
-
-  constructor(color: Color, r: number) {
+  constructor(
+    public readonly color: Color,
+    public readonly r: number,
+  ) {
     this.color = color;
     this.shape = 'circle';
 
     if (r <= 0) {
-      throw new Error('R <= 0');
+      throw new Error('Radius of circle must be positive number.');
     }
 
     this.r = r;
@@ -71,20 +67,18 @@ export class Circle implements Figure {
 }
 
 export class Rectangle implements Figure {
-  public color: Color;
-
   public shape: Shape = 'rectangle';
 
-  public w: number;
-
-  public h: number;
-
-  constructor(color: Color, w: number, h: number) {
+  constructor(
+    public readonly color: Color,
+    public readonly w: number,
+    public readonly h: number,
+  ) {
     this.shape = 'rectangle';
     this.color = color;
 
     if (w <= 0 || h <= 0) {
-      throw new Error('R <= 0');
+      throw new Error('All rectangle sides must be positive numbers.');
     }
 
     this.w = w;
