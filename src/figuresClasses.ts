@@ -16,7 +16,6 @@ export class Triangle implements Figure {
     public readonly b: number,
     public readonly c: number,
   ) {
-    this.color = color;
     this.shape = 'triangle';
 
     if (a <= 0 || b <= 0 || c <= 0) {
@@ -26,10 +25,6 @@ export class Triangle implements Figure {
     if (a + b <= c || a + c <= b || b + c <= a) {
       throw new Error("sides 1, 2 and 3 can't form a triangle");
     }
-
-    this.a = a;
-    this.b = b;
-    this.c = c;
   }
 
   getArea(): number {
@@ -48,14 +43,11 @@ export class Circle implements Figure {
     public readonly color: Color,
     public readonly r: number,
   ) {
-    this.color = color;
     this.shape = 'circle';
 
     if (r <= 0) {
       throw new Error('Radius of circle must be positive number.');
     }
-
-    this.r = r;
   }
 
   getArea(): number {
@@ -75,14 +67,10 @@ export class Rectangle implements Figure {
     public readonly h: number,
   ) {
     this.shape = 'rectangle';
-    this.color = color;
 
     if (w <= 0 || h <= 0) {
       throw new Error('All rectangle sides must be positive numbers.');
     }
-
-    this.w = w;
-    this.h = h;
   }
 
   getArea(): number {
@@ -93,6 +81,6 @@ export class Rectangle implements Figure {
   }
 }
 
-export function getInfo(figure): string {
+export function getInfo(figure: Figure): string {
   return `A ${figure.color} ${figure.shape} - ${figure.getArea()}`;
 }
