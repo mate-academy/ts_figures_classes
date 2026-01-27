@@ -14,15 +14,12 @@ export interface Figure {
 export class Triangle implements Figure {
   shape: Shape = 'triangle';
 
-  color: Color;
-
-  a: number;
-
-  b: number;
-
-  c: number;
-
-  constructor(color: Color, a: number, b: number, c: number) {
+  constructor(
+    public readonly color: Color,
+    public readonly a: number,
+    public readonly b: number,
+    public readonly c: number,
+  ) {
     if (a <= 0 || b <= 0 || c <= 0) {
       throw new Error('Triangle sides must be greater than 0');
     }
@@ -51,11 +48,10 @@ export class Triangle implements Figure {
 export class Circle implements Figure {
   shape: Shape = 'circle';
 
-  color: Color;
-
-  radius: number;
-
-  constructor(color: Color, radius: number) {
+  constructor(
+    public readonly color: Color,
+    public readonly radius: number,
+  ) {
     if (radius <= 0) {
       throw new Error('Radius must be greater than 0');
     }
@@ -74,24 +70,22 @@ export class Circle implements Figure {
 export class Rectangle implements Figure {
   shape: Shape = 'rectangle';
 
-  color: Color;
-
-  width: number;
-
-  heigth: number;
-
-  constructor(color: Color, width: number, heigth: number) {
-    if (width <= 0 || heigth <= 0) {
+  constructor(
+    public readonly color: Color,
+    public readonly width: number,
+    public readonly height: number,
+  ) {
+    if (width <= 0 || height <= 0) {
       throw new Error('Rectangle sides must be greater than 0');
     }
 
     this.color = color;
     this.width = width;
-    this.heigth = heigth;
+    this.height = height;
   }
 
   getArea(): number {
-    return roundDownToHundredths(this.width * this.heigth);
+    return roundDownToHundredths(this.width * this.height);
   }
 }
 
