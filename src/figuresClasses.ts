@@ -13,7 +13,9 @@ export class Triangle implements Figure {
     public b: number,
     public c: number,
   ) {
-    if (a + b <= c || b + c <= a || a + c <= b) {
+    const lengths = a > 0 && b > 0 && c > 0;
+
+    if (lengths && (a + b <= c || b + c <= a || a + c <= b)) {
       throw new Error('All sides must be positive numbers');
     }
   }
