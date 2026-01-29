@@ -20,7 +20,6 @@ export class Triangle implements Figure {
     if (a + b <= c || a + c <= b || b + c <= a) {
       throw new Error(`sides ${a}, ${b} and ${c} can't form a triangle`);
     }
-    this.color = color;
   }
 
   getArea(): number {
