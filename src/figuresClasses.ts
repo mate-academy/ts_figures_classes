@@ -7,16 +7,14 @@ export interface Figure {
 export class Triangle implements Figure {
   public shape: 'triangle' = 'triangle';
 
-  public color: 'red' | 'green' | 'blue';
-
   constructor(
-    color: 'red' | 'green' | 'blue',
+    public color: 'red' | 'green' | 'blue',
     public a: number,
     public b: number,
     public c: number,
   ) {
     if (a <= 0 || b <= 0 || c <= 0) {
-      throw new Error('cannot be <= 0');
+      throw new Error('Triangle sides must be positive numbers');
     }
 
     if (a + b <= c || a + c <= b || b + c <= a) {
@@ -38,17 +36,13 @@ export class Triangle implements Figure {
 export class Circle implements Figure {
   public shape: 'circle' = 'circle';
 
-  public color: 'red' | 'green' | 'blue';
-
   constructor(
-    color: 'red' | 'green' | 'blue',
+    public color: 'red' | 'green' | 'blue',
     public radius: number,
   ) {
     if (radius <= 0) {
-      throw new Error('cannot be <= 0');
+      throw new Error('Circle radius must be a positive number');
     }
-
-    this.color = color;
   }
 
   getArea(): number {
@@ -59,17 +53,14 @@ export class Circle implements Figure {
 export class Rectangle implements Figure {
   public shape: 'rectangle' = 'rectangle';
 
-  public color: 'red' | 'green' | 'blue';
-
   constructor(
-    color: 'red' | 'green' | 'blue',
+    public color: 'red' | 'green' | 'blue',
     public width: number,
     public height: number,
   ) {
     if (width <= 0 || height <= 0) {
-      throw new Error('Error message');
+      throw new Error('Rectangle width and height must be positive numbers');
     }
-    this.color = color;
   }
 
   getArea(): number {
