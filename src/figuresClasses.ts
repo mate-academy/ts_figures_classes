@@ -14,11 +14,11 @@ export class Triangle implements Figure {
     public c: number,
   ) {
     if (a <= 0 || b <= 0 || c <= 0) {
-      throw new Error('Sides must be > 0');
+      throw new Error('Triangle sides must be positive numbers');
     }
 
     if (a + b <= c || a + c <= b || b + c <= a) {
-      throw new Error('Triangle cannot exist');
+      throw new Error('The provided sides do not form a valid triangle');
     }
   }
 
@@ -38,7 +38,7 @@ export class Circle implements Figure {
     public radius: number,
   ) {
     if (radius <= 0) {
-      throw new Error('Radius must be > 0');
+      throw new Error('Circle radius must be a positive number');
     }
   }
 
@@ -58,7 +58,7 @@ export class Rectangle implements Figure {
     public height: number,
   ) {
     if (width <= 0 || height <= 0) {
-      throw new Error('Sides must be > 0');
+      throw new Error('Rectangle width and height must be positive numbers');
     }
   }
 
