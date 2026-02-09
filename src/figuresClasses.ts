@@ -27,7 +27,7 @@ export class Triangle implements Figure {
     this.c = c;
 
     if (a <= 0 || b <= 0 || c <= 0) {
-      throw new Error('Error');
+      throw new Error('Side lengths must be positive numbers');
     }
 
     const sides = [a, b, c];
@@ -35,7 +35,7 @@ export class Triangle implements Figure {
     const sumOthers = sides.reduce((sum, side) => sum + side, 0) - longest;
 
     if (longest >= sumOthers) {
-      throw new Error('Error');
+      throw new Error(`Sides ${a}, ${b} and ${c} can't form a triangle`);
     }
   }
 
@@ -59,7 +59,7 @@ export class Circle implements Figure {
     this.radius = radius;
 
     if (radius <= 0) {
-      throw new Error('Error');
+      throw new Error('Radius must be a positive number');
     }
   }
 
@@ -81,7 +81,7 @@ export class Rectangle implements Figure {
 
   constructor(color: 'red' | 'green' | 'blue', width: number, height: number) {
     if (width <= 0 || height <= 0) {
-      throw new Error('Error');
+      throw new Error('Width and height must be positive numbers');
     }
 
     this.color = color;
