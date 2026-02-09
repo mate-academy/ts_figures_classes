@@ -17,14 +17,20 @@ export class Triangle implements Figure {
     public b: number,
     public c: number,
   ) {
-    if (a <= 0 || b <= 0 || c <= 0) {
-      throw new Error("sides a, b and c can't form a triangle");
+    if (a <= 0) {
+      throw new Error("side 'a' must be greater than 0");
+    }
+
+    if (b <= 0) {
+      throw new Error("side 'b' must be greater than 0");
+    }
+
+    if (c <= 0) {
+      throw new Error("side 'c' must be greater than 0");
     }
 
     if (Math.max(a, b, c) >= a + b + c - Math.max(a, b, c)) {
-      throw new Error(
-        'Side cant be greater or equal to sum of other two sides',
-      );
+      throw new Error(`Sides ${a}, ${b} and ${c} can't form a triangle`);
     }
   }
 
@@ -47,7 +53,7 @@ export class Circle implements Figure {
     public radius: number,
   ) {
     if (radius <= 0) {
-      throw new Error('radius should be greater than 0');
+      throw new Error('Radius must be greater than 0');
     }
   }
 
@@ -65,7 +71,7 @@ export class Rectangle implements Figure {
     public height: number,
   ) {
     if (width <= 0 || height <= 0) {
-      throw new Error('Width or height must be greater than 0');
+      throw new Error('Width and height must be greater than 0');
     }
   }
 
