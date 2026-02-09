@@ -1,25 +1,30 @@
+type FigureShapes = 'triangle' | 'circle' | 'rectangle';
+
+type FigureColor = 'red' | 'green' | 'blue';
+
 export interface Figure {
-  color: string;
-  shape: string;
+  color: FigureColor;
+  shape: FigureShapes;
   getArea: () => number;
 }
 
 export class Triangle implements Figure {
-  shape = 'triangle';
+  shape: FigureShapes = 'triangle';
 
   constructor(
-    public color: string,
+    public color: FigureColor,
     public a: number,
     public b: number,
     public c: number,
   ) {
-    if (
-      a <= 0 ||
-      b <= 0 ||
-      c <= 0 ||
-      Math.max(a, b, c) >= a + b + c - Math.max(a, b, c)
-    ) {
-      throw new Error('sides of triangle cant be 0 or less');
+    if (a <= 0 || b <= 0 || c <= 0) {
+      throw new Error("sides a, b and c can't form a triangle");
+    }
+
+    if (Math.max(a, b, c) >= a + b + c - Math.max(a, b, c)) {
+      throw new Error(
+        'Side cant be greater or equal to sum of other two sides',
+      );
     }
   }
 
@@ -35,14 +40,14 @@ export class Triangle implements Figure {
 }
 
 export class Circle implements Figure {
-  shape = 'circle';
+  shape: FigureShapes = 'circle';
 
   constructor(
-    public color: string,
+    public color: FigureColor,
     public radius: number,
   ) {
     if (radius <= 0) {
-      throw new Error('radius cant be less than 0');
+      throw new Error('radius should be greater than 0');
     }
   }
 
@@ -52,15 +57,15 @@ export class Circle implements Figure {
 }
 
 export class Rectangle implements Figure {
-  shape = 'rectangle';
+  shape: FigureShapes = 'rectangle';
 
   constructor(
-    public color: string,
+    public color: FigureColor,
     public width: number,
     public height: number,
   ) {
     if (width <= 0 || height <= 0) {
-      throw new Error('side of rectangle cant be 0 or less');
+      throw new Error('Width or height must be greater than 0');
     }
   }
 
