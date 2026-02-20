@@ -15,13 +15,15 @@ export class Triangle implements Figure {
     public shape: Figure['shape'],
   ) {
     this.shape = 'triangle';
-    this.color = color;
-    this.a = a;
-    this.b = b;
-    this.c = c;
+    // this.color = color;
+    // this.a = a;
+    // this.b = b;
+    // this.c = c;
 
     if (this.a <= 0 || this.b <= 0 || this.c <= 0) {
-      throw new Error('some of values equal or less then zero');
+      throw new Error(
+        'All side lengths for a triangle must be positive numbers',
+      );
     }
 
     if (
@@ -51,11 +53,13 @@ export class Circle implements Figure {
     public shape: Figure['shape'],
   ) {
     this.shape = 'circle';
-    this.color = color;
-    this.radius = radius;
+    // this.color = color;
+    // this.radius = radius;
 
     if (this.radius <= 0) {
-      throw new Error('radius equal or less then zero');
+      throw new Error(
+        'All side lengths for a triangle must be positive numbers',
+      );
     }
   }
 
@@ -67,22 +71,24 @@ export class Circle implements Figure {
 export class Rectangle implements Figure {
   constructor(
     public color: Figure['color'],
-    public a: number,
-    public b: number,
+    public width: number,
+    public height: number,
     public shape: Figure['shape'],
   ) {
     this.shape = 'rectangle';
-    this.color = color;
-    this.a = a;
-    this.b = b;
+    // this.color = color;
+    // this.width = width;
+    // this.height = height;
 
-    if (this.a <= 0 || this.b <= 0) {
-      throw new Error('some value equal or less then zero');
+    if (this.width <= 0 || this.height <= 0) {
+      throw new Error(
+        'All side lengths for a triangle must be positive numbers',
+      );
     }
   }
 
   getArea(): number {
-    return Math.floor(this.a * this.b * 100) / 100;
+    return Math.floor(this.width * this.height * 100) / 100;
   }
 }
 
