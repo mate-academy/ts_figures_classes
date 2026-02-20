@@ -57,9 +57,7 @@ export class Circle implements Figure {
     // this.radius = radius;
 
     if (this.radius <= 0) {
-      throw new Error(
-        'All side lengths for a triangle must be positive numbers',
-      );
+      throw new Error('Radius must be positive numbers');
     }
   }
 
@@ -82,7 +80,7 @@ export class Rectangle implements Figure {
 
     if (this.width <= 0 || this.height <= 0) {
       throw new Error(
-        'All side lengths for a triangle must be positive numbers',
+        'Width and height for a rectangle must be positive numbers',
       );
     }
   }
