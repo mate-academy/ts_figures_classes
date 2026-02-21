@@ -63,12 +63,12 @@ export class Rectangle implements Figure {
     public height: number,
   ) {
     if (width <= 0 || height <= 0) {
-      throw new Error('sides should be positive');
+      throw new Error(`sides ${width} and ${height} should be positive`);
     }
   }
 
   getArea = (): number => {
-    return this.height * this.width;
+    return Math.floor(this.height * this.width * 100) / 100;
   };
 }
 
