@@ -22,7 +22,7 @@ export class Triangle implements Figure {
     const sorted = arr.sort((el, el2) => el - el2);
 
     if (sorted[2] >= sorted[0] + sorted[1]) {
-      throw new Error(`sides ${a}, ${b} and ${c} can't form a triangle`);
+      throw new Error(`All triangle sides must be positive numbers`);
     }
   }
 
@@ -62,8 +62,12 @@ export class Rectangle implements Figure {
     public width: number,
     public height: number,
   ) {
-    if (width <= 0 || height <= 0) {
-      throw new Error(`sides ${width} and ${height} should be positive`);
+    if (width <= 0) {
+      throw new Error(`Width must be a positive number, but got ${width}`);
+    }
+
+    if (height <= 0) {
+      throw new Error(`Height must be a positive number, but got ${height}'`);
     }
   }
 
