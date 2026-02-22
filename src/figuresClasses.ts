@@ -27,7 +27,7 @@ export class Triangle implements Figure {
     const sumOfOthers = a + b + c - longest;
 
     if (longest >= sumOfOthers) {
-      throw new Error(`Sides ${a}, ${b} and ${c} can't form a triangle`);
+      throw new Error(`sides ${a}, ${b} and ${c} can't form a triangle`);
     }
 
     this.color = color;
