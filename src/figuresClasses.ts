@@ -17,10 +17,12 @@ export class Triangle implements Figure {
     public c: number,
   ) {
     if (a <= 0 || b <= 0 || c <= 0) {
-      throw new Error('Sides must be positive numbers');
+      throw new Error(
+        'Triangle sides must be positive: a, b and c must be > 0',
+      );
     }
 
-    if (a + b <= c && a + c <= b && b + c <= a) {
+    if (a + b <= c || a + c <= b || b + c <= a) {
       throw new Error(`sides ${a}, ${b} and ${c} can't form a triangle`);
     }
   }
@@ -41,7 +43,7 @@ export class Circle implements Figure {
     private radius: number,
   ) {
     if (this.radius <= 0) {
-      throw new Error('Sides must be positive numbers');
+      throw new Error('Radius must be > 0');
     }
   }
 
@@ -61,7 +63,7 @@ export class Rectangle implements Figure {
     private height: number,
   ) {
     if (width <= 0 || height <= 0) {
-      throw new Error('Sides must be positive numbers');
+      throw new Error('Width and height must be > 0');
     }
   }
 
@@ -73,5 +75,5 @@ export class Rectangle implements Figure {
 }
 
 export function getInfo(figure: Figure): string {
-  return `A ${figure.color} ${figure.shape} - ${figure.getArea}`;
+  return `A ${figure.color} ${figure.shape} - ${figure.getArea()}`;
 }
