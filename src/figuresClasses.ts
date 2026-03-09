@@ -17,13 +17,24 @@ export class Triangle implements Figure {
       throw new Error('Sides cannot be negative');
     }
 
-    if (c >= a + b) {
-      throw new Error('Invalid triangle');
+    if (c >= a + b || a >= b + c || b >= a + c) {
+      throw new Error("The provided sides cannot form a valid triangle'");
     }
   }
 
   getArea(): number {
-    return (this.a + this.b + this.c) * 0.5;
+    const superPerimeter = (this.a + this.b + this.c) * 0.5;
+
+    return (
+      Math.floor(
+        Math.sqrt(
+          superPerimeter *
+            (superPerimeter - this.a) *
+            (superPerimeter - this.b) *
+            (superPerimeter - this.c),
+        ) * 100,
+      ) / 100
+    );
   }
 }
 
@@ -39,7 +50,7 @@ export class Circle implements Figure {
   }
 
   getArea(): number {
-    return Math.PI * this.radius * this.radius;
+    return Math.floor(Math.PI * this.radius * this.radius * 100) / 100;
   }
 }
 
@@ -56,7 +67,7 @@ export class Rectangle implements Figure {
   }
 
   getArea(): number {
-    return this.width * this.height;
+    return Math.floor(this.width * this.height * 100) / 100;
   }
 }
 
