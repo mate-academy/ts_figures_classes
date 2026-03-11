@@ -14,35 +14,27 @@ export class Triangle implements Figure {
     public color: Color,
     private a: number,
     private b: number,
-    private c: number,
+    private c: number
   ) {
     if (a <= 0 || b <= 0 || c <= 0) {
-      throw new Error('any length is <= 0');
+      throw new Error('All triangle sides must be positive numbers');
     }
     if (a >= b + c || b >= a + c || c >= a + b) {
-      throw new Error(
-        'the longest side of a triangle is >= than a sum of two others',
-      );
+      throw new Error('The longest side of a triangle must be less than the sum of the other two');
     }
   }
 
   getArea(): number {
     const s = (this.a + this.b + this.c) / 2;
     const area = Math.sqrt(s * (s - this.a) * (s - this.b) * (s - this.c));
-    return area;
+    return Math.floor(area * 100) / 100;
   }
 }
 
 export class Circle implements Figure {
   public shape: Shape = 'circle';
-
-  constructor(
-    public color: Color,
-    private radius: number,
-  ) {
-    if (radius <= 0) {
-      throw new Error('radius must be > 0');
-    }
+  constructor(public color: Color, private radius: number) {
+    if (radius <= 0) throw new Error('Radius must be positive');
   }
 
   getArea(): number {
@@ -53,15 +45,8 @@ export class Circle implements Figure {
 
 export class Rectangle implements Figure {
   public shape: Shape = 'rectangle';
-
-  constructor(
-    public color: Color,
-    private width: number,
-    private height: number,
-  ) {
-    if (width <= 0 || height <= 0) {
-      throw new Error('dimensions must be > 0');
-    }
+  constructor(public color: Color, private width: number, private height: number) {
+    if (width <= 0 || height <= 0) throw new Error('Sides must be positive');
   }
 
   getArea(): number {
