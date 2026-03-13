@@ -17,20 +17,26 @@ export class Triangle implements Figure {
     public readonly c: number,
   ) {
     if (a <= 0|| b <= 0 ||  c <= 0) {
-      throw new Error('your error message');
+      throw new Error('All triangle sides must be positive numbers');
     }
 
     const maxTriangle = Math.max(a, b, c);
 
     if (maxTriangle >= a + b + c - maxTriangle) {
-      throw new Error('your error message');
+      throw new Error('The provided side lengths cannot form a valid triangle');
     }
   }
 
   getArea(): number {
     const areaTriangle = (this.a + this.b + this.c) / 2;
+    const area = Math.sqrt(
+      areaTriangle
+      * (areaTriangle - this.a)
+      * (areaTriangle - this.b)
+      * (areaTriangle - this.c),
+    );
 
-    return Math.sqrt(areaTriangle * (areaTriangle - this.a) * (areaTriangle - this.b) * (areaTriangle - this.c));
+    return Math.floor(area * 100) / 100;
   }
 }
 
@@ -42,7 +48,7 @@ export class Circle implements Figure {
     private readonly radius: number,
   ) {
     if (radius <= 0) {
-      throw new Error('your error message');
+      throw new Error('The radius must be a positive number');
     }
   }
 
@@ -62,18 +68,16 @@ export class Rectangle implements Figure {
     private readonly height: number,
   ) {
     if (width <= 0 || height <= 0) {
-      throw new Error('your error message');
+      throw new Error('Both width and height must be positive numbers');
     }
   }
 
   getArea(): number {
-    return Math.floor(this.width * this.height);
+    const area = this.width * this.height;
+    return Math.floor(area * 100) / 100;
   }
 }
 
 export function getInfo(figure: Figure): string {
-  let area = figure.getArea();
-  area = Math.round(area * 100) / 100;
-
-  return `A ${figure.color} ${figure.shape} - ${area}`;
+  return `A ${figure.color} ${figure.shape} - ${figure.getArea()}`;
 }
