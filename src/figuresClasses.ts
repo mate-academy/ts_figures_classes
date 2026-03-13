@@ -22,7 +22,7 @@ export class Triangle implements Figure {
       this.a + this.c <= this.b ||
       this.b + this.c <= this.a
     ) {
-      throw Error('you have 0 sides');
+      throw Error('Provided side lengths do not form a valid triangle.');
     }
   }
 
@@ -42,7 +42,7 @@ export class Circle implements Figure {
     private radius: number,
   ) {
     if (this.radius <= 0) {
-      throw Error('you have radius less than or equal to 0  ');
+      throw Error('Radius must be a positive number.');
     }
   }
 
@@ -62,7 +62,7 @@ export class Rectangle implements Figure {
     private height: number,
   ) {
     if (this.width <= 0 || this.height <= 0) {
-      throw Error('you have width or height less than or equal to 0');
+      throw Error('Width and height must be positive numbers.');
     }
   }
 
