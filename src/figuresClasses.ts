@@ -22,7 +22,7 @@ export class Triangle implements Figure {
       this.a + this.c <= this.b ||
       this.b + this.c <= this.a
     ) {
-      throw Error('your error message');
+      throw Error('you have 0 sides');
     }
   }
 
@@ -30,7 +30,7 @@ export class Triangle implements Figure {
     const p: number = (this.a + this.b + this.c) / 2;
     const area = Math.sqrt(p * (p - this.a) * (p - this.b) * (p - this.c));
 
-    return Number(area.toFixed(2));
+    return Math.floor(area * 100) / 100;
   }
 }
 
@@ -42,7 +42,7 @@ export class Circle implements Figure {
     private radius: number,
   ) {
     if (this.radius <= 0) {
-      throw Error('your error message');
+      throw Error('you have radius less than or equal to 0  ');
     }
   }
 
@@ -62,14 +62,14 @@ export class Rectangle implements Figure {
     private height: number,
   ) {
     if (this.width <= 0 || this.height <= 0) {
-      throw Error('your error message');
+      throw Error('you have width or height less than or equal to 0');
     }
   }
 
   getArea(): number {
     const area: number = this.width * this.height;
 
-    return Number(area.toFixed(2));
+    return Math.floor(area * 100) / 100;
   }
 }
 
