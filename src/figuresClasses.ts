@@ -17,11 +17,11 @@ export class Triangle implements Figure {
     public shape: Shape = 'triangle',
   ) {
     if (a <= 0 || b <= 0 || c <= 0) {
-      throw new Error('invalid length');
+      throw new Error('All side lengths must be positive numbers');
     }
 
     if (a + b <= c || a + c <= b || b + c <= a) {
-      throw new Error('one side is more than a sum of two others');
+      throw new Error('One side can`t be greater than or equal to the sum of the other two');
     }
   }
 
@@ -42,7 +42,7 @@ export class Circle implements Figure {
     public shape: Shape = 'circle',
   ) {
     if (radius <= 0) {
-      throw new Error('invalid radius');
+      throw new Error('Radius must be positive number');
     }
   }
 
@@ -57,16 +57,16 @@ export class Rectangle implements Figure {
   constructor(
     public color: Color,
     public width: number,
-    public length: number,
+    public height: number,
     public shape: Shape = 'rectangle',
   ) {
-    if (width <= 0 || length <= 0) {
-      throw new Error('invalid length or width');
+    if (width <= 0 || height <= 0) {
+      throw new Error('Height and lengths must be positive numbers');
     }
   }
 
   getArea(): number {
-    const rectangleArea: number = this.width * this.length;
+    const rectangleArea: number = this.width * this.height;
 
     return Math.floor(rectangleArea * 100) / 100;
   }
