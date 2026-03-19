@@ -26,15 +26,15 @@ export class Triangle implements Figure {
     ) {
       throw new Error('Invalid triangle sides');
     }
-    this.color = color;
   }
 
   getArea(): number {
     const s = (this.sideA + this.sideB + this.sideC) / 2;
-
-    return Math.sqrt(
+    const area = Math.sqrt(
       s * (s - this.sideA) * (s - this.sideB) * (s - this.sideC),
     );
+
+    return Math.floor(area * 100) / 100;
   }
 }
 
@@ -46,14 +46,14 @@ export class Circle implements Figure {
     private radius: number,
   ) {
     if (radius <= 0) {
-      throw new Error('radius must be positive');
+      throw new Error('Radius must be positive');
     }
   }
 
   getArea(): number {
     const area = Math.PI * this.radius * this.radius;
 
-    return Math.trunc(area * 100) / 100;
+    return Math.floor(area * 100) / 100;
   }
 }
 
@@ -71,12 +71,12 @@ export class Rectangle implements Figure {
   }
 
   getArea(): number {
-    return this.width * this.height;
+    const area = this.width * this.height;
+
+    return Math.floor(area * 100) / 100;
   }
 }
 
 export function getInfo(figure: Figure): string {
-  const area = Math.round(figure.getArea() * 100) / 100;
-
-  return `A ${figure.color} ${figure.shape} - ${area}`;
+  return `A ${figure.color} ${figure.shape} - ${figure.getArea()}`;
 }
