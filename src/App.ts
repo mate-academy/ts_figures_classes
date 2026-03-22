@@ -1,0 +1,1 @@
+// import { Triangle } from './figuresClasses';
