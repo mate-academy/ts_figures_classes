@@ -16,7 +16,7 @@ export class Triangle implements Figure {
     public c: number,
   ) {
     if (this.a <= 0 || this.b <= 0 || this.c <= 0) {
-      throw new Error('Side have to be more than 0');
+      throw new Error('All triangle sides must be positive numbers');
     }
 
     if (
@@ -47,7 +47,7 @@ export class Circle implements Figure {
     public radius: number,
   ) {
     if (this.radius <= 0) {
-      throw new Error('The radius must be a positive number');
+      throw new Error('The radius must be positive numbers');
     }
   }
 
@@ -65,7 +65,7 @@ export class Rectangle implements Figure {
     public height: number,
   ) {
     if (this.width <= 0 || this.height <= 0) {
-      throw new Error('Side have to be more than 0');
+      throw new Error('All sides rectangle must be positive numbers.');
     }
   }
 
