@@ -24,9 +24,7 @@ export class Triangle implements Figure {
       this.a + this.c <= this.b ||
       this.b + this.c <= this.a
     ) {
-      throw new Error(
-        'The third side have to be less than the sum ofthe other two sides',
-      );
+      throw new Error('The provided sides do not form a valid triangle');
     }
   }
 
@@ -49,7 +47,7 @@ export class Circle implements Figure {
     public radius: number,
   ) {
     if (this.radius <= 0) {
-      throw new Error('Readius have to be more than 0');
+      throw new Error('The radius must be a positive number');
     }
   }
 
