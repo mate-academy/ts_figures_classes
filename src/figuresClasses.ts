@@ -16,7 +16,7 @@ export class Triangle implements Figure {
     public b: number,
     public c: number,
   ) {
-    const isTriagleBroken = () => {
+    const isTriagleBroken = (): boolean => {
       const greater = Math.max(this.a, this.b, this.c);
       const values = [this.a, this.b, this.c];
       const indexGreater = values.indexOf(greater);
@@ -35,12 +35,16 @@ export class Triangle implements Figure {
     this.shape = 'triangle';
   }
 
-  getArea() {
+  getArea(): number {
     const s = (this.a + this.b + this.c) / 2;
 
-    const area = Math.sqrt((s - this.a) * (s - this.b) * (s - this.c));
+    const area = Math.sqrt(s * (s - this.a) * (s - this.b) * (s - this.c));
 
-    return area;
+    const areaRound = area * 100;
+
+    const result = Math.floor(areaRound) / 100;
+
+    return result;
   }
 }
 
@@ -58,10 +62,14 @@ export class Circle implements Figure {
     this.shape = 'circle';
   }
 
-  getArea() {
+  getArea(): number {
     const area = Math.PI * this.radius ** 2;
 
-    return area;
+    const areaRound = area * 100;
+
+    const result = Math.floor(areaRound) / 100;
+
+    return result;
   }
 }
 
@@ -80,7 +88,7 @@ export class Rectangle implements Figure {
     this.shape = 'rectangle';
   }
 
-  getArea() {
+  getArea(): number {
     const area = this.width * this.height;
 
     return area;
