@@ -91,7 +91,11 @@ export class Rectangle implements Figure {
   getArea(): number {
     const area = this.width * this.height;
 
-    return area;
+    const areaRound = area * 100;
+
+    const result = Math.floor(areaRound) / 100;
+
+    return result;
   }
 }
 
