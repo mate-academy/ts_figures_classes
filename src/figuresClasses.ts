@@ -7,17 +7,12 @@ export interface Figure {
 export class Triangle implements Figure {
   readonly shape = 'triangle';
 
-  color: Figure['color'];
-
-  private a: number;
-
-  private b: number;
-
-  private c: number;
-
-  constructor(color: Figure['color'], a: number, b: number, c: number) {
-    this.color = color;
-
+  constructor(
+    public color: Figure['color'],
+    private a: number,
+    private b: number,
+    private c: number,
+  ) {
     const maxSide = Math.max(a, b, c);
     const sumOthers = a + b + c - maxSide;
 
@@ -28,10 +23,6 @@ export class Triangle implements Figure {
     if (maxSide >= sumOthers) {
       throw new Error('Triangle sides do not form a valid triangle');
     }
-
-    this.a = a;
-    this.b = b;
-    this.c = c;
   }
 
   getArea(): number {
@@ -45,18 +36,13 @@ export class Triangle implements Figure {
 export class Circle implements Figure {
   readonly shape = 'circle';
 
-  color: Figure['color'];
-
-  private radius: number;
-
-  constructor(color: Figure['color'], radius: number) {
-    this.color = color;
-
+  constructor(
+    public color: Figure['color'],
+    private radius: number,
+  ) {
     if (radius <= 0) {
       throw new Error('Radius must be greater than 0');
     }
-
-    this.radius = radius;
   }
 
   getArea(): number {
@@ -67,21 +53,14 @@ export class Circle implements Figure {
 export class Rectangle implements Figure {
   readonly shape = 'rectangle';
 
-  color: Figure['color'];
-
-  private width: number;
-
-  private height: number;
-
-  constructor(color: Figure['color'], width: number, height: number) {
-    this.color = color;
-
+  constructor(
+    public color: Figure['color'],
+    private width: number,
+    private height: number,
+  ) {
     if (width <= 0 || height <= 0) {
       throw new Error('Width and height must be greater than 0');
     }
-
-    this.width = width;
-    this.height = height;
   }
 
   getArea(): number {
