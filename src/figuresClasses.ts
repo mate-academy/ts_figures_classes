@@ -13,15 +13,16 @@ export class Triangle implements Figure {
     public b: number,
     public c: number,
   ) {
+    if (this.a <= 0 || this.b <= 0 || this.c <= 0) {
+      throw new Error('A or b or c cannot be less than zero!');
+    }
+
     if (
-      this.a <= 0 ||
-      this.b <= 0 ||
-      this.c <= 0 ||
       this.a + this.b <= this.c ||
       this.b + this.c <= this.a ||
       this.a + this.c <= this.b
     ) {
-      throw new Error('your error message');
+      throw new Error('Such a triangle does not exist!');
     }
   }
 
@@ -29,7 +30,7 @@ export class Triangle implements Figure {
     const p: number = (this.a + this.b + this.c) / 2;
     const s: number = Math.sqrt(p * (p - this.a) * (p - this.b) * (p - this.c));
 
-    return +s.toFixed(2);
+    return +(Math.floor(s * 100) / 100).toFixed(2);
   }
 }
 
@@ -41,7 +42,7 @@ export class Circle implements Figure {
     public radius: number,
   ) {
     if (this.radius <= 0) {
-      throw new Error('your error message');
+      throw new Error('Radius cannot be less than zero!');
     }
   }
 
@@ -61,14 +62,14 @@ export class Rectangle implements Figure {
     public height: number,
   ) {
     if (this.width <= 0 || this.height <= 0) {
-      throw new Error('your error message');
+      throw new Error('Height or width cannot be less then zero!');
     }
   }
 
   getArea(): number {
     const s: number = this.width * this.height;
 
-    return +s.toFixed(2);
+    return +(Math.floor(s * 100) / 100).toFixed(2);
   }
 }
 
