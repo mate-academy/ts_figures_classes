@@ -19,13 +19,13 @@ export class Triangle implements Figure {
 
   constructor(color: Color, a: number, b: number, c: number) {
     if (a <= 0 || b <= 0 || c <= 0) {
-      throw new Error('your error message');
+      throw new Error(`Sides must be positive numbers: a=${a}, b=${b}, c=${c}`);
     }
 
     const max: number = Math.max(a, b, c);
 
     if (max >= a + b + c - max) {
-      throw new Error('your error message');
+      throw new Error(`Sides ${a}, ${b} and ${c} can't form a triangle`);
     }
 
     this.shape = 'triangle';
@@ -56,7 +56,7 @@ export class Circle implements Figure {
     this.radius = radius;
 
     if (radius <= 0) {
-      throw new Error('your error message');
+      throw new Error(`Radius must be a positive number: radius=${radius}`);
     }
   }
 
@@ -83,7 +83,9 @@ export class Rectangle implements Figure {
     this.height = height;
 
     if (width <= 0 || height <= 0) {
-      throw new Error('your error message');
+      throw new Error(
+        `Width and height must be positive numbers: width=${width}, height=${height}`
+      );
     }
   }
 
