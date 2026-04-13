@@ -1,5 +1,5 @@
 export interface Figure {
-  color: string;
+  color: 'red' | 'green' | 'blue';
   shape: 'triangle' | 'circle' | 'rectangle';
   getArea: () => number;
 }
@@ -21,7 +21,7 @@ export class Triangle implements Figure {
     }
 
     if (a + b <= c || a + c <= b || b + c <= a) {
-      throw new Error('Invalid triangle sides');
+      throw new Error(`sides ${a}, ${b} and ${c} can't form a triangle`);
     }
   }
 
