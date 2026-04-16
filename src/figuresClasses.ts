@@ -21,13 +21,13 @@ export class Triangle implements Figure {
     this.color = color;
 
     if (a <= 0 || b <= 0 || c <= 0) {
-      throw new Error('...');
+      throw new Error('Triangle sides must be positive numbers');
     }
 
     const longest = Math.max(a, b, c);
 
     if (longest >= a + b + c - longest) {
-      throw new Error('...');
+      throw new Error(`Sides ${a}, ${b} and ${c} can't form a triangle`);
     }
   }
 
@@ -54,7 +54,7 @@ export class Circle implements Figure {
     this.color = color;
 
     if (radius <= 0) {
-      throw new Error('...');
+      throw new Error('Circle radius must be a positive number');
     }
   }
 
@@ -76,7 +76,7 @@ export class Rectangle implements Figure {
     this.color = color;
 
     if (width <= 0 || height <= 0) {
-      throw new Error('...');
+      throw new Error('Rectangle width and height must be positive numbers');
     }
   }
 
