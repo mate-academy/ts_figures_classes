@@ -14,11 +14,11 @@ export class Triangle implements Figure {
     public c: number,
   ) {
     if (a <= 0 || b <= 0 || c <= 0) {
-      throw new Error('Invalid triangle');
+      throw new Error('Sides must be > 0');
     }
 
     if (a + b <= c || a + c <= b || b + c <= a) {
-      throw new Error('Not a triangle');
+      throw new Error("Sides 1, 2 and 3 can't form a triangle");
     }
   }
 
