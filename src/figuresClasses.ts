@@ -1,3 +1,5 @@
+'use strict';
+
 type Color = 'red' | 'green' | 'blue';
 type Shape = 'triangle' | 'circle' | 'rectangle';
 
@@ -31,7 +33,8 @@ export class Triangle implements Figure {
       s * (s - this.a) * (s - this.b) * (s - this.c),
     );
 
-    return Number(area.toFixed(2));
+    // ВИПРАВЛЕНО: тепер завжди вниз
+    return Math.floor(area * 100) / 100;
   }
 }
 
@@ -48,8 +51,9 @@ export class Circle implements Figure {
   }
 
   getArea(): number {
-    const area = Math.PI * Math.pow(this.radius, 2);
+    const area: number = Math.PI * Math.pow(this.radius, 2);
 
+    // ТУТ ВЖЕ БУЛО ПРАВИЛЬНО
     return Math.floor(area * 100) / 100;
   }
 }
@@ -68,7 +72,10 @@ export class Rectangle implements Figure {
   }
 
   getArea(): number {
-    return Number((this.width * this.height).toFixed(2));
+    // ВИПРАВЛЕНО: тепер завжди вниз
+    const area: number = this.width * this.height;
+
+    return Math.floor(area * 100) / 100;
   }
 }
 
