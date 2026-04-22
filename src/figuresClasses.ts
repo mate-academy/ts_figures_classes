@@ -18,7 +18,7 @@ export class Triangle implements Figure {
     this.shape = 'triangle';
 
     if (a <= 0 || b <= 0 || c <= 0) {
-      throw new Error('Error');
+      throw new Error('Error, length < 0');
     }
 
     if (a + b <= c || b + c <= a || a + c <= b) {
@@ -46,7 +46,7 @@ export class Circle implements Figure {
     this.shape = 'circle';
 
     if (radius <= 0) {
-      throw new Error('Error');
+      throw new Error('Error, length < 0');
     }
   }
 
@@ -65,7 +65,7 @@ export class Rectangle implements Figure {
     this.shape = 'rectangle';
 
     if (width <= 0 || height <= 0) {
-      throw new Error('Error');
+      throw new Error('Error, length < 0');
     }
   }
 
