@@ -63,13 +63,15 @@ export class Rectangle implements Figure {
     protected height: number,
   ) {
     if (this.width <= 0 || this.height <= 0) {
-      throw new Error('throws an error');
+      throw new Error('Width and height must be greater than 0');
     }
     this.shape = 'rectangle';
   }
 
   getArea(): number {
-    return this.width * this.height;
+    const area = this.width * this.height;
+
+    return Math.floor(area * 100) / 100;
   }
 }
 
