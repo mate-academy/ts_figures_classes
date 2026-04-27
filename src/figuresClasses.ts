@@ -31,7 +31,7 @@ export class Triangle implements Figure {
 
     const area = Math.sqrt(p * (p - this.a) * (p - this.b) * (p - this.c));
 
-    return Number(area.toFixed(2));
+    return Math.floor(area * 100) / 100;
   }
 }
 
@@ -43,7 +43,7 @@ export class Circle implements Figure {
     protected radius: number,
   ) {
     if (this.radius <= 0) {
-      throw new Error('throws an error');
+      throw new Error('Radius must be greater than 0');
     }
 
     this.shape = 'circle';
