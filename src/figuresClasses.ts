@@ -36,7 +36,7 @@ export class Triangle implements Figure {
       p * (p - this.sideA) * (p - this.sideB) * (p - this.sideC),
     );
 
-    return Number(area.toFixed(2));
+    return Math.floor(area * 100) / 100;
   }
 }
 
@@ -73,7 +73,7 @@ export class Rectangle implements Figure {
   }
 
   getArea(): number {
-    return this.width * this.height;
+    return Math.floor(this.width * this.height * 100) / 100;
   }
 }
 
