@@ -1,11 +1,82 @@
-export interface Figure {}
+export interface Figure {
+  shape: string;
+  color: string;
+  getArea(): number;
+}
 
-export class Triangle implements Figure {}
+// implements obriga ter todas as propriedades e métodos (de Figure)
+export class Triangle implements Figure {
+  public readonly shape: string = 'triangle';
 
-export class Circle implements Figure {}
+  constructor(
+    public color: string,
+    public sideA: number,
+    public sideB: number,
+    public sideC: number,
+  ) {
+    if (sideA <= 0 || sideB <= 0 || sideC <= 0) {
+      throw new Error('Sides must be positive numbers');
+    }
 
-export class Rectangle implements Figure {}
+    if (
+      sideA + sideB <= sideC ||
+      sideA + sideC <= sideB ||
+      sideB + sideC <= sideA
+    ) {
+      throw new Error("sides 1, 2 and 3 can't form a triangle");
+    }
+  }
 
-export function getInfo(figure): string {
-  return typeof figure;
+  getArea(): number {
+    // Fórmula de Heron
+    // p = a+b+c/2 (semiperímetro)
+    // Área = √p(p - a).(p - b).(p - c)
+    const p = (this.sideA + this.sideB + this.sideC) / 2;
+    const area = Math.sqrt(
+      p * (p - this.sideA) * (p - this.sideB) * (p - this.sideC),
+    );
+
+    return Math.floor(area * 100) / 100;
+  }
+}
+
+export class Circle implements Figure {
+  public readonly shape: string = 'circle';
+
+  constructor(
+    public color: string,
+    public radius: number,
+  ) {
+    if (radius <= 0) {
+      throw new Error('Radius must be a positive number');
+    }
+  }
+
+  getArea(): number {
+    const area = Math.PI * Math.pow(this.radius, 2);
+
+    return Math.floor(area * 100) / 100;
+  }
+}
+
+export class Rectangle implements Figure {
+  public readonly shape: string = 'rectangle';
+
+  constructor(
+    public color: string,
+    public width: number,
+    public height: number,
+  ) {
+    if (width <= 0 || height <= 0) {
+      throw new Error('Width and height must be positive numbers');
+    }
+  }
+
+  getArea(): number {
+    return Math.floor(this.width * this.height * 100) / 100;
+  }
+}
+
+export function getInfo(figure: Figure): string {
+  return `A ${figure.color} ${figure.shape} - ${figure.getArea()}`;
 }
