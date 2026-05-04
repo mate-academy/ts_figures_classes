@@ -6,8 +6,11 @@ export interface Figure {
 
 export class Rectangle implements Figure {
   shape = 'rectangle';
+
   color: 'red' | 'green' | 'blue';
+
   width: number;
+
   height: number;
 
   constructor(color: 'red' | 'green' | 'blue', width: number, height: number) {
@@ -26,7 +29,9 @@ export class Rectangle implements Figure {
 
 export class Circle implements Figure {
   shape = 'circle';
+
   color: 'red' | 'green' | 'blue';
+
   radius: number;
 
   constructor(color: 'red' | 'green' | 'blue', radius: number) {
@@ -44,16 +49,27 @@ export class Circle implements Figure {
 
 export class Triangle implements Figure {
   shape = 'triangle';
+
   color: 'red' | 'green' | 'blue';
+
   a: number;
+
   b: number;
+
   c: number;
 
-  constructor(color: 'red' | 'green' | 'blue', a: number, b: number, c: number) {
+  constructor(
+    color: 'red' | 'green' | 'blue',
+    a: number,
+    b: number,
+    c: number,
+  ) {
     if (a <= 0 || b <= 0 || c <= 0) {
       throw new Error('Sides must be > 0');
     }
+
     const longest = Math.max(a, b, c);
+
     if (longest >= a + b + c - longest) {
       throw new Error(`Sides ${a}, ${b}, ${c} can't form a triangle`);
     }
@@ -66,6 +82,7 @@ export class Triangle implements Figure {
   getArea(): number {
     const s = (this.a + this.b + this.c) / 2;
     const area = Math.sqrt(s * (s - this.a) * (s - this.b) * (s - this.c));
+
     return Math.floor(area * 100) / 100;
   }
 }
@@ -73,4 +90,3 @@ export class Triangle implements Figure {
 export function getInfo(fig: Figure): string {
   return `A ${fig.color} ${fig.shape} - ${fig.getArea()}`;
 }
-
