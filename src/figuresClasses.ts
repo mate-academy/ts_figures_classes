@@ -17,11 +17,13 @@ export class Triangle implements Figure {
     const sumOfMinNums = a + b + c - Math.max(a, b, c);
 
     if (Math.max(a, b, c) >= sumOfMinNums) {
-      throw new Error('ERROR');
+      throw new Error(
+        `Triangle with sides ${a}, ${b}, ${c} cannot be formed because the longest side is >= sum of other sides`,
+      );
     }
 
     if (a <= 0 || b <= 0 || c <= 0) {
-      throw new Error('ERROR');
+      throw new Error('Triangle side must be greater than 0');
     }
   }
 
@@ -43,7 +45,7 @@ export class Circle implements Figure {
     public radius: number,
   ) {
     if (radius <= 0) {
-      throw new Error('ERROR');
+      throw new Error('Circle radius must be greater than 0');
     }
   }
 
@@ -61,7 +63,7 @@ export class Rectangle implements Figure {
     public height: number,
   ) {
     if (width <= 0 || height <= 0) {
-      throw new Error('ERROR');
+      throw new Error('Rectangle width and height must be greater than 0');
     }
   }
 
