@@ -3,6 +3,7 @@ enum Color {
   Green = 'green',
   Blue = 'blue',
 }
+
 enum Shape {
   Triangle = 'triangle',
   Circle = 'circle',
@@ -21,8 +22,20 @@ export class Triangle implements Figure {
     protected b: number,
     protected c: number,
   ) {
-    if (a <= 0 || b <= 0 || c <= 0 || a + b <= c || c + b <= a || a + c <= b) {
-      throw new Error('Triangle error');
+    if (a <= 0) {
+      throw new Error('Triangle side a must be greater than 0');
+    }
+
+    if (b <= 0) {
+      throw new Error('Triangle side b must be greater than 0');
+    }
+
+    if (c <= 0) {
+      throw new Error('Triangle side c must be greater than 0');
+    }
+
+    if (a + b <= c || b + c <= a || a + c <= b) {
+      throw new Error('Triangle sides do not satisfy the triangle inequality');
     }
   }
 
@@ -34,7 +47,7 @@ export class Triangle implements Figure {
     const s = (this.a + this.b + this.c) / 2;
     const area = Math.sqrt(s * (s - this.a) * (s - this.b) * (s - this.c));
 
-    return Math.floor(area * 100 + 0.01) / 100;
+    return Math.floor(area * 100) / 100;
   }
 }
 
@@ -44,7 +57,7 @@ export class Circle implements Figure {
     protected radius: number,
   ) {
     if (radius <= 0) {
-      throw new Error('Circle error');
+      throw new Error('Circle radius must be greater than 0');
     }
   }
 
@@ -63,8 +76,12 @@ export class Rectangle implements Figure {
     protected width: number,
     protected height: number,
   ) {
-    if (width <= 0 || height <= 0) {
-      throw new Error('Rectangle error');
+    if (width <= 0) {
+      throw new Error('Rectangle width must be greater than 0');
+    }
+
+    if (height <= 0) {
+      throw new Error('Rectangle height must be greater than 0');
     }
   }
 
@@ -73,7 +90,7 @@ export class Rectangle implements Figure {
   }
 
   getArea(): number {
-    return Math.floor(this.width * this.height * 100 + 0.01) / 100;
+    return Math.floor(this.width * this.height * 100) / 100;
   }
 }
 
