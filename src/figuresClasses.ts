@@ -15,15 +15,12 @@ function validatePositiveLength(value: number, name: string): void {
 export class Triangle implements Figure {
   shape: 'triangle' = 'triangle';
 
-  color: FigureColor;
-
-  a: number;
-
-  b: number;
-
-  c: number;
-
-  constructor(color: FigureColor, a: number, b: number, c: number) {
+  constructor(
+    public color: FigureColor,
+    public a: number,
+    public b: number,
+    public c: number,
+  ) {
     validatePositiveLength(a, 'a');
     validatePositiveLength(b, 'b');
     validatePositiveLength(c, 'c');
@@ -35,11 +32,6 @@ export class Triangle implements Figure {
     if (longestSide >= sumOfOtherSides) {
       throw new Error(`Sides ${a}, ${b} and ${c} can't form a triangle`);
     }
-
-    this.color = color;
-    this.a = a;
-    this.b = b;
-    this.c = c;
   }
 
   getArea(): number {
@@ -53,15 +45,11 @@ export class Triangle implements Figure {
 export class Circle implements Figure {
   shape: 'circle' = 'circle';
 
-  color: FigureColor;
-
-  radius: number;
-
-  constructor(color: FigureColor, radius: number) {
+  constructor(
+    public color: FigureColor,
+    public radius: number,
+  ) {
     validatePositiveLength(radius, 'radius');
-
-    this.color = color;
-    this.radius = radius;
   }
 
   getArea(): number {
@@ -74,19 +62,13 @@ export class Circle implements Figure {
 export class Rectangle implements Figure {
   shape: 'rectangle' = 'rectangle';
 
-  color: FigureColor;
-
-  width: number;
-
-  height: number;
-
-  constructor(color: FigureColor, width: number, height: number) {
+  constructor(
+    public color: FigureColor,
+    public width: number,
+    public height: number,
+  ) {
     validatePositiveLength(width, 'width');
     validatePositiveLength(height, 'height');
-
-    this.color = color;
-    this.width = width;
-    this.height = height;
   }
 
   getArea(): number {
