@@ -60,7 +60,7 @@ export class Circle implements Figure {
     public radius: number,
   ) {
     if (radius <= 0) {
-      throw new Error('Radius a must be greater than zero');
+      throw new Error('Radius must be greater than zero');
     }
   }
 
@@ -76,11 +76,11 @@ export class Rectangle implements Figure {
     public height: number,
   ) {
     if (width <= 0) {
-      throw new Error('Width a must be greater than zero');
+      throw new Error('Width must be greater than zero');
     }
 
     if (height <= 0) {
-      throw new Error('Height a must be greater than zero');
+      throw new Error('Height must be greater than zero');
     }
   }
 
