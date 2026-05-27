@@ -1,13 +1,16 @@
-type Colors = `red` | `green` | `blue`;
-type Shapes = `triangle` | `circle` | `rectangle`;
+'use strict';
+
+type Colors = 'red' | 'green' | 'blue';
+type Shapes = 'triangle' | 'circle' | 'rectangle';
+
 export interface Figure {
   shape: Shapes;
   color: Colors;
-  getArea: Function;
+  getArea(): number;
 }
 
 export class Triangle implements Figure {
-  public shape: Shapes = `triangle`;
+  public shape: Shapes = 'triangle';
 
   constructor(
     public color: Colors,
@@ -52,7 +55,6 @@ export class Triangle implements Figure {
 
   public getArea(): number {
     const s = 0.5 * (this.a + this.b + this.c);
-
     const area = Math.sqrt(s * (s - this.a) * (s - this.b) * (s - this.c));
 
     return Math.floor(area * 100) / 100;
@@ -60,7 +62,7 @@ export class Triangle implements Figure {
 }
 
 export class Circle implements Figure {
-  public shape: Shapes = `circle`;
+  public shape: Shapes = 'circle';
 
   constructor(
     public color: Colors,
@@ -77,7 +79,7 @@ export class Circle implements Figure {
 }
 
 export class Rectangle implements Figure {
-  public shape: Shapes = `rectangle`;
+  public shape: Shapes = 'rectangle';
 
   constructor(
     public color: Colors,
@@ -94,12 +96,12 @@ export class Rectangle implements Figure {
   }
 
   public getArea(): number {
-    return this.width * this.height;
+    return Math.floor(this.width * this.height * 100) / 100;
   }
 }
 
 type Figures = Triangle | Rectangle | Circle;
 
 export function getInfo(figure: Figures): string {
-  return `A ${figure.color} ${figure.shape} - ${+figure.getArea().toFixed(2)}`;
+  return `A ${figure.color} ${figure.shape} - ${figure.getArea()}`;
 }
