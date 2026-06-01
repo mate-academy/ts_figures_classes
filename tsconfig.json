@@ -1,6 +1,7 @@
 {
-  "extends": "@mate-academy/students-ts-config",
-  "include": [
-    "src"
-  ]
+  "compilerOptions": {
+    "ignoreDeprecations": "6.0",
+    "target": "ES5",
+    "moduleResolution": "node10"
+  }
 }
