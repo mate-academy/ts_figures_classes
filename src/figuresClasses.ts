@@ -22,11 +22,14 @@ export class Triangle implements Figure {
     c: number,
   ) {
     if (a <= 0 || b <= 0 || c <= 0) {
-      throw new Error('your error message');
+      throw new Error('The sides of a triangle must be positive numbers.');
     }
 
     if (Math.max(a, b, c) >= a + b + c - Math.max(a, b, c)) {
-      throw new Error('your error message');
+      throw new Error(
+        'Sides 1, 2, and 3 cannot form a triangle.The longest' +
+          'side must be less than the sum of the other two sides',
+      );
     }
     this.shape = 'triangle';
     this.color = color;
@@ -39,7 +42,7 @@ export class Triangle implements Figure {
     const s = (this.a + this.b + this.c) / 2;
     const area = Math.sqrt(s * (s - this.a) * (s - this.b) * (s - this.c));
 
-    return Math.round(area * 100) / 100;
+    return Math.floor(area * 100) / 100;
   }
 }
 
@@ -52,7 +55,7 @@ export class Circle implements Figure {
 
   constructor(color: 'red' | 'green' | 'blue', radius: number) {
     if (radius <= 0) {
-      throw new Error('your error message');
+      throw new Error('The radius of a circle must be a positive number');
     }
 
     this.shape = 'circle';
@@ -76,7 +79,9 @@ export class Rectangle implements Figure {
 
   constructor(color: 'red' | 'green' | 'blue', width: number, height: number) {
     if (width <= 0 || height <= 0) {
-      throw new Error('your error message');
+      throw new Error(
+        'The width and height of a rectangle must be positive numbers',
+      );
     }
     this.shape = 'rectangle';
     this.color = color;
