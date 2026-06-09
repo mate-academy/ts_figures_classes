@@ -14,7 +14,9 @@ export class Triangle implements Figure {
     readonly c: number,
   ) {
     if (a <= 0 || b <= 0 || c <= 0 || a >= b + c || b >= a + c || c >= a + b) {
-      throw new Error('your error message');
+      throw new Error(
+        'Triangle sides must be positive and satisfy triangle inequality',
+      );
     }
   }
 
@@ -36,7 +38,7 @@ export class Circle implements Figure {
     readonly radius: number,
   ) {
     if (radius <= 0) {
-      throw new Error('your error message');
+      throw new Error('Circle radius must be greater than 0');
     }
   }
 
@@ -54,7 +56,7 @@ export class Rectangle implements Figure {
     readonly height: number,
   ) {
     if (width <= 0 || height <= 0) {
-      throw new Error('your error message');
+      throw new Error('Rectangle width and height must be greater than 0');
     }
   }
 
