@@ -21,16 +21,16 @@ export class Triangle implements Figure {
     public b: number,
     public c: number,
   ) {
+    if (a <= 0 || b <= 0 || c <= 0) {
+      throw new Error('Side must be greater than 0');
+    }
+
     const maxSide = Math.max(a, b, c);
-    const p = a + b + c;
-    const pWithoutMaxSide = p - maxSide;
-    const invalidTriangleSides = maxSide >= pWithoutMaxSide;
 
-    const invalidSides =
-      [this.a, this.b, this.c].filter((s) => s <= 0).length > 0;
-
-    if (invalidTriangleSides || invalidSides) {
-      throw new Error('Invalid parameter');
+    if (maxSide >= a + b + c - maxSide) {
+      throw new Error(
+        'The longest side cannot be greater than or equal to the sum of the other two sides',
+      );
     }
   }
 
@@ -50,7 +50,7 @@ export class Circle implements Figure {
     public radius: number,
   ) {
     if (this.radius <= 0) {
-      throw new Error('Invalid parameter');
+      throw new Error('Radius must be greater than 0');
     }
   }
 
@@ -67,15 +67,19 @@ export class Rectangle implements Figure {
   constructor(
     public color: FigureColor,
     public width: number,
-    public heigth: number,
+    public height: number,
   ) {
-    if (this.width <= 0 || this.heigth <= 0) {
-      throw new Error('Invalid parameter');
+    if (width <= 0) {
+      throw new Error('Width must be greater than 0');
+    }
+
+    if (height <= 0) {
+      throw new Error('Height must be greater than 0');
     }
   }
 
   getArea(): number {
-    const area = this.width * this.heigth;
+    const area = this.width * this.height;
 
     return Math.floor(area * 100) / 100;
   }
