@@ -28,9 +28,11 @@ export class Triangle implements Figure {
     const maxSide = Math.max(a, b, c);
 
     if (maxSide >= a + b + c - maxSide) {
-      throw new Error(
-        'The longest side cannot be greater than or equal to the sum of the other two sides',
-      );
+      const message =
+        'The longest side cannot be greater than' +
+        ' or equal to the sum of the other two sides';
+
+      throw new Error(message);
     }
   }
 
