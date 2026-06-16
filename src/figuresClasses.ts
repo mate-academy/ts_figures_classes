@@ -5,22 +5,14 @@ export interface Figure {
 }
 
 export class Triangle implements Figure {
-  shape = 'triangle';
+  readonly shape = 'triangle';
 
-  color: string;
-
-  a: number;
-
-  b: number;
-
-  c: number;
-
-  constructor(color: string, a: number, b: number, c: number) {
-    this.shape = 'triangle';
-    this.a = a;
-    this.b = b;
-    this.c = c;
-
+  constructor(
+    public color: string,
+    public a: number,
+    public b: number,
+    public c: number,
+  ) {
     if (this.a <= 0 || this.b <= 0 || this.c <= 0) {
       throw new Error('All sides of the triangle must be positive numbers');
     }
@@ -28,7 +20,6 @@ export class Triangle implements Figure {
     if (a + b <= c || a + c <= b || b + c <= a) {
       throw new Error(`sides ${a}, ${b} and ${c} can't form a triangle`);
     }
-    this.color = color;
   }
 
   getArea(): number {
@@ -41,20 +32,15 @@ export class Triangle implements Figure {
 }
 
 export class Circle implements Figure {
-  shape: string;
+  readonly shape = 'circle';
 
-  color: string;
-
-  radius: number;
-
-  constructor(color: string, radius: number) {
-    this.shape = 'circle';
-    this.radius = radius;
-
+  constructor(
+    public color: string,
+    public radius: number,
+  ) {
     if (radius <= 0) {
       throw new Error('Radius of the circle must be a positive number');
     }
-    this.color = color;
   }
 
   getArea(): number {
@@ -66,20 +52,13 @@ export class Circle implements Figure {
 }
 
 export class Rectangle implements Figure {
-  shape = 'rectangle';
+  readonly shape = 'rectangle';
 
-  color: string;
-
-  width: number;
-
-  height: number;
-
-  constructor(color: string, width: number, height: number) {
-    this.shape = 'rectangle';
-    this.color = color;
-    this.width = width;
-    this.height = height;
-
+  constructor(
+    public color: string,
+    public width: number,
+    public height: number,
+  ) {
     if (width <= 0 || height <= 0) {
       throw new Error(
         'Width and height of the rectangle must be positive numbers',
