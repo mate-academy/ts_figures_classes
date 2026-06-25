@@ -36,11 +36,14 @@ export class Triangle implements Figure {
 
     if (max >= sum - max) {
       throw new Error(
-        'Greater side must be smaller or equal than the sum of two remaining',
+        `Greater triangle side must be smaller
+        or equal than the sum of two remaining
+        (the longest side is greater than
+        or equal to the sum of the other two sides or
+        that the given sides cannot form a triangle)`,
       );
     }
 
-    this.color = color;
     this.shape = Shape.Triang;
 
     const s: number = (a + b + c) / 2;
@@ -66,7 +69,6 @@ export class Circle implements Figure {
       throw new Error('Radius must be greater than 0');
     }
 
-    this.color = color;
     this.shape = Shape.Circ;
 
     this.area = Math.PI * radius ** 2;
@@ -91,7 +93,6 @@ export class Rectangle implements Figure {
       throw new Error('Width and height must be greater than 0');
     }
 
-    this.color = color;
     this.shape = Shape.Rectang;
 
     this.area = width * height;
