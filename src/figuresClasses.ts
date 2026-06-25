@@ -19,11 +19,14 @@ export interface Figure {
 export class Triangle implements Figure {
   shape: Shape;
 
-  color: Color;
-
   area: number;
 
-  constructor(color: Color, a: number, b: number, c: number) {
+  constructor(
+    public color: Color,
+    public a: number,
+    public b: number,
+    public c: number,
+  ) {
     if (a <= 0 || b <= 0 || c <= 0) {
       throw new Error('Sides must be greater than 0');
     }
@@ -32,7 +35,9 @@ export class Triangle implements Figure {
     const sum = a + b + c;
 
     if (max >= sum - max) {
-      throw new Error('Invalid triangle sides');
+      throw new Error(
+        'Greater side must be smaller or equal than the sum of two remaining',
+      );
     }
 
     this.color = color;
@@ -51,11 +56,12 @@ export class Triangle implements Figure {
 export class Circle implements Figure {
   shape: Shape;
 
-  color: Color;
-
   area: number;
 
-  constructor(color: Color, radius: number) {
+  constructor(
+    public color: Color,
+    public radius: number,
+  ) {
     if (radius <= 0) {
       throw new Error('Radius must be greater than 0');
     }
@@ -74,11 +80,13 @@ export class Circle implements Figure {
 export class Rectangle implements Figure {
   shape: Shape;
 
-  color: Color;
-
   area: number;
 
-  constructor(color: Color, width: number, height: number) {
+  constructor(
+    public color: Color,
+    public width: number,
+    public height: number,
+  ) {
     if (width <= 0 || height <= 0) {
       throw new Error('Width and height must be greater than 0');
     }
