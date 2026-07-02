@@ -25,10 +25,10 @@ export class Triangle implements Figure {
     if (
       a <= 0 ||
       b <= 0 ||
-      c < 0 ||
+      c <= 0 ||
       sortedSides[0] >= sortedSides[1] + sortedSides[2]
     ) {
-      throw new Error('your error message');
+      throw new Error('Incorrect triangle sides length');
     }
   }
 
@@ -48,7 +48,7 @@ export class Circle implements Figure {
     private radius: number,
   ) {
     if (radius <= 0) {
-      throw new Error('your error message');
+      throw new Error('Incorrect circle radius length');
     }
   }
 
@@ -68,7 +68,7 @@ export class Rectangle implements Figure {
     private height: number,
   ) {
     if (width <= 0 || height <= 0) {
-      throw new Error('your error message');
+      throw new Error('Incorrect rectangle sides length');
     }
   }
 
