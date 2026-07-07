@@ -6,13 +6,19 @@ export interface Figure {
 
 export class Triangle implements Figure {
   shape: 'triangle' = 'triangle';
-  constructor(public a: number, public b: number, public c: number, public color: 'red' | 'green' | 'blue') {
+
+  constructor(
+    public a: number,
+    public b: number,
+    public c: number,
+    public color: 'red' | 'green' | 'blue',
+  ) {
     if (a <= 0 || b <= 0 || c <= 0) {
       throw new Error('Invalid triangle');
     }
 
     const max = Math.max(a, b, c);
-    const sum = (a + b + c) - max;
+    const sum = a + b + c - max;
 
     if (max >= sum) {
       throw new Error('Error!');
@@ -21,20 +27,22 @@ export class Triangle implements Figure {
 
   getArea(): number {
     const s = (this.a + this.b + this.c) / 2;
-    const area = Math.sqrt((s * (s - this.a) * (s - this.b) * (s - this.c)));
+    const area = Math.sqrt(s * (s - this.a) * (s - this.b) * (s - this.c));
     const floor = Math.floor(area * 100) / 100;
 
     return floor;
   }
 }
 
-
 export class Circle implements Figure {
   shape: 'circle' = 'circle';
-  constructor(public color: 'red' | 'green' | 'blue', public radius: number) {
+
+  constructor(
+    public color: 'red' | 'green' | 'blue',
+    public radius: number,
+  ) {
     if (radius <= 0) {
       throw new Error('Error!');
-
     }
   }
 
@@ -48,20 +56,25 @@ export class Circle implements Figure {
 
 export class Rectangle implements Figure {
   shape: 'rectangle' = 'rectangle';
-  constructor(public width: number, public height: number, public color: 'red' | 'green' | 'blue') {
+
+  constructor(
+    public width: number,
+    public height: number,
+    public color: 'red' | 'green' | 'blue',
+  ) {
     if (width <= 0 || height <= 0) {
       throw new Error('Error!');
     }
   }
 
   getArea(): number {
-      const s = this.width * this.height;
-      const floor = Math.floor(s * 100) / 100;
+    const s = this.width * this.height;
+    const floor = Math.floor(s * 100) / 100;
 
-      return floor;
-    }
+    return floor;
+  }
 }
 
-export function getInfo(figure): string {
-  return typeof figure;
+export function getInfo(figure: Figure): string {
+  return `A ${figure.color} ${figure.shape} ${figure.getArea()}`;
 }
