@@ -8,20 +8,20 @@ export class Triangle implements Figure {
   shape: 'triangle' = 'triangle';
 
   constructor(
+    public color: 'red' | 'green' | 'blue',
     public a: number,
     public b: number,
     public c: number,
-    public color: 'red' | 'green' | 'blue',
   ) {
     if (a <= 0 || b <= 0 || c <= 0) {
-      throw new Error('Invalid triangle');
+      throw new Error('All sides must be greater than 0');
     }
 
     const max = Math.max(a, b, c);
     const sum = a + b + c - max;
 
     if (max >= sum) {
-      throw new Error('Error!');
+      throw new Error('These sides cannot form a triangle');
     }
   }
 
@@ -42,7 +42,7 @@ export class Circle implements Figure {
     public radius: number,
   ) {
     if (radius <= 0) {
-      throw new Error('Error!');
+      throw new Error('Radius must be greater than 0');
     }
   }
 
@@ -58,12 +58,12 @@ export class Rectangle implements Figure {
   shape: 'rectangle' = 'rectangle';
 
   constructor(
+    public color: 'red' | 'green' | 'blue',
     public width: number,
     public height: number,
-    public color: 'red' | 'green' | 'blue',
   ) {
     if (width <= 0 || height <= 0) {
-      throw new Error('Error!');
+      throw new Error('Width and height must be greater than 0');
     }
   }
 
@@ -76,5 +76,5 @@ export class Rectangle implements Figure {
 }
 
 export function getInfo(figure: Figure): string {
-  return `A ${figure.color} ${figure.shape} ${figure.getArea()}`;
+  return `A ${figure.color} ${figure.shape} - ${figure.getArea()}`;
 }
