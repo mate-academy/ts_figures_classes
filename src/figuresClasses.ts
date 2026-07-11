@@ -1,87 +1,113 @@
 type Shape = 'triangle' | 'circle' | 'rectangle';
+
 type Color = 'red' | 'green' | 'blue';
 
-interface Figure {
+export interface Figure {
   shape: Shape;
   color: Color;
   getArea(): number;
 }
 
-class Rectangle implements Figure {
-  shape: Shape = 'rectangle';
-  color: Color;
-  width: number;
-  height: number;
+export class Rectangle implements Figure {
+  public readonly shape: Shape = 'rectangle';
 
-  constructor(color: Color, width: number, height: number) {
-    if (width <= 0 || height <= 0) {
-      throw new Error('your error message');
+  constructor(
+    public color: Color,
+    public width: number,
+    public height: number,
+  ) {
+    if (width <= 0) {
+      throw new Error(
+        `Width must be greater than 0, received ${width}`,
+      );
     }
 
-    this.color = color;
-    this.width = width;
-    this.height = height;
+    if (height <= 0) {
+      throw new Error(
+        `Height must be greater than 0, received ${height}`,
+      );
+    }
   }
 
-  getArea(): number {
-    return Math.floor((this.width * this.height) * 100) / 100;
+  public getArea(): number {
+    const area = this.width * this.height;
+
+    return Math.floor(area * 100) / 100;
   }
 }
 
-class Circle implements Figure {
-  shape: Shape = 'circle';
-  color: Color;
-  radius: number;
+export class Circle implements Figure {
+  public readonly shape: Shape = 'circle';
 
-  constructor(color: Color, radius: number) {
+  constructor(
+    public color: Color,
+    public radius: number,
+  ) {
     if (radius <= 0) {
-      throw new Error('your error message');
+      throw new Error(
+        `Radius must be greater than 0, received ${radius}`,
+      );
     }
-
-    this.color = color;
-    this.radius = radius;
   }
 
-  getArea(): number {
-    return Math.floor((Math.PI * this.radius ** 2) * 100) / 100;
+  public getArea(): number {
+    const area = Math.PI * this.radius ** 2;
+
+    return Math.floor(area * 100) / 100;
   }
 }
 
-class Triangle implements Figure {
-  shape: Shape = 'triangle';
-  color: Color;
-  a: number;
-  b: number;
-  c: number;
+export class Triangle implements Figure {
+  public readonly shape: Shape = 'triangle';
 
-  constructor(color: Color, a: number, b: number, c: number) {
-    if (a <= 0 || b <= 0 || c <= 0) {
-      throw new Error('your error message');
+  constructor(
+    public color: Color,
+    public a: number,
+    public b: number,
+    public c: number,
+  ) {
+    if (a <= 0) {
+      throw new Error(
+        `Side a must be greater than 0, received ${a}`,
+      );
     }
 
-    const longest = Math.max(a, b, c);
-
-    if (longest >= a + b + c - longest) {
-      throw new Error('your error message');
+    if (b <= 0) {
+      throw new Error(
+        `Side b must be greater than 0, received ${b}`,
+      );
     }
 
-    this.color = color;
-    this.a = a;
-    this.b = b;
-    this.c = c;
+    if (c <= 0) {
+      throw new Error(
+        `Side c must be greater than 0, received ${c}`,
+      );
+    }
+
+    const longestSide = Math.max(a, b, c);
+    const otherSidesSum = a + b + c - longestSide;
+
+    if (longestSide >= otherSidesSum) {
+      throw new Error(
+        `Sides ${a}, ${b} and ${c} can't form a triangle`,
+      );
+    }
   }
 
-  getArea(): number {
-    const p = (this.a + this.b + this.c) / 2;
+  public getArea(): number {
+    const semiPerimeter = (this.a + this.b + this.c) / 2;
 
     const area = Math.sqrt(
-      p * (p - this.a) * (p - this.b) * (p - this.c),
+      semiPerimeter
+      * (semiPerimeter - this.a)
+      * (semiPerimeter - this.b)
+      * (semiPerimeter - this.c),
     );
 
     return Math.floor(area * 100) / 100;
   }
 }
 
-function getInfo(figure: Figure): string {
+export function getInfo(figure: Figure): string {
   return `A ${figure.color} ${figure.shape} - ${figure.getArea()}`;
 }
