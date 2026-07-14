@@ -1,4 +1,7 @@
-export interface Figure {}
+export interface Figure {
+
+  
+}
 
 export class Triangle implements Figure {}
 
