@@ -27,7 +27,8 @@ export class Triangle implements Figure {
 
     if (a + b <= c || b + c <= a || a + c <= b) {
       throw new Error(
-        `sides ${this.a}, ${this.b} and ${this.c}` + 'cant form a triangle',
+        `sides ${this.a}, ${this.b} and ${this.c}` + ' cant form a triangle',
+        // `sides 1, 2 and 3 can't form a triangle`,
       );
     }
   }
@@ -35,13 +36,16 @@ export class Triangle implements Figure {
   getArea(): number {
     const semiPerimeter = (this.a + this.b + this.c) / 2;
 
-    return Math.floor(
-      Math.sqrt(
-        semiPerimeter *
-          (semiPerimeter - this.a) *
-          (semiPerimeter - this.b) *
-          (semiPerimeter - this.c),
-      ),
+    return (
+      Math.floor(
+        100 *
+          Math.sqrt(
+            semiPerimeter *
+              (semiPerimeter - this.a) *
+              (semiPerimeter - this.b) *
+              (semiPerimeter - this.c),
+          ),
+      ) / 100
     );
   }
 }
@@ -77,7 +81,7 @@ export class Rectangle implements Figure {
   }
 
   getArea(): number {
-    return +(this.width * this.height).toFixed(2);
+    return Math.floor(this.width * this.height * 100) / 100;
   }
 }
 
