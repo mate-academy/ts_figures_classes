@@ -1,11 +1,90 @@
-export interface Figure {}
+enum Shape {
+  Triangle = 'triangle',
+  Circle = 'circle',
+  Rectangle = 'rectangle',
+}
 
-export class Triangle implements Figure {}
+type Color = 'red' | 'green' | 'blue';
 
-export class Circle implements Figure {}
+export interface Figure {
+  shape: Shape;
+  color: Color;
+  getArea(): number;
+}
 
-export class Rectangle implements Figure {}
+export class Triangle implements Figure {
+  shape = Shape.Triangle;
 
-export function getInfo(figure): string {
-  return typeof figure;
+  constructor(
+    public color: Color,
+    public a: number,
+    public b: number,
+    public c: number,
+  ) {
+    if (a <= 0 || b <= 0 || c <= 0) {
+      throw new Error('Side cannot be less than or equal to 0');
+    }
+
+    if (a + b <= c || b + c <= a || a + c <= b) {
+      throw new Error(
+        `sides ${this.a}, ${this.b} and ${this.c}` + ' cant form a triangle',
+        // `sides 1, 2 and 3 can't form a triangle`,
+      );
+    }
+  }
+
+  getArea(): number {
+    const semiPerimeter = (this.a + this.b + this.c) / 2;
+
+    return (
+      Math.floor(
+        100 *
+          Math.sqrt(
+            semiPerimeter *
+              (semiPerimeter - this.a) *
+              (semiPerimeter - this.b) *
+              (semiPerimeter - this.c),
+          ),
+      ) / 100
+    );
+  }
+}
+
+export class Circle implements Figure {
+  shape = Shape.Circle;
+
+  constructor(
+    public color: Color,
+    public radius: number,
+  ) {
+    if (radius <= 0) {
+      throw new Error('Radius cannot be less than or equal to 0');
+    }
+  }
+
+  getArea(): number {
+    return Math.floor(Math.PI * this.radius ** 2 * 100) / 100;
+  }
+}
+
+export class Rectangle implements Figure {
+  shape = Shape.Rectangle;
+
+  constructor(
+    public color: Color,
+    public width: number,
+    public height: number,
+  ) {
+    if (width <= 0 || height <= 0) {
+      throw new Error('Width and height cannot be less than or equal to 0');
+    }
+  }
+
+  getArea(): number {
+    return Math.floor(this.width * this.height * 100) / 100;
+  }
+}
+
+export function getInfo(figure: Figure): string {
+  return `A ${figure.color} ${figure.shape} -` + ` ${figure.getArea()}`;
 }
