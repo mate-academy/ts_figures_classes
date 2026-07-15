@@ -22,7 +22,7 @@ export class Triangle implements Figure {
     public c: number,
   ) {
     if (a <= 0 || b <= 0 || c <= 0) {
-      throw new Error();
+      throw new Error('Side cannot be less than or equal to 0');
     }
 
     if (a + b <= c || b + c <= a || a + c <= b) {
@@ -35,12 +35,14 @@ export class Triangle implements Figure {
   getArea(): number {
     const semiPerimeter = (this.a + this.b + this.c) / 2;
 
-    return +Math.sqrt(
-      semiPerimeter *
-        (semiPerimeter - this.a) *
-        (semiPerimeter - this.b) *
-        (semiPerimeter - this.c),
-    ).toFixed(2);
+    return Math.floor(
+      Math.sqrt(
+        semiPerimeter *
+          (semiPerimeter - this.a) *
+          (semiPerimeter - this.b) *
+          (semiPerimeter - this.c),
+      ),
+    );
   }
 }
 
@@ -52,7 +54,7 @@ export class Circle implements Figure {
     public radius: number,
   ) {
     if (radius <= 0) {
-      throw new Error();
+      throw new Error('Radius cannot be less than or equal to 0');
     }
   }
 
@@ -70,7 +72,7 @@ export class Rectangle implements Figure {
     public height: number,
   ) {
     if (width <= 0 || height <= 0) {
-      throw new Error();
+      throw new Error('Width and height cannot be less than or equal to 0');
     }
   }
 
