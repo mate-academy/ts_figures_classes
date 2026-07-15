@@ -1,7 +1,7 @@
 export interface Figure {
   shape: 'triangle' | 'circle' | 'rectangle';
   color: 'red' | 'green' | 'blue';
-  getArea(): number | string;
+  getArea(): number;
 }
 
 export class Triangle implements Figure {
@@ -28,17 +28,13 @@ export class Triangle implements Figure {
     }
   }
 
-  getArea(): number | string {
+  getArea(): number {
     const sum = (this.a + this.b + this.c) / 2;
     const result = Math.sqrt(
       sum * (sum - this.a) * (sum - this.b) * (sum - this.c),
     );
 
-    if (Number.isInteger(result)) {
-      return result;
-    } else {
-      return Number(result.toFixed(2));
-    }
+    return Math.floor(result * 100) / 100;
   }
 }
 
@@ -54,7 +50,7 @@ export class Circle implements Figure {
     }
   }
 
-  getArea(): number | string {
+  getArea(): number {
     const result = Math.PI * this.radius ** 2;
 
     return Math.floor(result * 100) / 100;
@@ -74,14 +70,10 @@ export class Rectangle implements Figure {
     }
   }
 
-  getArea(): number | string {
+  getArea(): number {
     const result = this.width * this.height;
 
-    if (Number.isInteger(result)) {
-      return result;
-    } else {
-      return Number(result.toFixed(2));
-    }
+    return Math.floor(result * 100) / 100;
   }
 }
 
