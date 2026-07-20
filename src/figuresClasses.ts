@@ -11,7 +11,7 @@ export interface Figure {
 
 export class Triangle implements Figure {
   shape: Shape = 'triangle';
-  
+
   color: Color;
 
   a: number;
