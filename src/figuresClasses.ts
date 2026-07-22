@@ -17,7 +17,7 @@ export class Triangle implements Figure {
     }
 
     if (c >= a + b || b >= c + a || a >= b + c) {
-      throw new Error('Error');
+      throw new Error('Sides 1, 2 and 3 can not form a triangle');
     }
   }
 
@@ -61,7 +61,7 @@ export class Rectangle implements Figure {
   }
 
   getArea(): number {
-    return Math.floor(this.width * this.height);
+    return Math.floor(this.width * this.height * 100) / 100;
   }
 }
 
