@@ -14,8 +14,12 @@ export class Triangle implements Figure {
   ) {
     const maxSide: number = Math.max(a, b, c);
 
-    if (a <= 0 || b <= 0 || c <= 0 || maxSide >= a + b + c - maxSide) {
-      throw new Error('Side a must be greater than 0');
+    if (a <= 0 || b <= 0 || c <= 0) {
+      throw new Error('Triangle sides must be greater than 0');
+    }
+
+    if (maxSide >= a + b + c - maxSide) {
+      throw new Error('Triangle sides must satisfy triangle inequality');
     }
   }
 
