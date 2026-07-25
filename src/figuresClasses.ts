@@ -16,7 +16,7 @@ export class Triangle implements Figure {
     public sideC: number,
   ) {
     if (sideA <= 0 || sideB <= 0 || sideC <= 0) {
-      throw new Error();
+      throw new Error('"Side must be greater than 0');
     }
 
     if (
@@ -24,7 +24,7 @@ export class Triangle implements Figure {
       sideB + sideC <= sideA ||
       sideA + sideC <= sideB
     ) {
-      throw new Error();
+      throw new Error('Invalid triangle sides');
     }
   }
 
@@ -48,7 +48,7 @@ export class Circle implements Figure {
     public radius: number,
   ) {
     if (radius <= 0) {
-      throw new Error();
+      throw new Error('Radius must be greater than 0');
     }
   }
 
@@ -66,14 +66,14 @@ export class Rectangle implements Figure {
     public height: number,
   ) {
     if (height <= 0 || width <= 0) {
-      throw new Error();
+      throw new Error('Width and height must be greater than 0');
     }
   }
 
   shape: Shape = 'rectangle';
 
   getArea(): number {
-    return this.width * this.height;
+    return Math.floor(this.width * this.height * 100) / 100;
   }
 }
 
