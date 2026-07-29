@@ -20,11 +20,13 @@ export class Triangle implements Figure {
     }
 
     if (
-      sideA + sideB <= sideC ||
-      sideA + sideC <= sideB ||
-      sideB + sideC <= sideA
+      sideA + sideB <= sideC
+      || sideA + sideC <= sideB
+      || sideB + sideC <= sideA
     ) {
-      throw new Error('Invalid triangle');
+      throw new Error(
+        'The longest side must be less than the sum of the other two sides',
+      );
     }
 
     this.shape = 'triangle';
@@ -34,11 +36,13 @@ export class Triangle implements Figure {
   getArea(): number {
     const p = (this.sideA + this.sideB + this.sideC) / 2;
 
-    return Number(
-      Math.sqrt(
-        p * (p - this.sideA) * (p - this.sideB) * (p - this.sideC),
-      ).toFixed(2),
+    const area = Math.sqrt(
+      p * (p - this.sideA)
+      * (p - this.sideB)
+      * (p - this.sideC),
     );
+
+    return Math.floor(area * 100) / 100;
   }
 }
 
@@ -85,7 +89,9 @@ export class Rectangle implements Figure {
   }
 
   getArea(): number {
-    return this.width * this.height;
+    const area = this.width * this.height;
+
+    return Math.floor(area * 100) / 100;
   }
 }
 
