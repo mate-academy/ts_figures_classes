@@ -18,7 +18,12 @@ export class Triangle implements Figure {
 
   c: number;
 
-  constructor(color: Color, a: number, b: number, c: number) {
+  constructor(
+    public color: Color,
+    public a: number,
+    public b: number,
+    public c: number,
+  ) {
     this.shape = 'triangle';
     this.color = color;
     this.a = a;
@@ -49,7 +54,10 @@ export class Circle implements Figure {
 
   radius: number;
 
-  constructor(color: Color, radius: number) {
+  constructor(
+    public color: Color,
+    public radius: number,
+  ) {
     this.shape = 'circle';
     this.color = color;
     this.radius = radius;
@@ -75,7 +83,11 @@ export class Rectangle implements Figure {
 
   height: number;
 
-  constructor(color: Color, width: number, height: number) {
+  constructor(
+    public color: Color,
+    public width: number,
+    public height: number,
+  ) {
     this.shape = 'rectangle';
     this.color = color;
     this.width = width;
