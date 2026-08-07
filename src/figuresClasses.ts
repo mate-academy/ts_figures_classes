@@ -10,14 +10,6 @@ export interface Figure {
 export class Triangle implements Figure {
   shape: 'triangle';
 
-  color: Color;
-
-  a: number;
-
-  b: number;
-
-  c: number;
-
   constructor(
     public color: Color,
     public a: number,
@@ -25,10 +17,6 @@ export class Triangle implements Figure {
     public c: number,
   ) {
     this.shape = 'triangle';
-    this.color = color;
-    this.a = a;
-    this.b = b;
-    this.c = c;
 
     if (a <= 0 || b <= 0 || c <= 0) {
       throw new Error('Triangle sides must be positive numbers');
@@ -50,17 +38,11 @@ export class Triangle implements Figure {
 export class Circle implements Figure {
   shape: 'circle';
 
-  color: Color;
-
-  radius: number;
-
   constructor(
     public color: Color,
     public radius: number,
   ) {
     this.shape = 'circle';
-    this.color = color;
-    this.radius = radius;
 
     if (radius <= 0) {
       throw new Error('Circle radius must be a positive number');
@@ -77,21 +59,12 @@ export class Circle implements Figure {
 export class Rectangle implements Figure {
   shape: 'rectangle';
 
-  color: Color;
-
-  width: number;
-
-  height: number;
-
   constructor(
     public color: Color,
     public width: number,
     public height: number,
   ) {
     this.shape = 'rectangle';
-    this.color = color;
-    this.width = width;
-    this.height = height;
 
     if (width <= 0 || height <= 0) {
       throw new Error('Rectangle width and height must be positive numbers');
