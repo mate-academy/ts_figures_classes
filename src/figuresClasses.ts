@@ -29,7 +29,10 @@ export class Triangle implements Figure {
     const longestSide = Math.max(a, b, c);
 
     if (longestSide >= a + b + c - longestSide) {
-      throw new Error('Invalid triangle sides');
+      throw new Error(
+        'Invalid triangle: the longest side must be less than ' +
+          'the sum of the other two sides',
+      );
     }
 
     this.shape = 'triangle';
@@ -49,7 +52,7 @@ export class Triangle implements Figure {
         (semiPerimeter - this.c),
     );
 
-    return Math.round(area * 100) / 100;
+    return Math.floor(area * 100) / 100;
   }
 }
 
@@ -100,7 +103,7 @@ export class Rectangle implements Figure {
   getArea(): number {
     const area = this.width * this.height;
 
-    return Math.round(area * 100) / 100;
+    return Math.floor(area * 100) / 100;
   }
 }
 
