@@ -22,11 +22,13 @@ export class Triangle implements Figure {
     const middleSide = sum - longestSide - shortestSide;
 
     if (longestSide >= shortestSide + middleSide) {
-      throw new Error('Error');
+      throw new Error(
+        'Longest side cannot be greater than or equal to sum of other sides',
+      );
     }
 
     if (this.a <= 0 || this.b <= 0 || this.c <= 0) {
-      throw new Error('Error');
+      throw new Error('All triangle sides must be greater than 0');
     }
   }
 
@@ -48,7 +50,7 @@ export class Circle implements Figure {
     this.shape = 'circle';
 
     if (this.radius <= 0) {
-      throw new Error('Error');
+      throw new Error('Circle radius must be greater than 0');
     }
   }
 
@@ -68,7 +70,7 @@ export class Rectangle implements Figure {
     this.shape = 'rectangle';
 
     if (this.width <= 0 || this.height <= 0) {
-      throw new Error('Error');
+      throw new Error('Rectangle width and height must be greater than 0');
     }
   }
 
