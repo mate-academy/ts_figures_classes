@@ -23,7 +23,8 @@ export class Triangle implements Figure {
 
     if (longestSide >= shortestSide + middleSide) {
       throw new Error(
-        'Longest side cannot be greater than or equal to sum of other sides',
+        'Triangle inequality violated:' +
+          'longest side cannot be greater than or equal to sum of other sides',
       );
     }
 
