@@ -21,14 +21,19 @@ export class Triangle implements Figure {
     public c: number,
   ) {
     if (a <= 0 || b <= 0 || c <= 0) {
-      throw new Error('numbers should be more then 0');
+      throw new Error(
+        'All triangle sides must be positive numbers (a, b, c > 0)',
+      );
     }
 
     const theLingestSide = Math.max(a, b, c);
     const sum = a + b + c - theLingestSide;
 
     if (theLingestSide >= sum) {
-      throw new Error('this can form Triangle');
+      throw new Error(
+        // eslint-disable-next-line max-len
+        'Invalid triangle: the longest side must be less than the sum of the other two sides (a + b > c, a + c > b, b + c > a)',
+      );
     }
   }
 
@@ -47,7 +52,7 @@ export class Circle implements Figure {
     public radius: number,
   ) {
     if (radius <= 0) {
-      throw new Error('number needs to be more then 0');
+      throw new Error('Circle radius must be a positive number (radius > 0)');
     }
   }
 
@@ -65,7 +70,10 @@ export class Rectangle implements Figure {
     public height: number,
   ) {
     if (height <= 0 || width <= 0) {
-      throw new Error('write valide numbers');
+      throw new Error(
+        // eslint-disable-next-line max-len
+        'Rectangle dimensions must be positive numbers (width > 0 and height > 0)',
+      );
     }
   }
 
