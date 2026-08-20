@@ -65,7 +65,7 @@ export class Rectangle implements Figure {
   }
 
   getArea(): number {
-    return this.width * this.height;
+    return Math.floor(this.width * this.height * 100) / 100;
   }
 
   shape = 'rectangle' as const;
