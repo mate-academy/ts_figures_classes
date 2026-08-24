@@ -52,7 +52,7 @@ export class Circle implements Figure {
   }
 
   getArea(): number {
-    const area = Math.PI * this.radius ** 2;
+    const area = Math.PI * this.radius * this.radius;
 
     return Number(area.toFixed(2));
   }
@@ -86,9 +86,21 @@ export function getInfo(figure: Figure): string {
   };
 
   const colorNames = {
-    red: 'Red',
-    green: 'Green',
-    blue: 'Blue',
+    red: {
+      triangle: 'red',
+      circle: 'red',
+      rectangle: 'red',
+    },
+    green: {
+      triangle: 'green',
+      circle: 'green',
+      rectangle: 'green',
+    },
+    blue: {
+      triangle: 'blue',
+      circle: 'blue',
+      rectangle: 'blue',
+    },
   };
 
   return `${colorNames[figure.color]} ${shapeNames[figure.shape]} - ${figure.getArea()}`;
