@@ -35,7 +35,7 @@ export class Triangle implements Figure {
         (semiPerimeter - this.c),
     );
 
-    return Number(area.toFixed(2));
+    return Math.floor(area * 100) / 100;
   }
 }
 
@@ -54,7 +54,7 @@ export class Circle implements Figure {
   getArea(): number {
     const area = Math.PI * this.radius * this.radius;
 
-    return Number(area.toFixed(2));
+    return Math.floor(area * 100) / 100;
   }
 }
 
@@ -74,34 +74,10 @@ export class Rectangle implements Figure {
   getArea(): number {
     const area = this.width * this.height;
 
-    return Number(area.toFixed(2));
+    return Math.floor(area * 100) / 100;
   }
 }
 
 export function getInfo(figure: Figure): string {
-  const shapeNames = {
-    triangle: 'triangle',
-    circle: 'circle',
-    rectangle: 'rectangle',
-  };
-
-  const colorNames = {
-    red: {
-      triangle: 'red',
-      circle: 'red',
-      rectangle: 'red',
-    },
-    green: {
-      triangle: 'green',
-      circle: 'green',
-      rectangle: 'green',
-    },
-    blue: {
-      triangle: 'blue',
-      circle: 'blue',
-      rectangle: 'blue',
-    },
-  };
-
-  return `${colorNames[figure.color]} ${shapeNames[figure.shape]} - ${figure.getArea()}`;
+  return `A ${figure.color} ${figure.shape} - ${figure.getArea()}`;
 }
