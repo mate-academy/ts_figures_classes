@@ -10,7 +10,7 @@ var Triangle = /** @class */ (function () {
         this.c = c;
         this.shape = 'triangle';
         if (this.a <= 0 || this.b <= 0 || this.c <= 0) {
-            throw new Error('value of the side is less than 0');
+            throw new Error('value of the triangle side is less than 0, which is an invalid data');
         }
         var sidesSorted = [this.a, this.b, this.c].sort(function (num1, num2) { return num1 - num2; });
         if (sidesSorted[2] >= sidesSorted[0] + sidesSorted[1]) {
@@ -34,7 +34,7 @@ var Circle = /** @class */ (function () {
         this.radius = radius;
         this.shape = 'circle';
         if (this.radius <= 0) {
-            throw new Error('value of the side is less than 0');
+            throw new Error('value of circle radius is less than 0, which is an invalid data');
         }
     }
     Circle.prototype.getArea = function () {
@@ -51,7 +51,7 @@ var Rectangle = /** @class */ (function () {
         this.height = height;
         this.shape = 'rectangle';
         if (this.width <= 0 || this.height <= 0) {
-            throw new Error('value of the side is less than 0');
+            throw new Error('value of the width/height is less than 0, which is an invalid data');
         }
     }
     Rectangle.prototype.getArea = function () {
