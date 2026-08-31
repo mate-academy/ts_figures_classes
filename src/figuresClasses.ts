@@ -1,7 +1,7 @@
 export interface Figure {
   shape: 'triangle' | 'circle' | 'rectangle';
   color: 'red' | 'green' | 'blue';
-  getArea: object;
+  getArea(): number;
   a?: number;
   b?: number;
   c?: number;
@@ -20,7 +20,9 @@ export class Triangle implements Figure {
     public c: number,
   ) {
     if (this.a <= 0 || this.b <= 0 || this.c <= 0) {
-      throw new Error('value of the side is less than 0');
+      throw new Error(
+        'value of the triangle side is less than 0, which is an invalid data',
+      );
     }
 
     const sidesSorted = [this.a, this.b, this.c].sort(
@@ -56,7 +58,9 @@ export class Circle implements Figure {
     public radius: number,
   ) {
     if (this.radius <= 0) {
-      throw new Error('value of the side is less than 0');
+      throw new Error(
+        'value of circle radius is less than 0, which is an invalid data',
+      );
     }
   }
 
@@ -76,7 +80,9 @@ export class Rectangle implements Figure {
     public height: number,
   ) {
     if (this.width <= 0 || this.height <= 0) {
-      throw new Error('value of the side is less than 0');
+      throw new Error(
+        'value of the width/height is less than 0, which is an invalid data',
+      );
     }
   }
 
@@ -85,7 +91,7 @@ export class Rectangle implements Figure {
   }
 }
 
-export function getInfo(figure): string {
+export function getInfo(figure: Figure): string {
   const areaValue = figure.getArea();
 
   return `A ${figure.color} ${figure.shape} - ${areaValue}`;
