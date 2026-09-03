@@ -28,10 +28,6 @@ export class Triangle implements Figure {
       throw new Error('Triangle with such sides does not exist');
     }
 
-    if (a <= 0 || b <= 0 || c <= 0) {
-      throw new Error('Triangle sides must be positive or greater than zero');
-    }
-
     this.color = color;
     this.shape = 'triangle';
   }
