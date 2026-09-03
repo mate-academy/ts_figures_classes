@@ -5,15 +5,15 @@ export interface Figure {
 }
 
 export class Triangle implements Figure {
-  shape: string = 'triangle';
+  public shape: string = 'triangle';
 
-  color: string;
+  public color: string;
 
-  a: number;
+  public a: number;
 
-  b: number;
+  public b: number;
 
-  c: number;
+  public c: number;
 
   constructor(color: string, a: number, b: number, c: number) {
     if (a <= 0 || b <= 0 || c <= 0) {
@@ -36,16 +36,16 @@ export class Triangle implements Figure {
     const p = (this.a + this.b + this.c) / 2;
     const area = Math.sqrt(p * (p - this.a) * (p - this.b) * (p - this.c));
 
-    return Math.round(area * 100) / 100;
+    return Math.floor(area * 100) / 100;
   }
 }
 
 export class Circle implements Figure {
-  shape: string = 'circle';
+  public shape: string = 'circle';
 
-  color: string;
+  public color: string;
 
-  radius: number;
+  public radius: number;
 
   constructor(color: string, radius: number) {
     if (radius <= 0) {
@@ -64,13 +64,13 @@ export class Circle implements Figure {
 }
 
 export class Rectangle implements Figure {
-  shape: string = 'rectangle';
+  public shape: string = 'rectangle';
 
-  color: string;
+  public color: string;
 
-  width: number;
+  public width: number;
 
-  height: number;
+  public height: number;
 
   constructor(color: string, width: number, height: number) {
     if (width <= 0 || height <= 0) {
@@ -85,7 +85,7 @@ export class Rectangle implements Figure {
   getArea(): number {
     const area = this.width * this.height;
 
-    return Math.round(area * 100) / 100;
+    return Math.floor(area * 100) / 100;
   }
 }
 
