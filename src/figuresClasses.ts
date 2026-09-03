@@ -16,6 +16,10 @@ export class Triangle implements Figure {
     public b: number,
     public c: number,
   ) {
+    if (a <= 0 || b <= 0 || c <= 0) {
+      throw new Error('Triangle sides must be positive numbers');
+    }
+
     if (a + b <= c) {
       throw new Error('Triangle with such sides does not exist');
     }
