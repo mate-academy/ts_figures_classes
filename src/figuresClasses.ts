@@ -75,7 +75,7 @@ export class Rectangle implements Figure {
   }
 
   public getArea(): number {
-    return this.width * this.height;
+    return roundDownToHundredths(this.width * this.height);
   }
 }
 
