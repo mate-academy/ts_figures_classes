@@ -34,9 +34,6 @@ export class Triangle implements Figure {
 
     this.color = color;
     this.shape = 'triangle';
-    this.a = a;
-    this.b = b;
-    this.c = c;
   }
 
   getArea(): number {
@@ -67,7 +64,6 @@ export class Circle implements Figure {
 
     this.color = color;
     this.shape = 'circle';
-    this.radius = radius;
   }
 
   getArea(): number {
@@ -91,8 +87,6 @@ export class Rectangle implements Figure {
 
     this.color = color;
     this.shape = 'rectangle';
-    this.width = width;
-    this.height = height;
   }
 
   getArea(): number {
