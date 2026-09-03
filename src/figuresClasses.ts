@@ -4,6 +4,7 @@ export interface Figure {
 
   getArea(): number;
 }
+
 export class Triangle implements Figure {
   color: Figure['color'];
 
@@ -20,7 +21,9 @@ export class Triangle implements Figure {
     }
 
     if (a + b <= c || a + c <= b || b + c <= a) {
-      throw new Error('Triangle with such sides does not exist');
+      throw new Error(
+        `Triangle with sides ${a}, ${b} and ${c} can't form a triangle`,
+      );
     }
 
     this.color = color;
@@ -36,6 +39,7 @@ export class Triangle implements Figure {
     );
   }
 }
+
 export class Circle implements Figure {
   color: Figure['color'];
 
@@ -56,6 +60,7 @@ export class Circle implements Figure {
     return Math.floor(Math.PI * this.radius ** 2 * 100) / 100;
   }
 }
+
 export class Rectangle implements Figure {
   color: Figure['color'];
 
