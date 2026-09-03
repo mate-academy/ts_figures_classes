@@ -1,11 +1,105 @@
-export interface Figure {}
+export interface Figure {
+  color: 'red' | 'green' | 'blue';
+  shape: 'circle' | 'triangle' | 'rectangle';
 
-export class Triangle implements Figure {}
+  getArea(): number;
+}
 
-export class Circle implements Figure {}
+export class Triangle implements Figure {
+  color: Figure['color'];
 
-export class Rectangle implements Figure {}
+  shape: 'triangle';
 
-export function getInfo(figure): string {
-  return typeof figure;
+  constructor(
+    color: Figure['color'],
+    public a: number,
+    public b: number,
+    public c: number,
+  ) {
+    if (a + b <= c) {
+      throw new Error('Triangle with such sides does not exist');
+    }
+
+    if (a + c <= b) {
+      throw new Error('Triangle with such sides does not exist');
+    }
+
+    if (b + c <= a) {
+      throw new Error('Triangle with such sides does not exist');
+    }
+
+    if (a <= 0 || b <= 0 || c <= 0) {
+      throw new Error('Triangle sides must be positive or greater than zero');
+    }
+
+    this.color = color;
+    this.shape = 'triangle';
+    this.a = a;
+    this.b = b;
+    this.c = c;
+  }
+
+  getArea(): number {
+    const square = (this.a + this.b + this.c) / 2;
+
+    return (
+      Math.floor(
+        Math.sqrt(
+          square * (square - this.a) * (square - this.b) * (square - this.c),
+        ) * 100,
+      ) / 100
+    );
+  }
+}
+
+export class Circle implements Figure {
+  color: Figure['color'];
+
+  shape: Figure['shape'];
+
+  constructor(
+    color: Figure['color'],
+    public radius: number,
+  ) {
+    if (radius <= 0) {
+      throw new Error('Circle radius must be a positive number');
+    }
+
+    this.color = color;
+    this.shape = 'circle';
+    this.radius = radius;
+  }
+
+  getArea(): number {
+    return Math.floor(Math.PI * this.radius ** 2 * 100) / 100;
+  }
+}
+
+export class Rectangle implements Figure {
+  color: Figure['color'];
+
+  shape: Figure['shape'];
+
+  constructor(
+    color: Figure['color'],
+    public width: number,
+    public height: number,
+  ) {
+    if (width <= 0 || height <= 0) {
+      throw new Error('Rectangle width and height must be positive numbers');
+    }
+
+    this.color = color;
+    this.shape = 'rectangle';
+    this.width = width;
+    this.height = height;
+  }
+
+  getArea(): number {
+    return Math.floor(this.width * this.height * 100) / 100;
+  }
+}
+
+export function getInfo(figure: Figure): string {
+  return `A ${figure.color} ${figure.shape} - ${figure.getArea()}`;
 }
