@@ -26,11 +26,11 @@ export class Triangle implements Figure {
     public c: number,
   ) {
     if (a <= 0 || b <= 0 || c <= 0) {
-      throw new Error('One of the length is less than or equal to zero');
+      throw new Error(`Sides must be > 0, got a=${a}, b=${b}, c=${c}`);
     }
 
     if (a + b <= c || c + b <= a || a + c <= b) {
-      throw new Error(`sides ${a}, ${b} and {c} can't form a triangle`);
+      throw new Error(`sides ${a}, ${b} and ${c} can't form a triangle`);
     }
   }
 
@@ -52,7 +52,7 @@ export class Circle implements Figure {
     public radius: number,
   ) {
     if (radius <= 0) {
-      throw new Error(`${radius} can't be less than or equal to zero`);
+      throw new Error(`Radius must be > 0, got ${radius}`);
     }
   }
 
@@ -72,7 +72,9 @@ export class Rectangle implements Figure {
     public height: number,
   ) {
     if (width <= 0 || height <= 0) {
-      throw new Error(`sides ${width} and ${height} can't form a rectangle`);
+      throw new Error(
+        `Width and height must be > 0, got width=${width}, height=${height}`,
+      );
     }
   }
 
