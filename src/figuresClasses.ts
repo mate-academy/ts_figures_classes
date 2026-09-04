@@ -18,15 +18,14 @@ export class Triangle implements Figure {
     public b: number,
     public c: number,
   ) {
+    if (a <= 0 || b <= 0 || c <= 0) {
+      throw new Error('Triangle sides must be positive numbers');
+    }
+
     const sortedSides = [a, b, c].sort((x, y) => x - y);
 
-    if (
-      a <= 0 ||
-      b <= 0 ||
-      c <= 0 ||
-      sortedSides[0] + sortedSides[1] <= sortedSides[2]
-    ) {
-      throw new Error('Invalid triangle sides');
+    if (sortedSides[0] + sortedSides[1] <= sortedSides[2]) {
+      throw new Error('Longest side must be less than sum of other two sides');
     }
   }
 
@@ -70,7 +69,7 @@ export class Rectangle implements Figure {
   }
 
   getArea(): number {
-    return this.width * this.height;
+    return roundDown(this.width * this.height);
   }
 }
 
