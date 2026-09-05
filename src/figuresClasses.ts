@@ -15,7 +15,7 @@ export class Triangle implements Figure {
   ) {
     this.shape = 'triangle';
 
-    if (a < 0 || b < 0 || c < 0) {
+    if (a <= 0 || b <= 0 || c <= 0) {
       throw new Error('Invalid values of triangle sides');
     }
 
@@ -46,7 +46,7 @@ export class Circle implements Figure {
   ) {
     this.shape = 'circle';
 
-    if (radius < 0) {
+    if (radius <= 0) {
       throw new Error('Invalid value of circle radius');
     }
   }
@@ -65,17 +65,17 @@ export class Rectangle implements Figure {
   constructor(
     public color: 'red' | 'green' | 'blue',
     public width: number,
-    public lenght: number,
+    public height: number,
   ) {
     this.shape = 'rectangle';
 
-    if (width < 0 || lenght < 0) {
+    if (width <= 0 || height <= 0) {
       throw new Error('Invalid values for rectangle sides');
     }
   }
 
   getArea(): number {
-    const area: number = Math.floor(this.width * this.lenght * 100) / 100;
+    const area: number = Math.floor(this.width * this.height * 100) / 100;
 
     return area;
   }
