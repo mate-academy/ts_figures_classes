@@ -16,11 +16,11 @@ export class Triangle implements Figure {
     public c: number,
   ) {
     if (a <= 0 || b <= 0 || c <= 0) {
-      throw new Error('please enter valid data');
+      throw new Error('Triangle sides must be greater than zero');
     }
 
     if (a + b <= c || a + c <= b || b + c <= a) {
-      throw new Error('please enter valid data');
+      throw new Error('Longest side must be less than sum of other sides');
     }
   }
 
@@ -45,7 +45,7 @@ export class Circle implements Figure {
     public radius: number,
   ) {
     if (radius <= 0) {
-      throw new Error('please enter valid data');
+      throw new Error('Circle radius must be greater than zero');
     }
   }
 
@@ -63,7 +63,7 @@ export class Rectangle implements Figure {
     public height: number,
   ) {
     if (width <= 0 || height <= 0) {
-      throw new Error('please enter valid data');
+      throw new Error('Rectangle width and height must be greater than zero');
     }
   }
 
