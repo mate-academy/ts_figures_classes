@@ -19,14 +19,13 @@ function roundDown(value: number): number {
 export class Triangle implements Figure {
   shape = 'triangle' as const;
 
-  color: Color;
-
-  sides: number[];
-
-  constructor(color: Color, ...sides: number[]) {
-    if (sides.length !== 3) {
-      throw new Error('A triangle must have three sides');
-    }
+  constructor(
+    public color: Color,
+    public a: number,
+    public b: number,
+    public c: number,
+  ) {
+    const sides = this.sides;
 
     validatePositive(sides);
 
@@ -37,9 +36,10 @@ export class Triangle implements Figure {
     if (longestSide >= otherSidesSum) {
       throw new Error('The sides cannot form a triangle');
     }
+  }
 
-    this.color = color;
-    this.sides = sides;
+  get sides(): number[] {
+    return [this.a, this.b, this.c];
   }
 
   getArea(): number {
@@ -58,15 +58,11 @@ export class Triangle implements Figure {
 export class Circle implements Figure {
   shape = 'circle' as const;
 
-  color: Color;
-
-  radius: number;
-
-  constructor(color: Color, radius: number) {
+  constructor(
+    public color: Color,
+    public radius: number,
+  ) {
     validatePositive([radius]);
-
-    this.color = color;
-    this.radius = radius;
   }
 
   getArea(): number {
@@ -77,19 +73,18 @@ export class Circle implements Figure {
 export class Rectangle implements Figure {
   shape = 'rectangle' as const;
 
-  color: Color;
-
-  sides: number[];
-
-  constructor(color: Color, ...sides: number[]) {
-    if (sides.length !== 2) {
-      throw new Error('A rectangle must have two sides');
-    }
+  constructor(
+    public color: Color,
+    public width: number,
+    public height: number,
+  ) {
+    const sides = this.sides;
 
     validatePositive(sides);
+  }
 
-    this.color = color;
-    this.sides = sides;
+  get sides(): number[] {
+    return [this.width, this.height];
   }
 
   getArea(): number {
