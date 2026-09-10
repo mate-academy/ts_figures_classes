@@ -5,18 +5,20 @@ export interface Figure {
 }
 
 export class Triangle implements Figure {
+  public shape: 'triangle' = 'triangle';
+  
   constructor(
+    public color: 'red' | 'green' | 'blue',
     public a: number,
     public b: number,
-    public c: number,
-    public area: number
+    public c: number
   ) {
     if (!this.isValid()) {
       throw new Error('Invalid triangle sides');
     }
   }
 
-  isValid() {
+  private isValid(): boolean {
     return (
       this.a > 0 &&
       this.b > 0 &&
@@ -27,54 +29,55 @@ export class Triangle implements Figure {
     );
   }
 
-  getArea() {
-    const pp = (a + b + c / 2);
-    this.area = Math.floor(Math.sqrt(pp * (pp - a) * (pp - b) * (pp - c)) * 100) / 100;
-    return this.area;
+  getArea(): number {
+    const pp = (this.a + this.b + this.c) / 2;
+    return Math.floor(Math.sqrt(pp * (pp - this.a) * (pp - this.b) * (pp - this.c)) * 100) / 100;
   }
 }
 
 export class Circle implements Figure {
+  public shape: 'circle' = 'circle';
+
   constructor(
-    public radius: number,
-    public area: number
+    public color: 'red' | 'green' | 'blue',
+    public radius: number
   ) {
     if (!this.isValid()) {
       throw new Error('Invalid circle radius');
     }
   }
 
-  isValid() {
+  private isValid(): boolean {
     return this.radius > 0;
   }
 
-  getArea() {
-    this.area = Math.floor((Math.PI * this.radius ** 2) * 100) / 100;
-    return this.area;
+  getArea(): number {
+    return Math.floor((Math.PI * this.radius ** 2) * 100) / 100;
   }
 }
 
 export class Rectangle implements Figure {
+  public shape: 'rectangle' = 'rectangle';
+
   constructor(
+    public color: 'red' | 'green' | 'blue',
     public width: number,
-    public height: number,
-    public area: number
+    public height: number
   ) {
     if (!this.isValid()) {
       throw new Error('Invalid rectangle sides');
     }
   }
 
-  isValid() {
+  private isValid(): boolean {
     return this.width > 0 && this.height > 0;
   }
 
-  getArea() {
-    this.area = Math.floor(this.width * this. height * 100) / 100;
-    return this.area;
+  getArea(): number {
+    return Math.floor(this.width * this.height * 100) / 100;
   }
 }
 
-export function getInfo(figure): string {
-  return `A ${figure.color} ${figure.shape} - ${figure.area}`;
+export function getInfo(figure: Figure): string {
+  return `A ${figure.color} ${figure.shape} - ${figure.getArea()}`;
 }
