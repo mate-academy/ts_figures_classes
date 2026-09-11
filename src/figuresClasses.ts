@@ -14,7 +14,7 @@ export class Triangle implements Figure {
     public c: number
   ) {
     if (!this.isValid()) {
-      throw new Error('Invalid triangle sides');
+      throw new Error('Triangle sides must be positive and satisfy triangle inequality theorem');
     }
   }
 
@@ -31,7 +31,7 @@ export class Triangle implements Figure {
 
   getArea(): number {
     const pp = (this.a + this.b + this.c) / 2;
-    
+
     return Math.floor(Math.sqrt(pp * (pp - this.a) * (pp - this.b) * (pp - this.c)) * 100) / 100;
   }
 }
@@ -44,7 +44,7 @@ export class Circle implements Figure {
     public radius: number
   ) {
     if (!this.isValid()) {
-      throw new Error('Invalid circle radius');
+      throw new Error('Circle radius must be a positive number');
     }
   }
 
@@ -66,7 +66,7 @@ export class Rectangle implements Figure {
     public height: number
   ) {
     if (!this.isValid()) {
-      throw new Error('Invalid rectangle sides');
+      throw new Error('Rectangle width and height must be positive numbers');
     }
   }
 
