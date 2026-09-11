@@ -14,7 +14,9 @@ export class Triangle implements Figure {
     public c: number
   ) {
     if (!this.isValid()) {
-      throw new Error('Triangle sides must be positive and satisfy triangle inequality theorem');
+      throw new Error(
+        'Triangle sides must be positive and satisfy triangle inequality theorem'
+      );
     }
   }
 
