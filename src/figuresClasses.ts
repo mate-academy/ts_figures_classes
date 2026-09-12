@@ -26,7 +26,7 @@ export class Triangle implements Figure {
     const sum = sideA + sideB + sideC - max;
 
     if (max >= sum) {
-      throw new Error('Invalid triangle');
+      throw new Error(`Sides ${sideA}, ${sideB}, and ${sideC} cannot form a triangle`);
     }
   }
 
