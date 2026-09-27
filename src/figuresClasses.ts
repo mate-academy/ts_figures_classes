@@ -20,7 +20,9 @@ export class Triangle implements Figure {
       Math.max(this.a, this.b, this.c) >=
       this.a + this.b + this.c - Math.max(this.a, this.b, this.c)
     ) {
-      throw new Error("sides 1, 2 and 3 can't form a triangle");
+      throw new Error(
+        `sides ${this.a}, ${this.b} and ${this.c} can't form a triangle`
+      );
     }
   }
 
