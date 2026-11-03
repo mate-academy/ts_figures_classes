@@ -28,7 +28,7 @@ export class Circle implements Figure {
     public color: Color,
     public radius: number,
   ) {if (radius <= 0)  {
-    throw new Error('radius must be positive numbers.');
+    throw new Error('radius must be positive number.');
   }}
     public shape: Shape = 'circle';
     public getArea(): number {
