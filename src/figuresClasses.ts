@@ -13,18 +13,15 @@ export class Triangle implements Figure {
     private b: number,
     private c: number,
   ) {
-    this.a = a;
-    this.b = b;
-    this.c = c;
 
-    if (this.a <= 0 || this.b <= 0 || this.c <= 0) {
-      throw new Error(`a = ${this.a} b = ${this.b} c = ${this.c} , Triangle`);
+    if (a <= 0 || b <= 0 || c <= 0) {
+      throw new Error(`a = ${a} b = ${b} c = ${c} , Triangle`);
     }
 
     if (
-      this.a + this.b <= this.c ||
-      this.a + this.c <= this.b ||
-      this.c + this.b <= this.a
+      a + b <= c ||
+      a + c <= b ||
+      c + b <= a
     ) {
       throw new Error("sides can't form a triangle");
     }
@@ -46,10 +43,9 @@ export class Circle implements Figure {
     public color: 'red' | 'green' | 'blue',
     private radius: number,
   ) {
-    this.radius = radius;
 
-    if (this.radius <= 0) {
-      throw new Error(`radius = ${this.radius}, Circle`);
+    if (radius <= 0) {
+      throw new Error(`radius = ${radius}, Circle`);
     }
   }
 
@@ -68,12 +64,10 @@ export class Rectangle implements Figure {
     private height: number,
     private width: number,
   ) {
-    this.height = height;
-    this.width = width;
 
-    if (this.width <= 0 || this.height <= 0) {
+    if (width <= 0 || height <= 0) {
       throw new Error(
-        `width = ${this.width} height = ${this.height}, Rectangle`,
+        `width = ${width} height = ${height}, Rectangle`,
       );
     }
   }
