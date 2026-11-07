@@ -12,19 +12,15 @@ export class Triangle implements Figure {
     public c: number,
     public shape = 'triangle',
   ) {
-    this.a = a;
-    this.b = b;
-    this.c = c;
-
     if ([a, b, c].some((side) => side <= 0)) {
-      throw new Error('your error message');
+      throw new Error('Side a must be greater than 0');
     }
 
     const longestSide = Math.max(a, b, c);
     const otherSidesSum = a + b + c - longestSide;
 
     if (longestSide >= otherSidesSum) {
-      throw new Error('your error message');
+      throw new Error(`sides ${a}, ${b} and ${c} can't form a triangle`);
     }
   }
 
@@ -39,18 +35,16 @@ export class Triangle implements Figure {
 export class Circle implements Figure {
   constructor(
     public color: string,
-    public r: number,
+    public radius: number,
     public shape = 'circle',
   ) {
-    this.r = r;
-
-    if (r <= 0) {
-      throw new Error('your error message');
+    if (radius <= 0) {
+      throw new Error('Radius must be greater than 0');
     }
   }
 
   public getArea(): number {
-    return Math.floor(Math.PI * Math.pow(this.r, 2) * 100) / 100;
+    return Math.floor(Math.PI * Math.pow(this.radius, 2) * 100) / 100;
   }
 }
 
@@ -61,11 +55,8 @@ export class Rectangle implements Figure {
     public height: number,
     public shape = 'rectangle',
   ) {
-    this.width = width;
-    this.height = height;
-
     if (width <= 0 || height <= 0) {
-      throw new Error('your error message');
+      throw new Error('Width and height must be greater than 0');
     }
   }
 
