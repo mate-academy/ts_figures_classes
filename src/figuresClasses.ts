@@ -30,8 +30,9 @@ export class Triangle implements Figure {
 
   public getArea(): number {
     const s: number = (this.a + this.b + this.c) / 2;
+    const area = Math.sqrt(s * (s - this.a) * (s - this.b) * (s - this.c));
 
-    return Math.sqrt(s * (s - this.a) * (s - this.b) * (s - this.c));
+    return Math.floor(area * 100) / 100;
   }
 }
 
@@ -49,7 +50,7 @@ export class Circle implements Figure {
   }
 
   public getArea(): number {
-    return Number((Math.PI * Math.pow(this.r, 2)).toFixed(2));
+    return Math.floor(Math.PI * Math.pow(this.r, 2) * 100) / 100;
   }
 }
 
@@ -69,13 +70,12 @@ export class Rectangle implements Figure {
   }
 
   public getArea(): number {
-    return this.width * this.height;
+    return Math.floor(this.width * this.height * 100) / 100;
   }
 }
 
 export function getInfo(figure: Figure): string {
   const area = figure.getArea();
-  const formattedArea = Number.isInteger(area) ? String(area) : area.toFixed(2);
 
-  return `A ${figure.color} ${figure.shape} - ${formattedArea}`;
+  return `A ${figure.color} ${figure.shape} - ${area}`;
 }
