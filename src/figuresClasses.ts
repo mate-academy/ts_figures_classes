@@ -1,17 +1,22 @@
+type Shape = 'triangle' | 'circle' | 'rectangle';
+
 export interface Figure {
   color: string;
-  shape: number[];
+  shape: Shape;
 
   getInfo(): string;
   getArea(): number;
 }
 
 export class Triangle implements Figure {
-  color: string;
+  shape: Shape;
 
-  shape: number[];
-
-  constructor(color: string, a: number, b: number, c: number) {
+  constructor(
+    public color: string,
+    public a: number,
+    public b: number,
+    public c: number,
+  ) {
     if (a <= 0 || b <= 0 || c <= 0) {
       throw new Error('Triangle sides cannot be zero or negative');
     }
@@ -20,8 +25,7 @@ export class Triangle implements Figure {
       throw new Error('Triangle sides do not satisfy the triangle inequality');
     }
 
-    this.color = color;
-    this.shape = [a, b, c];
+    this.shape = 'triangle';
   }
 
   getInfo(): string {
@@ -29,30 +33,28 @@ export class Triangle implements Figure {
   }
 
   getArea(): number {
-    const s = (this.shape[0] + this.shape[1] + this.shape[2]) / 2;
+    const s = (this.a + this.b + this.c) / 2;
 
     return (
       Math.floor(
-        Math.sqrt(
-          s * (s - this.shape[0]) * (s - this.shape[1]) * (s - this.shape[2]),
-        ) * 100,
+        Math.sqrt(s * (s - this.a) * (s - this.b) * (s - this.c)) * 100,
       ) / 100
     );
   }
 }
 
 export class Circle implements Figure {
-  color: string;
+  shape: Shape;
 
-  shape: number[];
-
-  constructor(color: string, radius: number) {
+  constructor(
+    public color: string,
+    public radius: number,
+  ) {
     if (radius <= 0) {
       throw new Error('Circle radius cannot be zero or negative');
     }
 
-    this.color = color;
-    this.shape = [radius];
+    this.shape = 'circle';
   }
 
   getInfo(): string {
@@ -60,22 +62,23 @@ export class Circle implements Figure {
   }
 
   getArea(): number {
-    return Math.floor(Math.PI * this.shape[0] ** 2 * 100) / 100;
+    return Math.floor(Math.PI * this.radius ** 2 * 100) / 100;
   }
 }
 
 export class Rectangle implements Figure {
-  color: string;
+  shape: Shape;
 
-  shape: number[];
-
-  constructor(color: string, width: number, height: number) {
+  constructor(
+    public color: string,
+    public width: number,
+    public height: number,
+  ) {
     if (width <= 0 || height <= 0) {
       throw new Error('Rectangle dimensions cannot be zero or negative');
     }
 
-    this.color = color;
-    this.shape = [width, height];
+    this.shape = 'rectangle';
   }
 
   getInfo(): string {
@@ -83,7 +86,7 @@ export class Rectangle implements Figure {
   }
 
   getArea(): number {
-    return this.shape[0] * this.shape[1];
+    return Math.floor(this.width * this.height * 100) / 100;
   }
 }
 
