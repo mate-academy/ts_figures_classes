@@ -1,10 +1,10 @@
-enum Color {
+export enum Color {
   Red = 'red',
   Green = 'green',
   Blue = 'blue',
 }
 
-enum Shape {
+export enum Shape {
   Triangle = 'triangle',
   Circle = 'circle',
   Rectangle = 'rectangle',
