@@ -3,18 +3,37 @@ export interface Figure {
   color: string;
   getArea(): number;
 }
+
 type Color = 'red' | 'green' | 'blue';
+type Shape = 'triangle' | 'circle' | 'rectangle';
 
 export class Triangle implements Figure {}
 
-export class Circle implements Figure {}
+export class Circle implements Figure {
+  rds: number;
+
+  shape: Shape;
+
+  constructor(
+    public color: Color,
+    radius: number,
+  ) {
+    this.color = color;
+    this.shape = 'circle';
+    this.rds = radius;
+  }
+
+  getArea(): number {
+    return Math.floor(Math.PI * this.rds ** 2 * 100) / 100;
+  }
+}
 
 export class Rectangle implements Figure {
   width: number;
 
   height: number;
 
-  shape: string;
+  shape: Shape;
 
   constructor(
     public color: Color,
@@ -37,8 +56,5 @@ export class Rectangle implements Figure {
 }
 
 export function getInfo(figure: Figure): string {
-  return typeof figure;
-
-  // const result = getArea();
-  // return `A ${this.color} ${this.shape} - ${result}`;
+  return `A ${figure.color} ${figure.shape} - ${figure.getArea()}`;
 }
