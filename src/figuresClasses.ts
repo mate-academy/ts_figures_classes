@@ -10,21 +10,22 @@ type Shape = 'triangle' | 'circle' | 'rectangle';
 export class Triangle implements Figure {}
 
 export class Circle implements Figure {
-  rds: number;
-
   shape: Shape;
 
   constructor(
     public color: Color,
-    radius: number,
+    public radius: number,
   ) {
     this.color = color;
     this.shape = 'circle';
-    this.rds = radius;
+
+    if (this.radius <= 0) {
+      throw new Error('This radius can not form a circle');
+    }
   }
 
   getArea(): number {
-    return Math.floor(Math.PI * this.rds ** 2 * 100) / 100;
+    return Math.floor(Math.PI * this.radius ** 2 * 100) / 100;
   }
 }
 
@@ -51,7 +52,7 @@ export class Rectangle implements Figure {
   }
 
   getArea(): number {
-    return this.width * this.height;
+    return Math.floor(this.width * this.height * 100) / 100;
   }
 }
 
