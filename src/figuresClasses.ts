@@ -1,13 +1,13 @@
 enum Color {
-  red = 'red',
-  green = 'green',
-  blue = 'blue',
+  Red = 'red',
+  Green = 'green',
+  Blue = 'blue',
 }
 
 enum Shape {
-  triangle = 'triangle',
-  circle = 'circle',
-  rectangle = 'rectangle',
+  Triangle = 'triangle',
+  Circle = 'circle',
+  Rectangle = 'rectangle',
 }
 
 export interface Figure {
@@ -17,13 +17,15 @@ export interface Figure {
 }
 
 export class Triangle implements Figure {
-  shape: Shape = Shape.triangle;
+  shape: Shape = Shape.Triangle;
 
   getArea(): number {
     const p = (this.a + this.b + this.c) / 2;
-    const sqrt = Math.sqrt(p * (p - this.a) * (p - this.b) * (p - this.c));
+    const sqrt =
+      Math.sqrt(p * (p - this.a) * (p - this.b) * (p - this.c)) * 100;
+    const resultRounded = Math.floor(sqrt) / 100;
 
-    return Number(sqrt.toFixed(2));
+    return Number(resultRounded.toFixed(2));
   }
 
   constructor(
@@ -33,17 +35,20 @@ export class Triangle implements Figure {
     public c: number,
   ) {
     if (a <= 0 || b <= 0 || c <= 0) {
-      throw new Error('our error message');
+      throw new Error('All triangle sides must be positive numbers');
     }
 
     if (a >= b + c || b >= a + c || c >= a + b) {
-      throw new Error('our error message');
+      throw new Error(
+        `Invalid triangle sides: the sum of 
+        any two sides must be greater than the third side`,
+      );
     }
   }
 }
 
 export class Circle implements Figure {
-  shape: Shape = Shape.circle;
+  shape: Shape = Shape.Circle;
 
   getArea(): number {
     const circleSquare = Math.pow(this.radius, 2) * Math.PI * 100;
@@ -58,16 +63,19 @@ export class Circle implements Figure {
     public radius: number,
   ) {
     if (radius <= 0) {
-      throw new Error('our error message');
+      throw new Error('Circle radius must be positive');
     }
   }
 }
 
 export class Rectangle implements Figure {
-  shape: Shape = Shape.rectangle;
+  shape: Shape = Shape.Rectangle;
 
   getArea(): number {
-    return this.width * this.height;
+    const rectangleSquare = this.width * this.height * 100;
+    const roundedrectangleSquare = Math.floor(rectangleSquare) / 100;
+
+    return Number(roundedrectangleSquare.toFixed(2));
   }
 
   constructor(
@@ -76,7 +84,7 @@ export class Rectangle implements Figure {
     public height: number,
   ) {
     if (width <= 0 || height <= 0) {
-      throw new Error('our error message');
+      throw new Error('Rectangle width and height must be positive');
     }
   }
 }
