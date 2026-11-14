@@ -17,23 +17,17 @@ export class Triangle implements Figure {
     public c: number,
   ) {
     this.shape = 'triangle';
-    this.color = color;
-    this.a = a;
-    this.b = b;
-    this.c = c;
 
     if (this.a <= 0 || this.b <= 0 || this.c <= 0) {
       throw new Error('All sides must be grater than 0');
     }
 
     if (
-      this.a > this.b + this.c ||
-      this.b > this.a + this.c ||
-      this.c > this.a + this.b
+      this.a >= this.b + this.c ||
+      this.b >= this.a + this.c ||
+      this.c >= this.a + this.b
     ) {
-      throw new Error(
-        'throws an error: sides 1, 2 and 3 can not form a triangle',
-      );
+      throw new Error('sides 1, 2 and 3 can not form a triangle');
     }
   }
 
@@ -52,7 +46,6 @@ export class Circle implements Figure {
     public color: Color,
     public radius: number,
   ) {
-    this.color = color;
     this.shape = 'circle';
 
     if (this.radius <= 0) {
