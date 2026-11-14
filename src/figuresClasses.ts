@@ -27,7 +27,9 @@ export class Triangle implements Figure {
       this.b >= this.a + this.c ||
       this.c >= this.a + this.b
     ) {
-      throw new Error('sides 1, 2 and 3 can not form a triangle');
+      throw new Error(
+        `All sides must be greater than 0, received ${this.a}, ${this.b}, ${this.c}`,
+      );
     }
   }
 
@@ -49,7 +51,7 @@ export class Circle implements Figure {
     this.shape = 'circle';
 
     if (this.radius <= 0) {
-      throw new Error('This radius can not form a circle');
+      throw new Error('Radius must be grater than 0');
     }
   }
 
@@ -73,10 +75,11 @@ export class Rectangle implements Figure {
     this.width = a;
     this.height = b;
     this.shape = 'rectangle';
-    this.color = color;
 
     if (this.width <= 0 || this.height <= 0) {
-      throw new Error('once with sides has zero!');
+      throw new Error(
+        `Width and height must be greater than 0, received ${this.width}, ${this.height}`,
+      );
     }
   }
 
