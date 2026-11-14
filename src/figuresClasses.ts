@@ -7,7 +7,43 @@ export interface Figure {
 type Color = 'red' | 'green' | 'blue';
 type Shape = 'triangle' | 'circle' | 'rectangle';
 
-export class Triangle implements Figure {}
+export class Triangle implements Figure {
+  shape: Shape;
+
+  constructor(
+    public color: Color,
+    public a: number,
+    public b: number,
+    public c: number,
+  ) {
+    this.shape = 'triangle';
+    this.color = color;
+    this.a = a;
+    this.b = b;
+    this.c = c;
+
+    if (this.a <= 0 || this.b <= 0 || this.c <= 0) {
+      throw new Error('All sides must be grater than 0');
+    }
+
+    if (
+      this.a > this.b + this.c ||
+      this.b > this.a + this.c ||
+      this.c > this.a + this.b
+    ) {
+      throw new Error(
+        'throws an error: sides 1, 2 and 3 can not form a triangle',
+      );
+    }
+  }
+
+  getArea(): number {
+    const p = (this.a + this.b + this.c) / 2;
+    const area = Math.sqrt(p * (p - this.a) * (p - this.b) * (p - this.c));
+
+    return Math.floor(area * 100) / 100;
+  }
+}
 
 export class Circle implements Figure {
   shape: Shape;
