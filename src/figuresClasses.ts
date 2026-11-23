@@ -21,7 +21,8 @@ export class Triangle implements Figure {
       this.b >= this.a + this.c ||
       this.c >= this.a + this.b
     ) {
-      throw new Error('Check your size data');
+      throw new Error(`Side lengths must be positive,
+        and each side must be less than the sum of the other two sides.`);
     }
   }
 
