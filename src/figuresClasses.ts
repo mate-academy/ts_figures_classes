@@ -21,7 +21,7 @@ export class Triangle implements Figure {
     }
 
     if (a + b <= c || a + c <= b || b + c <= a) {
-      throw new Error('Invalid triangle');
+      throw new Error('The side lengths cannot form a triangle');
     }
   }
 
