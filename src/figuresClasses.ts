@@ -1,14 +1,6 @@
-export enum Color {
-  Red = 'red',
-  Green = 'green',
-  Blue = 'blue',
-}
+export type Color = 'red' | 'green' | 'blue';
 
-export enum Shape {
-  Triangle = 'triangle',
-  Circle = 'circle',
-  Rectangle = 'rectangle',
-}
+export type Shape = 'triangle' | 'rectangle' | 'circle';
 
 export interface Figure {
   shape: Shape;
@@ -17,7 +9,7 @@ export interface Figure {
 }
 
 export class Triangle implements Figure {
-  readonly shape = Shape.Triangle;
+  readonly shape = 'triangle';
 
   constructor(
     readonly color: Color,
@@ -51,7 +43,7 @@ export class Triangle implements Figure {
 }
 
 export class Circle implements Figure {
-  readonly shape = Shape.Circle;
+  readonly shape = 'circle';
 
   constructor(
     readonly color: Color,
@@ -68,7 +60,7 @@ export class Circle implements Figure {
 }
 
 export class Rectangle implements Figure {
-  readonly shape = Shape.Rectangle;
+  readonly shape = 'rectangle';
 
   constructor(
     readonly color: Color,
